@@ -1,7 +1,6 @@
-# Camber
-## An open-source Dynamo package for Civil 3D.
+# Camber ## An open-source Dynamo package for Civil 3D.
 
-Camber is a Dynamo for Civil 3D package that expands the capabilities of Dynamo within Autodesk® Civil 3D. The main goals of the Camber project are to:
+**Camber** is a package for Dynamo for Civil 3D that expands the capabilities of Dynamo within Autodesk® Civil 3D. The main goals of the Camber project are to:
 
 1. Expose more Civil 3D functionality beyond what is provided with the out-of-the-box nodes
 2. Provide an open code base for those getting starting with Zero-Touch node development
