@@ -30,7 +30,7 @@ Camber can be installed from the Dynamo Package Manager. Look for _Packages -> S
 For further information on package installation, please refer to the [Dynamo Primer](https://primer.dynamobim.org/11_Packages/11-1_Introduction.html).
 
 ## Support
-Discussion related to Camber is handled on the Dynamo Forum.
+Discussion related to Camber is handled on the Dynamo Forum.  
 [Dynamo Forum Feedback Thread](https://forum.dynamobim.com/t/camber-feedback-thread/68942/19)
 
 Feel free to [file issues](https://github.com/mzjensen/Camber/issues) directly in this repo as well.
