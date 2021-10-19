@@ -34,7 +34,6 @@ using Autodesk.DesignScript.Runtime;
 
 namespace Camber.Tools
 {
-    [IsVisibleInDynamoLibrary(false)]
     public class ModelText
     {
         #region constructor

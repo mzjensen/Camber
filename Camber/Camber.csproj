@@ -47,7 +47,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="acdbmgdbrep">
-      <HintPath>..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\acdbmgdbrep.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\acdbmgdbrep.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="AcDynamoServices">
@@ -63,7 +63,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="AeccDataShortcutMgd">
-      <HintPath>..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\C3D\AeccDataShortcutMgd.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\C3D\AeccDataShortcutMgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="AeccDbMgd">
@@ -75,7 +75,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="AeccPressurePipesMgd">
-      <HintPath>..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\C3D\AeccPressurePipesMgd.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\C3D\AeccPressurePipesMgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Analysis, Version=2.12.0.5650, Culture=neutral, processorArchitecture=MSIL">

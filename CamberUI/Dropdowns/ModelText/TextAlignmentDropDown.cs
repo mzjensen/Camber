@@ -14,7 +14,6 @@ namespace Camber.UI
     [NodeDescription("Select text alignment.")]
     [NodeCategory("Camber.Tools.ModelText")]
     [IsDesignScriptCompatible]
-    [IsVisibleInDynamoLibrary(false)]
     public class TextAlignmentDropDown : DSDropDownBase
     {
         #region constructors

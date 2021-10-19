@@ -16,7 +16,6 @@ namespace Camber.UI
     [NodeDescription("Select system font.")]
     [NodeCategory("Camber.Tools.ModelText")]
     [IsDesignScriptCompatible]
-    [IsVisibleInDynamoLibrary(false)]
     public class SystemFontsDropDown : DSDropDownBase
     {
         #region constructors

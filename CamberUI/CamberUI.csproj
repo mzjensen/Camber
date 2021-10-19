@@ -37,47 +37,55 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="accoremgd">
-      <HintPath>..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\accoremgd.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\accoremgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="acdbmgd">
-      <HintPath>..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\acdbmgd.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\acdbmgd.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="acdbmgdbrep">
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\acdbmgdbrep.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="AcDynamo">
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\C3D\Dynamo\AcDynamo.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="AcDynamoServices">
-      <HintPath>..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\C3D\Dynamo\AcDynamoServices.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\C3D\Dynamo\AcDynamoServices.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="acmgd">
-      <HintPath>..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\acmgd.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\acmgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="AecBaseMgd">
-      <HintPath>..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\ACA\AecBaseMgd.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\AecBaseMgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="AeccDataShortcutMgd">
-      <HintPath>..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\C3D\AeccDataShortcutMgd.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\C3D\AeccDataShortcutMgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="AeccDbMgd">
-      <HintPath>..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\C3D\AeccDbMgd.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\C3D\AeccDbMgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="AeccDynamo">
-      <HintPath>..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\C3D\AeccDynamo.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\C3D\AeccDynamo.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="AeccPressurePipesMgd">
-      <HintPath>..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\C3D\AeccPressurePipesMgd.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\C3D\AeccPressurePipesMgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="AutoCADNodes">
-      <HintPath>..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\C3D\Dynamo\AutoCADNodes.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\C3D\Dynamo\AutoCADNodes.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Civil3DNodes">
-      <HintPath>..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\C3D\Dynamo\Civil3DNodes.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\C3D\Dynamo\Civil3DNodes.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="CommonServiceLocator, Version=2.0.6.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
