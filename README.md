@@ -27,7 +27,7 @@ The list is continually growing! See the [roadmap](https://github.com/mzjensen/C
 
 ### Installation
 Camber can be installed from the Dynamo Package Manager. Look for _Packages -> Search for a Package..._ in the Menus.
-For further information on package installation, please refer to the [Dynamo Primer](https://primer.dynamobim.org/11_Packages/11-1_Introduction.html).
+  For further information on package installation, please refer to the [Dynamo Primer](https://primer.dynamobim.org/11_Packages/11-1_Introduction.html).
 
 ### Support
 Discussion related to Camber is handled on the Dynamo Forum.
