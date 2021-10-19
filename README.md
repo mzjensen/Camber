@@ -31,7 +31,7 @@ For further information on package installation, please refer to the [Dynamo Pri
 
 ## Support
 Discussion related to Camber is handled on the Dynamo Forum.  
-[Dynamo Forum Feedback Thread](https://forum.dynamobim.com/t/camber-feedback-thread/68942/19)
+[Dynamo Forum Feedback Thread](https://forum.dynamobim.com/t/camber-feedback-thread/68942/)
 
 Feel free to [file issues](https://github.com/mzjensen/Camber/issues) directly in this repo as well.
 
