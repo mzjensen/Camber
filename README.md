@@ -26,8 +26,10 @@ Camber includes hundreds of nodes that utilize the AutoCAD and Civil 3D .NET API
 The list is continually growing! See the [roadmap](https://github.com/mzjensen/Camber/projects/1) for what is on the horizon.
 
 ## Installation
-Camber can be installed from the Dynamo Package Manager. Look for _Packages -> Search for a Package..._ in the Menus.  
+The best place to get Camber is from the Dynamo Package Manager. Look for _Packages -> Search for a Package..._ in the Menus.  
 For further information on package installation, please refer to the [Dynamo Primer](https://primer.dynamobim.org/11_Packages/11-1_Introduction.html).
+
+You can also find the source binaries on the [releases](https://github.com/mzjensen/Camber/releases) page, where they can be downloaded and installed in the Dynamo package folder of your choice.
 
 ## Support
 Discussion related to Camber is handled on the Dynamo Forum.  
