@@ -1,0 +1,297 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\Camber\packages\NUnit.3.13.2\build\NUnit.props" Condition="Exists('..\Camber\packages\NUnit.3.13.2\build\NUnit.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1BC882EB-92D5-43DE-BB73-C910DCC78729}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Camber</RootNamespace>
+    <AssemblyName>CamberUI</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\CamberUI.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\CamberUI.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="accoremgd">
+      <HintPath>..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\accoremgd.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="acdbmgd">
+      <HintPath>..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\acdbmgd.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="AcDynamoServices">
+      <HintPath>..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\C3D\Dynamo\AcDynamoServices.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="acmgd">
+      <HintPath>..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\acmgd.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="AecBaseMgd">
+      <HintPath>..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\ACA\AecBaseMgd.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="AeccDataShortcutMgd">
+      <HintPath>..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\C3D\AeccDataShortcutMgd.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="AeccDbMgd">
+      <HintPath>..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\C3D\AeccDbMgd.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="AeccDynamo">
+      <HintPath>..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\C3D\AeccDynamo.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="AeccPressurePipesMgd">
+      <HintPath>..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\C3D\AeccPressurePipesMgd.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="AutoCADNodes">
+      <HintPath>..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\C3D\Dynamo\AutoCADNodes.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Civil3DNodes">
+      <HintPath>..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\C3D\Dynamo\Civil3DNodes.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="CommonServiceLocator, Version=2.0.6.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\Camber\packages\CommonServiceLocator.2.0.6\lib\net48\CommonServiceLocator.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="CoreNodeModels, Version=2.12.0.5650, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Camber\packages\DynamoVisualProgramming.WpfUILibrary.2.12.0.5650\lib\net48\CoreNodeModels.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="CoreNodeModelsWpf, Version=2.12.0.5650, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Camber\packages\DynamoVisualProgramming.WpfUILibrary.2.12.0.5650\lib\net48\CoreNodeModelsWpf.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DesignScriptBuiltin, Version=2.12.0.5650, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Camber\packages\DynamoVisualProgramming.Core.2.12.0.5650\lib\net48\DesignScriptBuiltin.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DSCPython, Version=2.12.0.5650, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Camber\packages\DynamoVisualProgramming.Core.2.12.0.5650\lib\net48\DSCPython.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DSIronPython, Version=2.12.0.5650, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Camber\packages\DynamoVisualProgramming.Core.2.12.0.5650\lib\net48\DSIronPython.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DynamoApplications, Version=2.12.0.5650, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Camber\packages\DynamoVisualProgramming.Core.2.12.0.5650\lib\net48\DynamoApplications.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DynamoCore, Version=2.12.0.5650, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Camber\packages\DynamoVisualProgramming.Core.2.12.0.5650\lib\net48\DynamoCore.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DynamoCoreWpf, Version=2.12.0.5650, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Camber\packages\DynamoVisualProgramming.WpfUILibrary.2.12.0.5650\lib\net48\DynamoCoreWpf.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DynamoInstallDetective, Version=2.12.0.5650, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Camber\packages\DynamoVisualProgramming.Core.2.12.0.5650\lib\net48\DynamoInstallDetective.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DynamoServices, Version=2.12.0.5650, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Camber\packages\DynamoVisualProgramming.DynamoServices.2.12.0.5650\lib\net48\DynamoServices.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DynamoShapeManager, Version=2.12.0.5650, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Camber\packages\DynamoVisualProgramming.Core.2.12.0.5650\lib\net48\DynamoShapeManager.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DynamoUnits, Version=2.12.0.5650, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Camber\packages\DynamoVisualProgramming.ZeroTouchLibrary.2.12.0.5650\lib\net48\DynamoUnits.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DynamoUtilities, Version=2.12.0.5650, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Camber\packages\DynamoVisualProgramming.Core.2.12.0.5650\lib\net48\DynamoUtilities.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\Camber\packages\Prism.4.1.0.0\lib\NET40\Microsoft.Expression.Interactions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\Camber\packages\Prism.4.1.0.0\lib\NET40\Microsoft.Practices.Prism.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism.Interactivity, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\Camber\packages\Prism.4.1.0.0\lib\NET40\Microsoft.Practices.Prism.Interactivity.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\Camber\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="nunit.framework, Version=3.13.2.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\Camber\packages\NUnit.3.13.2\lib\net45\nunit.framework.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="ProtoCore, Version=2.12.0.5650, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Camber\packages\DynamoVisualProgramming.Core.2.12.0.5650\lib\net48\ProtoCore.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ProtoGeometry, Version=2.12.0.5475, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\Camber\packages\DynamoVisualProgramming.ZeroTouchLibrary.2.12.0.5650\lib\net48\ProtoGeometry.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\Camber\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\Camber\packages\System.Collections.Immutable.5.0.0\lib\net461\System.Collections.Immutable.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\Camber\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\Camber\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\Camber\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\Camber\packages\Prism.4.1.0.0\lib\NET40\System.Windows.Interactivity.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="VMDataBridge, Version=2.12.0.5650, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Camber\packages\DynamoVisualProgramming.Core.2.12.0.5650\lib\net48\VMDataBridge.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Base Classes\LabelStyleDropDownBase.cs" />
+    <Compile Include="Base Classes\StyleDropDownBase.cs" />
+    <Compile Include="Base Classes\EnumDropDownBase.cs" />
+    <Compile Include="Dropdowns\Civil\Styles\Labels\PointLabelStyleDropDowns.cs" />
+    <Compile Include="Dropdowns\Civil\Styles\Labels\ViewFrameLabelStyleDropDowns.cs" />
+    <Compile Include="Dropdowns\Civil\Styles\Labels\SurfaceLabelStyleDropDowns.cs" />
+    <Compile Include="Dropdowns\Civil\Styles\Labels\StructureLabelStyleDropDowns.cs" />
+    <Compile Include="Dropdowns\Civil\Styles\Labels\SectionViewLabelStyleDropDowns.cs" />
+    <Compile Include="Dropdowns\Civil\Styles\Labels\SectionLabelStyleDropDowns.cs" />
+    <Compile Include="Dropdowns\Civil\Styles\Labels\SampleLineLabelStyleDropDowns.cs" />
+    <Compile Include="Dropdowns\Civil\Styles\Labels\ProjectionLabelStyleDropDowns.cs" />
+    <Compile Include="Dropdowns\Civil\Styles\Labels\ProfileViewLabelStyleDropDowns.cs" />
+    <Compile Include="Dropdowns\Civil\Styles\Labels\ProfileLabelStyleDropDowns.cs" />
+    <Compile Include="Dropdowns\Civil\Styles\Labels\PipeLabelStyleDropDowns.cs" />
+    <Compile Include="Dropdowns\Civil\Styles\Labels\ParcelLabelStyleDropDowns.cs" />
+    <Compile Include="Dropdowns\Civil\Styles\Labels\MatchLineLabelStyleDropDowns.cs" />
+    <Compile Include="Dropdowns\Civil\Styles\Labels\IntersectionLabelStyleDropDowns.cs" />
+    <Compile Include="Dropdowns\Civil\Styles\Labels\CatchmentLabelStyleDropDowns.cs" />
+    <Compile Include="Dropdowns\Civil\Styles\DesignCheckDropDowns.cs" />
+    <Compile Include="Dropdowns\Civil\Styles\Objects\Structure Styles\StructureStyleSectionOptionsDropDown.cs" />
+    <Compile Include="Dropdowns\Civil\Styles\Objects\Structure Styles\StructureStyleProfileOptionsDropDown.cs" />
+    <Compile Include="Dropdowns\Civil\Styles\Objects\Structure Styles\StructureStylePlanOptionsDropDown.cs" />
+    <Compile Include="Dropdowns\Civil\Styles\Objects\Structure Styles\StructureStyleModelOptionsDropDown.cs" />
+    <Compile Include="Dropdowns\Civil\Styles\Objects\Pipe Styles\PipeStyleProfileOptionsDropDown.cs" />
+    <Compile Include="Dropdowns\Civil\Styles\Objects\Pipe Styles\PipeStylePlanOptionsDropDown.cs" />
+    <Compile Include="Dropdowns\Civil\Styles\GraphStyleDropDowns.cs" />
+    <Compile Include="Dropdowns\Civil\Styles\Objects\ObjectStyleDropDowns.cs" />
+    <Compile Include="Dropdowns\Civil\Styles\StyleDropDowns.cs" />
+    <Compile Include="Dropdowns\Civil\Styles\EnumDropDowns.cs" />
+    <Compile Include="Dropdowns\Civil\Styles\Labels\GeneralLabelStylesDropDown.cs" />
+    <None Include="Dropdowns\Civil\Pipe Networks\PipeRuleSetStylesDropDown.cs" />
+    <None Include="Dropdowns\Civil\Styles\Band Sets\SectionViewBandSetStylesDropDown.cs" />
+    <None Include="Dropdowns\Civil\Styles\Band Sets\ProfileViewBandSetStylesDropDown.cs" />
+    <Compile Include="Dropdowns\ModelText\TextAlignmentDropDown.cs" />
+    <Compile Include="Dropdowns\ModelText\SystemFontsDropDown.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Dropdowns\Civil\Styles\Labels\AlignmentLabelStyleDropDowns.cs" />
+    <None Include="Dropdowns\Civil\Pipe Networks\StructureRuleSetStylesDropDown.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="images\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Camber\Camber.csproj">
+      <Project>{23bbab73-5a3b-4ee8-a757-a1f37c67ab1f}</Project>
+      <Name>Camber</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="AfterBuild">
+    <GetReferenceAssemblyPaths TargetFrameworkMoniker=".NETFramework, Version=v4.8">
+      <Output TaskParameter="FullFrameworkReferenceAssemblyPaths" PropertyName="FrameworkAssembliesPath" />
+    </GetReferenceAssemblyPaths>
+    <GetAssemblyIdentity AssemblyFiles="$(OutDir)$(TargetName).dll">
+      <Output TaskParameter="Assemblies" ItemName="AssemblyInfo" />
+    </GetAssemblyIdentity>
+    <ItemGroup>
+      <SourceDlls Include="$(TargetDir)*.dll" />
+      <SourcePdbs Include="$(TargetDir)*.pdb" />
+      <SourcePdbs Include="$(TargetDir)*.pdb" />
+      <SourceXmls Include="$(TargetDir)*.xml" />
+    </ItemGroup>
+    <!--Copy the package to the Dynamo for Civil 3D 2022 2.10 package root directory-->
+    <RemoveDir Directories="$(AppData)\Autodesk\C3D 2022\Dynamo\2.10\packages\$(ProjectName)\bin" />
+    <Copy SourceFiles="@(SourceDlls)" DestinationFolder="$(AppData)\Autodesk\C3D 2022\Dynamo\2.10\packages\Camber\bin\%(RecursiveDir)" />
+    <Copy SourceFiles="@(SourcePkg)" DestinationFolder="$(AppData)\Autodesk\C3D 2022\Dynamo\2.10\packages\Camber\" />
+    <Copy SourceFiles="@(SourcePdbs)" DestinationFolder="$(AppData)\Autodesk\C3D 2022\Dynamo\2.10\packages\Camber\bin\" />
+    <Copy SourceFiles="@(SourceXmls)" DestinationFolder="$(AppData)\Autodesk\C3D 2022\Dynamo\2.10\packages\Camber\bin\" />
+    <!--Copy the package to the Dynamo for Civil 3D 2022 2.12 package root directory-->
+    <RemoveDir Directories="$(AppData)\Autodesk\C3D 2022\Dynamo\2.12\packages\$(ProjectName)\bin" />
+    <Copy SourceFiles="@(SourceDlls)" DestinationFolder="$(AppData)\Autodesk\C3D 2022\Dynamo\2.12\packages\Camber\bin\%(RecursiveDir)" />
+    <Copy SourceFiles="@(SourcePkg)" DestinationFolder="$(AppData)\Autodesk\C3D 2022\Dynamo\2.12\packages\Camber\" />
+    <Copy SourceFiles="@(SourcePdbs)" DestinationFolder="$(AppData)\Autodesk\C3D 2022\Dynamo\2.12\packages\Camber\bin\" />
+    <Copy SourceFiles="@(SourceXmls)" DestinationFolder="$(AppData)\Autodesk\C3D 2022\Dynamo\2.12\packages\Camber\bin\" />
+  </Target>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\Camber\packages\NUnit.3.13.2\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\Camber\packages\NUnit.3.13.2\build\NUnit.props'))" />
+  </Target>
+</Project>
