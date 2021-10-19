@@ -23,7 +23,7 @@ Camber includes hundreds of nodes that utilize the AutoCAD and Civil 3D .NET API
 - Block attribute definitions
 - MLeaders
 
-The list is continually growing! See the [Roadmap](https://github.com/mzjensen/Camber/projects/1) for what is on the horizon.
+The list is continually growing! See the [roadmap](https://github.com/mzjensen/Camber/projects/1) for what is on the horizon.
 
 ### Installation
 Camber can be installed from the Dynamo Package Manager. Look for _Packages -> Search for a Package..._ in the Menus.
