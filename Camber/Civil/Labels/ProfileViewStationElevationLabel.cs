@@ -11,6 +11,7 @@ using AeccStationElevationLabel = Autodesk.Civil.DatabaseServices.StationElevati
 using AeccProfile = Autodesk.Civil.DatabaseServices.Profile;
 using DynamoServices;
 using Camber.Civil.Styles.Objects;
+using Camber.Civil.Styles.Labels.ProfileView;
 #endregion
 
 namespace Camber.Civil.Labels
@@ -62,7 +63,7 @@ namespace Camber.Civil.Labels
         /// <param name="labelStyle"></param>
         /// <param name="markerStyle"></param>
         /// <returns></returns>
-        public static ProfileViewStationElevationLabel ByStationElevation(ProfileView profileView, double station, double elevation, ProfileViewStationElevationLabel labelStyle, MarkerStyle markerStyle)
+        public static ProfileViewStationElevationLabel ByStationElevation(ProfileView profileView, double station, double elevation, ProfileViewStationElevationLabelStyle labelStyle, MarkerStyle markerStyle)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
 
