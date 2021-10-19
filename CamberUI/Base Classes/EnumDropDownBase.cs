@@ -68,7 +68,7 @@ namespace Camber.UI
             IEnumerable<PortModel> outPorts, 
             bool addSpaces = false, 
             bool dropLastCharacter = false) 
-            : base(outputName)
+            : base(outputName, inPorts, outPorts)
         {
             EnumerationType = enumerationType;
             AddSpaces = addSpaces;

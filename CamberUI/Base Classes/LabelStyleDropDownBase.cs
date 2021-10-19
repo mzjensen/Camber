@@ -51,7 +51,8 @@ namespace Camber.UI
         /// <param name="inPorts"></param>
         /// <param name="outPorts"></param>
         [JsonConstructor]
-        public LabelStyleDropDownBase(string outputName, string labelStyleCollection, string labelStyleType, IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts) : base(outputName)
+        public LabelStyleDropDownBase(string outputName, string labelStyleCollection, string labelStyleType, IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts) 
+            : base(outputName, inPorts, outPorts)
         {
             LabelStyleCollection = labelStyleCollection;
             LabelStyleType = labelStyleType;
