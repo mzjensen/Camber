@@ -1,5 +1,6 @@
 ﻿#region references
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
@@ -43,7 +44,7 @@ namespace Camber.Civil
             (catchmentGroupId, (catchmentGroup) => new CatchmentGroup(catchmentGroup));
 
         /// <summary>
-        /// Creates a Catchment Group by name.
+        /// Creates a Catchment Group by name. Currently does not support binding 
         /// </summary>
         /// <param name="document"></param>
         /// <param name="name"></param>
@@ -118,11 +119,11 @@ namespace Camber.Civil
         public override string ToString() => $"CatchmentGroup(Name = {Name})";
 
         /// <summary>
-        /// Get all Catchment Groups in the document.
+        /// Gets all Catchment Groups in the document.
         /// </summary>
         /// <param name="document"></param>
         /// <returns></returns>
-        private static IList<CatchmentGroup> GetAllInDocument(acDynNodes.Document document)
+        public static IList<CatchmentGroup> GetCatchmentGroups(acDynNodes.Document document)
         {
             if (document is null)
             {
@@ -134,12 +135,9 @@ namespace Camber.Civil
 
             using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
             {
-                acDb.Database db = ctx.Database;
-                acDb.Transaction t = ctx.Transaction;
-
-                for (long i = 0; i < db.Handseed.Value; i++)
+                for (long i = 0; i < ctx.Database.Handseed.Value; i++)
                 {
-                    if (db.TryGetObjectId(new acDb.Handle(i), out acDb.ObjectId id))
+                    if (ctx.Database.TryGetObjectId(new acDb.Handle(i), out acDb.ObjectId id))
                     {
                         if (!id.IsValid || id.IsErased || id.IsEffectivelyErased)
                         {
@@ -153,13 +151,29 @@ namespace Camber.Civil
                 }
                 foreach (acDb.ObjectId id in ids)
                 {
-                    if (t.GetObject(id, acDb.OpenMode.ForRead, false, true) is AeccCatchmentGroup catchmentGroup)
+                    if (ctx.Transaction.GetObject(id, acDb.OpenMode.ForRead, false, true) is AeccCatchmentGroup catchmentGroup)
                     {
                         retList.Add(new CatchmentGroup(catchmentGroup));
                     }
                 }
             }
             return retList;
+        }
+
+        /// <summary>
+        /// Gets a Catchment Group by name in the document.
+        /// </summary>
+        /// <param name="document"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static CatchmentGroup GetCatchmentGroupByName(acDynNodes.Document document, string name)
+        {
+            if (document is null) { throw new ArgumentNullException("Document is null."); }
+            if (string.IsNullOrEmpty(name)) { throw new ArgumentNullException("Name is null or empty."); }
+
+            return GetCatchmentGroups(document)
+                .FirstOrDefault(item => item.Name.Equals
+                (name, StringComparison.OrdinalIgnoreCase));
         }
         #endregion        
     }
