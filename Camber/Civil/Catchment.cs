@@ -18,6 +18,8 @@ using Dynamo.Graph.Nodes;
 using Camber.Utils;
 using Camber.Civil.Labels;
 using Camber.Civil.Styles.Objects;
+using Camber.Civil.PipeNetworks;
+using Camber.Civil.PipeNetworks.Parts;
 #endregion
 
 namespace Camber.Civil
@@ -57,52 +59,97 @@ namespace Camber.Civil
         }
 
         /// <summary>
-        /// Gets a boolean value that identifies if the Catchment is exclusionary or not.
+        /// Gets a boolean value that identifies if a Catchment is exclusionary or not.
         /// </summary>
         public bool Exclusionary => GetBool();
 
         /// <summary>
-        /// Gets the hydrologically most distant length of the Catchment.
+        /// Gets the hydrologically most distant length of a Catchment.
         /// </summary>
         public double HydrologicallyMostDistantLength => GetDouble();
 
         /// <summary>
-        /// Gets the hydrologically most distant point in the Catchment.
+        /// Gets the hydrologically most distant point in a Catchment.
         /// </summary>
         public Point HydrologicallyMostDistantPoint => GeometryConversions.AcPointToDynPoint(AeccCatchment.HydrologicallyMostDistantPoint);
 
         /// <summary>
-        /// Gets the 2D perimeter of the Catchment.
+        /// Gets the 2D perimeter of a Catchment.
         /// </summary>
         public double Perimeter => GetDouble("Perimeter2d");
 
         /// <summary>
-        /// Gets the runoff coefficient for the Catchment.
+        /// Gets the runoff coefficient for a Catchment.
         /// </summary>
         public double RunoffCoefficient => GetDouble();
 
         /// <summary>
-        /// Gets the time of concentration for the Catchment.
+        /// Gets the time of concentration for a Catchment.
         /// </summary>
         public double TimeOfConcentration => GetDouble();
 
         /// <summary>
-        /// Gets the time of concentration calculation method for the Catchment.
+        /// Gets the time of concentration calculation method for a Catchment.
         /// </summary>
         public string TimeOfConcentrationCalculationMethod => AeccCatchment.TimeOfConcentrationCalculationMethod.ToString();
 
         /// <summary>
-        /// Gets the Catchment's 2D boundary Polygon.
+        /// Gets a Catchment's 2D boundary Polygon.
         /// </summary>
         public Polygon Boundary2D => GeometryConversions.AcPointCollectionToDynPolygon(AeccCatchment.BoundaryPolyline2d);
 
         /// <summary>
-        /// Gets the Catchment's 3D boundary Polygon.
+        /// Gets a Catchment's 3D boundary Polygon.
         /// </summary>
         public Polygon Boundary3D => GeometryConversions.AcPointCollectionToDynPolygon(AeccCatchment.BoundaryPolyline3d);
 
         /// <summary>
-        /// Gets the available Flow Segment Labels for the Catchment.
+        /// Gets the reference Surface for a Catchment.
+        /// </summary>
+        public civDynNodes.Surface ReferenceSurface
+        {
+            get
+            {
+                try
+                {
+                    return civDynNodes.Selection.SurfaceByName(AeccCatchment.ReferenceSurfaceName, acDynNodes.Document.Current);
+                }
+                catch { return null; }
+            }
+        }
+
+        /// <summary>
+        /// Gets the reference Pipe Network for a Catchment.
+        /// </summary>
+        public PipeNetwork ReferencePipeNetwork
+        {
+            get
+            {
+                try
+                {
+                    return PipeNetwork.GetByObjectId(AeccCatchment.ReferencePipeNetworkId);
+                }
+                catch { return null; }
+            }
+        }    
+
+        /// <summary>
+        /// Gets the reference Structure for a Catchment.
+        /// </summary>
+        public Structure ReferenceStructure
+        {
+            get
+            {
+                try
+                {
+                    return Structure.GetByObjectId(AeccCatchment.ReferencePipeNetworkStructureId);
+                }
+                catch { return null; }
+            }
+        }    
+
+        /// <summary>
+        /// Gets the available Flow Segment Labels for a Catchment.
         /// </summary>
         public List<CatchmentFlowSegmentLabel> FlowSegmentLabels
         {
@@ -119,7 +166,7 @@ namespace Camber.Civil
         }
 
         /// <summary>
-        /// Gets the available Area Labels for the Catchment.
+        /// Gets the available Area Labels for a Catchment.
         /// </summary>
         public List<CatchmentAreaLabel> AreaLabels
         {
@@ -216,7 +263,7 @@ namespace Camber.Civil
         }
 
         /// <summary>
-        /// Converts a Civil Object to a Catchment.
+        /// "Converts" a selected Civil Object to a Catchment object. The input Civil Object must be a Civil 3D Catchment.
         /// </summary>
         /// <param name="civilObject"></param>
         /// <returns></returns>
@@ -244,7 +291,7 @@ namespace Camber.Civil
         public override string ToString() => $"Catchment(Name = {Name})";
 
         /// <summary>
-        /// Sets the runoff coefficient for the Catchment.
+        /// Sets the runoff coefficient for a Catchment.
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
@@ -260,7 +307,7 @@ namespace Camber.Civil
         }
 
         /// <summary>
-        /// Sets the time of concentration for the Catchment.
+        /// Sets the time of concentration for a Catchment.
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
@@ -271,30 +318,23 @@ namespace Camber.Civil
         }
 
         /// <summary>
-        /// Sets the time of concentration calculation method for the Catchment.
+        /// Sets the time of concentration calculation method for a Catchment.
         /// </summary>
-        /// <param name="method">The calculation method type. "TR55" or "UserDefined".</param>
+        /// <param name="calculationMethod"></param>
         /// <returns></returns>
-        public Catchment SetTimeOfConcentrationCalculationMethod(string method)
+        public Catchment SetTimeOfConcentrationCalculationMethod(string calculationMethod)
         {
-            if (method == "TR55")
-            {
-                SetValue(civDb.TimeOfConcentrationCalculationMethod.CalculationMethodTR55);
-                return this;
+            if (!Enum.IsDefined(typeof(civDb.TimeOfConcentrationCalculationMethod), calculationMethod)) 
+            { 
+                throw new ArgumentException("Invalid calculation method."); 
             }
-            else if (method == "UserDefined")
-            {
-                SetValue(civDb.TimeOfConcentrationCalculationMethod.CalculationMethodUserDefined);
-                return this;
-            }
-            else
-            {
-                throw new ArgumentException("Calculation method must be \"TR55\" or \"UserDefined\".");
-            }
+            
+            SetValue((civDb.TimeOfConcentrationCalculationMethod)Enum.Parse(typeof(civDb.TimeOfConcentrationCalculationMethod), calculationMethod));
+            return this;
         }
 
         /// <summary>
-        /// Sets the Catchment's boundary Polygon.
+        /// Sets a Catchment's boundary Polygon.
         /// </summary>
         /// <param name="boundary"></param>
         /// <returns></returns>
@@ -305,7 +345,29 @@ namespace Camber.Civil
         }
 
         /// <summary>
-        /// Sets the Catchment's Flow Path.
+        /// Sets the reference Surface for a Catchment.
+        /// </summary>
+        /// <param name="surface"></param>
+        /// <returns></returns>
+        public Catchment SetReferenceSurface(civDynNodes.Surface surface)
+        {
+            SetValue("ReferenceSurfaceId", surface.InternalObjectId);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the reference Structure for a Catchment.
+        /// </summary>
+        /// <param name="structure"></param>
+        /// <returns></returns>
+        public Catchment SetReferenceStructure(Structure structure)
+        {
+            SetValue("ReferencePipeNetworkStructureId", structure.InternalObjectId);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets a Catchment's Flow Path.
         /// </summary>
         /// <param name="points"></param>
         /// <returns></returns>

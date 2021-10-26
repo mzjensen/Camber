@@ -219,6 +219,7 @@
     <Compile Include="Base Classes\LabelStyleDropDownBase.cs" />
     <Compile Include="Base Classes\StyleDropDownBase.cs" />
     <Compile Include="Base Classes\EnumDropDownBase.cs" />
+    <Compile Include="Dropdowns\Civil\TimeOfConcentrationCalculationMethodsDropDown.cs" />
     <Compile Include="Dropdowns\Civil\Styles\Labels\PointLabelStyleDropDowns.cs" />
     <Compile Include="Dropdowns\Civil\Styles\Labels\ViewFrameLabelStyleDropDowns.cs" />
     <Compile Include="Dropdowns\Civil\Styles\Labels\SurfaceLabelStyleDropDowns.cs" />
@@ -244,7 +245,7 @@
     <Compile Include="Dropdowns\Civil\Styles\GraphStyleDropDowns.cs" />
     <Compile Include="Dropdowns\Civil\Styles\Objects\ObjectStyleDropDowns.cs" />
     <Compile Include="Dropdowns\Civil\Styles\StyleDropDowns.cs" />
-    <Compile Include="Dropdowns\Civil\Styles\EnumDropDowns.cs" />
+    <Compile Include="Dropdowns\Civil\Styles\StyleEnumDropDowns.cs" />
     <Compile Include="Dropdowns\Civil\Styles\Labels\GeneralLabelStylesDropDown.cs" />
     <Compile Include="Dropdowns\ModelText\TextAlignmentDropDown.cs" />
     <Compile Include="Dropdowns\ModelText\SystemFontsDropDown.cs" />
