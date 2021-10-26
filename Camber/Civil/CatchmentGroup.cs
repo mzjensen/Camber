@@ -44,7 +44,7 @@ namespace Camber.Civil
             (catchmentGroupId, (catchmentGroup) => new CatchmentGroup(catchmentGroup));
 
         /// <summary>
-        /// Creates a Catchment Group by name. Currently does not support binding 
+        /// Creates a Catchment Group by name.
         /// </summary>
         /// <param name="document"></param>
         /// <param name="name"></param>
