@@ -228,26 +228,6 @@ namespace Camber.AutoCAD
             return SetValue(block, Enum.Parse(typeof(acDb.UnitsValue), units));
         }
 
-        protected static double GetDouble(acDynNodes.Block block, [CallerMemberName] string propertyName = null)
-        {
-            acDynNodes.Document document = acDynNodes.Document.Current;
-            using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
-            {
-                try
-                {
-                    var bt = (acDb.BlockTable)ctx.Transaction.GetObject(ctx.Database.BlockTableId, acDb.OpenMode.ForRead);
-                    var btr = (acDb.BlockTableRecord)ctx.Transaction.GetObject(bt[block.Name], acDb.OpenMode.ForRead);
-                    PropertyInfo propInfo = btr.GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
-                    if (propInfo != null)
-                    {
-                        return (double)propInfo.GetValue(btr);
-                    }
-                }
-                catch { }
-                return double.NaN;
-            }     
-        }
-
         protected static string GetString(acDynNodes.Block block, [CallerMemberName] string propertyName = null)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
@@ -273,26 +253,6 @@ namespace Camber.AutoCAD
                 }
                 catch { }
                 return NotApplicableMsg;
-            }
-        }
-
-        protected static int GetInt(acDynNodes.Block block, [CallerMemberName] string propertyName = null)
-        {
-            acDynNodes.Document document = acDynNodes.Document.Current;
-            using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
-            {
-                try
-                {
-                    var bt = (acDb.BlockTable)ctx.Transaction.GetObject(ctx.Database.BlockTableId, acDb.OpenMode.ForRead);
-                    var btr = (acDb.BlockTableRecord)ctx.Transaction.GetObject(bt[block.Name], acDb.OpenMode.ForRead);
-                    PropertyInfo propInfo = btr.GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
-                    if (propInfo != null)
-                    {
-                        return (int)propInfo.GetValue(btr);
-                    }
-                }
-                catch { }
-                return int.MinValue;
             }
         }
 
