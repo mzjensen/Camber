@@ -6,10 +6,12 @@ using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acGeom = Autodesk.AutoCAD.Geometry;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using AeccPipe = Autodesk.Civil.DatabaseServices.Pipe;
+using AeccPipeLabel = Autodesk.Civil.DatabaseServices.PipeLabel;
 using Autodesk.DesignScript.Runtime;
 using Autodesk.DesignScript.Geometry;
 using DynamoServices;
 using Camber.Utils;
+using Camber.Civil.Labels;
 #endregion
 
 namespace Camber.Civil.PipeNetworks.Parts
@@ -21,180 +23,196 @@ namespace Camber.Civil.PipeNetworks.Parts
         internal AeccPipe AeccPipe => AcObject as AeccPipe;
 
         /// <summary>
-        /// Gets the bearing of the Pipe. For straight Pipes, the returned value is the horizontal bearing.
+        /// Gets the bearing of a Pipe. For straight Pipes, the returned value is the horizontal bearing.
         /// For curved Pipes, the returned bearing is the chord bearing.
         /// </summary>
         public double Bearing => GetDouble();
 
         /// <summary>
-        /// Gets the depth of cover at the Pipe's start point, measured from the top outside edge of the Pipe to its reference Surface.
+        /// Gets the depth of cover at a Pipe's start point, measured from the top outside edge of the Pipe to its reference Surface.
         /// </summary>
         public double CoverStart => GetDouble("CoverOfStartPoint");
 
         /// <summary>
-        /// Gets the cover at the Pipe's end point, measured from the top outside edge of the Pipe to its reference Surface.
+        /// Gets the cover at a Pipe's end point, measured from the top outside edge of the Pipe to its reference Surface.
         /// </summary>
         public double CoverEnd => GetDouble("CoverOfEndpoint");
 
         /// <summary>
-        /// Gets the Pipe's cross sectional shape.
+        /// Gets a Pipe's cross sectional shape.
         /// </summary>
         public string CrossSectionalShape => GetString();
 
         /// <summary>
-        /// Gets the end point of the Pipe at the centerline.
+        /// Gets the end point of a Pipe at the centerline.
         /// </summary>
         public Point EndPoint => GeometryConversions.AcPointToDynPoint(AeccPipe.EndPoint);
 
         /// <summary>
-        /// Gets the offset of the Pipe's end point from the Pipe's reference Alignment.
+        /// Gets the offset of a Pipe's end point from its reference Alignment.
         /// </summary>
         public double EndOffset => GetDouble();
 
         /// <summary>
-        /// Gets the station of the Pipe's end point along the Pipe's reference Alignment.
+        /// Gets the station of a Pipe's end point along its reference Alignment.
         /// </summary>
         public double EndStation => GetDouble("EndStation");
 
         /// <summary>
-        /// Gets the Pipe's end Structure if it exists.
+        /// Gets a Pipe's end Structure if it exists.
         /// </summary>
         public Structure EndStructure => Structure.GetByObjectId(AeccPipe.EndStructureId) ?? null;
 
         /// <summary>
-        /// Gets the downstream elevation of the energy grade line for the Pipe.
+        /// Gets the downstream elevation of the energy grade line for a Pipe.
         /// </summary>
         public double EGLDown => GetDouble("EnergyGradeLineDown");
 
         /// <summary>
-        /// Gets the upstream elevation of the energy grade line for the Pipe.
+        /// Gets the upstream elevation of the energy grade line for a Pipe.
         /// </summary>
         public double EGLUp => GetDouble("EnergyGradeLineUp");
 
         /// <summary>
-        /// Gets the current flow direction of the Pipe relative to its start and end points.
+        /// Gets the current flow direction of a Pipe relative to its start and end points.
         /// </summary>
         public string FlowDirection => GetString();
 
         /// <summary>
-        /// Gets the method that is used to determine the flow direction of the Pipe.
+        /// Gets the method that is used to determine the flow direction of a Pipe.
         /// </summary>
         public string FlowDirectionMethod => GetString();
 
         /// <summary>
-        /// Gets the flow rate value assigned to the Pipe.
+        /// Gets the flow rate value assigned to a Pipe.
         /// </summary>
         public double FlowRate => GetDouble();
 
         /// <summary>
-        /// Gets the method that determines how the Pipe will behave when resized.
+        /// Gets the method that determines how a Pipe will behave when resized.
         /// </summary>
         public string ResizeBehavior => GetString("HoldOnResizeType");
 
         /// <summary>
-        /// Gets the downstream elevation of the hydraulic grade line for the Pipe.
+        /// Gets the downstream elevation of the hydraulic grade line for a Pipe.
         /// </summary>
         public double HGLDown => GetDouble();
 
         /// <summary>
-        /// Gets the upstream elevation of the hydraulic grade line for the Pipe.
+        /// Gets the upstream elevation of the hydraulic grade line for a Pipe.
         /// </summary>
         public double HGLUp => GetDouble();
 
         /// <summary>
-        /// Gets the inner diameter or width of the Pipe.
+        /// Gets the inner diameter or width of a Pipe.
         /// </summary>
         public double InnerDiameterOrWidth => GetDouble();
 
         /// <summary>
-        /// Gets the inner height of the Pipe.
+        /// Gets the inner height of a Pipe.
         /// </summary>
         public double InnerHeight => GetDouble();
 
         /// <summary>
-        /// Gets the junction loss value assigned to the Pipe.
+        /// Gets the junction loss value assigned to a Pipe.
         /// </summary>
         public double JunctionLoss => GetDouble();
 
         /// <summary>
-        /// Gets the 2D length of the Pipe measured from the centers of its start and end Structures. 
+        /// Gets the 2D length of a Pipe measured from the centers of its start and end Structures. 
         /// </summary>
         public double Length2DCenterToCenter => GetDouble();
 
         /// <summary>
-        /// Gets the 2D length of the Pipe measured from the inside edges of its start and end Structures. 
+        /// Gets the 2D length of a Pipe measured from the inside edges of its start and end Structures. 
         /// </summary>
         public double Length2DToInsideEdge => GetDouble();
 
         /// <summary>
-        /// Gets the 3D length of the Pipe measured from the centers of its start and end Structures. 
+        /// Gets the 3D length of a Pipe measured from the centers of its start and end Structures. 
         /// </summary>
         public double Length3DCenterToCenter => GetDouble();
 
         /// <summary>
-        /// Gets the 3D length of the Pipe measured from the inside edges of its start and end Structures. 
+        /// Gets the 3D length of a Pipe measured from the inside edges of its start and end Structures. 
         /// </summary>
         public double Length3DToInsideEdge => GetDouble();
 
         /// <summary>
-        /// Gets the maximum depth of cover along the entire length of the Pipe, measured from the top outside of the Pipe to its reference Surface.
+        /// Gets the maximum depth of cover along the entire length of a Pipe, measured from the top outside of the Pipe to its reference Surface.
         /// </summary>
         public double CoverMax => GetDouble("MaximumCover");
 
         /// <summary>
-        /// Gets the minimum depth of cover along the entire length of the Pipe, measured from the top outside of the Pipe to its reference Surface.
+        /// Gets the minimum depth of cover along the entire length of a Pipe, measured from the top outside of the Pipe to its reference Surface.
         /// </summary>
         public double CoverMin => GetDouble("MinimumCover");
 
         /// <summary>
-        /// Gets the outer diameter or width of the Pipe.
+        /// Gets the outer diameter or width of a Pipe.
         /// </summary>
         public double OuterDiameterOrWidth => GetDouble();
 
         /// <summary>
-        /// Gets the outer height of the Pipe.
+        /// Gets the outer height of a Pipe.
         /// </summary>
         public double OuterHeight => GetDouble();
 
         /// <summary>
-        /// Gets the radius of the Pipe.
+        /// Gets the radius of a Pipe.
         /// </summary>
         public double Radius => GetDouble();
 
         /// <summary>
-        /// Gets the return period value assigned to the Pipe.
+        /// Gets the return period value assigned to a Pipe.
         /// </summary>
         public int ReturnPeriod => GetInt();
 
         /// <summary>
-        /// Gets the slope of the Pipe in absolute value.
+        /// Gets the slope of a Pipe in absolute value.
         /// </summary>
         public double Slope => GetDouble();
 
         /// <summary>
-        /// Gets the start point of the Pipe at the centerline.
+        /// Gets the start point of a Pipe at the centerline.
         /// </summary>
         public Point StartPoint => GeometryConversions.AcPointToDynPoint(AeccPipe.StartPoint);
 
         /// <summary>
-        /// Gets the offset of the Pipe's start point from the Pipe's reference Alignment.
+        /// Gets the offset of a Pipe's start point from its reference Alignment.
         /// </summary>
         public double StartOffset => GetDouble();
 
         /// <summary>
-        /// Gets the station of the Pipe's end point along the Pipe's reference Alignment.
+        /// Gets the station of a Pipe's end point along its reference Alignment.
         /// </summary>
         public double StartStation => GetDouble();
 
         /// <summary>
-        /// Gets the Pipe's start Structure if it exists.
+        /// Gets a Pipe's start Structure if it exists.
         /// </summary>
         public Structure StartStructure => Structure.GetByObjectId(AeccPipe.StartStructureId) ?? null;
 
         /// <summary>
-        /// Gets the Pipe's subentity type.
+        /// Gets a Pipe's subentity type.
         /// </summary>
         public string SubEntityType => GetString();
+
+        /// <summary>
+        /// Gets the Pipe Plan Labels associated with a Pipe.
+        /// </summary>
+        public IList<PipePlanLabel> PipePlanLabels
+        {
+            get
+            {
+                var labels = new List<PipePlanLabel>();
+                foreach (acDb.ObjectId oid in AeccPipeLabel.GetAvailableLabelIds(InternalObjectId))
+                {
+                    labels.Add(PipePlanLabel.GetByObjectId(oid));
+                }
+                return labels;
+            }
+        }
         #endregion
 
         #region constructors
@@ -301,7 +319,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         }
 
         /// <summary>
-        /// Performs a cover check on the Pipe relative to its reference Surface.
+        /// Performs a cover check on a Pipe relative to its reference Surface.
         /// </summary>
         /// <param name="minCover"></param>
         /// <param name="maxCover"></param>

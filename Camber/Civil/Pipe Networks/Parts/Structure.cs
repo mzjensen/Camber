@@ -6,10 +6,11 @@ using acGeom = Autodesk.AutoCAD.Geometry;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using civDb = Autodesk.Civil.DatabaseServices;
 using AeccStructure = Autodesk.Civil.DatabaseServices.Structure;
-using AeccPipe = Autodesk.Civil.DatabaseServices.Pipe;
+using AeccStructureLabel = Autodesk.Civil.DatabaseServices.StructureLabel;
 using Autodesk.DesignScript.Runtime;
 using Autodesk.DesignScript.Geometry;
 using Camber.Utils;
+using Camber.Civil.Labels;
 #endregion
 
 namespace Camber.Civil.PipeNetworks.Parts
@@ -164,6 +165,22 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// For example, this property prevents a Pipe from entering through the cone of a Structure.
         /// </summary>
         public double VerticalPipeClearance => GetDouble();
+
+        /// <summary>
+        /// Gets the Structure Plan Labels associated with a Structure.
+        /// </summary>
+        public IList<StructurePlanLabel> StructurePlanLabels
+        {
+            get
+            {
+                var labels = new List<StructurePlanLabel>();
+                foreach (acDb.ObjectId oid in AeccStructureLabel.GetAvailableLabelIds(InternalObjectId))
+                {
+                    labels.Add(StructurePlanLabel.GetByObjectId(oid));
+                }
+                return labels;
+            }
+        }
         #endregion
 
         #region constructors
