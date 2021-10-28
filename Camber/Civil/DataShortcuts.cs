@@ -1,4 +1,5 @@
 ﻿#region references
+using System;
 using System.Collections.Generic;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using AeccDataShortcut = Autodesk.Civil.DataShortcuts.DataShortcuts;
@@ -23,51 +24,77 @@ namespace Camber.Civil
         /// Gets the current Data Shortcuts project folder.
         /// </summary>
         /// <returns></returns>
-        public static string GetCurrentProjectFolder(acDynNodes.Document document) => AeccDataShortcut.GetCurrentProjectFolder();
-
+        public static string GetCurrentProjectFolder() => AeccDataShortcut.GetCurrentProjectFolder();
 
         /// <summary>
         /// Gets the other Data Shortcut project folders within the working folder.
         /// </summary>
         /// <returns></returns>
-        public static IList<string> GetOtherProjectFolders(acDynNodes.Document document) => AeccDataShortcut.GetOtherProjectFolders();
+        public static IList<string> GetOtherProjectFolders() => AeccDataShortcut.GetOtherProjectFolders();
 
         /// <summary>
         /// Gets the description of the current Data Shortcuts project folder.
         /// </summary>
         /// <returns></returns>
-        public static string GetCurrentProjectFolderDescription(acDynNodes.Document document) => AeccDataShortcut.GetDescriptionDataShorcutProjectFolder();
+        public static string GetCurrentProjectFolderDescription() => AeccDataShortcut.GetDescriptionDataShorcutProjectFolder();
 
         /// <summary>
         /// Gets the description of a Data Shortcuts project folder by name.
         /// </summary>
         /// <param name="folderName"></param>
         /// <returns></returns>
-        public static string GetProjectFolderDescription(acDynNodes.Document document, string folderName) => AeccDataShortcut.GetDescriptionDataShorcutProjectFolder(folderName);
+        public static string GetProjectFolderDescription(string folderName) => AeccDataShortcut.GetDescriptionDataShorcutProjectFolder(folderName);
 
         /// <summary>
         /// Gets the Data Shortcuts working folder.
         /// </summary>
         /// <returns></returns>
-        public static string GetWorkingFolder(acDynNodes.Document document) => AeccDataShortcut.GetWorkingFolder();
+        public static string GetWorkingFolder() => AeccDataShortcut.GetWorkingFolder();
 
         /// <summary>
         /// Sets the Data Shortcuts working folder.
         /// </summary>
-        /// <param name="path"></param>
-        public static void SetWorkingFolder(acDynNodes.Document document, string path) => AeccDataShortcut.SetWorkingFolder(path);
+        /// <param name="folderPath"></param>
+        public static void SetWorkingFolder(string folderPath) => AeccDataShortcut.SetWorkingFolder(folderPath);
 
 
         /// <summary>
         /// Sets the current Data Shortcuts project folder by name.
         /// </summary>
         /// <param name="folderName"></param>
-        public static void SetCurrentProjectFolder(acDynNodes.Document document, string folderName) => AeccDataShortcut.SetCurrentProjectFolder(folderName);
+        public static void SetCurrentProjectFolderstring(string folderName) => AeccDataShortcut.SetCurrentProjectFolder(folderName);
 
         /// <summary>
         /// Validates Data Shortcuts.
         /// </summary>
-        public static void Validate(acDynNodes.Document document) => AeccDataShortcut.Validate();
+        public static void Validate() => AeccDataShortcut.Validate();
+
+        /// <summary>
+        /// Creates a new Data Shortcuts project folder in the current working folder.
+        /// </summary>
+        /// <param name="folderName">The name of the folder.</param>
+        /// <param name="folderDescription">The description of the folder.</param>
+        /// <param name="templatePath">The full path to a project template. If left blank, a template will not be used.</param>
+        /// <param name="setAsCurrent">Set the current project folder to the newly created one?</param>
+        public static void CreateProjectFolder(string folderName, string folderDescription = "", string templatePath = "", bool setAsCurrent = false)
+        {
+            // TODO: add some type of check in here to return true if the folder was successfully created, or false if not.
+            // Also add a boolean to allow overwriting an existing folder with the same name.
+            
+            if (string.IsNullOrEmpty(folderName)) { throw new ArgumentException("Folder name is null or empty."); }
+            try
+            {
+                if (string.IsNullOrEmpty(templatePath))
+                {
+                    AeccDataShortcut.CreateProjectFolder(folderName, folderDescription, setAsCurrent);
+                }
+                AeccDataShortcut.CreateProjectFolder(folderName, folderDescription, templatePath, setAsCurrent);
+            }
+            catch (Exception e)
+            {
+                throw new InvalidOperationException(e.Message);
+            }
+        }
         #endregion
     }
 }
