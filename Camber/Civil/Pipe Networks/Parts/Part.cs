@@ -202,7 +202,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         }
 
         /// <summary>
-        /// Applies the rules that are assigned to the Pipe Network Part.
+        /// Applies the rules that are assigned to a Pipe Network Part.
         /// </summary>
         public Part ApplyRules()
         {

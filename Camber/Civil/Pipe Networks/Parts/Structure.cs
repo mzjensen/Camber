@@ -6,9 +6,11 @@ using acGeom = Autodesk.AutoCAD.Geometry;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using civDb = Autodesk.Civil.DatabaseServices;
 using AeccStructure = Autodesk.Civil.DatabaseServices.Structure;
+using AeccStructureLabel = Autodesk.Civil.DatabaseServices.StructureLabel;
 using Autodesk.DesignScript.Runtime;
 using Autodesk.DesignScript.Geometry;
 using Camber.Utils;
+using Camber.Civil.Labels;
 #endregion
 
 namespace Camber.Civil.PipeNetworks.Parts
@@ -19,35 +21,19 @@ namespace Camber.Civil.PipeNetworks.Parts
         internal AeccStructure AeccStructure => AcObject as AeccStructure;
 
         /// <summary>
-        /// Gets whether the Structure's rim elevation should be automatically adjusted when the reference Surface changes.
+        /// Gets whether a Structure's rim elevation should be automatically adjusted when the reference Surface changes.
         /// </summary>
         public bool AutomaticRimSurfaceAdjustment => GetBool();
 
         /// <summary>
-        /// Gets the value that determines how close to the Structure’s rim a Pipe can be positioned.
+        /// Gets the value that determines how close to a Structure’s rim a Pipe can be positioned.
         /// This property only applies to two-tiered junction Structures.
         /// It is similar to Vertical Pipe Clearance, but only describes the transition zone between the access cylinder and the larger barrel cylinder.
         /// </summary>
         public double BarrelPipeClearance => GetDouble();
 
         /// <summary>
-        /// Gets the Pipes connected to the Structure.
-        /// </summary>
-        public IList<Pipe> ConnectedPipes
-        {
-            get
-            {
-                var pipes = new List<Pipe>();
-                for (int i = 0; i < AeccStructure.ConnectedPartCount; i++)
-                {
-                    pipes.Add(Pipe.GetByObjectId(AeccStructure.get_ConnectedPipe(i)));
-                }
-                return pipes;
-            }
-        }
-
-        /// <summary>
-        /// Gets how the Structure's sump should be adjusted when the elevations of its connected Pipes are changed.
+        /// Gets how a Structure's sump should be adjusted when the elevations of its connected Pipes are changed.
         /// </summary>
         public string ControlSumpBy => GetString();
 
@@ -57,128 +43,144 @@ namespace Camber.Civil.PipeNetworks.Parts
         public string Cover => GetString();
 
         /// <summary>
-        /// Gets the outer diameter or width of the Structure.
+        /// Gets the outer diameter or width of a Structure.
         /// </summary>
         public double OuterDiameterOrWidth => GetDouble("DiameterOrWidth");
 
         /// <summary>
-        /// Gets the floor thickness of the Structure.
+        /// Gets the floor thickness of a Structure.
         /// </summary>
         public double FloorThickness => GetDouble();
 
         /// <summary>
-        /// Gets the model or type of the Structure's frame.
+        /// Gets the model or type of a Structure's frame.
         /// </summary>
         public string Frame => GetString();
 
         /// <summary>
-        /// Gets the diameter of the Structure's frame.
+        /// Gets the diameter of a Structure's frame.
         /// </summary>
         public double FrameDiameter => GetDouble();
 
         /// <summary>
-        /// Gets the height of the Structure's frame.
+        /// Gets the height of a Structure's frame.
         /// </summary>
         public double FrameHeight => GetDouble();
 
         /// <summary>
-        /// Gets the model or type of the Structure's grate.
+        /// Gets the model or type of a Structure's grate.
         /// </summary>
         public string Grate => GetString();
 
         /// <summary>
-        /// Gets the thickness of the base of the headwall.
+        /// Gets the thickness of the base of a headwall.
         /// This property only applies to inlet-outlet Structures.
         /// </summary>
         public double HeadwallBaseThickness => GetDouble();
 
         /// <summary>
-        /// Gets the width of the base of the headwall.
+        /// Gets the width of the base of a headwall.
         /// This property only applies to inlet-outlet Structures.
         /// </summary>
         public double HeadwallBaseWidth => GetDouble();
 
         /// <summary>
-        /// Gets the overall height of the Structure.
+        /// Gets the overall height of a Structure.
         /// </summary>
         public double Height => GetDouble();
 
         /// <summary>
-        /// Gets the inner diamter or width of the Structure.
+        /// Gets the inner diamter or width of a Structure.
         /// </summary>
         public double InnerDiameterOrWidth => GetDouble();
 
         /// <summary>
-        /// Gets the inner length of the Structure.
+        /// Gets the inner length of a Structure.
         /// </summary>
         public double InnerLength => GetDouble();
 
         /// <summary>
-        /// Gets the length of the Structure.
+        /// Gets the length of a Structure.
         /// </summary>
         public double Length => GetDouble();
 
         /// <summary>
-        /// Gets the location of the Structure.
+        /// Gets the location of a Structure.
         /// </summary>
         public Point Location => GeometryConversions.AcPointToDynPoint(AeccStructure.Location);
 
         /// <summary>
-        /// Gets the offset of the Structure from its reference Alignment.
+        /// Gets the offset of a Structure from its reference Alignment.
         /// </summary>
         public double Offset => GetDouble();
 
         /// <summary>
-        /// Gets the depth to the bottom of the lowest Pipe connected to the Structure.
+        /// Gets the depth to the bottom of the lowest Pipe connected to a Structure.
         /// </summary>
         public double PipeLowestBottomDepth => GetDouble();
 
         /// <summary>
-        /// Gets the depth to the top of uppermost Pipe connected to the Structure.
+        /// Gets the depth to the top of uppermost Pipe connected to a Structure.
         /// </summary>
         public double PipeUpperTopDepth => GetDouble();
 
         /// <summary>
-        /// Gets the rim elevation of the Structure.
+        /// Gets the rim elevation of a Structure.
         /// </summary>
         public double RimElevation => GetDouble();
 
         /// <summary>
-        /// Gets the distance between the sump and rim of the Structure.
+        /// Gets the distance between the sump and rim of a Structure.
         /// </summary>
         public double RimToSumpHeight => GetDouble();
 
         /// <summary>
-        /// Gets the rotation of the Structure.
+        /// Gets the rotation of a Structure.
         /// </summary>
         public double Rotation => GetDouble();
 
         /// <summary>
-        /// Gets the station of the Structure along its reference Alignment.
+        /// Gets the station of a Structure along its reference Alignment.
         /// </summary>
         public double Station => GetDouble();
 
         /// <summary>
-        /// Gets the sump depth of the Structure.
+        /// Gets the sump depth of a Structure.
         /// </summary>
         public double SumpDepth => GetDouble();
 
         /// <summary>
-        /// Gets the sump elevation of the Structure.
+        /// Gets the sump elevation of a Structure.
         /// </summary>
         public double SumpElevation => GetDouble();
 
         /// <summary>
-        /// Gets the Structure's surface adjustment value.
+        /// Gets a Structure's surface adjustment value.
         /// </summary>
         public double SurfaceAdjustmentValue => GetDouble();
 
         /// <summary>
-        /// Gets the required clearance from the top outside of the uppermost pipe connected to the Structure to the Structure's rim.
+        /// Gets the required clearance from the top outside of the uppermost pipe connected to a Structure to the Structure's rim.
         /// This is defined in the structure catalog and ensures that Pipes enter the Structure at an appropriate elevation.
         /// For example, this property prevents a Pipe from entering through the cone of a Structure.
         /// </summary>
         public double VerticalPipeClearance => GetDouble();
+
+        /// <summary>
+        /// Gets the Structure Plan Labels associated with a Structure.
+        /// </summary>
+        public IList<StructurePlanLabel> StructurePlanLabels
+        {
+            get
+            {
+                var labels = new List<StructurePlanLabel>();
+                foreach (acDb.ObjectId oid in AeccStructureLabel.GetAvailableLabelIds(InternalObjectId))
+                {
+                    labels.Add(StructurePlanLabel.GetByObjectId(oid));
+                }
+                return labels;
+            }
+        }
         #endregion
 
         #region constructors
@@ -257,7 +259,45 @@ namespace Camber.Civil.PipeNetworks.Parts
         public override string ToString() => $"Structure(Name = {Name})";
 
         /// <summary>
-        /// Connects the Structure to the specified Pipe.
+        /// Gets the Pipes connected to a Structure.
+        /// </summary>
+        /// <returns></returns>
+        [MultiReturn(new[] { "All", "Incoming", "Outgoing", "Bidirectional" })]
+        public Dictionary<string, object> GetConnectedPipes()
+        {
+            var allPipes = new List<Pipe>();
+            var incomingPipes = new List<Pipe>();
+            var outgoingPipes = new List<Pipe>();
+            var bidirectionalPipes = new List<Pipe>();
+            for (int i = 0; i < AeccStructure.ConnectedPartCount; i++)
+            {
+                var pipe = Pipe.GetByObjectId(AeccStructure.get_ConnectedPipe(i));
+                allPipes.Add(pipe);
+                if (AeccStructure.IsConnectedPipeFlowingIn(i)) 
+                { 
+                    incomingPipes.Add(pipe); 
+                }
+                else if (AeccStructure.IsConnectedPipeFlowingOut(i))
+                {
+                    outgoingPipes.Add(pipe);
+                }
+                else
+                {
+                    bidirectionalPipes.Add(pipe);
+                }
+            }
+
+            return new Dictionary<string, object>
+                {
+                    { "All", allPipes },
+                    { "Incoming", incomingPipes },
+                    { "Outgoing", outgoingPipes },
+                    { "Bidirectional", bidirectionalPipes }
+                };
+        }
+
+        /// <summary>
+        /// Connects a Structure to a specified Pipe.
         /// </summary>
         /// <param name="pipe"></param>
         /// <param name="connectToStart">True = connect to Pipe start, False = connect to Pipe end</param>
@@ -278,7 +318,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         }
 
         /// <summary>
-        /// Disconnects the Structure from the specified Pipe.
+        /// Disconnects a Structure from a specified Pipe.
         /// </summary>
         /// <param name="pipe"></param>
         /// <returns></returns>
@@ -292,14 +332,14 @@ namespace Camber.Civil.PipeNetworks.Parts
         }
 
         /// <summary>
-        /// Determines if a point is within the region of the Structure.
+        /// Determines if a point is within the region of a Structure.
         /// </summary>
         /// <param name="point"></param>
         /// <returns></returns>
         public bool IsPointInsideStructureRegion(Point point) => AeccStructure.IsPointInsideStructureRegion((acGeom.Point3d)GeometryConversions.DynPointToAcPoint(point, true));
 
         /// <summary>
-        /// Attempts to resize the Structure by Pipe depths.
+        /// Attempts to resize a Structure by Pipe depths.
         /// </summary>
         /// <returns></returns>
         public Structure ResizeByPipeDepths()
@@ -316,7 +356,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         }
 
         /// <summary>
-        /// Resize the Structure by rim and sump elevations.
+        /// Resize a Structure by rim and sump elevations.
         /// </summary>
         /// <param name="partFamily"></param>
         /// <param name="rimElevation"></param>

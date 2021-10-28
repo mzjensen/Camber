@@ -37,7 +37,7 @@ namespace Camber.Civil.PipeNetworks
 
 
         /// <summary>
-        /// Gets all Structure Part Families in the Pipe Network Parts List.
+        /// Gets all Structure Part Families in a Pipe Network Parts List.
         /// </summary>
         public IList<PartFamily> StructureFamilies
         {
