@@ -224,6 +224,8 @@
     <Compile Include="AutoCAD\ObjectExtensions.cs" />
     <Compile Include="AutoCAD\MLeader.cs" />
     <Compile Include="Civil\Feature Line\FeatureLineSegmentType.cs" />
+    <Compile Include="Civil\Labels\StructurePlanLabel.cs" />
+    <Compile Include="Civil\Labels\PipePlanLabel.cs" />
     <Compile Include="Civil\Pressure Networks\PressurePartsList.cs" />
     <Compile Include="Civil\ProfileExtensions.cs" />
     <Compile Include="Civil\AlignmentExtensions.cs" />

@@ -27,36 +27,36 @@ namespace Camber.Civil.PipeNetworks
         private const string DocumentIsNullMessage = "Document is null.";
 
         /// <summary>
-        /// Gets the Pipe Network section layer name.
+        /// Gets a Pipe Network's section layer name.
         /// </summary>
         public string ModifiedPipeNetworkSectionLayer => GetString("ModifiedPipeNetworkSectionLayerName");
 
         /// <summary>
-        /// Gets the Pipe Network's modified Pipe plan layer name, with suffix or prefix.
+        /// Gets a Pipe Network's modified Pipe plan layer name, with suffix or prefix.
         /// Returns the same as PipePlanLayerName if there is no suffix or prefix.
         /// </summary>
         public string ModifiedPipePlanLayer => GetString("ModifiedPipePlanLayerName");
 
         /// <summary>
-        /// Gets the Pipe Network's modified Pipe profile layer name, with suffix or prefix.
+        /// Gets a Pipe Network's modified Pipe profile layer name, with suffix or prefix.
         /// Returns the same as PipeProfileLayerName if there is no suffix or prefix.
         /// </summary>
         public string ModifiedPipeProfileLayer => GetString("ModifiedPipeProfileLayerName");
 
         /// <summary>
-        /// Gets the Pipe Network's modified Structure plan layer name, with suffix or prefix.
+        /// Gets a Pipe Network's modified Structure plan layer name, with suffix or prefix.
         /// Returns the same as StructurePlanLayerName if there is no suffix or prefix.
         /// </summary>
         public string ModifiedStructurePlanLayer => GetString("ModifiedStructurePlanLayerName");
 
         /// <summary>
-        /// Gets the Pipe Network's modified Structure profile layer name, with suffix or prefix.
+        /// Gets a Pipe Network's modified Structure profile layer name, with suffix or prefix.
         /// Returns the same as StructureProfileLayerName if there is no suffix or prefix.
         /// </summary>
         public string ModifiedStructureProfileLayer => GetString("ModifiedStructureProfileLayerName");
         
         /// <summary>
-        /// Gets the Parts List assigned to the Pipe Network.
+        /// Gets the Parts List assigned to a Pipe Network.
         /// </summary>
         public PartsList PartsList => PartsList.GetByObjectId(AeccPipeNetwork.PartsListId);
 
@@ -66,22 +66,22 @@ namespace Camber.Civil.PipeNetworks
         public string PipeNameTemplate => GetString();
 
         /// <summary>
-        /// Gets the Pipe Network's section layer name.
+        /// Gets a Pipe Network's section layer name.
         /// </summary>
         public string PipeNetworkSectionLayer => GetString("PipeNetworkSectionLayerName");
 
         /// <summary>
-        /// Gets the Pipe Network's Pipe plan layer name.
+        /// Gets a Pipe Network's Pipe plan layer name.
         /// </summary>
         public string PipePlanLayer => GetString("PipePlanLayerName");
 
         /// <summary>
-        /// Gets the Pipe Network's Pipe profile layer name.
+        /// Gets a Pipe Network's Pipe profile layer name.
         /// </summary>
         public string PipeProfileLayer => GetString("PipeProfileLayerName");
 
         /// <summary>
-        /// Gets the reference Alignment for the Pipe Network.
+        /// Gets the reference Alignment for a Pipe Network.
         /// </summary>
         public civDynNodes.Alignment ReferenceAlignment
         {
@@ -99,7 +99,7 @@ namespace Camber.Civil.PipeNetworks
         }
         
         /// <summary>
-        /// Gets the reference Surface for the Pipe Network.
+        /// Gets the reference Surface for a Pipe Network.
         /// </summary>
         public civDynNodes.Surface ReferenceSurface
         {
@@ -117,22 +117,22 @@ namespace Camber.Civil.PipeNetworks
         }
 
         /// <summary>
-        /// Gets the Pipe Network's Structure naming template string.
+        /// Gets a Pipe Network's Structure naming template string.
         /// </summary>
         public string StructureNameTemplate => GetString();
 
         /// <summary>
-        /// Gets the Pipe Network's Structure plan layer name.
+        /// Gets a Pipe Network's Structure plan layer name.
         /// </summary>
         public string StructurePlanLayer => GetString("StructurePlanLayerName");
 
         /// <summary>
-        /// Gets the Pipe Network's Structure profile layer name.
+        /// Gets a Pipe Network's Structure profile layer name.
         /// </summary>
         public string StructureProfileLayer => GetString("StructureProfileLayerName");
 
         /// <summary>
-        /// Gets all of the Pipes in the Pipe Network.
+        /// Gets all of the Pipes in a Pipe Network.
         /// </summary>
         public IList<Pipe> Pipes
         {
@@ -149,7 +149,7 @@ namespace Camber.Civil.PipeNetworks
         }
 
         /// <summary>
-        /// Gets all of the Structures in the Pipe Network.
+        /// Gets all of the Structures in a Pipe Network.
         /// </summary>
         public IList<Structure> Structures
         {
@@ -236,7 +236,7 @@ namespace Camber.Civil.PipeNetworks
         /// <param name="allowReference">Include data shortcuts?</param>
         /// <returns></returns>
         [NodeCategory("Actions")]
-        public static PipeNetwork GetByName(acDynNodes.Document document, string name, bool allowReference = false)
+        public static PipeNetwork GetPipeNetworkByName(acDynNodes.Document document, string name, bool allowReference = false)
         {
             if (document is null)
             {
@@ -301,12 +301,11 @@ namespace Camber.Civil.PipeNetworks
         }
 
         /// <summary>
-        /// Finds the shortest path in the Pipe Network between two Parts.
+        /// Finds the shortest path in a Pipe Network between two Parts.
         /// </summary>
         /// <param name="startPart"></param>
         /// <param name="endPart"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [MultiReturn(new[] { "Parts", "Path Length" })]
         public Dictionary<string, object> FindShortestNetworkPath(Part startPart, Part endPart)
         {
@@ -326,11 +325,11 @@ namespace Camber.Civil.PipeNetworks
                     }
                     else if (aeccPart is AeccStructure)
                     {
-                        parts.Add(Pipe.GetByObjectId(oid));
+                        parts.Add(Structure.GetByObjectId(oid));
                     }
                     else
                     {
-                        throw new Exception("Part is not a Pipe or Structure.");
+                        throw new InvalidOperationException("Part is not a Pipe or Structure.");
                     }
                 }
             }
