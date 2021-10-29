@@ -1,6 +1,9 @@
 ﻿#region references
 using System;
+using System.IO;
 using System.Reflection;
+using System.Linq;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using civDb = Autodesk.Civil.DatabaseServices;
 using civApp = Autodesk.Civil.ApplicationServices;
@@ -8,11 +11,11 @@ using civDynNodes = Autodesk.Civil.DynamoNodes;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
+using AeccDataShortcut = Autodesk.Civil.DataShortcuts.DataShortcuts;
+using Autodesk.DesignScript.Runtime;
 using DynamoServices;
 using Camber.Civil.Styles;
 using Camber.Utils;
-using System.Collections.Generic;
-using System.Linq;
 #endregion
 
 namespace Camber.Civil
@@ -23,7 +26,7 @@ namespace Camber.Civil
         #region properties
         internal civDb.Entity AeccEntity => AcObject as civDb.Entity;
         protected const string NotApplicableMsg = "Not applicable";
-        //protected bool IsReference => AeccEntity.IsReferenceObject || AeccEntity.IsReferenceSubObject;
+        protected const string NotReferenceEntityMsg = "Civil Object is not a Data Shortcut reference entity.";
         #endregion
 
         #region constructors
@@ -104,6 +107,67 @@ namespace Camber.Civil
                 {
                     throw new Exception("Style is not valid for this type of object.");
                 }
+            }
+        }
+
+        /// <summary>
+        /// Attempts to repair a broken reference to a Civil Object by specifying a path to a new source drawing.
+        /// Includes a flag to optionally attempt to repair all other Civil Objects with broken references from the same source drawing.
+        /// </summary>
+        /// <param name="civilObject"></param>
+        /// <param name="pathToSourceDwg">The full path to the specified drawing to use as the new source drawing.</param>
+        /// <param name="repairOthers">Attempt to repair other Civil Objects with broken references?</param>
+        /// <returns></returns>
+        public static civDynNodes.CivilObject RepairBrokenReference(civDynNodes.CivilObject civilObject, string pathToSourceDwg, bool repairOthers = false)
+        {
+            if (!GetIsReference(civilObject)) { throw new ArgumentException(NotReferenceEntityMsg); }
+            if (string.IsNullOrEmpty(pathToSourceDwg)) { throw new ArgumentException("Path to target drawing is null or empty."); }
+
+            // Check if file exists
+            if (!File.Exists(pathToSourceDwg)) { throw new ArgumentException("The specified drawing does not exist or the path is invalid."); }
+
+            // Check if file is a DWG
+            var extension = Path.GetExtension(pathToSourceDwg);
+            if (string.IsNullOrEmpty(extension)) { throw new ArgumentException("The specified path does not point to a .DWG file."); }
+
+            try
+            {
+                bool repaired = AeccDataShortcut.RepairBrokenDRef(civilObject.InternalObjectId, pathToSourceDwg, repairOthers);
+                if (repaired) 
+                { 
+                    return civilObject; 
+                }
+                throw new Exception("The reference for the specified Civil Object could not be repaired.");
+            }
+            catch { throw; }
+        }
+
+        /// <summary>
+        /// Gets the Data Shortcut reference information for a Civil Object.
+        /// </summary>
+        /// <param name="civilObject"></param>
+        /// <returns></returns>
+        [MultiReturn(new[] { "Name", "Type", "Is Broken", "Source Drawing", "Handle High", "Handle Low" })]
+        public static Dictionary<string, object> GetReferenceInfo(civDynNodes.CivilObject civilObject)
+        {
+            if (!GetIsReference(civilObject)) { throw new ArgumentException(NotReferenceEntityMsg); }
+
+            var document = acDynNodes.Document.Current;
+
+            using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
+            {
+                var aeccEntity = (civDb.Entity)ctx.Transaction.GetObject(civilObject.InternalObjectId, acDb.OpenMode.ForRead);
+                var refInfo = aeccEntity.GetReferenceInfo();
+
+                return new Dictionary<string, object>
+                {
+                    { "Name", refInfo.Name },
+                    { "Type", refInfo.Type.ToString() },
+                    { "Is Broken", refInfo.IsSourceDrawingExistent },
+                    { "Source Drawing", refInfo.SourceDrawing },
+                    { "Handle High", refInfo.HandleHigh },
+                    { "Handle Low", refInfo.HandleLow }
+                };
             }
         }
 
