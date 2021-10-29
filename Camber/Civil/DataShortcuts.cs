@@ -1,18 +1,19 @@
 ﻿#region references
 using System;
+using System.IO;
 using System.Collections.Generic;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
+using civDynNodes = Autodesk.Civil.DynamoNodes;
 using AeccDataShortcut = Autodesk.Civil.DataShortcuts.DataShortcuts;
+using Autodesk.DesignScript.Runtime;
 #endregion
 
 namespace Camber.Civil
 {
-    // Need to expand this out after the 2022.1 update.
-    // The DLL that comes with C3D 2022 does not have the latest and greatest for the Data Shortcuts API, which was included in the 2021.3 update.
-    // https://help.autodesk.com/view/CIV3D/2020/ENU/?guid=299173e1-d4f1-a572-539d-f800a22b7cd8
     public abstract class DataShortcuts
     {
         #region properties
+        protected const string InvalidFolderNameMsg = "Folder name is null or empty.";
         #endregion
 
         #region constructors
@@ -21,79 +22,158 @@ namespace Camber.Civil
 
         #region methods
         /// <summary>
-        /// Gets the current Data Shortcuts project folder.
+        /// Gets the project folders within the current working folder. Both the current project folder and all other project folders are returned.
         /// </summary>
         /// <returns></returns>
-        public static string GetCurrentProjectFolder() => AeccDataShortcut.GetCurrentProjectFolder();
-
-        /// <summary>
-        /// Gets the other Data Shortcut project folders within the working folder.
-        /// </summary>
-        /// <returns></returns>
-        public static IList<string> GetOtherProjectFolders() => AeccDataShortcut.GetOtherProjectFolders();
+        [IsLacingDisabled]
+        [MultiReturn(new[] { "Current", "Others" })]
+        public static Dictionary<string, object> GetProjectFolders()
+        {
+            return new Dictionary<string, object>
+                {
+                    { "Current", AeccDataShortcut.GetCurrentProjectFolder() },
+                    { "Others", AeccDataShortcut.GetOtherProjectFolders() }
+                };
+        }
 
         /// <summary>
         /// Gets the description of the current Data Shortcuts project folder.
         /// </summary>
         /// <returns></returns>
+        [IsLacingDisabled]
         public static string GetCurrentProjectFolderDescription() => AeccDataShortcut.GetDescriptionDataShorcutProjectFolder();
 
         /// <summary>
-        /// Gets the description of a Data Shortcuts project folder by name.
+        /// Gets the description of a Data Shortcuts project folder by name within the current working folder.
         /// </summary>
         /// <param name="folderName"></param>
         /// <returns></returns>
-        public static string GetProjectFolderDescription(string folderName) => AeccDataShortcut.GetDescriptionDataShorcutProjectFolder(folderName);
+        [IsLacingDisabled]
+        public static string GetProjectFolderDescription(string folderName)
+        {
+            if (string.IsNullOrEmpty(folderName)) { throw new ArgumentException("Project folder name is null or empty."); }
+
+            try
+            {
+                return AeccDataShortcut.GetDescriptionDataShorcutProjectFolder(folderName);
+            }
+            catch { throw; }
+        }
 
         /// <summary>
         /// Gets the Data Shortcuts working folder.
         /// </summary>
         /// <returns></returns>
+        [IsLacingDisabled]
         public static string GetWorkingFolder() => AeccDataShortcut.GetWorkingFolder();
 
         /// <summary>
-        /// Sets the Data Shortcuts working folder.
+        /// Sets the Data Shortcuts working folder. Returns true if the working folder was set successfully and false otherwise.
         /// </summary>
         /// <param name="folderPath"></param>
-        public static void SetWorkingFolder(string folderPath) => AeccDataShortcut.SetWorkingFolder(folderPath);
+        [IsLacingDisabled]
+        public static bool SetWorkingFolder(string folderPath)
+        {
+            if (string.IsNullOrEmpty(folderPath)) { throw new ArgumentException("Folder path is null or empty."); }
+            
+            // Check if folder path is valid
+            try
+            {
+                Path.GetFullPath(folderPath);
+            }
+            catch { throw; }
 
+            // Disallow relative paths
+            if (!Path.IsPathRooted(folderPath)) { throw new ArgumentException("Folder path cannot be relative."); }
+
+            try
+            {
+                AeccDataShortcut.SetWorkingFolder(folderPath);
+
+                // Check if working folder was set successfully
+                string path = AeccDataShortcut.GetWorkingFolder();
+                if (path == folderPath)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch { throw; }
+        }
 
         /// <summary>
-        /// Sets the current Data Shortcuts project folder by name.
+        /// Sets the current Data Shortcuts project folder by name. The project folder must existing within the working folder.
+        /// Returns true if the project folder is set successfully and false otherwise.
         /// </summary>
         /// <param name="folderName"></param>
-        public static void SetCurrentProjectFolderstring(string folderName) => AeccDataShortcut.SetCurrentProjectFolder(folderName);
+        [IsLacingDisabled]
+        public static bool SetCurrentProjectFolder(string folderName)
+        {
+            if (string.IsNullOrEmpty(folderName)) { throw new ArgumentException(InvalidFolderNameMsg); }
+            
+            try
+            {
+                AeccDataShortcut.SetCurrentProjectFolder(folderName);
+                
+                // Check if the folder was set correctly
+                string dir = AeccDataShortcut.GetCurrentProjectFolder();
+                string dirName = new DirectoryInfo(dir).Name;
+                if (dirName == folderName)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch { throw; }
+        }
 
         /// <summary>
-        /// Validates Data Shortcuts.
+        /// Validates all Data Shortcuts.
         /// </summary>
+        [IsLacingDisabled]
         public static void Validate() => AeccDataShortcut.Validate();
 
         /// <summary>
         /// Creates a new Data Shortcuts project folder in the current working folder.
+        /// Returns true if the folder is successfully created and false otherwise.
         /// </summary>
         /// <param name="folderName">The name of the folder.</param>
         /// <param name="folderDescription">The description of the folder.</param>
         /// <param name="templatePath">The full path to a project template. If left blank, a template will not be used.</param>
         /// <param name="setAsCurrent">Set the current project folder to the newly created one?</param>
-        public static void CreateProjectFolder(string folderName, string folderDescription = "", string templatePath = "", bool setAsCurrent = false)
+        /// <param name="overwrite">Overwrite project folder if it already exists?</param>
+        public static bool CreateProjectFolder(
+            string folderName, 
+            string folderDescription = "", 
+            string templatePath = "", 
+            bool setAsCurrent = false, 
+            bool overwrite = false)
         {
-            // TODO: add some type of check in here to return true if the folder was successfully created, or false if not.
-            // Also add a boolean to allow overwriting an existing folder with the same name.
+            if (string.IsNullOrEmpty(folderName)) { throw new ArgumentException(InvalidFolderNameMsg); }
             
-            if (string.IsNullOrEmpty(folderName)) { throw new ArgumentException("Folder name is null or empty."); }
+            if (!overwrite && Directory.Exists(AeccDataShortcut.GetWorkingFolder() + "/" + folderName))
+            {
+                throw new InvalidOperationException("Folder already exists.");
+            }
+            
             try
             {
                 if (string.IsNullOrEmpty(templatePath))
                 {
                     AeccDataShortcut.CreateProjectFolder(folderName, folderDescription, setAsCurrent);
                 }
+                
+                // Create the folder
                 AeccDataShortcut.CreateProjectFolder(folderName, folderDescription, templatePath, setAsCurrent);
+                
+                // Check if the newly created folder exists
+                if (!Directory.Exists(AeccDataShortcut.GetWorkingFolder() + "/" + folderName))
+                {
+                    return false;
+                }
+                return true;
             }
-            catch (Exception e)
-            {
-                throw new InvalidOperationException(e.Message);
-            }
+            catch { throw; }
         }
         #endregion
     }
