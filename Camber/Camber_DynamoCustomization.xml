@@ -13,6 +13,9 @@
 		<namespace name="Camber.Civil">
 			<category>Camber.Civil 3D</category>
 		</namespace>
+		<namespace name="Camber.Civil.DataShortcuts">
+			<category>Camber.Civil 3D.Data Shortcuts</category>
+		</namespace>
 		<namespace name="Camber.Civil.PipeNetworks">
 			<category>Camber.Civil 3D.Pipe Networks</category>
 		</namespace>

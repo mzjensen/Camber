@@ -220,6 +220,7 @@
   <ItemGroup>
     <Compile Include="AutoCAD\AttributeDefinition.cs" />
     <Compile Include="AutoCAD\BlockExtensions.cs" />
+    <Compile Include="AutoCAD\DocumentExtensions.cs" />
     <Compile Include="AutoCAD\ObjectSupport.cs" />
     <Compile Include="AutoCAD\ObjectExtensions.cs" />
     <Compile Include="AutoCAD\MLeader.cs" />
