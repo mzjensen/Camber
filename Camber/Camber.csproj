@@ -224,13 +224,16 @@
     <Compile Include="AutoCAD\ObjectSupport.cs" />
     <Compile Include="AutoCAD\ObjectExtensions.cs" />
     <Compile Include="AutoCAD\MLeader.cs" />
+    <Compile Include="Civil\CivilApplication.cs" />
+    <Compile Include="Civil\Data Shortcuts\ProjectFolder.cs" />
+    <Compile Include="Civil\Data Shortcuts\WorkingFolder.cs" />
     <Compile Include="Civil\Feature Line\FeatureLineSegmentType.cs" />
     <Compile Include="Civil\Labels\StructurePlanLabel.cs" />
     <Compile Include="Civil\Labels\PipePlanLabel.cs" />
     <Compile Include="Civil\Pressure Networks\PressurePartsList.cs" />
     <Compile Include="Civil\ProfileExtensions.cs" />
     <Compile Include="Civil\AlignmentExtensions.cs" />
-    <Compile Include="Civil\DataShortcuts.cs" />
+    <Compile Include="Civil\Data Shortcuts\DataShortcut.cs" />
     <Compile Include="Civil\Labels\GeneralSegmentLabel.cs" />
     <Compile Include="Civil\Labels\SectionViewDepthLabel.cs" />
     <Compile Include="Civil\Labels\SectionViewOffsetElevationLabel.cs" />
