@@ -13,7 +13,7 @@ using Autodesk.DesignScript.Runtime;
 namespace Camber.AutoCAD
 {
     [RegisterForTrace]
-    public class AttributeDefinition : ObjectExtensions
+    public class AttributeDefinition : Object
     {
         #region properties
         internal AcAttDef AcAttDef => AcObject as AcAttDef;

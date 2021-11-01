@@ -11,7 +11,7 @@ namespace Camber.AutoCAD
 {
     [RegisterForTrace]
     [IsVisibleInDynamoLibrary(false)]
-    public class ObjectExtensions : acDynNodes.Object
+    public class Object : acDynNodes.Object
     {
         #region properties
         internal acDb.Entity AcEntity => AcObject as acDb.Entity;
@@ -19,7 +19,7 @@ namespace Camber.AutoCAD
         #endregion
 
         #region constructors
-        public ObjectExtensions(acDb.Entity acEntity, bool isDynamoOwned = false) : base(acEntity, isDynamoOwned) { }
+        public Object(acDb.Entity acEntity, bool isDynamoOwned = false) : base(acEntity, isDynamoOwned) { }
         #endregion
 
         #region methods

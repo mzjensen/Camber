@@ -13,7 +13,7 @@ using Autodesk.DesignScript.Runtime;
 namespace Camber.AutoCAD
 {
     [RegisterForTrace]
-    public sealed class MLeader : ObjectExtensions
+    public sealed class MLeader : Object
     {
         #region properties
         internal AcMLeader AcMLeader => AcObject as AcMLeader;

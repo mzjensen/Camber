@@ -19,7 +19,7 @@ using Camber.Civil.PipeNetworks.Parts;
 namespace Camber.Civil.PipeNetworks
 {
     [RegisterForTrace]
-    public sealed class PipeNetwork : CivilObjectExtensions
+    public sealed class PipeNetwork : CivilObject
     {
         #region properties
         internal AeccPipeNetwork AeccPipeNetwork => AcObject as AeccPipeNetwork;

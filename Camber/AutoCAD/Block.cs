@@ -13,14 +13,14 @@ using Dynamo.Graph.Nodes;
 namespace Camber.AutoCAD
 {
     [RegisterForTrace]
-    public class BlockExtensions
+    public sealed class Block
     {
         #region properties
         protected const string NotApplicableMsg = "Not applicable";
         #endregion
 
         #region constructors
-        private BlockExtensions() { }
+        private Block() { }
         #endregion
 
         #region methods

@@ -17,7 +17,7 @@ using Camber.Civil.PressureNetworks.Parts;
 namespace Camber.Civil.PressureNetworks
 {
     [RegisterForTrace]
-    public sealed class PressureNetwork : CivilObjectExtensions
+    public sealed class PressureNetwork : CivilObject
     {
         #region properties
         internal AeccPressureNetwork AeccPressureNetwork => AcObject as AeccPressureNetwork;

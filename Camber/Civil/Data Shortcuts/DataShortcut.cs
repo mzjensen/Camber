@@ -75,14 +75,14 @@ namespace Camber.Civil.DataShortcuts
             // This doesn't work correctly because we need to check for the situation where multiple data shortcuts are created for parents and children.
             
             // Check if the object has already been published
-            bool isExported = CivilObjectExtensions.IsExportedAsDataShortcut(civilObject);
+            bool isExported = CivilObject.IsExportedAsDataShortcut(civilObject);
             if (isExported) { throw new ArgumentException("A Data Shortcut has already been created for this Civil Object."); }
 
-            var exportableItem = CivilObjectExtensions.GetExportableItem(civilObject);
+            var exportableItem = CivilObject.GetExportableItem(civilObject);
             bool successfulExport = SetExportableItemPublishedState(exportableItem, true);
             if (successfulExport)
             {
-                return CivilObjectExtensions.DataShortcut(civilObject);
+                return CivilObject.DataShortcut(civilObject);
             }
             return null;
         }

@@ -18,7 +18,7 @@ using Dynamo.Graph.Nodes;
 namespace Camber.Civil
 {
     [RegisterForTrace]
-    public sealed class SectionView : CivilObjectExtensions
+    public sealed class SectionView : CivilObject
     {
         #region properties
         internal AeccSectionView AeccSectionView => AcObject as AeccSectionView;

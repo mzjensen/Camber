@@ -219,10 +219,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoCAD\AttributeDefinition.cs" />
-    <Compile Include="AutoCAD\BlockExtensions.cs" />
-    <Compile Include="AutoCAD\DocumentExtensions.cs" />
+    <Compile Include="AutoCAD\Block.cs" />
+    <Compile Include="AutoCAD\Document.cs" />
     <Compile Include="AutoCAD\ObjectSupport.cs" />
-    <Compile Include="AutoCAD\ObjectExtensions.cs" />
+    <Compile Include="AutoCAD\Object.cs" />
     <Compile Include="AutoCAD\MLeader.cs" />
     <Compile Include="Civil\CivilApplication.cs" />
     <Compile Include="Civil\Data Shortcuts\ProjectFolder.cs" />
@@ -231,8 +231,8 @@
     <Compile Include="Civil\Labels\StructurePlanLabel.cs" />
     <Compile Include="Civil\Labels\PipePlanLabel.cs" />
     <Compile Include="Civil\Pressure Networks\PressurePartsList.cs" />
-    <Compile Include="Civil\ProfileExtensions.cs" />
-    <Compile Include="Civil\AlignmentExtensions.cs" />
+    <Compile Include="Civil\Profile.cs" />
+    <Compile Include="Civil\Alignment.cs" />
     <Compile Include="Civil\Data Shortcuts\DataShortcut.cs" />
     <Compile Include="Civil\Labels\GeneralSegmentLabel.cs" />
     <Compile Include="Civil\Labels\SectionViewDepthLabel.cs" />
@@ -348,7 +348,7 @@
     <Compile Include="Tools\ModelText.cs" />
     <Compile Include="Civil\Catchment.cs" />
     <Compile Include="Civil\CatchmentGroup.cs" />
-    <Compile Include="Civil\CivilObjectExtensions.cs" />
+    <Compile Include="Civil\CivilObject.cs" />
     <Compile Include="Civil\Labels\ProfileViewStationElevationLabel.cs" />
     <Compile Include="Civil\Labels\SurfaceElevationLabel.cs" />
     <Compile Include="Civil\Labels\AlignmentStationOffsetLabel.cs" />

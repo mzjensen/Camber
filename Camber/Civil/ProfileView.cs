@@ -20,7 +20,7 @@ using Camber.Utils;
 namespace Camber.Civil
 {
     [RegisterForTrace]
-    public sealed class ProfileView : CivilObjectExtensions
+    public sealed class ProfileView : CivilObject
     {
         #region properties
         internal AeccProfileView AeccProfileView => AcObject as AeccProfileView;

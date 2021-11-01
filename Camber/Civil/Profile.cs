@@ -3,37 +3,38 @@ using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using civDynNodes = Autodesk.Civil.DynamoNodes;
-using AeccAlignment = Autodesk.Civil.DatabaseServices.Alignment;
+using AeccProfile = Autodesk.Civil.DatabaseServices.Profile;
 using DynamoServices;
 #endregion
 
 namespace Camber.Civil
 {
     [RegisterForTrace]
-    public sealed class AlignmentExtensions
+    public sealed class Profile
     {
         #region properties
         #endregion
 
         #region constructors
-        private AlignmentExtensions() { }
+        private Profile() { }
         #endregion
 
         #region methods
         /// <summary>
-        /// Gets a Dynamo-wrapped Alignment by Object ID.
+        /// Gets a Dynamo-wrapped Profile by Object ID.
         /// </summary>
         /// <param name="oid"></param>
         /// <returns></returns>
-        internal static civDynNodes.Alignment GetFromObjectId(acDb.ObjectId oid)
+        internal static civDynNodes.Profile GetFromObjectId(acDb.ObjectId oid)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
             try
             {
                 using (acDynApp.DocumentContext ctx = new acDynApp.DocumentContext(document.AcDocument))
                 {
-                    var aeccAlign = ctx.Transaction.GetObject(oid, acDb.OpenMode.ForWrite) as AeccAlignment;
-                    return civDynNodes.Selection.AlignmentByName(aeccAlign.Name, document);
+                    var aeccProfile = ctx.Transaction.GetObject(oid, acDb.OpenMode.ForWrite) as AeccProfile;
+                    var parentAlign = Alignment.GetFromObjectId(aeccProfile.AlignmentId);
+                    return parentAlign.ProfileByName(aeccProfile.Name);
                 }
             }
             catch { throw; }

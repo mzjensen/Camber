@@ -9,13 +9,13 @@ using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 
 namespace Camber.AutoCAD
 {
-    public sealed class DocumentExtensions
+    public sealed class Document
     {
         #region properties
         #endregion
 
         #region constructors
-        internal DocumentExtensions() { }
+        internal Document() { }
         #endregion
 
         #region methods

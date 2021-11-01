@@ -24,7 +24,7 @@ using Camber.Utils;
 namespace Camber.Civil
 {
     [RegisterForTrace]
-    public class CivilObjectExtensions : civDynNodes.CivilObject
+    public class CivilObject : civDynNodes.CivilObject
     {
         #region properties
         internal civDb.Entity AeccEntity => AcObject as civDb.Entity;
@@ -33,7 +33,7 @@ namespace Camber.Civil
         #endregion
 
         #region constructors
-        internal CivilObjectExtensions(civDb.Entity entity, bool isDynamoOwned = false) : base(entity, isDynamoOwned) { }
+        internal CivilObject(civDb.Entity entity, bool isDynamoOwned = false) : base(entity, isDynamoOwned) { }
         #endregion
 
         #region methods

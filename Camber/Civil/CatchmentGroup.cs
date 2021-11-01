@@ -13,7 +13,7 @@ using DynamoServices;
 namespace Camber.Civil
 {
     [RegisterForTrace]
-    public sealed class CatchmentGroup : CivilObjectExtensions
+    public sealed class CatchmentGroup : CivilObject
     {
         #region properties
         internal AeccCatchmentGroup AeccCatchmentGroup => AcObject as AeccCatchmentGroup;

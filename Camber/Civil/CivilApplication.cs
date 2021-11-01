@@ -67,14 +67,14 @@ namespace Camber.Civil
         /// Refresh method for use internally.
         /// </summary>
         [SupressImportIntoVM]
-        public static void RefreshDataShortcuts() => DocumentExtensions.SendCommand(acDynNodes.Document.Current, RefreshCommand, false);
+        public static void RefreshDataShortcuts() => Document.SendCommand(acDynNodes.Document.Current, RefreshCommand, false);
 
         /// <summary>
         /// Refreshes the Data Shortcuts view in the Toolspace.
         /// </summary>
         /// <param name="runToggle">A boolean input that can be changed to force the node to run.</param>
         [IsLacingDisabled]
-        public static void RefreshDataShortcuts(bool runToggle = true) => DocumentExtensions.SendCommand(acDynNodes.Document.Current, RefreshCommand, false);
+        public static void RefreshDataShortcuts(bool runToggle = true) => Document.SendCommand(acDynNodes.Document.Current, RefreshCommand, false);
 
         /// <summary>
         /// Sets the current Data Shortcuts Working Folder for the application.
