@@ -15,6 +15,8 @@ using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using ExportableItem = Autodesk.Civil.DataShortcuts.DataShortcuts.DataShortcutManager.ExportableItem;
 using Autodesk.DesignScript.Runtime;
 using DynamoServices;
+using Dynamo.Graph.Nodes;
+using Camber.Civil.DataShortcuts;
 using Camber.Civil.Styles;
 using Camber.Utils;
 #endregion
@@ -40,7 +42,8 @@ namespace Camber.Civil
         /// </summary>
         /// <param name="civilObject"></param>
         /// <returns></returns>
-        public static Style GetStyle(civDynNodes.CivilObject civilObject)
+        [NodeCategory("Query")]
+        public static Style Style(civDynNodes.CivilObject civilObject)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
             using (var ctx = new acDynApp.DocumentContext(document?.AcDocument))
@@ -69,7 +72,8 @@ namespace Camber.Civil
         /// </summary>
         /// <param name="civilObject"></param>
         /// <returns></returns>
-        public static bool GetIsReference(civDynNodes.CivilObject civilObject)
+        [NodeCategory("Query")]
+        public static bool IsReference(civDynNodes.CivilObject civilObject)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
             using (var ctx = new acDynApp.DocumentContext(document?.AcDocument))
@@ -83,6 +87,57 @@ namespace Camber.Civil
                 }
                 return false;
             }
+        }
+
+        /// <summary>
+        /// Determines if a Civil Object can be exported as a Data Shortcut.
+        /// </summary>
+        /// <param name="civilObject"></param>
+        /// <returns></returns>
+        [NodeCategory("Query")]
+        public static bool IsExportableAsDataShortcut(civDynNodes.CivilObject civilObject)
+        {
+            var DSEntityType = GetDataShortcutEntityType(civilObject);
+            if (DSEntityType is civDs.DataShortcutEntityType.Unknown)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Gets if a Data Shortcut has been created for a Civil Object. 
+        /// </summary>
+        /// <param name="civilObject"></param>
+        /// <returns></returns>
+        [NodeCategory("Query")]
+        public static bool IsExportedAsDataShortcut(civDynNodes.CivilObject civilObject)
+        {
+            var item = GetExportableItem(civilObject);
+            if (item != null)
+            {
+                return item.IsExported;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Gets a Civil Object's Data Shortcut if one has been created.
+        /// </summary>
+        /// <param name="civilObject"></param>
+        /// <returns></returns>
+        [NodeCategory("Query")]
+        public static DataShortcut DataShortcut(civDynNodes.CivilObject civilObject)
+        {
+            if (IsExportedAsDataShortcut(civilObject))
+            {
+                var exportedItems = DataShortcuts.DataShortcut.GetExportedItems();
+                var index = exportedItems.IndexOf(GetExportableItem(civilObject));
+                var publishedItems = DataShortcuts.DataShortcut.GetAllPublishedItems();
+
+                return new DataShortcut(publishedItems[index], exportedItems[index]);
+            }
+            return null;
         }
 
         /// <summary>
@@ -121,7 +176,7 @@ namespace Camber.Civil
         /// <returns></returns>
         public static civDynNodes.CivilObject RepairBrokenReference(civDynNodes.CivilObject civilObject, string pathToSourceDwg, bool repairOthers = false)
         {
-            if (!GetIsReference(civilObject)) { throw new ArgumentException(NotReferenceEntityMsg); }
+            if (!IsReference(civilObject)) { throw new ArgumentException(NotReferenceEntityMsg); }
             if (string.IsNullOrEmpty(pathToSourceDwg)) { throw new ArgumentException("Path to target drawing is null or empty."); }
 
             // Check if file exists
@@ -144,14 +199,14 @@ namespace Camber.Civil
         }
 
         /// <summary>
-        /// Gets the Data Shortcut reference information for a Civil Object.
+        /// Gets reference information for a Civil Object whose source is a Data Shortcut.
         /// </summary>
         /// <param name="civilObject"></param>
         /// <returns></returns>
         [MultiReturn(new[] { "Name", "Type", "Is Broken", "Source Drawing", "Handle High", "Handle Low" })]
         public static Dictionary<string, object> GetReferenceInfo(civDynNodes.CivilObject civilObject)
         {
-            if (!GetIsReference(civilObject)) { throw new ArgumentException(NotReferenceEntityMsg); }
+            if (!IsReference(civilObject)) { throw new ArgumentException(NotReferenceEntityMsg); }
 
             var document = acDynNodes.Document.Current;
 
@@ -173,10 +228,59 @@ namespace Camber.Civil
         }
 
         /// <summary>
-        /// Gets the data shortcut entity type of a Civil Object.
+        /// Gets a Civil Object's associated Exportable Item if it exists.
         /// </summary>
         /// <param name="civilObject"></param>
         /// <returns></returns>
+        [SupressImportIntoVM]
+        public static ExportableItem GetExportableItem(civDynNodes.CivilObject civilObject)
+        {
+            // Get list of all exportable items
+            var exportableItems = DataShortcuts.DataShortcut.GetAllExportableItems();
+
+            // Get DS entity type of Civil Object
+            var DSEntityType = GetDataShortcutEntityType(civilObject);
+
+            ExportableItem exportableItem = null;
+
+            foreach (ExportableItem item in exportableItems)
+            {
+                if (item.Name == civilObject.Name && item.DSEntityType == DSEntityType)
+                {
+                    // Profiles and Sample Line Groups are the only exportable items that can have parents.
+                    if (item.DSEntityType == civDs.DataShortcutEntityType.Profile
+                        || item.DSEntityType == civDs.DataShortcutEntityType.SampleLineGroup)
+                    {
+                        civDynNodes.Alignment parentAlignment;
+
+                        if (item.DSEntityType == civDs.DataShortcutEntityType.Profile)
+                        {
+                            var profile = (civDynNodes.Profile)civilObject;
+                            parentAlignment = profile.Alignment;
+                        }
+                        else
+                        {
+                            var slg = (SampleLineGroup)civilObject;
+                            parentAlignment = slg.Alignment;
+                        }
+
+                        if (item.ParentItem.Name == parentAlignment.Name)
+                        {
+                            exportableItem = item;
+                        }
+                    }
+                    exportableItem = item;
+                }
+            }
+            return exportableItem;
+        }
+
+        /// <summary>
+        /// Gets the Data Shortcut entity type of a Civil Object.
+        /// </summary>
+        /// <param name="civilObject"></param>
+        /// <returns></returns>
+        [SupressImportIntoVM]
         public static civDs.DataShortcutEntityType GetDataShortcutEntityType(civDynNodes.CivilObject civilObject)
         {
             var document = acDynNodes.Document.Current;
@@ -184,7 +288,7 @@ namespace Camber.Civil
             using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
             {
                 var aeccObj = ctx.Transaction.GetObject(civilObject.InternalObjectId, acDb.OpenMode.ForRead);
-                
+
                 switch (aeccObj)
                 {
                     case civDb.Alignment alignment:
@@ -215,43 +319,6 @@ namespace Camber.Civil
                 return DSEntityType;
             }
         }
-
-        /// <summary>
-        /// Determines if a Civil Object can be published as a data shortcut.
-        /// </summary>
-        /// <param name="civilObject"></param>
-        /// <returns></returns>
-        public static bool IsExportable(civDynNodes.CivilObject civilObject)
-        {
-            var DSEntityType = GetDataShortcutEntityType(civilObject);
-            if (DSEntityType is civDs.DataShortcutEntityType.Unknown)
-            {
-                return false;
-            }
-            return true;
-        }
-
-        // TODO
-        public static ExportableItem GetExportableItem(civDynNodes.CivilObject civilObject)
-        {
-            // I think Profiles and Sample Line Groups are the only exportable items that can have parents.
-            
-            bool isExportable = IsExportable(civilObject);
-            if (!isExportable) { throw new ArgumentException("A data shortcut cannot be created for this type of object."); }
-            
-            var exportableItems = DataShortcuts.DataShortcuts.GetExportableItems();
-            var DSEntityType = GetDataShortcutEntityType(civilObject);
-
-            foreach (ExportableItem item in exportableItems)
-            {
-                if (item.Name == civilObject.Name && item.DSEntityType == DSEntityType)
-                {
-                    return null;
-                }
-            }
-            return null;
-        }
-
 
         protected double GetDouble([CallerMemberName] string propertyName = null)
         {
