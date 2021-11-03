@@ -344,6 +344,8 @@
     <Compile Include="Civil\Pipe Networks\PartFamily.cs" />
     <Compile Include="Civil\Pipe Networks\PartsList.cs" />
     <Compile Include="Civil\Pipe Networks\Rule Sets\RuleSet.cs" />
+    <Compile Include="Civil\ViewFrame.cs" />
+    <Compile Include="Civil\ViewFrameGroup.cs" />
     <Compile Include="Utils\GeometryConversions.cs" />
     <Compile Include="Tools\ModelText.cs" />
     <Compile Include="Civil\Catchment.cs" />
