@@ -64,20 +64,10 @@ namespace Camber.Civil.DataShortcuts
                 var dataShortcuts = new List<DataShortcut>();
                 if (isValidCreation)
                 {
-                    var exportableItemsCount = manager.GetExportableItemsCount();
-                    var exportedIndices = new List<int>();
-                    for (int i = 0; i < exportableItemsCount; i++)
-                    {
-                        if (manager.IsItemAtIndexAlreadyPublished(i))
-                        {
-                            exportedIndices.Add(i);
-                        }
-                    }
-
                     var publishedItemsCount = manager.GetPublishedItemsCount();
                     for (int i = 0; i < publishedItemsCount; i++)
                     {
-                        dataShortcuts.Add(new DataShortcut(manager.GetPublishedItemAt(i), manager.GetExportableItemAt(exportedIndices[i])));
+                        dataShortcuts.Add(new DataShortcut(manager.GetPublishedItemAt(i)));
                     }
                 }
                 return dataShortcuts;

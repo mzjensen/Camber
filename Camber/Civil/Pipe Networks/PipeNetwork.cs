@@ -233,7 +233,7 @@ namespace Camber.Civil.PipeNetworks
         /// </summary>
         /// <param name="document"></param>
         /// <param name="name"></param>
-        /// <param name="allowReference">Include data shortcuts?</param>
+        /// <param name="allowReference">Include data references?</param>
         /// <returns></returns>
         [NodeCategory("Actions")]
         public static PipeNetwork GetPipeNetworkByName(acDynNodes.Document document, string name, bool allowReference = false)
@@ -261,7 +261,7 @@ namespace Camber.Civil.PipeNetworks
         /// Gets the Pipe Networks in the document.
         /// </summary>
         /// <param name="document"></param>
-        /// <param name="allowReference">Include data shortcuts?</param>
+        /// <param name="allowReference">Include data references?</param>
         /// <returns></returns>
         public static IList<PipeNetwork> GetPipeNetworks(acDynNodes.Document document, bool allowReference = false)
         {

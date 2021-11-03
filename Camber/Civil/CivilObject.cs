@@ -12,7 +12,8 @@ using civDynNodes = Autodesk.Civil.DynamoNodes;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
-using ExportableItem = Autodesk.Civil.DataShortcuts.DataShortcuts.DataShortcutManager.ExportableItem;
+using AeccExportableItem = Autodesk.Civil.DataShortcuts.DataShortcuts.DataShortcutManager.ExportableItem;
+using AeccPublishedItem = Autodesk.Civil.DataShortcuts.DataShortcuts.DataShortcutManager.PublishedItem;
 using Autodesk.DesignScript.Runtime;
 using DynamoServices;
 using Dynamo.Graph.Nodes;
@@ -113,10 +114,10 @@ namespace Camber.Civil
         [NodeCategory("Query")]
         public static bool IsExportedAsDataShortcut(civDynNodes.CivilObject civilObject)
         {
-            var item = GetExportableItem(civilObject);
-            if (item != null)
+            var exItem = GetExportableItem(civilObject);
+            if (exItem != null)
             {
-                return item.IsExported;
+                return exItem.IsExported;
             }
             return false;
         }
@@ -131,11 +132,13 @@ namespace Camber.Civil
         {
             if (IsExportedAsDataShortcut(civilObject))
             {
-                var exportedItems = DataShortcuts.DataShortcut.GetExportedItems();
-                var index = exportedItems.IndexOf(GetExportableItem(civilObject));
-                var publishedItems = DataShortcuts.DataShortcut.GetAllPublishedItems();
+                var exItem = GetExportableItem(civilObject);
+                var pItems = DataShortcuts.DataShortcut.GetAllPublishedItems();
+                AeccPublishedItem pItem = (AeccPublishedItem)pItems.Where(
+                    item => item.DSEntityType == exItem.DSEntityType
+                    && item.Name == exItem.Name);
 
-                return new DataShortcut(publishedItems[index], exportedItems[index]);
+                return new DataShortcut(pItem);
             }
             return null;
         }
@@ -233,27 +236,27 @@ namespace Camber.Civil
         /// <param name="civilObject"></param>
         /// <returns></returns>
         [SupressImportIntoVM]
-        public static ExportableItem GetExportableItem(civDynNodes.CivilObject civilObject)
+        public static AeccExportableItem GetExportableItem(civDynNodes.CivilObject civilObject)
         {
             // Get list of all exportable items
-            var exportableItems = DataShortcuts.DataShortcut.GetAllExportableItems();
+            var exItems = DataShortcuts.DataShortcut.GetAllExportableItems();
 
             // Get DS entity type of Civil Object
             var DSEntityType = GetDataShortcutEntityType(civilObject);
 
-            ExportableItem exportableItem = null;
+            AeccExportableItem output = null;
 
-            foreach (ExportableItem item in exportableItems)
+            foreach (AeccExportableItem exItem in exItems)
             {
-                if (item.Name == civilObject.Name && item.DSEntityType == DSEntityType)
+                if (exItem.Name == civilObject.Name && exItem.DSEntityType == DSEntityType)
                 {
                     // Profiles and Sample Line Groups are the only exportable items that can have parents.
-                    if (item.DSEntityType == civDs.DataShortcutEntityType.Profile
-                        || item.DSEntityType == civDs.DataShortcutEntityType.SampleLineGroup)
+                    if (exItem.DSEntityType == civDs.DataShortcutEntityType.Profile
+                        || exItem.DSEntityType == civDs.DataShortcutEntityType.SampleLineGroup)
                     {
                         civDynNodes.Alignment parentAlignment;
 
-                        if (item.DSEntityType == civDs.DataShortcutEntityType.Profile)
+                        if (exItem.DSEntityType == civDs.DataShortcutEntityType.Profile)
                         {
                             var profile = (civDynNodes.Profile)civilObject;
                             parentAlignment = profile.Alignment;
@@ -264,15 +267,15 @@ namespace Camber.Civil
                             parentAlignment = slg.Alignment;
                         }
 
-                        if (item.ParentItem.Name == parentAlignment.Name)
+                        if (exItem.ParentItem.Name == parentAlignment.Name)
                         {
-                            exportableItem = item;
+                            output = exItem;
                         }
                     }
-                    exportableItem = item;
+                    output = exItem;
                 }
             }
-            return exportableItem;
+            return output;
         }
 
         /// <summary>

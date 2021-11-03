@@ -6,10 +6,12 @@ using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using civDynNodes = Autodesk.Civil.DynamoNodes;
+using civDb = Autodesk.Civil.DatabaseServices;
 using civDs = Autodesk.Civil.DataShortcuts;
 using AeccPublishedItem = Autodesk.Civil.DataShortcuts.DataShortcuts.DataShortcutManager.PublishedItem;
 using AeccExportableItem = Autodesk.Civil.DataShortcuts.DataShortcuts.DataShortcutManager.ExportableItem;
 using Autodesk.DesignScript.Runtime;
+using Dynamo.Graph.Nodes;
 
 #endregion
 
@@ -19,7 +21,11 @@ namespace Camber.Civil.DataShortcuts
     {
         #region properties
         internal AeccPublishedItem AeccPublishedItem { get; set; }
-        internal AeccExportableItem AeccExportableItem { get; set; }
+        internal AeccExportableItem AeccExportableItem => 
+            (AeccExportableItem)GetAllExportableItems().Where(
+            item => item.DSEntityType == AeccPublishedItem.DSEntityType
+            && item.Name == AeccPublishedItem.Name);
+
         protected const string InvalidCivilObjectMsg = "A Data Shortcut cannot be created for this type of Civil Object.";
 
         /// <summary>
@@ -59,32 +65,9 @@ namespace Camber.Civil.DataShortcuts
         #endregion
 
         #region constructors
-        internal DataShortcut(AeccPublishedItem aeccPublishedItem, AeccExportableItem aeccExportableItem)
+        internal DataShortcut(AeccPublishedItem aeccPublishedItem)
         {
             AeccPublishedItem = aeccPublishedItem;
-            AeccExportableItem = aeccExportableItem;
-        }
-
-        /// <summary>
-        /// Creates a new Data Shortcut for a Civil Object in the current Project Folder.
-        /// </summary>
-        /// <param name="civilObject"></param>
-        /// <returns></returns>
-        public static DataShortcut ByCivilObject(civDynNodes.CivilObject civilObject)
-        {
-            // This doesn't work correctly because we need to check for the situation where multiple data shortcuts are created for parents and children.
-            
-            // Check if the object has already been published
-            bool isExported = CivilObject.IsExportedAsDataShortcut(civilObject);
-            if (isExported) { throw new ArgumentException("A Data Shortcut has already been created for this Civil Object."); }
-
-            var exportableItem = CivilObject.GetExportableItem(civilObject);
-            bool successfulExport = SetExportableItemPublishedState(exportableItem, true);
-            if (successfulExport)
-            {
-                return CivilObject.DataShortcut(civilObject);
-            }
-            return null;
         }
         #endregion
 
@@ -92,13 +75,65 @@ namespace Camber.Civil.DataShortcuts
         public override string ToString() => $"DataShortcut(Name = {Name}, Entity Type = {EntityType})";
 
         /// <summary>
+        /// Creates new Data Shortcuts for a Civil Object in the current Project Folder.
+        /// If the Civil Object is a Profile or Sample Line Group, a Data Shortcut will also be created for its parent Alignment.
+        /// If the Civil Object is a Corridor, Data Shortcuts will be created for each of its horizontal and vertical baselines.
+        /// </summary>
+        /// <param name="civilObject"></param>
+        /// <returns></returns>
+        [NodeCategory("Create")]
+        public static IList<DataShortcut> ByCivilObject(civDynNodes.CivilObject civilObject)
+        {
+            // Check if the object has already been published
+            bool isExported = CivilObject.IsExportedAsDataShortcut(civilObject);
+            if (isExported) { throw new ArgumentException("A Data Shortcut has already been created for this Civil Object."); }
+
+            var dataShortcuts = new List<DataShortcut>();
+
+            var allExItems = new List<AeccExportableItem>();
+            var mainExItem = CivilObject.GetExportableItem(civilObject);
+            allExItems.Add(mainExItem);
+
+            // Check for parent item
+            if (mainExItem.ParentItem != null)
+            {
+                allExItems.Add(mainExItem.ParentItem);
+            }
+
+            // Check for dependent items
+            if (mainExItem.DependentItems != null)
+            {
+                foreach (var item in mainExItem.DependentItems)
+                {
+                    allExItems.Add(item);
+                }
+            }
+
+            bool successfulExport = SetExportableItemPublishedState(mainExItem);
+            if (successfulExport)
+            {
+                foreach (var exItem in allExItems)
+                {
+                    // Get corresponding PublishedItem for each ExportableItem
+                    AeccPublishedItem pItem = (AeccPublishedItem)GetAllPublishedItems().Where(
+                        item => item.DSEntityType == exItem.DSEntityType
+                        && item.Name == exItem.Name);
+
+                    dataShortcuts.Add(new DataShortcut(pItem));
+                }
+                return dataShortcuts;
+            }
+            return null;
+        }
+
+        /// <summary>
         /// Creates a reference to a Data Shortcut in the current drawing.
         /// </summary>
         /// <returns></returns>
-        public IList<object> CreateReference()
+        public IList<civDynNodes.CivilObject> CreateReference()
         {
             var document = acDynNodes.Document.Current;
-            var objects = new List<object>();
+            var civilObjects = new List<civDynNodes.CivilObject>();
 
             using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
             {
@@ -112,31 +147,44 @@ namespace Camber.Civil.DataShortcuts
 
                     foreach (acDb.ObjectId oid in oids)
                     {
-                        var obj = ctx.Transaction.GetObject(oid, acDb.OpenMode.ForRead);
-                        objects.Add(obj);
+                        var entity = (civDb.Entity)ctx.Transaction.GetObject(oid, acDb.OpenMode.ForRead);
+                        switch (entity)
+                        {
+                            case civDb.Alignment alignment:
+                                civilObjects.Add(civDynNodes.Selection.AlignmentByName(entity.Name, document));
+                                break;
+                            case civDb.Network pipeNetwork:
+                                civilObjects.Add(PipeNetworks.PipeNetwork.GetByObjectId(oid));
+                                break;
+                            case civDb.PressurePipeNetwork pressurePipeNetwork:
+                                civilObjects.Add(PressureNetworks.PressureNetwork.GetByObjectId(oid));
+                                break;
+                            case civDb.Corridor corridor:
+                                civilObjects.Add(civDynNodes.Selection.CorridorByName(entity.Name, document));
+                                break;
+                            case civDb.Profile profile:
+                                var aeccProfile = (civDb.Profile)entity;
+                                var align = (civDb.Alignment)ctx.Transaction.GetObject(aeccProfile.AlignmentId, acDb.OpenMode.ForRead);
+                                civilObjects.Add(civDynNodes.Selection.AlignmentByName(align.Name, document).ProfileByName(aeccProfile.Name));
+                                break;
+                            case civDb.SampleLineGroup sampleLineGroup:
+                                civilObjects.Add(SampleLineGroup.GetByObjectId(oid));
+                                break;
+                            case civDb.ViewFrameGroup viewFrameGroup:
+                                civilObjects.Add(ViewFrameGroup.GetByObjectId(oid));
+                                break;
+                            case civDb.Surface surface:
+                                civilObjects.Add(civDynNodes.Selection.SurfaceByName(entity.Name, document));
+                                break;
+                        }
                     }
-                    return objects;
+                    return civilObjects;
                 }
                 catch { throw; }
             }
         }
 
-        /// <summary>
-        /// Removes a Data Shortcut from the current Project Folder. Returns true if the Data Shortcut was removed successfully and false otherwise. 
-        /// </summary>
-        /// <returns></returns>
-        public bool Remove()
-        {
-            return !SetExportableItemPublishedState(AeccExportableItem, false);
-        }
-
-        /// <summary>
-        /// Sets the state of an ExportableItem via the Data Shortcut Manager.
-        /// </summary>
-        /// <param name="aeccExportableItem"></param>
-        /// <param name="isPublished"></param>
-        /// <returns></returns>
-        private static bool SetExportableItemPublishedState(AeccExportableItem aeccExportableItem, bool isPublished)
+        public static AeccExportableItem GetExportableItemAt(int index)
         {
             try
             {
@@ -146,7 +194,58 @@ namespace Camber.Civil.DataShortcuts
 
                 if (isValidCreation)
                 {
-                    manager.SetSelectItemAtIndex(aeccExportableItem.Index, isPublished);
+                    return manager.GetExportableItemAt(index);
+                }
+
+                throw new InvalidOperationException("Failed to create Data Shortcut Manager.");
+            }
+            catch { throw; }
+        }
+        public static AeccPublishedItem GetPublishedItemAt(int index)
+        {
+            try
+            {
+                // Create data shortcut manager
+                bool isValidCreation = false;
+                var manager = civDs.DataShortcuts.CreateDataShortcutManager(ref isValidCreation);
+
+                if (isValidCreation)
+                {
+                    return manager.GetPublishedItemAt(index);
+                }
+
+                throw new InvalidOperationException("Failed to create Data Shortcut Manager.");
+            }
+            catch { throw; }
+        }
+        public static IList<AeccExportableItem> GetDependentItems(AeccExportableItem aeccExportableItem) => aeccExportableItem.DependentItems;
+        public static IList<AeccExportableItem> GetDirectChildrenItems(AeccExportableItem aeccExportableItem) => aeccExportableItem.DirectChildrenItems;
+        public static AeccExportableItem GetParentItem(AeccExportableItem aeccExportableItem) => aeccExportableItem.ParentItem;
+        public static IList<AeccExportableItem> GetRecursiveChildrenItems(AeccExportableItem aeccExportableItem) => aeccExportableItem.RecursiveChildrenItems;
+        public static string GetExportableItemName(AeccExportableItem aeccExportableItem) => aeccExportableItem.Name;
+        public static string GetPublishedItemName(AeccPublishedItem aeccPublishedItem) => aeccPublishedItem.Name;
+
+        /// <summary>
+        /// Sets the state of an ExportableItem via the Data Shortcut Manager.
+        /// </summary>
+        /// <param name="aeccExportableItem"></param>
+        /// <param name="isPublished"></param>
+        /// <returns></returns>
+        private static bool SetExportableItemPublishedState(AeccExportableItem aeccExportableItem)
+        {
+            try
+            {
+                // Create data shortcut manager
+                bool isValidCreation = false;
+                var manager = civDs.DataShortcuts.CreateDataShortcutManager(ref isValidCreation);
+
+                if (isValidCreation)
+                {
+                    // Setting isSelected to false will not actually remove a data shortcut if it has already been created
+                    // It essentially just unchecks the box in the "Create Data Shortcuts" window, although I don't see
+                    // the point of this because saving the state of the DataShortcutManager when isSelected is true
+                    // will create a data shortcut. So there's really never a time when passing false would do anything.
+                    manager.SetSelectItemAtIndex(aeccExportableItem.Index, true);
                     civDs.DataShortcuts.SaveDataShortcutManager(ref manager);
                     CivilApplication.RefreshDataShortcuts();
                     return manager.IsItemAtIndexAlreadyPublished(aeccExportableItem.Index);
