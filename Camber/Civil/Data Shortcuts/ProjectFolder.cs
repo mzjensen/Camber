@@ -152,8 +152,11 @@ namespace Camber.Civil.DataShortcuts
         /// </summary>
         /// <param name="description"></param>
         /// <returns></returns>
-        public ProjectFolder SetDescription(string description)
+        private ProjectFolder SetDescription(string description)
         {
+            // While this should work in theory, the returned value for the project folder description
+            // does not change after manually editing the description in the XML file.
+
             string path = Path + @"\_Shortcuts\ShortcutsHistory.xml";
 
             XmlDocument doc = new XmlDocument();
@@ -208,19 +211,19 @@ namespace Camber.Civil.DataShortcuts
             }
             if (!string.IsNullOrEmpty(name))
             {
-                q = q.Where(p => p.Name == name);
+                q = q.Where(p => p.Name.Contains(name));
             }
             if (!string.IsNullOrEmpty(description))
             {
-                q = q.Where(p => p.Description == description);
+                q = q.Where(p => p.Description.Contains(description));
             }
             if (!string.IsNullOrEmpty(sourceFileName))
             {
-                q = q.Where(p => p.SourceFileName == sourceFileName);
+                q = q.Where(p => p.SourceFileName.Contains(sourceFileName));
             }
             if (!string.IsNullOrEmpty(sourceLocation))
             {
-                q = q.Where(p => p.SourceLocation == sourceLocation);
+                q = q.Where(p => p.SourceLocation.Contains(sourceLocation));
             }
 
             return q.ToList();

@@ -1,5 +1,6 @@
 ﻿#region references
 using System;
+using System.IO;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using AeccDataShortcuts = Autodesk.Civil.DataShortcuts.DataShortcuts;
 using Autodesk.DesignScript.Runtime;
@@ -84,6 +85,7 @@ namespace Camber.Civil
         public static WorkingFolder SetWorkingFolder(string directoryPath)
         {
             if (string.IsNullOrEmpty(directoryPath)) { throw new ArgumentException("Folder path is null or empty."); }
+            if (!Directory.Exists(directoryPath)) { throw new ArgumentException("Directory does not exist."); }
 
             try
             {

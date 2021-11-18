@@ -8,7 +8,7 @@ using Dynamo.Graph.Nodes;
 namespace Camber.UI
 {
     [NodeName("Data Shortcut Entity Types")]
-    [NodeCategory("Camber.Civil 3D.Data Shortcuts.DataShortcut")]
+    [NodeCategory("Camber.Civil 3D.Data Shortcuts.ProjectFolder")]
     [NodeDescription("Select Data Shortcut entity type.")]
     [IsDesignScriptCompatible]
     public class DataShortcutEntityTypesDropDown : EnumDropDownBase

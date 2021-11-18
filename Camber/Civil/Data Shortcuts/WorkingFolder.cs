@@ -1,6 +1,7 @@
 ﻿#region references
 using System;
 using System.IO;
+using System.Linq;
 using System.Collections.Generic;
 using AeccDataShortcuts = Autodesk.Civil.DataShortcuts.DataShortcuts;
 using Autodesk.DesignScript.Runtime;
@@ -39,7 +40,7 @@ namespace Camber.Civil.DataShortcuts
         /// <summary>
         /// Gets all of the Project Folders in a Working Folder.
         /// </summary>
-        public IList<ProjectFolder> ProjectFolders
+        public List<ProjectFolder> ProjectFolders
         {
             get
             {
@@ -79,7 +80,26 @@ namespace Camber.Civil.DataShortcuts
         /// <returns></returns>
         public bool ContainsFolder(string folderName)
         {
+            if (string.IsNullOrEmpty(folderName)) { throw new ArgumentException("Folder name is null or empty."); }
+            
             return Directory.Exists(Path + "/" + folderName);
+        }
+
+        /// <summary>
+        /// Gets a Project Folder by name from a Working Folder if it exists.
+        /// </summary>
+        /// <param name="folderName"></param>
+        /// <returns></returns>
+        public ProjectFolder GetProjectFolderByName(string folderName)
+        {
+            if (string.IsNullOrEmpty(folderName)) { throw new ArgumentException("Folder name is null or empty."); }
+
+            var folder = ProjectFolders.Find(x => x.Name == folderName);
+            if (folder == null)
+            {
+                throw new InvalidOperationException("The Working Folder does not contain a Project Folder with the input name.");
+            }
+            return folder;
         }
         #endregion
     }

@@ -134,9 +134,9 @@ namespace Camber.Civil
             {
                 var exItem = GetExportableItem(civilObject);
                 var pItems = DataShortcuts.DataShortcut.GetAllPublishedItems();
-                AeccPublishedItem pItem = (AeccPublishedItem)pItems.Where(
+                AeccPublishedItem pItem = pItems.Where(
                     item => item.DSEntityType == exItem.DSEntityType
-                    && item.Name == exItem.Name);
+                    && item.Name == exItem.Name).FirstOrDefault();
 
                 return new DataShortcut(pItem);
             }
@@ -206,7 +206,7 @@ namespace Camber.Civil
         /// </summary>
         /// <param name="civilObject"></param>
         /// <returns></returns>
-        [MultiReturn(new[] { "Name", "Type", "Is Broken", "Source Drawing", "Handle High", "Handle Low" })]
+        [MultiReturn(new[] { "Name", "Type", "Is Broken", "Source Drawing" })]
         public static Dictionary<string, object> GetReferenceInfo(civDynNodes.CivilObject civilObject)
         {
             if (!IsReference(civilObject)) { throw new ArgumentException(NotReferenceEntityMsg); }
@@ -222,10 +222,8 @@ namespace Camber.Civil
                 {
                     { "Name", refInfo.Name },
                     { "Type", refInfo.Type.ToString() },
-                    { "Is Broken", refInfo.IsSourceDrawingExistent },
-                    { "Source Drawing", refInfo.SourceDrawing },
-                    { "Handle High", refInfo.HandleHigh },
-                    { "Handle Low", refInfo.HandleLow }
+                    { "Is Broken", !refInfo.IsSourceDrawingExistent },
+                    { "Source Drawing", refInfo.SourceDrawing }
                 };
             }
         }

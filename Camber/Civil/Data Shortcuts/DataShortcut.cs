@@ -29,11 +29,6 @@ namespace Camber.Civil.DataShortcuts
         protected const string InvalidCivilObjectMsg = "A Data Shortcut cannot be created for this type of Civil Object.";
 
         /// <summary>
-        /// Gets the index of a Data Shortcut's PublishedItem from the list of PublishedItems (not the main list of ExportableItems).
-        /// </summary>
-        private int PublishedItemIndex => GetAllPublishedItems().IndexOf(AeccPublishedItem);
-
-        /// <summary>
         /// Gets the description of a Data Shortcut.
         /// </summary>
         public string Description => AeccPublishedItem.Description;
@@ -115,9 +110,9 @@ namespace Camber.Civil.DataShortcuts
                 foreach (var exItem in allExItems)
                 {
                     // Get corresponding PublishedItem for each ExportableItem
-                    AeccPublishedItem pItem = (AeccPublishedItem)GetAllPublishedItems().Where(
+                    AeccPublishedItem pItem = GetAllPublishedItems().Where(
                         item => item.DSEntityType == exItem.DSEntityType
-                        && item.Name == exItem.Name);
+                        && item.Name == exItem.Name).FirstOrDefault();
 
                     dataShortcuts.Add(new DataShortcut(pItem));
                 }
@@ -183,47 +178,6 @@ namespace Camber.Civil.DataShortcuts
                 catch { throw; }
             }
         }
-
-        public static AeccExportableItem GetExportableItemAt(int index)
-        {
-            try
-            {
-                // Create data shortcut manager
-                bool isValidCreation = false;
-                var manager = civDs.DataShortcuts.CreateDataShortcutManager(ref isValidCreation);
-
-                if (isValidCreation)
-                {
-                    return manager.GetExportableItemAt(index);
-                }
-
-                throw new InvalidOperationException("Failed to create Data Shortcut Manager.");
-            }
-            catch { throw; }
-        }
-        public static AeccPublishedItem GetPublishedItemAt(int index)
-        {
-            try
-            {
-                // Create data shortcut manager
-                bool isValidCreation = false;
-                var manager = civDs.DataShortcuts.CreateDataShortcutManager(ref isValidCreation);
-
-                if (isValidCreation)
-                {
-                    return manager.GetPublishedItemAt(index);
-                }
-
-                throw new InvalidOperationException("Failed to create Data Shortcut Manager.");
-            }
-            catch { throw; }
-        }
-        public static IList<AeccExportableItem> GetDependentItems(AeccExportableItem aeccExportableItem) => aeccExportableItem.DependentItems;
-        public static IList<AeccExportableItem> GetDirectChildrenItems(AeccExportableItem aeccExportableItem) => aeccExportableItem.DirectChildrenItems;
-        public static AeccExportableItem GetParentItem(AeccExportableItem aeccExportableItem) => aeccExportableItem.ParentItem;
-        public static IList<AeccExportableItem> GetRecursiveChildrenItems(AeccExportableItem aeccExportableItem) => aeccExportableItem.RecursiveChildrenItems;
-        public static string GetExportableItemName(AeccExportableItem aeccExportableItem) => aeccExportableItem.Name;
-        public static string GetPublishedItemName(AeccPublishedItem aeccPublishedItem) => aeccPublishedItem.Name;
 
         /// <summary>
         /// Sets the state of an ExportableItem via the Data Shortcut Manager.
