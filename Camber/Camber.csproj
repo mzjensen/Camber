@@ -224,9 +224,9 @@
     <Compile Include="AutoCAD\ObjectSupport.cs" />
     <Compile Include="AutoCAD\Object.cs" />
     <Compile Include="AutoCAD\MLeader.cs" />
-    <Compile Include="Civil\CivilApplication.cs" />
-    <Compile Include="Civil\Data Shortcuts\ProjectFolder.cs" />
-    <Compile Include="Civil\Data Shortcuts\WorkingFolder.cs" />
+    <Compile Include="Civil\Data Shortcuts\DataShortcutFunctions.cs" />
+    <Compile Include="Civil\Data Shortcuts\DataShortcutProject.cs" />
+    <Compile Include="Civil\Data Shortcuts\DataShortcutWorkingFolder.cs" />
     <Compile Include="Civil\Feature Line\FeatureLineSegmentType.cs" />
     <Compile Include="Civil\Labels\StructurePlanLabel.cs" />
     <Compile Include="Civil\Labels\PipePlanLabel.cs" />

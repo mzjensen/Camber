@@ -201,7 +201,7 @@ namespace Camber.Civil.DataShortcuts
                     // will create a data shortcut. So there's really never a time when passing false would do anything.
                     manager.SetSelectItemAtIndex(aeccExportableItem.Index, true);
                     civDs.DataShortcuts.SaveDataShortcutManager(ref manager);
-                    CivilApplication.RefreshDataShortcuts();
+                    DataShortcuts.Refresh();
                     return manager.IsItemAtIndexAlreadyPublished(aeccExportableItem.Index);
                 }
 

@@ -12,7 +12,7 @@ using Autodesk.DesignScript.Runtime;
 
 namespace Camber.Civil.DataShortcuts
 {
-    public sealed class ProjectFolder
+    public sealed class DataShortcutProject
     {
         #region fields
         private DirectoryInfo _directoryInfo;
@@ -33,27 +33,32 @@ namespace Camber.Civil.DataShortcuts
         }
 
         /// <summary>
-        /// Gets the full path of a Project Folder.
+        /// Gets the folder path of a Data Shortcut Project.
         /// </summary>
         public string Path => DirectoryInfo.FullName;
 
         /// <summary>
-        /// Gets the directory name of a Project Folder.
+        /// Gets the ID of a Data Shortcut Project.
+        /// </summary>
+        public string ID => AeccDataShortcuts.GetDSProjectId(Path);
+
+        /// <summary>
+        /// Gets the name of a Data Shortcut Project.
         /// </summary>
         public string Name => DirectoryInfo.Name;
 
         /// <summary>
-        /// Gets the description of a Project Folder.
+        /// Gets the description of a Data Shortcut Project.
         /// </summary>
         public string Description => AeccDataShortcuts.GetDescriptionDataShorcutProjectFolder(Name);
 
         /// <summary>
-        /// Gets if a Project Folder is set as the current Project Folder for the application.
+        /// Gets if a Data Shortcut Project is set as the current project.
         /// </summary>
         public bool IsCurrent => AeccDataShortcuts.GetCurrentProjectFolder() == Name ? true : false;
 
         /// <summary>
-        /// Gets the Data Shortcuts in a Project Folder.
+        /// Gets the Data Shortcuts in a Data Shortcut Project.
         /// </summary>
         private IList<DataShortcut> DataShortcuts
         {
@@ -76,22 +81,22 @@ namespace Camber.Civil.DataShortcuts
         #endregion
 
         #region constructors
-        internal ProjectFolder(string name)
+        internal DataShortcutProject(string name)
         {
-            DirectoryInfo = new DirectoryInfo(CivilApplication.WorkingFolder().Path + @"\" + name);
+            DirectoryInfo = new DirectoryInfo(Civil.DataShortcuts.DataShortcuts.GetDSWorkingFolder().Path + @"\" + name);
         }
 
         /// <summary>
-        /// Creates a new Data Shortcuts Project Folder.
+        /// Creates a new Data Shortcut Project and folder.
         /// </summary>
-        /// <param name="name">The name of the folder.</param>
-        /// <param name="description">The description of the folder.</param>
+        /// <param name="name">The name of the project.</param>
+        /// <param name="description">The description of the project.</param>
         /// <param name="templatePath">The full path to a project template. If left blank, a template will not be used.</param>
-        /// <param name="setAsCurrent">Set the current project folder to the newly created one?</param>
+        /// <param name="setAsCurrent">Set the newly-created project as the current project?</param>
         /// <param name="overwrite">Overwrite project folder if it already exists?</param>
         /// <returns></returns>
-        public static ProjectFolder ByName(
-            WorkingFolder workingFolder,
+        public static DataShortcutProject ByName(
+            DataShortcutWorkingFolder workingFolder,
             string name,
             string description = "",
             string templatePath = "",
@@ -102,7 +107,7 @@ namespace Camber.Civil.DataShortcuts
 
             if (!overwrite && workingFolder.ContainsFolder(name))
             {
-                throw new InvalidOperationException("A folder with that name already exists.");
+                throw new InvalidOperationException("A project with that name already exists.");
             }
 
             try
@@ -115,46 +120,45 @@ namespace Camber.Civil.DataShortcuts
 
                 // Create the folder
                 AeccDataShortcuts.CreateProjectFolder(name, description, templatePath, setAsCurrent);
-                CivilApplication.RefreshDataShortcuts();
+                Civil.DataShortcuts.DataShortcuts.Refresh();
 
                 // Check if the newly created folder exists
                 if (!workingFolder.ContainsFolder(name))
                 {
-                    throw new InvalidOperationException("Failed to create Project Folder.");
+                    throw new InvalidOperationException("Failed to create project.");
                 }
-                return new ProjectFolder(name);
+                return new DataShortcutProject(name);
             }
             catch { throw; }
         }
         #endregion
 
         #region methods
-        public override string ToString() => $"ProjectFolder(Name = {Name})";
+        public override string ToString() => $"DataShortcutProject(Name = {Name})";
 
         /// <summary>
-        /// Sets a Project Folder as the current Data Shortcuts Project Folder.
+        /// Sets a Data Shortcut Project as the current project.
         /// </summary>
-        /// <param name="folderName"></param>
         [IsLacingDisabled]
-        public ProjectFolder SetAsCurrent()
+        public DataShortcutProject SetAsCurrent()
         {
             try
             {
                 AeccDataShortcuts.SetCurrentProjectFolder(Name);
-                CivilApplication.RefreshDataShortcuts();
+                Civil.DataShortcuts.DataShortcuts.Refresh();
                 return this;
             }
             catch { throw; }
         }
 
         /// <summary>
-        /// Sets the description of a Project Folder.
+        /// Sets the description of a Data Shortcut Project.
         /// </summary>
         /// <param name="description"></param>
         /// <returns></returns>
-        private ProjectFolder SetDescription(string description)
+        private DataShortcutProject SetDescription(string description)
         {
-            // While this should work in theory, the returned value for the project folder description
+            // While this should work in theory, the returned value for the project description
             // does not change after manually editing the description in the XML file.
 
             string path = Path + @"\_Shortcuts\ShortcutsHistory.xml";
@@ -181,7 +185,7 @@ namespace Camber.Civil.DataShortcuts
         }
 
         /// <summary>
-        /// Gets Data Shortcuts from the current Project Folder. Each input can be used as a filter.
+        /// Gets Data Shortcuts from the current Data Shortcut Project. Each input can be used as a filter.
         /// </summary>
         /// <param name="entityType">Filter by entity type.</param>
         /// <param name="name">Filter by object name.</param>
@@ -201,7 +205,7 @@ namespace Camber.Civil.DataShortcuts
                 throw new ArgumentException("Invalid entity type.");
             }
 
-            IList<DataShortcut> shortcuts = CivilApplication.ProjectFolder().DataShortcuts;
+            IList<DataShortcut> shortcuts = Civil.DataShortcuts.DataShortcuts.GetCurrentDSProject().DataShortcuts;
 
             IQueryable<DataShortcut> q = shortcuts.AsQueryable();
 

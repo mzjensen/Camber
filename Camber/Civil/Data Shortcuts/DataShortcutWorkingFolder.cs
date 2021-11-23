@@ -9,7 +9,7 @@ using Autodesk.DesignScript.Runtime;
 
 namespace Camber.Civil.DataShortcuts
 {
-    public sealed class WorkingFolder
+    public sealed class DataShortcutWorkingFolder
     {
         #region fields
         private DirectoryInfo _directoryInfo;
@@ -28,26 +28,26 @@ namespace Camber.Civil.DataShortcuts
         }
 
         /// <summary>
-        /// Gets the full path of a Working Folder.
+        /// Gets the full path of a Data Shortcut Working Folder.
         /// </summary>
         public string Path => DirectoryInfo.FullName;
 
         /// <summary>
-        /// Gets the directory name of a Working Folder.
+        /// Gets the directory name of a Data Shortcut Working Folder.
         /// </summary>
         public string Name => DirectoryInfo.Name;
 
         /// <summary>
-        /// Gets all of the Project Folders in a Working Folder.
+        /// Gets all of the Data Shortcut Projects in a Data Shortcut Working Folder.
         /// </summary>
-        public List<ProjectFolder> ProjectFolders
+        public List<DataShortcutProject> DataShortcutProjects
         {
             get
             {
                 string currentProject = null;
                 List<string> otherProjects = new List<string>();
                 List<string> allProjects = new List<string>();
-                List<ProjectFolder> projectFolders = new List<ProjectFolder>();
+                List<DataShortcutProject> projectFolders = new List<DataShortcutProject>();
                 AeccDataShortcuts.GetAllProjectFolders(ref currentProject, ref otherProjects);
                 allProjects.Add(currentProject);
                 foreach (string otherProject in otherProjects)
@@ -56,7 +56,7 @@ namespace Camber.Civil.DataShortcuts
                 }
                 foreach (string project in allProjects)
                 {
-                    projectFolders.Add(new ProjectFolder(project));
+                    projectFolders.Add(new DataShortcutProject(project));
                 }
                 return projectFolders;
             }
@@ -64,7 +64,7 @@ namespace Camber.Civil.DataShortcuts
         #endregion
 
         #region constructors
-        internal WorkingFolder(string path)
+        internal DataShortcutWorkingFolder(string path)
         {
             DirectoryInfo = new DirectoryInfo(path);
         }
@@ -74,10 +74,11 @@ namespace Camber.Civil.DataShortcuts
         public override string ToString() => $"WorkingFolder(Name = {Name})";
 
         /// <summary>
-        /// Determines if a folder exists within a Working Folder.
+        /// Determines if a folder exists within a Data Shortcut Working Folder.
         /// </summary>
         /// <param name="folderName"></param>
         /// <returns></returns>
+        [IsVisibleInDynamoLibrary(false)]
         public bool ContainsFolder(string folderName)
         {
             if (string.IsNullOrEmpty(folderName)) { throw new ArgumentException("Folder name is null or empty."); }
@@ -86,18 +87,18 @@ namespace Camber.Civil.DataShortcuts
         }
 
         /// <summary>
-        /// Gets a Project Folder by name from a Working Folder if it exists.
+        /// Gets a Data Shortcut Project by name from a Data Shortcut Working Folder if it exists.
         /// </summary>
-        /// <param name="folderName"></param>
+        /// <param name="projectName"></param>
         /// <returns></returns>
-        public ProjectFolder GetProjectFolderByName(string folderName)
+        public DataShortcutProject GetProjectByName(string projectName)
         {
-            if (string.IsNullOrEmpty(folderName)) { throw new ArgumentException("Folder name is null or empty."); }
+            if (string.IsNullOrEmpty(projectName)) { throw new ArgumentException("Project name is null or empty."); }
 
-            var folder = ProjectFolders.Find(x => x.Name == folderName);
+            var folder = DataShortcutProjects.Find(x => x.Name == projectName);
             if (folder == null)
             {
-                throw new InvalidOperationException("The Working Folder does not contain a Project Folder with the input name.");
+                throw new InvalidOperationException("The Working Folder does not contain a project with the input name.");
             }
             return folder;
         }
