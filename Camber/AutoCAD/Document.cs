@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
+using acApp = Autodesk.AutoCAD.ApplicationServices;
+using Dynamo.Graph.Nodes;
 #endregion
 
 namespace Camber.AutoCAD
@@ -40,6 +42,39 @@ namespace Camber.AutoCAD
                 throw;
                 return false;
             }
+        }
+
+        /// <summary>
+        /// Gets the value of a system variable by name.
+        /// </summary>
+        /// <param name="document"></param>
+        /// <param name="variableName"></param>
+        /// <returns></returns>
+        public static object GetSystemVariable(acDynNodes.Document document, string variableName)
+        {
+            return acApp.Application.GetSystemVariable(variableName);
+        }
+
+        /// <summary>
+        /// Gets if a Document is a named file on the disk (as opposed to a new drawing that has not yet been saved).
+        /// </summary>
+        /// <param name="document"></param>
+        /// <returns></returns>
+        [NodeCategory("Query")]
+        public static bool IsNamedDrawing(acDynNodes.Document document)
+        {
+            return document.AcDocument.IsNamedDrawing;
+        }
+
+        /// <summary>
+        /// Gets if a Document is read-only.
+        /// </summary>
+        /// <param name="document"></param>
+        /// <returns></returns>
+        [NodeCategory("Query")]
+        public static bool IsReadOnly(acDynNodes.Document document)
+        {
+            return document.AcDocument.IsReadOnly;
         }
         #endregion
     }

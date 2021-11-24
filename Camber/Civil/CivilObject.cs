@@ -174,24 +174,24 @@ namespace Camber.Civil
         /// Includes a flag to optionally attempt to repair all other Civil Objects with broken references from the same source drawing.
         /// </summary>
         /// <param name="civilObject"></param>
-        /// <param name="pathToSourceDwg">The full path to the specified drawing to use as the new source drawing.</param>
+        /// <param name="pathToSource">The full path to the specified drawing to use as the new source drawing.</param>
         /// <param name="repairOthers">Attempt to repair other Civil Objects with broken references?</param>
         /// <returns></returns>
-        public static civDynNodes.CivilObject RepairBrokenReference(civDynNodes.CivilObject civilObject, string pathToSourceDwg, bool repairOthers = false)
+        public static civDynNodes.CivilObject RepairBrokenReference(civDynNodes.CivilObject civilObject, string pathToSource, bool repairOthers = false)
         {
             if (!IsReference(civilObject)) { throw new ArgumentException(NotReferenceEntityMsg); }
-            if (string.IsNullOrEmpty(pathToSourceDwg)) { throw new ArgumentException("Path to target drawing is null or empty."); }
+            if (string.IsNullOrEmpty(pathToSource)) { throw new ArgumentException("Path to target drawing is null or empty."); }
 
             // Check if file exists
-            if (!File.Exists(pathToSourceDwg)) { throw new ArgumentException("The specified drawing does not exist or the path is invalid."); }
+            if (!File.Exists(pathToSource)) { throw new ArgumentException("The specified drawing does not exist or the path is invalid."); }
 
             // Check if file is a DWG
-            var extension = Path.GetExtension(pathToSourceDwg);
+            var extension = Path.GetExtension(pathToSource);
             if (string.IsNullOrEmpty(extension)) { throw new ArgumentException("The specified path does not point to a .DWG file."); }
 
             try
             {
-                bool repaired = civDs.DataShortcuts.RepairBrokenDRef(civilObject.InternalObjectId, pathToSourceDwg, repairOthers);
+                bool repaired = civDs.DataShortcuts.RepairBrokenDRef(civilObject.InternalObjectId, pathToSource, repairOthers);
                 if (repaired) 
                 { 
                     return civilObject; 

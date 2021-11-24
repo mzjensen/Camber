@@ -89,7 +89,7 @@ namespace Camber.Civil.DataShortcuts
         /// Sets the current Data Shortcuts Working Folder for the application.
         /// </summary>
         /// <param name="directoryPath"></param>
-        public static DataShortcutWorkingFolder SetWorkingFolder(string directoryPath)
+        public static DataShortcutWorkingFolder SetWorkingFolder(acDynNodes.Document document, string directoryPath)
         {
             if (string.IsNullOrEmpty(directoryPath)) { throw new ArgumentException("Folder path is null or empty."); }
             if (!Directory.Exists(directoryPath)) { throw new ArgumentException("Directory does not exist."); }
@@ -109,7 +109,6 @@ namespace Camber.Civil.DataShortcuts
         /// </summary>
         /// <param name="runToggle"></param>
         /// <returns></returns>
-        [IsLacingDisabled]
         public static bool Validate(bool runToggle = true)
         {
             try

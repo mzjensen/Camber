@@ -5,9 +5,10 @@ using System.Xml;
 using System.Linq;
 using System.Collections.Generic;
 using civDs = Autodesk.Civil.DataShortcuts;
+using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using AeccDataShortcuts = Autodesk.Civil.DataShortcuts.DataShortcuts;
+using Camber.AutoCAD;
 using Autodesk.DesignScript.Runtime;
-
 #endregion
 
 namespace Camber.Civil.DataShortcuts
@@ -139,7 +140,6 @@ namespace Camber.Civil.DataShortcuts
         /// <summary>
         /// Sets a Data Shortcut Project as the current project.
         /// </summary>
-        [IsLacingDisabled]
         public DataShortcutProject SetAsCurrent()
         {
             try
@@ -231,6 +231,52 @@ namespace Camber.Civil.DataShortcuts
             }
 
             return q.ToList();
+        }
+
+        /// <summary>
+        /// Associates a Data Shortcut Project to the current drawing.
+        /// </summary>
+        /// <param name="saveDrawing">Save drawing after association is complete?</param>
+        /// <returns></returns>
+        public DataShortcutProject AssociateToCurrentDrawing(bool saveDrawing)
+        {
+            var document = acDynNodes.Document.Current;
+            if (saveDrawing && !Document.IsNamedDrawing(document))
+            {
+                throw new InvalidOperationException("The current drawing is a new drawing and has not yet been saved. Please save the drawing and try again.");
+            }
+
+            try
+            {
+                AeccDataShortcuts.AssociateDSProject(ID, document.AcDocument.Database, saveDrawing);
+                Civil.DataShortcuts.DataShortcuts.Refresh();
+                return this;
+            }
+            catch { throw; }
+        }
+
+        /// <summary>
+        /// Associates a Data Shortcut Project to a drawing at the specified path.
+        /// </summary>
+        /// <param name="pathToDrawing"></param>
+        /// <returns></returns>
+        public DataShortcutProject AssociateToOtherDrawing(string pathToDrawing)
+        {
+            if (string.IsNullOrEmpty(pathToDrawing)) { throw new ArgumentException("Path is null or empty."); }
+
+            // Check if file exists
+            if (!File.Exists(pathToDrawing)) { throw new ArgumentException("The specified drawing does not exist or the path is invalid."); }
+
+            // Check if file is a DWG
+            var extension = System.IO.Path.GetExtension(pathToDrawing);
+            if (string.IsNullOrEmpty(extension)) { throw new ArgumentException("The specified path does not point to a .DWG file."); }
+
+            try
+            {
+                AeccDataShortcuts.AssociateDSProject(ID, pathToDrawing);
+                return this;
+            }
+            catch { throw; }
         }
         #endregion
     }

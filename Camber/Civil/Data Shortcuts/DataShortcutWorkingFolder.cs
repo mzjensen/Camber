@@ -71,7 +71,7 @@ namespace Camber.Civil.DataShortcuts
         #endregion
 
         #region methods
-        public override string ToString() => $"WorkingFolder(Name = {Name})";
+        public override string ToString() => $"DataShortcutWorkingFolder(Name = {Name})";
 
         /// <summary>
         /// Determines if a folder exists within a Data Shortcut Working Folder.

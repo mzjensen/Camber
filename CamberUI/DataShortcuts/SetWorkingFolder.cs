@@ -1,0 +1,60 @@
+﻿using System;
+using System.Linq;
+using System.Collections.Generic;
+using ProtoCore.AST.AssociativeAST;
+using Newtonsoft.Json;
+using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
+using Camber.Civil.DataShortcuts;
+using Dynamo.Graph.Nodes;
+
+namespace Camber.UI
+{
+    [NodeName("Set Data Shortcut Working Folder")]
+    [NodeDescription("Sets the current Data Shortcut Working Folder.")]
+    [NodeCategory("Camber.Civil 3D.Data Shortcuts")]
+    [InPortNames("document", "directoryPath")]
+    [InPortTypes("Autodesk.AutoCAD.DynamoNodes.Document")]
+    [InPortDescriptions("document", "string")]
+    [OutPortNames("dataShortcutWorkingFolder")]
+    [OutPortTypes("Camber.Civil.DataShortcuts.DataShortcutWorkingFolder")]
+    [OutPortDescriptions("dataShortcutWorkingFolder")]
+
+    [IsDesignScriptCompatible]
+    public class SetWorkingFolder : NodeModel
+    {
+        #region constructors
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public SetWorkingFolder()
+        {
+            RegisterAllPorts();
+        }
+
+        /// <summary>
+        /// JSON constructor
+        /// </summary>
+        /// <param name="inPorts"></param>
+        /// <param name="outPorts"></param>
+        [JsonConstructor]
+        private SetWorkingFolder(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts) : base(inPorts, outPorts) { }
+        #endregion
+
+        #region methods
+        public override IEnumerable<AssociativeNode> BuildOutputAst(List<AssociativeNode> inputAsNodes)
+        {
+            if (!InPorts[0].Connectors.Any() || !InPorts[1].Connectors.Any())
+            {
+                return new[] { AstFactory.BuildAssignment(GetAstIdentifierForOutputIndex(0), AstFactory.BuildNullNode()) };
+            }
+
+            var functionNode =
+                AstFactory.BuildFunctionCall(
+                    new Func<acDynNodes.Document, string, DataShortcutWorkingFolder>(DataShortcuts.SetWorkingFolder),
+                    new List<AssociativeNode> { inputAsNodes[0], inputAsNodes[1] });
+
+            return new[] { AstFactory.BuildAssignment(GetAstIdentifierForOutputIndex(0), functionNode) };
+        }
+        #endregion
+    }
+}
