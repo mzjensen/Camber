@@ -11,7 +11,7 @@ using AcDatabase = Autodesk.AutoCAD.DatabaseServices.Database;
 using Dynamo.Graph.Nodes;
 #endregion
 
-namespace Camber.AutoCAD
+namespace Camber.AutoCAD.External
 {
     public class ExternalDocument
     {
@@ -25,17 +25,64 @@ namespace Camber.AutoCAD
         private const string InvalidTemplateFileExtensionMessage = "File name should have a .DWG, .DWT, or .DWS extension.";
         private const string FileExistsMessage = "A file with the same name already exists and will not be overwritten.";
 
+        /// <summary>
+        /// Gets the name of an External Document.
+        /// </summary>
         public string Name => FileInfo.Name;
+
+        /// <summary>
+        /// Gets the directory path where an External Document is located.
+        /// </summary>
         public string Directory => FileInfo.DirectoryName;
+
+        /// <summary>
+        /// Gets the full path to an External Document.
+        /// </summary>
         public string Path => FileInfo.FullName;
+
+        /// <summary>
+        /// Gets the file extension of an External Document.
+        /// </summary>
         public string Extension => FileInfo.Extension;
+
+        /// <summary>
+        /// Gets if an External Document needs to be recovered.
+        /// </summary>
         public bool NeedsRecovery => AcDatabase.NeedsRecovery;
+
+        /// <summary>
+        /// Gets the number of objects in the database of an External Document.
+        /// </summary>
         public int ObjectsCount => AcDatabase.ApproxNumObjects;
+
+        /// <summary>
+        /// Gets the External Blocks in an External Document.
+        /// </summary>
+        public IList<ExternalBlock> Blocks
+        {
+            get
+            {
+                List<ExternalBlock> blocks = new List<ExternalBlock>();
+                using (acDb.Transaction t = AcDatabase.TransactionManager.StartTransaction())
+                {
+                    acDb.BlockTable bt = (acDb.BlockTable)t.GetObject(AcDatabase.BlockTableId, acDb.OpenMode.ForWrite);
+                    foreach (acDb.ObjectId oid in bt)
+                    {
+                        acDb.BlockTableRecord btr = (acDb.BlockTableRecord)t.GetObject(oid, acDb.OpenMode.ForWrite);
+                        if (btr != null)
+                        {
+                            blocks.Add(new ExternalBlock(btr, this));
+                        }
+                    }
+                    return blocks;
+                }
+            }
+        }
         #endregion
 
         #region constructors
         internal ExternalDocument(AcDatabase acDatabase, string fileName)
-        {         
+        {
             try
             {
                 FileInfo fileInfo = new FileInfo(fileName);
@@ -84,7 +131,7 @@ namespace Camber.AutoCAD
 
             FileShare openMode = FileShare.ReadWrite;
             if (readOnly) { openMode = FileShare.Read; }
-            
+
             try
             {
                 var db = new AcDatabase(false, true);
@@ -141,20 +188,20 @@ namespace Camber.AutoCAD
 
             // Check if directory exists
             if (!System.IO.Directory.Exists(directoryPath))
-            { 
-                throw new ArgumentNullException("Invalid directory."); 
+            {
+                throw new ArgumentNullException("Invalid directory.");
             }
 
             // Check extensions
             if (!HasValidExtension(fileName)) { throw new ArgumentException(InvalidFileExtensionMessage); }
-            
+
             // Check if file with same name already exists
-            if (File.Exists(directoryPath + "\\" + fileName) 
+            if (File.Exists(directoryPath + "\\" + fileName)
                 && overwrite == false)
             {
                 throw new InvalidOperationException(FileExistsMessage);
             }
-            
+
             try
             {
                 AcDatabase.SaveAs(directoryPath + "\\" + fileName, acDb.DwgVersion.Current);
