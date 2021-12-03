@@ -2,22 +2,20 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
-using System.Linq;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
-using acApp = Autodesk.AutoCAD.ApplicationServices;
-using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
-using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using AcDatabase = Autodesk.AutoCAD.DatabaseServices.Database;
+using Autodesk.DesignScript.Runtime;
 using Dynamo.Graph.Nodes;
 #endregion
 
 namespace Camber.AutoCAD.External
 {
-    public class ExternalDocument
+    public sealed class ExternalDocument : IDisposable
     {
         #region properties
-        internal AcDatabase AcDatabase { get; private set; }
-        internal FileInfo FileInfo { get; private set; }
+        protected AcDatabase AcDatabase { get; private set; }
+        protected FileInfo FileInfo { get; private set; }
+        
         private const string InvalidDirectoryPathMessage = "Directory path is null or empty.";
         private const string InvalidFileNameMessage = "File name is null or empty.";
         private const string InvalidFilePathMessage = "File path is null or empty.";
@@ -63,19 +61,20 @@ namespace Camber.AutoCAD.External
             get
             {
                 List<ExternalBlock> blocks = new List<ExternalBlock>();
-                using (acDb.Transaction t = AcDatabase.TransactionManager.StartTransaction())
+                acDb.Transaction t = AcDatabase.TransactionManager.StartTransaction();
+                using (t)
                 {
-                    acDb.BlockTable bt = (acDb.BlockTable)t.GetObject(AcDatabase.BlockTableId, acDb.OpenMode.ForWrite);
+                    acDb.BlockTable bt = (acDb.BlockTable)t.GetObject(AcDatabase.BlockTableId, acDb.OpenMode.ForRead);
                     foreach (acDb.ObjectId oid in bt)
                     {
-                        acDb.BlockTableRecord btr = (acDb.BlockTableRecord)t.GetObject(oid, acDb.OpenMode.ForWrite);
+                        acDb.BlockTableRecord btr = (acDb.BlockTableRecord)t.GetObject(oid, acDb.OpenMode.ForRead);
                         if (btr != null)
                         {
-                            blocks.Add(new ExternalBlock(btr, this));
+                            blocks.Add(new ExternalBlock(btr));
                         }
                     }
-                    return blocks;
                 }
+                return blocks;
             }
         }
         #endregion
@@ -98,10 +97,15 @@ namespace Camber.AutoCAD.External
         /// <param name="directoryPath">The path to a directory location for the new file.</param>
         /// <param name="fileName">The name of the new file. Be sure to append the desired file extension to the name.</param>
         /// <param name="templateFilePath">The path to a .DWG, .DWT, or .DWS file.</param>
+        /// <param name="lock">True = file can be edited by other applications, False = file can only be opened as read-only by other applications.</param>
         /// <param name="overwrite">Overwrite if a file of the same name already exists in the specified directory?</param>
-        /// <param name="readOnly">True = load file as read-only, False = load file with read/write access.</param>
         /// <returns></returns>
-        public static ExternalDocument CreateAndLoad(string directoryPath, string fileName, string templateFilePath, bool overwrite = false, bool readOnly = true)
+        public static ExternalDocument CreateAndLoad(
+            string directoryPath, 
+            string fileName, 
+            string templateFilePath, 
+            bool @lock, 
+            bool overwrite = false)
         {
             FileCreationChecks(directoryPath, fileName, templateFilePath, overwrite);
 
@@ -113,7 +117,7 @@ namespace Camber.AutoCAD.External
                     db.ReadDwgFile(templateFilePath, FileShare.Read, true, null);
                     db.SaveAs(filePath, acDb.DwgVersion.Current);
                 }
-                return LoadFromFile(filePath, readOnly);
+                return LoadFromFile(filePath, @lock);
             }
             catch { throw; }
         }
@@ -122,20 +126,20 @@ namespace Camber.AutoCAD.External
         /// Loads an External Document from an existing file.
         /// </summary>
         /// <param name="filePath">The path to the file.</param>
-        /// <param name="readOnly">True = load file as read-only, False = load file with read/write access.</param>
+        /// <param name="lock">True = file can be edited by other applications, False = file can only be opened as read-only by other applications.</param>
         /// <returns></returns>
         [NodeCategory("Actions")]
-        public static ExternalDocument LoadFromFile(string filePath, bool readOnly = true)
+        public static ExternalDocument LoadFromFile(string filePath, bool @lock)
         {
             if (string.IsNullOrEmpty(filePath)) { throw new ArgumentNullException(InvalidFilePathMessage); }
 
-            FileShare openMode = FileShare.ReadWrite;
-            if (readOnly) { openMode = FileShare.Read; }
+            FileShare access = FileShare.ReadWrite;
+            if (@lock) { access = FileShare.Read; }
 
             try
             {
                 var db = new AcDatabase(false, true);
-                db.ReadDwgFile(filePath, openMode, true, null);
+                db.ReadDwgFile(filePath, access, true, null);
                 return new ExternalDocument(db, filePath);
             }
             catch
@@ -147,6 +151,12 @@ namespace Camber.AutoCAD.External
 
         #region methods
         public override string ToString() => $"ExternalDocument(Name = {Name})";
+
+        /// <summary>
+        /// Implementation of IDisposable
+        /// </summary>
+        [IsVisibleInDynamoLibrary(false)]
+        public void Dispose() { AcDatabase = null; }
 
         /// <summary>
         /// Creates a new External Document from a template file.
@@ -174,7 +184,7 @@ namespace Camber.AutoCAD.External
         }
 
         /// <summary>
-        /// Saves an External Document as a new file.
+        /// Attempts to save an External Document as a new file.
         /// </summary>
         /// <param name="directoryPath">The path to a directory location for the new file.</param>
         /// <param name="fileName">The name of the new file. Be sure to append the desired file extension to the name.</param>
@@ -209,21 +219,20 @@ namespace Camber.AutoCAD.External
                 FileInfo = newFileInfo;
                 return this;
             }
-            catch { throw; }
+            catch
+            {
+                throw new InvalidOperationException("Cannot save file.");
+            }
         }
 
         /// <summary>
-        /// Saves an External Document.
+        /// Attempts to save an External Document.
         /// </summary>
         /// <returns></returns>
         public ExternalDocument Save()
         {
-            try
-            {
-                AcDatabase.SaveAs(Path, acDb.DwgVersion.Current);
-                return this;
-            }
-            catch { throw; }
+            AcDatabase.SaveAs(Path, acDb.DwgVersion.Current);
+            return this;
         }
 
         /// <summary>

@@ -1,31 +1,18 @@
 ﻿#region references
 using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
-using acApp = Autodesk.AutoCAD.ApplicationServices;
-using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
-using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using AcBlock = Autodesk.AutoCAD.DatabaseServices.BlockTableRecord;
-using Dynamo.Graph.Nodes;
-
 #endregion
 
 namespace Camber.AutoCAD.External
 {
-    public class ExternalBlock
+    public class ExternalBlock : ExternalObjectBase
     {
         #region properties
-        internal AcBlock AcBlock { get; private set; }
+        protected AcBlock AcBlock => AcObject as AcBlock;
 
-        /// <summary>
-        /// Gets the External Document that an External Block belongs to.
-        /// </summary>
-        public ExternalDocument ExternalDocument { get; private set; }
-        
         /// <summary>
         /// Gets the name of an External Block.
         /// </summary>
@@ -38,11 +25,7 @@ namespace Camber.AutoCAD.External
         #endregion
 
         #region constructors
-        internal ExternalBlock(AcBlock acBlock, ExternalDocument externalDocument)
-        {
-            AcBlock = acBlock;
-            ExternalDocument = externalDocument;
-        }
+        internal ExternalBlock(AcBlock acBlock) : base(acBlock) { }
         #endregion
 
         #region methods
@@ -55,16 +38,52 @@ namespace Camber.AutoCAD.External
         /// <returns></returns>
         public ExternalBlock SetName(string newName)
         {
-            if (string.IsNullOrEmpty(newName)) { throw new ArgumentException("Input name is null or empty."); }
-
-            try
-            {
-                if (!AcBlock.IsWriteEnabled) { AcBlock.UpgradeOpen(); }
-                AcBlock.Name = newName;
-                return this;
-            }
-            catch { throw; }
+            if (string.IsNullOrEmpty(newName)) { throw new ArgumentException("Name is null or empty."); }
+            return SetValue(newName);
         }
+
+        /// <summary>
+        /// Sets the description of an External Block.
+        /// </summary>
+        /// <param name="newDescription"></param>
+        /// <returns></returns>
+        public ExternalBlock SetDescription(string newDescription)
+        {
+            if (string.IsNullOrEmpty(newDescription)) { throw new ArgumentException("Description is null or empty."); }
+            return SetValue((object)newDescription, "Comments");
+        }
+
+        #region helper methods
+        protected ExternalBlock SetValue(object value, [CallerMemberName] string methodName = null)
+        {
+            if (methodName.StartsWith("Set"))
+            {
+                methodName = methodName.Substring(3);
+            }
+            return SetValue(methodName, value);
+        }
+
+        protected ExternalBlock SetValue(string propertyName, object value)
+        {
+            acDb.Transaction t = AcDatabase.TransactionManager.StartTransaction();
+
+            using (t)
+            {
+                try
+                {
+                    acDb.BlockTable bt = (acDb.BlockTable)t.GetObject(AcDatabase.BlockTableId, acDb.OpenMode.ForRead);
+                    AcBlock btr = (AcBlock)t.GetObject(bt[Name], acDb.OpenMode.ForWrite);
+                    PropertyInfo propInfo = btr.GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
+                    propInfo?.SetValue(btr, value);
+                    return this;
+                }
+                catch (Exception e)
+                {
+                    throw new InvalidOperationException(e.Message);
+                }
+            }
+        }
+        #endregion
         #endregion
     }
 }

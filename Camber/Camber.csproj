@@ -223,7 +223,8 @@
     <Compile Include="AutoCAD\Document.cs" />
     <Compile Include="AutoCAD\External\ExternalBlock.cs" />
     <Compile Include="AutoCAD\External\ExternalDocument.cs" />
-    <Compile Include="AutoCAD\External\ExternalSupport.cs" />
+    <Compile Include="AutoCAD\External\ExternalObject.cs" />
+    <Compile Include="AutoCAD\External\ExternalObjectBase.cs" />
     <Compile Include="AutoCAD\ObjectSupport.cs" />
     <Compile Include="AutoCAD\Object.cs" />
     <Compile Include="AutoCAD\MLeader.cs" />
