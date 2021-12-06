@@ -12,7 +12,7 @@ namespace Camber.AutoCAD.External
     public class ExternalBlock : ExternalObjectBase
     {
         #region properties
-        protected AcBlock AcBlock => AcObject as AcBlock;
+        internal AcBlock AcBlock => AcObject as AcBlock;
 
         /// <summary>
         /// Gets the name of an External Block.
