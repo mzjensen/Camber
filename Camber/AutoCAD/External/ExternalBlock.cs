@@ -1,6 +1,7 @@
 ﻿#region references
 using System;
 using System.Reflection;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using AcBlock = Autodesk.AutoCAD.DatabaseServices.BlockTableRecord;
@@ -22,6 +23,123 @@ namespace Camber.AutoCAD.External
         /// Gets the description of an External Block.
         /// </summary>
         public string Description => AcBlock.Comments;
+
+        /// <summary>
+        /// Gets whether External Block References associated with an External Block can be exploded.
+        /// </summary>
+        public bool Explodable => AcBlock.Explodable;
+
+        /// <summary>
+        /// Gets if an External Block has a preview icon.
+        /// </summary>
+        public bool HasPreviewIcon => AcBlock.HasPreviewIcon;
+
+        /// <summary>
+        /// Gets if an External Block is anonymous.
+        /// </summary>
+        public bool IsAnonymous => AcBlock.IsAnonymous;
+
+        /// <summary>
+        /// Gets if an External Block is dynamic.
+        /// </summary>
+        public bool IsDynamic => AcBlock.IsDynamicBlock;
+
+        /// <summary>
+        /// Gets if an External Block represents an external reference.
+        /// </summary>
+        public bool IsFromExternalReference => AcBlock.IsFromExternalReference;
+
+        /// <summary>
+        /// Gets if an External Block represents an overlay reference.
+        /// </summary>
+        public bool IsFromOverlayReference => AcBlock.IsFromOverlayReference;
+
+        /// <summary>
+        /// Gets if an External Block represents a layout.
+        /// </summary>
+        public bool IsLayout => AcBlock.IsLayout;
+
+        /// <summary>
+        /// Gets if an External Block that represents an external reference is currently unloaded.
+        /// </summary>
+        public bool IsUnloaded => AcBlock.IsUnloaded;
+
+        /// <summary>
+        /// Gets the units of an External Block.
+        /// </summary>
+        public string Units => AcBlock.Units.ToString();
+
+        /// <summary>
+        /// Gets the external refrence status of an External Block.
+        /// </summary>
+        public string XrefStatus => AcBlock.XrefStatus.ToString();
+
+        /// <summary>
+        /// Gets all of the External Objects in an External Block.
+        /// </summary>
+        public IList<ExternalObject> Objects
+        {
+            get
+            {
+                var objs = new List<ExternalObject>();
+                acDb.Transaction t = AcDatabase.TransactionManager.StartTransaction();
+                using (t)
+                {
+                    acDb.BlockTable bt = (acDb.BlockTable)t.GetObject(AcDatabase.BlockTableId, acDb.OpenMode.ForRead);
+                    AcBlock btr = (AcBlock)t.GetObject(bt[Name], acDb.OpenMode.ForRead);
+                    foreach (acDb.ObjectId oid in btr)
+                    {
+                        acDb.Entity ent = (acDb.Entity)t.GetObject(oid, acDb.OpenMode.ForRead);
+                        objs.Add(new ExternalObject(ent));
+                    }
+                    return objs;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets the anonymous blocks create from an External Block that is dynamic.
+        /// </summary>
+        public IList<ExternalBlock> AnonymousBlocks
+        {
+            get
+            {
+                var anonBlocks = new List<ExternalBlock>();
+                acDb.Transaction t = AcDatabase.TransactionManager.StartTransaction();
+                using (t)
+                {
+                    try
+                    {
+                        var bt = (acDb.BlockTable)t.GetObject(AcDatabase.BlockTableId, acDb.OpenMode.ForRead);
+                        var btr = (AcBlock)t.GetObject(bt[Name], acDb.OpenMode.ForRead);
+                        foreach (acDb.ObjectId oid in btr.GetAnonymousBlockIds())
+                        {
+                            var acAnonBlock = (AcBlock)t.GetObject(oid, acDb.OpenMode.ForRead);
+                            anonBlocks.Add(new ExternalBlock(acAnonBlock));
+                        }
+                        return anonBlocks;
+                    }
+                    catch { throw; }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets the External Block References of an External Block.
+        /// </summary>
+        public IList<ExternalBlockReference> BlockReferences
+        {
+            get
+            {
+                List<ExternalBlockReference> brefs = new List<ExternalBlockReference>();
+                acDb.ObjectIdCollection brefIds = AcBlock.GetBlockReferenceIds(true, false);
+                foreach (acDb.ObjectId oid in brefIds)
+                {
+                    brefs.Add(ExternalBlockReference.GetByObjectId(oid));
+                }
+                return brefs;
+            }
+        }
         #endregion
 
         #region constructors
@@ -53,6 +171,42 @@ namespace Camber.AutoCAD.External
             return SetValue((object)newDescription, "Comments");
         }
 
+        /// <summary>
+        /// Sets whether External Block References associated with an External Block can be exploded.
+        /// </summary>
+        /// <param name="bool"></param>
+        /// <returns></returns>
+        public ExternalBlock SetExplodable(bool @bool) => SetValue(@bool);
+
+        /// <summary>
+        /// Sets if an External Block represents an overlay reference.
+        /// </summary>
+        /// <param name="bool"></param>
+        /// <returns></returns>
+        public ExternalBlock SetIsFromOverlayReference(bool @bool) => SetValue(@bool);
+
+        /// <summary>
+        /// Sets if a Block that represents an external reference is currently unloaded.
+        /// </summary>
+        /// <param name="bool"></param>
+        /// <returns></returns>
+        public ExternalBlock SetIsUnloaded(bool @bool) => SetValue(@bool);
+
+
+        /// <summary>
+        /// Sets the units of an External Block.
+        /// </summary>
+        /// <param name="units"></param>
+        /// <returns></returns>
+        public ExternalBlock SetUnits(string units)
+        {
+            if (!Enum.IsDefined(typeof(acDb.UnitsValue), units))
+            {
+                throw new ArgumentException("Invalid units.");
+            }
+            return SetValue(Enum.Parse(typeof(acDb.UnitsValue), units));
+        }
+
         #region helper methods
         protected ExternalBlock SetValue(object value, [CallerMemberName] string methodName = null)
         {
@@ -66,7 +220,6 @@ namespace Camber.AutoCAD.External
         protected ExternalBlock SetValue(string propertyName, object value)
         {
             acDb.Transaction t = AcDatabase.TransactionManager.StartTransaction();
-
             using (t)
             {
                 try

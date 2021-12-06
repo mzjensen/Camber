@@ -11,17 +11,12 @@ using Dynamo.Graph.Nodes;
 
 namespace Camber.AutoCAD
 {
-    public sealed class Document
+    public static class Document
     {
         #region properties
         #endregion
 
-        #region constructors
-        internal Document() { }
-        #endregion
-
         #region methods
-
         /// <summary>
         /// Executes a particular command string. Returns true if the command was executed successfully and false otherwise.
         /// Ensure that a space or \n is included at the end of any string that you wish to be executed.
@@ -45,14 +40,38 @@ namespace Camber.AutoCAD
         }
 
         /// <summary>
-        /// Gets the value of a system variable by name.
+        /// Gets the value of a system variable.
         /// </summary>
         /// <param name="document"></param>
-        /// <param name="variableName"></param>
+        /// <param name="variableName">The name of the system variable.</param>
         /// <returns></returns>
         public static object GetSystemVariable(acDynNodes.Document document, string variableName)
         {
             return acApp.Application.GetSystemVariable(variableName);
+        }
+
+        /// <summary>
+        /// Sets the value of a system variable.
+        /// </summary>
+        /// <param name="document"></param>
+        /// <param name="variableName">The name of the system variable.</param>
+        /// <param name="newValue">The new value to assign.</param>
+        /// <returns></returns>
+        public static void SetSystemVariable(acDynNodes.Document document, string variableName, object newValue)
+        {
+            // AutoCAD needs 16-bit integers, but from Dynamo they come as 64-bit.
+            // Without this check, an eInvalidInput exception will be thrown when trying to set integer values.
+            if (newValue is long) { newValue = Convert.ToInt16(newValue); }
+            
+            try
+            {
+                acApp.Application.SetSystemVariable(variableName, newValue);
+                var result = GetSystemVariable(document, variableName);
+            }
+            catch (Exception e)
+            {
+                throw new InvalidOperationException(e.Message);
+            }
         }
 
         /// <summary>

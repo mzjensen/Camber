@@ -1,7 +1,9 @@
 ﻿#region references
+using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
+using Autodesk.DesignScript.Runtime;
 #endregion
 
 namespace Camber.AutoCAD.External
@@ -9,7 +11,12 @@ namespace Camber.AutoCAD.External
     public class ExternalObject : ExternalObjectBase
     {
         #region properties
-        protected acDb.Entity AcEntity => AcObject as acDb.Entity;
+        internal acDb.Entity AcEntity => AcObject as acDb.Entity;
+
+        /// <summary>
+        /// Gets the color index assigned to an External Object.
+        /// </summary>
+        public int ColorIndex => GetInt();
 
         /// <summary>
         /// Gets the database handle of an External Object.
@@ -20,15 +27,68 @@ namespace Camber.AutoCAD.External
         /// Gets the name of the layer that an External Object is on.
         /// </summary>
         public string Layer => GetString();
+
+        /// <summary>
+        /// Gets the linetype assigned to an External Object.
+        /// </summary>
+        public string Linetype => GetString();
+
+        /// <summary>
+        /// Gets the material assigned to an External Object.
+        /// </summary>
+        public string Material => GetString();
+
+        /// <summary>
+        /// Gets the name of the plot style assigned to an External Object.
+        /// </summary>
+        public string PlotStyle => GetString("PlotStyleName");
+
+        /// <summary>
+        /// Gets the underlying Autodesk.AutoCAD.DatabaseServices type of an External Object.
+        /// </summary>
+        public string Type
+        {
+            get
+            {
+                const string prefix = "Autodesk.AutoCAD.DatabaseServices.";
+                string typeString = AcEntity.GetType().ToString();
+
+                if (typeString.Contains(prefix))
+                {
+                    typeString = typeString.Substring(prefix.Length);
+                }
+                return typeString;
+            }
+        }
         #endregion
 
         #region constructors
-        protected ExternalObject(acDb.Entity ent) : base(ent) { }
+        internal ExternalObject(acDb.Entity ent) : base(ent) { }
         #endregion
 
         #region methods
         public override string ToString() => $"ExternalObject(Handle = {Handle})";
 
+        /// <summary>
+        /// Sets the layer that an External Object is on.
+        /// </summary>
+        /// <param name="layer"></param>
+        /// <returns></returns>
+        public ExternalObject SetLayer(string layer) => SetValue(layer);
+
+        #region helper methods
+        [SupressImportIntoVM]
+        public static T Get<T, U>(acDb.ObjectId oid, Func<U, T> creator)
+            where T : ExternalObject
+            where U : acDb.DBObject
+        {
+            acDb.Transaction t = oid.Database.TransactionManager.StartTransaction();
+            using (t)
+            {
+                U acObject = t.GetObject(oid, acDb.OpenMode.ForWrite) as U;
+                return creator(acObject);
+            }
+        }
         protected double GetDouble([CallerMemberName] string propertyName = null)
         {
             try
@@ -105,17 +165,23 @@ namespace Camber.AutoCAD.External
 
         protected ExternalObject SetValue(string propertyName, object value)
         {
-            try
+            acDb.Transaction t = AcDatabase.TransactionManager.StartTransaction();
+            using (t)
             {
-                bool openedForWrite = AcEntity.IsWriteEnabled;
-                if (!openedForWrite) AcEntity.UpgradeOpen();
-                PropertyInfo propInfo = AcEntity.GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
-                propInfo?.SetValue(AcEntity, value);
-                if (!openedForWrite) AcEntity.DowngradeOpen();
-                return this;
+                try
+                {
+                    acDb.Entity ent = (acDb.Entity)t.GetObject(InternalObjectId, acDb.OpenMode.ForWrite);
+                    PropertyInfo propInfo = ent.GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
+                    propInfo?.SetValue(ent, value);
+                    return this;
+                }
+                catch (Exception e)
+                {
+                    throw new InvalidOperationException(e.Message);
+                }
             }
-            catch { throw; }
         }
+        #endregion
         #endregion
     }
 }

@@ -8,6 +8,7 @@ using civDs = Autodesk.Civil.DataShortcuts;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using AeccDataShortcuts = Autodesk.Civil.DataShortcuts.DataShortcuts;
 using Camber.AutoCAD;
+using Camber.AutoCAD.External;
 using Autodesk.DesignScript.Runtime;
 #endregion
 
@@ -130,7 +131,10 @@ namespace Camber.Civil.DataShortcuts
                 }
                 return new DataShortcutProject(name);
             }
-            catch { throw; }
+            catch (Exception e)
+            {
+                throw new InvalidOperationException(e.Message);
+            }
         }
         #endregion
 
@@ -148,7 +152,10 @@ namespace Camber.Civil.DataShortcuts
                 Civil.DataShortcuts.DataShortcuts.Refresh();
                 return this;
             }
-            catch { throw; }
+            catch (Exception e)
+            {
+                throw new InvalidOperationException(e.Message);
+            }
         }
 
         /// <summary>
@@ -234,49 +241,46 @@ namespace Camber.Civil.DataShortcuts
         }
 
         /// <summary>
-        /// Associates a Data Shortcut Project to the current drawing.
+        /// Associates a Data Shortcut Project to the current document.
         /// </summary>
-        /// <param name="saveDrawing">Save drawing after association is complete?</param>
+        /// <param name="save">Save current document after association is complete?</param>
         /// <returns></returns>
-        public DataShortcutProject AssociateToCurrentDrawing(bool saveDrawing)
+        public DataShortcutProject Associate(acDynNodes.Document document, bool save)
         {
-            var document = acDynNodes.Document.Current;
-            if (saveDrawing && !Document.IsNamedDrawing(document))
+            if (save && !Document.IsNamedDrawing(document))
             {
                 throw new InvalidOperationException("The current drawing is a new drawing and has not yet been saved. Please save the drawing and try again.");
             }
 
             try
             {
-                AeccDataShortcuts.AssociateDSProject(ID, document.AcDocument.Database, saveDrawing);
+                AeccDataShortcuts.AssociateDSProject(ID, document.AcDocument.Database, save);
                 Civil.DataShortcuts.DataShortcuts.Refresh();
                 return this;
             }
-            catch { throw; }
+            catch (Exception e)
+            {
+                throw new InvalidOperationException(e.Message);
+            }
         }
 
         /// <summary>
-        /// Associates a Data Shortcut Project to a drawing at the specified path.
+        /// Associates a Data Shortcut Project to an External Document.
         /// </summary>
-        /// <param name="pathToDrawing"></param>
+        /// <param name="externalDocument"></param>
+        /// <param name="save">Save External Document after association is complete?</param>
         /// <returns></returns>
-        public DataShortcutProject AssociateToOtherDrawing(string pathToDrawing)
+        public DataShortcutProject Associate(ExternalDocument externalDocument, bool save)
         {
-            if (string.IsNullOrEmpty(pathToDrawing)) { throw new ArgumentException("Path is null or empty."); }
-
-            // Check if file exists
-            if (!File.Exists(pathToDrawing)) { throw new ArgumentException("The specified drawing does not exist or the path is invalid."); }
-
-            // Check if file is a DWG
-            var extension = System.IO.Path.GetExtension(pathToDrawing);
-            if (string.IsNullOrEmpty(extension)) { throw new ArgumentException("The specified path does not point to a .DWG file."); }
-
             try
             {
-                AeccDataShortcuts.AssociateDSProject(ID, pathToDrawing);
+                AeccDataShortcuts.AssociateDSProject(ID, externalDocument.AcDatabase, save);
                 return this;
             }
-            catch { throw; }
+            catch (Exception e)
+            {
+                throw new InvalidOperationException(e.Message);
+            }
         }
         #endregion
     }

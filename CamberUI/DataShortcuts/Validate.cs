@@ -13,7 +13,7 @@ namespace Camber.UI
     [NodeCategory("Camber.Civil 3D.Data Shortcuts")]
     [InPortNames("runToggle")]
     [InPortTypes("bool")]
-    [InPortDescriptions("A boolean input that can be changed to force the node to run.")]
+    [InPortDescriptions("A boolean input that can be changed to force the node to run.\n\nbool")]
     [OutPortNames("bool")]
     [OutPortTypes("bool")]
     [OutPortDescriptions("bool")]

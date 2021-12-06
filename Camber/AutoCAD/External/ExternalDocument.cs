@@ -1,6 +1,7 @@
 ﻿#region references
 using System;
 using System.IO;
+using System.Linq;
 using System.Collections.Generic;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using AcDatabase = Autodesk.AutoCAD.DatabaseServices.Database;
@@ -13,8 +14,8 @@ namespace Camber.AutoCAD.External
     public sealed class ExternalDocument : IDisposable
     {
         #region properties
-        protected AcDatabase AcDatabase { get; private set; }
-        protected FileInfo FileInfo { get; private set; }
+        internal AcDatabase AcDatabase { get; private set; }
+        internal FileInfo FileInfo { get; private set; }
         
         private const string InvalidDirectoryPathMessage = "Directory path is null or empty.";
         private const string InvalidFileNameMessage = "File name is null or empty.";
@@ -77,6 +78,9 @@ namespace Camber.AutoCAD.External
                 return blocks;
             }
         }
+
+
+
         #endregion
 
         #region constructors
@@ -288,6 +292,21 @@ namespace Camber.AutoCAD.External
             {
                 throw new InvalidOperationException(FileExistsMessage);
             }
+        }
+
+        /// <summary>
+        /// Gets an External Block from an External Document by name.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public ExternalBlock BlockByName(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentException("Name is null or empty.");
+            }
+
+            return Blocks.FirstOrDefault(item => item.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
         }
         #endregion
     }

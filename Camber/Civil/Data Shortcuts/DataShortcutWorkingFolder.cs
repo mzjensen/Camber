@@ -91,7 +91,7 @@ namespace Camber.Civil.DataShortcuts
         /// </summary>
         /// <param name="projectName"></param>
         /// <returns></returns>
-        public DataShortcutProject GetProjectByName(string projectName)
+        public DataShortcutProject GetDataShortcutProjectByName(string projectName)
         {
             if (string.IsNullOrEmpty(projectName)) { throw new ArgumentException("Project name is null or empty."); }
 

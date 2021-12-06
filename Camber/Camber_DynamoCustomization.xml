@@ -7,6 +7,9 @@
 		<namespace name="Camber.AutoCAD">
 			<category>Camber.AutoCAD</category>
 		</namespace>
+		<namespace name="Camber.AutoCAD.External">
+			<category>Camber.AutoCAD.External</category>
+		</namespace>
 		<namespace name="Camber.AutoCAD.Blocks">
 			<category>Camber.AutoCAD.Blocks</category>
 		</namespace>

@@ -34,6 +34,7 @@ namespace Camber.Civil.DataShortcuts
         /// <returns></returns>
         public static DataShortcutWorkingFolder GetWorkingFolder(acDynNodes.Document document)
         {
+            if (document is null) { throw new ArgumentNullException(); }
             Refresh();
             return new DataShortcutWorkingFolder(AeccDataShortcuts.GetWorkingFolder());
         }
@@ -56,6 +57,7 @@ namespace Camber.Civil.DataShortcuts
         /// <returns></returns>
         public static DataShortcutProject GetCurrentProject(acDynNodes.Document document)
         {
+            if (document is null) { throw new ArgumentNullException(); }
             Refresh();
             return new DataShortcutProject(AeccDataShortcuts.GetCurrentProjectFolder());
         }

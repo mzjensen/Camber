@@ -12,6 +12,7 @@ using AeccPublishedItem = Autodesk.Civil.DataShortcuts.DataShortcuts.DataShortcu
 using AeccExportableItem = Autodesk.Civil.DataShortcuts.DataShortcuts.DataShortcutManager.ExportableItem;
 using Autodesk.DesignScript.Runtime;
 using Dynamo.Graph.Nodes;
+using Camber.AutoCAD.External;
 #endregion
 
 namespace Camber.Civil.DataShortcuts
@@ -121,12 +122,11 @@ namespace Camber.Civil.DataShortcuts
         }
 
         /// <summary>
-        /// Creates a reference to a Data Shortcut in the current drawing.
+        /// Creates a reference to a Data Shortcut in the current document.
         /// </summary>
         /// <returns></returns>
-        public IList<civDynNodes.CivilObject> CreateReference()
+        public IList<civDynNodes.CivilObject> CreateReference(acDynNodes.Document document)
         {
-            var document = acDynNodes.Document.Current;
             var civilObjects = new List<civDynNodes.CivilObject>();
 
             using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
@@ -174,7 +174,42 @@ namespace Camber.Civil.DataShortcuts
                     }
                     return civilObjects;
                 }
-                catch { throw; }
+                catch (Exception e)
+                {
+                    throw new InvalidOperationException(e.Message);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Creates a reference to a Data Shortcut in an External Document.
+        /// </summary>
+        /// <param name="externalDocument"></param>
+        /// <param name="save">Save the External Document when complete?</param>
+        /// <returns></returns>
+        public bool CreateReference(ExternalDocument externalDocument, bool save)
+        {
+            using (var ctx = new acDynApp.DocumentContext(externalDocument.AcDatabase))
+            {
+                try
+                {
+                    var oids = civDs.DataShortcuts.CreateReference(
+                        externalDocument.AcDatabase,
+                        SourceLocation + @"\" + SourceFileName,
+                        Name,
+                        (civDs.DataShortcutEntityType)Enum.Parse(typeof(civDs.DataShortcutEntityType), EntityType));
+                    if (save) {
+                        externalDocument.Save();
+                    }
+                    if (oids.Count > 0) {
+                        return true;
+                    }
+                    return false;
+                }
+                catch (Exception e)
+                {
+                    throw new InvalidOperationException(e.Message);
+                }
             }
         }
 

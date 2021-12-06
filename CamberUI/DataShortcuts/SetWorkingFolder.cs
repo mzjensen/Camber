@@ -13,11 +13,11 @@ namespace Camber.UI
     [NodeDescription("Sets the current Data Shortcut Working Folder.")]
     [NodeCategory("Camber.Civil 3D.Data Shortcuts")]
     [InPortNames("document", "directoryPath")]
-    [InPortTypes("Autodesk.AutoCAD.DynamoNodes.Document")]
-    [InPortDescriptions("document", "string")]
+    [InPortTypes("Autodesk.AutoCAD.DynamoNodes.Document", "string")]
+    [InPortDescriptions("Document", "string")]
     [OutPortNames("dataShortcutWorkingFolder")]
     [OutPortTypes("Camber.Civil.DataShortcuts.DataShortcutWorkingFolder")]
-    [OutPortDescriptions("dataShortcutWorkingFolder")]
+    [OutPortDescriptions("DataShortcutWorkingFolder")]
 
     [IsDesignScriptCompatible]
     public class SetWorkingFolder : NodeModel

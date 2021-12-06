@@ -14,10 +14,10 @@ namespace Camber.UI
     [NodeCategory("Camber.Civil 3D.Data Shortcuts")]
     [InPortNames("document")]
     [InPortTypes("Autodesk.AutoCAD.DynamoNodes.Document")]
-    [InPortDescriptions("document")]
+    [InPortDescriptions("Document")]
     [OutPortNames("dataShortcutProject")]
     [OutPortTypes("Camber.Civil.DataShortcuts.DataShortcutProject")]
-    [OutPortDescriptions("dataShortcutProject")]
+    [OutPortDescriptions("DataShortcutProject")]
 
     [IsDesignScriptCompatible]
     public class GetCurrentProject : NodeModel

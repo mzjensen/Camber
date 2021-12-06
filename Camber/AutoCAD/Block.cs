@@ -64,7 +64,7 @@ namespace Camber.AutoCAD
         public static bool Explodable(acDynNodes.Block block) => GetBool(block);
 
         /// <summary>
-        /// Gets the value specifying if a Block has a preview icon.
+        /// Gets if a Block has a preview icon.
         /// </summary>
         /// <param name="block"></param>
         /// <returns></returns>
@@ -72,7 +72,7 @@ namespace Camber.AutoCAD
         public static bool HasPreviewIcon(acDynNodes.Block block) => GetBool(block);
 
         /// <summary>
-        /// Gets the value specifying if a Block is anonymous.
+        /// Gets if a Block is anonymous.
         /// </summary>
         /// <param name="block"></param>
         /// <returns></returns>
@@ -80,7 +80,7 @@ namespace Camber.AutoCAD
         public static bool IsAnonymous(acDynNodes.Block block) => GetBool(block);
 
         /// <summary>
-        /// Gets the value specifying if a Block is dynamic.
+        /// Gets if a Block is dynamic.
         /// </summary>
         /// <param name="block"></param>
         /// <returns></returns>
@@ -88,7 +88,7 @@ namespace Camber.AutoCAD
         public static bool IsDynamic(acDynNodes.Block block) => GetBool(block, "IsDynamicBlock");
 
         /// <summary>
-        /// Gets the value specifying if a Block represents an external reference.
+        /// Gets if a Block represents an external reference.
         /// </summary>
         /// <param name="block"></param>
         /// <returns></returns>
@@ -96,7 +96,7 @@ namespace Camber.AutoCAD
         public static bool IsFromExternalReference(acDynNodes.Block block) => GetBool(block);
 
         /// <summary>
-        /// Gets the value specifying if a Block represents an overlay reference.
+        /// Gets if a Block represents an overlay reference.
         /// </summary>
         /// <param name="block"></param>
         /// <returns></returns>
@@ -104,7 +104,7 @@ namespace Camber.AutoCAD
         public static bool IsFromOverlayReference(acDynNodes.Block block) => GetBool(block);
 
         /// <summary>
-        /// Gets the value specifying if a Block represents a layout.
+        /// Gets if a Block represents a layout.
         /// </summary>
         /// <param name="block"></param>
         /// <returns></returns>
@@ -113,7 +113,7 @@ namespace Camber.AutoCAD
 
 
         /// <summary>
-        /// Gets the value specifying if a Block that represents an external reference is currently unloaded.
+        /// Gets if a Block that represents an external reference is currently unloaded.
         /// </summary>
         /// <param name="block"></param>
         /// <returns></returns>
@@ -121,7 +121,7 @@ namespace Camber.AutoCAD
         public static bool IsUnloaded(acDynNodes.Block block) => GetBool(block);
 
         /// <summary>
-        /// Gets a Block's units.
+        /// Gets the units of a Block.
         /// </summary>
         /// <param name="block"></param>
         /// <returns></returns>
@@ -142,7 +142,8 @@ namespace Camber.AutoCAD
         /// </summary>
         /// <param name="block"></param>
         /// <returns></returns>
-        public static List<acDynNodes.Block> GetAnonymousBlocks(acDynNodes.Block block)
+        [NodeCategory("Query")]
+        public static List<acDynNodes.Block> AnonymousBlocks(acDynNodes.Block block)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
             var anonBlocks = new List<acDynNodes.Block>();
@@ -199,7 +200,7 @@ namespace Camber.AutoCAD
         public static acDynNodes.Block SetExplodable(acDynNodes.Block block, bool @bool) => SetValue(block, @bool);
 
         /// <summary>
-        /// Sets the value specifying if a Block represents an overlay reference.
+        /// Sets if a Block represents an overlay reference.
         /// </summary>
         /// <param name="block"></param>
         /// <param name="bool"></param>
@@ -207,7 +208,7 @@ namespace Camber.AutoCAD
         public static acDynNodes.Block SetIsFromOverlayReference(acDynNodes.Block block, bool @bool) => SetValue(block, @bool);
 
         /// <summary>
-        /// Sets the value specifying if a Block that represents an external reference is currently unloaded.
+        /// Sets if a Block that represents an external reference is currently unloaded.
         /// </summary>
         /// <param name="block"></param>
         /// <param name="bool"></param>
@@ -215,9 +216,10 @@ namespace Camber.AutoCAD
         public static acDynNodes.Block SetIsUnloaded(acDynNodes.Block block, bool @bool) => SetValue(block, @bool);
 
         /// <summary>
-        /// Sets a Block's units.
+        /// Sets the units of a Block.
         /// </summary>
         /// <param name="block"></param>
+        /// <param name="units"></param>
         /// <returns></returns>
         public static acDynNodes.Block SetUnits(acDynNodes.Block block, string units)
         {
