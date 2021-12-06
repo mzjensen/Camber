@@ -8,7 +8,7 @@ using Dynamo.Graph.Nodes;
 namespace Camber.UI
 {
     [NodeName("Block Units")]
-    [NodeCategory("Camber.AutoCAD.BlockExtensions")]
+    [NodeCategory("Camber.AutoCAD.Block")]
     [NodeDescription("Select Block units.")]
     [IsDesignScriptCompatible]
     public class BlockUnitsDropDown : EnumDropDownBase

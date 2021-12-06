@@ -11,14 +11,14 @@ namespace Camber.AutoCAD
     [SupressImportIntoVM]
     internal static class ObjectSupport
     {
-        public static T Get<T, U>(acDb.ObjectId id, Func<U, T> creator)
+        public static T Get<T, U>(acDb.ObjectId oid, Func<U, T> creator)
             where T : acDynNodes.Object
             where U : acDb.DBObject
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
             using (acDynApp.DocumentContext ctx = new acDynApp.DocumentContext(document.AcDocument))
             {
-                U acObject = ctx.Transaction.GetObject(id, acDb.OpenMode.ForWrite) as U;
+                U acObject = ctx.Transaction.GetObject(oid, acDb.OpenMode.ForWrite) as U;
                 return creator(acObject);
             }
         }

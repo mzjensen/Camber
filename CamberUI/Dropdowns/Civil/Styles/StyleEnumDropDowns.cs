@@ -436,22 +436,6 @@ namespace Camber.UI
             : base(OutputName, typeof(civDb.Styles.SubassemblySubentityStyleType), inPorts, outPorts) { }
     }
 
-    [NodeName("Data Shortcut Entity Types")]
-    [NodeCategory("Camber.Civil 3D.DataShortcuts")]
-    [NodeDescription("Select data shortcut entity type.")]
-    [IsDesignScriptCompatible]
-    [IsVisibleInDynamoLibrary(false)]
-    public class DataShortcutEntityTypesDropDown : EnumDropDownBase
-    {
-        private const string OutputName = "entityType";
-
-        public DataShortcutEntityTypesDropDown() : base(OutputName, typeof(civDs.DataShortcutEntityType), true) { }
-
-        [JsonConstructor]
-        public DataShortcutEntityTypesDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts)
-            : base(OutputName, typeof(civDs.DataShortcutEntityType), inPorts, outPorts) { }
-    }
-
     [NodeName("Object Style Types")]
     [NodeCategory("Camber.Civil 3D.Styles.Style")]
     [NodeDescription("Select Object Style type.")]

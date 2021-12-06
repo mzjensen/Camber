@@ -19,7 +19,7 @@ using Dynamo.Graph.Nodes;
 namespace Camber.Civil
 {
     [RegisterForTrace]
-    public sealed class SampleLine : CivilObjectExtensions
+    public sealed class SampleLine : CivilObject
     {
         #region properties
         internal AeccSampleLine aeccSampleLine => AcObject as AeccSampleLine;

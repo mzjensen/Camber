@@ -13,7 +13,7 @@ using DynamoServices;
 namespace Camber.Civil
 {
     [RegisterForTrace]
-    public sealed class SampleLineGroup : CivilObjectExtensions
+    public sealed class SampleLineGroup : CivilObject
     {
         #region properties
         internal AeccSampleLineGroup aeccSampleLineGroup => AcObject as AeccSampleLineGroup;

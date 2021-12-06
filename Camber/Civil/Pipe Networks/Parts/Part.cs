@@ -15,7 +15,7 @@ using Dynamo.Graph.Nodes;
 namespace Camber.Civil.PipeNetworks.Parts
 {
     [RegisterForTrace]
-    public abstract class Part : CivilObjectExtensions
+    public abstract class Part : CivilObject
     {
         #region properties
         internal AeccPart AeccPart => AcObject as AeccPart;

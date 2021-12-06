@@ -3,26 +3,59 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
-using Autodesk.DesignScript.Runtime;
+using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using DynamoServices;
+using Dynamo.Graph.Nodes;
+using Autodesk.DesignScript.Runtime;
 #endregion
 
 namespace Camber.AutoCAD
 {
     [RegisterForTrace]
-    [IsVisibleInDynamoLibrary(false)]
-    public class ObjectExtensions : acDynNodes.Object
+    public class Object : acDynNodes.Object
     {
         #region properties
         internal acDb.Entity AcEntity => AcObject as acDb.Entity;
-        protected const string NotApplicableMsg = "Not applicable";
         #endregion
 
         #region constructors
-        public ObjectExtensions(acDb.Entity acEntity, bool isDynamoOwned = false) : base(acEntity, isDynamoOwned) { }
+        internal Object(acDb.Entity acEntity, bool isDynamoOwned = false) : base(acEntity, isDynamoOwned) { }
         #endregion
 
         #region methods
+        /// <summary>
+        /// Gets the handle assigned to an Object.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        [NodeCategory("Query")]
+        public static string Handle(acDynNodes.Object obj)
+        {
+            acDynNodes.Document document = acDynNodes.Document.Current;
+            using (var ctx = new acDynApp.DocumentContext(document.AcDocument.Database))
+            {
+                acDb.Entity acEnt = (acDb.Entity)ctx.Transaction.GetObject(obj.InternalObjectId, acDb.OpenMode.ForRead);
+                return acEnt.Handle.ToString();
+            }
+        }
+
+        /// <summary>
+        /// Gets the color index assigned to an Object.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        [NodeCategory("Query")]
+        public static int ColorIndex(acDynNodes.Object obj)
+        {
+            acDynNodes.Document document = acDynNodes.Document.Current;
+            using (var ctx = new acDynApp.DocumentContext(document.AcDocument.Database))
+            {
+                acDb.Entity acEnt = (acDb.Entity)ctx.Transaction.GetObject(obj.InternalObjectId, acDb.OpenMode.ForRead);
+                return acEnt.ColorIndex;
+            }
+        }
+
+        #region helper methods
         protected double GetDouble([CallerMemberName] string propertyName = null)
         {
             try
@@ -56,7 +89,7 @@ namespace Camber.AutoCAD
                 }
             }
             catch { }
-            return NotApplicableMsg;
+            return "Not applicable.";
         }
 
         protected int GetInt([CallerMemberName] string propertyName = null)
@@ -111,6 +144,7 @@ namespace Camber.AutoCAD
             catch { }
             return false;
         }
+        #endregion
         #endregion
     }
 }

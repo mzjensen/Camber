@@ -19,7 +19,7 @@ using Camber.Utils;
 namespace Camber.Civil.PressureNetworks.Parts
 {
     [RegisterForTrace]
-    public abstract class PressurePart : CivilObjectExtensions
+    public abstract class PressurePart : CivilObject
     {
         #region properties
         internal AeccPressurePart AeccPressurePart => AcObject as AeccPressurePart;

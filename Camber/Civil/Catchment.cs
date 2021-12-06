@@ -25,7 +25,7 @@ using Camber.Civil.PipeNetworks.Parts;
 namespace Camber.Civil
 {
     [RegisterForTrace]
-    public sealed class Catchment : CivilObjectExtensions
+    public sealed class Catchment : CivilObject
     {
         #region properties
         internal AeccCatchment AeccCatchment => AcObject as AeccCatchment;

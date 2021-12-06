@@ -32,7 +32,7 @@ namespace Camber.Civil.PressureNetworks
         /// <summary>
         /// Gets the Alignment that is used as the horizontal path for the Pressure Pipe Run.
         /// </summary>
-        public civDynNodes.Alignment Alignment => AlignmentExtensions.GetFromObjectId(AeccPressurePipeRun.AlignmentId);
+        public civDynNodes.Alignment Alignment => Civil.Alignment.GetFromObjectId(AeccPressurePipeRun.AlignmentId);
 
         /// <summary>
         /// Gets the name of the Pressure Pipe Run.
@@ -50,7 +50,7 @@ namespace Camber.Civil.PressureNetworks
                 {
                     return null;
                 }
-                return ProfileExtensions.GetFromObjectId(AeccPressurePipeRun.ProfileId);
+                return Civil.Profile.GetFromObjectId(AeccPressurePipeRun.ProfileId);
             }
         }
 
@@ -65,7 +65,7 @@ namespace Camber.Civil.PressureNetworks
                 {
                     return null;
                 }
-                return ProfileExtensions.GetFromObjectId(AeccPressurePipeRun.ReferenceProfileId);
+                return Civil.Profile.GetFromObjectId(AeccPressurePipeRun.ReferenceProfileId);
             }
         }  
 

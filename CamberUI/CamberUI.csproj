@@ -219,7 +219,12 @@
     <Compile Include="Base Classes\LabelStyleDropDownBase.cs" />
     <Compile Include="Base Classes\StyleDropDownBase.cs" />
     <Compile Include="Base Classes\EnumDropDownBase.cs" />
+    <Compile Include="DataShortcuts\SetWorkingFolder.cs" />
+    <Compile Include="DataShortcuts\Validate.cs" />
+    <Compile Include="DataShortcuts\Refresh.cs" />
+    <Compile Include="DataShortcuts\GetCurrentProject.cs" />
     <Compile Include="Dropdowns\AutoCAD\AutoCADEnumDropDowns.cs" />
+    <Compile Include="Dropdowns\Civil\CivilEnumDropDowns.cs" />
     <Compile Include="Dropdowns\Civil\TimeOfConcentrationCalculationMethodsDropDown.cs" />
     <Compile Include="Dropdowns\Civil\Styles\Labels\PointLabelStyleDropDowns.cs" />
     <Compile Include="Dropdowns\Civil\Styles\Labels\ViewFrameLabelStyleDropDowns.cs" />
@@ -250,6 +255,7 @@
     <Compile Include="Dropdowns\Civil\Styles\Labels\GeneralLabelStylesDropDown.cs" />
     <Compile Include="Dropdowns\ModelText\TextAlignmentDropDown.cs" />
     <Compile Include="Dropdowns\ModelText\SystemFontsDropDown.cs" />
+    <Compile Include="DataShortcuts\GetWorkingFolder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Dropdowns\Civil\Styles\Labels\AlignmentLabelStyleDropDowns.cs" />
   </ItemGroup>

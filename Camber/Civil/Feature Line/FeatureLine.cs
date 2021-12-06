@@ -19,7 +19,7 @@ namespace Camber.Civil
 {
     [RegisterForTrace]
     [IsVisibleInDynamoLibrary(false)]
-    public sealed class FeatureLine : CivilObjectExtensions
+    public sealed class FeatureLine : CivilObject
     {
         #region properties
         internal AeccFeatureLine AeccFeatureLine => AcObject as AeccFeatureLine;

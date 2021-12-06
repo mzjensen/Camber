@@ -17,7 +17,7 @@ using Camber.Civil.PressureNetworks.Parts;
 namespace Camber.Civil.PressureNetworks
 {
     [RegisterForTrace]
-    public sealed class PressureNetwork : CivilObjectExtensions
+    public sealed class PressureNetwork : CivilObject
     {
         #region properties
         internal AeccPressureNetwork AeccPressureNetwork => AcObject as AeccPressureNetwork;
@@ -158,7 +158,7 @@ namespace Camber.Civil.PressureNetworks
         /// Gets the Pressure Pipe Networks in the document.
         /// </summary>
         /// <param name="document"></param>
-        /// <param name="allowReference">Include data shortcuts?</param>
+        /// <param name="allowReference">Include data references?</param>
         /// <returns></returns>
         public static IList<PressureNetwork> GetPressureNetworks(acDynNodes.Document document, bool allowReference = false)
         {
@@ -202,7 +202,7 @@ namespace Camber.Civil.PressureNetworks
         /// </summary>
         /// <param name="document"></param>
         /// <param name="name"></param>
-        /// <param name="allowReference">Include data shortcuts?</param>
+        /// <param name="allowReference">Include data references?</param>
         /// <returns></returns>
         [NodeCategory("Actions")]
         public static PressureNetwork GetByName(acDynNodes.Document document, string name, bool allowReference = false)

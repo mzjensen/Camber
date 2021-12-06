@@ -18,7 +18,7 @@ using Camber.Civil.Styles.Objects;
 namespace Camber.Civil.Labels
 {
     [RegisterForTrace]
-    public class Label : CivilObjectExtensions
+    public class Label : CivilObject
     {
         #region notes
         // Label location and dragged offset is a bit confusing. See this page for an explanation.
