@@ -55,6 +55,23 @@ namespace Camber.AutoCAD.External
         public int ObjectsCount => AcDatabase.ApproxNumObjects;
 
         /// <summary>
+        /// Gets the Model Space block of an External Document.
+        /// </summary>
+        public ExternalBlock ModelSpace
+        {
+            get
+            {
+                ExternalBlock retBlk = null;
+                using (var t = AcDatabase.TransactionManager.StartTransaction())
+                {
+                    acDb.BlockTable bt = (acDb.BlockTable)t.GetObject(AcDatabase.BlockTableId, acDb.OpenMode.ForRead);
+                    acDb.BlockTableRecord btr = (acDb.BlockTableRecord)t.GetObject(bt[acDb.BlockTableRecord.ModelSpace], acDb.OpenMode.ForRead);
+                    return new ExternalBlock(btr);
+                }
+            }
+        }
+
+        /// <summary>
         /// Gets the External Blocks in an External Document.
         /// </summary>
         public IList<ExternalBlock> Blocks
@@ -78,9 +95,6 @@ namespace Camber.AutoCAD.External
                 return blocks;
             }
         }
-
-
-
         #endregion
 
         #region constructors
@@ -116,6 +130,8 @@ namespace Camber.AutoCAD.External
             try
             {
                 string filePath = directoryPath + "\\" + fileName;
+                
+                // Using false here for buildDefaultDrawing because we are reading from a template file.
                 using (var db = new AcDatabase(false, true))
                 {
                     db.ReadDwgFile(templateFilePath, FileShare.Read, true, null);
@@ -178,6 +194,8 @@ namespace Camber.AutoCAD.External
             try
             {
                 string filePath = directoryPath + "\\" + fileName;
+
+                // Using false here for buildDefaultDrawing because we are reading from a template file.
                 using (var db = new AcDatabase(false, true))
                 {
                     db.ReadDwgFile(templateFilePath, FileShare.Read, true, null);
@@ -240,6 +258,21 @@ namespace Camber.AutoCAD.External
         }
 
         /// <summary>
+        /// Gets an External Block from an External Document by name.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public ExternalBlock BlockByName(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentException("Name is null or empty.");
+            }
+
+            return Blocks.FirstOrDefault(item => item.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+        }
+
+        /// <summary>
         /// Check file name for valid extensions.
         /// </summary>
         /// <param name="fileName"></param>
@@ -261,7 +294,7 @@ namespace Camber.AutoCAD.External
         }
 
         /// <summary>
-        /// Base method for checking various items when creating new files.
+        /// Helper method for checking various items when creating new files.
         /// </summary>
         /// <param name="directoryPath"></param>
         /// <param name="fileName"></param>
@@ -295,18 +328,27 @@ namespace Camber.AutoCAD.External
         }
 
         /// <summary>
-        /// Gets an External Block from an External Document by name.
+        /// Ensures that a specified layer exists in an External Document. If not, create a new layer.
         /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        public ExternalBlock BlockByName(string name)
+        /// <param name="externalDocument"></param>
+        /// <param name="layer"></param>
+        [IsVisibleInDynamoLibrary(false)]
+        public static void EnsureLayer(ExternalDocument externalDocument, string layer)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentException("Name is null or empty.");
-            }
+            if (string.IsNullOrEmpty(layer)) { throw new ArgumentNullException("layer"); }
 
-            return Blocks.FirstOrDefault(item => item.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            using (var t = externalDocument.AcDatabase.TransactionManager.StartTransaction())
+            {
+                acDb.LayerTable lt = (acDb.LayerTable)t.GetObject(externalDocument.AcDatabase.LayerTableId, acDb.OpenMode.ForWrite);
+                if (!lt.Has(layer))
+                {
+                    acDb.LayerTableRecord ltr = new acDb.LayerTableRecord();
+                    ltr.Name = layer;
+                    lt.Add(ltr);
+                    t.AddNewlyCreatedDBObject(ltr, true);
+                }
+                t.Commit();
+            }
         }
         #endregion
     }

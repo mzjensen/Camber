@@ -58,14 +58,15 @@ namespace Camber.AutoCAD.External
         /// <returns></returns>
         public static ExternalBlockReference ByCoordinateSystem(ExternalBlock sourceBlock, CoordinateSystem cs, string layer, ExternalBlock block)
         {
+            if (string.IsNullOrEmpty(layer)) { throw new ArgumentNullException("layer"); }
+            
             // TODO: need to add some way to handle blocks being created from one database to another.
             acDb.Database sourceDb = sourceBlock.AcBlock.Database;
             acDb.Database destDb = block.AcBlock.Database;
-            acDb.Transaction t = destDb.TransactionManager.StartTransaction();
 
             ExternalBlockReference retBlk = null;
 
-            using (t)
+            using (var t = destDb.TransactionManager.StartTransaction())
             {
                 try
                 {
@@ -76,6 +77,7 @@ namespace Camber.AutoCAD.External
                     t.AddNewlyCreatedDBObject(bref, true);
                     // Set properties
                     bref.BlockTransform = acDynNodes.AutoCADUtility.CooridnateSystemToMatrix(cs);
+                    //ExternalDocument.EnsureLayer()
                     bref.Layer = layer;
                     retBlk = new ExternalBlockReference(bref);
                 }
