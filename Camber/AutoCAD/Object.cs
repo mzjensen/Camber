@@ -1,6 +1,9 @@
 ﻿#region references
+using System;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Collections.Generic;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
@@ -52,6 +55,44 @@ namespace Camber.AutoCAD
             {
                 acDb.Entity acEnt = (acDb.Entity)ctx.Transaction.GetObject(obj.InternalObjectId, acDb.OpenMode.ForRead);
                 return acEnt.ColorIndex;
+            }
+        }
+
+        /// <summary>
+        /// Highlights an Object in the current document.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static acDynNodes.Object Highlight(acDynNodes.Object obj)
+        {
+            using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
+            {
+                acDb.Entity ent = (acDb.Entity)ctx.Transaction.GetObject(obj.InternalObjectId, acDb.OpenMode.ForRead);
+                ent.Highlight();
+            }
+            return obj;
+        }
+
+        /// <summary>
+        /// Selects Objects in the current document. This mimics the behavior of clicking on an object.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static List<acDynNodes.Object> Select(List<acDynNodes.Object> objs)
+        {
+            acDb.ObjectId[] oids = objs.Select(obj => obj.InternalObjectId).ToArray();
+
+            var adoc = acDynNodes.Document.Current.AcDocument;
+            var ed = adoc.Editor;
+            try
+            {
+                ed.SetImpliedSelection(oids);
+                ed.SelectImplied();
+                return objs;
+            }
+            catch (Exception e)
+            {
+                throw new InvalidOperationException(e.Message);
             }
         }
 
