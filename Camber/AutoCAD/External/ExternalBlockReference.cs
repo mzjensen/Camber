@@ -54,30 +54,37 @@ namespace Camber.AutoCAD.External
         /// <param name="sourceBlock"></param>
         /// <param name="cs"></param>
         /// <param name="layer"></param>
-        /// <param name="block"></param>
+        /// <param name="destinationBlock">The block where the block reference will be created.</param>
         /// <returns></returns>
-        public static ExternalBlockReference ByCoordinateSystem(ExternalBlock sourceBlock, CoordinateSystem cs, string layer, ExternalBlock block)
+        public static ExternalBlockReference ByCoordinateSystem(
+            ExternalBlock sourceBlock, 
+            CoordinateSystem cs, 
+            string layer, 
+            ExternalBlock destinationBlock)
         {
             if (string.IsNullOrEmpty(layer)) { throw new ArgumentNullException("layer"); }
             
-            // TODO: need to add some way to handle blocks being created from one database to another.
-            acDb.Database sourceDb = sourceBlock.AcBlock.Database;
-            acDb.Database destDb = block.AcBlock.Database;
-
             ExternalBlockReference retBlk = null;
 
-            using (var t = destDb.TransactionManager.StartTransaction())
+            acDb.Database destDb = destinationBlock.AcBlock.Database;
+            ExternalDocument destDoc = new ExternalDocument(destDb, destDb.Filename);
+
+            // Ensure that the block exists in the destination
+            ExternalBlock localBlock = ExternalBlock.Import(sourceBlock, destDoc, false);
+
+            using (var tr = destDb.TransactionManager.StartTransaction())
             {
                 try
                 {
-                    // Create block and add to destination block table record
-                    AcBlockReference bref = new AcBlockReference(new acGeom.Point3d(0, 0, 0), sourceBlock.InternalObjectId);
-                    acDb.BlockTableRecord btr = (acDb.BlockTableRecord)t.GetObject(block.InternalObjectId, acDb.OpenMode.ForWrite);
+                    // Create block reference and add to destination block table record
+                    AcBlockReference bref = new AcBlockReference(new acGeom.Point3d(0, 0, 0), localBlock.InternalObjectId);
+                    acDb.BlockTableRecord btr = (acDb.BlockTableRecord)tr.GetObject(destinationBlock.InternalObjectId, acDb.OpenMode.ForWrite);
                     btr.AppendEntity(bref);
-                    t.AddNewlyCreatedDBObject(bref, true);
+                    tr.AddNewlyCreatedDBObject(bref, true);
                     // Set properties
                     bref.BlockTransform = acDynNodes.AutoCADUtility.CooridnateSystemToMatrix(cs);
-                    //ExternalDocument.EnsureLayer()
+                    // Ensure destination has input layer
+                    ExternalDocument.EnsureLayer(destDoc, layer);
                     bref.Layer = layer;
                     retBlk = new ExternalBlockReference(bref);
                 }
@@ -85,7 +92,7 @@ namespace Camber.AutoCAD.External
                 {
                     throw new InvalidOperationException(e.Message);
                 }
-                t.Commit();
+                tr.Commit();
             }
             return retBlk;
         }

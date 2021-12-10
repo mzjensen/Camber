@@ -82,14 +82,13 @@ namespace Camber.AutoCAD.External
             get
             {
                 var objs = new List<ExternalObject>();
-                acDb.Transaction t = AcDatabase.TransactionManager.StartTransaction();
-                using (t)
+                using (var tr = AcDatabase.TransactionManager.StartTransaction())
                 {
-                    acDb.BlockTable bt = (acDb.BlockTable)t.GetObject(AcDatabase.BlockTableId, acDb.OpenMode.ForRead);
-                    AcBlock btr = (AcBlock)t.GetObject(bt[Name], acDb.OpenMode.ForRead);
+                    acDb.BlockTable bt = (acDb.BlockTable)tr.GetObject(AcDatabase.BlockTableId, acDb.OpenMode.ForRead);
+                    AcBlock btr = (AcBlock)tr.GetObject(bt[Name], acDb.OpenMode.ForRead);
                     foreach (acDb.ObjectId oid in btr)
                     {
-                        acDb.Entity ent = (acDb.Entity)t.GetObject(oid, acDb.OpenMode.ForRead);
+                        acDb.Entity ent = (acDb.Entity)tr.GetObject(oid, acDb.OpenMode.ForRead);
                         objs.Add(new ExternalObject(ent));
                     }
                     return objs;
@@ -105,16 +104,15 @@ namespace Camber.AutoCAD.External
             get
             {
                 var anonBlocks = new List<ExternalBlock>();
-                acDb.Transaction t = AcDatabase.TransactionManager.StartTransaction();
-                using (t)
+                using (var tr = AcDatabase.TransactionManager.StartTransaction())
                 {
                     try
                     {
-                        var bt = (acDb.BlockTable)t.GetObject(AcDatabase.BlockTableId, acDb.OpenMode.ForRead);
-                        var btr = (AcBlock)t.GetObject(bt[Name], acDb.OpenMode.ForRead);
+                        var bt = (acDb.BlockTable)tr.GetObject(AcDatabase.BlockTableId, acDb.OpenMode.ForRead);
+                        var btr = (AcBlock)tr.GetObject(bt[Name], acDb.OpenMode.ForRead);
                         foreach (acDb.ObjectId oid in btr.GetAnonymousBlockIds())
                         {
-                            var acAnonBlock = (AcBlock)t.GetObject(oid, acDb.OpenMode.ForRead);
+                            var acAnonBlock = (AcBlock)tr.GetObject(oid, acDb.OpenMode.ForRead);
                             anonBlocks.Add(new ExternalBlock(acAnonBlock));
                         }
                         return anonBlocks;
@@ -156,7 +154,7 @@ namespace Camber.AutoCAD.External
         public static ExternalBlock Import(ExternalBlock sourceBlock, ExternalDocument destinationDocument, bool overwrite)
         {
             if (sourceBlock.IsAnonymous) { throw new InvalidOperationException("Cannot import anonymous blocks."); }
-            if (sourceBlock.IsLayout) { throw new InvalidOperationException("Cannot import Model Space or Paper Space blocks."); }
+            if (sourceBlock.IsLayout) { throw new InvalidOperationException("Cannot import layout blocks."); }
             
             ExternalBlock existingBlock = destinationDocument.BlockByName(sourceBlock.Name);
             
@@ -171,7 +169,7 @@ namespace Camber.AutoCAD.External
             {
                 acDb.Database destDb = destinationDocument.AcDatabase;
                 acDb.Database sourceDb = destinationDocument.AcDatabase;
-                using (var t = sourceDb.TransactionManager.StartTransaction())
+                using (var tr = sourceDb.TransactionManager.StartTransaction())
                 {
                     acDb.IdMapping mapping = new acDb.IdMapping();
                     acDb.ObjectIdCollection ids = new acDb.ObjectIdCollection() { sourceBlock.InternalObjectId };

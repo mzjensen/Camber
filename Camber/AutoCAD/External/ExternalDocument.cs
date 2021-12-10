@@ -98,11 +98,11 @@ namespace Camber.AutoCAD.External
         #endregion
 
         #region constructors
-        internal ExternalDocument(AcDatabase acDatabase, string fileName)
+        internal ExternalDocument(AcDatabase acDatabase, string filePath)
         {
             try
             {
-                FileInfo fileInfo = new FileInfo(fileName);
+                FileInfo fileInfo = new FileInfo(filePath);
                 AcDatabase = acDatabase;
                 FileInfo = fileInfo;
             }
@@ -206,13 +206,13 @@ namespace Camber.AutoCAD.External
         }
 
         /// <summary>
-        /// Attempts to save an External Document as a new file.
+        /// Saves a copy of an External Document under a new name. Returns the original External Document, not the newly-created copy.
         /// </summary>
         /// <param name="directoryPath">The path to a directory location for the new file.</param>
         /// <param name="fileName">The name of the new file. Be sure to append the desired file extension to the name.</param>
         /// <param name="overwrite">Overwrite if a file of the same name already exists in the specified directory?</param>
         /// <returns></returns>
-        public ExternalDocument SaveAs(string directoryPath, string fileName, bool overwrite = false)
+        public ExternalDocument SaveCopy(string directoryPath, string fileName, bool overwrite = false)
         {
             // Check inputs
             if (string.IsNullOrEmpty(directoryPath)) { throw new ArgumentException(InvalidDirectoryPathMessage); }
@@ -337,17 +337,17 @@ namespace Camber.AutoCAD.External
         {
             if (string.IsNullOrEmpty(layer)) { throw new ArgumentNullException("layer"); }
 
-            using (var t = externalDocument.AcDatabase.TransactionManager.StartTransaction())
+            using (var tr = externalDocument.AcDatabase.TransactionManager.StartTransaction())
             {
-                acDb.LayerTable lt = (acDb.LayerTable)t.GetObject(externalDocument.AcDatabase.LayerTableId, acDb.OpenMode.ForWrite);
+                acDb.LayerTable lt = (acDb.LayerTable)tr.GetObject(externalDocument.AcDatabase.LayerTableId, acDb.OpenMode.ForWrite);
                 if (!lt.Has(layer))
                 {
                     acDb.LayerTableRecord ltr = new acDb.LayerTableRecord();
                     ltr.Name = layer;
                     lt.Add(ltr);
-                    t.AddNewlyCreatedDBObject(ltr, true);
+                    tr.AddNewlyCreatedDBObject(ltr, true);
                 }
-                t.Commit();
+                tr.Commit();
             }
         }
         #endregion

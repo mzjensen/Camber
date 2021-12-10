@@ -34,6 +34,11 @@ namespace Camber.AutoCAD.External
         public string Linetype => GetString();
 
         /// <summary>
+        /// Gets the scale of the linetype assigned to an External Object.
+        /// </summary>
+        public double LinetypeScale => GetDouble();
+
+        /// <summary>
         /// Gets the material assigned to an External Object.
         /// </summary>
         public string Material => GetString();
@@ -75,6 +80,54 @@ namespace Camber.AutoCAD.External
         /// <param name="layer"></param>
         /// <returns></returns>
         public ExternalObject SetLayer(string layer) => SetValue(layer);
+
+        /// <summary>
+        /// Sets the linetype for an External Object.
+        /// </summary>
+        /// <param name="linetype"></param>
+        /// <returns></returns>
+        public ExternalObject SetLinetype(string linetype) => SetValue(linetype);
+
+        /// <summary>
+        /// Sets the scale of the linetype for an External Object.
+        /// </summary>
+        /// <param name="scale"></param>
+        /// <returns></returns>
+        public ExternalObject SetLinetypeScale(double scale) => SetValue(scale);
+
+        /// <summary>
+        /// Sets the material assigned to an External Object.
+        /// </summary>
+        /// <param name="material"></param>
+        /// <returns></returns>
+        public ExternalObject SetMaterial(string material) => SetValue(material);
+
+        /// <summary>
+        /// Sets the plot style of an External Object.
+        /// </summary>
+        /// <param name="plotstyle"></param>
+        /// <returns></returns>
+        public ExternalObject SetPlotStyle(string plotstyle) => SetValue((object)plotstyle, "PlotStyleName");
+
+
+        /// <summary>
+        /// Deletes an External Object.
+        /// </summary>
+        public void Delete()
+        {
+            try
+            {
+                using (var tr = AcEntity.Database.TransactionManager.StartTransaction())
+                {
+                    acDb.Entity ent = (acDb.Entity)tr.GetObject(InternalObjectId, acDb.OpenMode.ForWrite);
+                    ent.Erase();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new InvalidOperationException(e.Message);
+            }
+        }
 
         #region helper methods
         [SupressImportIntoVM]
