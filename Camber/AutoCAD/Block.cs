@@ -6,21 +6,15 @@ using System.Reflection;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
-using DynamoServices;
 using Dynamo.Graph.Nodes;
 #endregion
 
 namespace Camber.AutoCAD
 {
-    [RegisterForTrace]
-    public sealed class Block
+    public static class Block
     {
         #region properties
-        protected const string NotApplicableMsg = "Not applicable";
-        #endregion
-
-        #region constructors
-        private Block() { }
+        const string NotApplicableMsg = "Not applicable";
         #endregion
 
         #region methods
@@ -230,7 +224,7 @@ namespace Camber.AutoCAD
             return SetValue(block, Enum.Parse(typeof(acDb.UnitsValue), units));
         }
 
-        protected static string GetString(acDynNodes.Block block, [CallerMemberName] string propertyName = null)
+        internal static string GetString(acDynNodes.Block block, [CallerMemberName] string propertyName = null)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
             using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
@@ -258,7 +252,7 @@ namespace Camber.AutoCAD
             }
         }
 
-        protected static bool GetBool(acDynNodes.Block block, [CallerMemberName] string propertyName = null)
+        internal static bool GetBool(acDynNodes.Block block, [CallerMemberName] string propertyName = null)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
             using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
@@ -278,7 +272,7 @@ namespace Camber.AutoCAD
             }
         }
 
-        protected static acDynNodes.Block SetValue(acDynNodes.Block block, object value, [CallerMemberName] string methodName = null)
+        internal static acDynNodes.Block SetValue(acDynNodes.Block block, object value, [CallerMemberName] string methodName = null)
         {
             if (methodName.StartsWith("Set"))
             {
@@ -287,7 +281,7 @@ namespace Camber.AutoCAD
             return SetValue(block, methodName, value);
         }
 
-        protected static acDynNodes.Block SetValue(acDynNodes.Block block, string propertyName, object value)
+        internal static acDynNodes.Block SetValue(acDynNodes.Block block, string propertyName, object value)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
             using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
