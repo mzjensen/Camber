@@ -1,4 +1,7 @@
 ﻿#region references
+using System;
+using System.Linq;
+using System.Collections.Generic;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acGeom = Autodesk.AutoCAD.Geometry;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
@@ -69,6 +72,55 @@ namespace Camber.AutoCAD
         /// Gets the location of MLeader MText content.
         /// </summary>
         public Point TextLocation => GeometryConversions.AcPointToDynPoint(AcMLeader.TextLocation);
+
+        /// <summary>
+        /// Gets the Attribute References of an MLeader with block content.
+        /// </summary>
+        private IList<acDb.AttributeReference> AttributeReferences
+        {
+            get
+            {
+                if (ContentType != acDb.ContentType.BlockContent.ToString())
+                { 
+                    throw new InvalidOperationException("MLeader does not contain block content."); 
+                }
+
+                List<acDb.AttributeDefinition> attDefs = new List<acDb.AttributeDefinition>();
+                List<acDb.AttributeReference> attRefs = new List<acDb.AttributeReference>();
+
+                acDynNodes.Document document = acDynNodes.Document.Current;
+                try
+                {
+                    using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
+                    {
+                        using (var tr = ctx.Transaction)
+                        {
+                            AcMLeader acMld = (AcMLeader)tr.GetObject(InternalObjectId, acDb.OpenMode.ForWrite);
+                            acDb.BlockTableRecord btr = (acDb.BlockTableRecord)tr.GetObject(acMld.BlockContentId, acDb.OpenMode.ForRead);
+
+                            List<Tuple<acDb.ObjectId, string>> lst = new List<Tuple<acDb.ObjectId, string>>();
+                            foreach (acDb.ObjectId oid in btr)
+                            {
+                                acDb.AttributeDefinition attDef = (acDb.AttributeDefinition)tr.GetObject(oid, acDb.OpenMode.ForRead);
+                                if (attDef != null)
+                                {
+                                    attDefs.Add(attDef);
+                                }
+                            }
+                            foreach (acDb.AttributeDefinition attDef in attDefs)
+                            {
+                                attRefs.Add(acMld.GetBlockAttribute(attDef.ObjectId));
+                            }
+                            return attRefs;
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw new InvalidOperationException(e.Message);
+                }
+            }
+        }
         #endregion
 
         #region constructors
@@ -211,6 +263,30 @@ namespace Camber.AutoCAD
 
         #region methods
         public override string ToString() => $"MLeader(ContentType = {ContentType})";
+        
+        /// <summary>
+        /// Gets the value of a Block Attribute Reference in an MLeader by tag.
+        /// </summary>
+        /// <param name="tagName"></param>
+        /// <returns></returns>
+        public string GetAttributeValueByTag(string tagName)
+        {
+            // TODO: this is causing a hard crash. Probably an issue with the top transaction.
+            if (string.IsNullOrEmpty(tagName)) { throw new ArgumentNullException("tagName"); }
+
+            if (ContentType != acDb.ContentType.BlockContent.ToString())
+            {
+                throw new InvalidOperationException("MLeader does not contain block content.");
+            }
+
+            var match = AttributeReferences.FirstOrDefault(p => p.Tag == tagName);
+            if (match == null)
+            {
+                throw new InvalidOperationException($"The MLeader Block does not contain an attribute named {tagName}.");
+            }
+
+            return match.TextString;
+        }
         #endregion
     }
 }
