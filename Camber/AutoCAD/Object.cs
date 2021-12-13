@@ -10,11 +10,11 @@ using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using DynamoServices;
 using Dynamo.Graph.Nodes;
 using Autodesk.DesignScript.Runtime;
+using Camber.Utils;
 #endregion
 
 namespace Camber.AutoCAD
 {
-    [RegisterForTrace]
     public class Object : acDynNodes.Object
     {
         #region properties
@@ -93,6 +93,31 @@ namespace Camber.AutoCAD
             catch (Exception e)
             {
                 throw new InvalidOperationException(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Converts a Dynamo object to its valid Camber object.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        [IsVisibleInDynamoLibrary(false)]
+        public static acDynNodes.Object ConvertToCamberObject(acDynNodes.Object obj)
+        {
+            acDynNodes.Document document = acDynNodes.Document.Current;
+            using (var ctx = new acDynApp.DocumentContext(document?.AcDocument))
+            {
+                var acObj = obj.InternalObjectId.GetObject(acDb.OpenMode.ForRead);
+                IEnumerable<Object> assemblyObjects = ReflectionUtils.GetEnumerableOfType<Object>(new object[] { acObj, false });
+                if (assemblyObjects.Count() > 1)
+                {
+                    throw new InvalidOperationException("Multiple object types found.");
+                }
+                else if (assemblyObjects.Count() == 0)
+                {
+                    throw new InvalidOperationException("Not implemented.");
+                }
+                return assemblyObjects.First();
             }
         }
 
