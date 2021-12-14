@@ -216,6 +216,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoCAD\ConvertToCamberObject.cs" />
     <Compile Include="Base Classes\LabelStyleDropDownBase.cs" />
     <Compile Include="Base Classes\StyleDropDownBase.cs" />
     <Compile Include="Base Classes\EnumDropDownBase.cs" />
