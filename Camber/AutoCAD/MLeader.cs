@@ -85,34 +85,20 @@ namespace Camber.AutoCAD
                     throw new InvalidOperationException("MLeader does not contain block content."); 
                 }
 
-                List<acDb.AttributeDefinition> attDefs = new List<acDb.AttributeDefinition>();
-                List<acDb.AttributeReference> attRefs = new List<acDb.AttributeReference>();
-
                 acDynNodes.Document document = acDynNodes.Document.Current;
                 try
                 {
                     using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
                     {
-                        using (var tr = ctx.Transaction)
-                        {
-                            AcMLeader acMld = (AcMLeader)tr.GetObject(InternalObjectId, acDb.OpenMode.ForWrite);
-                            acDb.BlockTableRecord btr = (acDb.BlockTableRecord)tr.GetObject(acMld.BlockContentId, acDb.OpenMode.ForRead);
+                        List<AttributeDefinition> attDefs = Camber.AutoCAD.Block.AttributeDefinitions(Block);
+                        List<acDb.AttributeReference> attRefs = new List<acDb.AttributeReference>();
 
-                            List<Tuple<acDb.ObjectId, string>> lst = new List<Tuple<acDb.ObjectId, string>>();
-                            foreach (acDb.ObjectId oid in btr)
-                            {
-                                acDb.AttributeDefinition attDef = (acDb.AttributeDefinition)tr.GetObject(oid, acDb.OpenMode.ForRead);
-                                if (attDef != null)
-                                {
-                                    attDefs.Add(attDef);
-                                }
-                            }
-                            foreach (acDb.AttributeDefinition attDef in attDefs)
-                            {
-                                attRefs.Add(acMld.GetBlockAttribute(attDef.ObjectId));
-                            }
-                            return attRefs;
+                        AcMLeader acMld = (AcMLeader)ctx.Transaction.GetObject(InternalObjectId, acDb.OpenMode.ForRead);
+                        foreach (AttributeDefinition attDef in attDefs)
+                        {
+                            attRefs.Add(acMld.GetBlockAttribute(attDef.InternalObjectId));
                         }
+                        return attRefs; 
                     }
                 }
                 catch (Exception e)
@@ -271,7 +257,6 @@ namespace Camber.AutoCAD
         /// <returns></returns>
         public string GetAttributeValueByTag(string tagName)
         {
-            // TODO: this is causing a hard crash. Probably an issue with the top transaction.
             if (string.IsNullOrEmpty(tagName)) { throw new ArgumentNullException("tagName"); }
 
             if (ContentType != acDb.ContentType.BlockContent.ToString())
@@ -279,13 +264,61 @@ namespace Camber.AutoCAD
                 throw new InvalidOperationException("MLeader does not contain block content.");
             }
 
-            var match = AttributeReferences.FirstOrDefault(p => p.Tag == tagName);
+            var match = AttributeReferences
+                .FirstOrDefault(attRef => attRef.Tag.Equals
+                (tagName, StringComparison.OrdinalIgnoreCase));
+            
             if (match == null)
             {
                 throw new InvalidOperationException($"The MLeader Block does not contain an attribute named {tagName}.");
             }
 
             return match.TextString;
+        }
+
+        /// <summary>
+        /// Sets the value of a Block Reference Attribute in an MLeader by tag.
+        /// </summary>
+        /// <param name="tagName"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public MLeader SetAttributeValueByTag(string tagName, string value)
+        {
+            if (string.IsNullOrEmpty(tagName)) { throw new ArgumentNullException("tagName"); }
+
+            if (ContentType != acDb.ContentType.BlockContent.ToString())
+            {
+                throw new InvalidOperationException("MLeader does not contain block content.");
+            }
+
+            List<AttributeDefinition> attDefs = Camber.AutoCAD.Block.AttributeDefinitions(Block);
+
+            var match = attDefs
+                .FirstOrDefault(x => x.Tag.Equals
+                (tagName, StringComparison.OrdinalIgnoreCase));
+
+            if (match != null)
+            {
+                try
+                {
+                    using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
+                    {
+                        AcMLeader acMld = (AcMLeader)ctx.Transaction.GetObject(InternalObjectId, acDb.OpenMode.ForWrite);
+                        acDb.AttributeReference attRef = acMld.GetBlockAttribute(match.InternalObjectId);
+                        attRef.TextString = value;
+                        acMld.SetBlockAttribute(match.InternalObjectId, attRef);
+                        return this;
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw new InvalidOperationException(e.Message);
+                }
+            }
+            else
+            {
+                throw new InvalidOperationException($"The MLeader Block does not contain an attribute named {tagName}.");
+            }  
         }
         #endregion
     }
