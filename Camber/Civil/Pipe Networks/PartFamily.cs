@@ -1,6 +1,7 @@
 ﻿#region references
 using System;
 using System.Linq;
+using System.Collections.Generic;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using civDb = Autodesk.Civil.DatabaseServices;
@@ -51,6 +52,22 @@ namespace Camber.Civil.PipeNetworks
         /// Gets the swept shape of the Part Family. Returns 'Undefined' for Structure Part Families.
         /// </summary>
         public string SweptShape => AeccPartFamily.SweptShape.ToString();
+
+        /// <summary>
+        /// Gets the Part Sizes in a Part Family.
+        /// </summary>
+        public IList<PartSize> PartSizes
+        {
+            get
+            {
+                List<PartSize> sizes = new List<PartSize>();
+                for (int i = 0; i < AeccPartFamily.PartSizeCount; i++)
+                {
+                    sizes.Add(PartSize.GetByObjectId(AeccPartFamily[i]));
+                }
+                return sizes;
+            }
+        }
         #endregion
 
         #region constructors
@@ -125,6 +142,27 @@ namespace Camber.Civil.PipeNetworks
 
         #region methods
         public override string ToString() => $"PartFamily(Name = {Name}, Domain = {Domain})";
+
+        /// <summary>
+        /// Gets a Part Size by name from a Part Family.
+        /// </summary>
+        /// <param name="partSizeName"></param>
+        /// <returns></returns>
+        public PartSize GetPartSizeByName(string partSizeName)
+        {
+            if (string.IsNullOrEmpty(partSizeName)) { throw new ArgumentNullException("partSizeName"); }
+
+            var size = PartSizes
+            .FirstOrDefault(item => item.Name.Equals
+            (partSizeName, StringComparison.OrdinalIgnoreCase));
+
+            if (size != null) 
+            { 
+                return size; 
+            }
+            throw new InvalidOperationException("No Part Size found.");
+
+        }
 
         /// <summary>
         /// Removes a Part Size from the Part Family.
