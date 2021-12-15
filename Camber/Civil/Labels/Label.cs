@@ -288,7 +288,7 @@ namespace Camber.Civil.Labels
         /// <summary>
         /// Sets the rotation angle of a Label.
         /// </summary>
-        /// <param name="angle">Angle in degrees</param>
+        /// <param name="angle">Angle (degrees) in the range of [0,360).</param>
         /// <returns></returns>
         public Label SetRotation(double angle)
         {
