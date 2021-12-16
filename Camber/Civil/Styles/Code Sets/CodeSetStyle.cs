@@ -1,12 +1,15 @@
 ﻿#region references
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
+using civDb = Autodesk.Civil.DatabaseServices;
 using AeccCodeSetStyle = Autodesk.Civil.DatabaseServices.Styles.CodeSetStyle;
 using AeccCodeSetStyleItem = Autodesk.Civil.DatabaseServices.Styles.CodeSetStyleItem;
 using Camber.Civil.Styles.Objects;
+using Autodesk.DesignScript.Runtime;
 #endregion
 
 namespace Camber.Civil.Styles.CodeSets
@@ -23,12 +26,35 @@ namespace Camber.Civil.Styles.CodeSets
         {
             get
             {
-                var items = new List<CodeSetStyleItem>();
-                foreach (AeccCodeSetStyleItem item in AeccCodeSetStyle)
+                // This is a really frustrating pattern. You have to set the SubentityStyleType for the CodeSetStyle
+                // before you can enumerate through and get the CodeSetStyleItems of the current SubentityStyleType.
+                using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
                 {
-                    items.Add(new CodeSetStyleItem(item, this));
+                    var items = new List<CodeSetStyleItem>();
+                    AeccCodeSetStyle.UpgradeOpen();
+                    
+                    // Get point code set style items 
+                    AeccCodeSetStyle.SubentityStyleType = civDb.Styles.SubassemblySubentityStyleType.MarkerType;
+                    foreach (AeccCodeSetStyleItem item in AeccCodeSetStyle)
+                    {
+                        items.Add(new CodeSetStyleItem(item, this));
+                    }
+
+                    // Get link code set style items 
+                    AeccCodeSetStyle.SubentityStyleType = civDb.Styles.SubassemblySubentityStyleType.LinkType;
+                    foreach (AeccCodeSetStyleItem item in AeccCodeSetStyle)
+                    {
+                        items.Add(new CodeSetStyleItem(item, this));
+                    }
+
+                    // Get shape code set style items 
+                    AeccCodeSetStyle.SubentityStyleType = civDb.Styles.SubassemblySubentityStyleType.ShapeType;
+                    foreach (AeccCodeSetStyleItem item in AeccCodeSetStyle)
+                    {
+                        items.Add(new CodeSetStyleItem(item, this));
+                    }
+                    return items;
                 }
-                return items;
             }
         }
         #endregion
@@ -58,6 +84,7 @@ namespace Camber.Civil.Styles.CodeSets
         /// <param name="code"></param>
         /// <param name="linkStyle"></param>
         /// <returns></returns>
+        [IsVisibleInDynamoLibrary(false)]
         public CodeSetStyle AddLinkItem(string code, LinkStyle linkStyle) => AddItem(code, linkStyle);
 
         /// <summary>
@@ -66,6 +93,7 @@ namespace Camber.Civil.Styles.CodeSets
         /// <param name="code"></param>
         /// <param name="shapeStyle"></param>
         /// <returns></returns>
+        [IsVisibleInDynamoLibrary(false)]
         public CodeSetStyle AddShapeItem(string code, ShapeStyle shapeStyle) => AddItem(code, shapeStyle);
 
         /// <summary>
