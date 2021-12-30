@@ -125,9 +125,21 @@ namespace Camber.UI
                     {
                         if (!styleId.IsValid || styleId.IsErased || styleId.IsEffectivelyErased) { continue; }
 
-                        var style = (civDb.Styles.LabelStyle)styleId.GetObject(acDb.OpenMode.ForRead, false, true);
-                        var item = new DynamoDropDownItem(style.Name, style.Handle.ToString());
-                        Items.Add(item);
+                        var parentLabelStyle = (civDb.Styles.LabelStyle)styleId.GetObject(acDb.OpenMode.ForRead, false, true);
+                        
+                        var parentItem = new DynamoDropDownItem(parentLabelStyle.Name, parentLabelStyle.Handle.ToString());
+                        Items.Add(parentItem);
+                        
+                        // Add child styles if they exist
+                        if (parentLabelStyle.ChildrenCount > 0)
+                        {
+                            for (int i = 0; i < parentLabelStyle.ChildrenCount; i++)
+                            {
+                                var childLabelStyle = (civDb.Styles.LabelStyle)parentLabelStyle[i].GetObject(acDb.OpenMode.ForRead, false, true);
+                                var childItem = new DynamoDropDownItem(childLabelStyle.Name, childLabelStyle.Handle.ToString());
+                                Items.Add(childItem);
+                            }
+                        }
                     }
                 }
             }

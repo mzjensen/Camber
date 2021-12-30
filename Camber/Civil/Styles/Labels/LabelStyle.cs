@@ -7,6 +7,7 @@ using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using civApp = Autodesk.Civil.ApplicationServices;
 using civDb = Autodesk.Civil.DatabaseServices;
 using AeccLabelStyle = Autodesk.Civil.DatabaseServices.Styles.LabelStyle;
+using AeccLabelStyleCollection = Autodesk.Civil.DatabaseServices.Styles.LabelStyleCollection;
 using Autodesk.DesignScript.Runtime;
 using System.Reflection;
 using DynamoServices;
@@ -253,16 +254,37 @@ namespace Camber.Civil.Styles.Labels
             using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
             {
                 civApp.CivilDocument cdoc = civApp.CivilDocument.GetCivilDocument(ctx.Database);
-                var aeccCollection = Utils.ReflectionUtils.GetNestedProperty(cdoc.Styles.LabelStyles, labelStyleCollection, "Error");
-                var itemProp = aeccCollection.GetType().GetProperty("Item", new[] { typeof(string) });
-                var getMethod = itemProp.GetGetMethod();
-                acDb.ObjectId styleId = (acDb.ObjectId)getMethod.Invoke(aeccCollection, new string[] { labelStyleName });
+                
+                AeccLabelStyleCollection aeccCollection = 
+                    (AeccLabelStyleCollection)Utils.ReflectionUtils.GetNestedProperty(
+                        cdoc.Styles.LabelStyles, 
+                        labelStyleCollection, 
+                        "Error");
+                
+                var styleId = FindLabelStyleByName(aeccCollection, labelStyleName);
+                
+                //var itemProp = aeccCollection
+                //    .GetType()
+                //    .GetProperty("Item", new[] { typeof(string) });
+
+                //var getMethod = itemProp.GetGetMethod();
+                //acDb.ObjectId styleId = 
+                //    (acDb.ObjectId)getMethod.Invoke(
+                //        aeccCollection, 
+                //        new string[] { labelStyleName });
 
                 var aeccStyle = styleId.GetObject(acDb.OpenMode.ForRead);
+                
                 if (aeccStyle != null)
                 {
-                    return (Style)Activator.CreateInstance(type, BindingFlags.Instance | BindingFlags.NonPublic, null, new object[] { aeccStyle, false }, null);
+                    return (Style)Activator.CreateInstance(
+                        type, 
+                        BindingFlags.Instance | BindingFlags.NonPublic, 
+                        null, 
+                        new object[] { aeccStyle, false }, 
+                        null);
                 }
+                
                 return null;
             }
         }
@@ -477,6 +499,47 @@ namespace Camber.Civil.Styles.Labels
                 }
             }
             catch { throw; }
+        }
+
+        /// <summary>
+        /// Gets a label style ID by name.
+        /// </summary>
+        /// <param name="labelStyleCollection"></param>
+        /// <param name="styleName"></param>
+        /// <returns></returns>
+        private static acDb.ObjectId FindLabelStyleByName(AeccLabelStyleCollection labelStyleCollection, string styleName)
+        {
+            var retval = acDb.ObjectId.Null;
+            foreach (acDb.ObjectId id in labelStyleCollection)
+            {
+                retval = ProcessChildren(id, styleName);
+                if (retval != acDb.ObjectId.Null)
+                    break;
+            }
+            return retval;
+        }
+
+        /// <summary>
+        /// Returns the Object ID of a child label style by name if it exists, otherwise returns the Object ID of the parent. 
+        /// </summary>
+        /// <param name="parentStyleId"></param>
+        /// <param name="styleName"></param>
+        /// <returns></returns>
+        private static acDb.ObjectId ProcessChildren(acDb.ObjectId parentStyleId, string styleName)
+        {
+            var retval = acDb.ObjectId.Null;
+            AeccLabelStyle labelStyle = (AeccLabelStyle)parentStyleId.Open(acDb.OpenMode.ForRead);
+            if (labelStyle.Name == styleName)
+                retval = parentStyleId;
+            else
+                for (int i = 0; i < labelStyle.ChildrenCount; i++)
+                {
+                    retval = ProcessChildren(labelStyle[i], styleName);
+                    if (retval != acDb.ObjectId.Null)
+                        break;
+                }
+            labelStyle.Close();
+            return retval;
         }
         #endregion
     }
