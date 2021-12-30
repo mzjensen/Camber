@@ -9,6 +9,7 @@ using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using civApp = Autodesk.Civil.ApplicationServices;
 using civDb = Autodesk.Civil.DatabaseServices;
+using civStyles = Autodesk.Civil.DatabaseServices.Styles;
 using AeccStyle = Autodesk.Civil.DatabaseServices.Styles.StyleBase;
 using AeccDisplayStyle = Autodesk.Civil.DatabaseServices.Styles.DisplayStyle;
 using Autodesk.DesignScript.Runtime;
@@ -291,6 +292,7 @@ namespace Camber.Civil.Styles
             }
 
             List<DisplayStyle> displayStyles = new List<DisplayStyle>();
+            
             // Get all methods that contain "DisplayStyle" in the name
             var methods = style.AeccStyle.GetType().GetMethods().Where(m => (m.Name.Contains("DisplayStyle") && m.Name.Contains(viewDirection) && !m.Name.Contains("Hatch")));
 
@@ -307,12 +309,28 @@ namespace Camber.Civil.Styles
                     if (aeccDisplayStyle == null)
                         continue;
                     DisplayStyle displayStyle = new DisplayStyle(style, aeccDisplayStyle);
-                    // Remove characters from method name to get Display Style name
-                    var name = method.Name;
-                    var charsToRemove = new string[] { "Get", "get_", "DisplayStyle", "Plan", "Profile", "Model", "Section" };
-                    foreach (var c in charsToRemove)
+
+                    // First check if name is valid from list of special cases
+                    string name = GetDisplayStyleName(style, viewDirection);
+
+                    // Otherwise get name from method name
+                    if (string.IsNullOrEmpty(name))
                     {
-                        name = name.Replace(c, string.Empty);
+                        // Remove characters from method name
+                        name = method.Name;
+                        var charsToRemove = new string[] {
+                        "Get",
+                        "get_",
+                        "DisplayStyle",
+                        "Plan",
+                        "Profile",
+                        "Model",
+                        "Section" };
+
+                        foreach (var c in charsToRemove)
+                        {
+                            name = name.Replace(c, string.Empty);
+                        }
                     }
 
                     displayStyle.Name = name;
@@ -324,6 +342,7 @@ namespace Camber.Civil.Styles
                 if (!param.ParameterType.IsEnum)
                     // If not an enumeration, skip
                     continue;
+                
                 // Check all values in the enumeration
                 foreach (var enumValue in Enum.GetValues(param.ParameterType))
                 {
@@ -341,8 +360,10 @@ namespace Camber.Civil.Styles
                     catch { }
                 }
             }
+            
             // Sort Display Styles by name
             displayStyles = displayStyles.OrderBy(x => x.Name).ToList();
+            
             // There are some methods within the same class that seem to return the same result,
             // so filter out duplicates by name if they are created somehow
             var uniqueItems = displayStyles.GroupBy(x => x.Name).Select(x => x.First()).ToList();
@@ -363,6 +384,31 @@ namespace Camber.Civil.Styles
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Handles the special cases for Display Style names.
+        /// </summary>
+        /// <param name="style"></param>
+        /// <param name="viewDirection"></param>
+        /// <returns></returns>
+        private static string GetDisplayStyleName(Style style, string viewDirection)
+        {
+            string name = null;
+
+            if (style is AlignmentStyle && viewDirection == "Section") { name = "LineMarkerInSection"; }
+            if (style is FeatureLineStyle && viewDirection == "Section") { name = "CrossingMarker"; }
+            if (style is IntersectionStyle) { name = "Marker"; }
+            if (style is LinkStyle) { name = "Link"; }
+            if (style is MarkerStyle && viewDirection == "Profile") { name = "Marker/CrossingVerticalLine"; }
+            if (style is MatchLineStyle && viewDirection == "Plan") { name = "MatchLineMask"; }
+            if (style is ParcelStyle && viewDirection == "Section") { name = "ParcelSegmentsMarker"; }
+            if (style is PipeStyle && viewDirection == "Model") { name = "PipeSolid"; }
+            if (style is ProfileStyle && viewDirection == "Section") { name = "ProfileMarker"; }
+            if (style is StructureStyle) { name = "3DSolid"; }
+            if (style is ViewFrameStyle) { name = "ViewFrameBorder"; }
+            
+            return name;
         }
 
         protected double GetDouble([CallerMemberName] string propertyName = null)

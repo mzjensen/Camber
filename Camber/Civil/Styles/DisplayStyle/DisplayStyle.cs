@@ -65,7 +65,7 @@ namespace Camber.Civil.Styles
 
         #region methods
         public override string ToString() => $"DisplayStyle(Name = {Name}, View Direction = {ViewDirection})";
-
+        
         protected DisplayStyle SetValue(object value, [CallerMemberName] string methodName = null)
         {
             if (methodName.StartsWith("Set"))
