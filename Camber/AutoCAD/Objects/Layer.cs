@@ -10,7 +10,7 @@ using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using Autodesk.DesignScript.Runtime;
 #endregion
 
-namespace Camber.AutoCAD
+namespace Camber.AutoCAD.Objects
 {
     public static class Layer
     {
@@ -36,8 +36,8 @@ namespace Camber.AutoCAD
                     short index = ltr.Color.ColorIndex;
                     string colorName = ltr.Color.ColorName;
                     string bookName = ltr.Color.BookName;
-                    
-                    return new Dictionary<string, object> 
+
+                    return new Dictionary<string, object>
                     {
                         { "Index", index },
                         { "Color name", colorName },
@@ -45,9 +45,9 @@ namespace Camber.AutoCAD
                     };
                 }
                 catch { throw; }
-            }  
+            }
         }
-        
+
         /// <summary>
         /// Sets the color of a Layer by ACI number.
         /// </summary>

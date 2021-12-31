@@ -16,7 +16,7 @@ namespace Camber.AutoCAD.External
         #region properties
         internal AcDatabase AcDatabase { get; private set; }
         internal FileInfo FileInfo { get; private set; }
-        
+
         private const string InvalidDirectoryPathMessage = "Directory path is null or empty.";
         private const string InvalidFileNameMessage = "File name is null or empty.";
         private const string InvalidFilePathMessage = "File path is null or empty.";
@@ -119,10 +119,10 @@ namespace Camber.AutoCAD.External
         /// <param name="overwrite">Overwrite if a file of the same name already exists in the specified directory?</param>
         /// <returns></returns>
         public static ExternalDocument CreateAndLoad(
-            string directoryPath, 
-            string fileName, 
-            string templateFilePath, 
-            bool @lock, 
+            string directoryPath,
+            string fileName,
+            string templateFilePath,
+            bool @lock,
             bool overwrite = false)
         {
             FileCreationChecks(directoryPath, fileName, templateFilePath, overwrite);
@@ -130,7 +130,7 @@ namespace Camber.AutoCAD.External
             try
             {
                 string filePath = directoryPath + "\\" + fileName;
-                
+
                 // Using false here for buildDefaultDrawing because we are reading from a template file.
                 using (var db = new AcDatabase(false, true))
                 {

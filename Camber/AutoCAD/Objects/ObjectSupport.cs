@@ -6,7 +6,7 @@ using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using Autodesk.DesignScript.Runtime;
 #endregion
 
-namespace Camber.AutoCAD
+namespace Camber.AutoCAD.Objects
 {
     [SupressImportIntoVM]
     internal static class ObjectSupport

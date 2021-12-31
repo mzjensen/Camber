@@ -13,7 +13,7 @@ using Autodesk.DesignScript.Runtime;
 using Camber.Utils;
 #endregion
 
-namespace Camber.AutoCAD
+namespace Camber.AutoCAD.Objects
 {
     public class Object : acDynNodes.Object
     {

@@ -9,7 +9,7 @@ using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using Dynamo.Graph.Nodes;
 #endregion
 
-namespace Camber.AutoCAD
+namespace Camber.AutoCAD.Objects
 {
     public static class Block
     {
@@ -170,12 +170,12 @@ namespace Camber.AutoCAD
             {
                 return SetValue(block, name);
             }
-            catch 
-            { 
-                throw new InvalidOperationException("Block cannot be renamed."); 
+            catch
+            {
+                throw new InvalidOperationException("Block cannot be renamed.");
             }
         }
-            
+
 
         /// <summary>
         /// Sets the description for a Block.

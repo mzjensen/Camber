@@ -13,7 +13,7 @@ using Camber.Utils;
 using Autodesk.DesignScript.Runtime;
 #endregion
 
-namespace Camber.AutoCAD
+namespace Camber.AutoCAD.Objects
 {
     [RegisterForTrace]
     public sealed class MLeader : Object
@@ -81,8 +81,8 @@ namespace Camber.AutoCAD
             get
             {
                 if (ContentType != acDb.ContentType.BlockContent.ToString())
-                { 
-                    throw new InvalidOperationException("MLeader does not contain block content."); 
+                {
+                    throw new InvalidOperationException("MLeader does not contain block content.");
                 }
 
                 acDynNodes.Document document = acDynNodes.Document.Current;
@@ -90,7 +90,7 @@ namespace Camber.AutoCAD
                 {
                     using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
                     {
-                        List<AttributeDefinition> attDefs = Camber.AutoCAD.Block.AttributeDefinitions(Block);
+                        List<AttributeDefinition> attDefs = Objects.Block.AttributeDefinitions(Block);
                         List<acDb.AttributeReference> attRefs = new List<acDb.AttributeReference>();
 
                         AcMLeader acMld = (AcMLeader)ctx.Transaction.GetObject(InternalObjectId, acDb.OpenMode.ForRead);
@@ -98,7 +98,7 @@ namespace Camber.AutoCAD
                         {
                             attRefs.Add(acMld.GetBlockAttribute(attDef.InternalObjectId));
                         }
-                        return attRefs; 
+                        return attRefs;
                     }
                 }
                 catch (Exception e)
@@ -249,7 +249,7 @@ namespace Camber.AutoCAD
 
         #region methods
         public override string ToString() => $"MLeader(ContentType = {ContentType})";
-        
+
         /// <summary>
         /// Gets the value of a Block Attribute Reference in an MLeader by tag.
         /// </summary>
@@ -267,7 +267,7 @@ namespace Camber.AutoCAD
             var match = AttributeReferences
                 .FirstOrDefault(attRef => attRef.Tag.Equals
                 (tagName, StringComparison.OrdinalIgnoreCase));
-            
+
             if (match == null)
             {
                 throw new InvalidOperationException($"The MLeader Block does not contain an attribute named {tagName}.");
@@ -291,7 +291,7 @@ namespace Camber.AutoCAD
                 throw new InvalidOperationException("MLeader does not contain block content.");
             }
 
-            List<AttributeDefinition> attDefs = Camber.AutoCAD.Block.AttributeDefinitions(Block);
+            List<AttributeDefinition> attDefs = Objects.Block.AttributeDefinitions(Block);
 
             var match = attDefs
                 .FirstOrDefault(x => x.Tag.Equals
@@ -318,7 +318,7 @@ namespace Camber.AutoCAD
             else
             {
                 throw new InvalidOperationException($"The MLeader Block does not contain an attribute named {tagName}.");
-            }  
+            }
         }
         #endregion
     }

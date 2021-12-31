@@ -10,7 +10,7 @@ using Camber.Utils;
 using Autodesk.DesignScript.Runtime;
 #endregion
 
-namespace Camber.AutoCAD
+namespace Camber.AutoCAD.Objects
 {
     [RegisterForTrace]
     public class AttributeDefinition : Object
