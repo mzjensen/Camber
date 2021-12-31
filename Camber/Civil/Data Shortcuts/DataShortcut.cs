@@ -13,6 +13,7 @@ using AeccExportableItem = Autodesk.Civil.DataShortcuts.DataShortcuts.DataShortc
 using Autodesk.DesignScript.Runtime;
 using Dynamo.Graph.Nodes;
 using Camber.AutoCAD.External;
+using Camber.Civil.CivilObjects;
 #endregion
 
 namespace Camber.Civil.DataShortcuts

@@ -8,8 +8,8 @@ using civDs = Autodesk.Civil.DataShortcuts;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using AeccDataShortcuts = Autodesk.Civil.DataShortcuts.DataShortcuts;
 using Camber.AutoCAD;
-using Camber.AutoCAD.External;
 using Autodesk.DesignScript.Runtime;
+using Camber.AutoCAD.External;
 #endregion
 
 namespace Camber.Civil.DataShortcuts
