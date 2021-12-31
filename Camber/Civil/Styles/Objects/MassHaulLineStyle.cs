@@ -11,7 +11,7 @@ namespace Camber.Civil.Styles.Objects
         internal AeccMassHaulLineStyle AeccMassHaulLineStyle => AcObject as AeccMassHaulLineStyle;
 
         /// <summary>
-        /// Gets the free haul option for a Mass Haul Line Style, which determines how to show the free haul in the graph.
+        /// Gets the free haul option for a Mass Haul Line Style, which determines how to show the free haul in the view.
         /// </summary>
         public string FreeHaulOption => AeccMassHaulLineStyle.FreeHaulOption.ToString();
         #endregion
@@ -28,7 +28,7 @@ namespace Camber.Civil.Styles.Objects
         public override string ToString() => $"MassHaulLineStyle(Name = {Name})";
 
         /// <summary>
-        /// Sets the free haul option for a Mass Haul Line Style, which determines how to show the free haul in the graph.
+        /// Sets the free haul option for a Mass Haul Line Style, which determines how to show the free haul in the view.
         /// </summary>
         /// <param name="useGradePoint">True = Grade Point, False = Balance Point</param>
         /// <returns></returns>
