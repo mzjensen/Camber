@@ -10,6 +10,7 @@ using AeccCodeSetStyle = Autodesk.Civil.DatabaseServices.Styles.CodeSetStyle;
 using AeccCodeSetStyleItem = Autodesk.Civil.DatabaseServices.Styles.CodeSetStyleItem;
 using Camber.Civil.Styles.Objects;
 using Autodesk.DesignScript.Runtime;
+using Camber.Civil.Styles;
 #endregion
 
 namespace Camber.Civil.Styles.CodeSets
@@ -32,7 +33,7 @@ namespace Camber.Civil.Styles.CodeSets
                 {
                     var items = new List<CodeSetStyleItem>();
                     AeccCodeSetStyle.UpgradeOpen();
-                    
+
                     // Get point code set style items 
                     AeccCodeSetStyle.SubentityStyleType = civDb.Styles.SubassemblySubentityStyleType.MarkerType;
                     foreach (AeccCodeSetStyleItem item in AeccCodeSetStyle)
