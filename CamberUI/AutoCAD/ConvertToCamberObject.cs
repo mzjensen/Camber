@@ -8,7 +8,7 @@ using Dynamo.Graph.Nodes;
 
 namespace Camber.UI
 {
-    [NodeName("Get Camber Object from Dynamo Object")]
+    [NodeName("Convert to Camber Object")]
     [NodeDescription("Converts a Dynamo Object to a Camber Object.")]
     [NodeCategory("Camber.AutoCAD")]
     [InPortNames("object")]
@@ -49,7 +49,7 @@ namespace Camber.UI
 
             var functionNode =
                 AstFactory.BuildFunctionCall(
-                    new Func<Camber.AutoCAD.Object, acDynNodes.Object>(Camber.AutoCAD.Object.ConvertToCamberObject),
+                    new Func<AutoCAD.Objects.Object, acDynNodes.Object>(AutoCAD.Objects.Object.ConvertToCamberObject),
                     new List<AssociativeNode> { inputAsNodes[0] });
 
             return new[] { AstFactory.BuildAssignment(GetAstIdentifierForOutputIndex(0), functionNode) };

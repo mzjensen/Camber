@@ -4,32 +4,49 @@
 		<name>Camber</name>
 	</assembly>
 	<namespaces>
+		<!--AutoCAD-->
 		<namespace name="Camber.AutoCAD">
 			<category>Camber.AutoCAD</category>
 		</namespace>
 		<namespace name="Camber.AutoCAD.External">
 			<category>Camber.AutoCAD.External</category>
 		</namespace>
-		<namespace name="Camber.AutoCAD.Blocks">
-			<category>Camber.AutoCAD.Blocks</category>
+		<namespace name="Camber.AutoCAD.Objects">
+			<category>Camber.AutoCAD.Objects</category>
 		</namespace>
+		<!--Civil 3D-->
 		<namespace name="Camber.Civil">
 			<category>Camber.Civil 3D</category>
+		</namespace>
+		<namespace name="Camber.Civil.CivilObjects">
+			<category>Camber.Civil 3D.CivilObjects</category>
+		</namespace>
+		<namespace name="Camber.Civil.PipeNetworks">
+			<category>Camber.Civil 3D.CivilObjects.Pipe Networks</category>
+		</namespace>
+		<namespace name="Camber.Civil.PipeNetworks.Parts">
+			<category>Camber.Civil 3D.CivilObjects.Pipe Networks.Parts</category>
+		</namespace>
+		<namespace name="Camber.Civil.PressureNetworks">
+			<category>Camber.Civil 3D.CivilObjects.Pressure Networks</category>
+		</namespace>
+		<namespace name="Camber.Civil.PressureNetworks.Parts">
+			<category>Camber.Civil 3D.CivilObjects.Pressure Networks.Parts</category>
 		</namespace>
 		<namespace name="Camber.Civil.DataShortcuts">
 			<category>Camber.Civil 3D.Data Shortcuts</category>
 		</namespace>
-		<namespace name="Camber.Civil.PipeNetworks">
-			<category>Camber.Civil 3D.Pipe Networks</category>
+		<namespace name="Camber.Civil.DesignChecks">
+			<category>Camber.Civil 3D.Design Checks</category>
 		</namespace>
-		<namespace name="Camber.Civil.PipeNetworks.Parts">
-			<category>Camber.Civil 3D.Pipe Networks.Parts</category>
+		<namespace name="Camber.Civil.GradingCriteria">
+			<category>Camber.Civil 3D.Grading Criteria</category>
 		</namespace>
-		<namespace name="Camber.Civil.PressureNetworks">
-			<category>Camber.Civil 3D.Pressure Networks</category>
+		<namespace name="Camber.Civil.Labels">
+			<category>Camber.Civil 3D.Labels</category>
 		</namespace>
-		<namespace name="Camber.Civil.PressureNetworks.Parts">
-			<category>Camber.Civil 3D.Pressure Networks.Parts</category>
+		<namespace name="Camber.Civil.QTO">
+			<category>Camber.Civil 3D.Quantity Takeoff</category>
 		</namespace>
 		<namespace name="Camber.Civil.Styles">
 			<category>Camber.Civil 3D.Styles</category>
@@ -41,22 +58,16 @@
 			<category>Camber.Civil 3D.Styles.Band Styles</category>
 		</namespace>
 		<namespace name="Camber.Civil.Styles.CodeSets">
-			<category>Camber.Civil 3D.Styles.Code Sets</category>
-		</namespace>
-		<namespace name="Camber.Civil.Styles.DesignChecks">
-			<category>Camber.Civil 3D.Styles.Design Checks</category>
-		</namespace>
-		<namespace name="Camber.Civil.Styles.GradingCriteria">
-			<category>Camber.Civil 3D.Styles.Grading Criteria</category>
-		</namespace>
-		<namespace name="Camber.Civil.Styles.Graphs">
-			<category>Camber.Civil 3D.Styles.Graphs</category>
+			<category>Camber.Civil 3D.Styles.Code Set Styles</category>
 		</namespace>
 		<namespace name="Camber.Civil.Styles.LabelSets">
 			<category>Camber.Civil 3D.Styles.Label Set Styles</category>
 		</namespace>
 		<namespace name="Camber.Civil.Styles.Labels">
 			<category>Camber.Civil 3D.Styles.Label Styles</category>
+		</namespace>
+		<namespace name="Camber.Civil.Styles.Objects">
+			<category>Camber.Civil 3D.Styles.Object Styles</category>
 		</namespace>
 		<namespace name="Camber.Civil.Styles.Labels.Alignment">
 			<category>Camber.Civil 3D.Styles.Label Styles.Alignment</category>
@@ -94,14 +105,8 @@
 		<namespace name="Camber.Civil.Styles.Labels.Surface">
 			<category>Camber.Civil 3D.Styles.Label Styles.Surface</category>
 		</namespace>
-		<namespace name="Camber.Civil.Labels">
-			<category>Camber.Civil 3D.Labels</category>
-		</namespace>
-		<namespace name="Camber.Civil.Styles.Objects">
-			<category>Camber.Civil 3D.Styles.Object Styles</category>
-		</namespace>
-		<namespace name="Camber.Civil.Styles.QTO">
-			<category>Camber.Civil 3D.Styles.Quantity Takeoff</category>
+		<namespace name="Camber.Civil.Styles.Views">
+			<category>Camber.Civil 3D.Styles.View Styles</category>
 		</namespace>
 		<namespace name="Camber.DynamoExtensions">
 			<category>Camber.Dynamo Extensions</category>

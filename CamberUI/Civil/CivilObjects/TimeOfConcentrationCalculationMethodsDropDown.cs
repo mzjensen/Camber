@@ -11,7 +11,7 @@ using System.Linq;
 namespace Camber.UI
 {
     [NodeName("Time of Concentration Calculation Methods")]
-    [NodeCategory("Camber.Civil 3D.Catchment")]
+    [NodeCategory("Camber.Civil 3D.CivilObjects.Catchment")]
     [NodeDescription("Select time of concentration calculation method.")]
     [IsDesignScriptCompatible]
     public class TimeOfConcentrationCalculationMethodsDropDown : DSDropDownBase

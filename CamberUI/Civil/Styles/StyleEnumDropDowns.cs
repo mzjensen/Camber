@@ -6,8 +6,8 @@ using Newtonsoft.Json;
 using Dynamo.Graph.Nodes;
 using Camber.Civil.Styles;
 using Camber.Civil.Styles.Objects;
-using Camber.Civil.Styles.Graphs;
 using Autodesk.DesignScript.Runtime;
+using Camber.Civil.Styles.Views;
 #endregion
 
 namespace Camber.UI
@@ -331,7 +331,7 @@ namespace Camber.UI
     }
 
     [NodeName("Axis Tick Style Justifications")]
-    [NodeCategory("Camber.Civil 3D.Styles.Graphs.AxisTickStyle")]
+    [NodeCategory("Camber.Civil 3D.Styles.View Styles.AxisTickStyle")]
     [NodeDescription("Select Axis Tick Style justification.")]
     [IsDesignScriptCompatible]
     public class AxisTickStyleJustificationTypesDropDown : EnumDropDownBase
@@ -346,38 +346,38 @@ namespace Camber.UI
     }
 
 
-    [NodeName("Graph Style Directions")]
-    [NodeCategory("Camber.Civil 3D.Styles.Graphs.GraphStyle")]
-    [NodeDescription("Select Graph Style direction type.")]
+    [NodeName("View Style Directions")]
+    [NodeCategory("Camber.Civil 3D.Styles.View Styles.ViewStyle")]
+    [NodeDescription("Select View Style direction type.")]
     [IsDesignScriptCompatible]
-    public class GraphStyleDirectionsDropDown : EnumDropDownBase
+    public class ViewStyleDirectionsDropDown : EnumDropDownBase
     {
         private const string OutputName = "direction";
 
-        public GraphStyleDirectionsDropDown() : base(OutputName, typeof(civDb.Styles.GraphDirectionType), true) { }
+        public ViewStyleDirectionsDropDown() : base(OutputName, typeof(civDb.Styles.GraphDirectionType), true) { }
 
         [JsonConstructor]
-        public GraphStyleDirectionsDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts)
+        public ViewStyleDirectionsDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts)
             : base(OutputName, typeof(civDb.Styles.GraphDirectionType), inPorts, outPorts) { }
     }
 
-    [NodeName("Graph Style Title Justifications")]
-    [NodeCategory("Camber.Civil 3D.Styles.Graphs.GraphStyle")]
-    [NodeDescription("Select Graph Style title justification options.")]
+    [NodeName("View Style Title Justifications")]
+    [NodeCategory("Camber.Civil 3D.Styles.View Styles.ViewStyle")]
+    [NodeDescription("Select View Style title justification options.")]
     [IsDesignScriptCompatible]
-    public class GraphStyleTitleJustificationsDropDown : EnumDropDownBase
+    public class ViewStyleTitleJustificationsDropDown : EnumDropDownBase
     {
         private const string OutputName = "justification";
 
-        public GraphStyleTitleJustificationsDropDown() : base(OutputName, typeof(civDb.Styles.GraphTitleJustificationType), true) { }
+        public ViewStyleTitleJustificationsDropDown() : base(OutputName, typeof(civDb.Styles.GraphTitleJustificationType), true) { }
 
         [JsonConstructor]
-        public GraphStyleTitleJustificationsDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts)
+        public ViewStyleTitleJustificationsDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts)
             : base(OutputName, typeof(civDb.Styles.GraphTitleJustificationType), inPorts, outPorts) { }
     }
 
     [NodeName("Grid Style Title Locations")]
-    [NodeCategory("Camber.Civil 3D.Styles.Graphs.GridStyle")]
+    [NodeCategory("Camber.Civil 3D.Styles.View Styles.GridStyle")]
     [NodeDescription("Select Grid Style title location option.")]
     [IsDesignScriptCompatible]
     public class GridStyleTitleLocationsDropDown : EnumDropDownBase
@@ -389,51 +389,6 @@ namespace Camber.UI
         [JsonConstructor]
         public GridStyleTitleLocationsDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts)
             : base(OutputName, typeof(civDb.Styles.GraphTitleLocationType), inPorts, outPorts) { }
-    }
-
-    [NodeName("Material Quantity Types")]
-    [NodeCategory("Camber.Civil 3D.Styles.Quantity Takeoff.QTOCriteria")]
-    [NodeDescription("Select material quantity type.")]
-    [IsDesignScriptCompatible]
-    public class MaterialQuantityTypesDropDown : EnumDropDownBase
-    {
-        private const string OutputName = "quantityType";
-
-        public MaterialQuantityTypesDropDown() : base(OutputName, typeof(civDb.MaterialQuantityType)) { }
-
-        [JsonConstructor]
-        public MaterialQuantityTypesDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts)
-            : base(OutputName, typeof(civDb.MaterialQuantityType), inPorts, outPorts) { }
-    }
-
-    [NodeName("Material Conditions")]
-    [NodeCategory("Camber.Civil 3D.Styles.Quantity Takeoff.QTOCriteriaData")]
-    [NodeDescription("Select material condition.")]
-    [IsDesignScriptCompatible]
-    public class MaterialConditionsDropDown : EnumDropDownBase
-    {
-        private const string OutputName = "condition";
-
-        public MaterialConditionsDropDown() : base(OutputName, typeof(civDb.MaterialConditionType)) { }
-
-        [JsonConstructor]
-        public MaterialConditionsDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts)
-            : base(OutputName, typeof(civDb.MaterialConditionType), inPorts, outPorts) { }
-    }
-
-    [NodeName("Subentity Style Types")]
-    [NodeCategory("Camber.Civil 3D.Styles.Code Sets.CodeSetStyleItem")]
-    [NodeDescription("Select subentity style type.")]
-    [IsDesignScriptCompatible]
-    public class SubentityStyleTypesDropDown : EnumDropDownBase
-    {
-        private const string OutputName = "subentityStyleType";
-
-        public SubentityStyleTypesDropDown() : base(OutputName, typeof(civDb.Styles.SubassemblySubentityStyleType)) { }
-
-        [JsonConstructor]
-        public SubentityStyleTypesDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts)
-            : base(OutputName, typeof(civDb.Styles.SubassemblySubentityStyleType), inPorts, outPorts) { }
     }
 
     [NodeName("Object Style Types")]
@@ -451,188 +406,19 @@ namespace Camber.UI
             : base(OutputName, typeof(ObjectStyleCollections), inPorts, outPorts) { }
     }
 
-    [NodeName("Graph Style Types")]
+    [NodeName("View Style Types")]
     [NodeCategory("Camber.Civil 3D.Styles.Style")]
-    [NodeDescription("Select Graph Style type.")]
+    [NodeDescription("Select View Style type.")]
     [IsDesignScriptCompatible]
-    public class GraphStyleTypesDropDown : EnumDropDownBase
+    public class ViewStyleTypesDropDown : EnumDropDownBase
     {
         private const string OutputName = "styleType";
 
-        public GraphStyleTypesDropDown() : base(OutputName, typeof(GraphStyleCollections), true, true) { }
+        public ViewStyleTypesDropDown() : base(OutputName, typeof(ViewStyleCollections), true, true) { }
 
         [JsonConstructor]
-        public GraphStyleTypesDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts)
-            : base(OutputName, typeof(GraphStyleCollections), inPorts, outPorts) { }
-    }
-
-    [NodeName("Alignment Design Check Types")]
-    [NodeCategory("Camber.Civil 3D.Styles.Design Checks")]
-    [NodeDescription("Select Alignment Design Check type.")]
-    [IsDesignScriptCompatible]
-    public class AlignmentDesignCheckTypesDropDown : EnumDropDownBase
-    {
-        private const string OutputName = "checkType";
-
-        public AlignmentDesignCheckTypesDropDown() : base(OutputName, typeof(Autodesk.Civil.AlignmentDesignCheckType), true) { }
-
-        [JsonConstructor]
-        public AlignmentDesignCheckTypesDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts)
-            : base(OutputName, typeof(Autodesk.Civil.AlignmentDesignCheckType), inPorts, outPorts) { }
-    }
-
-    [NodeName("Profile Design Check Types")]
-    [NodeCategory("Camber.Civil 3D.Styles.Design Checks")]
-    [NodeDescription("Select Profile Design Check type.")]
-    [IsDesignScriptCompatible]
-    public class ProfileDesignCheckTypesDropDown : EnumDropDownBase
-    {
-        private const string OutputName = "checkType";
-
-        public ProfileDesignCheckTypesDropDown() : base(OutputName, typeof(Autodesk.Civil.ProfileDesignCheckType), true) { }
-
-        [JsonConstructor]
-        public ProfileDesignCheckTypesDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts)
-            : base(OutputName, typeof(Autodesk.Civil.ProfileDesignCheckType), inPorts, outPorts) { }
-    }
-
-    [NodeName("Profile Design Check Curve Types")]
-    [NodeCategory("Camber.Civil 3D.Styles.Design Checks.ProfileDesignCheckSet")]
-    [NodeDescription("Select Profile Design Check curve type.")]
-    [IsDesignScriptCompatible]
-    public class ProfileDesignCheckCurveTypesDropDown : EnumDropDownBase
-    {
-        private const string OutputName = "curveCheckType";
-
-        public ProfileDesignCheckCurveTypesDropDown() : base(OutputName, typeof(civDb.Styles.ProfileDesignCheckCurveType), true) { }
-
-        [JsonConstructor]
-        public ProfileDesignCheckCurveTypesDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts)
-            : base(OutputName, typeof(civDb.Styles.ProfileDesignCheckCurveType), inPorts, outPorts) { }
-    }
-
-
-    [NodeName("Grading Distance Projection Types")]
-    [NodeCategory("Camber.Civil 3D.Styles.Grading Criteria.GradingCriteria")]
-    [NodeDescription("Select grading distance projection type.")]
-    [IsDesignScriptCompatible]
-    public class GradingDistanceProjectionTypesDropDown : EnumDropDownBase
-    {
-        private const string OutputName = "projectionType";
-
-        public GradingDistanceProjectionTypesDropDown() : base(OutputName, typeof(Autodesk.Civil.GradingDistanceProjectionType), true) { }
-
-        [JsonConstructor]
-        public GradingDistanceProjectionTypesDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts)
-            : base(OutputName, typeof(Autodesk.Civil.GradingDistanceProjectionType), inPorts, outPorts) { }
-    }
-
-    [NodeName("Grading Elevation Projection Types")]
-    [NodeCategory("Camber.Civil 3D.Styles.Grading Criteria.GradingCriteria")]
-    [NodeDescription("Select grading elevation projection type.")]
-    [IsDesignScriptCompatible]
-    public class GradingElevationProjectionTypesDropDown : EnumDropDownBase
-    {
-        private const string OutputName = "projectionType";
-
-        public GradingElevationProjectionTypesDropDown() : base(OutputName, typeof(Autodesk.Civil.GradingElevationProjectionType), true) { }
-
-        [JsonConstructor]
-        public GradingElevationProjectionTypesDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts)
-            : base(OutputName, typeof(Autodesk.Civil.GradingElevationProjectionType), inPorts, outPorts) { }
-    }
-
-
-    [NodeName("Grading Slope Format Types")]
-    [NodeCategory("Camber.Civil 3D.Styles.Grading Criteria.GradingCriteria")]
-    [NodeDescription("Select grading slope format type.")]
-    [IsDesignScriptCompatible]
-    public class GradingSlopeFormatTypesDropDown : EnumDropDownBase
-    {
-        private const string OutputName = "formatType";
-
-        public GradingSlopeFormatTypesDropDown() : base(OutputName, typeof(Autodesk.Civil.GradingSlopeFormatType)) { }
-
-        [JsonConstructor]
-        public GradingSlopeFormatTypesDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts)
-            : base(OutputName, typeof(Autodesk.Civil.GradingSlopeFormatType), inPorts, outPorts) { }
-    }
-
-
-    [NodeName("Grading Interior Corner Overlap Solution Types")]
-    [NodeCategory("Camber.Civil 3D.Styles.Grading Criteria.GradingCriteria")]
-    [NodeDescription("Select grading interior corner overlap solution type.")]
-    [IsDesignScriptCompatible]
-    public class GradingInteriorOverlapSolutionTypesDropDown : EnumDropDownBase
-    {
-        private const string OutputName = "overlapSolution";
-
-        public GradingInteriorOverlapSolutionTypesDropDown() : base(OutputName, typeof(Autodesk.Civil.GradingInteriorCornerOverlapSolutionType), true) { }
-
-        [JsonConstructor]
-        public GradingInteriorOverlapSolutionTypesDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts)
-            : base(OutputName, typeof(Autodesk.Civil.GradingInteriorCornerOverlapSolutionType), inPorts, outPorts) { }
-    }
-
-    [NodeName("Grading Relative Elevation Projection Types")]
-    [NodeCategory("Camber.Civil 3D.Styles.Grading Criteria.GradingCriteria")]
-    [NodeDescription("Select grading relative elevation projection type.")]
-    [IsDesignScriptCompatible]
-    public class GradingRelativeElevationProjectionTypesDropDown : EnumDropDownBase
-    {
-        private const string OutputName = "projectionType";
-
-        public GradingRelativeElevationProjectionTypesDropDown() : base(OutputName, typeof(Autodesk.Civil.GradingRelativeElevationProjectionType)) { }
-
-        [JsonConstructor]
-        public GradingRelativeElevationProjectionTypesDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts)
-            : base(OutputName, typeof(Autodesk.Civil.GradingRelativeElevationProjectionType), inPorts, outPorts) { }
-    }
-
-    [NodeName("Grading Search Orders")]
-    [NodeCategory("Camber.Civil 3D.Styles.Grading Criteria.GradingCriteria")]
-    [NodeDescription("Select grading search order.")]
-    [IsDesignScriptCompatible]
-    public class GradingSearchOrderTypesDropDown : EnumDropDownBase
-    {
-        private const string OutputName = "searchOrder";
-
-        public GradingSearchOrderTypesDropDown() : base(OutputName, typeof(Autodesk.Civil.GradingSearchOrderType), true) { }
-
-        [JsonConstructor]
-        public GradingSearchOrderTypesDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts)
-            : base(OutputName, typeof(Autodesk.Civil.GradingSearchOrderType), inPorts, outPorts) { }
-    }
-
-
-    [NodeName("Grading Surface Projection Types")]
-    [NodeCategory("Camber.Civil 3D.Styles.Grading Criteria.GradingCriteria")]
-    [NodeDescription("Select grading surface projection type.")]
-    [IsDesignScriptCompatible]
-    public class GradingSurfaceProjectionTypesDropDown : EnumDropDownBase
-    {
-        private const string OutputName = "projectionType";
-
-        public GradingSurfaceProjectionTypesDropDown() : base(OutputName, typeof(Autodesk.Civil.GradingSurfaceProjectionType), true) { }
-
-        [JsonConstructor]
-        public GradingSurfaceProjectionTypesDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts)
-            : base(OutputName, typeof(Autodesk.Civil.GradingSurfaceProjectionType), inPorts, outPorts) { }
-    }
-
-    [NodeName("Grading Target Types")]
-    [NodeCategory("Camber.Civil 3D.Styles.Grading Criteria.GradingCriteria")]
-    [NodeDescription("Select grading target type.")]
-    [IsDesignScriptCompatible]
-    public class GradingTargetTypesDropDown : EnumDropDownBase
-    {
-        private const string OutputName = "targetType";
-
-        public GradingTargetTypesDropDown() : base(OutputName, typeof(Autodesk.Civil.GradingTargetType), true) { }
-
-        [JsonConstructor]
-        public GradingTargetTypesDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts)
-            : base(OutputName, typeof(Autodesk.Civil.GradingTargetType), inPorts, outPorts) { }
+        public ViewStyleTypesDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts)
+            : base(OutputName, typeof(ViewStyleCollections), inPorts, outPorts) { }
     }
 
     [NodeName("Label Style Component Types")]

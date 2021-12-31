@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Dynamo.Graph.Nodes;
-using Camber.Civil.Styles.DesignChecks;
+using Camber.Civil.DesignChecks;
 #endregion
 
 namespace Camber.UI
 {
     [NodeName("Alignment Design Check Sets")]
-    [NodeCategory("Camber.Civil 3D.Styles.Design Checks")]
+    [NodeCategory("Camber.Civil 3D.Design Checks")]
     [NodeDescription("Select Alignment Design Check Set.")]
     [IsDesignScriptCompatible]
     public class AlignmentDesignCheckSetDropDown : StyleDropDownBase
@@ -25,7 +25,7 @@ namespace Camber.UI
     }
 
     [NodeName("Profile Design Check Sets")]
-    [NodeCategory("Camber.Civil 3D.Styles.Design Checks")]
+    [NodeCategory("Camber.Civil 3D.Design Checks")]
     [NodeDescription("Select Profile Design Check Set.")]
     [IsDesignScriptCompatible]
     public class ProfileDesignCheckSetDropDown : StyleDropDownBase
