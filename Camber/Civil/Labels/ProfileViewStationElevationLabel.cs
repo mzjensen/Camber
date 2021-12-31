@@ -12,6 +12,7 @@ using AeccProfile = Autodesk.Civil.DatabaseServices.Profile;
 using DynamoServices;
 using Camber.Civil.Styles.Objects;
 using Camber.Civil.Styles.Labels.ProfileView;
+using Camber.Civil.CivilObjects;
 #endregion
 
 namespace Camber.Civil.Labels

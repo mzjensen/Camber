@@ -7,6 +7,7 @@ using AeccCatchmentFlowSegmentLabel = Autodesk.Civil.DatabaseServices.FlowSegmen
 using DynamoServices;
 using System;
 using Camber.Civil.Styles.Labels.Catchment;
+using Camber.Civil.CivilObjects;
 #endregion
 
 namespace Camber.Civil.Labels

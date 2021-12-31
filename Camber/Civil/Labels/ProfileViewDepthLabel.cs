@@ -9,6 +9,7 @@ using AeccProfileViewDepthLabel = Autodesk.Civil.DatabaseServices.ProfileViewDep
 using Camber.Civil.Styles.Labels.ProfileView;
 using DynamoServices;
 using Camber.Utils;
+using Camber.Civil.CivilObjects;
 #endregion
 
 namespace Camber.Civil.Labels

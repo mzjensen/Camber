@@ -10,6 +10,7 @@ using DynamoServices;
 using Camber.Civil.PipeNetworks.Parts;
 using Camber.Civil.Styles.Labels;
 using Camber.Utils;
+using Camber.Civil.CivilObjects;
 #endregion
 
 namespace Camber.Civil.Labels

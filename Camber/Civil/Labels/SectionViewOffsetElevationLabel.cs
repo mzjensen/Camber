@@ -9,6 +9,7 @@ using AeccSectionViewOffsetElevationLabel = Autodesk.Civil.DatabaseServices.Sect
 using Camber.Civil.Styles.Labels.SectionView;
 using DynamoServices;
 using Camber.Civil.Styles.Objects;
+using Camber.Civil.CivilObjects;
 #endregion
 
 namespace Camber.Civil.Labels

@@ -9,6 +9,7 @@ using AeccSectionViewDepthLabel = Autodesk.Civil.DatabaseServices.SectionViewDep
 using Camber.Civil.Styles.Labels.SectionView;
 using DynamoServices;
 using Camber.Utils;
+using Camber.Civil.CivilObjects;
 #endregion
 
 namespace Camber.Civil.Labels

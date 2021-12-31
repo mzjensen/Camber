@@ -13,6 +13,7 @@ using Camber.Utils;
 using Camber.Civil.Styles.Labels;
 using System.Text;
 using Camber.Civil.Styles.Objects;
+using Camber.Civil.CivilObjects;
 #endregion
 
 namespace Camber.Civil.Labels

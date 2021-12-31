@@ -6,6 +6,7 @@ using civApp = Autodesk.Civil.ApplicationServices;
 using AeccCatchmentAreaLabel = Autodesk.Civil.DatabaseServices.CatchmentLabel;
 using DynamoServices;
 using Camber.Civil.Styles.Labels.Catchment;
+using Camber.Civil.CivilObjects;
 #endregion
 
 namespace Camber.Civil.Labels
