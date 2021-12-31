@@ -15,8 +15,8 @@ using AeccDisplayStyle = Autodesk.Civil.DatabaseServices.Styles.DisplayStyle;
 using Autodesk.DesignScript.Runtime;
 using DynamoServices;
 using Camber.Civil.Styles.Objects;
-using Camber.Civil.Styles.Graphs;
-using Camber.Civil.Styles.DesignChecks;
+using Camber.Civil.Styles.Views;
+using Camber.Civil.DesignChecks;
 #endregion
 
 namespace Camber.Civil.Styles
@@ -161,19 +161,19 @@ namespace Camber.Civil.Styles
         }
 
         /// <summary>
-        /// Creates a Graph Style by name and type.
+        /// Creates a View Style by name and type.
         /// </summary>
         /// <param name="name"></param>
         /// <param name="styleType"></param>
         /// <returns></returns>
-        public static Style GraphStyleByNameType(string name, string styleType)
+        public static Style ViewStyleByNameType(string name, string styleType)
         {
             if (string.IsNullOrEmpty(name)) { throw new ArgumentNullException(NullNameMessage); }
             if (string.IsNullOrEmpty(styleType)) { throw new ArgumentNullException(NullTypeMessage); }
-            if (!Enum.IsDefined(typeof(GraphStyleCollections), styleType)) { throw new ArgumentException(InvalidTypeMessage); }
+            if (!Enum.IsDefined(typeof(ViewStyleCollections), styleType)) { throw new ArgumentException(InvalidTypeMessage); }
 
             // Remove the 's' from the end of the collection name
-            string qualifiedName = "Camber.Civil.Styles.Graphs." + styleType.Remove(styleType.Length - 1, 1);
+            string qualifiedName = "Camber.Civil.Styles.Views." + styleType.Remove(styleType.Length - 1, 1);
 
             return CreateByNameType(name, styleType, qualifiedName);
         }
@@ -191,7 +191,7 @@ namespace Camber.Civil.Styles
             if (!Enum.IsDefined(typeof(DesignCheckSetCollections), checkSetType)) { throw new ArgumentException(InvalidTypeMessage); }
 
             // Remove the 's' from the end of the collection name
-            string qualifiedName = "Camber.Civil.Styles.DesignChecks." + checkSetType.Remove(checkSetType.Length - 1, 1);
+            string qualifiedName = "Camber.Civil.DesignChecks." + checkSetType.Remove(checkSetType.Length - 1, 1);
 
             return CreateByNameType(name, checkSetType, qualifiedName);
         }
