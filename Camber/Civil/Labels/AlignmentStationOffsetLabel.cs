@@ -24,22 +24,7 @@ namespace Camber.Civil.Labels
         /// <summary>
         /// Gets the Alignment that an Alignment Station Offset Label is associated with.
         /// </summary>
-        public civDynNodes.Alignment Alignment
-        {
-            get
-            {
-                acDynNodes.Document document = acDynNodes.Document.Current;
-
-                using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
-                {
-                    civDb.Alignment alignment = 
-                        (civDb.Alignment)ctx
-                        .Transaction
-                        .GetObject(AeccStationOffsetLabel.FeatureId, acDb.OpenMode.ForRead);
-                    return civDynNodes.Selection.AlignmentByName(alignment.Name, document);
-                }
-            }
-        }
+        public civDynNodes.Alignment Alignment => CivilObjects.Alignment.GetByObjectId(AeccStationOffsetLabel.FeatureId);
 
         /// <summary>
         /// Gets the station value of an Alignment Station Offset Label's location.

@@ -33,7 +33,7 @@ namespace Camber.Civil.CivilObjects
                 using (acDynApp.DocumentContext ctx = new acDynApp.DocumentContext(document.AcDocument))
                 {
                     var aeccProfile = ctx.Transaction.GetObject(oid, acDb.OpenMode.ForWrite) as AeccProfile;
-                    var parentAlign = Alignment.GetFromObjectId(aeccProfile.AlignmentId);
+                    var parentAlign = Alignment.GetByObjectId(aeccProfile.AlignmentId);
                     return parentAlign.ProfileByName(aeccProfile.Name);
                 }
             }
