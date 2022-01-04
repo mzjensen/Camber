@@ -10,12 +10,12 @@ namespace Camber.UI
 {
     [NodeName("Convert to Camber Object")]
     [NodeDescription("Converts a Dynamo Object to a Camber Object.")]
-    [NodeCategory("Camber.AutoCAD")]
+    [NodeCategory("Camber")]
     [InPortNames("object")]
     [InPortTypes("Autodesk.AutoCAD.DynamoNodes.Object")]
     [InPortDescriptions("Autodesk.AutoCAD.DynamoNodes.Object")]
     [OutPortNames("Object")]
-    [OutPortTypes("Camber.AutoCAD.Object")]
+    [OutPortTypes("Autodesk.AutoCAD.DynamoNodes.Object")]
     [OutPortDescriptions("Object")]
 
     [IsDesignScriptCompatible]
@@ -49,7 +49,7 @@ namespace Camber.UI
 
             var functionNode =
                 AstFactory.BuildFunctionCall(
-                    new Func<AutoCAD.Objects.Object, acDynNodes.Object>(AutoCAD.Objects.Object.ConvertToCamberObject),
+                    new Func<acDynNodes.Object, acDynNodes.Object>(AutoCAD.Objects.Object.ConvertToCamberObject),
                     new List<AssociativeNode> { inputAsNodes[0] });
 
             return new[] { AstFactory.BuildAssignment(GetAstIdentifierForOutputIndex(0), functionNode) };

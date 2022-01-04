@@ -174,23 +174,15 @@ namespace Camber.Civil.Labels
         #endregion
 
         #region constructors
-        internal Label(AeccLabel aeccLabel, bool isDynamoOwned = false) : base(aeccLabel, isDynamoOwned) { }
+        internal Label(
+            AeccLabel aeccLabel, 
+            bool isDynamoOwned = false) 
+            : base(aeccLabel, isDynamoOwned) { }
 
         [SupressImportIntoVM]
         internal static Label GetByObjectId(acDb.ObjectId labelId)
             => CivilObjectSupport.Get<Label, AeccLabel>
             (labelId, (label) => new Label(label));
-
-        /// <summary>
-        /// Returns a Label from Dynamo Object.
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        private static Label ByObject(acDynNodes.Object obj)
-        {
-            var id = obj.InternalObjectId;
-            return GetByObjectId(id);
-        }
         #endregion
 
         #region methods

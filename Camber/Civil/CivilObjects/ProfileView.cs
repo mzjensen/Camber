@@ -146,30 +146,6 @@ namespace Camber.Civil.CivilObjects
                 return null;
             }
         }
-
-        /// <summary>
-        /// Converts a Civil Object to a Profile View.
-        /// </summary>
-        /// <param name="civilObject"></param>
-        /// <returns></returns>
-        [NodeCategory("Actions")]
-        public static ProfileView GetFromCivilObject(civDynNodes.CivilObject civilObject)
-        {
-            var document = acDynNodes.Document.Current;
-            acDb.ObjectId oid = civilObject.InternalObjectId;
-            using (acDynApp.DocumentContext ctx = new acDynApp.DocumentContext(document.AcDocument))
-            {
-                var aeccObject = ctx.Transaction.GetObject(oid, acDb.OpenMode.ForRead);
-                if (aeccObject is AeccProfileView)
-                {
-                    return GetByObjectId(oid);
-                }
-                else
-                {
-                    throw new ArgumentException("Object is not a Profile View.");
-                }
-            }
-        }
         #endregion
 
         #region methods

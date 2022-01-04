@@ -7,9 +7,10 @@ using System.Collections.Generic;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
-using DynamoServices;
+using civDb = Autodesk.Civil.DatabaseServices;
 using Dynamo.Graph.Nodes;
 using Autodesk.DesignScript.Runtime;
+using Camber.Civil.CivilObjects;
 using Camber.Utils;
 #endregion
 
@@ -102,22 +103,36 @@ namespace Camber.AutoCAD.Objects
         /// <param name="obj"></param>
         /// <returns></returns>
         [IsVisibleInDynamoLibrary(false)]
-        public static acDynNodes.Object ConvertToCamberObject(acDynNodes.Object obj)
+        public static acDynNodes.Object ConvertToCamberObject(acDynNodes.Object @object)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
             using (var ctx = new acDynApp.DocumentContext(document?.AcDocument))
             {
-                var acObj = obj.InternalObjectId.GetObject(acDb.OpenMode.ForRead);
-                IEnumerable<Object> assemblyObjects = ReflectionUtils.GetEnumerableOfType<Object>(new object[] { acObj, false });
-                if (assemblyObjects.Count() > 1)
+                IEnumerable<acDynNodes.Object> assemblyObjects = null;
+                var acObj = @object.InternalObjectId.GetObject(acDb.OpenMode.ForRead);
+
+                if (acObj is civDb.Entity)
                 {
-                    throw new InvalidOperationException("Multiple object types found.");
+                    assemblyObjects = ReflectionUtils.GetEnumerableOfType<CivilObject>(new object[] { acObj, false });
                 }
-                else if (assemblyObjects.Count() == 0)
+                else if (acObj is acDb.Entity)
                 {
-                    throw new InvalidOperationException("Not implemented.");
+                    assemblyObjects = ReflectionUtils.GetEnumerableOfType<Object>(new object[] { acObj, false });
                 }
-                return assemblyObjects.First();
+
+                if (assemblyObjects == null)
+                {
+                    throw new InvalidOperationException("Unable to get internal object.");
+                }
+                else
+                {
+                    if (assemblyObjects.Count() == 0)
+                    {
+                        throw new InvalidOperationException("Not implemented.");
+                    }
+                    // If there are multiple objects, the first one should be the furthest down the inheritance hierarchy (i.e. the most derived)
+                    return assemblyObjects.First();
+                }
             }
         }
 

@@ -261,30 +261,6 @@ namespace Camber.Civil.CivilObjects
             }
             return res;
         }
-
-        /// <summary>
-        /// "Converts" a selected Civil Object to a Catchment object. The input Civil Object must be a Civil 3D Catchment.
-        /// </summary>
-        /// <param name="civilObject"></param>
-        /// <returns></returns>
-        [NodeCategory("Actions")]
-        public static Catchment GetFromCivilObject(civDynNodes.CivilObject civilObject)
-        {
-            var document = acDynNodes.Document.Current;
-            acDb.ObjectId oid = civilObject.InternalObjectId;
-            using (acDynApp.DocumentContext ctx = new acDynApp.DocumentContext(document.AcDocument))
-            {
-                var aeccObject = ctx.Transaction.GetObject(oid, acDb.OpenMode.ForRead);
-                if (aeccObject is AeccCatchment)
-                {
-                    return GetByObjectId(oid);
-                }
-                else
-                {
-                    throw new ArgumentException("Object is not a Catchment.");
-                }
-            }
-        }
         #endregion
 
         #region methods

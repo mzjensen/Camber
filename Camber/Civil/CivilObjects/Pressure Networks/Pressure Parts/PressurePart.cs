@@ -125,39 +125,10 @@ namespace Camber.Civil.PressureNetworks.Parts
         #endregion
 
         #region constructors
-        internal PressurePart(AeccPressurePart aeccPressurePart, bool isDynamoOwned = false) : base(aeccPressurePart, isDynamoOwned) { }
-
-        /// <summary>
-        /// Converts a Civil Object to its appropriate Pressure Part (Pipe, Fitting, or Appurtenance).
-        /// </summary>
-        /// <param name="civilObject"></param>
-        /// <returns></returns>
-        [NodeCategory("Actions")]
-        public static PressurePart GetFromCivilObject(civDynNodes.CivilObject civilObject)
-        {
-            var document = acDynNodes.Document.Current;
-            acDb.ObjectId oid = civilObject.InternalObjectId;
-            using (acDynApp.DocumentContext ctx = new acDynApp.DocumentContext(document.AcDocument))
-            {
-                var aeccObject = ctx.Transaction.GetObject(oid, acDb.OpenMode.ForRead);
-                if (aeccObject is AeccPressurePipe)
-                {
-                    return PressurePipe.GetByObjectId(oid);
-                }
-                else if (aeccObject is AeccPressureAppurtenance)
-                {
-                    return PressureAppurtenance.GetByObjectId(oid);
-                }
-                else if (aeccObject is AeccPressureFitting)
-                {
-                    return PressureFitting.GetByObjectId(oid);
-                }
-                else
-                {
-                    throw new ArgumentException("Object is not a Pressure Part.");
-                }
-            }
-        }
+        internal PressurePart(
+            AeccPressurePart aeccPressurePart, 
+            bool isDynamoOwned = false) 
+            : base(aeccPressurePart, isDynamoOwned) { }
         #endregion
 
         #region methods

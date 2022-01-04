@@ -205,23 +205,6 @@ namespace Camber.Civil.CivilObjects
         }
 
         /// <summary>
-        /// Gets a Feature Line from a Civil Object.
-        /// </summary>
-        /// <param name="civilObject"></param>
-        /// <returns></returns>
-        [NodeCategory("Actions")]
-        public static FeatureLine GetFromCivilObject(civDynNodes.CivilObject civilObject)
-        {
-            var document = acDynNodes.Document.Current;
-            using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
-            {
-                var aeccFeatureLine = ctx.Transaction.GetObject(civilObject.InternalObjectId, acDb.OpenMode.ForRead);
-                if (!(aeccFeatureLine is AeccFeatureLine)) { throw new ArgumentException("Civil Object is not a Feature Line."); }
-                return GetByObjectId(civilObject.InternalObjectId);
-            }
-        }
-
-        /// <summary>
         /// Gets the deflection angle (in degrees) between consecutive segments at a given point along a Feature Line. 
         /// The angle is measured between the incoming and outgoing segments and is relative to the incoming segment. 
         /// Positive angles are clockwise, negative angles are counterclockwise.

@@ -138,35 +138,10 @@ namespace Camber.Civil.PipeNetworks.Parts
         #endregion
 
         #region constructors
-        internal Part(AeccPart aeccPart, bool isDynamoOwned = false) : base(aeccPart, isDynamoOwned) { }
-
-        /// <summary>
-        /// Converts a Civil Object to its appropriate Part (Pipe or Structure).
-        /// </summary>
-        /// <param name="civilObject"></param>
-        /// <returns></returns>
-        [NodeCategory("Actions")]
-        public static Part GetFromCivilObject(civDynNodes.CivilObject civilObject)
-        {
-            var document = acDynNodes.Document.Current;
-            acDb.ObjectId oid = civilObject.InternalObjectId;
-            using (acDynApp.DocumentContext ctx = new acDynApp.DocumentContext(document.AcDocument))
-            {
-                var aeccObject = ctx.Transaction.GetObject(oid, acDb.OpenMode.ForRead);
-                if (aeccObject is AeccPipe)
-                {
-                    return Pipe.GetByObjectId(oid);
-                }
-                else if (aeccObject is AeccStructure)
-                {
-                    return Structure.GetByObjectId(oid);
-                }
-                else
-                {
-                    throw new ArgumentException("Object is not a Part.");
-                }
-            }
-        }
+        internal Part(
+            AeccPart aeccPart, 
+            bool isDynamoOwned = false) 
+            : base(aeccPart, isDynamoOwned) { }
         #endregion
 
         #region methods
