@@ -16,17 +16,17 @@ namespace Camber.Civil.CivilObjects
     public sealed class SampleLineGroup : CivilObject
     {
         #region properties
-        internal AeccSampleLineGroup aeccSampleLineGroup => AcObject as AeccSampleLineGroup;
+        internal AeccSampleLineGroup AeccSampleLineGroup => AcObject as AeccSampleLineGroup;
 
         /// <summary>
-        /// Gets all the Sample Lines in the Sample Line Group.
+        /// Gets all the Sample Lines in a Sample Line Group.
         /// </summary>
         public IList<SampleLine> SampleLines
         {
             get
             {
                 List<SampleLine> sampleLines = new List<SampleLine>();
-                foreach (acDb.ObjectId sampleLineId in aeccSampleLineGroup.GetSampleLineIds())
+                foreach (acDb.ObjectId sampleLineId in AeccSampleLineGroup.GetSampleLineIds())
                 {
                     sampleLines.Add(SampleLine.GetByObjectId(sampleLineId));
                 }
@@ -35,13 +35,13 @@ namespace Camber.Civil.CivilObjects
         }
 
         /// <summary>
-        /// Gets the parent Alignment of the Sample Line Group.
+        /// Gets the parent Alignment of a Sample Line Group.
         /// </summary>
         public civDynNodes.Alignment Alignment
         {
             get
             {
-                acDb.ObjectId alignmentId = aeccSampleLineGroup.ParentAlignmentId;
+                acDb.ObjectId alignmentId = AeccSampleLineGroup.ParentAlignmentId;
                 AeccAlignment aeccAlignment = (AeccAlignment)alignmentId.GetObject(acDb.OpenMode.ForRead);
                 string name = aeccAlignment.Name;
                 return civDynNodes.Selection.AlignmentByName(name, acDynNodes.Document.Current);
@@ -113,10 +113,10 @@ namespace Camber.Civil.CivilObjects
         #endregion
 
         #region methods
-        public override string ToString() => $"SampleLineGroup(Name = {Name}, Alignment = {Alignment.Name})";
+        public override string ToString() => $"SampleLineGroup(Name = {Name})";
 
         /// <summary>
-        /// Gets the Sample Lines near the given station within the specified tolerance.
+        /// Gets the Sample Lines near a given station within a specified tolerance.
         /// </summary>
         /// <param name="station"></param>
         /// <param name="tolerance"></param>
@@ -124,7 +124,7 @@ namespace Camber.Civil.CivilObjects
         public IList<SampleLine> GetSampleLinesByStation(double station, double tolerance = 0.001)
         {
             List<SampleLine> sampleLines = new List<SampleLine>();
-            acDb.ObjectIdCollection aeccSampleLines = aeccSampleLineGroup.GetSampleLineIds(station, tolerance);
+            acDb.ObjectIdCollection aeccSampleLines = AeccSampleLineGroup.GetSampleLineIds(station, tolerance);
             if (aeccSampleLines.Count > 0)
             {
                 foreach (acDb.ObjectId sampleLineId in aeccSampleLines)
