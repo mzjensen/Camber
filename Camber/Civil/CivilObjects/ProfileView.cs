@@ -152,6 +152,40 @@ namespace Camber.Civil.CivilObjects
         public override string ToString() => $"ProfileView(Name = {Name}, Start Station = {StartStation:F2}, End Station = {EndStation:F2})";
 
         /// <summary>
+        /// Gets all of the Profile Views in a document.
+        /// </summary>
+        /// <param name="document"></param>
+        /// <returns></returns>
+        public static IList<ProfileView> GetAllProfileViews(acDynNodes.Document document)
+        {
+            List<ProfileView> pViews = new List<ProfileView>();
+            
+            try
+            {
+                using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
+                {
+                    var bt = (acDb.BlockTable)ctx.Transaction.GetObject(ctx.Database.BlockTableId, acDb.OpenMode.ForRead);
+                    var btr = (acDb.BlockTableRecord)ctx.Transaction.GetObject(bt[acDb.BlockTableRecord.ModelSpace], acDb.OpenMode.ForRead);
+
+                    foreach (acDb.ObjectId oid in btr)
+                    {
+                        var obj = ctx.Transaction.GetObject(oid, acDb.OpenMode.ForRead);
+                        if (obj is AeccProfileView)
+                        {
+                            pViews.Add(GetByObjectId(oid));
+                        }
+                    }
+                    return pViews;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new InvalidOperationException(e.Message);
+            }
+            
+        }
+        
+        /// <summary>
         /// Gets the station and elevation values of a point in the Profile View.
         /// </summary>
         /// <param name="profileView"></param>
