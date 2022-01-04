@@ -20,14 +20,15 @@ namespace Camber.Civil.Labels
         /// <summary>
         /// Gets the Catchment that the Catchment Area Label is associated with.
         /// </summary>
-        public Catchment Catchment { get; set; }
+        public Catchment Catchment => Catchment.GetByObjectId(AeccCatchmentAreaLabel.FeatureId);
         #endregion
 
         #region constructors
-        internal CatchmentAreaLabel(AeccCatchmentAreaLabel AeccCatchmentAreaLabel, Catchment catchment, bool isDynamoOwned = false) : base(AeccCatchmentAreaLabel, isDynamoOwned)
-        {
-            Catchment = catchment;
-        }
+        internal CatchmentAreaLabel(
+            AeccCatchmentAreaLabel AeccCatchmentAreaLabel, 
+            bool isDynamoOwned = false) 
+            : base(AeccCatchmentAreaLabel, isDynamoOwned)
+        { }
 
         /// <summary>
         /// Creates a Catchment Area Label by Catchment.
@@ -63,7 +64,7 @@ namespace Camber.Civil.Labels
                 var createdLabel = labelId.GetObject(acDb.OpenMode.ForRead) as AeccCatchmentAreaLabel;
                 if (createdLabel != null)
                 {
-                    return new CatchmentAreaLabel(createdLabel, catchment, true);
+                    return new CatchmentAreaLabel(createdLabel, true);
                 }
                 return null;
             }

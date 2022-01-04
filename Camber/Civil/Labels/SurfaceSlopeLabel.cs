@@ -4,6 +4,7 @@ using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using acGeom = Autodesk.AutoCAD.Geometry;
+using civDb = Autodesk.Civil.DatabaseServices;
 using civApp = Autodesk.Civil.ApplicationServices;
 using civDynNodes = Autodesk.Civil.DynamoNodes;
 using Autodesk.DesignScript.Geometry;
@@ -23,7 +24,22 @@ namespace Camber.Civil.Labels
         /// <summary>
         /// Gets the Surface that a Surface Slope Label is associated with.
         /// </summary>
-        public civDynNodes.Surface Surface { get; set; }
+        public civDynNodes.Surface Surface
+        {
+            get
+            {
+                acDynNodes.Document document = acDynNodes.Document.Current;
+
+                using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
+                {
+                    civDb.Surface surface =
+                        (civDb.Surface)ctx
+                        .Transaction
+                        .GetObject(AeccSurfaceSlopeLabel.FeatureId, acDb.OpenMode.ForRead);
+                    return civDynNodes.Selection.SurfaceByName(surface.Name, document);
+                }
+            }
+        }
 
         /// <summary>
         /// Gets the type of a Surface Slope Label.
@@ -40,12 +56,18 @@ namespace Camber.Civil.Labels
             {
                 if (SlopeLabelType == "OnePoint")
                 {
-                    return civDynNodes.Surface.SamplePoint(Surface, Utils.GeometryConversions.AcPointToDynPoint(AeccSurfaceSlopeLabel.Location));
+                    return civDynNodes.Surface.SamplePoint(
+                        Surface, 
+                        Utils.GeometryConversions.AcPointToDynPoint(AeccSurfaceSlopeLabel.Location));
                 }
                 else if (SlopeLabelType == "TwoPoint")
                 {
-                    Point startPoint = civDynNodes.Surface.SamplePoint(Surface, Utils.GeometryConversions.AcPointToDynPoint(AeccSurfaceSlopeLabel.Location));
-                    Point endPoint = civDynNodes.Surface.SamplePoint(Surface, Utils.GeometryConversions.AcPointToDynPoint(AeccSurfaceSlopeLabel.Location2));
+                    Point startPoint = civDynNodes.Surface.SamplePoint(
+                        Surface, 
+                        Utils.GeometryConversions.AcPointToDynPoint(AeccSurfaceSlopeLabel.Location));
+                    Point endPoint = civDynNodes.Surface.SamplePoint(
+                        Surface, 
+                        Utils.GeometryConversions.AcPointToDynPoint(AeccSurfaceSlopeLabel.Location2));
                     return Line.ByStartPointEndPoint(startPoint, endPoint);
                 }
                 else
@@ -57,10 +79,11 @@ namespace Camber.Civil.Labels
         #endregion
 
         #region constructors
-        internal SurfaceSlopeLabel(AeccSurfaceSlopeLabel AeccSurfaceSlopeLabel, civDynNodes.Surface surface, bool isDynamoOwned = false) : base(AeccSurfaceSlopeLabel, isDynamoOwned)
-        {
-            Surface = surface;
-        }
+        internal SurfaceSlopeLabel(
+            AeccSurfaceSlopeLabel AeccSurfaceSlopeLabel, 
+            bool isDynamoOwned = false) 
+            : base(AeccSurfaceSlopeLabel, isDynamoOwned)
+        { }
 
         /// <summary>
         /// Creates a one-point Surface Slope Label.
@@ -69,7 +92,10 @@ namespace Camber.Civil.Labels
         /// <param name="point"></param>
         /// <param name="labelStyle"></param>
         /// <returns></returns>
-        public static SurfaceSlopeLabel ByPoint(civDynNodes.Surface surface, Point point, SurfaceSlopeLabelStyle labelStyle)
+        public static SurfaceSlopeLabel ByPoint(
+            civDynNodes.Surface surface, 
+            Point point, 
+            SurfaceSlopeLabelStyle labelStyle)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
 
@@ -94,13 +120,16 @@ namespace Camber.Civil.Labels
                 {
                     // Create new label
                     acGeom.Point2d location = new acGeom.Point2d(point.X, point.Y);
-                    labelId = AeccSurfaceSlopeLabel.Create(surface.InternalObjectId, location, labelStyle.InternalObjectId);
+                    labelId = AeccSurfaceSlopeLabel.Create(
+                        surface.InternalObjectId, 
+                        location, 
+                        labelStyle.InternalObjectId);
                 }
 
                 var createdLabel = labelId.GetObject(acDb.OpenMode.ForRead) as AeccSurfaceSlopeLabel;
                 if (createdLabel != null)
                 {
-                    return new SurfaceSlopeLabel(createdLabel, surface, true);
+                    return new SurfaceSlopeLabel(createdLabel, true);
                 }
                 return null;
             }
@@ -140,13 +169,17 @@ namespace Camber.Civil.Labels
                     // Create new label
                     acGeom.Point2d location1 = new acGeom.Point2d(line.StartPoint.X, line.StartPoint.Y);
                     acGeom.Point2d location2 = new acGeom.Point2d(line.EndPoint.X, line.EndPoint.Y);
-                    labelId = AeccSurfaceSlopeLabel.Create(surface.InternalObjectId, location1, location2, labelStyle.InternalObjectId);
+                    labelId = AeccSurfaceSlopeLabel.Create(
+                        surface.InternalObjectId, 
+                        location1, 
+                        location2, 
+                        labelStyle.InternalObjectId);
                 }
 
                 var createdLabel = labelId.GetObject(acDb.OpenMode.ForRead) as AeccSurfaceSlopeLabel;
                 if (createdLabel != null)
                 {
-                    return new SurfaceSlopeLabel(createdLabel, surface, true);
+                    return new SurfaceSlopeLabel(createdLabel, true);
                 }
                 return null;
             }

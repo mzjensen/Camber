@@ -159,7 +159,7 @@ namespace Camber.Civil.CivilObjects
                 foreach (acDb.ObjectId aeccLabelId in AeccCatchment.GetAvailableFlowSegmentLabelIds())
                 {
                     AeccCatchmentFlowSegmentLabel aeccLabel = (AeccCatchmentFlowSegmentLabel)aeccLabelId.GetObject(acDb.OpenMode.ForWrite);
-                    labels.Add(new CatchmentFlowSegmentLabel(aeccLabel, this));
+                    labels.Add(new CatchmentFlowSegmentLabel(aeccLabel, false));
                 }
                 return labels;
             }
@@ -176,7 +176,7 @@ namespace Camber.Civil.CivilObjects
                 foreach (acDb.ObjectId aeccLabelId in AeccCatchment.GetAvailableCatchmentLabelIds())
                 {
                     AeccCatchmentAreaLabel aeccLabel = (AeccCatchmentAreaLabel)aeccLabelId.GetObject(acDb.OpenMode.ForWrite);
-                    labels.Add(new CatchmentAreaLabel(aeccLabel, this));
+                    labels.Add(new CatchmentAreaLabel(aeccLabel, false));
                 }
                 return labels;
             }

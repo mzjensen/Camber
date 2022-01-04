@@ -26,7 +26,7 @@ namespace Camber.Civil.Labels
         /// <summary>
         /// Gets the Profile View that a Profile View Station Elevation Label belongs to.
         /// </summary>
-        public ProfileView ProfileView { get; set; }
+        public ProfileView ProfileView => ProfileView.GetByObjectId(AeccStationElevationLabel.FeatureId);
 
         /// <summary>
         /// Gets the elevation value of a Profile View Station Elevation Label in it's Profile View.
@@ -50,10 +50,11 @@ namespace Camber.Civil.Labels
         #endregion
 
         #region constructors
-        internal ProfileViewStationElevationLabel(AeccStationElevationLabel AeccStationOffsetLabel, ProfileView profileView, bool isDynamoOwned = false) : base(AeccStationOffsetLabel, isDynamoOwned)
-        {
-            ProfileView = profileView;
-        }
+        internal ProfileViewStationElevationLabel(
+            AeccStationElevationLabel AeccStationOffsetLabel, 
+            bool isDynamoOwned = false) 
+            : base(AeccStationOffsetLabel, isDynamoOwned)
+        { }
 
         /// <summary>
         /// Create a Profile View Station Elevation Label by station and elevation.
@@ -64,7 +65,12 @@ namespace Camber.Civil.Labels
         /// <param name="labelStyle"></param>
         /// <param name="markerStyle"></param>
         /// <returns></returns>
-        public static ProfileViewStationElevationLabel ByStationElevation(ProfileView profileView, double station, double elevation, ProfileViewStationElevationLabelStyle labelStyle, MarkerStyle markerStyle)
+        public static ProfileViewStationElevationLabel ByStationElevation(
+            ProfileView profileView, 
+            double station, 
+            double elevation, 
+            ProfileViewStationElevationLabelStyle labelStyle, 
+            MarkerStyle markerStyle)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
 
@@ -97,13 +103,18 @@ namespace Camber.Civil.Labels
                 {
                     // Create new label
                     acGeom.Point2d location = new acGeom.Point2d(point.X, point.Y);
-                    labelId = AeccStationElevationLabel.Create(profileView.InternalObjectId, labelStyle.InternalObjectId, markerStyle.InternalObjectId, station, elevation);
+                    labelId = AeccStationElevationLabel.Create(
+                        profileView.InternalObjectId, 
+                        labelStyle.InternalObjectId, 
+                        markerStyle.InternalObjectId, 
+                        station, 
+                        elevation);
                 }
 
                 var createdLabel = labelId.GetObject(acDb.OpenMode.ForRead) as AeccStationElevationLabel;
                 if (createdLabel != null)
                 {
-                    return new ProfileViewStationElevationLabel(createdLabel, profileView, true);
+                    return new ProfileViewStationElevationLabel(createdLabel, true);
                 }
                 return null;
             }

@@ -23,7 +23,7 @@ namespace Camber.Civil.Labels
         /// <summary>
         /// Gets the Section View that a Section View Depth Label belongs to.
         /// </summary>
-        public SectionView SectionView { get; set; }
+        public SectionView SectionView => SectionView.GetByObjectId(AeccSectionViewDepthLabel.FeatureId);
 
         /// <summary>
         /// Gets the start point of a Section View Depth Label.
@@ -37,10 +37,11 @@ namespace Camber.Civil.Labels
         #endregion
 
         #region constructors
-        internal SectionViewDepthLabel(AeccSectionViewDepthLabel AeccSectionViewDepthLabel, SectionView sectionView, bool isDynamoOwned = false) : base(AeccSectionViewDepthLabel, isDynamoOwned)
-        {
-            SectionView = sectionView;
-        }
+        internal SectionViewDepthLabel(
+            AeccSectionViewDepthLabel AeccSectionViewDepthLabel, 
+            bool isDynamoOwned = false) 
+            : base(AeccSectionViewDepthLabel, isDynamoOwned)
+        { }
 
         /// <summary>
         /// Create a Section View Depth Label by two points.
@@ -50,7 +51,11 @@ namespace Camber.Civil.Labels
         /// <param name="endPoint"></param>
         /// <param name="labelStyle"></param>
         /// <returns></returns>
-        public static SectionViewDepthLabel ByTwoPoints(SectionView sectionView, Point startPoint, Point endPoint, SectionViewDepthLabelStyle labelStyle)
+        public static SectionViewDepthLabel ByTwoPoints(
+            SectionView sectionView, 
+            Point startPoint, 
+            Point endPoint, 
+            SectionViewDepthLabelStyle labelStyle)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
 
@@ -78,13 +83,17 @@ namespace Camber.Civil.Labels
                 else
                 {
                     // Create new label
-                    labelId = AeccSectionViewDepthLabel.Create(sectionView.InternalObjectId, acStartPoint, acEndPoint, labelStyle.InternalObjectId);
+                    labelId = AeccSectionViewDepthLabel.Create(
+                        sectionView.InternalObjectId, 
+                        acStartPoint, 
+                        acEndPoint, 
+                        labelStyle.InternalObjectId);
                 }
 
                 var createdLabel = labelId.GetObject(acDb.OpenMode.ForRead) as AeccSectionViewDepthLabel;
                 if (createdLabel != null)
                 {
-                    return new SectionViewDepthLabel(createdLabel, sectionView, true);
+                    return new SectionViewDepthLabel(createdLabel, true);
                 }
                 return null;
             }

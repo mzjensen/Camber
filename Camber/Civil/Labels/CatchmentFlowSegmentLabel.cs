@@ -21,7 +21,7 @@ namespace Camber.Civil.Labels
         /// <summary>
         /// Gets the Catchment that a Catchment Flow Segment Label is associated with.
         /// </summary>
-        public Catchment Catchment { get; set; }
+        public Catchment Catchment => Catchment.GetByObjectId(AeccCatchmentFlowSegmentLabel.FeatureId);
 
         /// <summary>
         /// Gets the index of the Flow Segment within the Flow Path that a Catchment Flow Segment Label is associated with.
@@ -35,10 +35,11 @@ namespace Camber.Civil.Labels
         #endregion
 
         #region constructors
-        internal CatchmentFlowSegmentLabel(AeccCatchmentFlowSegmentLabel AeccCatchmentFlowSegmentLabel, Catchment catchment, bool isDynamoOwned = false) : base(AeccCatchmentFlowSegmentLabel, isDynamoOwned)
-        {
-            Catchment = catchment;
-        }
+        internal CatchmentFlowSegmentLabel(
+            AeccCatchmentFlowSegmentLabel AeccCatchmentFlowSegmentLabel,
+            bool isDynamoOwned = false) 
+            : base(AeccCatchmentFlowSegmentLabel, isDynamoOwned)
+        { }
 
         /// <summary>
         /// Creates a Catchment Flow Segment Label by Catchment.
@@ -46,7 +47,11 @@ namespace Camber.Civil.Labels
         /// <param name="catchment"></param>
         /// <param name="labelStyle"></param>
         /// <returns></returns>
-        public static CatchmentFlowSegmentLabel ByCatchment(Catchment catchment, CatchmentFlowSegmentLabelStyle labelStyle, int flowSegmentIndex, double ratio = 0.5)
+        public static CatchmentFlowSegmentLabel ByCatchment(
+            Catchment catchment, 
+            CatchmentFlowSegmentLabelStyle labelStyle, 
+            int flowSegmentIndex, 
+            double ratio = 0.5)
         {
 
             acDynNodes.Document document = acDynNodes.Document.Current;
@@ -81,7 +86,7 @@ namespace Camber.Civil.Labels
                 var createdLabel = labelId.GetObject(acDb.OpenMode.ForRead) as AeccCatchmentFlowSegmentLabel;
                 if (createdLabel != null)
                 {
-                    return new CatchmentFlowSegmentLabel(createdLabel, catchment, true);
+                    return new CatchmentFlowSegmentLabel(createdLabel, true);
                 }
                 return null;
             }

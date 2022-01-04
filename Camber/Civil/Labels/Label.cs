@@ -117,7 +117,10 @@ namespace Camber.Civil.Labels
         /// <summary>
         /// Gets the dragged offset of a Label.
         /// </summary>
-        public Vector DraggedOffset => Vector.ByCoordinates(AeccLabel.DraggedOffset.X, AeccLabel.DraggedOffset.Y, AeccLabel.DraggedOffset.Z);
+        public Vector DraggedOffset => Vector.ByCoordinates(
+            AeccLabel.DraggedOffset.X, 
+            AeccLabel.DraggedOffset.Y, 
+            AeccLabel.DraggedOffset.Z);
 
         /// <summary>
         /// Gets the flipped state of a Label.

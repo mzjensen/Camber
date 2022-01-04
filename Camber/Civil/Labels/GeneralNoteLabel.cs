@@ -21,7 +21,10 @@ namespace Camber.Civil.Labels
         #endregion
 
         #region constructors
-        internal GeneralNoteLabel(AeccGeneralNoteLabel AeccGeneralNoteLabel, bool isDynamoOwned = false) : base(AeccGeneralNoteLabel, isDynamoOwned) { }
+        internal GeneralNoteLabel(
+            AeccGeneralNoteLabel AeccGeneralNoteLabel, 
+            bool isDynamoOwned = false) 
+            : base(AeccGeneralNoteLabel, isDynamoOwned) { }
 
         /// <summary>
         /// Creates a General Note Label by point.
@@ -30,7 +33,10 @@ namespace Camber.Civil.Labels
         /// <param name="labelStyle"></param>
         /// <param name="markerStyle"></param>
         /// <returns></returns>
-        public static GeneralNoteLabel ByPoint(Point point, GeneralNoteLabelStyle labelStyle, MarkerStyle markerStyle)
+        public static GeneralNoteLabel ByPoint(
+            Point point, 
+            GeneralNoteLabelStyle labelStyle, 
+            MarkerStyle markerStyle)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
 
@@ -61,7 +67,10 @@ namespace Camber.Civil.Labels
                 {
                     // Create new label
                     acGeom.Point3d location = new acGeom.Point3d(point.X, point.Y, point.Z);
-                    labelId = AeccGeneralNoteLabel.Create(location, labelStyle.InternalObjectId, markerStyle.InternalObjectId);
+                    labelId = AeccGeneralNoteLabel.Create(
+                        location, 
+                        labelStyle.InternalObjectId, 
+                        markerStyle.InternalObjectId);
                 }
 
                 var createdLabel = labelId.GetObject(acDb.OpenMode.ForRead) as AeccGeneralNoteLabel;

@@ -32,7 +32,10 @@ namespace Camber.Civil.Labels
         #endregion
 
         #region constructors
-        internal PipePlanLabel(AeccPipeLabel AeccPipeLabel, bool isDynamoOwned = false) : base(AeccPipeLabel, isDynamoOwned) { }
+        internal PipePlanLabel(
+            AeccPipeLabel AeccPipeLabel, 
+            bool isDynamoOwned = false) 
+            : base(AeccPipeLabel, isDynamoOwned) { }
 
         [SupressImportIntoVM]
         internal static PipePlanLabel GetByObjectId(acDb.ObjectId labelId)
@@ -46,7 +49,10 @@ namespace Camber.Civil.Labels
         /// <param name="ratio"></param>
         /// <param name="labelStyle"></param>
         /// <returns></returns>
-        public static PipePlanLabel ByPipe(Pipe pipe, double ratio, PipePlanProfileLabelStyle labelStyle)
+        public static PipePlanLabel ByPipe(
+            Pipe pipe, 
+            double ratio, 
+            PipePlanProfileLabelStyle labelStyle)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
 
@@ -64,7 +70,10 @@ namespace Camber.Civil.Labels
                         if (pipe.InternalObjectId != aeccLabel.FeatureId)
                         {
                             aeccLabel.Erase();
-                            labelId = AeccPipeLabel.Create(pipe.InternalObjectId, ratio, labelStyle.InternalObjectId);
+                            labelId = AeccPipeLabel.Create(
+                                pipe.InternalObjectId, 
+                                ratio, 
+                                labelStyle.InternalObjectId);
                         }
                         else
                         {
@@ -79,7 +88,10 @@ namespace Camber.Civil.Labels
                 else
                 {
                     // Create new label
-                    labelId = AeccPipeLabel.Create(pipe.InternalObjectId, ratio, labelStyle.InternalObjectId);
+                    labelId = AeccPipeLabel.Create(
+                        pipe.InternalObjectId, 
+                        ratio, 
+                        labelStyle.InternalObjectId);
                 }
 
                 var createdLabel = labelId.GetObject(acDb.OpenMode.ForRead) as AeccPipeLabel;

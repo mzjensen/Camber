@@ -23,7 +23,7 @@ namespace Camber.Civil.Labels
         /// <summary>
         /// Gets the Profile View that the Profile View Depth Label belongs to.
         /// </summary>
-        public ProfileView ProfileView { get; set; }
+        public ProfileView ProfileView => ProfileView.GetByObjectId(AeccProfileViewDepthLabel.FeatureId);
 
         /// <summary>
         /// Gets the start point of the Profile View Depth Label.
@@ -37,10 +37,11 @@ namespace Camber.Civil.Labels
         #endregion
 
         #region constructors
-        internal ProfileViewDepthLabel(AeccProfileViewDepthLabel AeccProfileViewDepthLabel, ProfileView profileView, bool isDynamoOwned = false) : base(AeccProfileViewDepthLabel, isDynamoOwned)
-        {
-            ProfileView = profileView;
-        }
+        internal ProfileViewDepthLabel(
+            AeccProfileViewDepthLabel AeccProfileViewDepthLabel, 
+            bool isDynamoOwned = false) 
+            : base(AeccProfileViewDepthLabel, isDynamoOwned)
+        { }
 
         /// <summary>
         /// Creates a Profile View Depth Label by two points
@@ -50,7 +51,11 @@ namespace Camber.Civil.Labels
         /// <param name="endPoint"></param>
         /// <param name="labelStyle"></param>
         /// <returns></returns>
-        public static ProfileViewDepthLabel ByTwoPoints(ProfileView profileView, Point startPoint, Point endPoint, ProfileViewDepthLabelStyle labelStyle)
+        public static ProfileViewDepthLabel ByTwoPoints(
+            ProfileView profileView, 
+            Point startPoint, 
+            Point endPoint, 
+            ProfileViewDepthLabelStyle labelStyle)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
 
@@ -84,7 +89,7 @@ namespace Camber.Civil.Labels
                 var createdLabel = labelId.GetObject(acDb.OpenMode.ForRead) as AeccProfileViewDepthLabel;
                 if (createdLabel != null)
                 {
-                    return new ProfileViewDepthLabel(createdLabel, profileView, true);
+                    return new ProfileViewDepthLabel(createdLabel, true);
                 }
                 return null;
             }

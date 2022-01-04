@@ -23,7 +23,7 @@ namespace Camber.Civil.Labels
         /// <summary>
         /// Gets the Section View that a Section View Offset Elevation Label is associated with.
         /// </summary>
-        public SectionView SectionView { get; set; }
+        public SectionView SectionView => SectionView.GetByObjectId(AeccSectionViewOffsetElevationLabel.FeatureId);
 
         /// <summary>
         /// Gets the offset value of a Section View Offset Elevation Label's location.
@@ -38,13 +38,10 @@ namespace Camber.Civil.Labels
 
         #region constructors
         internal SectionViewOffsetElevationLabel(
-            AeccSectionViewOffsetElevationLabel AeccSectionViewOffsetElevationLabel, 
-            SectionView sectionView, 
+            AeccSectionViewOffsetElevationLabel AeccSectionViewOffsetElevationLabel,
             bool isDynamoOwned = false) 
             : base(AeccSectionViewOffsetElevationLabel, isDynamoOwned)
-        {
-            SectionView = sectionView;
-        }
+        { }
 
         /// <summary>
         /// Creates a Section View Offset Elevation Label by offset and elevation.
@@ -55,9 +52,18 @@ namespace Camber.Civil.Labels
         /// <param name="labelStyle"></param>
         /// <param name="markerStyle"></param>
         /// <returns></returns>
-        public static SectionViewOffsetElevationLabel ByOffsetElevation(SectionView sectionView, double offset, double elevation, SectionViewOffsetElevationLabelStyle labelStyle, MarkerStyle markerStyle)
+        public static SectionViewOffsetElevationLabel ByOffsetElevation(
+            SectionView sectionView, 
+            double offset, 
+            double elevation, 
+            SectionViewOffsetElevationLabelStyle labelStyle, 
+            MarkerStyle markerStyle)
         {
-            return ByPoint(sectionView, SectionView.GetPointAtOffsetElevation(sectionView, offset, elevation), labelStyle, markerStyle);
+            return ByPoint(
+                sectionView, 
+                SectionView.GetPointAtOffsetElevation(sectionView, offset, elevation), 
+                labelStyle, 
+                markerStyle);
         }
 
         /// <summary>
@@ -68,7 +74,11 @@ namespace Camber.Civil.Labels
         /// <param name="labelStyle"></param>
         /// <param name="markerStyle"></param>
         /// <returns></returns>
-        public static SectionViewOffsetElevationLabel ByPoint(SectionView sectionView, Point point, SectionViewOffsetElevationLabelStyle labelStyle, MarkerStyle markerStyle)
+        public static SectionViewOffsetElevationLabel ByPoint(
+            SectionView sectionView, 
+            Point point, 
+            SectionViewOffsetElevationLabelStyle labelStyle, 
+            MarkerStyle markerStyle)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
 
@@ -100,13 +110,18 @@ namespace Camber.Civil.Labels
                     // Create new label
                     double offset = (double)SectionView.GetOffsetElevationAtPoint(sectionView, point)["Offset"];
                     double elevation = (double)SectionView.GetOffsetElevationAtPoint(sectionView, point)["Elevation"];
-                    labelId = AeccSectionViewOffsetElevationLabel.Create(sectionView.InternalObjectId, offset, elevation, labelStyle.InternalObjectId, markerStyle.InternalObjectId);
+                    labelId = AeccSectionViewOffsetElevationLabel.Create(
+                        sectionView.InternalObjectId, 
+                        offset, 
+                        elevation, 
+                        labelStyle.InternalObjectId, 
+                        markerStyle.InternalObjectId);
                 }
 
                 var createdLabel = labelId.GetObject(acDb.OpenMode.ForRead) as AeccSectionViewOffsetElevationLabel;
                 if (createdLabel != null)
                 {
-                    return new SectionViewOffsetElevationLabel(createdLabel, sectionView, true);
+                    return new SectionViewOffsetElevationLabel(createdLabel, true);
                 }
                 return null;
             }

@@ -28,7 +28,10 @@ namespace Camber.Civil.Labels
         #endregion
 
         #region constructors
-        internal StructurePlanLabel(AeccStructureLabel AeccStructureLabel, bool isDynamoOwned = false) : base(AeccStructureLabel, isDynamoOwned) { }
+        internal StructurePlanLabel(
+            AeccStructureLabel AeccStructureLabel, 
+            bool isDynamoOwned = false) 
+            : base(AeccStructureLabel, isDynamoOwned) { }
 
         [SupressImportIntoVM]
         internal static StructurePlanLabel GetByObjectId(acDb.ObjectId labelId)
@@ -72,7 +75,10 @@ namespace Camber.Civil.Labels
                 else
                 {
                     // Create new label
-                    labelId = AeccStructureLabel.Create(structure.InternalObjectId, labelStyle.InternalObjectId, insertionPoint);
+                    labelId = AeccStructureLabel.Create(
+                        structure.InternalObjectId, 
+                        labelStyle.InternalObjectId, 
+                        insertionPoint);
                 }
 
                 var createdLabel = labelId.GetObject(acDb.OpenMode.ForRead) as AeccStructureLabel;

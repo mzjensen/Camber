@@ -23,7 +23,10 @@ namespace Camber.Civil.Labels
         #endregion
 
         #region constructors
-        internal GeneralSegmentLabel(AeccGeneralSegmentLabel AeccGeneralNoteLabel, bool isDynamoOwned = false) : base(AeccGeneralNoteLabel, isDynamoOwned) { }
+        internal GeneralSegmentLabel(
+            AeccGeneralSegmentLabel AeccGeneralNoteLabel, 
+            bool isDynamoOwned = false) 
+            : base(AeccGeneralNoteLabel, isDynamoOwned) { }
 
         /// <summary>
         /// Creates a General Segment Label by object. The object type must be a Line, Arc, Polyline, or Feature Line.
@@ -35,7 +38,11 @@ namespace Camber.Civil.Labels
         /// <param name="lineLabelStyle"></param>
         /// <param name="curveLabelStyle"></param>
         /// <returns></returns>
-        public static GeneralSegmentLabel ByObject(acDynNodes.Object obj, double ratio, GeneralLineLabelStyle lineLabelStyle, GeneralCurveLabelStyle curveLabelStyle)
+        public static GeneralSegmentLabel ByObject(
+            acDynNodes.Object obj, 
+            double ratio, 
+            GeneralLineLabelStyle lineLabelStyle, 
+            GeneralCurveLabelStyle curveLabelStyle)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
 
@@ -71,7 +78,11 @@ namespace Camber.Civil.Labels
                 else
                 {
                     // Create new label
-                    labelId = AeccGeneralSegmentLabel.Create(obj.InternalObjectId, ratio, lineLabelStyle.InternalObjectId, curveLabelStyle.InternalObjectId);
+                    labelId = AeccGeneralSegmentLabel.Create(
+                        obj.InternalObjectId, 
+                        ratio, 
+                        lineLabelStyle.InternalObjectId, 
+                        curveLabelStyle.InternalObjectId);
                 }
 
                 var createdLabel = labelId.GetObject(acDb.OpenMode.ForRead) as AeccGeneralSegmentLabel;

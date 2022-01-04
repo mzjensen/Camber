@@ -3,6 +3,7 @@ using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using acGeom = Autodesk.AutoCAD.Geometry;
+using civDb = Autodesk.Civil.DatabaseServices;
 using civApp = Autodesk.Civil.ApplicationServices;
 using civDynNodes = Autodesk.Civil.DynamoNodes;
 using Autodesk.DesignScript.Geometry;
@@ -18,12 +19,27 @@ namespace Camber.Civil.Labels
     public sealed class SurfaceElevationLabel : Label
     {
         #region properties
-        internal AeccSurfaceElevationLabel aeccSurfaceElevationLabel => AcObject as AeccSurfaceElevationLabel;
+        internal AeccSurfaceElevationLabel AeccSurfaceElevationLabel => AcObject as AeccSurfaceElevationLabel;
 
         /// <summary>
         /// Gets the Surface that a Surface Elevation Label is associated with.
         /// </summary>
-        public civDynNodes.Surface Surface { get; set; }
+        public civDynNodes.Surface Surface
+        {
+            get
+            {
+                acDynNodes.Document document = acDynNodes.Document.Current;
+
+                using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
+                {
+                    civDb.Surface surface =
+                        (civDb.Surface)ctx
+                        .Transaction
+                        .GetObject(AeccSurfaceElevationLabel.FeatureId, acDb.OpenMode.ForRead);
+                    return civDynNodes.Selection.SurfaceByName(surface.Name, document);
+                }
+            }
+        }
 
         /// <summary>
         /// Gets the elevation of a Surface Elevation Label's location.
@@ -32,10 +48,11 @@ namespace Camber.Civil.Labels
         #endregion
 
         #region constructors
-        internal SurfaceElevationLabel(AeccSurfaceElevationLabel AeccSurfaceSlopeLabel, civDynNodes.Surface surface, bool isDynamoOwned = false) : base(AeccSurfaceSlopeLabel, isDynamoOwned)
-        {
-            Surface = surface;
-        }
+        internal SurfaceElevationLabel(
+            AeccSurfaceElevationLabel AeccSurfaceSlopeLabel,
+            bool isDynamoOwned = false) 
+            : base(AeccSurfaceSlopeLabel, isDynamoOwned)
+        { }
 
         /// <summary>
         /// Creates a Surface Elevation Label by point.
@@ -45,7 +62,11 @@ namespace Camber.Civil.Labels
         /// <param name="labelStyle"></param>
         /// <param name="markerStyle"></param>
         /// <returns></returns>
-        public static SurfaceElevationLabel ByPoint(civDynNodes.Surface surface, Point point, SurfaceElevationLabelStyle labelStyle, MarkerStyle markerStyle)
+        public static SurfaceElevationLabel ByPoint(
+            civDynNodes.Surface surface, 
+            Point point, 
+            SurfaceElevationLabelStyle labelStyle, 
+            MarkerStyle markerStyle)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
 
@@ -76,13 +97,17 @@ namespace Camber.Civil.Labels
                 {
                     // Create new label
                     acGeom.Point2d location = new acGeom.Point2d(point.X, point.Y);
-                    labelId = AeccSurfaceElevationLabel.Create(surface.InternalObjectId, location, labelStyle.InternalObjectId, markerStyle.InternalObjectId);
+                    labelId = AeccSurfaceElevationLabel.Create(
+                        surface.InternalObjectId, 
+                        location, 
+                        labelStyle.InternalObjectId, 
+                        markerStyle.InternalObjectId);
                 }
 
                 var createdLabel = labelId.GetObject(acDb.OpenMode.ForRead) as AeccSurfaceElevationLabel;
                 if (createdLabel != null)
                 {
-                    return new SurfaceElevationLabel(createdLabel, surface, true);
+                    return new SurfaceElevationLabel(createdLabel, true);
                 }
                 return null;
             }

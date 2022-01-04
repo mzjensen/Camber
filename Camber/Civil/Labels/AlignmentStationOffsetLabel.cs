@@ -3,6 +3,7 @@ using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using acGeom = Autodesk.AutoCAD.Geometry;
+using civDb = Autodesk.Civil.DatabaseServices;
 using civApp = Autodesk.Civil.ApplicationServices;
 using civDynNodes = Autodesk.Civil.DynamoNodes;
 using Autodesk.DesignScript.Geometry;
@@ -23,7 +24,22 @@ namespace Camber.Civil.Labels
         /// <summary>
         /// Gets the Alignment that an Alignment Station Offset Label is associated with.
         /// </summary>
-        public civDynNodes.Alignment Alignment { get; set; }
+        public civDynNodes.Alignment Alignment
+        {
+            get
+            {
+                acDynNodes.Document document = acDynNodes.Document.Current;
+
+                using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
+                {
+                    civDb.Alignment alignment = 
+                        (civDb.Alignment)ctx
+                        .Transaction
+                        .GetObject(AeccStationOffsetLabel.FeatureId, acDb.OpenMode.ForRead);
+                    return civDynNodes.Selection.AlignmentByName(alignment.Name, document);
+                }
+            }
+        }
 
         /// <summary>
         /// Gets the station value of an Alignment Station Offset Label's location.
@@ -37,10 +53,11 @@ namespace Camber.Civil.Labels
         #endregion
 
         #region constructors
-        internal AlignmentStationOffsetLabel(AeccStationOffsetLabel AeccStationOffsetLabel, civDynNodes.Alignment alignment, bool isDynamoOwned = false) : base(AeccStationOffsetLabel, isDynamoOwned)
-        {
-            Alignment = alignment;
-        }
+        internal AlignmentStationOffsetLabel(
+            AeccStationOffsetLabel AeccStationOffsetLabel, 
+            bool isDynamoOwned = false) 
+            : base(AeccStationOffsetLabel, isDynamoOwned) 
+        { }
 
         /// <summary>
         /// Creates an Alignment Station Offset Label by station and offset.
@@ -51,7 +68,12 @@ namespace Camber.Civil.Labels
         /// <param name="labelStyle"></param>
         /// <param name="markerStyle"></param>
         /// <returns></returns>
-        public static AlignmentStationOffsetLabel ByStationOffset(civDynNodes.Alignment alignment, double station, double offset, AlignmentStationOffsetLabelStyle labelStyle, MarkerStyle markerStyle)
+        public static AlignmentStationOffsetLabel ByStationOffset(
+            civDynNodes.Alignment alignment, 
+            double station, 
+            double offset, 
+            AlignmentStationOffsetLabelStyle labelStyle, 
+            MarkerStyle markerStyle)
         {
             Point point = alignment.CoordinateSystemByStationOffset(station, offset).Origin;
             return ByPoint(alignment, point, labelStyle, markerStyle);
@@ -65,7 +87,11 @@ namespace Camber.Civil.Labels
         /// <param name="labelStyle"></param>
         /// <param name="markerStyle"></param>
         /// <returns></returns>
-        public static AlignmentStationOffsetLabel ByPoint(civDynNodes.Alignment alignment, Point point, AlignmentStationOffsetLabelStyle labelStyle, MarkerStyle markerStyle)
+        public static AlignmentStationOffsetLabel ByPoint(
+            civDynNodes.Alignment alignment, 
+            Point point, 
+            AlignmentStationOffsetLabelStyle labelStyle, 
+            MarkerStyle markerStyle)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
 
@@ -102,7 +128,7 @@ namespace Camber.Civil.Labels
                 var createdLabel = labelId.GetObject(acDb.OpenMode.ForRead) as AeccStationOffsetLabel;
                 if (createdLabel != null)
                 {
-                    return new AlignmentStationOffsetLabel(createdLabel, alignment, true);
+                    return new AlignmentStationOffsetLabel(createdLabel, true);
                 }
                 return null;
             }
