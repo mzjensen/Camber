@@ -7,7 +7,7 @@ using acDb = Autodesk.AutoCAD.DatabaseServices;
 using AcBlock = Autodesk.AutoCAD.DatabaseServices.BlockTableRecord;
 #endregion
 
-namespace Camber.AutoCAD.External
+namespace Camber.External
 {
     public class ExternalBlock : ExternalObjectBase
     {
@@ -155,9 +155,9 @@ namespace Camber.AutoCAD.External
         {
             if (sourceBlock.IsAnonymous) { throw new InvalidOperationException("Cannot import anonymous blocks."); }
             if (sourceBlock.IsLayout) { throw new InvalidOperationException("Cannot import layout blocks."); }
-            
+
             ExternalBlock existingBlock = destinationDocument.BlockByName(sourceBlock.Name);
-            
+
             var overwriteSwitch = acDb.DuplicateRecordCloning.Ignore;
             if (overwrite) { overwriteSwitch = acDb.DuplicateRecordCloning.Replace; }
 

@@ -8,9 +8,6 @@
 		<namespace name="Camber.AutoCAD">
 			<category>Camber.AutoCAD</category>
 		</namespace>
-		<namespace name="Camber.AutoCAD.External">
-			<category>Camber.AutoCAD.External</category>
-		</namespace>
 		<namespace name="Camber.AutoCAD.Objects">
 			<category>Camber.AutoCAD.Objects</category>
 		</namespace>
@@ -108,12 +105,18 @@
 		<namespace name="Camber.Civil.Styles.Views">
 			<category>Camber.Civil 3D.Styles.View Styles</category>
 		</namespace>
+		<!--Dynamo Extensions-->
 		<namespace name="Camber.DynamoExtensions">
 			<category>Camber.Dynamo Extensions</category>
 		</namespace>
 		<namespace name="Camber.DynamoExtensions.GeometryExtensions">
 			<category>Camber.Dynamo Extensions.Geometry</category>
 		</namespace>
+		<!--External-->
+		<namespace name="Camber.External">
+			<category>Camber.External</category>
+		</namespace>
+		<!--Tools-->
 		<namespace name="Camber.Tools">
 			<category>Camber.Tools</category>
 		</namespace>

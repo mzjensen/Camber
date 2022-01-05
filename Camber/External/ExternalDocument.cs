@@ -9,7 +9,7 @@ using Autodesk.DesignScript.Runtime;
 using Dynamo.Graph.Nodes;
 #endregion
 
-namespace Camber.AutoCAD.External
+namespace Camber.External
 {
     public sealed class ExternalDocument : IDisposable
     {

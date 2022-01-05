@@ -217,11 +217,11 @@
     <Compile Include="AutoCAD\Objects\AttributeDefinition.cs" />
     <Compile Include="AutoCAD\Objects\Block.cs" />
     <Compile Include="AutoCAD\Document.cs" />
-    <Compile Include="AutoCAD\External\ExternalBlock.cs" />
-    <Compile Include="AutoCAD\External\ExternalBlockReference.cs" />
-    <Compile Include="AutoCAD\External\ExternalDocument.cs" />
-    <Compile Include="AutoCAD\External\ExternalObject.cs" />
-    <Compile Include="AutoCAD\External\ExternalObjectBase.cs" />
+    <Compile Include="External\ExternalBlock.cs" />
+    <Compile Include="External\ExternalBlockReference.cs" />
+    <Compile Include="External\ExternalDocument.cs" />
+    <Compile Include="External\ExternalObject.cs" />
+    <Compile Include="External\ExternalObjectBase.cs" />
     <Compile Include="AutoCAD\Objects\Layer.cs" />
     <Compile Include="AutoCAD\Objects\ObjectSupport.cs" />
     <Compile Include="AutoCAD\Objects\Object.cs" />

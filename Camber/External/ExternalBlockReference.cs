@@ -11,13 +11,13 @@ using Autodesk.DesignScript.Geometry;
 using Autodesk.DesignScript.Runtime;
 #endregion
 
-namespace Camber.AutoCAD.External
+namespace Camber.External
 {
     public sealed class ExternalBlockReference : ExternalObject
     {
         #region properties
         internal AcBlockReference AcEntity => AcObject as AcBlockReference;
-        
+
         /// <summary>
         /// Gets the External Block referenced by an External Block Reference.
         /// </summary>
@@ -57,13 +57,13 @@ namespace Camber.AutoCAD.External
         /// <param name="destinationBlock">The block where the block reference will be created.</param>
         /// <returns></returns>
         public static ExternalBlockReference ByCoordinateSystem(
-            ExternalBlock sourceBlock, 
-            CoordinateSystem cs, 
-            string layer, 
+            ExternalBlock sourceBlock,
+            CoordinateSystem cs,
+            string layer,
             ExternalBlock destinationBlock)
         {
             if (string.IsNullOrEmpty(layer)) { throw new ArgumentNullException("layer"); }
-            
+
             ExternalBlockReference retBlk = null;
 
             acDb.Database destDb = destinationBlock.AcBlock.Database;
@@ -106,7 +106,7 @@ namespace Camber.AutoCAD.External
         /// </summary>
         /// <param name="cs"></param>
         /// <returns></returns>
-        public ExternalBlockReference SetCoordinateSystem(CoordinateSystem cs) => 
+        public ExternalBlockReference SetCoordinateSystem(CoordinateSystem cs) =>
             (ExternalBlockReference)SetValue(
             acDynNodes.AutoCADUtility.CooridnateSystemToMatrix(cs),
             "BlockTransform");
