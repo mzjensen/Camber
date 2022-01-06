@@ -30,15 +30,16 @@ namespace Camber.AutoCAD.Objects
         /// <summary>
         /// Gets the handle assigned to an Object.
         /// </summary>
-        /// <param name="obj"></param>
+        /// <param name="object"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        public static string Handle(acDynNodes.Object obj)
+        // BUG: for some reason this is giving a warning of "Converting objects to function pointers is not allowed."
+        private static string Handle(acDynNodes.Object @object)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
             using (var ctx = new acDynApp.DocumentContext(document.AcDocument.Database))
             {
-                acDb.Entity acEnt = (acDb.Entity)ctx.Transaction.GetObject(obj.InternalObjectId, acDb.OpenMode.ForRead);
+                acDb.Entity acEnt = (acDb.Entity)ctx.Transaction.GetObject(@object.InternalObjectId, acDb.OpenMode.ForRead);
                 return acEnt.Handle.ToString();
             }
         }
@@ -46,15 +47,15 @@ namespace Camber.AutoCAD.Objects
         /// <summary>
         /// Gets the color index assigned to an Object.
         /// </summary>
-        /// <param name="obj"></param>
+        /// <param name="object"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        public static int ColorIndex(acDynNodes.Object obj)
+        public static int ColorIndex(acDynNodes.Object @object)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
             using (var ctx = new acDynApp.DocumentContext(document.AcDocument.Database))
             {
-                acDb.Entity acEnt = (acDb.Entity)ctx.Transaction.GetObject(obj.InternalObjectId, acDb.OpenMode.ForRead);
+                acDb.Entity acEnt = (acDb.Entity)ctx.Transaction.GetObject(@object.InternalObjectId, acDb.OpenMode.ForRead);
                 return acEnt.ColorIndex;
             }
         }
@@ -62,26 +63,26 @@ namespace Camber.AutoCAD.Objects
         /// <summary>
         /// Highlights an Object in the current document.
         /// </summary>
-        /// <param name="obj"></param>
+        /// <param name="object"></param>
         /// <returns></returns>
-        public static acDynNodes.Object Highlight(acDynNodes.Object obj)
+        public static acDynNodes.Object Highlight(acDynNodes.Object @object)
         {
             using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
             {
-                acDb.Entity ent = (acDb.Entity)ctx.Transaction.GetObject(obj.InternalObjectId, acDb.OpenMode.ForRead);
+                acDb.Entity ent = (acDb.Entity)ctx.Transaction.GetObject(@object.InternalObjectId, acDb.OpenMode.ForRead);
                 ent.Highlight();
             }
-            return obj;
+            return @object;
         }
 
         /// <summary>
         /// Selects Objects in the current document. This mimics the behavior of clicking on an object.
         /// </summary>
-        /// <param name="obj"></param>
+        /// <param name="objects"></param>
         /// <returns></returns>
-        public static List<acDynNodes.Object> Select(List<acDynNodes.Object> objs)
+        public static List<acDynNodes.Object> Select(List<acDynNodes.Object> @objects)
         {
-            acDb.ObjectId[] oids = objs.Select(obj => obj.InternalObjectId).ToArray();
+            acDb.ObjectId[] oids = objects.Select(obj => obj.InternalObjectId).ToArray();
 
             var adoc = acDynNodes.Document.Current.AcDocument;
             var ed = adoc.Editor;
@@ -89,7 +90,7 @@ namespace Camber.AutoCAD.Objects
             {
                 ed.SetImpliedSelection(oids);
                 ed.SelectImplied();
-                return objs;
+                return objects;
             }
             catch (Exception e)
             {
