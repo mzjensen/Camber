@@ -17,17 +17,6 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>1</WarningLevel>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DocumentationFile>bin\Debug\Camber.xml</DocumentationFile>
-  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -37,45 +26,87 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\Camber.xml</DocumentationFile>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug2022|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug2022\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>bin\Debug\Camber.xml</DocumentationFile>
+    <WarningLevel>1</WarningLevel>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <C3DVersion>2022</C3DVersion>
+    <DynamoPackageFolder>2.12</DynamoPackageFolder>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug2021|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug2021\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>bin\Debug\Camber.xml</DocumentationFile>
+    <WarningLevel>1</WarningLevel>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <C3DVersion>2021</C3DVersion>
+    <DynamoPackageFolder>2.5</DynamoPackageFolder>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug2020|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug2020\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>bin\Debug\Camber.xml</DocumentationFile>
+    <WarningLevel>1</WarningLevel>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <C3DVersion>2020</C3DVersion>
+    <DynamoPackageFolder>2.4</DynamoPackageFolder>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="accoremgd">
-      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\accoremgd.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\accoremgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="acdbmgd">
-      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\acdbmgd.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\acdbmgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="AcDynamoServices">
-      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\C3D\Dynamo\AcDynamoServices.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\C3D\Dynamo\AcDynamoServices.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="acmgd">
-      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\acmgd.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\acmgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="AecBaseMgd">
-      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\AecBaseMgd.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\AecBaseMgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="AeccDataShortcutMgd">
-      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\C3D\AeccDataShortcutMgd.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\C3D\AeccDataShortcutMgd.dll</HintPath>
       <Private>False</Private>
+      <Aliases>global</Aliases>
     </Reference>
     <Reference Include="AeccDbMgd">
-      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\C3D\AeccDbMgd.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\C3D\AeccDbMgd.dll</HintPath>
       <Private>False</Private>
+      <Aliases>global</Aliases>
     </Reference>
     <Reference Include="AeccPressurePipesMgd">
-      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\C3D\AeccPressurePipesMgd.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\C3D\AeccPressurePipesMgd.dll</HintPath>
       <Private>False</Private>
+      <Aliases>global</Aliases>
     </Reference>
     <Reference Include="AutoCADNodes">
-      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\C3D\Dynamo\AutoCADNodes.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\C3D\Dynamo\AutoCADNodes.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Civil3DNodes">
-      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\C3D\Dynamo\Civil3DNodes.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\C3D\Dynamo\Civil3DNodes.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PresentationCore" />
@@ -294,6 +325,7 @@
     <Compile Include="Civil\Styles\Objects\MarkerStyle.cs" />
     <Compile Include="DynamoExtensions\Geometry\CurveExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\Globals.cs" />
     <Compile Include="Utils\ReflectionUtils.cs" />
     <Compile Include="Utils\MathUtils.cs" />
   </ItemGroup>
@@ -329,18 +361,12 @@
       <SourceXmls Include="$(TargetDir)*.xml" />
       <SourcePkg Include="pkg.json" />
     </ItemGroup>
-    <!--Copy the package to the Dynamo for Civil 3D 2022 2.10 package root directory-->
-    <RemoveDir Directories="$(AppData)\Autodesk\C3D 2022\Dynamo\2.10\packages\$(ProjectName)\bin" />
-    <Copy SourceFiles="@(SourceDlls)" DestinationFolder="$(AppData)\Autodesk\C3D 2022\Dynamo\2.10\packages\$(ProjectName)\bin\%(RecursiveDir)" />
-    <Copy SourceFiles="@(SourcePkg)" DestinationFolder="$(AppData)\Autodesk\C3D 2022\Dynamo\2.10\packages\$(ProjectName)\" />
-    <Copy SourceFiles="@(SourcePdbs)" DestinationFolder="$(AppData)\Autodesk\C3D 2022\Dynamo\2.10\packages\$(ProjectName)\bin\" />
-    <Copy SourceFiles="@(SourceXmls)" DestinationFolder="$(AppData)\Autodesk\C3D 2022\Dynamo\2.10\packages\$(ProjectName)\bin\" />
-    <!--Copy the package to the Dynamo for Civil 3D 2022 2.12 package root directory-->
-    <RemoveDir Directories="$(AppData)\Autodesk\C3D 2022\Dynamo\2.12\packages\$(ProjectName)\bin" />
-    <Copy SourceFiles="@(SourceDlls)" DestinationFolder="$(AppData)\Autodesk\C3D 2022\Dynamo\2.12\packages\$(ProjectName)\bin\%(RecursiveDir)" />
-    <Copy SourceFiles="@(SourcePkg)" DestinationFolder="$(AppData)\Autodesk\C3D 2022\Dynamo\2.12\packages\$(ProjectName)\" />
-    <Copy SourceFiles="@(SourcePdbs)" DestinationFolder="$(AppData)\Autodesk\C3D 2022\Dynamo\2.12\packages\$(ProjectName)\bin\" />
-    <Copy SourceFiles="@(SourceXmls)" DestinationFolder="$(AppData)\Autodesk\C3D 2022\Dynamo\2.12\packages\$(ProjectName)\bin\" />
+    <!--Copy the package to the Dynamo for Civil 3D package root directory-->
+    <RemoveDir Directories="$(AppData)\Autodesk\C3D $(C3DVersion)\Dynamo\2.12\packages\$(ProjectName)\bin" />
+    <Copy SourceFiles="@(SourceDlls)" DestinationFolder="$(AppData)\Autodesk\C3D $(C3DVersion)\Dynamo\$(DynamoPackageFolder)\packages\$(ProjectName)\bin\%(RecursiveDir)" />
+    <Copy SourceFiles="@(SourcePkg)" DestinationFolder="$(AppData)\Autodesk\C3D $(C3DVersion)\Dynamo\$(DynamoPackageFolder)\packages\$(ProjectName)\" />
+    <Copy SourceFiles="@(SourcePdbs)" DestinationFolder="$(AppData)\Autodesk\C3D $(C3DVersion)\Dynamo\$(DynamoPackageFolder)\packages\$(ProjectName)\bin\" />
+    <Copy SourceFiles="@(SourceXmls)" DestinationFolder="$(AppData)\Autodesk\C3D $(C3DVersion)\Dynamo\$(DynamoPackageFolder)\packages\$(ProjectName)\bin\" />
   </Target>
   <PropertyGroup>
     <PreBuildEvent>
