@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using Autodesk.DesignScript.Runtime;
 #endregion
 
@@ -141,6 +142,35 @@ namespace Camber.Utils
                 return obj;
             }
             catch { throw; }
+            return null;
+        }
+
+        /// <summary>
+        /// Invokes a method by name in the current assembly.
+        /// </summary>
+        /// <typeparam name="T">The type that the method is a member of.</typeparam>
+        /// <param name="args"></param>
+        /// <param name="methodName"></param>
+        /// <returns></returns>
+        public static object InvokeMethod<T>(object[] args, [CallerMemberName] string methodName = null)
+        {
+            Type objType = typeof(T);
+
+            MethodInfo methodInfo = objType.GetMethod(methodName);
+            Type returnType = methodInfo.ReturnType;
+            
+            try
+            {
+                object baseObject = Activator.CreateInstance(objType);
+                return objType.InvokeMember(
+                    methodName,
+                    BindingFlags.Default | BindingFlags.InvokeMethod,
+                    null,
+                    baseObject,
+                    args);
+            }
+            catch { }
+
             return null;
         }
         #endregion
