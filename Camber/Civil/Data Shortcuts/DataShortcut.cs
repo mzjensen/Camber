@@ -125,6 +125,7 @@ namespace Camber.Civil.DataShortcuts
         /// <summary>
         /// Creates a reference to a Data Shortcut in the current document.
         /// </summary>
+        /// <param name="document"></param>
         /// <returns></returns>
         public IList<civDynNodes.CivilObject> CreateReference(acDynNodes.Document document)
         {
