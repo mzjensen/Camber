@@ -131,7 +131,6 @@
     <Compile Include="AutoCAD\Objects\AttributeDefinition.cs" />
     <Compile Include="AutoCAD\Objects\Block.cs" />
     <Compile Include="AutoCAD\Document.cs" />
-    <Compile Include="Civil\Data Shortcuts\DSAssemblyLoader.cs" />
     <Compile Include="External\ExternalBlock.cs" />
     <Compile Include="External\ExternalBlockReference.cs" />
     <Compile Include="External\ExternalDocument.cs" />
