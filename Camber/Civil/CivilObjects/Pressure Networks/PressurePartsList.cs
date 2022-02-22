@@ -98,7 +98,10 @@ namespace Camber.Civil.PressureNetworks
         {
             List<PressurePartSize> parts = new List<PressurePartSize>();
             
-            civDb.PressurePartType domain = (civDb.PressurePartType)Enum.Parse(typeof(civDb.PressurePartType), pressurePartDomain);
+            civDb.PressurePartDomainType domain = (civDb.PressurePartDomainType)Enum.Parse(
+                typeof(civDb.PressurePartDomainType), 
+                pressurePartDomain);
+
             List< AeccPressurePartSize> aeccParts = AeccPressurePartsList.GetParts(domain);
             
             foreach (AeccPressurePartSize aeccPart in aeccParts)
