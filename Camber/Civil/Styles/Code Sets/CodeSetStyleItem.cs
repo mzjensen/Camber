@@ -190,7 +190,7 @@ namespace Camber.Civil.Styles.CodeSets
 
         /// <summary>
         /// Sets the render material style assigned to a Code Set Style Item.
-        /// Use an empty string to set the render material to "<none>".
+        /// Use an empty string to set the render material to "none".
         /// </summary>
         /// <param name="renderMaterial"></param>
         /// <returns></returns>
