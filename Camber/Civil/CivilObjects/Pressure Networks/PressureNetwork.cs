@@ -229,7 +229,7 @@ namespace Camber.Civil.PressureNetworks
         /// <param name="name">The name of the new Pipe Run.</param>
         /// <param name="polyline">Input Polyline that defines the path of the Pipe Run.</param>
         /// <param name="pressurePartSize"></param>
-        /// <param name="depthOfCover">Offset from reference surface.</param>
+        /// <param name="surfaceOffset">Offset from reference surface.</param>
         /// <param name="autoAddFittings">Automatically add Fittings at Polyline vertices?</param>
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
@@ -237,9 +237,15 @@ namespace Camber.Civil.PressureNetworks
             string name, 
             acDynNodes.Polyline polyline, 
             PressurePartSize pressurePartSize, 
-            double depthOfCover, 
+            double surfaceOffset, 
             bool autoAddFittings = true)
         {
+            // TODO
+            // 1. Need to check for part sizes that are not in the Pipe domain
+            // 2. Check if polyline elevation will be used if there is no reference surface and the polyline is not at 0.
+            // 3. Check for duplicate names. If the name already exists, it just adds a new run without a name.
+            // 4. Implement trace data
+            
             if (string.IsNullOrEmpty(name))
             {
                 throw new ArgumentException(NameIsNullOrEmptyMessage);
@@ -250,7 +256,7 @@ namespace Camber.Civil.PressureNetworks
                     name, 
                     (acDb.Polyline)polyline.InternalDBObject, 
                     pressurePartSize.AeccPressurePartSize,
-                    depthOfCover,
+                    surfaceOffset,
                     autoAddFittings);
                 return PipeRuns.FirstOrDefault(x => x.Name == name);
             }
