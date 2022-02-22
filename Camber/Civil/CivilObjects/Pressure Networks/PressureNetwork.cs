@@ -206,7 +206,7 @@ namespace Camber.Civil.PressureNetworks
         /// <param name="allowReference">Include data references?</param>
         /// <returns></returns>
         [NodeCategory("Actions")]
-        public static PressureNetwork GetByName(acDynNodes.Document document, string name, bool allowReference = false)
+        public static PressureNetwork GetPressureNetworkByName(acDynNodes.Document document, string name, bool allowReference = false)
         {
             if (document is null)
             {
