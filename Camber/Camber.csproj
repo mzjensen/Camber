@@ -131,6 +131,7 @@
     <Compile Include="AutoCAD\Objects\AttributeDefinition.cs" />
     <Compile Include="AutoCAD\Objects\Block.cs" />
     <Compile Include="AutoCAD\Document.cs" />
+    <Compile Include="Civil\CivilObjects\Pressure Networks\PressurePartSize.cs" />
     <Compile Include="External\ExternalBlock.cs" />
     <Compile Include="External\ExternalBlockReference.cs" />
     <Compile Include="External\ExternalDocument.cs" />
