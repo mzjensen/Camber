@@ -222,6 +222,43 @@ namespace Camber.Civil.PressureNetworks
                 .FirstOrDefault(item => item.Name.Equals
                 (name, StringComparison.OrdinalIgnoreCase));
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name">The name of the new Pipe Run.</param>
+        /// <param name="polyline">Input Polyline that defines the path of the Pipe Run.</param>
+        /// <param name="pressurePartSize"></param>
+        /// <param name="depthOfCover">Offset from reference surface.</param>
+        /// <param name="autoAddFittings">Automatically add Fittings at Polyline vertices?</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        public PressurePipeRun AddPipeRun(
+            string name, 
+            acDynNodes.Polyline polyline, 
+            PressurePartSize pressurePartSize, 
+            double depthOfCover, 
+            bool autoAddFittings = true)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentException(NameIsNullOrEmptyMessage);
+            }
+            try
+            {
+                AeccPressureNetwork.PipeRuns.createPipeRun(
+                    name, 
+                    (acDb.Polyline)polyline.InternalDBObject, 
+                    pressurePartSize.AeccPressurePartSize,
+                    depthOfCover,
+                    autoAddFittings);
+                return PipeRuns.FirstOrDefault(x => x.Name == name);
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
         #endregion
     }
 }
