@@ -6,8 +6,10 @@ using acApp = Autodesk.AutoCAD.ApplicationServices;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using civApp = Autodesk.Civil.ApplicationServices;
+using civDb = Autodesk.Civil.DatabaseServices;
 using PressureExtension = Autodesk.Civil.DatabaseServices.Styles.StylesRootPressurePipesExtension;
 using AeccPressurePartsList = Autodesk.Civil.DatabaseServices.Styles.PressurePartList;
+using AeccPressurePartSize = Autodesk.Civil.DatabaseServices.Styles.PressurePartSize;
 using DynamoServices;
 using Camber.Civil.Styles;
 #endregion
@@ -85,6 +87,80 @@ namespace Camber.Civil.PressureNetworks
                 }
             }
             return res;
+        }
+
+        /// <summary>
+        /// Gets the Pressure Parts in a Pressure Parts List by domain.
+        /// </summary>
+        /// <param name="pressurePartDomain"></param>
+        /// <returns></returns>
+        public IList<PressurePartSize> GetPartsByDomain(string pressurePartDomain)
+        {
+            List<PressurePartSize> parts = new List<PressurePartSize>();
+            
+            civDb.PressurePartType domain = (civDb.PressurePartType)Enum.Parse(typeof(civDb.PressurePartType), pressurePartDomain);
+            List< AeccPressurePartSize> aeccParts = AeccPressurePartsList.GetParts(domain);
+            
+            foreach (AeccPressurePartSize aeccPart in aeccParts)
+            {
+                parts.Add(new PressurePartSize(aeccPart));
+            }
+            
+            return parts;
+        }
+
+        /// <summary>
+        /// Adds a Pressure Part to a Pressure Parts List.
+        /// </summary>
+        /// <param name="pressurePartSize"></param>
+        /// <returns></returns>
+        public PressurePartsList AddPart(PressurePartSize pressurePartSize)
+        {
+            try
+            {
+                AeccPressurePartsList.AddPart(pressurePartSize.AeccPressurePartSize);
+                return this;
+            } 
+            catch (Exception e)
+            {
+                throw new InvalidOperationException(e.Message);
+            } 
+        }
+
+        /// <summary>
+        /// Removes a Pressure Part from a Pressure Parts List.
+        /// </summary>
+        /// <param name="pressurePartSize"></param>
+        /// <returns></returns>
+        public PressurePartsList RemovePart(PressurePartSize pressurePartSize)
+        {
+            try
+            {
+                AeccPressurePartsList.RemovePart(pressurePartSize.AeccPressurePartSize);
+                return this;
+            }
+            catch (Exception e)
+            {
+                throw new InvalidOperationException(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Updates a Pressure Part in a Pressure Parts List.
+        /// </summary>
+        /// <param name="pressurePartSize"></param>
+        /// <returns></returns>
+        public PressurePartsList UpdatePart(PressurePartSize pressurePartSize)
+        {
+            try
+            {
+                AeccPressurePartsList.UpdatePart(pressurePartSize.AeccPressurePartSize);
+                return this;
+            }
+            catch (Exception e)
+            {
+                throw new InvalidOperationException(e.Message);
+            }
         }
         #endregion
     }
