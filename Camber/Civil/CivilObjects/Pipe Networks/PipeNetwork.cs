@@ -302,14 +302,19 @@ namespace Camber.Civil.PipeNetworks
         }
 
         /// <summary>
-        /// Finds the shortest path in a Pipe Network between two Parts.
+        /// Finds the shortest path between two Parts in the same Pipe Network.
         /// </summary>
         /// <param name="startPart"></param>
         /// <param name="endPart"></param>
         /// <returns></returns>
         [MultiReturn(new[] { "Parts", "Path Length" })]
-        public Dictionary<string, object> FindShortestNetworkPath(Part startPart, Part endPart)
+        public static Dictionary<string, object> FindShortestNetworkPath(Part startPart, Part endPart)
         {
+            if (startPart.PipeNetwork.Name != endPart.PipeNetwork.Name)
+            {
+                throw new InvalidOperationException("The Parts must be in the same Pipe Network.");
+            }
+            
             double pathLength = 0.0;
             var parts = new List<Part>();
 
@@ -332,6 +337,10 @@ namespace Camber.Civil.PipeNetworks
                     {
                         throw new InvalidOperationException("Part is not a Pipe or Structure.");
                     }
+                }
+                if (startPart.Name != endPart.Name)
+                {
+                    parts.Add(endPart);
                 }
             }
             return new Dictionary<string, object>

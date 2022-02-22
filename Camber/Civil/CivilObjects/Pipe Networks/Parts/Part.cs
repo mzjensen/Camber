@@ -293,6 +293,7 @@ namespace Camber.Civil.PipeNetworks.Parts
 
         /// <summary>
         /// Sets the Part's Rule Set.
+        /// </summary>
         /// <param name="ruleSet"></param>
         /// <returns></returns>
         public Part SetRuleSet(RuleSet ruleSet)
