@@ -124,7 +124,7 @@ namespace Camber.Civil.PressureNetworks.Parts
         }
 
         /// <summary>
-        /// Gets the Pressure Part as a Dynamo solid.
+        /// Gets the Pressure Part represented as a Dynamo solid.
         /// </summary>
         public Solid Solid => GeometryConversions.AcSolidToDynSolid(AeccPressurePart.Get3dBody());
         #endregion
