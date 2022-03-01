@@ -105,6 +105,9 @@
       <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\C3D\Dynamo\AutoCADNodes.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Autodesk.Civil3DToolkit">
+      <HintPath>..\..\..\..\AppData\Roaming\Autodesk\C3D 2022\Dynamo\2.12\packages\Civil3DToolkit\bin\Autodesk.Civil3DToolkit.dll</HintPath>
+    </Reference>
     <Reference Include="Civil3DNodes">
       <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\C3D\Dynamo\Civil3DNodes.dll</HintPath>
       <Private>False</Private>
@@ -263,7 +266,7 @@
     <Compile Include="Civil\CivilObjects\Pipe Networks\Rule Sets\RuleSet.cs" />
     <Compile Include="Civil\CivilObjects\ViewFrame.cs" />
     <Compile Include="Civil\CivilObjects\ViewFrameGroup.cs" />
-    <Compile Include="Utils\GeometryConversions.cs" />
+    <Compile Include="Utilities\GeometryConversions.cs" />
     <Compile Include="Tools\ModelText.cs" />
     <Compile Include="Civil\CivilObjects\Catchment.cs" />
     <Compile Include="Civil\CivilObjects\CatchmentGroup.cs" />
@@ -326,9 +329,9 @@
     <Compile Include="Civil\Styles\Objects\MarkerStyle.cs" />
     <Compile Include="DynamoExtensions\Geometry\CurveExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utils\Globals.cs" />
-    <Compile Include="Utils\ReflectionUtils.cs" />
-    <Compile Include="Utils\MathUtils.cs" />
+    <Compile Include="Utilities\Globals.cs" />
+    <Compile Include="Utilities\ReflectionUtilities.cs" />
+    <Compile Include="Utilities\MathUtilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
