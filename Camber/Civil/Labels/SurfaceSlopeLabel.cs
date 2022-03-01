@@ -11,6 +11,7 @@ using Autodesk.DesignScript.Geometry;
 using AeccSurfaceSlopeLabel = Autodesk.Civil.DatabaseServices.SurfaceSlopeLabel;
 using DynamoServices;
 using Camber.Civil.Styles.Labels.Surface;
+using Camber.Utilities.GeometryConversions;
 #endregion
 
 namespace Camber.Civil.Labels
@@ -57,17 +58,17 @@ namespace Camber.Civil.Labels
                 if (SlopeLabelType == "OnePoint")
                 {
                     return civDynNodes.Surface.SamplePoint(
-                        Surface, 
-                        Utils.GeometryConversions.AcPointToDynPoint(AeccSurfaceSlopeLabel.Location));
+                        Surface,
+                        GeometryConversions.AcPointToDynPoint(AeccSurfaceSlopeLabel.Location));
                 }
                 else if (SlopeLabelType == "TwoPoint")
                 {
                     Point startPoint = civDynNodes.Surface.SamplePoint(
-                        Surface, 
-                        Utils.GeometryConversions.AcPointToDynPoint(AeccSurfaceSlopeLabel.Location));
+                        Surface,
+                        GeometryConversions.AcPointToDynPoint(AeccSurfaceSlopeLabel.Location));
                     Point endPoint = civDynNodes.Surface.SamplePoint(
-                        Surface, 
-                        Utils.GeometryConversions.AcPointToDynPoint(AeccSurfaceSlopeLabel.Location2));
+                        Surface,
+                        GeometryConversions.AcPointToDynPoint(AeccSurfaceSlopeLabel.Location2));
                     return Line.ByStartPointEndPoint(startPoint, endPoint);
                 }
                 else

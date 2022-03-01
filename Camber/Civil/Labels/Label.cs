@@ -9,11 +9,12 @@ using AeccLabel = Autodesk.Civil.DatabaseServices.Label;
 using Autodesk.DesignScript.Runtime;
 using Autodesk.DesignScript.Geometry;
 using DynamoServices;
-using Camber.Utils;
+using Camber.Utilities;
 using Camber.Civil.Styles.Labels;
 using System.Text;
 using Camber.Civil.Styles.Objects;
 using Camber.Civil.CivilObjects;
+using Camber.Utilities.GeometryConversions;
 #endregion
 
 namespace Camber.Civil.Labels
@@ -160,7 +161,7 @@ namespace Camber.Civil.Labels
         /// <summary>
         /// Gets the rotation angle of a Label.
         /// </summary>
-        public double Rotation => MathUtils.RadiansToDegrees(GetDouble("RotationAngle"));
+        public double Rotation => MathUtilities.RadiansToDegrees(GetDouble("RotationAngle"));
 
         /// <summary>
         /// Gets all of the Text, Reference Text, and Text For Each Label Style Components for a Label.
@@ -288,7 +289,7 @@ namespace Camber.Civil.Labels
         /// <returns></returns>
         public Label SetRotation(double angle)
         {
-            SetValue(MathUtils.DegreesToRadians(angle), "RotationAngle");
+            SetValue(MathUtilities.DegreesToRadians(angle), "RotationAngle");
             return this;
         }
 

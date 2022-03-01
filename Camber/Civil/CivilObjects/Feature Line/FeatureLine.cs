@@ -12,7 +12,8 @@ using Autodesk.DesignScript.Geometry;
 using Dynamo.Graph.Nodes;
 using DynamoServices;
 using Camber.DynamoExtensions.GeometryExtensions;
-using Camber.Utils;
+using Camber.Utilities;
+using Camber.Utilities.GeometryConversions;
 #endregion
 
 namespace Camber.Civil.CivilObjects
@@ -375,11 +376,11 @@ namespace Camber.Civil.CivilObjects
             {
                 if (param == 0)
                 {
-                    retCS = baseCS.Rotate(baseCS.YZPlane, MathUtils.GradeToAngle(GradeOutAtPoint(point)));
+                    retCS = baseCS.Rotate(baseCS.YZPlane, MathUtilities.GradeToAngle(GradeOutAtPoint(point)));
                 }
                 else
                 {
-                    retCS = baseCS.Rotate(baseCS.YZPlane, MathUtils.GradeToAngle(GradeInAtPoint(point)));
+                    retCS = baseCS.Rotate(baseCS.YZPlane, MathUtilities.GradeToAngle(GradeInAtPoint(point)));
                 }
             }
             else

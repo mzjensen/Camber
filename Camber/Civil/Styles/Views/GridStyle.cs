@@ -105,7 +105,7 @@ namespace Camber.Civil.Styles.Views
                 using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
                 {
                     var aeccParentStyle = ctx.Transaction.GetObject(ParentStyle.AeccStyle.ObjectId, acDb.OpenMode.ForWrite);
-                    Utils.ReflectionUtils.SetNestedProperty(AeccGridStyle, outerPropName + "." + innerPropertyName, value);
+                    Utilities.ReflectionUtilities.SetNestedProperty(AeccGridStyle, outerPropName + "." + innerPropertyName, value);
                     return this;
                 }
             }

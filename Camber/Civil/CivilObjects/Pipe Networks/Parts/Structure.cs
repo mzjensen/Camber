@@ -9,9 +9,9 @@ using AeccStructure = Autodesk.Civil.DatabaseServices.Structure;
 using AeccStructureLabel = Autodesk.Civil.DatabaseServices.StructureLabel;
 using Autodesk.DesignScript.Runtime;
 using Autodesk.DesignScript.Geometry;
-using Camber.Utils;
 using Camber.Civil.Labels;
 using Camber.Civil.CivilObjects;
+using Camber.Utilities.GeometryConversions;
 #endregion
 
 namespace Camber.Civil.PipeNetworks.Parts

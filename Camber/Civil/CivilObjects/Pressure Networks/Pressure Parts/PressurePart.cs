@@ -13,8 +13,8 @@ using AeccPressureFitting = Autodesk.Civil.DatabaseServices.PressureFitting;
 using Autodesk.DesignScript.Geometry;
 using DynamoServices;
 using Dynamo.Graph.Nodes;
-using Camber.Utils;
 using Camber.Civil.CivilObjects;
+using Camber.Utilities.GeometryConversions;
 #endregion
 
 namespace Camber.Civil.PressureNetworks.Parts
@@ -122,6 +122,11 @@ namespace Camber.Civil.PressureNetworks.Parts
                 }
             }
         }
+
+        /// <summary>
+        /// Gets the Pressure Part as a Dynamo solid.
+        /// </summary>
+        public Solid Solid => GeometryConversions.AcSolidToDynSolid(AeccPressurePart.Get3dBody());
         #endregion
 
         #region constructors

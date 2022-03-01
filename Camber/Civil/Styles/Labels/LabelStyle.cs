@@ -214,7 +214,7 @@ namespace Camber.Civil.Styles.Labels
             using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
             {
                 civApp.CivilDocument cdoc = civApp.CivilDocument.GetCivilDocument(ctx.Database);
-                var aeccCollection = Utils.ReflectionUtils.GetNestedProperty(cdoc.Styles.LabelStyles, labelStyleCollection, "Error");
+                var aeccCollection = Utilities.ReflectionUtilities.GetNestedProperty(cdoc.Styles.LabelStyles, labelStyleCollection, "Error");
 
                 // Check for duplicate
                 MethodInfo containsMethod = aeccCollection.GetType().GetMethod("Contains", new[] { typeof(string) });
@@ -256,7 +256,7 @@ namespace Camber.Civil.Styles.Labels
                 civApp.CivilDocument cdoc = civApp.CivilDocument.GetCivilDocument(ctx.Database);
                 
                 AeccLabelStyleCollection aeccCollection = 
-                    (AeccLabelStyleCollection)Utils.ReflectionUtils.GetNestedProperty(
+                    (AeccLabelStyleCollection)Utilities.ReflectionUtilities.GetNestedProperty(
                         cdoc.Styles.LabelStyles, 
                         labelStyleCollection, 
                         "Error");

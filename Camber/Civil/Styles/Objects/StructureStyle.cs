@@ -141,7 +141,7 @@ namespace Camber.Civil.Styles.Objects
 
             bool openedForWrite = AeccStructureStyle.IsWriteEnabled;
             if (!openedForWrite) { AeccStructureStyle.UpgradeOpen(); }
-            var res = Utils.ReflectionUtils.SetNestedProperty(AeccStructureStyle, viewDirection.ToString() + "." + propertyName, value);
+            var res = Utilities.ReflectionUtilities.SetNestedProperty(AeccStructureStyle, viewDirection.ToString() + "." + propertyName, value);
             if (res == null) { throw new Exception("Value not set."); }
             if (!openedForWrite) { AeccStructureStyle.DowngradeOpen(); }
             return this;
@@ -155,7 +155,7 @@ namespace Camber.Civil.Styles.Objects
         /// <returns></returns>
         private object GetStructureStyleProperty(StructureViewDirection viewDirection, string propertyName)
         {
-            var propVal = Utils.ReflectionUtils.GetNestedProperty(AeccStructureStyle, viewDirection.ToString() + "." + propertyName, null);
+            var propVal = Utilities.ReflectionUtilities.GetNestedProperty(AeccStructureStyle, viewDirection.ToString() + "." + propertyName, null);
             if (propVal is Enum)
             {
                 return propVal.ToString();

@@ -1,7 +1,7 @@
 ﻿#region references
 using AeccPressurePartConnection = Autodesk.Civil.DatabaseServices.PressurePartConnection;
 using Autodesk.DesignScript.Geometry;
-using Camber.Utils;
+using Camber.Utilities.GeometryConversions;
 #endregion
 
 namespace Camber.Civil.PressureNetworks.Parts

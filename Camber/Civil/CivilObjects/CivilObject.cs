@@ -19,7 +19,7 @@ using DynamoServices;
 using Dynamo.Graph.Nodes;
 using Camber.Civil.DataShortcuts;
 using Camber.Civil.Styles;
-using Camber.Utils;
+using Camber.Utilities;
 #endregion
 
 namespace Camber.Civil.CivilObjects
@@ -54,7 +54,7 @@ namespace Camber.Civil.CivilObjects
                 var aeccEntity = (civDb.Entity)oid.GetObject(acDb.OpenMode.ForRead);
                 var styleId = aeccEntity.StyleId;
                 var aeccStyle = styleId.GetObject(acDb.OpenMode.ForRead);
-                IEnumerable<Style> styles = ReflectionUtils.GetEnumerableOfType<Style>(new object[] { aeccStyle, false });
+                IEnumerable<Style> styles = ReflectionUtilities.GetEnumerableOfType<Style>(new object[] { aeccStyle, false });
                 if (styles.Count() > 1)
                 {
                     throw new Exception("Multiple Styles found.");

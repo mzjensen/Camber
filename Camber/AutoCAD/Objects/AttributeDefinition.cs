@@ -6,8 +6,8 @@ using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using AcAttDef = Autodesk.AutoCAD.DatabaseServices.AttributeDefinition;
 using Autodesk.DesignScript.Geometry;
 using DynamoServices;
-using Camber.Utils;
 using Autodesk.DesignScript.Runtime;
+using Camber.Utilities.GeometryConversions;
 #endregion
 
 namespace Camber.AutoCAD.Objects

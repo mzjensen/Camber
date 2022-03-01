@@ -188,7 +188,7 @@ namespace Camber.Civil.GradingCriteria
                 using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
                 {
                     var aeccParentStyle = ctx.Transaction.GetObject(CriteriaSet.AeccGradingCriteriaSet.ObjectId, acDb.OpenMode.ForWrite);
-                    Utils.ReflectionUtils.SetNestedProperty(AeccGradingCriteria, propertyName + ".Value", value);
+                    Utilities.ReflectionUtilities.SetNestedProperty(AeccGradingCriteria, propertyName + ".Value", value);
                     return this;
                 }
             }

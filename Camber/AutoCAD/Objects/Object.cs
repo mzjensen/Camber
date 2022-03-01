@@ -11,7 +11,7 @@ using civDb = Autodesk.Civil.DatabaseServices;
 using Dynamo.Graph.Nodes;
 using Autodesk.DesignScript.Runtime;
 using Camber.Civil.CivilObjects;
-using Camber.Utils;
+using Camber.Utilities;
 #endregion
 
 namespace Camber.AutoCAD.Objects
@@ -114,11 +114,11 @@ namespace Camber.AutoCAD.Objects
 
                 if (acObj is civDb.Entity)
                 {
-                    assemblyObjects = ReflectionUtils.GetEnumerableOfType<CivilObject>(new object[] { acObj, false });
+                    assemblyObjects = ReflectionUtilities.GetEnumerableOfType<CivilObject>(new object[] { acObj, false });
                 }
                 else if (acObj is acDb.Entity)
                 {
-                    assemblyObjects = ReflectionUtils.GetEnumerableOfType<Object>(new object[] { acObj, false });
+                    assemblyObjects = ReflectionUtilities.GetEnumerableOfType<Object>(new object[] { acObj, false });
                 }
 
                 if (assemblyObjects == null)

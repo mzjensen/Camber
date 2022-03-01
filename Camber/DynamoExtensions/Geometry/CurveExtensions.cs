@@ -3,7 +3,7 @@ using Autodesk.DesignScript.Geometry;
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using Camber.Utils;
+using Camber.Utilities;
 using Autodesk.DesignScript.Runtime;
 #endregion
 
@@ -32,7 +32,7 @@ namespace Camber.DynamoExtensions.GeometryExtensions
             }
             else
             {
-                Dictionary<string, object> paramDict = MathUtils.BulgeToParameters(startPoint, endPoint, bulge);
+                Dictionary<string, object> paramDict = MathUtilities.BulgeToParameters(startPoint, endPoint, bulge);
                 return Arc.ByCenterPointRadiusAngle((Point)paramDict["centerPoint"], (double)paramDict["radius"], (double)paramDict["startAngle"], (double)paramDict["endAngle"], Vector.ZAxis());
             }
         }

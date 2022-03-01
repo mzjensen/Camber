@@ -14,7 +14,7 @@ using AeccPressureFitting = Autodesk.Civil.DatabaseServices.PressureFitting;
 using Autodesk.DesignScript.Runtime;
 using Autodesk.DesignScript.Geometry;
 using Camber.Civil.PressureNetworks.Parts;
-using Camber.Utils;
+using Camber.Utilities.GeometryConversions;
 #endregion
 
 namespace Camber.Civil.PressureNetworks

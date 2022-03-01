@@ -122,7 +122,7 @@ namespace Camber.Civil.Styles.Objects
 
             bool openedForWrite = AeccPipeStyle.IsWriteEnabled;
             if (!openedForWrite) { AeccPipeStyle.UpgradeOpen(); }
-            var res = Utils.ReflectionUtils.SetNestedProperty(AeccPipeStyle, planOrProfile + "." + propertyName, value);
+            var res = Utilities.ReflectionUtilities.SetNestedProperty(AeccPipeStyle, planOrProfile + "." + propertyName, value);
             if (res == null) { throw new Exception("Value not set."); }
             if (!openedForWrite) { AeccPipeStyle.DowngradeOpen(); }
             return this;
@@ -139,7 +139,7 @@ namespace Camber.Civil.Styles.Objects
             string planOrProfile = "PlanOption";
             if (!usePlanOption) { planOrProfile = "ProfileOption"; }
 
-            var propVal = Utils.ReflectionUtils.GetNestedProperty(AeccPipeStyle, planOrProfile + "." + propertyName, null);
+            var propVal = Utilities.ReflectionUtilities.GetNestedProperty(AeccPipeStyle, planOrProfile + "." + propertyName, null);
             if (propVal is Enum)
             {
                 return propVal.ToString();

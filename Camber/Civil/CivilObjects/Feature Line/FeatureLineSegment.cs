@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using Autodesk.DesignScript.Geometry;
 using Autodesk.DesignScript.Runtime;
-using Camber.Utils;
+using Camber.Utilities;
 #endregion
 
 namespace Camber.Civil.CivilObjects
@@ -85,7 +85,7 @@ namespace Camber.Civil.CivilObjects
         {
             get
             {
-                Dictionary<string, object> parentParamDict = MathUtils.BulgeToParameters(ParentStartPoint, ParentEndPoint, ParentBulge);
+                Dictionary<string, object> parentParamDict = MathUtilities.BulgeToParameters(ParentStartPoint, ParentEndPoint, ParentBulge);
                 if (SegmentType is FeatureLineSegmentType.Line)
                 {
                     return Line.ByStartPointEndPoint(StartPoint, EndPoint);
