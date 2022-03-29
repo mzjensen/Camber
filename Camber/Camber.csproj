@@ -67,68 +67,59 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="accoremgd">
-      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\accoremgd.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\accoremgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="acdbmgd">
-      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\acdbmgd.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\acdbmgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="AcDynamoServices">
-      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\C3D\Dynamo\AcDynamoServices.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\C3D\Dynamo\AcDynamoServices.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="acmgd">
-      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\acmgd.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\acmgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="AecBaseMgd">
-      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\AecBaseMgd.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\AecBaseMgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="AeccDataShortcutMgd">
-      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\C3D\AeccDataShortcutMgd.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\C3D\AeccDataShortcutMgd.dll</HintPath>
       <Private>False</Private>
       <Aliases>global</Aliases>
     </Reference>
     <Reference Include="AeccDbMgd">
-      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\C3D\AeccDbMgd.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\C3D\AeccDbMgd.dll</HintPath>
       <Private>False</Private>
       <Aliases>global</Aliases>
     </Reference>
     <Reference Include="AeccPressurePipesMgd">
-      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\C3D\AeccPressurePipesMgd.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\C3D\AeccPressurePipesMgd.dll</HintPath>
       <Private>False</Private>
       <Aliases>global</Aliases>
     </Reference>
     <Reference Include="AutoCADNodes">
-      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\C3D\Dynamo\AutoCADNodes.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\C3D\Dynamo\AutoCADNodes.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Autodesk.Civil3DToolkit">
-      <HintPath>..\..\..\..\AppData\Roaming\Autodesk\C3D 2022\Dynamo\2.12\packages\Civil3DToolkit\bin\Autodesk.Civil3DToolkit.dll</HintPath>
+      <HintPath>..\..\..\..\..\AppData\Roaming\Autodesk\C3D 2022\Dynamo\2.12\packages\Civil3DToolkit\bin\Autodesk.Civil3DToolkit.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Civil3DNodes">
-      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\C3D\Dynamo\Civil3DNodes.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\C3D\Dynamo\Civil3DNodes.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Xaml" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="DynamoVisualProgramming.Core" Version="2.4.0.6186">
-      <ExcludeAssets>runtime</ExcludeAssets>
-    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoCAD\Objects\AttributeDefinition.cs" />
@@ -347,7 +338,8 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="DynamoVisualProgramming.Core">
-      <Version>2.4.0.6186</Version>
+      <Version>2.13.1.3887</Version>
+	  <ExcludeAssets>runtime</ExcludeAssets>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
