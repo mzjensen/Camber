@@ -45,6 +45,25 @@ namespace Camber.External
         public string Extension => FileInfo.Extension;
 
         /// <summary>
+        /// Gets the version of an ExternalDocument when it was last saved with the current session.
+        /// Returns null if the ExternalDocument has not been saved with the current session.
+        /// Returns 0 for any version prior to 2004.
+        /// </summary>
+        public int? LastSavedVersion 
+            => AutoCAD.Document.GetDatabaseVersionInfo(
+            AcDatabase, 
+            true);
+
+        /// <summary>
+        /// Gets the version of an ExternalDocument when it was first loaded.
+        /// Returns 0 for any version prior to 2004.
+        /// </summary>
+        public int? OriginalVersion
+            => AutoCAD.Document.GetDatabaseVersionInfo(
+                AcDatabase, 
+                false);
+
+        /// <summary>
         /// Gets if an External Document needs to be recovered.
         /// </summary>
         public bool NeedsRecovery => AcDatabase.NeedsRecovery;
