@@ -264,7 +264,9 @@ namespace Camber.Civil.PipeNetworks
         /// <param name="document"></param>
         /// <param name="allowReference">Include data references?</param>
         /// <returns></returns>
-        public static IList<PipeNetwork> GetPipeNetworks(acDynNodes.Document document, bool allowReference = false)
+        public static IList<PipeNetwork> GetPipeNetworks(
+            acDynNodes.Document document, 
+            bool allowReference = false)
         {
             if (document is null)
             {
@@ -288,9 +290,16 @@ namespace Camber.Civil.PipeNetworks
                             continue;
                         }
 
-                        if (tr.GetObject(oid, acDb.OpenMode.ForRead, false, true) is AeccPipeNetwork network)
+                        if (tr.GetObject(
+                                oid, 
+                                acDb.OpenMode.ForRead, 
+                                false, 
+                                true) is AeccPipeNetwork network)
                         {
-                            if (allowReference || (!network.IsReferenceObject && !network.IsReferenceSubObject))
+                            if (
+                                allowReference || 
+                                (!network.IsReferenceObject && 
+                                 !network.IsReferenceSubObject))
                             {
                                 networks.Add(new PipeNetwork(network));
                             }
@@ -308,11 +317,14 @@ namespace Camber.Civil.PipeNetworks
         /// <param name="endPart"></param>
         /// <returns></returns>
         [MultiReturn(new[] { "Parts", "Path Length" })]
-        public static Dictionary<string, object> FindShortestNetworkPath(Part startPart, Part endPart)
+        public static Dictionary<string, object> FindShortestNetworkPath(
+            Part startPart, 
+            Part endPart)
         {
             if (startPart.PipeNetwork.Name != endPart.PipeNetwork.Name)
             {
-                throw new InvalidOperationException("The Parts must be in the same Pipe Network.");
+                throw new InvalidOperationException(
+                    "The Parts must be in the same Pipe Network.");
             }
             
             double pathLength = 0.0;
@@ -321,10 +333,16 @@ namespace Camber.Civil.PipeNetworks
             var document = acDynNodes.Document.Current;
             using(var ctx = new acDynApp.DocumentContext(document.AcDocument.Database))
             {
-                var pathParts = AeccPipeNetwork.FindShortestNetworkPath(startPart.InternalObjectId, endPart.InternalObjectId, ref pathLength);
+                var pathParts = AeccPipeNetwork.FindShortestNetworkPath(
+                    startPart.InternalObjectId, 
+                    endPart.InternalObjectId, 
+                    ref pathLength);
                 foreach (acDb.ObjectId oid in pathParts)
                 {
-                    var aeccPart = ctx.Transaction.GetObject(oid, acDb.OpenMode.ForRead, false);
+                    var aeccPart = ctx.Transaction.GetObject(
+                        oid, 
+                        acDb.OpenMode.ForRead, 
+                        false);
                     if (aeccPart is AeccPipe)
                     {
                         parts.Add(Pipe.GetByObjectId(oid));
@@ -335,12 +353,9 @@ namespace Camber.Civil.PipeNetworks
                     }
                     else
                     {
-                        throw new InvalidOperationException("Part is not a Pipe or Structure.");
+                        throw new InvalidOperationException(
+                            "Part is not a Pipe or Structure.");
                     }
-                }
-                if (startPart.Name != endPart.Name)
-                {
-                    parts.Add(endPart);
                 }
             }
             return new Dictionary<string, object>
