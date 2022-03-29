@@ -125,6 +125,7 @@
     <Compile Include="AutoCAD\Objects\AttributeDefinition.cs" />
     <Compile Include="AutoCAD\Objects\Block.cs" />
     <Compile Include="AutoCAD\Document.cs" />
+    <Compile Include="AutoCAD\Objects\Text.cs" />
     <Compile Include="Civil\CivilObjects\Pressure Networks\PressurePartSize.cs" />
     <Compile Include="External\ExternalBlock.cs" />
     <Compile Include="External\ExternalBlockReference.cs" />
@@ -339,7 +340,7 @@
   <ItemGroup>
     <PackageReference Include="DynamoVisualProgramming.Core">
       <Version>2.13.1.3887</Version>
-	  <ExcludeAssets>runtime</ExcludeAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
