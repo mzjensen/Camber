@@ -143,7 +143,7 @@ namespace Camber.AutoCAD
                 throw new InvalidOperationException("Layout name is null or empty.");
             }
 
-            return GetLayouts(document).FirstOrDefault(
+            return GetLayouts(document, true).FirstOrDefault(
                 item => item.Name.Equals(
                     name, 
                     StringComparison.OrdinalIgnoreCase));
