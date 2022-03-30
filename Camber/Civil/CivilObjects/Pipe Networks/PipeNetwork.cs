@@ -230,7 +230,7 @@ namespace Camber.Civil.PipeNetworks
         }
 
         /// <summary>
-        /// Gets a Pipe Network in the document by name.
+        /// Gets a Pipe Network in a Document by name.
         /// </summary>
         /// <param name="document"></param>
         /// <param name="name"></param>
