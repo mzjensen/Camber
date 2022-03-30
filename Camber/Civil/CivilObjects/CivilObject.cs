@@ -19,6 +19,7 @@ using DynamoServices;
 using Dynamo.Graph.Nodes;
 using Camber.Civil.DataShortcuts;
 using Camber.Civil.Styles;
+using Camber.Civil.Toolspace;
 using Camber.Utilities;
 #endregion
 
@@ -87,6 +88,33 @@ namespace Camber.Civil.CivilObjects
                     return true;
                 }
                 return false;
+            }
+        }
+
+        /// <summary>
+        /// Gets the Toolspace Folder that a Civil Object is contained within.
+        /// Returns null if the Civil Object is not contained in a Folder.
+        /// </summary>
+        /// <param name="civilObject"></param>
+        /// <returns></returns>
+        [NodeCategory("Query")]
+        public static Folder Folder(civDynNodes.CivilObject civilObject)
+        {
+            acDynNodes.Document document = acDynNodes.Document.Current;
+
+            using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
+            {
+                acDb.ObjectId oid = civilObject.InternalObjectId;
+                var aeccEntity = (civDb.Entity)oid.GetObject(acDb.OpenMode.ForRead);
+
+                if (aeccEntity.FolderId != acDb.ObjectId.Null)
+                {
+                    civDb.Folder folder = (civDb.Folder)ctx.Transaction.GetObject(
+                        aeccEntity.FolderId,
+                        acDb.OpenMode.ForWrite);
+                    return new Folder(folder, false);
+                }
+                return null;
             }
         }
 
