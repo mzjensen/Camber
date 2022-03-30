@@ -11,6 +11,7 @@ using AcLayout = Autodesk.AutoCAD.DatabaseServices.Layout;
 using Autodesk.DesignScript.Geometry;
 using DynamoServices;
 using Autodesk.DesignScript.Runtime;
+using Dynamo.Graph.Nodes;
 using Dynamo.Utilities;
 using NUnit.Framework.Constraints;
 #endregion
@@ -127,6 +128,26 @@ namespace Camber.AutoCAD
             }
             return res;
         }
+
+        /// <summary>
+        /// Gets a Layout in a Document by name.
+        /// </summary>
+        /// <param name="document"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        [NodeCategory("Actions")]
+        public static Layout GetLayoutByName(acDynNodes.Document document, string name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new InvalidOperationException("Layout name is null or empty.");
+            }
+
+            return GetLayouts(document).FirstOrDefault(
+                item => item.Name.Equals(
+                    name, 
+                    StringComparison.OrdinalIgnoreCase));
+        }
         #endregion
 
         #region methods
@@ -163,6 +184,46 @@ namespace Camber.AutoCAD
             }
             ObjectHandle = (string)null;
             acDynNodes.Document.Current.AcDocument.Editor.Regen();
+        }
+
+        /// <summary>
+        /// Gets all of the Layouts in a Document.
+        /// </summary>
+        /// <param name="document"></param>
+        /// <param name="includeModel">Include Model Space?</param>
+        /// <returns></returns>
+        public static IList<Layout> GetLayouts(acDynNodes.Document document, bool includeModel = false)
+        {
+            List<Layout> layouts = new List<Layout>();
+
+            try
+            {
+                using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
+                {
+                    acDb.DBDictionary layoutDict = (acDb.DBDictionary)ctx.Transaction.GetObject(
+                        document.AcDocument.Database.LayoutDictionaryId,
+                        acDb.OpenMode.ForRead);
+                    foreach (acDb.DBDictionaryEntry layoutEntry in layoutDict)
+                    {
+                        if (layoutEntry.Key.ToUpper() == "MODEL" && !includeModel)
+                        {
+                            continue;
+                        }
+
+                        var acLayout = (acDb.Layout)ctx.Transaction.GetObject(
+                            layoutEntry.Value,
+                            acDb.OpenMode.ForRead);
+
+                        layouts.Add(new Layout(acLayout, false));
+                    }
+
+                    return layouts;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         /// <summary>
@@ -206,7 +267,7 @@ namespace Camber.AutoCAD
                 throw new InvalidOperationException("The Model Space tab cannot be reordered.");
             }
 
-            var docLayouts = Document.GetLayouts(
+            var docLayouts = GetLayouts(
                 acDynNodes.Document.Current, 
                 false);
 

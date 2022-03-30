@@ -168,45 +168,5 @@ namespace Camber.AutoCAD
                     return 0;
             }
         }
-
-        /// <summary>
-        /// Gets all of the Layouts in a Document.
-        /// </summary>
-        /// <param name="document"></param>
-        /// <param name="includeModel">Include Model Space?</param>
-        /// <returns></returns>
-        public static IList<Layout> GetLayouts(acDynNodes.Document document, bool includeModel = false)
-        {
-            List<Layout> layouts = new List<Layout>();
-
-            try
-            {
-                using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
-                {
-                    acDb.DBDictionary layoutDict = (acDb.DBDictionary)ctx.Transaction.GetObject(
-                        document.AcDocument.Database.LayoutDictionaryId,
-                        acDb.OpenMode.ForRead);
-                    foreach (acDb.DBDictionaryEntry layoutEntry in layoutDict)
-                    {
-                        if (layoutEntry.Key.ToUpper() == "MODEL" && !includeModel)
-                        {
-                            continue;
-                        }
-
-                        var acLayout = (acDb.Layout)ctx.Transaction.GetObject(
-                            layoutEntry.Value,
-                            acDb.OpenMode.ForRead);
-
-                        layouts.Add(new Layout(acLayout, false));
-                    }
-
-                    return layouts;
-                }
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
     }
 }
