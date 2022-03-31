@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Dynamo.Graph.Nodes;
 using System.Text;
+using Camber.Utilities;
 #endregion
 
 namespace Camber.UI
@@ -98,7 +99,8 @@ namespace Camber.UI
                 foreach (string enumName in Enum.GetNames(EnumerationType))
                 {
                     string displayName = enumName;
-                    if (AddSpaces) { displayName = AddSpacesBetweenCapitals(enumName, true, DropLastCharacter); }
+                    //if (AddSpaces) { displayName = AddSpacesBetweenCapitals(enumName, true, DropLastCharacter); }
+                    if (AddSpaces) { displayName = StringUtilities.AddSpacesBetweenCapitals(enumName, true, DropLastCharacter); }
                     Items.Add(new DynamoDropDownItem(displayName, enumName));
                 }
 
@@ -132,31 +134,6 @@ namespace Camber.UI
             var stringNode = AstFactory.BuildStringNode((string)Items[SelectedIndex].Item);
             var assign = AstFactory.BuildAssignment(GetAstIdentifierForOutputIndex(0), stringNode);
             return new List<AssociativeNode> { assign };
-        }
-
-        /// <summary>
-        /// Adds spaces between capital letters in a string.
-        /// </summary>
-        /// <param name="text"></param>
-        /// <param name="preserveAcronyms"></param>
-        /// <param name="dropLastCharacter"></param>
-        /// <returns></returns>
-        public string AddSpacesBetweenCapitals(string text, bool preserveAcronyms, bool dropLastCharacter = false)
-        {
-            if (string.IsNullOrWhiteSpace(text)) { return string.Empty; }
-            StringBuilder newText = new StringBuilder(text.Length * 2);
-            newText.Append(text[0]);
-            for (int i = 1; i < text.Length; i++)
-            {
-                if (char.IsUpper(text[i]))
-                    if ((text[i - 1] != ' ' && !char.IsUpper(text[i - 1])) ||
-                        (preserveAcronyms && char.IsUpper(text[i - 1]) &&
-                         i < text.Length - 1 && !char.IsUpper(text[i + 1])))
-                        newText.Append(' ');
-                newText.Append(text[i]);
-            }
-            if (dropLastCharacter) { newText = newText.Remove(newText.Length - 1, 1); }
-            return newText.ToString();
         }
     }
     #endregion
