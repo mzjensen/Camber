@@ -4,6 +4,7 @@ using civDs = Autodesk.Civil.DataShortcuts;
 using civDb = Autodesk.Civil.DatabaseServices;
 using Newtonsoft.Json;
 using Dynamo.Graph.Nodes;
+using Camber.Civil;
 #endregion
 
 namespace Camber.UI
@@ -51,5 +52,20 @@ namespace Camber.UI
         [JsonConstructor]
         public PressurePartTypeDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts)
             : base(OutputName, typeof(civDb.PressurePartType), inPorts, outPorts) { }
+    }
+
+    [NodeName("Folder Entity Types")]
+    [NodeCategory("Camber.Civil 3D.Folder")]
+    [NodeDescription("Select Folder entity type.")]
+    [IsDesignScriptCompatible]
+    public class FolderEntityTypesDropDown : EnumDropDownBase
+    {
+        private const string OutputName = "entityType";
+
+        public FolderEntityTypesDropDown() : base(OutputName, typeof(Folder.RootFolderType), true) { }
+
+        [JsonConstructor]
+        public FolderEntityTypesDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts)
+            : base(OutputName, typeof(Folder.RootFolderType), inPorts, outPorts) { }
     }
 }
