@@ -18,6 +18,9 @@
 		<namespace name="Camber.Civil.CivilObjects">
 			<category>Camber.Civil 3D.CivilObjects</category>
 		</namespace>
+		<namespace name="Camber.Civil.Intersections">
+			<category>Camber.Civil 3D.CivilObjects.Intersections</category>
+		</namespace>
 		<namespace name="Camber.Civil.PipeNetworks">
 			<category>Camber.Civil 3D.CivilObjects.Pipe Networks</category>
 		</namespace>
@@ -29,6 +32,9 @@
 		</namespace>
 		<namespace name="Camber.Civil.PressureNetworks.Parts">
 			<category>Camber.Civil 3D.CivilObjects.Pressure Networks.Parts</category>
+		</namespace>
+		<namespace name="Camber.Civil.Toolspace">
+			<category>Camber.Civil 3D.Toolspace</category>
 		</namespace>
 		<namespace name="Camber.Civil.DataShortcuts">
 			<category>Camber.Civil 3D.Data Shortcuts</category>
