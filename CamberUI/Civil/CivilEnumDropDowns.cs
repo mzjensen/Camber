@@ -54,18 +54,18 @@ namespace Camber.UI
             : base(OutputName, typeof(civDb.PressurePartType), inPorts, outPorts) { }
     }
 
-    [NodeName("Folder Entity Types")]
+    [NodeName("Folder Categories")]
     [NodeCategory("Camber.Civil 3D.Folder")]
-    [NodeDescription("Select Folder entity type.")]
+    [NodeDescription("Select Folder category.")]
     [IsDesignScriptCompatible]
-    public class FolderEntityTypesDropDown : EnumDropDownBase
+    public class FolderCategoriesDropDown : EnumDropDownBase
     {
-        private const string OutputName = "entityType";
+        private const string OutputName = "category";
 
-        public FolderEntityTypesDropDown() : base(OutputName, typeof(Folder.RootFolderType), true) { }
+        public FolderCategoriesDropDown() : base(OutputName, typeof(Folder.FolderCategory), true) { }
 
         [JsonConstructor]
-        public FolderEntityTypesDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts)
-            : base(OutputName, typeof(Folder.RootFolderType), inPorts, outPorts) { }
+        public FolderCategoriesDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts)
+            : base(OutputName, typeof(Folder.FolderCategory), inPorts, outPorts) { }
     }
 }

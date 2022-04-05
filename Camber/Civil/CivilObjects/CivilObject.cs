@@ -19,7 +19,6 @@ using DynamoServices;
 using Dynamo.Graph.Nodes;
 using Camber.Civil.DataShortcuts;
 using Camber.Civil.Styles;
-using Camber.Civil.Toolspace;
 using Camber.Utilities;
 #endregion
 
@@ -112,7 +111,10 @@ namespace Camber.Civil.CivilObjects
                     civDb.Folder folder = (civDb.Folder)ctx.Transaction.GetObject(
                         aeccEntity.FolderId,
                         acDb.OpenMode.ForWrite);
-                    return new Folder(folder, false);
+                    return new Folder(
+                        folder,
+                        Civil.Folder.DetermineRootFolderType(aeccEntity), 
+                        false);
                 }
                 return null;
             }
