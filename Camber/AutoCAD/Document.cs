@@ -1,15 +1,9 @@
 ﻿#region references
+using Dynamo.Graph.Nodes;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+using acApp = Autodesk.AutoCAD.ApplicationServices;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
-using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
-using acApp = Autodesk.AutoCAD.ApplicationServices;
-using Dynamo.Graph.Nodes;
 #endregion
 
 namespace Camber.AutoCAD

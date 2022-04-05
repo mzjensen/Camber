@@ -1,19 +1,15 @@
 ﻿#region references
-using System;
-using System.Linq;
-using System.Collections.Generic;
 using Autodesk.AutoCAD.DynamoNodes;
+using Autodesk.DesignScript.Runtime;
+using Dynamo.Graph.Nodes;
+using DynamoServices;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
-using acGeom = Autodesk.AutoCAD.Geometry;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using AcLayout = Autodesk.AutoCAD.DatabaseServices.Layout;
-using Autodesk.DesignScript.Geometry;
-using DynamoServices;
-using Autodesk.DesignScript.Runtime;
-using Dynamo.Graph.Nodes;
-using Dynamo.Utilities;
-using NUnit.Framework.Constraints;
 #endregion
 
 namespace Camber.AutoCAD

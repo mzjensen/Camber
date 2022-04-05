@@ -1,13 +1,13 @@
 ﻿#region references
-using acDb = Autodesk.AutoCAD.DatabaseServices;
-using acGeom = Autodesk.AutoCAD.Geometry;
-using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
-using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
-using AcAttDef = Autodesk.AutoCAD.DatabaseServices.AttributeDefinition;
 using Autodesk.DesignScript.Geometry;
-using DynamoServices;
 using Autodesk.DesignScript.Runtime;
 using Camber.Utilities.GeometryConversions;
+using DynamoServices;
+using AcAttDef = Autodesk.AutoCAD.DatabaseServices.AttributeDefinition;
+using acDb = Autodesk.AutoCAD.DatabaseServices;
+using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
+using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
+using acGeom = Autodesk.AutoCAD.Geometry;
 #endregion
 
 namespace Camber.AutoCAD.Objects
