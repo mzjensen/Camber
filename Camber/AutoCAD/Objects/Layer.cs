@@ -1,13 +1,12 @@
 ﻿#region references
-using System;
-using System.Reflection;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using Autodesk.AutoCAD.Colors;
-using acDb = Autodesk.AutoCAD.DatabaseServices;
-using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
-using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using Autodesk.DesignScript.Runtime;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using acDb = Autodesk.AutoCAD.DatabaseServices;
+using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
+using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 #endregion
 
 namespace Camber.AutoCAD.Objects
