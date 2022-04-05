@@ -165,7 +165,7 @@ namespace Camber.External
         /// Loads an External Document from an existing file.
         /// </summary>
         /// <param name="filePath">The path to the file.</param>
-        /// <param name="lock">True = file can be edited by other applications, False = file can only be opened as read-only by other applications.</param>
+        /// <param name="lock">True = file can only be opened as read-only by other applications, False = file can be edited by other applications.</param>
         /// <returns></returns>
         [NodeCategory("Actions")]
         public static ExternalDocument LoadFromFile(string filePath, bool @lock)
