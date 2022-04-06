@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using AcDatabase = Autodesk.AutoCAD.DatabaseServices.Database;
 using Autodesk.DesignScript.Runtime;
+using Camber.External.ExternalObjects;
 using Dynamo.Graph.Nodes;
 #endregion
 
@@ -112,6 +113,35 @@ namespace Camber.External
                     }
                 }
                 return blocks;
+            }
+        }
+
+        /// <summary>
+        /// Gets the External Layers in an External Document.
+        /// </summary>
+        public IList<ExternalLayer> Layers
+        {
+            get
+            {
+                List<ExternalLayer> layers = new List<ExternalLayer>();
+                acDb.Transaction t = AcDatabase.TransactionManager.StartTransaction();
+                using (t)
+                {
+                    acDb.LayerTable lt = (acDb.LayerTable)t.GetObject(
+                        AcDatabase.LayerTableId, 
+                        acDb.OpenMode.ForRead);
+                    foreach (acDb.ObjectId oid in lt)
+                    {
+                        acDb.LayerTableRecord ltr = (acDb.LayerTableRecord)t.GetObject(
+                            oid, 
+                            acDb.OpenMode.ForRead);
+                        if (ltr != null)
+                        {
+                            layers.Add(new ExternalLayer(ltr));
+                        }
+                    }
+                }
+                return layers;
             }
         }
         #endregion
@@ -283,12 +313,27 @@ namespace Camber.External
         /// <returns></returns>
         public ExternalBlock BlockByName(string name)
         {
-            if (string.IsNullOrEmpty(name))
+            if (string.IsNullOrWhiteSpace(name))
             {
-                throw new ArgumentException("Name is null or empty.");
+                throw new InvalidOperationException("Invalid name.");
             }
 
             return Blocks.FirstOrDefault(item => item.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+        }
+
+        /// <summary>
+        /// Gets an External Layer from an External Document by name.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public ExternalLayer LayerByName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new InvalidOperationException("Invalid name.");
+            }
+
+            return Layers.FirstOrDefault(item => item.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
         }
 
         /// <summary>
