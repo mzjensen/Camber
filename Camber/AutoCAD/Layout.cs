@@ -1,6 +1,7 @@
 ﻿#region references
 using Autodesk.AutoCAD.DynamoNodes;
 using Autodesk.DesignScript.Runtime;
+using Camber.External;
 using Dynamo.Graph.Nodes;
 using DynamoServices;
 using System;
@@ -123,6 +124,130 @@ namespace Camber.AutoCAD
                 throw new InvalidOperationException(NameExistsMsg);
             }
             return res;
+        }
+
+        /// <summary>
+        /// Imports a Layout from an External Document.
+        /// </summary>
+        /// <param name="externalDocument"></param>
+        /// <param name="layoutName"></param>
+        /// <returns></returns>
+        public static Layout Import(ExternalDocument externalDocument, string layoutName)
+        {
+            if (string.IsNullOrWhiteSpace(layoutName))
+            {
+                throw new InvalidOperationException("Invalid layout name.");
+            }
+
+            if (GetLayoutByName(acDynNodes.Document.Current, layoutName) != null)
+            {
+                throw new InvalidOperationException("A Layout with that name already exists in the current document.");
+            }
+
+            acDb.Database curDb = acDynNodes.Document.Current.AcDocument.Database;
+            acDb.Database exDb = externalDocument.AcDatabase;
+            
+            // External drawing transaction
+            using (acDb.Transaction exTr = exDb.TransactionManager.StartTransaction())
+            {
+                acDb.DBDictionary layoutsEx = (acDb.DBDictionary)exTr.GetObject(
+                        exDb.LayoutDictionaryId, 
+                        acDb.OpenMode.ForRead);
+
+                if (!layoutsEx.Contains(layoutName))
+                {
+                    throw new InvalidOperationException("A Layout with that name does not exist in the external drawing.");
+                }
+                
+                // Get the layout and block objects from the external drawing
+                AcLayout layEx = layoutsEx.GetAt(layoutName).GetObject(acDb.OpenMode.ForRead) as AcLayout;
+                acDb.BlockTableRecord blkBlkRecEx = (acDb.BlockTableRecord)exTr.GetObject(
+                        layEx.BlockTableRecordId,
+                        acDb.OpenMode.ForRead);
+
+                // Get the objects from the block associated with the layout
+                acDb.ObjectIdCollection idCol = new acDb.ObjectIdCollection();
+                foreach (acDb.ObjectId id in blkBlkRecEx)
+                {
+                    idCol.Add(id);
+                }
+
+                // Current drawing transaction
+                using (var ctx = new acDynApp.DocumentContext(curDb))
+                {
+                    // Get the block table and create a new block,
+                    // then copy the objects between drawings
+                    acDb.BlockTable blkTbl = (acDb.BlockTable)ctx.Transaction.GetObject(
+                        curDb.BlockTableId, 
+                        acDb.OpenMode.ForWrite);
+
+                    using (acDb.BlockTableRecord blkBlkRec = new acDb.BlockTableRecord())
+                    {
+                        int layoutCount = layoutsEx.Count - 1;
+
+                        blkBlkRec.Name = "*Paper_Space" + layoutCount.ToString();
+                        blkTbl.Add(blkBlkRec);
+                        ctx.Transaction.AddNewlyCreatedDBObject(blkBlkRec, true);
+                        exDb.WblockCloneObjects(
+                            idCol,
+                            blkBlkRec.ObjectId,
+                            new acDb.IdMapping(),
+                            acDb.DuplicateRecordCloning.Ignore,
+                            false);
+
+                        // Create a new layout and then copy properties between drawings
+                        acDb.DBDictionary layouts = (acDb.DBDictionary)ctx.Transaction.GetObject(
+                            curDb.LayoutDictionaryId,
+                            acDb.OpenMode.ForWrite);
+
+                        using (AcLayout lay = new AcLayout())
+                        {
+                            lay.LayoutName = layoutName;
+                            lay.AddToLayoutDictionary(curDb, blkBlkRec.ObjectId);
+                            ctx.Transaction.AddNewlyCreatedDBObject(lay, true);
+                            lay.CopyFrom(layEx);
+
+                            acDb.DBDictionary plSets = (acDb.DBDictionary)ctx.Transaction.GetObject(
+                                    curDb.PlotSettingsDictionaryId,
+                                    acDb.OpenMode.ForRead);
+
+                            // Check to see if a named page setup was assigned to the layout,
+                            // if so then copy the page setup settings
+                            if (lay.PlotSettingsName != "")
+                            {
+                                // Check to see if the page setup exists
+                                if (!plSets.Contains(lay.PlotSettingsName))
+                                {
+                                    ctx.Transaction.GetObject(
+                                        curDb.PlotSettingsDictionaryId, 
+                                        acDb.OpenMode.ForWrite);
+
+                                    using (acDb.PlotSettings plSet = new acDb.PlotSettings(lay.ModelType))
+                                    {
+                                        plSet.PlotSettingsName = lay.PlotSettingsName;
+                                        plSet.AddToPlotSettingsDictionary(curDb);
+                                        ctx.Transaction.AddNewlyCreatedDBObject(plSet, true);
+
+                                        acDb.DBDictionary plSetsEx = (acDb.DBDictionary)exTr.GetObject(
+                                            exDb.PlotSettingsDictionaryId,
+                                            acDb.OpenMode.ForRead);
+
+                                        acDb.PlotSettings plSetEx =
+                                            plSetsEx.GetAt(lay.PlotSettingsName).GetObject(
+                                                           acDb.OpenMode.ForRead) as acDb.PlotSettings;
+
+                                        plSet.CopyFrom(plSetEx);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    acDynNodes.Document.Current.AcDocument.Editor.Regen();
+                    //ctx.Transaction.Commit();
+                }
+                exTr.Abort();
+                return GetLayoutByName(acDynNodes.Document.Current, layoutName);
+            }
         }
 
         /// <summary>
