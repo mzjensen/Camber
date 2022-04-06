@@ -1,6 +1,7 @@
 ﻿#region references
 using Autodesk.AutoCAD.Colors;
 using Autodesk.DesignScript.Runtime;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -69,6 +70,16 @@ namespace Camber.AutoCAD.Objects
         /// <returns></returns>
         public static acDynNodes.Layer SetColor(acDynNodes.Layer layer, string colorName, string bookName)
         {
+            if (string.IsNullOrWhiteSpace(colorName))
+            {
+                throw new InvalidOperationException("Invalid color name.");
+            }
+
+            if (string.IsNullOrWhiteSpace(bookName))
+            {
+                throw new InvalidOperationException("Invalid book name.");
+            }
+
             var color = Color.FromNames(colorName, bookName);
             SetValue(layer, color);
             return layer;
