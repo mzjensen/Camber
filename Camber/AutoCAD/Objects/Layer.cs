@@ -1,6 +1,7 @@
 ﻿#region references
 using Autodesk.AutoCAD.Colors;
 using Autodesk.DesignScript.Runtime;
+using Dynamo.Graph.Nodes;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -14,7 +15,40 @@ namespace Camber.AutoCAD.Objects
 {
     public static class Layer
     {
-        #region methods
+        #region query methods
+        /// <summary>
+        /// Gets the lineweight of a Layer.
+        /// </summary>
+        /// <param name="layer"></param>
+        /// <returns></returns>
+        [NodeCategory("Query")]
+        public static object Lineweight(acDynNodes.Layer layer)
+        {
+            using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
+            {
+                var lt = (acDb.LayerTable)ctx.Transaction.GetObject(
+                    ctx.Database.LayerTableId, 
+                    acDb.OpenMode.ForRead);
+                var ltr = (acDb.LayerTableRecord)ctx.Transaction.GetObject(
+                    lt[layer.Name], 
+                    acDb.OpenMode.ForRead);
+                
+                var lw = ltr.LineWeight;
+                if ((int)lw < 0)
+                {
+                    if ((int)lw == -3)
+                    {
+                        return "Default";
+                    }
+
+                    return lw.ToString();
+                }
+                return (double)lw / 100;
+            }
+        }
+        #endregion
+
+        #region action methods
         /// <summary>
         /// Gets info about the color assigned to a Layer.
         /// </summary>
@@ -85,6 +119,30 @@ namespace Camber.AutoCAD.Objects
             return layer;
         }
 
+        /// <summary>
+        /// Sets the lineweight of a Layer.
+        /// </summary>
+        /// <param name="layer"></param>
+        /// <param name="lineweight"></param>
+        /// <returns></returns>
+        public static acDynNodes.Layer SetLineweight(acDynNodes.Layer layer, string lineweight)
+        {
+            if (string.IsNullOrWhiteSpace(lineweight))
+            {
+                throw new ArgumentNullException(nameof(lineweight));
+            }
+            acDb.LineWeight lwEnum;
+            if (!Enum.TryParse(lineweight, out lwEnum))
+            {
+                throw new InvalidOperationException("Invalid lineweight.");
+            }
+
+            SetValue(layer, lwEnum, "LineWeight");
+            return layer;
+        }
+        #endregion
+
+        #region helper methods
         internal static acDynNodes.Layer SetValue(acDynNodes.Layer layer, object value, [CallerMemberName] string methodName = null)
         {
             if (methodName.StartsWith("Set"))
