@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using AcBlock = Autodesk.AutoCAD.DatabaseServices.BlockTableRecord;
+using Camber.External.ExternalObjects;
 #endregion
 
 namespace Camber.External

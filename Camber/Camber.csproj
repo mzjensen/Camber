@@ -113,6 +113,9 @@
       <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\C3D\Dynamo\Civil3DNodes.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="DSCoreNodes">
+      <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\C3D\Dynamo\Core\DSCoreNodes.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -132,11 +135,12 @@
     <Compile Include="Civil\CivilObjects\Corridor.cs" />
     <Compile Include="Civil\Labels\IntersectionLocationLabel.cs" />
     <Compile Include="Civil\Toolspace\Folder.cs" />
+    <Compile Include="External\External Objects\ExternalLayer.cs" />
     <Compile Include="External\ExternalBlock.cs" />
-    <Compile Include="External\ExternalBlockReference.cs" />
+    <Compile Include="External\External Objects\ExternalBlockReference.cs" />
     <Compile Include="External\ExternalDocument.cs" />
-    <Compile Include="External\ExternalObject.cs" />
-    <Compile Include="External\ExternalObjectBase.cs" />
+    <Compile Include="External\External Objects\ExternalObject.cs" />
+    <Compile Include="External\External Objects\ExternalObjectBase.cs" />
     <Compile Include="AutoCAD\Objects\Layer.cs" />
     <Compile Include="AutoCAD\Objects\ObjectSupport.cs" />
     <Compile Include="AutoCAD\Objects\Object.cs" />

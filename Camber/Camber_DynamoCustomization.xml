@@ -119,6 +119,9 @@
 		<namespace name="Camber.External">
 			<category>Camber.External</category>
 		</namespace>
+		<namespace name="Camber.External.ExternalObjects">
+			<category>Camber.External.External Objects</category>
+		</namespace>
 		<!--Tools-->
 		<namespace name="Camber.Tools">
 			<category>Camber.Tools</category>

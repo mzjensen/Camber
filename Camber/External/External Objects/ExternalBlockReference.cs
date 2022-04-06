@@ -11,7 +11,7 @@ using Autodesk.DesignScript.Geometry;
 using Autodesk.DesignScript.Runtime;
 #endregion
 
-namespace Camber.External
+namespace Camber.External.ExternalObjects
 {
     public sealed class ExternalBlockReference : ExternalObject
     {

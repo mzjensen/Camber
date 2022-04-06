@@ -6,7 +6,7 @@ using acDb = Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.DesignScript.Runtime;
 #endregion
 
-namespace Camber.External
+namespace Camber.External.ExternalObjects
 {
     public class ExternalObject : ExternalObjectBase
     {
