@@ -274,6 +274,24 @@ namespace Camber.Civil.Styles
         public Style SetCreateBy(string value) => SetValue(value);
 
         /// <summary>
+        /// Duplicates a Style.
+        /// </summary>
+        /// <param name="newStyleName"></param>
+        /// <returns></returns>
+        public Style Duplicate(string newStyleName)
+        {
+            try
+            {
+                AeccStyle.CopyAsSibling(newStyleName);
+                return this;
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
+
+        /// <summary>
         /// Gets the Display Styles by view direction for a Style. 
         /// </summary>
         /// <param name="style"></param>
