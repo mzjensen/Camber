@@ -61,6 +61,34 @@ namespace Camber.AutoCAD.Objects
         }
 
         /// <summary>
+        /// Sets the color of an Object by color index.
+        /// 0 = ByBlock, 256 = ByLayer.
+        /// </summary>
+        /// <param name="object"></param>
+        /// <param name="colorIndex"></param>
+        /// <returns></returns>
+        public static acDynNodes.Object SetColor(acDynNodes.Object @object, int colorIndex)
+        {
+            acDynNodes.Document document = acDynNodes.Document.Current;
+            try
+            {
+                using (var ctx = new acDynApp.DocumentContext(document.AcDocument.Database))
+                {
+                    acDb.Entity acEnt = (acDb.Entity)ctx.Transaction.GetObject(
+                        @object.InternalObjectId,
+                        acDb.OpenMode.ForWrite);
+                    acEnt.ColorIndex = colorIndex;
+                    return @object;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+            
+        }
+
+        /// <summary>
         /// Highlights an Object in the current document.
         /// </summary>
         /// <param name="object"></param>
