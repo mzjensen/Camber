@@ -281,20 +281,30 @@ namespace Camber.AutoCAD
         public override void Dispose()
         {
             if (acDynApp.DisposeLogic.DisableDispose)
+            {
                 return;
+            }
+
             acDynApp.LifecycleManager<string> instance = acDynApp.LifecycleManager<string>.Instance;
+
             if (instance.IsEmpty())
             {
                 return;
             }
             bool flag = instance.IsAutoCADDeleted(this.Handle);
             instance.UnRegisterAssociation(Handle, (object)this, this.IsDynamoOwned);
+            
             if (this.IsDynamoOwned && !flag && instance.GetDynamoOwnedRegisterCount(this.Handle) == 0)
             {
                 try
                 {
                     if (!string.IsNullOrEmpty(this.Handle))
                     {
+                        // If layout is current, switch to Model to avoid hard crash
+                        if (acDb.LayoutManager.Current.CurrentLayout == this.Name)
+                        {
+                            acDb.LayoutManager.Current.CurrentLayout = "Model";
+                        }
                         this.Delete();
                     }
                 }
