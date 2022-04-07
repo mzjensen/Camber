@@ -11,6 +11,10 @@ using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using AcLayout = Autodesk.AutoCAD.DatabaseServices.Layout;
+using Autodesk.DesignScript.Geometry;
+using Camber.Utilities;
+using Camber.Utilities.GeometryConversions;
+
 #endregion
 
 namespace Camber.AutoCAD
@@ -19,11 +23,21 @@ namespace Camber.AutoCAD
     public sealed class Layout : ObjectBase
     {
         #region properties
-
         private const string NameExistsMsg = "A Layout with the same name already exists.";
+        private const string PageSetupNotExistsMsg = "A page setup with that name does not exist.";
         internal AcLayout AcLayout => AcObject as AcLayout;
 
         /// <summary>
+        /// Gets the name of a Layout.
+        /// </summary>
+        public string Name => AcLayout.LayoutName;
+
+        /// <summary>
+        /// Gets the tab order of a Layout.
+        /// </summary>
+        public int TabOrder => AcLayout.TabOrder;
+
+        /// <summary>P
         /// Gets the Block associated with a Layout.
         /// </summary>
         public acDynNodes.Block Block
@@ -51,17 +65,6 @@ namespace Camber.AutoCAD
                 }
             }
         }
-
-        /// <summary>
-        /// Gets the name of a Layout.
-        /// </summary>
-        public string Name => AcLayout.LayoutName;
-
-        /// <summary>
-        /// Gets the tab order of a Layout.
-        /// </summary>
-        public int TabOrder => AcLayout.TabOrder;
-
         #endregion
 
         #region constructors
@@ -74,7 +77,10 @@ namespace Camber.AutoCAD
         /// <param name="document"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        public static Layout ByName(acDynNodes.Document document, string name)
+        public static Layout ByName(
+            acDynNodes.Document document, 
+            string name,
+            string pageSetupName)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -82,6 +88,7 @@ namespace Camber.AutoCAD
             }
 
             bool hasLayoutWithSameName = false;
+            bool pageSetupExists = true;
             var res = CommonConstruct<Layout, AcLayout>(
                 document,
                 (ctx) =>
@@ -92,13 +99,28 @@ namespace Camber.AutoCAD
                         return null;
                     }
 
-                    using (acDb.Transaction t = ctx.Transaction.TransactionManager.StartTransaction())
+                    using (acDb.Transaction tr = document.AcDocument.TransactionManager.StartTransaction())
                     {
+                        acDb.DBDictionary plSets = (acDb.DBDictionary)tr.GetObject(
+                            ctx.Database.PlotSettingsDictionaryId,
+                            acDb.OpenMode.ForRead);
+
+                        if (!plSets.Contains(pageSetupName))
+                        {
+                            pageSetupExists = false;
+                            return null;
+                        }
+
                         acDb.ObjectId layId = acDb.LayoutManager.Current.CreateLayout(name);
-                        AcLayout acLayout = (AcLayout)t.GetObject(
+                        AcLayout acLayout = (AcLayout)tr.GetObject(
                             layId,
                             acDb.OpenMode.ForWrite);
-                        t.Commit();
+
+                        acDb.PlotSettings plSet = plSets.GetAt(pageSetupName).GetObject(
+                                    acDb.OpenMode.ForRead) as acDb.PlotSettings;
+
+                        acLayout.CopyFrom(plSet);
+                        tr.Commit();
                         return acLayout;
                     }
                 },
@@ -116,12 +138,38 @@ namespace Camber.AutoCAD
                             hasLayoutWithSameName = true;
                             return false;
                         }
+
+                        using (acDb.Transaction tr = document.AcDocument.TransactionManager.StartTransaction())
+                        {
+                            acDb.DBDictionary plSets = (acDb.DBDictionary)tr.GetObject(
+                                ctx.Database.PlotSettingsDictionaryId,
+                                acDb.OpenMode.ForRead);
+
+                            if (layout.PlotSettingsName != pageSetupName && plSets.Contains(pageSetupName))
+                            {
+                                acDb.PlotSettings plSet = plSets.GetAt(pageSetupName).GetObject(
+                                    acDb.OpenMode.ForRead) as acDb.PlotSettings;
+
+                                layout.CopyFrom(plSet);
+                                tr.Commit();
+                            }
+                            else if (layout.PlotSettingsName != pageSetupName && !plSets.Contains(pageSetupName))
+                            {
+                                pageSetupExists = false;
+                                return false;
+                            }
+                        }
                     }
                     return true;
                 });
             if (hasLayoutWithSameName)
             {
                 throw new InvalidOperationException(NameExistsMsg);
+            }
+
+            if (!pageSetupExists)
+            {
+                throw new InvalidOperationException(PageSetupNotExistsMsg);
             }
             return res;
         }
@@ -275,7 +323,7 @@ namespace Camber.AutoCAD
         public override string ToString() => $"Layout(Name = {Name})";
 
         /// <summary>
-        /// Override from ObjectBase to include Editor regen on Dispose().
+        /// Override from ObjectBase to include Editor regen on Dispose() and utilize LayoutManager for delete.
         /// </summary>
         [IsVisibleInDynamoLibrary(false)]
         public override void Dispose()
@@ -300,12 +348,7 @@ namespace Camber.AutoCAD
                 {
                     if (!string.IsNullOrEmpty(this.Handle))
                     {
-                        // If layout is current, switch to Model to avoid hard crash
-                        if (acDb.LayoutManager.Current.CurrentLayout == this.Name)
-                        {
-                            acDb.LayoutManager.Current.CurrentLayout = "Model";
-                        }
-                        this.Delete();
+                        acDb.LayoutManager.Current.DeleteLayout(this.Name);
                     }
                 }
                 catch (Exception ex)
