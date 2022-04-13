@@ -11,6 +11,9 @@
 		<namespace name="Camber.AutoCAD.Objects">
 			<category>Camber.AutoCAD.Objects</category>
 		</namespace>
+		<namespace name="Camber.AutoCAD.Objects.Dimensions">
+			<category>Camber.AutoCAD.Objects.Dimensions</category>
+		</namespace>
 		<!--Civil 3D-->
 		<namespace name="Camber.Civil">
 			<category>Camber.Civil 3D</category>

@@ -18,6 +18,16 @@ namespace Camber.AutoCAD.Objects.Dimensions
     {
         #region properties
         internal AcAlignedDimension AcAlignedDimension => AcObject as AcAlignedDimension;
+
+        /// <summary>
+        /// Gets the first point of an Aligned Dimension.
+        /// </summary>
+        public Point Point1 => GeometryConversions.AcPointToDynPoint(AcAlignedDimension.XLine1Point);
+
+        /// <summary>
+        /// Gets the second point of an Aligned Dimension.
+        /// </summary>
+        public Point Point2 => GeometryConversions.AcPointToDynPoint(AcAlignedDimension.XLine2Point);
         #endregion
 
         #region constructors
