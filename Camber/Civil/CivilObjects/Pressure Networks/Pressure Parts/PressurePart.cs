@@ -5,6 +5,7 @@ using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acGeom = Autodesk.AutoCAD.Geometry;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
+using civDb = Autodesk.Civil.DatabaseServices;
 using civDynNodes = Autodesk.Civil.DynamoNodes;
 using AeccPressurePart = Autodesk.Civil.DatabaseServices.PressurePart;
 using AeccPressurePipe = Autodesk.Civil.DatabaseServices.PressurePipe;
@@ -54,6 +55,25 @@ namespace Camber.Civil.PressureNetworks.Parts
         /// Gets the Pressure Part's domain.
         /// </summary>
         public string Domain => GetString("PartDomain");
+
+        /// <summary>
+        /// Gets the part data dictionary for a Pressure Part.
+        /// </summary>
+        public Dictionary<string, object> PartData
+        {
+            get
+            {
+                Dictionary<string, object> propDict = new Dictionary<string, object>();
+                civDb.PressureNetworkPartData partData = AeccPressurePart.PartData;
+                uint[] propIds = partData.GetAllPropertyIds();
+                foreach (uint propId in propIds)
+                {
+                    civDb.PressurePartProperty prop = partData.GetProperty(propId);
+                    propDict.Add(prop.DisplayName, prop.Value);
+                } 
+                return propDict;
+            }
+        }
 
         /// <summary>
         /// Gets the Pressure Part's description.
