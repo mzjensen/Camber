@@ -38,7 +38,7 @@ namespace Camber.Civil.PressureNetworks.Parts
                 if (!openedForWrite) AeccPressurePart.UpgradeOpen();
                 try
                 {
-                    for (int i = 0; i < AeccPressurePart.ConnectionCount - 1; i++)
+                    for (int i = 0; i < AeccPressurePart.ConnectionCount; i++)
                     {
                         connections.Add(new PressurePartConnection(AeccPressurePart.GetConnectionAt(i)));
                     }
