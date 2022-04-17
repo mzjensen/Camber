@@ -125,6 +125,32 @@ namespace Camber.Civil.CivilObjects
         #region methods
         public override string ToString() => $"SectionView(Name = {Name})";
 
+        /// <summary>
+        /// Gets all Section Views in a Document.
+        /// </summary>
+        /// <param name="document"></param>
+        /// <returns></returns>
+        public static IList<SectionView> GetSectionViews(acDynNodes.Document document)
+        {
+            List<SectionView> sectViews = new List<SectionView>();
+            using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
+            {
+                var bt = (acDb.BlockTable)ctx.Transaction.GetObject(ctx.Database.BlockTableId, acDb.OpenMode.ForRead);
+                var btr = (acDb.BlockTableRecord)ctx.Transaction.GetObject(
+                    acDb.SymbolUtilityServices.GetBlockModelSpaceId(document.AcDocument.Database), 
+                    acDb.OpenMode.ForRead);
+                foreach (acDb.ObjectId oid in btr)
+                {
+                    var obj = ctx.Transaction.GetObject(oid, acDb.OpenMode.ForRead);
+                    if (obj is AeccSectionView)
+                    {
+                        sectViews.Add(SectionView.GetByObjectId(oid));
+                    }
+                }
+
+                return sectViews;
+            }
+        }
 
         /// <summary>
         /// Gets the offset and elevation values of a point in the Section View.
