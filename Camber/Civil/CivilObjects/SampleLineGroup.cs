@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
+using civDb = Autodesk.Civil.DatabaseServices;
 using civApp = Autodesk.Civil.ApplicationServices;
 using civDynNodes = Autodesk.Civil.DynamoNodes;
 using AeccSampleLineGroup = Autodesk.Civil.DatabaseServices.SampleLineGroup;
@@ -137,6 +138,21 @@ namespace Camber.Civil.CivilObjects
             {
                 throw new Exception("No Sample Lines found near the given station with the specified tolerance.");
             }
+        }
+
+        /// <summary>
+        /// Adds labels to all Sample Lines in a Sample Line Group using the default style.
+        /// </summary>
+        /// <returns></returns>
+        public SampleLineGroup AddLabels()
+        {
+            acDb.ObjectId labelGroupId = civDb.SampleLineLabelGroup.Create(this.InternalObjectId);
+            if (labelGroupId == acDb.ObjectId.Null)
+            {
+                throw new InvalidOperationException("Could not create Sample Line Label Group.");
+            }
+
+            return this;
         }
         #endregion
     }
