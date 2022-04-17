@@ -1,25 +1,23 @@
 ﻿#region references
+using Autodesk.DesignScript.Geometry;
+using Autodesk.DesignScript.Runtime;
+using Camber.Civil.Labels;
+using Camber.Civil.PipeNetworks;
+using Camber.Civil.PipeNetworks.Parts;
+using Camber.Civil.Styles.Objects;
+using Camber.Utilities.GeometryConversions;
+using DynamoServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
-using acGeom = Autodesk.AutoCAD.Geometry;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
-using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
+using acGeom = Autodesk.AutoCAD.Geometry;
+using AeccCatchment = Autodesk.Civil.DatabaseServices.Catchment;
+using AeccCatchmentAreaLabel = Autodesk.Civil.DatabaseServices.CatchmentLabel;
+using AeccCatchmentFlowSegmentLabel = Autodesk.Civil.DatabaseServices.FlowSegmentLabel;
 using civDb = Autodesk.Civil.DatabaseServices;
 using civDynNodes = Autodesk.Civil.DynamoNodes;
-using AeccCatchment = Autodesk.Civil.DatabaseServices.Catchment;
-using AeccCatchmentFlowSegmentLabel = Autodesk.Civil.DatabaseServices.FlowSegmentLabel;
-using AeccCatchmentAreaLabel = Autodesk.Civil.DatabaseServices.CatchmentLabel;
-using Autodesk.DesignScript.Runtime;
-using Autodesk.DesignScript.Geometry;
-using DynamoServices;
-using Dynamo.Graph.Nodes;
-using Camber.Civil.Labels;
-using Camber.Civil.Styles.Objects;
-using Camber.Civil.PipeNetworks;
-using Camber.Civil.PipeNetworks.Parts;
-using Camber.Utilities.GeometryConversions;
 #endregion
 
 namespace Camber.Civil.CivilObjects
