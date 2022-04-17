@@ -22,12 +22,12 @@ namespace Camber.Civil.CivilObjects
     public sealed class SampleLine : CivilObject
     {
         #region properties
-        internal AeccSampleLine aeccSampleLine => AcObject as AeccSampleLine;
+        internal AeccSampleLine AeccSampleLine => AcObject as AeccSampleLine;
 
         /// <summary>
         /// Gets the Sample Line Group to which the Sample Line belongs.
         /// </summary>
-        public SampleLineGroup SampleLineGroup => SampleLineGroup.GetByObjectId(aeccSampleLine.GroupId);
+        public SampleLineGroup SampleLineGroup => SampleLineGroup.GetByObjectId(AeccSampleLine.GroupId);
 
         /// <summary>
         /// Gets the boolean value which specifies whether the Sample Line is locked to a station.
@@ -53,6 +53,23 @@ namespace Camber.Civil.CivilObjects
             {
                 var dict = GetVertices();
                 return PolyCurve.ByPoints((List<Point>)dict["Points"]);
+            }
+        }
+
+        /// <summary>
+        /// Gets the Section Views associated with a Sample Line.
+        /// </summary>
+        public IList<SectionView> SectionViews
+        {
+            get
+            {
+                List<SectionView> sectViews = new List<SectionView>();
+                foreach (acDb.ObjectId oid in AeccSampleLine.GetSectionViewIds())
+                {
+                    sectViews.Add(SectionView.GetByObjectId(oid));
+                }
+
+                return sectViews;
             }
         }
         #endregion
@@ -203,7 +220,7 @@ namespace Camber.Civil.CivilObjects
             var offsetIndicies = new List<int>();
             var sides = new List<string>();
 
-            foreach (AeccSampleLineVertex vertex in aeccSampleLine.Vertices)
+            foreach (AeccSampleLineVertex vertex in AeccSampleLine.Vertices)
             {
                 var dict = GetVertexInfo(vertex);
                 points.Add((Point)dict["Location"]);
@@ -253,7 +270,7 @@ namespace Camber.Civil.CivilObjects
             acGeom.Point3d acPoint = new acGeom.Point3d(location.X, location.Y, location.Z);
             bool openedForWrite = AeccEntity.IsWriteEnabled;
             if (!openedForWrite) AeccEntity.UpgradeOpen();
-            AeccSampleLineVertex vertex = aeccSampleLine.Vertices[index];
+            AeccSampleLineVertex vertex = AeccSampleLine.Vertices[index];
             vertex.Location = acPoint;
             if (!openedForWrite) AeccEntity.DowngradeOpen();
             return this;
