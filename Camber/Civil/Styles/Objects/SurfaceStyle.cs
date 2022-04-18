@@ -1,4 +1,5 @@
 ﻿#region references
+using Autodesk.DesignScript.Runtime;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using AeccSurfaceStyle = Autodesk.Civil.DatabaseServices.Styles.SurfaceStyle;
 #endregion
@@ -9,6 +10,9 @@ namespace Camber.Civil.Styles.Objects
     {
         #region properties
         internal AeccSurfaceStyle AeccSurfaceStyle => AcObject as AeccSurfaceStyle;
+
+        [IsVisibleInDynamoLibrary(false)]
+        public string DummyProperty => "DummyProperty";
         #endregion
 
         #region constructors

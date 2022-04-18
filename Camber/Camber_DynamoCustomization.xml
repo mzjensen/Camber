@@ -24,7 +24,7 @@
 		<namespace name="Camber.Civil.Intersections">
 			<category>Camber.Civil 3D.CivilObjects.Intersections</category>
 		</namespace>
-		<namespace name="Camber.Civil.PipeNetworks">
+    <namespace name="Camber.Civil.PipeNetworks">
 			<category>Camber.Civil 3D.CivilObjects.Pipe Networks</category>
 		</namespace>
 		<namespace name="Camber.Civil.PipeNetworks.Parts">

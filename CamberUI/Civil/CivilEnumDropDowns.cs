@@ -68,4 +68,19 @@ namespace Camber.UI
         public FolderCategoriesDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts)
             : base(OutputName, typeof(Folder.FolderCategory), inPorts, outPorts) { }
     }
+
+    [NodeName("Overhang Correction Types")]
+    [NodeCategory("Camber.Civil 3D.CorridorSurface")]
+    [NodeDescription("Select Corridor Surface overhang correction type.")]
+    [IsDesignScriptCompatible]
+    public class OverhangCorrectionTypesDropDown : EnumDropDownBase
+    {
+        private const string OutputName = "overhangCorrectionType";
+
+        public OverhangCorrectionTypesDropDown() : base(OutputName, typeof(civDb.OverhangCorrectionType), true) { }
+
+        [JsonConstructor]
+        public OverhangCorrectionTypesDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts)
+            : base(OutputName, typeof(civDb.OverhangCorrectionType), inPorts, outPorts) { }
+    }
 }
