@@ -96,7 +96,7 @@ namespace Camber.AutoCAD
         /// <param name="variableName">The name of the system variable.</param>
         /// <param name="newValue">The new value to assign.</param>
         /// <returns></returns>
-        public static void SetSystemVariable(acDynNodes.Document document, string variableName, object newValue)
+        public static acDynNodes.Document SetSystemVariable(acDynNodes.Document document, string variableName, object newValue)
         {
             // AutoCAD needs 16-bit integers, but from Dynamo they come as 64-bit.
             // Without this check, an eInvalidInput exception will be thrown when trying to set integer values.
@@ -105,7 +105,7 @@ namespace Camber.AutoCAD
             try
             {
                 acApp.Application.SetSystemVariable(variableName, newValue);
-                var result = GetSystemVariable(document, variableName);
+                return document;
             }
             catch (Exception e)
             {
