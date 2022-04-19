@@ -115,7 +115,7 @@
 		<namespace name="Camber.DynamoExtensions">
 			<category>Camber.Dynamo Extensions</category>
 		</namespace>
-		<namespace name="Camber.DynamoExtensions.GeometryExtensions">
+		<namespace name="Camber.DynamoExtensions.Geometry">
 			<category>Camber.Dynamo Extensions.Geometry</category>
 		</namespace>
 		<!--External-->
@@ -123,7 +123,7 @@
 			<category>Camber.External</category>
 		</namespace>
 		<namespace name="Camber.External.ExternalObjects">
-			<category>Camber.External.External Objects</category>
+			<category>Camber.External.ExternalObjects</category>
 		</namespace>
 		<!--Tools-->
 		<namespace name="Camber.Tools">
