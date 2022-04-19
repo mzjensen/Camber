@@ -3,7 +3,9 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
+using acApp = Autodesk.AutoCAD.ApplicationServices;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
+using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using AcDatabase = Autodesk.AutoCAD.DatabaseServices.Database;
 using Autodesk.DesignScript.Runtime;
 using Camber.External.ExternalObjects;
@@ -334,6 +336,44 @@ namespace Camber.External
             }
 
             return Layers.FirstOrDefault(item => item.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+        }
+
+        /// <summary>
+        /// Gets the value of a system variable.
+        /// </summary>
+        /// <param name="variableName">The name of the system variable.</param>
+        /// <returns></returns>
+        public object GetSystemVariable(string variableName)
+        {
+            acDb.HostApplicationServices.WorkingDatabase = AcDatabase;
+            var sysVar = acApp.Application.GetSystemVariable(variableName);
+            acDb.HostApplicationServices.WorkingDatabase = acDynNodes.Document.Current.AcDocument.Database;
+            return sysVar;
+        }
+
+        /// <summary>
+        /// Sets the value of a system variable.
+        /// </summary>
+        /// <param name="variableName">The name of the system variable.</param>
+        /// <param name="newValue">The new value to assign.</param>
+        /// <returns></returns>
+        public ExternalDocument SetSystemVariable(string variableName, object newValue)
+        {
+            // AutoCAD needs 16-bit integers, but from Dynamo they come as 64-bit.
+            // Without this check, an eInvalidInput exception will be thrown when trying to set integer values.
+            if (newValue is long) { newValue = Convert.ToInt16(newValue); }
+
+            try
+            {
+                acDb.HostApplicationServices.WorkingDatabase = AcDatabase;
+                acApp.Application.SetSystemVariable(variableName, newValue);
+                acDb.HostApplicationServices.WorkingDatabase = acDynNodes.Document.Current.AcDocument.Database;
+                return this;
+            }
+            catch (Exception e)
+            {
+                throw new InvalidOperationException(e.Message);
+            }
         }
 
         /// <summary>
