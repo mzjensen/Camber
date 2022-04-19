@@ -1,20 +1,21 @@
 ﻿#region references
-using System;
-using System.Collections.Generic;
-using acDb = Autodesk.AutoCAD.DatabaseServices;
-using acGeom = Autodesk.AutoCAD.Geometry;
-using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
-using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
-using civDb = Autodesk.Civil.DatabaseServices;
-using civDynNodes = Autodesk.Civil.DynamoNodes;
-using AeccPressurePipeRun = Autodesk.Civil.DatabaseServices.PressurePipeRun;
-using AeccPressurePipe = Autodesk.Civil.DatabaseServices.PressurePipe;
-using AeccPressureAppurtenance = Autodesk.Civil.DatabaseServices.PressureAppurtenance;
-using AeccPressureFitting = Autodesk.Civil.DatabaseServices.PressureFitting;
-using Autodesk.DesignScript.Runtime;
 using Autodesk.DesignScript.Geometry;
+using Autodesk.DesignScript.Runtime;
 using Camber.Civil.PressureNetworks.Parts;
 using Camber.Utilities.GeometryConversions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using acDb = Autodesk.AutoCAD.DatabaseServices;
+using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
+using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
+using acGeom = Autodesk.AutoCAD.Geometry;
+using AeccPressureAppurtenance = Autodesk.Civil.DatabaseServices.PressureAppurtenance;
+using AeccPressureFitting = Autodesk.Civil.DatabaseServices.PressureFitting;
+using AeccPressurePipe = Autodesk.Civil.DatabaseServices.PressurePipe;
+using AeccPressurePipeRun = Autodesk.Civil.DatabaseServices.PressurePipeRun;
+using civDb = Autodesk.Civil.DatabaseServices;
+using civDynNodes = Autodesk.Civil.DynamoNodes;
 #endregion
 
 namespace Camber.Civil.PressureNetworks
@@ -121,6 +122,77 @@ namespace Camber.Civil.PressureNetworks
         {
             AeccPressurePipeRun = aeccPressurePipeRun;
             PressureNetwork = pressureNetwork;
+        }
+
+        /// <summary>
+        /// Creates a new Pressure Pipe Run by Object. Currently supports Alignments or Polylines as input.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="object">Alignment or Polyline to define the horizontal path of the Pipe Run.</param>
+        /// <param name="pressurePartSize"></param>
+        /// <param name="surfaceOffset">Vertical offset from Pressure Network reference surface.</param>
+        /// <param name="autoAddFittings">Automatically add Fittings?</param>
+        /// <returns></returns>
+        public static PressurePipeRun ByObject(
+            PressureNetwork pressureNetwork,
+            string name,
+            acDynNodes.Object @object,
+            PressurePartSize pressurePartSize,
+            double surfaceOffset,
+            bool autoAddFittings = true)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new InvalidOperationException("Name is null or empty.");
+            }
+
+            if (pressurePartSize.AeccPressurePartSize.Domain != civDb.PressurePartDomainType.Pipe)
+            {
+                throw new InvalidOperationException("Part Size must be in the Pipe domain.");
+            }
+
+            if (pressureNetwork.PipeRuns.Any(p => p.Name == name))
+            {
+                throw new InvalidOperationException("A Pipe Run with the same name already exists.");
+            }
+
+            using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
+            {
+                
+                try
+                {
+                    acDb.Polyline acPline = null;
+
+                    if (@object is acDynNodes.Polyline)
+                    {
+                        acPline = (acDb.Polyline)@object.InternalDBObject;
+                    }
+                    else if (@object is civDynNodes.Alignment)
+                    {
+                        civDb.Alignment aeccAlign = (civDb.Alignment)ctx.Transaction.GetObject(
+                            @object.InternalObjectId,
+                            acDb.OpenMode.ForRead);
+                        acPline = (acDb.Polyline)ctx.Transaction.GetObject(
+                            aeccAlign.GetPolyline(),
+                            acDb.OpenMode.ForRead);
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("Object must be an Alignment or Polyline.");
+                    }
+                    pressureNetwork.AeccPressureNetwork.PipeRuns.createPipeRun(
+                        name,
+                        acPline,
+                        pressurePartSize.AeccPressurePartSize,
+                        surfaceOffset,
+                        autoAddFittings);
+                    return pressureNetwork.PipeRuns.FirstOrDefault(x => x.Name == name);
+                }
+                catch (Exception ex)
+                {
+                    throw new InvalidOperationException(ex.Message);
+                }
+            }
         }
         #endregion
 

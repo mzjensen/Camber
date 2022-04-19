@@ -222,49 +222,6 @@ namespace Camber.Civil.PressureNetworks
                 .FirstOrDefault(item => item.Name.Equals
                 (name, StringComparison.OrdinalIgnoreCase));
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="name">The name of the new Pipe Run.</param>
-        /// <param name="polyline">Input Polyline that defines the path of the Pipe Run.</param>
-        /// <param name="pressurePartSize"></param>
-        /// <param name="surfaceOffset">Offset from reference surface.</param>
-        /// <param name="autoAddFittings">Automatically add Fittings at Polyline vertices?</param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentException"></exception>
-        public PressurePipeRun AddPipeRun(
-            string name, 
-            acDynNodes.Polyline polyline, 
-            PressurePartSize pressurePartSize, 
-            double surfaceOffset, 
-            bool autoAddFittings = true)
-        {
-            // TODO
-            // 1. Need to check for part sizes that are not in the Pipe domain
-            // 2. Check if polyline elevation will be used if there is no reference surface and the polyline is not at 0.
-            // 3. Check for duplicate names. If the name already exists, it just adds a new run without a name.
-            // 4. Implement trace data
-            
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentException(NameIsNullOrEmptyMessage);
-            }
-            try
-            {
-                AeccPressureNetwork.PipeRuns.createPipeRun(
-                    name, 
-                    (acDb.Polyline)polyline.InternalDBObject, 
-                    pressurePartSize.AeccPressurePartSize,
-                    surfaceOffset,
-                    autoAddFittings);
-                return PipeRuns.FirstOrDefault(x => x.Name == name);
-            }
-            catch (Exception ex)
-            {
-                throw new InvalidOperationException(ex.Message);
-            }
-        }
         #endregion
     }
 }
