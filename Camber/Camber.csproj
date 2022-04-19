@@ -26,11 +26,24 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\Camber.xml</DocumentationFile>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug2023|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug2023\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>bin\Debug2023\Camber.xml</DocumentationFile>
+    <WarningLevel>1</WarningLevel>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <C3DVersion>2023</C3DVersion>
+    <DynamoPackageFolder>2.13</DynamoPackageFolder>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug2022|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\Debug2022\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DocumentationFile>bin\Debug\Camber.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug2022\Camber.xml</DocumentationFile>
     <WarningLevel>1</WarningLevel>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
@@ -43,7 +56,7 @@
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\Debug2021\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DocumentationFile>bin\Debug\Camber.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug2021\Camber.xml</DocumentationFile>
     <WarningLevel>1</WarningLevel>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -56,7 +69,7 @@
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\Debug2020\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DocumentationFile>bin\Debug\Camber.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug2020\Camber.xml</DocumentationFile>
     <WarningLevel>1</WarningLevel>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -105,16 +118,13 @@
       <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\C3D\Dynamo\AutoCADNodes.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Autodesk.Civil3DToolkit">
-      <HintPath>..\..\..\..\..\AppData\Roaming\Autodesk\C3D 2022\Dynamo\2.12\packages\Civil3DToolkit\bin\Autodesk.Civil3DToolkit.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Civil3DNodes">
       <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\C3D\Dynamo\Civil3DNodes.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="DSCoreNodes">
       <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\C3D\Dynamo\Core\DSCoreNodes.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -372,7 +382,7 @@
       <SourcePkg Include="pkg.json" />
     </ItemGroup>
     <!--Copy the package to the Dynamo for Civil 3D package root directory-->
-    <RemoveDir Directories="$(AppData)\Autodesk\C3D $(C3DVersion)\Dynamo\2.12\packages\$(ProjectName)\bin" />
+    <RemoveDir Directories="$(AppData)\Autodesk\C3D $(C3DVersion)\Dynamo\$(DynamoPackageFolder)\packages\$(ProjectName)\bin" />
     <Copy SourceFiles="@(SourceDlls)" DestinationFolder="$(AppData)\Autodesk\C3D $(C3DVersion)\Dynamo\$(DynamoPackageFolder)\packages\$(ProjectName)\bin\%(RecursiveDir)" />
     <Copy SourceFiles="@(SourcePkg)" DestinationFolder="$(AppData)\Autodesk\C3D $(C3DVersion)\Dynamo\$(DynamoPackageFolder)\packages\$(ProjectName)\" />
     <Copy SourceFiles="@(SourcePdbs)" DestinationFolder="$(AppData)\Autodesk\C3D $(C3DVersion)\Dynamo\$(DynamoPackageFolder)\packages\$(ProjectName)\bin\" />

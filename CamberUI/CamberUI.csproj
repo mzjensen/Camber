@@ -25,6 +25,18 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\CamberUI.xml</DocumentationFile>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug2023|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug2023\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>bin\Debug2023\CamberUI.xml</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <C3DVersion>2023</C3DVersion>
+    <DynamoPackageFolder>2.13</DynamoPackageFolder>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug2022|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\Debug2022\</OutputPath>
@@ -188,7 +200,7 @@
       <SourceXmls Include="$(TargetDir)*.xml" />
     </ItemGroup>
     <!--Copy the package to the Dynamo for Civil 3D package root directory-->
-    <RemoveDir Directories="$(AppData)\Autodesk\C3D $(C3DVersion)\Dynamo\2.12\packages\$(ProjectName)\bin" />
+    <RemoveDir Directories="$(AppData)\Autodesk\C3D $(C3DVersion)\Dynamo\$(DynamoPackageFolder)\packages\$(ProjectName)\bin" />
     <Copy SourceFiles="@(SourceDlls)" DestinationFolder="$(AppData)\Autodesk\C3D $(C3DVersion)\Dynamo\$(DynamoPackageFolder)\packages\Camber\bin\%(RecursiveDir)" />
     <Copy SourceFiles="@(SourcePkg)" DestinationFolder="$(AppData)\Autodesk\C3D $(C3DVersion)\Dynamo\$(DynamoPackageFolder)\packages\Camber\" />
     <Copy SourceFiles="@(SourcePdbs)" DestinationFolder="$(AppData)\Autodesk\C3D $(C3DVersion)\Dynamo\$(DynamoPackageFolder)\packages\Camber\bin\" />
