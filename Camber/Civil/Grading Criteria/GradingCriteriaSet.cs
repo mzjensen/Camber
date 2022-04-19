@@ -6,6 +6,7 @@ using acApp = Autodesk.AutoCAD.ApplicationServices;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using civApp = Autodesk.Civil.ApplicationServices;
+using AeccGradingCriteria = Autodesk.Civil.DatabaseServices.Styles.GradingCriteria;
 using AeccGradingCriteriaSet = Autodesk.Civil.DatabaseServices.Styles.GradingCriteriaSet;
 using DynamoServices;
 using Camber.Civil.Styles;
@@ -100,7 +101,9 @@ namespace Camber.Civil.GradingCriteria
             {
                 using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
                 {
-                    var aeccSet = ctx.Transaction.GetObject(InternalObjectId, acDb.OpenMode.ForWrite);
+                    AeccGradingCriteriaSet aeccSet = (AeccGradingCriteriaSet)ctx.Transaction.GetObject(
+                        InternalObjectId, 
+                        acDb.OpenMode.ForWrite);
                     AeccGradingCriteriaSet.AddCriteria(criteriaName);
                     return this;
                 }
@@ -120,7 +123,16 @@ namespace Camber.Civil.GradingCriteria
             {
                 using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
                 {
-                    var aeccSet = ctx.Transaction.GetObject(InternalObjectId, acDb.OpenMode.ForWrite);
+                    AeccGradingCriteriaSet aeccSet = (AeccGradingCriteriaSet)ctx.Transaction.GetObject(
+                        InternalObjectId,
+                        acDb.OpenMode.ForWrite);
+                    AeccGradingCriteria aeccCrit = (AeccGradingCriteria)ctx.Transaction.GetObject(
+                        aeccSet[criteriaName],
+                        acDb.OpenMode.ForRead);
+                    if (aeccCrit.IsUsed)
+                    {
+                        throw new InvalidOperationException("The Grading Criteria is in use and cannot be removed.");
+                    }
                     AeccGradingCriteriaSet.RemoveCriteria(criteriaName);
                     return this;
                 }
