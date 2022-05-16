@@ -22,9 +22,12 @@ namespace Camber.AutoCAD
     [RegisterForTrace]
     public sealed class Layout : ObjectBase
     {
-        #region properties
+        #region fields
         private const string NameExistsMsg = "A Layout with the same name already exists.";
         private const string PageSetupNotExistsMsg = "A page setup with that name does not exist.";
+        #endregion
+
+        #region properties
         internal AcLayout AcLayout => AcObject as AcLayout;
 
         /// <summary>
