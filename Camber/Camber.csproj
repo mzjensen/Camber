@@ -135,12 +135,16 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoCAD\Objects\Multi-View Blocks\MultiViewBlockReference.cs" />
+    <Compile Include="AutoCAD\Objects\Multi-View Blocks\MultiViewBlock.cs" />
     <Compile Include="AutoCAD\Objects\AttributeDefinition.cs" />
     <Compile Include="AutoCAD\Objects\Block.cs" />
     <Compile Include="AutoCAD\Document.cs" />
     <Compile Include="AutoCAD\Layout.cs" />
     <Compile Include="AutoCAD\Objects\Dimensions\AlignedDimension.cs" />
     <Compile Include="AutoCAD\Objects\Dimensions\Dimension.cs" />
+    <Compile Include="AutoCAD\Objects\Multi-View Blocks\DisplayRepresentation.cs" />
+    <Compile Include="AutoCAD\Objects\Multi-View Blocks\ViewBlock.cs" />
     <Compile Include="AutoCAD\Objects\Text.cs" />
     <Compile Include="Civil\CivilObjects\Intersections\Intersection.cs" />
     <Compile Include="Civil\CivilObjects\Pressure Networks\PressurePartSize.cs" />

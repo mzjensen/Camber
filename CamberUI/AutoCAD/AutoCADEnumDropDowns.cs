@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
+using aecDb = Autodesk.Aec.DatabaseServices;
 using Dynamo.Graph.Nodes;
 #endregion
 
@@ -20,5 +21,20 @@ namespace Camber.UI
         [JsonConstructor]
         public BlockUnitsDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts)
             : base(OutputName, typeof(acDb.UnitsValue), inPorts, outPorts) { }
+    }
+
+    [NodeName("View Block View Directions")]
+    [NodeCategory("Camber.AutoCAD.Objects.Multi-View Blocks.ViewBlock")]
+    [NodeDescription("Select View Block view direction type.")]
+    [IsDesignScriptCompatible]
+    public class ViewDirectionsDropDown : EnumDropDownBase
+    {
+        private const string OutputName = "viewDirection";
+
+        public ViewDirectionsDropDown() : base(OutputName, typeof(aecDb.ViewDirection)) { }
+
+        [JsonConstructor]
+        public ViewDirectionsDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts)
+            : base(OutputName, typeof(aecDb.ViewDirection), inPorts, outPorts) { }
     }
 }

@@ -1,9 +1,14 @@
 ﻿#region references
+using Camber.AutoCAD.Objects.MultiViewBlocks;
 using Dynamo.Graph.Nodes;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using acApp = Autodesk.AutoCAD.ApplicationServices;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
+using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
+using aecDb = Autodesk.Aec.DatabaseServices;
 #endregion
 
 namespace Camber.AutoCAD
@@ -53,6 +58,28 @@ namespace Camber.AutoCAD
         [NodeCategory("Query")]
         public static int? OriginalVersion(acDynNodes.Document document)
             => GetDatabaseVersionInfo(document.AcDocument.Database, false);
+
+        /// <summary>
+        /// Gets the Multi-View Block definitions in a Document.
+        /// </summary>
+        /// <param name="document"></param>
+        /// <returns></returns>
+        [NodeCategory("Query")]
+        public static List<MultiViewBlock> MultiViewBlocks(acDynNodes.Document document)
+        {
+            List<MultiViewBlock> mvBlks = new List<MultiViewBlock>();
+
+            using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
+            {
+                var mvDict = new aecDb.DictionaryMultiViewBlockDefinition(ctx.Database);
+                foreach (acDb.ObjectId oid in mvDict.Records)
+                {
+                    var mvBlk = (aecDb.MultiViewBlockDefinition) ctx.Transaction.GetObject(oid, acDb.OpenMode.ForRead);
+                    mvBlks.Add(new MultiViewBlock(mvBlk, false));
+                }
+            }
+            return mvBlks;
+        }
         #endregion
 
         #region action methods
@@ -111,6 +138,29 @@ namespace Camber.AutoCAD
             {
                 throw new InvalidOperationException(e.Message);
             }
+        }
+
+        /// <summary>
+        /// Gets a Multi-View Block definition in a Document by name.
+        /// </summary>
+        /// <param name="document"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static MultiViewBlock MultiViewBlockByName(acDynNodes.Document document, string name)
+        {
+            if (document is null)
+            {
+                throw new InvalidOperationException("Document cannot be null.");
+            }
+
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new InvalidOperationException("Name is null or empty.");
+            }
+
+            return MultiViewBlocks(document)
+                .FirstOrDefault(item => item.Name.Equals
+                    (name, StringComparison.OrdinalIgnoreCase));
         }
         #endregion
 
