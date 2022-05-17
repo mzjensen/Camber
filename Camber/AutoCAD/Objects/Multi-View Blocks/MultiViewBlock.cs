@@ -77,8 +77,6 @@ namespace Camber.AutoCAD.Objects.MultiViewBlocks
         /// <summary>
         /// Gets all of the Display Representations for a Multi-View Block.
         /// </summary>
-        // TODO: this isn't returning the correct results. Need to look into the DisplayRepresentationManager class.
-        // https://adndevblog.typepad.com/aec/autocad-architecture/page/4/
         public List<DisplayRepresentation> DisplayRepresentations
         {
             get

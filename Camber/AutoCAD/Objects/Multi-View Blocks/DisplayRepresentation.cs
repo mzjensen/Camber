@@ -21,6 +21,23 @@ namespace Camber.AutoCAD.Objects.MultiViewBlocks
         public MultiViewBlock MultiViewBlock { get; }
 
         /// <summary>
+        /// Gets the name of a Display Representation.
+        /// </summary>
+        public string Name
+        {
+            get
+            {
+                using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
+                {
+                    var dispRep = (aecDb.DisplayRepresentation)ctx.Transaction.GetObject(
+                        AecDisplayRepresentation.DisplayRepresentationId,
+                        acDb.OpenMode.ForRead);
+                    return dispRep.ViewTypeDisplayName;
+                }
+            }
+        }
+
+        /// <summary>
         /// Gets all of the View Blocks assigned to a Display Representation.
         /// </summary>
         public List<ViewBlock> ViewBlocks
@@ -51,7 +68,7 @@ namespace Camber.AutoCAD.Objects.MultiViewBlocks
         #endregion
 
         #region methods
-        public override string ToString() => $"DisplayRepresentation(MultiViewBlock = {MultiViewBlock.Name})";
+        public override string ToString() => $"DisplayRepresentation(Name = {Name})";
 
         /// <summary>
         /// Adds a new View Block to a Display Representation.
