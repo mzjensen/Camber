@@ -64,9 +64,6 @@ namespace Camber.Civil.CivilObjects.Surfaces
         public static bool IsLocked(this civDynNodes.Surface surface) => surface.GetBoolProperty("Lock");
         #endregion
 
-        #region create methods
-        #endregion
-
         #region action methods
         /// <summary>
         /// Sets whether to automatically rebuild a Surface when its definition is changed.
@@ -87,9 +84,7 @@ namespace Camber.Civil.CivilObjects.Surfaces
 
         /// <summary>
         /// Creates one or more Polylines that represent the flow of water along a Surface from a given start startPoint.
-        /// If the location is on a peak, multiple Polylines are created.
-        /// If the location is on a flat area, no objects are created.
-        /// Otherwise, only one Polyline is created.
+        /// If the location is on a peak, multiple Polylines are created. If the location is on a flat area, no objects are created. Otherwise, only one Polyline is created.
         /// </summary>
         /// <param name="surface"></param>
         /// <param name="startPoint"></param>
