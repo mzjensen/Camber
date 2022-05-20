@@ -78,31 +78,34 @@ namespace Camber.Civil.CivilObjects.Surfaces
             }
         }
 
+        [NodeCategory("Create")]
         /// <summary>
         /// Creates a new TIN Surface by importing from a LandXML file.
         /// </summary>
         /// <param name="document"></param>
         /// <param name="newSurfaceName">The name to give the new TIN Surface</param>
-        /// <param name="pathToLandXMLFile">The full path to the LandXML file</param>
-        /// <param name="surfaceNameInLandXMLFile">The name of the TIN Surface as defined in the LandXML file</param>
+        /// <param name="filePath">The full path to the LandXML file</param>
+        /// <param name="surfaceNameInFile">The name of the TIN Surface as defined in the LandXML file</param>
         /// <returns></returns>
+        // TODO: this will import a surface even if you get the name wrong.
+        // Look into parsing the XML, and possible creating a separate static class for LandXML imports.
         public static civDynNodes.Surface ImportFromLandXML(
             acDynNodes.Document document,
             string newSurfaceName,
-            string pathToLandXMLFile,
-            string surfaceNameInLandXMLFile)
+            string filePath,
+            string surfaceNameInFile)
         {
             if (string.IsNullOrEmpty(newSurfaceName))
             {
                 throw new InvalidOperationException("New surface name is null or empty.");
             }
 
-            if (string.IsNullOrEmpty(pathToLandXMLFile))
+            if (string.IsNullOrEmpty(filePath))
             {
                 throw new InvalidOperationException("The LandXML file path is null or empty.");
             }
 
-            if (string.IsNullOrWhiteSpace(surfaceNameInLandXMLFile))
+            if (string.IsNullOrWhiteSpace(surfaceNameInFile))
             {
                 throw new InvalidOperationException("The provided name for the surface in the LandXML file is null or empty.");
             }
@@ -114,8 +117,8 @@ namespace Camber.Civil.CivilObjects.Surfaces
                     AeccTinSurface.CreateFromLandXML(
                         ctx.Database,
                         newSurfaceName,
-                        pathToLandXMLFile,
-                        surfaceNameInLandXMLFile);
+                        filePath,
+                        surfaceNameInFile);
 
                     return civDynNodes.Selection.SurfaceByName(newSurfaceName, document);
                 }
