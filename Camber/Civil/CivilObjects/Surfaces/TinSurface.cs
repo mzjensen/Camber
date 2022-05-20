@@ -12,6 +12,7 @@ using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using civDb = Autodesk.Civil.DatabaseServices;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
+using AeccTinSurface = Autodesk.Civil.DatabaseServices.TinSurface;
 
 namespace Camber.Civil.CivilObjects.Surfaces
 {
@@ -49,13 +50,13 @@ namespace Camber.Civil.CivilObjects.Surfaces
         }
 
         /// <summary>
-        /// Creates a new TIN Surface from a .tin file.
+        /// Creates a new TIN Surface by importing a TIN file.
         /// </summary>
         /// <param name="document"></param>
-        /// <param name="filePath">The path to the .tin file</param>
+        /// <param name="filePath">The full path to the TIN file</param>
         /// <returns></returns>
         [NodeCategory("Create")]
-        public static civDynNodes.Surface ByTINFile(acDynNodes.Document document, string filePath)
+        public static civDynNodes.Surface ImportFromTINFile(acDynNodes.Document document, string filePath)
         {
             if (string.IsNullOrEmpty(filePath))
             {
@@ -76,6 +77,54 @@ namespace Camber.Civil.CivilObjects.Surfaces
                 throw new InvalidOperationException(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Creates a new TIN Surface by importing from a LandXML file.
+        /// </summary>
+        /// <param name="document"></param>
+        /// <param name="newSurfaceName">The name to give the new TIN Surface</param>
+        /// <param name="pathToLandXMLFile">The full path to the LandXML file</param>
+        /// <param name="surfaceNameInLandXMLFile">The name of the TIN Surface as defined in the LandXML file</param>
+        /// <returns></returns>
+        public static civDynNodes.Surface ImportFromLandXML(
+            acDynNodes.Document document,
+            string newSurfaceName,
+            string pathToLandXMLFile,
+            string surfaceNameInLandXMLFile)
+        {
+            if (string.IsNullOrEmpty(newSurfaceName))
+            {
+                throw new InvalidOperationException("New surface name is null or empty.");
+            }
+
+            if (string.IsNullOrEmpty(pathToLandXMLFile))
+            {
+                throw new InvalidOperationException("The LandXML file path is null or empty.");
+            }
+
+            if (string.IsNullOrWhiteSpace(surfaceNameInLandXMLFile))
+            {
+                throw new InvalidOperationException("The provided name for the surface in the LandXML file is null or empty.");
+            }
+            
+            try
+            {
+                using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
+                {
+                    AeccTinSurface.CreateFromLandXML(
+                        ctx.Database,
+                        newSurfaceName,
+                        pathToLandXMLFile,
+                        surfaceNameInLandXMLFile);
+
+                    return civDynNodes.Selection.SurfaceByName(newSurfaceName, document);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
         #endregion
 
         #region action methods
@@ -86,7 +135,7 @@ namespace Camber.Civil.CivilObjects.Surfaces
         /// <param name="surfaceToPaste">TIN Surface, Grid Surface, TIN Volume Surface, or Grid Volume Surface</param>
         /// <returns></returns>
         public static civDynNodes.Surface PasteSurface(
-            civDynNodes.TinSurface surfaceToPasteInto,
+            this civDynNodes.TinSurface surfaceToPasteInto,
             civDynNodes.Surface surfaceToPaste)
         {
             try
@@ -118,7 +167,7 @@ namespace Camber.Civil.CivilObjects.Surfaces
         /// <param name="customNullElevation"></param>
         /// <returns></returns>
         public static civDynNodes.Surface AddDEMFile(
-            civDynNodes.TinSurface tinSurface, 
+            this civDynNodes.TinSurface tinSurface, 
             string filePath,
             [DefaultArgument("null")] double customNullElevation,
             string coordinateSystemCode = "")
@@ -164,7 +213,7 @@ namespace Camber.Civil.CivilObjects.Surfaces
         /// <param name="description"></param>
         /// <returns></returns>
         public static civDynNodes.Surface AddBlocks(
-            civDynNodes.TinSurface tinSurface, 
+            this civDynNodes.TinSurface tinSurface, 
             List<acDynNodes.BlockReference> blockReferences,
             string description = "")
         {
@@ -200,7 +249,7 @@ namespace Camber.Civil.CivilObjects.Surfaces
         /// <param name="description"></param>
         /// <returns></returns>
         public static civDynNodes.Surface Add3DFaces(
-            civDynNodes.TinSurface tinSurface,
+            this civDynNodes.TinSurface tinSurface,
             List<acDynNodes.Face> faces,
             string description = "",
             bool maintainEdges = false
