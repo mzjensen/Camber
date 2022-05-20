@@ -147,6 +147,40 @@ namespace Camber.Civil.CivilObjects.Surfaces
                 throw new InvalidOperationException(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Calculates the volume between a Surface and a datum elevation within an area defined by a Polygon.
+        /// </summary>
+        /// <param name="surface"></param>
+        /// <param name="polygon"></param>
+        /// <param name="datumElevation"></param>
+        /// <returns></returns>
+        [MultiReturn(new[] { "Cut Volume", "Fill Volume", "Net Volume" })]
+        public static Dictionary<string, object> GetBoundedVolumes(
+            this civDynNodes.Surface surface,
+            Polygon polygon,
+            double datumElevation)
+        {
+            try
+            {
+                using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
+                {
+                    acGeom.Point3dCollection pnts = GeometryConversions.DynPolygonToAcPoint3dCollection(polygon, true);
+                    var aeccSurf = surface.GetAeccSurface(acDb.OpenMode.ForRead);
+                    var volInfo = aeccSurf.GetBoundedVolumes(pnts, datumElevation);
+                    return new Dictionary<string, object>
+                    {
+                        {"Cut Volume", volInfo.Cut},
+                        {"Fill Volume", volInfo.Fill},
+                        {"Net Volume", volInfo.Net}
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
         #endregion
 
         #region internal methods
