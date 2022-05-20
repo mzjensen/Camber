@@ -83,51 +83,64 @@ namespace Camber.Civil.CivilObjects.Surfaces
             surface.SetProperty(@bool, "Lock");
 
         /// <summary>
-        /// Creates one or more Polylines that represent the flow of water along a Surface from a given start startPoint.
-        /// If the location is on a peak, multiple Polylines are created. If the location is on a flat area, no objects are created. Otherwise, only one Polyline is created.
+        /// Creates one or more PolyCurves that represent the flow of water along a Surface from a given start point.
+        /// If the point is on a peak, multiple curves are created. If the location is on a flat area, no curves are created. Otherwise, only one curve is created.
         /// </summary>
         /// <param name="surface"></param>
         /// <param name="startPoint"></param>
-        /// <param name="create3DPolylines">Create 3D Polylines or 2D Polylines?</param>
-        /// <param name="layer">If blank, the Polyline(s) will be created on the same layer as the Surface</param>
+        /// <param name="create3DCurves">True = create 3D PolyCurves, False = create 2D PolyCurves</param>
         /// <returns></returns>
-        public static List<acDynNodes.Object> CreateWaterDrop(
+        public static List<PolyCurve> CreateWaterDrop(
             this civDynNodes.Surface surface,
             Point startPoint,
-            bool create3DPolylines,
-            string layer = "")
+            bool create3DCurves)
         {
-            List<acDynNodes.Object> dynObjs = new List<acDynNodes.Object>();
+            List<PolyCurve> pcurves = new List<PolyCurve>();
 
             try
             {
                 using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
                 {
                     AeccSurface aeccSurf = surface.GetAeccSurface(acDb.OpenMode.ForRead);
-                    
+
                     acGeom.Point2d location = (acGeom.Point2d)GeometryConversions.DynPointToAcPoint(startPoint, false);
-                    
+
                     var dropType = WaterdropObjectType.Polyline2D;
-                    if (create3DPolylines)
+                    if (create3DCurves)
                     {
                         dropType = WaterdropObjectType.Polyline3D;
                     }
 
-                    acDb.ObjectIdCollection oids = aeccSurf.Analysis.CreateWaterdrop(location, dropType);
-                    
-                    foreach (acDb.ObjectId oid in oids)
-                    {
-                        var acObj = (acDb.Entity) ctx.Transaction.GetObject(oid, acDb.OpenMode.ForWrite);
-                        if (!string.IsNullOrEmpty(layer))
-                        {
-                            acDynNodes.AutoCADUtility.EnsureLayer(ctx, layer);
-                            acObj.Layer = layer;
-                        }
+                    acDb.ObjectIdCollection plineIds = aeccSurf.Analysis.CreateWaterdrop(location, dropType);
 
-                        dynObjs.Add(acDynNodes.SelectionByQuery.GetObjectByObjectHandle(oid.Handle.ToString()));
+                    foreach (acDb.ObjectId plineId in plineIds)
+                    {
+                        List<Point> dynPnts = new List<Point>();
+                        if (dropType == WaterdropObjectType.Polyline2D)
+                        {
+                            var pline = (acDb.Polyline)ctx.Transaction.GetObject(plineId, acDb.OpenMode.ForWrite);
+                            for (int i = 0; i < pline.NumberOfVertices; i++)
+                            {
+                                dynPnts.Add(GeometryConversions.AcPointToDynPoint(pline.GetPoint3dAt(i)));
+                            }
+                            pline.Erase();
+                        }
+                        else
+                        {
+                            var pline3d = (acDb.Polyline3d)ctx.Transaction.GetObject(plineId, acDb.OpenMode.ForWrite);
+                            foreach (acDb.ObjectId vertexId in pline3d)
+                            {
+                                var vertex = (acDb.PolylineVertex3d) ctx.Transaction.GetObject(
+                                        vertexId,
+                                        acDb.OpenMode.ForRead);
+                                dynPnts.Add(GeometryConversions.AcPointToDynPoint(vertex.Position));
+                            }
+                            pline3d.Erase();
+                        }
+                        pcurves.Add(PolyCurve.ByPoints(dynPnts));
                     }
                 }
-                return dynObjs;
+                return pcurves;
             }
             catch (Exception ex)
             {
