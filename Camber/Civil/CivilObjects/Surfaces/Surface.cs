@@ -181,6 +181,28 @@ namespace Camber.Civil.CivilObjects.Surfaces
                 throw new InvalidOperationException(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Rebuilds a Surface by processing all of the build operations one by one.
+        /// </summary>
+        /// <param name="surface"></param>
+        /// <returns></returns>
+        public static civDynNodes.Surface Rebuild(this civDynNodes.Surface surface)
+        {
+            try
+            {
+                using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
+                {
+                    var aeccSurf = surface.GetAeccSurface(acDb.OpenMode.ForWrite);
+                    aeccSurf.Rebuild();
+                }
+                return surface;
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
         #endregion
 
         #region internal methods
