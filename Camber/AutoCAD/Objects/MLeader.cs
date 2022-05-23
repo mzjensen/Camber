@@ -151,7 +151,7 @@ namespace Camber.AutoCAD.Objects
                         acMld.SetFirstVertex(0, insertionPoint);
                         acMld.MoveMLeader(translation, acDb.MoveType.MoveAllExceptArrowHeaderPoints);
                         acDb.MText mtext = acMld.MText;
-                        mtext.SetContentsRtf(text);
+                        mtext.Contents = text;
                         acMld.MText = mtext;
                     }
                 }
@@ -167,7 +167,7 @@ namespace Camber.AutoCAD.Objects
                     mld.ContentType = acDb.ContentType.MTextContent;
                     acDb.MText mText = new acDb.MText();
                     mText.SetDatabaseDefaults();
-                    mText.SetContentsRtf(text);
+                    mText.Contents = text;
                     mld.MText = mText;
                     model.AppendEntity(mld);
                     t.AddNewlyCreatedDBObject(mld, true);
