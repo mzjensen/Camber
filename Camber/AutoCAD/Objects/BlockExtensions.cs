@@ -24,7 +24,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="block"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        public static List<AttributeDefinition> AttributeDefinitions(acDynNodes.Block block)
+        public static List<AttributeDefinition> AttributeDefinitions(this acDynNodes.Block block)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
             var attDefs = new List<AttributeDefinition>();
@@ -55,7 +55,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="block"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        public static bool Explodable(acDynNodes.Block block) => GetBool(block);
+        public static bool Explodable(this acDynNodes.Block block) => GetBool(block);
 
         /// <summary>
         /// Gets if a Block has a preview icon.
@@ -63,7 +63,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="block"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        public static bool HasPreviewIcon(acDynNodes.Block block) => GetBool(block);
+        public static bool HasPreviewIcon(this acDynNodes.Block block) => GetBool(block);
 
         /// <summary>
         /// Gets if a Block is anonymous.
@@ -71,7 +71,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="block"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        public static bool IsAnonymous(acDynNodes.Block block) => GetBool(block);
+        public static bool IsAnonymous(this acDynNodes.Block block) => GetBool(block);
 
         /// <summary>
         /// Gets if a Block is dynamic.
@@ -79,7 +79,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="block"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        public static bool IsDynamic(acDynNodes.Block block) => GetBool(block, "IsDynamicBlock");
+        public static bool IsDynamic(this acDynNodes.Block block) => GetBool(block, "IsDynamicBlock");
 
         /// <summary>
         /// Gets if a Block represents an external reference.
@@ -87,7 +87,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="block"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        public static bool IsFromExternalReference(acDynNodes.Block block) => GetBool(block);
+        public static bool IsFromExternalReference(this acDynNodes.Block block) => GetBool(block);
 
         /// <summary>
         /// Gets if a Block represents an overlay reference.
@@ -95,7 +95,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="block"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        public static bool IsFromOverlayReference(acDynNodes.Block block) => GetBool(block);
+        public static bool IsFromOverlayReference(this acDynNodes.Block block) => GetBool(block);
 
         /// <summary>
         /// Gets if a Block represents a layout.
@@ -103,7 +103,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="block"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        public static bool IsLayout(acDynNodes.Block block) => GetBool(block);
+        public static bool IsLayout(this acDynNodes.Block block) => GetBool(block);
 
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="block"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        public static bool IsUnloaded(acDynNodes.Block block) => GetBool(block);
+        public static bool IsUnloaded(this acDynNodes.Block block) => GetBool(block);
 
         /// <summary>
         /// Gets the units of a Block.
@@ -120,7 +120,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="block"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        public static string Units(acDynNodes.Block block) => GetString(block);
+        public static string Units(this acDynNodes.Block block) => GetString(block);
 
 
         /// <summary>
@@ -129,7 +129,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="block"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        public static string XrefStatus(acDynNodes.Block block) => GetString(block);
+        public static string XrefStatus(this acDynNodes.Block block) => GetString(block);
 
         /// <summary>
         /// Gets the anonymous blocks created from a dynamic Block.
@@ -137,7 +137,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="block"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        public static List<acDynNodes.Block> AnonymousBlocks(acDynNodes.Block block)
+        public static List<acDynNodes.Block> AnonymousBlocks(this acDynNodes.Block block)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
             var anonBlocks = new List<acDynNodes.Block>();
@@ -164,7 +164,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="block"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        public static acDynNodes.Block SetName(acDynNodes.Block block, string name)
+        public static acDynNodes.Block SetName(this acDynNodes.Block block, string name)
         {
             try
             {
@@ -176,14 +176,13 @@ namespace Camber.AutoCAD.Objects
             }
         }
 
-
         /// <summary>
         /// Sets the description for a Block.
         /// </summary>
         /// <param name="block"></param>
         /// <param name="description"></param>
         /// <returns></returns>
-        public static acDynNodes.Block SetDescription(acDynNodes.Block block, string description) => SetValue(block, (object)description, "Comments");
+        public static acDynNodes.Block SetDescription(this acDynNodes.Block block, string description) => SetValue(block, (object)description, "Comments");
 
         /// <summary>
         /// Sets whether Block References associated with a Block can be exploded.
@@ -191,7 +190,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="block"></param>
         /// <param name="bool"></param>
         /// <returns></returns>
-        public static acDynNodes.Block SetExplodable(acDynNodes.Block block, bool @bool) => SetValue(block, @bool);
+        public static acDynNodes.Block SetExplodable(this acDynNodes.Block block, bool @bool) => SetValue(block, @bool);
 
         /// <summary>
         /// Sets if a Block represents an overlay reference.
@@ -199,7 +198,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="block"></param>
         /// <param name="bool"></param>
         /// <returns></returns>
-        public static acDynNodes.Block SetIsFromOverlayReference(acDynNodes.Block block, bool @bool) => SetValue(block, @bool);
+        public static acDynNodes.Block SetIsFromOverlayReference(this acDynNodes.Block block, bool @bool) => SetValue(block, @bool);
 
         /// <summary>
         /// Sets if a Block that represents an external reference is currently unloaded.
@@ -207,7 +206,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="block"></param>
         /// <param name="bool"></param>
         /// <returns></returns>
-        public static acDynNodes.Block SetIsUnloaded(acDynNodes.Block block, bool @bool) => SetValue(block, @bool);
+        public static acDynNodes.Block SetIsUnloaded(this acDynNodes.Block block, bool @bool) => SetValue(block, @bool);
 
         /// <summary>
         /// Sets the units of a Block.
@@ -215,7 +214,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="block"></param>
         /// <param name="units"></param>
         /// <returns></returns>
-        public static acDynNodes.Block SetUnits(acDynNodes.Block block, string units)
+        public static acDynNodes.Block SetUnits(this acDynNodes.Block block, string units)
         {
             if (!Enum.IsDefined(typeof(acDb.UnitsValue), units))
             {
@@ -224,7 +223,7 @@ namespace Camber.AutoCAD.Objects
             return SetValue(block, Enum.Parse(typeof(acDb.UnitsValue), units));
         }
 
-        internal static string GetString(acDynNodes.Block block, [CallerMemberName] string propertyName = null)
+        internal static string GetString(this acDynNodes.Block block, [CallerMemberName] string propertyName = null)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
             using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
@@ -252,7 +251,7 @@ namespace Camber.AutoCAD.Objects
             }
         }
 
-        internal static bool GetBool(acDynNodes.Block block, [CallerMemberName] string propertyName = null)
+        internal static bool GetBool(this acDynNodes.Block block, [CallerMemberName] string propertyName = null)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
             using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
@@ -272,7 +271,7 @@ namespace Camber.AutoCAD.Objects
             }
         }
 
-        internal static acDynNodes.Block SetValue(acDynNodes.Block block, object value, [CallerMemberName] string methodName = null)
+        internal static acDynNodes.Block SetValue(this acDynNodes.Block block, object value, [CallerMemberName] string methodName = null)
         {
             if (methodName.StartsWith("Set"))
             {
@@ -281,7 +280,7 @@ namespace Camber.AutoCAD.Objects
             return SetValue(block, methodName, value);
         }
 
-        internal static acDynNodes.Block SetValue(acDynNodes.Block block, string propertyName, object value)
+        internal static acDynNodes.Block SetValue(this acDynNodes.Block block, string propertyName, object value)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
             using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
