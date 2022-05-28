@@ -22,7 +22,7 @@ namespace Camber.AutoCAD
         /// <param name="document"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        public static bool IsNamedDrawing(acDynNodes.Document document)
+        public static bool IsNamedDrawing(this acDynNodes.Document document)
         {
             return document.AcDocument.IsNamedDrawing;
         }
@@ -33,7 +33,7 @@ namespace Camber.AutoCAD
         /// <param name="document"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        public static bool IsReadOnly(acDynNodes.Document document)
+        public static bool IsReadOnly(this acDynNodes.Document document)
         {
             return document.AcDocument.IsReadOnly;
         }
@@ -46,7 +46,7 @@ namespace Camber.AutoCAD
         /// <param name="document"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        public static int? LastSavedVersion(acDynNodes.Document document)
+        public static int? LastSavedVersion(this acDynNodes.Document document)
             => GetDatabaseVersionInfo(document.AcDocument.Database, true);
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Camber.AutoCAD
         /// <param name="document"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        public static int? OriginalVersion(acDynNodes.Document document)
+        public static int? OriginalVersion(this acDynNodes.Document document)
             => GetDatabaseVersionInfo(document.AcDocument.Database, false);
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Camber.AutoCAD
         /// <param name="document"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        public static List<MultiViewBlock> MultiViewBlocks(acDynNodes.Document document)
+        public static List<MultiViewBlock> MultiViewBlocks(this acDynNodes.Document document)
         {
             List<MultiViewBlock> mvBlks = new List<MultiViewBlock>();
 
@@ -89,7 +89,7 @@ namespace Camber.AutoCAD
         /// </summary>
         /// <param name="command"></param>
         /// <param name="echoInCommandLine">Show the command in the command line?</param>
-        public static bool SendCommand(acDynNodes.Document document, string command, bool echoInCommandLine = true)
+        public static bool SendCommand(this acDynNodes.Document document, string command, bool echoInCommandLine = true)
         {
             if (string.IsNullOrEmpty(command)) { throw new ArgumentException("Command string is null or empty."); }
 
@@ -111,7 +111,7 @@ namespace Camber.AutoCAD
         /// <param name="document"></param>
         /// <param name="variableName">The name of the system variable.</param>
         /// <returns></returns>
-        public static object GetSystemVariable(acDynNodes.Document document, string variableName)
+        public static object GetSystemVariable(this acDynNodes.Document document, string variableName)
         {
             return acApp.Application.GetSystemVariable(variableName);
         }
@@ -123,7 +123,7 @@ namespace Camber.AutoCAD
         /// <param name="variableName">The name of the system variable.</param>
         /// <param name="newValue">The new value to assign.</param>
         /// <returns></returns>
-        public static acDynNodes.Document SetSystemVariable(acDynNodes.Document document, string variableName, object newValue)
+        public static acDynNodes.Document SetSystemVariable(this acDynNodes.Document document, string variableName, object newValue)
         {
             // AutoCAD needs 16-bit integers, but from Dynamo they come as 64-bit.
             // Without this check, an eInvalidInput exception will be thrown when trying to set integer values.
@@ -146,7 +146,7 @@ namespace Camber.AutoCAD
         /// <param name="document"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        public static MultiViewBlock MultiViewBlockByName(acDynNodes.Document document, string name)
+        public static MultiViewBlock MultiViewBlockByName(this acDynNodes.Document document, string name)
         {
             if (document is null)
             {
@@ -176,7 +176,7 @@ namespace Camber.AutoCAD
         /// Returns null if the database has not been saved in the current session.
         /// Returns 0 if the DWG version is prior to 2004.
         /// </returns>
-        internal static int? GetDatabaseVersionInfo(acDb.Database database, bool getLastSaved)
+        internal static int? GetDatabaseVersionInfo(this acDb.Database database, bool getLastSaved)
         {
             acDb.DwgVersion dwgVersion;
 
