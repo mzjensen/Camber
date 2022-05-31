@@ -3,10 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Reflection;
+using Autodesk.DesignScript.Runtime;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using Dynamo.Graph.Nodes;
+using AcBlock = Autodesk.AutoCAD.DatabaseServices.BlockTableRecord;
 #endregion
 
 namespace Camber.AutoCAD.Objects
@@ -14,10 +16,45 @@ namespace Camber.AutoCAD.Objects
     public static class Block
     {
         #region properties
-        const string NotApplicableMsg = "Not applicable";
+        private const string NotApplicableMsg = "Not applicable";
         #endregion
 
         #region methods
+        /// <summary>
+        /// Gets the internal Block Table Record of a Dynamo Block.
+        /// </summary>
+        /// <param name="block"></param>
+        /// <returns></returns>
+        /// <remarks>
+        /// The object will be returned as OpenMode.ForRead. It is up to the caller to upgrade open if necessary.
+        /// </remarks>
+        [IsVisibleInDynamoLibrary(false)]
+        public static AcBlock GetBlockTableRecord(this acDynNodes.Block block)
+        {
+            using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
+            {
+                var bt = (acDb.BlockTable)ctx.Transaction.GetObject(ctx.Database.BlockTableId, acDb.OpenMode.ForRead);
+                var btr = (acDb.BlockTableRecord)ctx.Transaction.GetObject(bt[block.Name], acDb.OpenMode.ForRead);
+                return btr;
+            }
+        }
+
+        /// <summary>
+        /// Gets the Object ID of a Dynamo Block.
+        /// </summary>
+        /// <param name="block"></param>
+        /// <returns></returns>
+        [IsVisibleInDynamoLibrary(false)]
+        public static acDb.ObjectId GetObjectId(this acDynNodes.Block block)
+        {
+            using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
+            {
+                var bt = (acDb.BlockTable)ctx.Transaction.GetObject(ctx.Database.BlockTableId, acDb.OpenMode.ForRead);
+                var btr = (acDb.BlockTableRecord)ctx.Transaction.GetObject(bt[block.Name], acDb.OpenMode.ForRead);
+                return btr.ObjectId;
+            }
+        }
+
         /// <summary>
         /// Gets the Block's Attribute Definitions.
         /// </summary>
@@ -223,7 +260,7 @@ namespace Camber.AutoCAD.Objects
             return SetValue(block, Enum.Parse(typeof(acDb.UnitsValue), units));
         }
 
-        internal static string GetString(this acDynNodes.Block block, [CallerMemberName] string propertyName = null)
+        private static string GetString(this acDynNodes.Block block, [CallerMemberName] string propertyName = null)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
             using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
@@ -251,7 +288,7 @@ namespace Camber.AutoCAD.Objects
             }
         }
 
-        internal static bool GetBool(this acDynNodes.Block block, [CallerMemberName] string propertyName = null)
+        private static bool GetBool(this acDynNodes.Block block, [CallerMemberName] string propertyName = null)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
             using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
@@ -271,7 +308,7 @@ namespace Camber.AutoCAD.Objects
             }
         }
 
-        internal static acDynNodes.Block SetValue(this acDynNodes.Block block, object value, [CallerMemberName] string methodName = null)
+        private static acDynNodes.Block SetValue(this acDynNodes.Block block, object value, [CallerMemberName] string methodName = null)
         {
             if (methodName.StartsWith("Set"))
             {
@@ -280,7 +317,7 @@ namespace Camber.AutoCAD.Objects
             return SetValue(block, methodName, value);
         }
 
-        internal static acDynNodes.Block SetValue(this acDynNodes.Block block, string propertyName, object value)
+        private static acDynNodes.Block SetValue(this acDynNodes.Block block, string propertyName, object value)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
             using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
