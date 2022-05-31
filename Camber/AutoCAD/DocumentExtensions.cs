@@ -92,6 +92,7 @@ namespace Camber.AutoCAD
         /// </summary>
         /// <param name="document"></param>
         /// <returns></returns>
+        [NodeCategory("Query")]
         public static List<Xref> Xrefs(this acDynNodes.Document document)
         {
             List<Xref> xrefs = new List<Xref>();
