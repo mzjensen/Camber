@@ -13,7 +13,7 @@ using civDynNodes = Autodesk.Civil.DynamoNodes;
 namespace Camber.Civil.CivilObjects.Surfaces
 {
     [RegisterForTrace]
-    public sealed class TinVolumeSurface : CivilObject
+    public sealed class TinVolumeSurface : CivilObject, ICamberSurface
     {
         #region properties
         internal AeccTinVolumeSurface AeccTinVolumeSurface => AcObject as AeccTinVolumeSurface;
@@ -231,6 +231,11 @@ namespace Camber.Civil.CivilObjects.Surfaces
                 throw new InvalidOperationException(ex.Message);
             }
         }
+
+        /// <summary>
+        /// "Converts" a TIN Volume Surface to a base Surface object in order to use the out-of-the-box nodes for Surfaces.
+        /// </summary>
+        public civDynNodes.Surface AsSurface() => civDynNodes.Selection.SurfaceByName(Name, acDynNodes.Document.Current);
         #endregion
     }
 }

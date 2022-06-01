@@ -154,6 +154,7 @@
     <Compile Include="Civil\CivilObjects\Corridor.cs" />
     <Compile Include="Civil\CivilObjects\Surfaces\GridSurface.cs" />
     <Compile Include="Civil\CivilObjects\Surfaces\GridVolumeSurface.cs" />
+    <Compile Include="Civil\CivilObjects\Surfaces\ICamberSurface.cs" />
     <Compile Include="Civil\CivilObjects\Surfaces\SurfaceExtensions.cs" />
     <Compile Include="Civil\CivilObjects\Surfaces\TinSurfaceExtensions.cs" />
     <Compile Include="Civil\CivilObjects\Surfaces\TinVolumeSurface.cs" />
