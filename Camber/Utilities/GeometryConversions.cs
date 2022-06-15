@@ -1,5 +1,6 @@
 ﻿#region references
 using System;
+using System.Collections;
 using System.Linq;
 using System.IO;
 using System.Collections.Generic;
@@ -307,6 +308,23 @@ namespace Camber.Utilities.GeometryConversions
             }
 
             return acCollection;
+        }
+
+        /// <summary>
+        /// Converts an AutoCAD Polyline3d to Dynamo PolyCurve.
+        /// </summary>
+        /// <param name="polyline3d"></param>
+        /// <returns></returns>
+        public static PolyCurve AcPolyline3dToDynPolyCurve(acDb.Polyline3d polyline3d)
+        {
+            bool connectLastToFirst = polyline3d.Closed;
+
+            List<Point> dynPnts = new List<Point>();
+            foreach (acDb.PolylineVertex3d vert in polyline3d)
+            {
+                dynPnts.Add(AcPointToDynPoint(vert.Position));
+            }
+            return PolyCurve.ByPoints(dynPnts, connectLastToFirst);
         }
         #endregion
 
