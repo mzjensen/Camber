@@ -1,22 +1,22 @@
-﻿using System;
+﻿using Autodesk.Civil;
+using Autodesk.DesignScript.Geometry;
+using Autodesk.DesignScript.Runtime;
+using Camber.Utilities.GeometryConversions;
+using DSCore;
+using Dynamo.Graph.Nodes;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using Autodesk.Civil;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
-using civDb = Autodesk.Civil.DatabaseServices;
-using Autodesk.DesignScript.Runtime;
-using Autodesk.DesignScript.Geometry;
-using acGeom = Autodesk.AutoCAD.Geometry;
-using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
-using civDynNodes = Autodesk.Civil.DynamoNodes;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
-using Camber.Utilities.GeometryConversions;
-using Dynamo.Graph.Nodes;
+using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
+using acGeom = Autodesk.AutoCAD.Geometry;
 using AeccSurface = Autodesk.Civil.DatabaseServices.Surface;
+using civDb = Autodesk.Civil.DatabaseServices;
+using civDynNodes = Autodesk.Civil.DynamoNodes;
 
 namespace Camber.Civil.CivilObjects.Surfaces
 {
@@ -65,6 +65,66 @@ namespace Camber.Civil.CivilObjects.Surfaces
         #endregion
 
         #region action methods
+        /// <summary>
+        /// Performs an elevation analysis on a Surface. 
+        /// </summary>
+        /// <param name="surface"></param>
+        /// <param name="minElevations">List of minimum elevations in each range.</param>
+        /// <param name="maxElevations">List of maximum elevations in each range.</param>
+        /// <param name="colors">List of color schemes to assign to each elevation range.</param>
+        /// <returns></returns>
+        public static civDynNodes.Surface ElevationAnalysis(
+            this civDynNodes.Surface surface, 
+            List<double> minElevations, 
+            List<double> maxElevations, 
+            List<Color> colors) 
+            => RunMinMaxAnalysis(surface, SurfaceMinMaxAnalysisType.Elevations, minElevations, maxElevations, colors);
+
+        /// <summary>
+        /// Performs a direction analysis on a Surface. 
+        /// </summary>
+        /// <param name="surface"></param>
+        /// <param name="minDirections">List of minimum directions (degrees) in each range.</param>
+        /// <param name="maxDirections">List of maximum directions (degrees) in each range.</param>
+        /// <param name="colors">List of color schemes to assign to each direction range.</param>
+        /// <returns></returns>
+        public static civDynNodes.Surface DirectionAnalysis(
+            this civDynNodes.Surface surface,
+            List<double> minDirections,
+            List<double> maxDirections,
+            List<Color> colors)
+            => RunMinMaxAnalysis(surface, SurfaceMinMaxAnalysisType.Directions, minDirections, maxDirections, colors);
+
+        /// <summary>
+        /// Performs a slope analysis on a Surface. 
+        /// </summary>
+        /// <param name="surface"></param>
+        /// <param name="minSlopes">List of minimum slopes (percent) in each range.</param>
+        /// <param name="maxSlopes">List of minimum slopes (percent) in each range.</param>
+        /// <param name="colors">List of color schemes to assign to each slope range.</param>
+        /// <returns></returns>
+        public static civDynNodes.Surface SlopeAnalysis(
+            this civDynNodes.Surface surface,
+            List<double> minSlopes,
+            List<double> maxSlopes,
+            List<Color> colors)
+            => RunMinMaxAnalysis(surface, SurfaceMinMaxAnalysisType.Slopes, minSlopes, maxSlopes, colors);
+
+        /// <summary>
+        /// Performs a slope  arrow analysis on a Surface.
+        /// </summary>
+        /// <param name="surface"></param>
+        /// <param name="minSlopes">List of minimum slopes (percent) in each range.</param>
+        /// <param name="maxSlopes">List of minimum slopes (percent) in each range.</param>
+        /// <param name="colors">List of color schemes to assign to each slope range.</param>
+        /// <returns></returns>
+        public static civDynNodes.Surface SlopeArrowAnalysis(
+            this civDynNodes.Surface surface,
+            List<double> minSlopes,
+            List<double> maxSlopes,
+            List<Color> colors)
+            => RunMinMaxAnalysis(surface, SurfaceMinMaxAnalysisType.SlopeArrows, minSlopes, maxSlopes, colors);
+
         /// <summary>
         /// Sets whether to automatically rebuild a Surface when its definition is changed.
         /// </summary>
@@ -350,6 +410,108 @@ namespace Camber.Civil.CivilObjects.Surfaces
                 return false;
             }
         }
+
+        private static civDynNodes.Surface RunMinMaxAnalysis(
+            civDynNodes.Surface surface,
+            SurfaceMinMaxAnalysisType analysisType,
+            List<double> minValues,
+            List<double> maxValues,
+            List<Color> colors)
+        {
+            // Check list lengths
+            if (new IList[] { minValues, maxValues, colors }.All(list => list.Count != minValues.Count))
+            {
+                throw new InvalidOperationException("All lists must have the same number of items.");
+            }
+
+            try
+            {
+                using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
+                {
+                    AeccSurface aeccSurf = surface.GetAeccSurface(acDb.OpenMode.ForWrite);
+
+                    int steps = minValues.Count;
+
+                    switch (analysisType)
+                    {
+                        case SurfaceMinMaxAnalysisType.Directions:
+                            civDb.SurfaceAnalysisDirectionData[] directionData = new civDb.SurfaceAnalysisDirectionData[steps];
+                            for (var i = 0; i < steps; i++)
+                            {
+                                Autodesk.AutoCAD.Colors.Color acColor = Autodesk.AutoCAD.Colors.Color.FromRgb(
+                                    colors[i].Red,
+                                    colors[i].Green,
+                                    colors[i].Blue);
+                                directionData[i] = new civDb.SurfaceAnalysisDirectionData(
+                                    Utilities.MathUtilities.DegreesToRadians(minValues[i]),
+                                    Utilities.MathUtilities.DegreesToRadians(maxValues[i]),
+                                    acColor);
+                            }
+                            aeccSurf.Analysis.SetDirectionData(directionData);
+                            break;
+                        case SurfaceMinMaxAnalysisType.Elevations:
+                            civDb.SurfaceAnalysisElevationData[] elevationData = new civDb.SurfaceAnalysisElevationData[steps];
+                            for (var i = 0; i < steps; i++)
+                            {
+                                Autodesk.AutoCAD.Colors.Color acColor = Autodesk.AutoCAD.Colors.Color.FromRgb(
+                                    colors[i].Red,
+                                    colors[i].Green,
+                                    colors[i].Blue);
+                                elevationData[i] = new civDb.SurfaceAnalysisElevationData(
+                                    minValues[i],
+                                    maxValues[i],
+                                    acColor);
+                            }
+                            aeccSurf.Analysis.SetElevationData(elevationData);
+                            break;
+                        case SurfaceMinMaxAnalysisType.SlopeArrows:
+                            civDb.SurfaceAnalysisSlopeArrowData[] arrowData = new civDb.SurfaceAnalysisSlopeArrowData[steps];
+                            for (var i = 0; i < steps; i++)
+                            {
+                                Autodesk.AutoCAD.Colors.Color acColor = Autodesk.AutoCAD.Colors.Color.FromRgb(
+                                    colors[i].Red,
+                                    colors[i].Green,
+                                    colors[i].Blue);
+                                arrowData[i] = new civDb.SurfaceAnalysisSlopeArrowData(
+                                    minValues[i],
+                                    maxValues[i],
+                                    acColor);
+                            }
+                            aeccSurf.Analysis.SetSlopeArrowData(arrowData);
+                            break;
+                        case SurfaceMinMaxAnalysisType.Slopes:
+                            civDb.SurfaceAnalysisSlopeData[] slopeData = new civDb.SurfaceAnalysisSlopeData[steps];
+                            for (var i = 0; i < steps; i++)
+                            {
+                                Autodesk.AutoCAD.Colors.Color acColor = Autodesk.AutoCAD.Colors.Color.FromRgb(
+                                    colors[i].Red,
+                                    colors[i].Green,
+                                    colors[i].Blue);
+                                slopeData[i] = new civDb.SurfaceAnalysisSlopeData(
+                                    minValues[i],
+                                    maxValues[i],
+                                    acColor);
+                            }
+                            aeccSurf.Analysis.SetSlopeData(slopeData);
+                            break;
+                    }
+                }
+                return surface;
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
         #endregion
+
+        [IsVisibleInDynamoLibrary(false)]
+        public enum SurfaceMinMaxAnalysisType
+        {
+            Directions,
+            Elevations,
+            Slopes,
+            SlopeArrows
+        }
     }
 }
