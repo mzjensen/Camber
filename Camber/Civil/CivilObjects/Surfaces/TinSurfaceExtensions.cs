@@ -67,6 +67,11 @@ namespace Camber.Civil.CivilObjects.Surfaces
             {
                 throw new InvalidOperationException("File path is null or empty.");
             }
+
+            if (Path.GetExtension(filePath).ToLower() != ".tin")
+            {
+                throw new InvalidOperationException("Invalid file type.");
+            }
             
             try
             {
@@ -182,14 +187,14 @@ namespace Camber.Civil.CivilObjects.Surfaces
         {
             if (string.IsNullOrEmpty(filePath))
             {
-                throw new InvalidOperationException("File path is null or empty");
+                throw new InvalidOperationException("File path is null or empty.");
             }
 
             var ext = Path.GetExtension(filePath).ToLower();
 
             if (ext != ".dem" && ext != ".tif" && ext != ".asc" && ext != ".txt" && ext != ".adf")
             {
-                throw new InvalidOperationException("Invalid file type");
+                throw new InvalidOperationException("Invalid file type.");
             }
 
             bool useCustomNullElevation = true;
