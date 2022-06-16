@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Autodesk.AutoCAD.Windows.Data;
-using Autodesk.DesignScript.Runtime;
+﻿using Autodesk.DesignScript.Runtime;
 using Camber.Civil.Styles.Objects;
 using Dynamo.Graph.Nodes;
-using civDynNodes = Autodesk.Civil.DynamoNodes;
-using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
-using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
-using civDb = Autodesk.Civil.DatabaseServices;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using Autodesk.DesignScript.Geometry;
+using Camber.Utilities.GeometryConversions;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
+using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
+using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using AeccTinSurface = Autodesk.Civil.DatabaseServices.TinSurface;
+using civDb = Autodesk.Civil.DatabaseServices;
+using civDynNodes = Autodesk.Civil.DynamoNodes;
+using acGeom = Autodesk.AutoCAD.Geometry;
 
 namespace Camber.Civil.CivilObjects.Surfaces
 {
@@ -35,11 +35,16 @@ namespace Camber.Civil.CivilObjects.Surfaces
             string name,
             SurfaceStyle surfaceStyle)
         {
+            if (civDynNodes.Selection.SurfaceByName(name, document) != null)
+            {
+                throw new InvalidOperationException("A TIN Surface with the same name already exists.");
+            }
+            
             try
             {
                 using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
                 {
-                    civDb.TinSurface.Create(name, surfaceStyle.InternalObjectId);
+                    AeccTinSurface.Create(name, surfaceStyle.InternalObjectId);
                     return civDynNodes.Selection.SurfaceByName(name, document);
                 }
             }
@@ -67,8 +72,8 @@ namespace Camber.Civil.CivilObjects.Surfaces
             {
                 using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
                 {
-                    acDb.ObjectId surfId = civDb.TinSurface.CreateFromTin(document.AcDocument.Database, filePath);
-                    var surf = (civDb.TinSurface) ctx.Transaction.GetObject(surfId, acDb.OpenMode.ForRead);
+                    acDb.ObjectId surfId = AeccTinSurface.CreateFromTin(document.AcDocument.Database, filePath);
+                    var surf = (AeccTinSurface) ctx.Transaction.GetObject(surfId, acDb.OpenMode.ForRead);
                     return civDynNodes.Selection.SurfaceByName(surf.Name, document);
                 }
             }
@@ -87,8 +92,8 @@ namespace Camber.Civil.CivilObjects.Surfaces
         /// <param name="filePath">The full path to the LandXML file</param>
         /// <param name="surfaceNameInFile">The name of the TIN Surface as defined in the LandXML file</param>
         /// <returns></returns>
-        // TODO: this will import a surface even if you get the name wrong.
-        // Look into parsing the XML, and possible creating a separate static class for LandXML imports.
+        // TODO: the API function will create an empty surface if the surface name isn't found in the LandXML, which is undesirable behavior.
+        // TODO: need to parse the XML file to determine if the surface name exists.
         public static civDynNodes.Surface ImportFromLandXML(
             acDynNodes.Document document,
             string newSurfaceName,
@@ -145,7 +150,7 @@ namespace Camber.Civil.CivilObjects.Surfaces
             {
                 using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
                 {
-                    var aeccSurf = (civDb.TinSurface)surfaceToPasteInto.InternalDBObject;
+                    var aeccSurf = (AeccTinSurface)surfaceToPasteInto.InternalDBObject;
                     aeccSurf.UpgradeOpen();
                     aeccSurf.PasteSurface(surfaceToPaste.InternalObjectId);
                     aeccSurf.DowngradeOpen();
@@ -159,7 +164,7 @@ namespace Camber.Civil.CivilObjects.Surfaces
         }
 
         /// <summary>
-        /// Adds DEM file data to a Tin Surface with custom null elevation and coordinate system information.
+        /// Adds DEM file data to a TIN Surface with custom null elevation and coordinate system information.
         /// If the DEM file coordinate system is different from the current coordinate system of the drawing, you can specify a coordinate system for the DEM file.
         /// The coordinate system you specify for the DEM file should match the data defined in the DEM file itself.
         /// An empty string input for the coordinate system code means that no transformation is needed.
@@ -172,12 +177,19 @@ namespace Camber.Civil.CivilObjects.Surfaces
         public static civDynNodes.Surface AddDEMFile(
             this civDynNodes.TinSurface tinSurface, 
             string filePath,
-            [DefaultArgument("null")] double customNullElevation,
+            [DefaultArgument("null")] double? customNullElevation,
             string coordinateSystemCode = "")
         {
             if (string.IsNullOrEmpty(filePath))
             {
                 throw new InvalidOperationException("File path is null or empty");
+            }
+
+            var ext = Path.GetExtension(filePath).ToLower();
+
+            if (ext != ".dem" && ext != ".tif" && ext != ".asc" && ext != ".txt" && ext != ".adf")
+            {
+                throw new InvalidOperationException("Invalid file type");
             }
 
             bool useCustomNullElevation = true;
@@ -191,13 +203,13 @@ namespace Camber.Civil.CivilObjects.Surfaces
             {
                 using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
                 {
-                    var aeccSurf = (civDb.TinSurface) tinSurface.InternalDBObject;
+                    var aeccSurf = (AeccTinSurface) tinSurface.InternalDBObject;
                     aeccSurf.UpgradeOpen();
                     aeccSurf.DEMFilesDefinition.AddDEMFile(
                         filePath,
                         coordinateSystemCode,
                         useCustomNullElevation,
-                        customNullElevation);
+                        (double)customNullElevation);
                     aeccSurf.DowngradeOpen();
                 }
                 return tinSurface;
@@ -231,7 +243,7 @@ namespace Camber.Civil.CivilObjects.Surfaces
             {
                 using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
                 {
-                    var aeccSurf = (civDb.TinSurface)tinSurface.InternalDBObject;
+                    var aeccSurf = (AeccTinSurface)tinSurface.InternalDBObject;
                     aeccSurf.UpgradeOpen();
                     aeccSurf.DrawingObjectsDefinition.AddFromBlocks(blkIds, description);
                     aeccSurf.DowngradeOpen();
@@ -269,7 +281,7 @@ namespace Camber.Civil.CivilObjects.Surfaces
             {
                 using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
                 {
-                    var aeccSurf = (civDb.TinSurface)tinSurface.InternalDBObject;
+                    var aeccSurf = (AeccTinSurface)tinSurface.InternalDBObject;
                     aeccSurf.UpgradeOpen();
                     aeccSurf.DrawingObjectsDefinition.AddFrom3DFaces(faceIds, maintainEdges, description);
                     aeccSurf.DowngradeOpen();
@@ -280,6 +292,96 @@ namespace Camber.Civil.CivilObjects.Surfaces
             {
                 throw new InvalidOperationException(ex.Message);
             }
+        }
+
+        /// <summary>
+        /// Gets the triangles of a TIN Surface within a boundary.
+        /// </summary>
+        /// <param name="tinSurface"></param>
+        /// <param name="polyline"></param>
+        /// <returns></returns>
+        public static List<PolyCurve> GetTrianglesWithinBoundary(
+            this civDynNodes.TinSurface tinSurface,
+            acDynNodes.Polyline polyline
+        )
+        {
+            try
+            {
+                using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
+                {
+                    var aeccSurf = (AeccTinSurface)tinSurface.InternalDBObject;
+                    var plineIds = new acDb.ObjectIdCollection(new[] { polyline.InternalObjectId });
+                    var verts = aeccSurf.GetVerticesInsidePolylines(plineIds);
+
+                    return GetConnectedTriangles(verts);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Gets the triangles of a TIN Surface within a boundary.
+        /// </summary>
+        /// <param name="tinSurface"></param>
+        /// <param name="polygon"></param>
+        /// <returns></returns>
+        public static List<PolyCurve> GetTrianglesWithinBoundary(
+            this civDynNodes.TinSurface tinSurface,
+            Polygon polygon
+        )
+        {
+            if (polygon.SelfIntersections().Length > 0)
+            {
+                throw new ArgumentException("Boundary Polygon cannot have self-intersections.");
+            }
+
+            acGeom.Point3dCollection bndyPnts = GeometryConversions.DynPolygonToAcPoint3dCollection(polygon, true);
+            List<PolyCurve> pcurves = new List<PolyCurve>();
+
+            try
+            {
+                using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
+                {
+                    var aeccSurf = (AeccTinSurface)tinSurface.InternalDBObject;
+                    var verts = aeccSurf.GetVerticesInsideBorder(bndyPnts);
+
+                    return GetConnectedTriangles(verts);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
+        #endregion
+
+        #region private methods
+        /// <summary>
+        /// Gets all triangles connected to a TIN Surface vertex.
+        /// </summary>
+        /// <param name="verts"></param>
+        /// <returns></returns>
+        private static List<PolyCurve> GetConnectedTriangles(civDb.TinSurfaceVertex[] verts)
+        {
+            List<PolyCurve> pcurves = new List<PolyCurve>();
+
+            foreach (civDb.TinSurfaceVertex vert in verts)
+            {
+                foreach (civDb.TinSurfaceTriangle tri in vert.Triangles)
+                {
+                    List<Point> pnts = new List<Point>()
+                    {
+                        GeometryConversions.AcPointToDynPoint(tri.Vertex1.Location),
+                        GeometryConversions.AcPointToDynPoint(tri.Vertex2.Location),
+                        GeometryConversions.AcPointToDynPoint(tri.Vertex3.Location)
+                    };
+                    pcurves.Add(PolyCurve.ByPoints(pnts, true));
+                }
+            }
+            return pcurves;
         }
         #endregion
     }
