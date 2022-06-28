@@ -39,6 +39,9 @@
 		<namespace name="Camber.Civil.PressureNetworks.Parts">
 			<category>Camber.Civil 3D.CivilObjects.Pressure Networks.Parts</category>
 		</namespace>
+    <namespace name="Camber.Civil.CivilObjects.Surfaces">
+      <category>Camber.Civil 3D.CivilObjects.Surfaces</category>
+    </namespace>
 		<namespace name="Camber.Civil.DataShortcuts">
 			<category>Camber.Civil 3D.Data Shortcuts</category>
 		</namespace>
