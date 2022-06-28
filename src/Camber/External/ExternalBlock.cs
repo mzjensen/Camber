@@ -1,11 +1,15 @@
 ﻿#region references
-using System;
-using System.Reflection;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using acDb = Autodesk.AutoCAD.DatabaseServices;
-using AcBlock = Autodesk.AutoCAD.DatabaseServices.BlockTableRecord;
 using Camber.External.ExternalObjects;
+using Camber.Utilities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using AcBlock = Autodesk.AutoCAD.DatabaseServices.BlockTableRecord;
+using acDb = Autodesk.AutoCAD.DatabaseServices;
+using civDb = Autodesk.Civil.DatabaseServices;
+
 #endregion
 
 namespace Camber.External
@@ -82,17 +86,34 @@ namespace Camber.External
         {
             get
             {
-                var objs = new List<ExternalObject>();
+                var retList = new List<ExternalObject>();
                 using (var tr = AcDatabase.TransactionManager.StartTransaction())
                 {
                     acDb.BlockTable bt = (acDb.BlockTable)tr.GetObject(AcDatabase.BlockTableId, acDb.OpenMode.ForRead);
                     AcBlock btr = (AcBlock)tr.GetObject(bt[Name], acDb.OpenMode.ForRead);
-                    foreach (acDb.ObjectId oid in btr)
+                    foreach (var oid in btr)
                     {
-                        acDb.Entity ent = (acDb.Entity)tr.GetObject(oid, acDb.OpenMode.ForRead);
-                        objs.Add(new ExternalObject(ent));
+                        var acObj = oid.GetObject(acDb.OpenMode.ForRead);
+
+                        if (!(acObj is acDb.Entity))
+                        {
+                            continue;
+                        }
+                        
+                        var assemblyObjects = ReflectionUtilities.GetEnumerableOfType<ExternalObject>(acObj);
+                        if (assemblyObjects != null && assemblyObjects.Any())
+                        {
+                            // If there are multiple objects, the first one should be the furthest down the inheritance hierarchy (i.e. the most derived)
+                            IEnumerable<ExternalObject> externalObjects = assemblyObjects.ToList();
+                            retList.Add(externalObjects.First());
+                        }
+                        else
+                        {
+                            // If we don't get any instances of a derived class, just create an ExternalObject
+                            retList.Add(new ExternalObject((acDb.Entity)acObj));
+                        }
                     }
-                    return objs;
+                    return retList;
                 }
             }
         }
