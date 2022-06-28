@@ -131,6 +131,10 @@
 		<namespace name="Camber.External.ExternalObjects">
 			<category>Camber.External.ExternalObjects</category>
 		</namespace>
+		<!--LandXML-->
+    <namespace name="Camber.LandXML">
+      <category>Camber.LandXML</category>
+    </namespace>
 		<!--Tools-->
 		<namespace name="Camber.Tools">
 			<category>Camber.Tools</category>
