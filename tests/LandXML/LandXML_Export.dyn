@@ -1,0 +1,194 @@
+{
+  "Uuid": "422dbcd2-14a1-4d39-9018-a2f4e459c6a1",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "LandXML_Export",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.LandXML.LandXML.Export@string,string",
+      "Id": "bfd271dbc2d54636ad43b2180d4ed3df",
+      "Inputs": [
+        {
+          "Id": "536e947c2af6425eb0dd0b85cc8e47ad",
+          "Name": "folderPath",
+          "Description": "The path to the destination folder\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "36907dd4b0ff4fe2a13d3c01a47faad2",
+          "Name": "fileName",
+          "Description": "The desired name of the LandXML file (do not include the .xml extension)\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "ba2b404e16a84fa78af6b8ee5e954237",
+          "Name": "void",
+          "Description": "void",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Exports a LandXML using the settings defined in the drawing. All available objects will be exported.\n\nLandXML.Export (folderPath: string, fileName: string): void"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "LandXMLTest",
+      "Id": "736686b9bed04a69919f89c29500c45a",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "2994d26a30db4cb3a6878bc27204e62f",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": ".\\",
+      "Id": "f81247b1672548909d2d94b93eee72ed",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "c457e576027c40069d980355ebe88266",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "2994d26a30db4cb3a6878bc27204e62f",
+      "End": "36907dd4b0ff4fe2a13d3c01a47faad2",
+      "Id": "b26ccbd9b7e347db86e8b7248c3ffb37",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "c457e576027c40069d980355ebe88266",
+      "End": "536e947c2af6425eb0dd0b85cc8e47ad",
+      "Id": "1fab034809c94076a6a51c3ea9ed2ffb",
+      "IsHidden": "False"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Camber",
+      "Version": "2.0.0",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "bfd271dbc2d54636ad43b2180d4ed3df"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.13",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.13.1.3887",
+      "RunType": "Automatic",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "ConnectorPins": [],
+    "NodeViews": [
+      {
+        "Name": "LandXML.Export",
+        "ShowGeometry": true,
+        "Id": "bfd271dbc2d54636ad43b2180d4ed3df",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 374.00000000000017,
+        "Y": 147.60000000000002
+      },
+      {
+        "Name": "String",
+        "ShowGeometry": true,
+        "Id": "736686b9bed04a69919f89c29500c45a",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 98.663482483631924,
+        "Y": 235.55529274108994
+      },
+      {
+        "Name": "String",
+        "ShowGeometry": true,
+        "Id": "f81247b1672548909d2d94b93eee72ed",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 111.70377170259712,
+        "Y": 97.446775103871772
+      }
+    ],
+    "Annotations": [],
+    "X": 103.41875848940066,
+    "Y": 90.639831148304637,
+    "Zoom": 0.67483165842686466
+  }
+}

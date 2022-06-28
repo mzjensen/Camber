@@ -1,0 +1,249 @@
+{
+  "Uuid": "142a6842-c296-4dbf-a361-e7eabe7c3117",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "LandXML_Import",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "CoreNodeModels.Input.Filename, CoreNodeModels",
+      "HintPath": "C:\\Software Projects\\Camber\\tests\\LandXML\\LandXMLTest.xml",
+      "InputValue": ".\\LandXMLTest.xml",
+      "NodeType": "ExtensionNode",
+      "Id": "9fc8527304c846ff9d44554b39dc748c",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "a233961dedec422a82d0bc1b769ead41",
+          "Name": "",
+          "Description": "File Path",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows you to select a file on the system to get its file path."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.LandXML.LandXML.Import@Autodesk.AutoCAD.DynamoNodes.Document",
+      "Id": "904926f8dcb54a8eabc6bc5273d16555",
+      "Inputs": [
+        {
+          "Id": "a36b6008d4004d98b37fd4a495dbf1e3",
+          "Name": "landXML",
+          "Description": "Camber.LandXML.LandXML",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "9646ad0c1ba54162bf5ee51e84a6153c",
+          "Name": "document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "06cd717bea534abeae556303ca7bfd51",
+          "Name": "LandXML",
+          "Description": "LandXML",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Imports the objects defined in a LandXML file.\n\nLandXML.Import (document: Document): LandXML"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.LandXML.LandXML.LoadFromFile@string",
+      "Id": "27e7f4d50a64499a9214db1e7451f6bb",
+      "Inputs": [
+        {
+          "Id": "e162452ef91b4358aaf0485be61d1f88",
+          "Name": "filePath",
+          "Description": "The path to the LandXML file\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "613169a45d834a75943726c16ebab3db",
+          "Name": "LandXML",
+          "Description": "LandXML",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Loads a LandXML file.\n\nLandXML.LoadFromFile (filePath: string): LandXML"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Document.Current",
+      "Id": "8e4690fd380849e69b0ac97c8693ca30",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "fd72ac6585f44830ab162b3d9fd93f15",
+          "Name": "Document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the current AutoCAD document.\n\nDocument.Current: Document"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "a233961dedec422a82d0bc1b769ead41",
+      "End": "e162452ef91b4358aaf0485be61d1f88",
+      "Id": "8fddd04580c4449bb80d2bd9279b394e",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "613169a45d834a75943726c16ebab3db",
+      "End": "a36b6008d4004d98b37fd4a495dbf1e3",
+      "Id": "57d34d2f0c7d48c9bcd96a714589058a",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "fd72ac6585f44830ab162b3d9fd93f15",
+      "End": "9646ad0c1ba54162bf5ee51e84a6153c",
+      "Id": "592e84a7729242d5b321ef3cf1e8e2cb",
+      "IsHidden": "False"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Camber",
+      "Version": "2.0.0",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "904926f8dcb54a8eabc6bc5273d16555",
+        "27e7f4d50a64499a9214db1e7451f6bb"
+      ]
+    },
+    {
+      "Name": "LandXMLTest.xml",
+      "ReferenceType": "External",
+      "Nodes": [
+        "9fc8527304c846ff9d44554b39dc748c"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.13",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.13.1.3887",
+      "RunType": "Automatic",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "ConnectorPins": [],
+    "NodeViews": [
+      {
+        "Name": "File Path",
+        "ShowGeometry": true,
+        "Id": "9fc8527304c846ff9d44554b39dc748c",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 86.400000000000034,
+        "Y": 80.000000000000043
+      },
+      {
+        "Name": "LandXML.Import",
+        "ShowGeometry": true,
+        "Id": "904926f8dcb54a8eabc6bc5273d16555",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 665.39558028060935,
+        "Y": 155.45799490289633
+      },
+      {
+        "Name": "LandXML.LoadFromFile",
+        "ShowGeometry": true,
+        "Id": "27e7f4d50a64499a9214db1e7451f6bb",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 317.11089786736204,
+        "Y": 80.6812062222958
+      },
+      {
+        "Name": "Document.Current",
+        "ShowGeometry": true,
+        "Id": "8e4690fd380849e69b0ac97c8693ca30",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 356.85711887777154,
+        "Y": 241.68708455259775
+      }
+    ],
+    "Annotations": [],
+    "X": 89.709968912269829,
+    "Y": 58.094150879211469,
+    "Zoom": 0.59376714062500013
+  }
+}
