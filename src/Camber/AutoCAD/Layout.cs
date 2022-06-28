@@ -317,6 +317,14 @@ namespace Camber.AutoCAD
                     name, 
                     StringComparison.OrdinalIgnoreCase));
         }
+
+        [NodeCategory("Actions")]
+        /// <summary>
+        /// Gets the currently-selected Layout.
+        /// </summary>
+        /// <param name="document"></param>
+        public static Layout GetActiveLayout(acDynNodes.Document document) =>
+            GetLayoutByName(document, acDb.LayoutManager.Current.CurrentLayout);
         #endregion
 
         #region methods
@@ -384,7 +392,7 @@ namespace Camber.AutoCAD
                             continue;
                         }
 
-                        var acLayout = (acDb.Layout)ctx.Transaction.GetObject(
+                        var acLayout = (AcLayout)ctx.Transaction.GetObject(
                             layoutEntry.Value,
                             acDb.OpenMode.ForRead);
 

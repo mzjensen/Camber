@@ -1,0 +1,560 @@
+{
+  "Uuid": "c8de68bf-294c-4b71-bb8e-ec4707353bcf",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "LayoutTests",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.AutoCAD.Layout.GetActiveLayout@Autodesk.AutoCAD.DynamoNodes.Document",
+      "Id": "3e1e66b52fb14aaba259d4893f0ebe3d",
+      "Inputs": [
+        {
+          "Id": "4e174ab8a6e84e0892314a0b5eb9421d",
+          "Name": "document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "e4f536aa292f4ab68237a710424db41e",
+          "Name": "Layout",
+          "Description": "Layout",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Layout.GetActiveLayout (document: Document): Layout"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Document.Current",
+      "Id": "6d0a3e1fe91c4244a36c7e9212710da9",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "a5ec747c905047b4a4cb49d2e29e8e8e",
+          "Name": "Document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the current AutoCAD document.\n\nDocument.Current: Document"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.AutoCAD.Layout.GetLayoutByName@Autodesk.AutoCAD.DynamoNodes.Document,string",
+      "Id": "0aad2bbde84447b9b8a0e2428e0a6533",
+      "Inputs": [
+        {
+          "Id": "9d970d86c3b64fec878cd68784ddd684",
+          "Name": "document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "82b91b4ac1a6419c922a7d727eb1518f",
+          "Name": "name",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "bf289a005c6449f8bb54ee393706a037",
+          "Name": "Layout",
+          "Description": "Layout",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets a Layout in a Document by name.\n\nLayout.GetLayoutByName (document: Document, name: string): Layout"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Layout1",
+      "Id": "cc0652cd68c64641be302e67a5909f9c",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "dfd0a4204a024af7844f62ca198d6cb5",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.AutoCAD.Layout.GetLayouts@Autodesk.AutoCAD.DynamoNodes.Document,bool",
+      "Id": "42df8c66c1e140a09293b52c92844025",
+      "Inputs": [
+        {
+          "Id": "76329ccf43da4753904b08ae534f4727",
+          "Name": "document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "2e4e6a40ad28409f8ba2db628d032c9b",
+          "Name": "includeModel",
+          "Description": "Include Model Space?\n\nbool\nDefault value : false",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "588b59eb614146e2bcf601062eac00a6",
+          "Name": "Layout[]",
+          "Description": "Layout[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets all of the Layouts in a Document.\n\nLayout.GetLayouts (document: Document, includeModel: bool = false): Layout[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.AutoCAD.Layout.SetName@string",
+      "Id": "4734e3f821074c8da294332dccea852e",
+      "Inputs": [
+        {
+          "Id": "e82dc76e2d8345889d7e894da50af11f",
+          "Name": "layout",
+          "Description": "Camber.AutoCAD.Layout",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "f0e4426650304ae6af51516d894e8bb3",
+          "Name": "newName",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "fd3733ca92e04cdb8f20fef28b134fcc",
+          "Name": "Layout",
+          "Description": "Layout",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Sets the name of a Layout.\n\nLayout.SetName (newName: string): Layout"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Layout3",
+      "Id": "b56bdda1b4974b1a8a897ae1352131ad",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "174e542f78844e8995837edfc1be0915",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.AutoCAD.Layout.Block",
+      "Id": "4178eb1a1db245eab73343e2efa43edc",
+      "Inputs": [
+        {
+          "Id": "8db4182c9fa54d07a92b5040b831edce",
+          "Name": "layout",
+          "Description": "Camber.AutoCAD.Layout",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "9cb81dbdc6d947be8662040ddf3cab0a",
+          "Name": "Block",
+          "Description": "Block",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "P Gets the Block associated with a Layout.\n\nLayout.Block: Block"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.AutoCAD.Layout.TabOrder",
+      "Id": "335d397a158d473f82e472074fb1163c",
+      "Inputs": [
+        {
+          "Id": "4410f4a563cf42a289a9cd4b0bbacdd4",
+          "Name": "layout",
+          "Description": "Camber.AutoCAD.Layout",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "93cf342237d54f6687608be67bfd9ab5",
+          "Name": "int",
+          "Description": "int",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the tab order of a Layout.\n\nLayout.TabOrder: int"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": true,
+      "Id": "1fbfc8b4e1d243848a78b7b2d7c03024",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "09c6b385c88f4758b2702c6b0c28bd39",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Selection between a true and false."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.AutoCAD.Layout.Name",
+      "Id": "1cdbe69f2cab4c01bce602e1b93ac1ef",
+      "Inputs": [
+        {
+          "Id": "a343a624ed3347938dee00f6ea9c0811",
+          "Name": "layout",
+          "Description": "Camber.AutoCAD.Layout",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "58573bd0795b402d875aaaa426af65a6",
+          "Name": "string",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the name of a Layout.\n\nLayout.Name: string"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "e4f536aa292f4ab68237a710424db41e",
+      "End": "8db4182c9fa54d07a92b5040b831edce",
+      "Id": "7559f4eda7e44ababe276c3034acae34",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "a5ec747c905047b4a4cb49d2e29e8e8e",
+      "End": "9d970d86c3b64fec878cd68784ddd684",
+      "Id": "1a6e983cf5034e6ba17f0e2f051c0095",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "a5ec747c905047b4a4cb49d2e29e8e8e",
+      "End": "76329ccf43da4753904b08ae534f4727",
+      "Id": "acd597f758fd46a8883e0822a796eab6",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "a5ec747c905047b4a4cb49d2e29e8e8e",
+      "End": "4e174ab8a6e84e0892314a0b5eb9421d",
+      "Id": "d8935464f4174fa398d38d2bd9d27849",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "bf289a005c6449f8bb54ee393706a037",
+      "End": "e82dc76e2d8345889d7e894da50af11f",
+      "Id": "ffc3558abe7b498ebe017187e0f4cfda",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "bf289a005c6449f8bb54ee393706a037",
+      "End": "a343a624ed3347938dee00f6ea9c0811",
+      "Id": "ac6ef4e0ba1341da8b18856ae176fc4f",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "dfd0a4204a024af7844f62ca198d6cb5",
+      "End": "82b91b4ac1a6419c922a7d727eb1518f",
+      "Id": "41f71849a70044db82ac0f76f62cac90",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "588b59eb614146e2bcf601062eac00a6",
+      "End": "4410f4a563cf42a289a9cd4b0bbacdd4",
+      "Id": "21cd7aa1442c4a3887d54086470bdec6",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "09c6b385c88f4758b2702c6b0c28bd39",
+      "End": "2e4e6a40ad28409f8ba2db628d032c9b",
+      "Id": "a25ab1a190ba495796b275ed06dd4747",
+      "IsHidden": "False"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Camber",
+      "Version": "4.0.0",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "3e1e66b52fb14aaba259d4893f0ebe3d",
+        "0aad2bbde84447b9b8a0e2428e0a6533",
+        "42df8c66c1e140a09293b52c92844025",
+        "4734e3f821074c8da294332dccea852e",
+        "4178eb1a1db245eab73343e2efa43edc",
+        "335d397a158d473f82e472074fb1163c",
+        "1cdbe69f2cab4c01bce602e1b93ac1ef"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.13",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.13.1.3887",
+      "RunType": "Automatic",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "ConnectorPins": [],
+    "NodeViews": [
+      {
+        "Name": "Layout.GetActiveLayout",
+        "ShowGeometry": true,
+        "Id": "3e1e66b52fb14aaba259d4893f0ebe3d",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 349.99999999999994,
+        "Y": 150.0
+      },
+      {
+        "Name": "Document.Current",
+        "ShowGeometry": true,
+        "Id": "6d0a3e1fe91c4244a36c7e9212710da9",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 60.562019820503508,
+        "Y": 149.64787278166563
+      },
+      {
+        "Name": "Layout.GetLayoutByName",
+        "ShowGeometry": true,
+        "Id": "0aad2bbde84447b9b8a0e2428e0a6533",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 355.34126897320493,
+        "Y": 319.08901815911952
+      },
+      {
+        "Name": "String",
+        "ShowGeometry": true,
+        "Id": "cc0652cd68c64641be302e67a5909f9c",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 128.32742018405884,
+        "Y": 353.5537809699905
+      },
+      {
+        "Name": "Layout.GetLayouts",
+        "ShowGeometry": true,
+        "Id": "42df8c66c1e140a09293b52c92844025",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 356.71700276194997,
+        "Y": -66.807255019331677
+      },
+      {
+        "Name": "Layout.SetName",
+        "ShowGeometry": true,
+        "Id": "4734e3f821074c8da294332dccea852e",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 775.98120233686416,
+        "Y": 402.862514563594
+      },
+      {
+        "Name": "String",
+        "ShowGeometry": true,
+        "Id": "b56bdda1b4974b1a8a897ae1352131ad",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 481.381748147635,
+        "Y": 531.40571664779213
+      },
+      {
+        "Name": "Layout.Block",
+        "ShowGeometry": true,
+        "Id": "4178eb1a1db245eab73343e2efa43edc",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 786.5951485644581,
+        "Y": 150.95819076202187
+      },
+      {
+        "Name": "Layout.TabOrder",
+        "ShowGeometry": true,
+        "Id": "335d397a158d473f82e472074fb1163c",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 799.7397999697555,
+        "Y": -65.530969231844352
+      },
+      {
+        "Name": "Boolean",
+        "ShowGeometry": true,
+        "Id": "1fbfc8b4e1d243848a78b7b2d7c03024",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 62.484670365244938,
+        "Y": -30.425836999534624
+      },
+      {
+        "Name": "Layout.Name",
+        "ShowGeometry": true,
+        "Id": "1cdbe69f2cab4c01bce602e1b93ac1ef",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 789.42553422514993,
+        "Y": 279.74073832349973
+      }
+    ],
+    "Annotations": [],
+    "X": 96.495329982585019,
+    "Y": 117.29489386878109,
+    "Zoom": 0.55152031146487845
+  }
+}
