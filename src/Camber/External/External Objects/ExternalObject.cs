@@ -1,9 +1,10 @@
 ﻿#region references
+using Autodesk.DesignScript.Geometry;
+using Autodesk.DesignScript.Runtime;
 using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
-using Autodesk.DesignScript.Runtime;
 #endregion
 
 namespace Camber.External.ExternalObjects
@@ -73,6 +74,15 @@ namespace Camber.External.ExternalObjects
 
         #region methods
         public override string ToString() => $"ExternalObject(Handle = {Handle})";
+
+        /// <summary>
+        /// Gets the Dynamo geometry of an External Object.
+        /// </summary>
+        public virtual Geometry Geometry()
+        {
+            throw new NotImplementedException(
+                "The ability to get geometry has not been implemented for this object type.");
+        }
 
         /// <summary>
         /// Sets the layer that an External Object is on.
