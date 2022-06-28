@@ -3,8 +3,10 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
-# AutoCAD DWG .bak files
+# AutoCAD files
 *.bak
+*.dwl
+*.dwl2
 
 # User-specific files
 *.rsuser
