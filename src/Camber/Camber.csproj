@@ -161,6 +161,7 @@
     <Compile Include="Civil\CorridorSurface.cs" />
     <Compile Include="Civil\Labels\IntersectionLocationLabel.cs" />
     <Compile Include="Civil\Folder.cs" />
+    <Compile Include="External\External Objects\ExternalDBPoint.cs" />
     <Compile Include="External\External Objects\ExternalLayer.cs" />
     <Compile Include="External\ExternalBlock.cs" />
     <Compile Include="External\External Objects\ExternalBlockReference.cs" />
