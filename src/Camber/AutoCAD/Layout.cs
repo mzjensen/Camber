@@ -75,7 +75,8 @@ namespace Camber.AutoCAD
         /// Creates a new Layout by name.
         /// </summary>
         /// <param name="document"></param>
-        /// <param name="name"></param>
+        /// <param name="name">The name for the Layout.</param>
+        /// <param name="pageSetupName">Named page setup as defined in the Page Setup Manager.</param>
         /// <returns></returns>
         public static Layout ByName(
             acDynNodes.Document document, 
