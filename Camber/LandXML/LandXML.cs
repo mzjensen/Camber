@@ -265,7 +265,6 @@ namespace Camber.LandXML
         /// <returns></returns>
         private Dictionary<string, string> GetRootElementAttributes([CallerMemberName] string elementName = null)
         {
-            // TODO: this isn't working
             return Root.Element(Namespace + elementName)?
                 .Attributes()
                 .ToDictionary(
