@@ -1,4 +1,5 @@
 ﻿using Autodesk.AutoCAD.Runtime;
+using Autodesk.DesignScript.Runtime;
 using Dynamo.Graph.Nodes;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,6 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Xml.Linq;
-using Autodesk.DesignScript.Runtime;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using civDb = Autodesk.Civil.DatabaseServices;
 using civDynNodes = Autodesk.Civil.DynamoNodes;

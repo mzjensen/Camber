@@ -369,8 +369,9 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="DynamoVisualProgramming.Core">
-      <Version>2.13.1.3887</Version>
+      <Version>2.15.0.5383</Version>
       <ExcludeAssets>runtime</ExcludeAssets>
+      <IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
