@@ -4,8 +4,6 @@ using Newtonsoft.Json;
 using Dynamo.Graph.Nodes;
 using civDb = Autodesk.Civil.DatabaseServices;
 using Camber.Civil.Styles;
-using Camber.Civil.GradingCriteria;
-using Camber.Civil.QTO;
 using Camber.Civil.Styles.CodeSets;
 #endregion
 

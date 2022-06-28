@@ -1,5 +1,5 @@
 ﻿#region references
-using System;
+
 using System.Collections.Generic;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
@@ -9,7 +9,6 @@ using AeccPart = Autodesk.Civil.DatabaseServices.Part;
 using AeccPipe = Autodesk.Civil.DatabaseServices.Pipe;
 using AeccStructure = Autodesk.Civil.DatabaseServices.Structure;
 using DynamoServices;
-using Dynamo.Graph.Nodes;
 using Camber.Civil.CivilObjects;
 #endregion
 

@@ -1,8 +1,5 @@
 ﻿#region references
 using System;
-using System.Reflection;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using acGeom = Autodesk.AutoCAD.Geometry;

@@ -1,14 +1,10 @@
 ﻿#region references
-using System;
-using System.Linq;
-using System.Collections.Generic;
-using Autodesk.Civil;
+
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acGeom = Autodesk.AutoCAD.Geometry;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using AcDimension = Autodesk.AutoCAD.DatabaseServices.Dimension;
-using Autodesk.DesignScript.Geometry;
 using DynamoServices;
 using Autodesk.DesignScript.Runtime;
 using Camber.Utilities;

@@ -11,9 +11,6 @@ using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using AcLayout = Autodesk.AutoCAD.DatabaseServices.Layout;
-using Autodesk.DesignScript.Geometry;
-using Camber.Utilities;
-using Camber.Utilities.GeometryConversions;
 
 #endregion
 

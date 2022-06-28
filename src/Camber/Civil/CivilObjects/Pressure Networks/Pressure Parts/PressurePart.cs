@@ -1,5 +1,5 @@
 ﻿#region references
-using System;
+
 using System.Collections.Generic;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acGeom = Autodesk.AutoCAD.Geometry;
@@ -13,7 +13,6 @@ using AeccPressureAppurtenance = Autodesk.Civil.DatabaseServices.PressureAppurte
 using AeccPressureFitting = Autodesk.Civil.DatabaseServices.PressureFitting;
 using Autodesk.DesignScript.Geometry;
 using DynamoServices;
-using Dynamo.Graph.Nodes;
 using Camber.Civil.CivilObjects;
 using Camber.Utilities.GeometryConversions;
 #endregion

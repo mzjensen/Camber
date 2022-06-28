@@ -1,5 +1,4 @@
-﻿using Autodesk.DesignScript.Runtime;
-using civDynNodes = Autodesk.Civil.DynamoNodes;
+﻿using civDynNodes = Autodesk.Civil.DynamoNodes;
 
 namespace Camber.Civil.CivilObjects.Surfaces
 {

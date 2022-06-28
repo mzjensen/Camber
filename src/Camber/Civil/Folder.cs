@@ -11,7 +11,6 @@ using civDb = Autodesk.Civil.DatabaseServices;
 using AeccFolder = Autodesk.Civil.DatabaseServices.Folder;
 using Camber.Civil.CivilObjects;
 using Camber.Civil.Intersections;
-using Camber.Utilities;
 using Autodesk.DesignScript.Runtime;
 #endregion
 

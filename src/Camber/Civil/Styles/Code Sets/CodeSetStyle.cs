@@ -1,6 +1,5 @@
 ﻿#region references
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
@@ -10,7 +9,7 @@ using AeccCodeSetStyle = Autodesk.Civil.DatabaseServices.Styles.CodeSetStyle;
 using AeccCodeSetStyleItem = Autodesk.Civil.DatabaseServices.Styles.CodeSetStyleItem;
 using Camber.Civil.Styles.Objects;
 using Autodesk.DesignScript.Runtime;
-using Camber.Civil.Styles;
+
 #endregion
 
 namespace Camber.Civil.Styles.CodeSets

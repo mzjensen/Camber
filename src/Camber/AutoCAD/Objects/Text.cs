@@ -1,20 +1,14 @@
 ﻿#region references
 using System;
-using System.Linq;
-using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using Autodesk.Aec.DatabaseServices;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acGeom = Autodesk.AutoCAD.Geometry;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using AcMLeader = Autodesk.AutoCAD.DatabaseServices.MLeader;
 using Autodesk.DesignScript.Geometry;
-using DynamoServices;
-using Autodesk.DesignScript.Runtime;
 using Camber.Utilities.GeometryConversions;
-using DesignScript.Builtin;
 using Dynamo.Graph.Nodes;
 #endregion
 

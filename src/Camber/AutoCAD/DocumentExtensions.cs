@@ -3,10 +3,7 @@ using Camber.AutoCAD.Objects.MultiViewBlocks;
 using Dynamo.Graph.Nodes;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
 using System.Linq;
-using Autodesk.DesignScript.Geometry;
 using Camber.AutoCAD.Objects;
 using acApp = Autodesk.AutoCAD.ApplicationServices;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
@@ -14,7 +11,6 @@ using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using acGeom = Autodesk.AutoCAD.Geometry;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using aecDb = Autodesk.Aec.DatabaseServices;
-using Camber.Utilities.GeometryConversions;
 #endregion
 
 namespace Camber.AutoCAD

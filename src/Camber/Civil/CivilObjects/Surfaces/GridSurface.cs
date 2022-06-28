@@ -1,9 +1,5 @@
 ﻿using Autodesk.DesignScript.Runtime;
-using Camber.Civil.Styles.Objects;
-using DynamoServices;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using Autodesk.DesignScript.Geometry;
 using Camber.Utilities.GeometryConversions;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
