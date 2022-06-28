@@ -1,0 +1,714 @@
+{
+  "Uuid": "785e624c-63d4-423e-b358-2a61579eeb43",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "ExternalDBPointTests",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.External.ExternalObjects.ExternalObject.Geometry",
+      "Id": "9ee2203139ba4ddea246fd953d57d0b5",
+      "Inputs": [
+        {
+          "Id": "49f66d1a6835456da72f1ad8f651e117",
+          "Name": "externalObject",
+          "Description": "Camber.External.ExternalObjects.ExternalObject",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "f5245d2dc63948c0844417c372b512f1",
+          "Name": "Geometry",
+          "Description": "Geometry",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the Dynamo geometry of an External Object.\n\nExternalObject.Geometry ( ): Geometry"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.External.ExternalDocument.LoadFromFile@string,bool",
+      "Id": "2b1ea07160dc49219e33be2705508ad0",
+      "Inputs": [
+        {
+          "Id": "72d2fd1dad0749f7b8335c3d38b97822",
+          "Name": "filePath",
+          "Description": "The path to the file.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "25a3822379f046229ec7613df5d5cf8c",
+          "Name": "lock",
+          "Description": "True = file can only be opened as read-only by other applications, False = file can be edited by other applications.\n\nbool",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "38b7db91b4664d1f9ba868e37508bfb0",
+          "Name": "ExternalDocument",
+          "Description": "ExternalDocument",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Loads an External Document from an existing file.\n\nExternalDocument.LoadFromFile (filePath: string, lock: bool): ExternalDocument"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.Filename, CoreNodeModels",
+      "HintPath": "C:\\Software Projects\\Camber\\tests\\ExternalDBPoint\\ExternalDBPointTests.dwg",
+      "InputValue": ".\\ExternalDBPointTests.dwg",
+      "NodeType": "ExtensionNode",
+      "Id": "e696bd29fbd34309b641c427325ee1ca",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "ca20b526a96a4299bd091c776eb69319",
+          "Name": "",
+          "Description": "File Path",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows you to select a file on the system to get its file path."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": false,
+      "Id": "4c68197c405a4a8ba12bd7fa6130fda4",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "9cfb2a71b58644acb434a86f9c2d0014",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Selection between a true and false."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.External.ExternalDocument.ModelSpace",
+      "Id": "70aedfef05fc41b2a4fbe70b1e3e5cd0",
+      "Inputs": [
+        {
+          "Id": "03f26547a7f046c7bb7a474805b1c254",
+          "Name": "externalDocument",
+          "Description": "Camber.External.ExternalDocument",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "c24ec594d6c9437388713a745cb5c4dd",
+          "Name": "ExternalBlock",
+          "Description": "ExternalBlock",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the Model Space block of an External Document.\n\nExternalDocument.ModelSpace: ExternalBlock"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.External.ExternalBlock.Objects",
+      "Id": "86bdb8fdaf9249fe825c55048593f33e",
+      "Inputs": [
+        {
+          "Id": "61df090ac4b9455b85e12923e2af26bf",
+          "Name": "externalBlock",
+          "Description": "Camber.External.ExternalBlock",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "e36093de70cd4846877ce8d527d04711",
+          "Name": "ExternalObject[]",
+          "Description": "ExternalObject[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets all of the External Objects in an External Block.\n\nExternalBlock.Objects: ExternalObject[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.External.ExternalObjects.ExternalDBPoint.Thickness",
+      "Id": "b1bf2ece490349a0afe3a3be1079f05e",
+      "Inputs": [
+        {
+          "Id": "bdd289415cd84adc9cfed1faa9aec7f0",
+          "Name": "externalDBPoint",
+          "Description": "Camber.External.ExternalObjects.ExternalDBPoint",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "3bac6ceb1ac447eaa732b7d99d45f957",
+          "Name": "double",
+          "Description": "double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the thickness value of a DBPoint. The thickness is the point's dimension along its normal vector direction (sometimes called the extrusion direction).\n\nExternalDBPoint.Thickness: double"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.External.ExternalObjects.ExternalDBPoint.ByPoint@Camber.External.ExternalBlock,string,Autodesk.DesignScript.Geometry.Point",
+      "Id": "fa43bb339bb442f6bbe202eea5815076",
+      "Inputs": [
+        {
+          "Id": "43a9dd92c7864722a08cfadc5d0108ab",
+          "Name": "block",
+          "Description": "The destination block for the DBPoint.\n\nExternalBlock",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "acfc8c868a5f4a4ba3316cb39884293a",
+          "Name": "layer",
+          "Description": "The layer that the DBPoint will reside on.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "bdc1ae1678564602a07e213f6cf9a2b6",
+          "Name": "point",
+          "Description": "The Dynamo point.\n\nPoint",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "d67e1909bc7a462283cb2fa37075bfc2",
+          "Name": "ExternalDBPoint",
+          "Description": "ExternalDBPoint",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Creates a new External DBPoint from a Dynamo point.\n\nExternalDBPoint.ByPoint (block: ExternalBlock, layer: string, point: Point): ExternalDBPoint"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.DesignScript.Geometry.Geometry.Translate@double,double,double",
+      "Id": "2a5607a3d85043f19c2085f697e4a00f",
+      "Inputs": [
+        {
+          "Id": "5a07d4adf004406e94bd030f7848cd08",
+          "Name": "geometry",
+          "Description": "Autodesk.DesignScript.Geometry.Geometry",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "6580fb6d99944bd78d0f5ebc5b4e211f",
+          "Name": "xTranslation",
+          "Description": "Displacement along X-axis.\n\ndouble\nDefault value : 0",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "3a72f71880b5429dacbcc6c4be968f72",
+          "Name": "yTranslation",
+          "Description": "Displacement along Y-axis.\n\ndouble\nDefault value : 0",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "7c060d894e1a4fb88bc79116d66b828d",
+          "Name": "zTranslation",
+          "Description": "Displacement along Z-axis.\n\ndouble\nDefault value : 0",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "438d74bfacb0419693c92a623d301be7",
+          "Name": "Geometry",
+          "Description": "Transformed Geometry.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Translates any given geometry by the given displacements in the x, y, and z directions defined in WCS respectively.\n\nGeometry.Translate (xTranslation: double = 0, yTranslation: double = 0, zTranslation: double = 0): Geometry"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "5;",
+      "Id": "0a9b8d52c73e43e4a2a32532471f7824",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "c100f679e45644edaff879292ab201ea",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.External.ExternalDocument.Save",
+      "Id": "5af8ecad378e4047af115b53af58430c",
+      "Inputs": [
+        {
+          "Id": "10ad9894c60c4a57aab7df2e9d1c8437",
+          "Name": "externalDocument",
+          "Description": "Camber.External.ExternalDocument",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "63233af47fb84bc88759d1c60a0890fe",
+          "Name": "ExternalDocument",
+          "Description": "ExternalDocument",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Attempts to save an External Document.\n\nExternalDocument.Save ( ): ExternalDocument"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "[pass,wait][0];",
+      "Id": "c3c46ee1728a4bf099080dee10ab3daa",
+      "Inputs": [
+        {
+          "Id": "077ede8b502848cba3ee8917f3afda50",
+          "Name": "pass",
+          "Description": "pass",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "0b91b0d84b254b3bb04bb7aaaf3f7d51",
+          "Name": "wait",
+          "Description": "wait",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "83529ae0221e412dbcfbcac4fabf216e",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"NewLayer\";",
+      "Id": "a398d64ce8e6447c9a1b05c4a5eb87cf",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "214f5aaf66ba4318bc6f89ed8993b0ec",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "f5245d2dc63948c0844417c372b512f1",
+      "End": "5a07d4adf004406e94bd030f7848cd08",
+      "Id": "69a55f31291c4bcb861783d964cc9a09",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "38b7db91b4664d1f9ba868e37508bfb0",
+      "End": "03f26547a7f046c7bb7a474805b1c254",
+      "Id": "f377e80d1ee24897950f1d3564668062",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "38b7db91b4664d1f9ba868e37508bfb0",
+      "End": "077ede8b502848cba3ee8917f3afda50",
+      "Id": "6c1c2ae9f8e9483bad36bc407f34a1a9",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "ca20b526a96a4299bd091c776eb69319",
+      "End": "72d2fd1dad0749f7b8335c3d38b97822",
+      "Id": "d29695de168347589ba2d59514b0d648",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "9cfb2a71b58644acb434a86f9c2d0014",
+      "End": "25a3822379f046229ec7613df5d5cf8c",
+      "Id": "d10231e37410440dac4ddb2d5b3a07c2",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "c24ec594d6c9437388713a745cb5c4dd",
+      "End": "61df090ac4b9455b85e12923e2af26bf",
+      "Id": "79ac6f0a732140d0b26868a56e279f6d",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "c24ec594d6c9437388713a745cb5c4dd",
+      "End": "43a9dd92c7864722a08cfadc5d0108ab",
+      "Id": "2aa585fd97bd423cadb5f4e648ece01b",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "e36093de70cd4846877ce8d527d04711",
+      "End": "49f66d1a6835456da72f1ad8f651e117",
+      "Id": "a94074386c8547f7a363b0df8b34558b",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "e36093de70cd4846877ce8d527d04711",
+      "End": "bdd289415cd84adc9cfed1faa9aec7f0",
+      "Id": "2c3c31dcd72c48f69c0c56680e88c56d",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "d67e1909bc7a462283cb2fa37075bfc2",
+      "End": "0b91b0d84b254b3bb04bb7aaaf3f7d51",
+      "Id": "abacd4fffccd4f408296dade7c5f5c2c",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "438d74bfacb0419693c92a623d301be7",
+      "End": "bdc1ae1678564602a07e213f6cf9a2b6",
+      "Id": "3629f564aed040df9c0646d7504cd9ca",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "c100f679e45644edaff879292ab201ea",
+      "End": "6580fb6d99944bd78d0f5ebc5b4e211f",
+      "Id": "5caf2d525dda463685b31a551764f8ce",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "83529ae0221e412dbcfbcac4fabf216e",
+      "End": "10ad9894c60c4a57aab7df2e9d1c8437",
+      "Id": "7bbd6084203b4adfb6176a5c1be8b400",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "214f5aaf66ba4318bc6f89ed8993b0ec",
+      "End": "acfc8c868a5f4a4ba3316cb39884293a",
+      "Id": "21af600ad94d47b58793c0fdfefa28fc",
+      "IsHidden": "False"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Camber",
+      "Version": "4.0.0",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "9ee2203139ba4ddea246fd953d57d0b5",
+        "2b1ea07160dc49219e33be2705508ad0",
+        "70aedfef05fc41b2a4fbe70b1e3e5cd0",
+        "86bdb8fdaf9249fe825c55048593f33e",
+        "b1bf2ece490349a0afe3a3be1079f05e",
+        "fa43bb339bb442f6bbe202eea5815076",
+        "5af8ecad378e4047af115b53af58430c"
+      ]
+    },
+    {
+      "Name": "ExternalDBPointTests.dwg",
+      "ReferenceType": "External",
+      "Nodes": [
+        "e696bd29fbd34309b641c427325ee1ca"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.13",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.13.1.3887",
+      "RunType": "Automatic",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": 2371.83837890625,
+      "EyeY": 92.030921936035156,
+      "EyeZ": -7118.57958984375,
+      "LookX": 30.580810546875,
+      "LookY": -92.005928039550781,
+      "LookZ": -268.8505859375,
+      "UpX": 0.012598654255270958,
+      "UpY": 0.99376791715621948,
+      "UpZ": -0.11075466126203537
+    },
+    "ConnectorPins": [],
+    "NodeViews": [
+      {
+        "Name": "ExternalObject.Geometry",
+        "ShowGeometry": true,
+        "Id": "9ee2203139ba4ddea246fd953d57d0b5",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1662.8158517072877,
+        "Y": 324.54025520787917
+      },
+      {
+        "Name": "ExternalDocument.LoadFromFile",
+        "ShowGeometry": true,
+        "Id": "2b1ea07160dc49219e33be2705508ad0",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 498.4589038292338,
+        "Y": 119.5460285911891
+      },
+      {
+        "Name": "File Path",
+        "ShowGeometry": true,
+        "Id": "e696bd29fbd34309b641c427325ee1ca",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 158.26252284020194,
+        "Y": 78.154963314084
+      },
+      {
+        "Name": "Boolean",
+        "ShowGeometry": true,
+        "Id": "4c68197c405a4a8ba12bd7fa6130fda4",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 203.02108196380811,
+        "Y": 217.28884009644685
+      },
+      {
+        "Name": "ExternalDocument.ModelSpace",
+        "ShowGeometry": true,
+        "Id": "70aedfef05fc41b2a4fbe70b1e3e5cd0",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 917.46480218700776,
+        "Y": 227.22205206896717
+      },
+      {
+        "Name": "ExternalBlock.Objects",
+        "ShowGeometry": true,
+        "Id": "86bdb8fdaf9249fe825c55048593f33e",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1299.2986398656692,
+        "Y": 396.48629270024617
+      },
+      {
+        "Name": "ExternalDBPoint.Thickness",
+        "ShowGeometry": true,
+        "Id": "b1bf2ece490349a0afe3a3be1079f05e",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1662.959295940306,
+        "Y": 469.91912578580337
+      },
+      {
+        "Name": "ExternalDBPoint.ByPoint",
+        "ShowGeometry": true,
+        "Id": "fa43bb339bb442f6bbe202eea5815076",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2525.4006395104839,
+        "Y": 188.24191866823602
+      },
+      {
+        "Name": "Geometry.Translate",
+        "ShowGeometry": true,
+        "Id": "2a5607a3d85043f19c2085f697e4a00f",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2193.834012818189,
+        "Y": 324.46159086017343
+      },
+      {
+        "Name": "Code Block",
+        "ShowGeometry": true,
+        "Id": "0a9b8d52c73e43e4a2a32532471f7824",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1976.3125955449318,
+        "Y": 453.8524948353429
+      },
+      {
+        "Name": "ExternalDocument.Save",
+        "ShowGeometry": true,
+        "Id": "5af8ecad378e4047af115b53af58430c",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 3237.1846441491789,
+        "Y": -68.028405855727129
+      },
+      {
+        "Name": "Code Block",
+        "ShowGeometry": true,
+        "Id": "c3c46ee1728a4bf099080dee10ab3daa",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2896.1563511244185,
+        "Y": -68.12017761480223
+      },
+      {
+        "Name": "Code Block",
+        "ShowGeometry": true,
+        "Id": "a398d64ce8e6447c9a1b05c4a5eb87cf",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2278.1143885174115,
+        "Y": 111.69823336022978
+      }
+    ],
+    "Annotations": [],
+    "X": -1457.1141973486604,
+    "Y": 116.13600426117881,
+    "Zoom": 0.6052809020388531
+  }
+}
