@@ -325,6 +325,95 @@
       ],
       "Replication": "Auto",
       "Description": "Gets the name of a Layout.\n\nLayout.Name: string"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.AutoCAD.Layout.ByName@Autodesk.AutoCAD.DynamoNodes.Document,string,string",
+      "Id": "bffc235abd6449558f18bbb612e934d9",
+      "Inputs": [
+        {
+          "Id": "e9c5facada8848eaaf03a5eaa6b361ea",
+          "Name": "document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "d1f82c40781946efbe3da551404a360d",
+          "Name": "name",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "8f55925dbb4647eb9a2abbbefd796149",
+          "Name": "pageSetupName",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "4e087a169e574a8c9c5511b07129c525",
+          "Name": "Layout",
+          "Description": "Layout",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Creates a new Layout by name.\n\nLayout.ByName (document: Document, name: string, pageSetupName: string): Layout"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Document.Current",
+      "Id": "f1ce8f8b2b054cccab002521627e138e",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "4912d93f5654498e882cde76313b7b8e",
+          "Name": "Document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the current AutoCAD document.\n\nDocument.Current: Document"
+    },
+    {
+      "ConcreteType": "Camber.UI.NamedPageSetupsDropDown, CamberUI",
+      "SelectedIndex": 0,
+      "SelectedString": "Setup1",
+      "NodeType": "ExtensionNode",
+      "Id": "f1c6e55fbc33439bbf1696fff745383a",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "7b857694bd4a441cb27a1b40204fe307",
+          "Name": "pageSetupName",
+          "Description": "The selected pageSetupName",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Select named page setup."
     }
   ],
   "Connectors": [
@@ -377,9 +466,27 @@
       "IsHidden": "False"
     },
     {
+      "Start": "174e542f78844e8995837edfc1be0915",
+      "End": "d1f82c40781946efbe3da551404a360d",
+      "Id": "4c5ab51a00b84938a38ad2b260269204",
+      "IsHidden": "False"
+    },
+    {
       "Start": "09c6b385c88f4758b2702c6b0c28bd39",
       "End": "2e4e6a40ad28409f8ba2db628d032c9b",
       "Id": "a25ab1a190ba495796b275ed06dd4747",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "4912d93f5654498e882cde76313b7b8e",
+      "End": "e9c5facada8848eaaf03a5eaa6b361ea",
+      "Id": "458e1dcc40c049819e207b9866e3f42b",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "7b857694bd4a441cb27a1b40204fe307",
+      "End": "8f55925dbb4647eb9a2abbbefd796149",
+      "Id": "3b3553bb547a499eac6fac6fcb8c6198",
       "IsHidden": "False"
     }
   ],
@@ -396,7 +503,9 @@
         "4734e3f821074c8da294332dccea852e",
         "4178eb1a1db245eab73343e2efa43edc",
         "335d397a158d473f82e472074fb1163c",
-        "1cdbe69f2cab4c01bce602e1b93ac1ef"
+        "1cdbe69f2cab4c01bce602e1b93ac1ef",
+        "bffc235abd6449558f18bbb612e934d9",
+        "f1c6e55fbc33439bbf1696fff745383a"
       ]
     }
   ],
@@ -508,8 +617,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 481.381748147635,
-        "Y": 531.40571664779213
+        "X": 571.91228690263,
+        "Y": 1137.9603263062586
       },
       {
         "Name": "Layout.Block",
@@ -550,11 +659,41 @@
         "Excluded": false,
         "X": 789.42553422514993,
         "Y": 279.74073832349973
+      },
+      {
+        "Name": "Layout.ByName",
+        "ShowGeometry": true,
+        "Id": "bffc235abd6449558f18bbb612e934d9",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 902.0818458617166,
+        "Y": 920.79420794631642
+      },
+      {
+        "Name": "Document.Current",
+        "ShowGeometry": true,
+        "Id": "f1ce8f8b2b054cccab002521627e138e",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 567.62882461550521,
+        "Y": 825.94534593832429
+      },
+      {
+        "Name": "Named Page Setups",
+        "ShowGeometry": true,
+        "Id": "f1c6e55fbc33439bbf1696fff745383a",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 490.21679243553393,
+        "Y": 970.95582342965577
       }
     ],
     "Annotations": [],
-    "X": 96.495329982585019,
-    "Y": 117.29489386878109,
-    "Zoom": 0.55152031146487845
+    "X": -204.20155524647396,
+    "Y": -507.80335623557977,
+    "Zoom": 0.66275978056840557
   }
 }
