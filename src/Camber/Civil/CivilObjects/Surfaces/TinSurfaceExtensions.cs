@@ -97,9 +97,8 @@ namespace Camber.Civil.CivilObjects.Surfaces
         /// <param name="filePath">The full path to the LandXML file</param>
         /// <param name="surfaceNameInFile">The name of the TIN Surface as defined in the LandXML file</param>
         /// <returns></returns>
-        // TODO: the API function will create an empty surface if the surface name isn't found in the LandXML, which is undesirable behavior.
-        // TODO: need to parse the XML file to determine if the surface name exists.
-        public static civDynNodes.Surface ImportFromLandXML(
+        // Leaving this node out because the API function will create an empty surface if the surface name isn't found in the LandXML, which is undesirable behavior.
+        private static civDynNodes.Surface ImportFromLandXML(
             acDynNodes.Document document,
             string newSurfaceName,
             string filePath,

@@ -174,13 +174,6 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Camber\Camber.csproj">
-      <Project>{23bbab73-5a3b-4ee8-a757-a1f37c67ab1f}</Project>
-      <Name>Camber</Name>
-      <Private>False</Private>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="DynamoVisualProgramming.WpfUILibrary">
       <Version>2.4.0.6186</Version>
     </PackageReference>
