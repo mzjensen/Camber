@@ -1,5 +1,4 @@
 ﻿using Autodesk.AutoCAD.Runtime;
-using Autodesk.DesignScript.Runtime;
 using Dynamo.Graph.Nodes;
 using System;
 using System.Collections.Generic;
@@ -79,6 +78,9 @@ namespace Camber.LandXML
         /// </summary>
         public Dictionary<string, string> Application => GetRootElementAttributes();
 
+        /// <summary>
+        /// Gets the coordinate system info from a LandXML file.
+        /// </summary>
         public Dictionary<string, string> CoordinateSystem => GetRootElementAttributes();
         #endregion
 
@@ -210,27 +212,6 @@ namespace Camber.LandXML
 
         #region public methods
         public override string ToString() => $"{nameof(LandXML)}(Name = {Name})";
-
-        /// <summary>
-        /// Gets the objects defined in a LandXML file.
-        /// </summary>
-        /// <returns></returns>
-        [MultiReturn(new[] 
-            {
-            "Thing1",
-            "Thing2"
-            })
-        ]
-        public Dictionary<string, object> GetContents()
-        {
-            // https://knowledge.autodesk.com/support/civil-3d/learn-explore/caas/CloudHelp/cloudhelp/2017/ENU/Civil3D-UserGuide/files/GUID-4D10ABA5-5EA0-41A8-BB61-C3F446CE7C6B-htm.html
-            return new Dictionary<string, object>
-            {
-                { "Thing1", "thing1" },
-                { "Thing2", "thing2" }
-            };
-        }
-
         #endregion
 
         #region private methods
@@ -299,7 +280,6 @@ namespace Camber.LandXML
         /// <returns></returns>
         private Dictionary<string, string> GetChildElementAttributes([CallerMemberName] string parentElement = null)
         {
-            // TODO: this isn't working
             return Root.Element(Namespace + parentElement)?
                 .Elements()
                 .Attributes()
@@ -315,7 +295,7 @@ namespace Camber.LandXML
         /// <returns></returns>
         private string GetRootAttributeValue([CallerMemberName] string attributeName = null)
         {
-            return Root.Attribute("language")?.Value;
+            return Root.Attribute(attributeName)?.Value;
         }
 
         /// <summary>
