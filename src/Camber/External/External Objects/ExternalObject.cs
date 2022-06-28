@@ -1,11 +1,9 @@
-﻿#region references
-using Autodesk.DesignScript.Geometry;
+﻿using Autodesk.DesignScript.Geometry;
 using Autodesk.DesignScript.Runtime;
 using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
-#endregion
 
 namespace Camber.External.ExternalObjects
 {
