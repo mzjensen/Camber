@@ -184,7 +184,7 @@
     <Compile Include="Civil\Labels\PipePlanLabel.cs" />
     <Compile Include="Civil\CivilObjects\Pressure Networks\PressurePartsList.cs" />
     <Compile Include="Civil\CivilObjects\Profile.cs" />
-    <Compile Include="Civil\CivilObjects\Alignment.cs" />
+    <Compile Include="Civil\CivilObjects\AlignmentExtensions.cs" />
     <Compile Include="Civil\Data Shortcuts\DataShortcut.cs" />
     <Compile Include="Civil\Labels\GeneralSegmentLabel.cs" />
     <Compile Include="Civil\Labels\SectionViewDepthLabel.cs" />

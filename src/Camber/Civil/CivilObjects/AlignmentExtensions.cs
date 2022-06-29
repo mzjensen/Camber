@@ -34,13 +34,14 @@ namespace Camber.Civil.CivilObjects
             catch { throw; }
         }
 
+        #region query methods
         /// <summary>
         /// Gets the Profile Views that are based on an Alignment.
         /// </summary>
         /// <param name="alignment"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        public static IList<ProfileView> ProfileViews(civDynNodes.Alignment alignment)
+        public static IList<ProfileView> ProfileViews(this civDynNodes.Alignment alignment)
         {
             List<ProfileView> profileViews = new List<ProfileView>();
             acDynNodes.Document document = acDynNodes.Document.Current;
@@ -70,7 +71,7 @@ namespace Camber.Civil.CivilObjects
         /// <param name="alignment"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        public static IList<SampleLineGroup> SampleLineGroups(civDynNodes.Alignment alignment)
+        public static IList<SampleLineGroup> SampleLineGroups(this civDynNodes.Alignment alignment)
         {
             List<SampleLineGroup> slGroups = new List<SampleLineGroup>();
             acDynNodes.Document document = acDynNodes.Document.Current;
@@ -100,7 +101,7 @@ namespace Camber.Civil.CivilObjects
         /// <param name="alignment"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        public static bool IsConnectedAlignment(civDynNodes.Alignment alignment)
+        public static bool IsConnectedAlignment(this civDynNodes.Alignment alignment)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
 
@@ -124,7 +125,7 @@ namespace Camber.Civil.CivilObjects
         /// <param name="alignment"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        public static bool IsOffsetAlignment(civDynNodes.Alignment alignment)
+        public static bool IsOffsetAlignment(this civDynNodes.Alignment alignment)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
 
@@ -141,5 +142,6 @@ namespace Camber.Civil.CivilObjects
                 throw new InvalidOperationException(e.Message);
             }
         }
+        #endregion
     }
 }
