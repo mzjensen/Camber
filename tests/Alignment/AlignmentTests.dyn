@@ -1,0 +1,241 @@
+{
+  "Uuid": "c82ddfaa-a61a-45dc-a2cc-7db3105616d8",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "AlignmentTests",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Autodesk.Civil.DynamoNodes.Alignments, Civil3DNodesUI",
+      "NodeType": "ExtensionNode",
+      "Id": "463ac825d17e4e36982191d60d72d4ff",
+      "Inputs": [
+        {
+          "Id": "4933f6b08cb54d6d9ffde46690cca535",
+          "Name": "document",
+          "Description": "",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "d230720fc1da478981f7b4a4e9a8c510",
+          "Name": "Alignment[]",
+          "Description": "Alignment[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Select all alignments in the drawing."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Document.Current",
+      "Id": "90866bff3de94200a5bf05ee604af0ea",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "3d10b91dd59b4d8599e108c418349c8b",
+          "Name": "Document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the current AutoCAD document.\n\nDocument.Current: Document"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.Civil.CivilObjects.Alignment.ImportLabelSet@Autodesk.Civil.DynamoNodes.Alignment,string",
+      "Id": "aba879076f7c40938d2ba94eddf2f35b",
+      "Inputs": [
+        {
+          "Id": "80505e39e3544a789f9d021ead89b931",
+          "Name": "alignment",
+          "Description": "Alignment",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "384438155e3d4c90b9b573a65c4750d7",
+          "Name": "labelSetStyleName",
+          "Description": "The name of the label set style to import.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "997b6f62a8e2428d89f79b316938fb95",
+          "Name": "Alignment",
+          "Description": "Alignment",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Imports an Alignment Label Set for an Alignment.\n\nAlignment.ImportLabelSet (alignment: Alignment, labelSetStyleName: string): Alignment"
+    },
+    {
+      "ConcreteType": "Camber.UI.AlignmentLabelSetStyleNamesDropDown, CamberUI",
+      "SelectedIndex": 1,
+      "SelectedString": "All Labels",
+      "NodeType": "ExtensionNode",
+      "Id": "38d658e63d034c7580014f498dd809e0",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "d8faca5d1e604d71aa806fb770037691",
+          "Name": "labelSetStyleName",
+          "Description": "The selected labelSetStyleName",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Select Alignment Label Set Style name."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "d230720fc1da478981f7b4a4e9a8c510",
+      "End": "80505e39e3544a789f9d021ead89b931",
+      "Id": "4ed6c2fd15044ac7b062eee75e7c5214",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "3d10b91dd59b4d8599e108c418349c8b",
+      "End": "4933f6b08cb54d6d9ffde46690cca535",
+      "Id": "b4af742b37d4453bb85fd62d86ba74cf",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "d8faca5d1e604d71aa806fb770037691",
+      "End": "384438155e3d4c90b9b573a65c4750d7",
+      "Id": "0cdd61aa51c04c489f1f617ee21e66c7",
+      "IsHidden": "False"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Camber",
+      "Version": "4.0.0",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "aba879076f7c40938d2ba94eddf2f35b",
+        "38d658e63d034c7580014f498dd809e0"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.13",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.13.1.3887",
+      "RunType": "Automatic",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "ConnectorPins": [],
+    "NodeViews": [
+      {
+        "Name": "Alignments",
+        "ShowGeometry": true,
+        "Id": "463ac825d17e4e36982191d60d72d4ff",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 344.80000000000013,
+        "Y": 155.2
+      },
+      {
+        "Name": "Document.Current",
+        "ShowGeometry": true,
+        "Id": "90866bff3de94200a5bf05ee604af0ea",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 80.800000000000011,
+        "Y": 154.79999999999995
+      },
+      {
+        "Name": "Alignment.ImportLabelSet",
+        "ShowGeometry": true,
+        "Id": "aba879076f7c40938d2ba94eddf2f35b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 638.39999999999986,
+        "Y": 231.2
+      },
+      {
+        "Name": "Alignment Label Set Styles",
+        "ShowGeometry": true,
+        "Id": "38d658e63d034c7580014f498dd809e0",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 250.31712120620045,
+        "Y": 325.82282837182868
+      }
+    ],
+    "Annotations": [],
+    "X": 78.066834305966154,
+    "Y": -101.58087882550811,
+    "Zoom": 0.56529398880890214
+  }
+}

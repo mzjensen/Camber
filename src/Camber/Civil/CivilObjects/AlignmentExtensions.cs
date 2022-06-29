@@ -1,14 +1,12 @@
-﻿#region references
+﻿using Dynamo.Graph.Nodes;
+using DynamoServices;
 using System;
 using System.Collections.Generic;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
-using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
-using civDynNodes = Autodesk.Civil.DynamoNodes;
+using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using AeccAlignment = Autodesk.Civil.DatabaseServices.Alignment;
-using DynamoServices;
-using Dynamo.Graph.Nodes;
-#endregion
+using civDynNodes = Autodesk.Civil.DynamoNodes;
 
 namespace Camber.Civil.CivilObjects
 {
@@ -140,6 +138,40 @@ namespace Camber.Civil.CivilObjects
             catch (Exception e)
             {
                 throw new InvalidOperationException(e.Message);
+            }
+        }
+        #endregion
+
+        #region action methods
+        /// <summary>
+        /// Imports an Alignment Label Set for an Alignment.
+        /// </summary>
+        /// <param name="alignment"></param>
+        /// <param name="labelSetStyleName">The name of the label set style to import.</param>
+        /// <returns></returns>
+        public static civDynNodes.Alignment ImportLabelSet(
+            this civDynNodes.Alignment alignment,
+            string labelSetStyleName)
+        {
+            if (string.IsNullOrEmpty(labelSetStyleName))
+            {
+                throw new InvalidOperationException("Label set style name is null or empty.");
+            }
+
+            try
+            {
+                using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
+                {
+                    var aeccAlign =
+                        (AeccAlignment) ctx.Transaction.GetObject(alignment.InternalObjectId, acDb.OpenMode.ForWrite);
+                    aeccAlign.ImportLabelSet(labelSetStyleName);
+                }
+
+                return alignment;
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
             }
         }
         #endregion

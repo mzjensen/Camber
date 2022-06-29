@@ -125,6 +125,7 @@
     <Compile Include="Civil\Design Checks\DesignCheckEnumDropDowns.cs" />
     <Compile Include="Civil\QTOEnumDropDowns.cs" />
     <Compile Include="Civil\GradingCriteriaEnumDropDowns.cs" />
+    <Compile Include="Civil\Styles\AlignmentLabelSetStyleNamesDropDown.cs" />
     <Compile Include="EnumDropDownBase.cs" />
     <Compile Include="Civil\Data Shortcuts\SetWorkingFolder.cs" />
     <Compile Include="Civil\Data Shortcuts\Validate.cs" />
