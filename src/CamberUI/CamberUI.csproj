@@ -116,6 +116,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoCAD\ConvertToCamberObject.cs" />
+    <Compile Include="AutoCAD\TextStylesDropDown.cs" />
     <Compile Include="AutoCAD\NamedPageSetupsDropDown.cs" />
     <Compile Include="Civil\Styles\Label Styles\LabelStyleDropDownBase.cs" />
     <Compile Include="Civil\Styles\StyleDropDownBase.cs" />
