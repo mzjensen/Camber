@@ -118,6 +118,9 @@
       <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\C3D\Dynamo\AutoCADNodes.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Autodesk.Civil3DToolkit">
+      <HintPath>..\..\..\..\Users\zjensen\AppData\Roaming\Autodesk\C3D 2023\Dynamo\2.13\packages\Civil3DToolkit\bin\Autodesk.Civil3DToolkit.dll</HintPath>
+    </Reference>
     <Reference Include="Civil3DNodes">
       <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\C3D\Dynamo\Civil3DNodes.dll</HintPath>
       <Private>False</Private>
