@@ -302,7 +302,7 @@ namespace Camber.AutoCAD.Objects
 
         #region helper methods
         internal static string GetString(
-            (this acDynNodes.Text text, 
+            acDynNodes.Text text, 
             [CallerMemberName] string propertyName = null)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
