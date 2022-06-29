@@ -139,6 +139,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoCAD\Objects\MTextExtensions.cs" />
     <Compile Include="AutoCAD\Objects\Multi-View Blocks\MultiViewBlockReference.cs" />
     <Compile Include="AutoCAD\Objects\Multi-View Blocks\MultiViewBlock.cs" />
     <Compile Include="AutoCAD\Objects\AttributeDefinition.cs" />
