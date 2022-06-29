@@ -51,7 +51,7 @@ namespace Camber.UI
         }
 
         /// <summary>
-        /// Assign the selected style type to the output.
+        /// Assign the selected named page setup to the output.
         /// </summary>
         public override IEnumerable<AssociativeNode> BuildOutputAst(List<AssociativeNode> inputAstNodes)
         {
