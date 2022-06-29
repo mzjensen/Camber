@@ -297,7 +297,39 @@ namespace Camber.AutoCAD.Objects
                     "The width factor must be greater than zero.");
             }
             return SetValue(text, widthFactor);
-        } 
+        }
+
+        /// <summary>
+        /// Sets the text style for a Text object.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="textStyleName">The name of the text style to assign.</param>
+        /// <returns></returns>
+        public static acDynNodes.Text SetTextStyle(this acDynNodes.Text text, string textStyleName)
+        {
+            try
+            {
+                using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
+                {
+                    var textStyleTbl = (acDb.TextStyleTable)ctx.Transaction.GetObject(
+                        ctx.Database.TextStyleTableId,
+                        acDb.OpenMode.ForRead);
+                    if (!textStyleTbl.Has(textStyleName))
+                    {
+                        throw new InvalidOperationException("Text style does not exist.");
+                    }
+
+                    var styleId = textStyleTbl[textStyleName];
+                    var acDBText = (acDb.DBText)ctx.Transaction.GetObject(text.InternalObjectId, acDb.OpenMode.ForWrite);
+                    acDBText.TextStyleId = styleId;
+                    return text;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
         #endregion
 
         #region helper methods
