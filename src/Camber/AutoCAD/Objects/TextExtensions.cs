@@ -1,15 +1,14 @@
 ﻿#region references
+using Autodesk.DesignScript.Geometry;
+using Camber.Utilities.GeometryConversions;
+using Dynamo.Graph.Nodes;
 using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
-using acGeom = Autodesk.AutoCAD.Geometry;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
-using AcMLeader = Autodesk.AutoCAD.DatabaseServices.MLeader;
-using Autodesk.DesignScript.Geometry;
-using Camber.Utilities.GeometryConversions;
-using Dynamo.Graph.Nodes;
+using acGeom = Autodesk.AutoCAD.Geometry;
 #endregion
 
 namespace Camber.AutoCAD.Objects
@@ -23,7 +22,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="text"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        public static Point AlignmentPoint(acDynNodes.Text text)
+        public static Point AlignmentPoint(this acDynNodes.Text text)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
             using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
@@ -41,7 +40,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="text"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        public static double Height(acDynNodes.Text text) => GetDouble(text);
+        public static double Height(this acDynNodes.Text text) => GetDouble(text);
 
         /// <summary>
         /// Gets the horizontal alignment mode of a Text object.
@@ -49,7 +48,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="text"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        public static string HorizontalMode(acDynNodes.Text text) => GetString(text);
+        public static string HorizontalMode(this acDynNodes.Text text) => GetString(text);
 
         /// <summary>
         /// Gets whether a Text object is in its default alignment.
@@ -57,7 +56,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="text"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        public static bool IsDefaultAlignment(acDynNodes.Text text) => GetBool(text);
+        public static bool IsDefaultAlignment(this acDynNodes.Text text) => GetBool(text);
 
         /// <summary>
         /// Gets whether a Text object is backward (i.e. mirrored in the X direction).
@@ -65,7 +64,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="text"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        public static bool IsBackward(acDynNodes.Text text) 
+        public static bool IsBackward(this acDynNodes.Text text) 
             => GetBool(text, "IsMirroredInX");
 
         /// <summary>
@@ -74,7 +73,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="text"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        public static bool IsUpsideDown(acDynNodes.Text text) 
+        public static bool IsUpsideDown(this acDynNodes.Text text) 
             => GetBool(text, "IsMirroredInY");
 
         /// <summary>
@@ -83,7 +82,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="text"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        public static Vector Normal(acDynNodes.Text text)
+        public static Vector Normal(this acDynNodes.Text text)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
             using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
@@ -101,7 +100,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="text"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        public static double Obliquing(acDynNodes.Text text) 
+        public static double Obliquing(this acDynNodes.Text text) 
             => Utilities.MathUtilities.RadiansToDegrees(
                 GetDouble(text, "Oblique"));
 
@@ -111,7 +110,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="text"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        public static Point Position(acDynNodes.Text text)
+        public static Point Position(this acDynNodes.Text text)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
             using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
@@ -129,7 +128,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="text"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        public static double Rotation(acDynNodes.Text text) 
+        public static double Rotation(this acDynNodes.Text text) 
             => Utilities.MathUtilities.RadiansToDegrees(GetDouble(text));
 
         /// <summary>
@@ -138,7 +137,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="text"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        public static string Contents(acDynNodes.Text text)
+        public static string Contents(this acDynNodes.Text text)
             => GetString(
                 text,
                 "TextString");
@@ -149,7 +148,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="text"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        public static string TextStyle(acDynNodes.Text text) 
+        public static string TextStyle(this acDynNodes.Text text) 
             => GetString(text, "TextStyleName");
 
         /// <summary>
@@ -158,7 +157,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="text"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        public static double Thickness(acDynNodes.Text text) => GetDouble(text);
+        public static double Thickness(this acDynNodes.Text text) => GetDouble(text);
 
         /// <summary>
         /// Gets the vertical alignment mode of a Text object.
@@ -166,7 +165,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="text"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        public static double VerticalMode(acDynNodes.Text text) => GetDouble(text);
+        public static double VerticalMode(this acDynNodes.Text text) => GetDouble(text);
 
         /// <summary>
         /// Gets the width factor of a Text object.
@@ -174,7 +173,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="text"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        public static double WidthFactor(acDynNodes.Text text) => GetDouble(text);
+        public static double WidthFactor(this acDynNodes.Text text) => GetDouble(text);
         #endregion
 
         #region action methods
@@ -185,7 +184,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="text"></param>
         /// <param name="point"></param>
         /// <returns></returns>
-        public static acDynNodes.Text SetAlignmentPoint(acDynNodes.Text text, Point point)
+        public static acDynNodes.Text SetAlignmentPoint(this acDynNodes.Text text, Point point)
             => SetValue(
                 text,
                 (acGeom.Point3d)GeometryConversions.DynPointToAcPoint(point, true));
@@ -195,7 +194,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="text"></param>
         /// <param name="height"></param>
         /// <returns></returns>
-        public static acDynNodes.Text SetHeight(acDynNodes.Text text, double height) 
+        public static acDynNodes.Text SetHeight(this acDynNodes.Text text, double height) 
             => SetValue(text, height);
 
         /// <summary>
@@ -204,7 +203,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="text"></param>
         /// <param name="bool"></param>
         /// <returns></returns>
-        public static acDynNodes.Text SetIsBackward(acDynNodes.Text text, bool @bool)
+        public static acDynNodes.Text SetIsBackward(this acDynNodes.Text text, bool @bool)
             => SetValue(text, @bool, "IsMirroredInX");
 
         /// <summary>
@@ -213,7 +212,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="text"></param>
         /// <param name="bool"></param>
         /// <returns></returns>
-        public static acDynNodes.Text SetIsUpsideDown(acDynNodes.Text text, bool @bool)
+        public static acDynNodes.Text SetIsUpsideDown(this acDynNodes.Text text, bool @bool)
             => SetValue(text, @bool, "IsMirroredInY");
 
         /// <summary>
@@ -222,7 +221,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="text"></param>
         /// <param name="vector"></param>
         /// <returns></returns>
-        public static acDynNodes.Text SetNormal(acDynNodes.Text text, Vector vector)
+        public static acDynNodes.Text SetNormal(this acDynNodes.Text text, Vector vector)
             => SetValue(
                 text,
                 (acGeom.Vector3d)GeometryConversions.DynamoVectorToAcVector(
@@ -235,7 +234,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="text"></param>
         /// <param name="angle"></param>
         /// <returns></returns>
-        public static acDynNodes.Text SetObliquing(acDynNodes.Text text, double angle)
+        public static acDynNodes.Text SetObliquing(this acDynNodes.Text text, double angle)
             => SetValue(
                 text, 
                 Utilities.MathUtilities.DegreesToRadians(angle), 
@@ -247,7 +246,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="text"></param>
         /// <param name="point"></param>
         /// <returns></returns>
-        public static acDynNodes.Text SetPosition(acDynNodes.Text text, Point point)
+        public static acDynNodes.Text SetPosition(this acDynNodes.Text text, Point point)
             => SetValue(
                 text, 
                 (acGeom.Point3d)GeometryConversions.DynPointToAcPoint(
@@ -260,7 +259,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="text"></param>
         /// <param name="angle"></param>
         /// <returns></returns>
-        public static acDynNodes.Text SetRotation(acDynNodes.Text text, double angle)
+        public static acDynNodes.Text SetRotation(this acDynNodes.Text text, double angle)
             => SetValue(text, Utilities.MathUtilities.DegreesToRadians(angle));
 
         /// <summary>
@@ -269,7 +268,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="text"></param>
         /// <param name="contents"></param>
         /// <returns></returns>
-        public static acDynNodes.Text SetContents(acDynNodes.Text text, string contents)
+        public static acDynNodes.Text SetContents(this acDynNodes.Text text, string contents)
             => SetValue(
                 text,
                 (object)contents,
@@ -281,7 +280,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="text"></param>
         /// <param name="thickness"></param>
         /// <returns></returns>
-        public static acDynNodes.Text SetThickness(acDynNodes.Text text, double thickness) 
+        public static acDynNodes.Text SetThickness(this acDynNodes.Text text, double thickness) 
             => SetValue(text, thickness);
 
         /// <summary>
@@ -290,7 +289,7 @@ namespace Camber.AutoCAD.Objects
         /// <param name="text"></param>
         /// <param name="widthFactor"></param>
         /// <returns></returns>
-        public static acDynNodes.Text SetWidthFactor(acDynNodes.Text text, double widthFactor)
+        public static acDynNodes.Text SetWidthFactor(this acDynNodes.Text text, double widthFactor)
         {
             if (widthFactor <= 0)
             {
@@ -303,7 +302,7 @@ namespace Camber.AutoCAD.Objects
 
         #region helper methods
         internal static string GetString(
-            acDynNodes.Text text, 
+            (this acDynNodes.Text text, 
             [CallerMemberName] string propertyName = null)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
@@ -336,7 +335,7 @@ namespace Camber.AutoCAD.Objects
         }
 
         internal static bool GetBool(
-            acDynNodes.Text text, 
+            this acDynNodes.Text text, 
             [CallerMemberName] string propertyName = null)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
@@ -361,7 +360,7 @@ namespace Camber.AutoCAD.Objects
         }
 
         internal static double GetDouble(
-            acDynNodes.Text text,
+            this acDynNodes.Text text,
             [CallerMemberName] string propertyName = null)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;

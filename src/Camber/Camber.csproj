@@ -149,7 +149,7 @@
     <Compile Include="AutoCAD\Objects\Dimensions\Dimension.cs" />
     <Compile Include="AutoCAD\Objects\Multi-View Blocks\DisplayRepresentation.cs" />
     <Compile Include="AutoCAD\Objects\Multi-View Blocks\ViewBlock.cs" />
-    <Compile Include="AutoCAD\Objects\Text.cs" />
+    <Compile Include="AutoCAD\Objects\TextExtensions.cs" />
     <Compile Include="AutoCAD\Xref.cs" />
     <Compile Include="Civil\CivilObjects\Intersections\Intersection.cs" />
     <Compile Include="Civil\CivilObjects\Pressure Networks\PressurePartSize.cs" />
