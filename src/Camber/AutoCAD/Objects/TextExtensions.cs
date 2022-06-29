@@ -3,6 +3,7 @@ using Autodesk.DesignScript.Geometry;
 using Camber.Utilities.GeometryConversions;
 using Dynamo.Graph.Nodes;
 using System;
+using System.ComponentModel;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
@@ -307,6 +308,11 @@ namespace Camber.AutoCAD.Objects
         /// <returns></returns>
         public static acDynNodes.Text SetTextStyle(this acDynNodes.Text text, string textStyleName)
         {
+            if (string.IsNullOrEmpty(textStyleName))
+            {
+                throw new InvalidOperationException("Text style name is null or empty.");
+            }
+            
             try
             {
                 using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))

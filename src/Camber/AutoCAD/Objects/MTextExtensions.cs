@@ -2,6 +2,7 @@
 using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Windows.Controls;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
@@ -30,6 +31,11 @@ namespace Camber.AutoCAD.Objects
         /// <returns></returns>
         public static acDynNodes.MText SetTextStyle(this acDynNodes.MText mText, string textStyleName)
         {
+            if (string.IsNullOrEmpty(textStyleName))
+            {
+                throw new InvalidOperationException("Text style name is null or empty.");
+            }
+            
             try
             {
                 using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
