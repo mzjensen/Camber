@@ -335,7 +335,7 @@ namespace Camber.AutoCAD.Objects
         }
 
         internal static bool GetBool(
-            this acDynNodes.Text text, 
+            acDynNodes.Text text, 
             [CallerMemberName] string propertyName = null)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
@@ -360,7 +360,7 @@ namespace Camber.AutoCAD.Objects
         }
 
         internal static double GetDouble(
-            this acDynNodes.Text text,
+            acDynNodes.Text text,
             [CallerMemberName] string propertyName = null)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
