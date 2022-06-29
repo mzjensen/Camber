@@ -1,0 +1,339 @@
+{
+  "Uuid": "4afd1fd5-e1a4-49b0-a714-4ebc9fa01a99",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "DisplayStyleTests",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.Civil.Styles.DisplayStyle.SetLayer@string",
+      "Id": "eaeca91871c74968bd0ac3b340f10bc4",
+      "Inputs": [
+        {
+          "Id": "22d1a2f3f949441996ab57e5032a87ca",
+          "Name": "displayStyle",
+          "Description": "Camber.Civil.Styles.DisplayStyle",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "f2adf165c1884fab8e5f6e018e0a3276",
+          "Name": "layer",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "e8ca6d4b84934143ada00eaac166a01c",
+          "Name": "DisplayStyle",
+          "Description": "DisplayStyle",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Sets the layer of a Display Style.\n\nDisplayStyle.SetLayer (layer: string): DisplayStyle"
+    },
+    {
+      "ConcreteType": "Camber.UI.PipeStyleDropDown, CamberUI",
+      "SelectedIndex": 5,
+      "SelectedString": "Single Line (Sanitary)",
+      "NodeType": "ExtensionNode",
+      "Id": "df299d7ffa3c44f5bf46c7785629d8e2",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "4ab373089d7a411b93541217e369cae0",
+          "Name": "pipeStyle",
+          "Description": "The selected pipeStyle",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Select Pipe Style."
+    },
+    {
+      "ConcreteType": "Camber.UI.DisplayStyleViewDirectionsDropDown, CamberUI",
+      "EnumerationType": "Camber.Civil.Styles.DisplayStyleViewDirections, Camber, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "AddSpaces": false,
+      "DropLastCharacter": false,
+      "SelectedIndex": 0,
+      "SelectedString": "Model",
+      "NodeType": "ExtensionNode",
+      "Id": "0e06aa2a82384140a9fd2c7cc5d19cb9",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "726d5884eb6f47379503ab81e25e7228",
+          "Name": "viewDirection",
+          "Description": "The selected viewDirection",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Select Display Style view direction."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.Civil.Styles.Style.GetDisplayStyles@Camber.Civil.Styles.Style,string",
+      "Id": "54a5b0ed1d9147a0b64b773cca946211",
+      "Inputs": [
+        {
+          "Id": "375c80dfd5dd40af8cad097d61d578f3",
+          "Name": "style",
+          "Description": "Style",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "37d3c8d71d414c72a4b10bc7010297b5",
+          "Name": "viewDirection",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "aa50e6d0056d4a67b9be6df205400392",
+          "Name": "DisplayStyle[]",
+          "Description": "DisplayStyle[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the Display Styles by view direction for a Style.\n\nStyle.GetDisplayStyles (style: Style, viewDirection: string): DisplayStyle[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "a[0];",
+      "Id": "03e1302175de4d2a9881b515056d6d05",
+      "Inputs": [
+        {
+          "Id": "3c1c4c56aa8c46f1a8d3dbfdb78970ef",
+          "Name": "a",
+          "Description": "a",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "8ff481ff81034fcab955b834ea7be276",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "0",
+      "Id": "1f9c66186dd94e00a7b6c647d06e5411",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "694da167b7cf45a9b267b6e472112a40",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "4ab373089d7a411b93541217e369cae0",
+      "End": "375c80dfd5dd40af8cad097d61d578f3",
+      "Id": "b8f9ef002c6545e6ab049d4d9b193920",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "726d5884eb6f47379503ab81e25e7228",
+      "End": "37d3c8d71d414c72a4b10bc7010297b5",
+      "Id": "112ff3a2afde4c0a830a8089973dd0c6",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "aa50e6d0056d4a67b9be6df205400392",
+      "End": "3c1c4c56aa8c46f1a8d3dbfdb78970ef",
+      "Id": "a1c8acf7f45b42548b4f00908f3032ba",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "8ff481ff81034fcab955b834ea7be276",
+      "End": "22d1a2f3f949441996ab57e5032a87ca",
+      "Id": "823f309562784effbc7a0b93fc5b981a",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "694da167b7cf45a9b267b6e472112a40",
+      "End": "f2adf165c1884fab8e5f6e018e0a3276",
+      "Id": "093bb9478f1d4551a5e8491ccbc18af9",
+      "IsHidden": "False"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Camber",
+      "Version": "4.0.0",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "eaeca91871c74968bd0ac3b340f10bc4",
+        "df299d7ffa3c44f5bf46c7785629d8e2",
+        "0e06aa2a82384140a9fd2c7cc5d19cb9",
+        "54a5b0ed1d9147a0b64b773cca946211"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.13",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.13.1.3887",
+      "RunType": "Automatic",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "ConnectorPins": [],
+    "NodeViews": [
+      {
+        "Name": "DisplayStyle.SetLayer",
+        "ShowGeometry": true,
+        "Id": "eaeca91871c74968bd0ac3b340f10bc4",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1173.2826598424012,
+        "Y": 388.06197822732184
+      },
+      {
+        "Name": "Pipe Styles",
+        "ShowGeometry": true,
+        "Id": "df299d7ffa3c44f5bf46c7785629d8e2",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 73.599999999999966,
+        "Y": 143.59999999999997
+      },
+      {
+        "Name": "Display Style View Directions",
+        "ShowGeometry": true,
+        "Id": "0e06aa2a82384140a9fd2c7cc5d19cb9",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 75.199999999999875,
+        "Y": 343.20000000000005
+      },
+      {
+        "Name": "Style.GetDisplayStyles",
+        "ShowGeometry": true,
+        "Id": "54a5b0ed1d9147a0b64b773cca946211",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 473.23907070746367,
+        "Y": 237.20045945528426
+      },
+      {
+        "Name": "Code Block",
+        "ShowGeometry": true,
+        "Id": "03e1302175de4d2a9881b515056d6d05",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 841.1965197551956,
+        "Y": 241.37932948790677
+      },
+      {
+        "Name": "String",
+        "ShowGeometry": true,
+        "Id": "1f9c66186dd94e00a7b6c647d06e5411",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 873.40005117945555,
+        "Y": 534.85194516942033
+      }
+    ],
+    "Annotations": [],
+    "X": 153.91684325486739,
+    "Y": 17.199370752323716,
+    "Zoom": 0.57937399427177738
+  }
+}
