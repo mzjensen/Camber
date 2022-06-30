@@ -58,10 +58,10 @@ namespace Camber.Civil.CivilObjects.Surfaces
         /// Creates a new TIN Surface by importing a TIN file.
         /// </summary>
         /// <param name="document"></param>
-        /// <param name="filePath">The full path to the TIN file</param>
+        /// <param name="filePath">The full path to a .tin file.</param>
         /// <returns></returns>
         [NodeCategory("Create")]
-        public static civDynNodes.Surface ImportFromTINFile(acDynNodes.Document document, string filePath)
+        public static civDynNodes.Surface ImportFromTIN(acDynNodes.Document document, string filePath)
         {
             if (string.IsNullOrEmpty(filePath))
             {

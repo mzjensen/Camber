@@ -1,0 +1,531 @@
+{
+  "Uuid": "5dc39dbb-e7fd-4251-a809-70a4cc265852",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "TINVolumeSurfaceTests",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.Civil.DynamoNodes.Selection.SurfaceByName@string,Autodesk.AutoCAD.DynamoNodes.Document",
+      "Id": "8d996d0d3f124f509f01523e171048c0",
+      "Inputs": [
+        {
+          "Id": "4f074cbee64343c1a80d89ce665a61b8",
+          "Name": "name",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "f7ca7e8717484aef87e792374fdff428",
+          "Name": "document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "8252833190cb42cd986474c24b4c3b67",
+          "Name": "Surface",
+          "Description": "Surface",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Select a surface by a specified surface name.\n\nSelection.SurfaceByName (name: string, document: Document): Surface"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Document.Current",
+      "Id": "c07273c6cbf14cdea4c6606dadae0047",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "ec83f226aefd41429eafadb27604b2d4",
+          "Name": "Document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the current AutoCAD document.\n\nDocument.Current: Document"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "EG",
+      "Id": "53ce57c3bf054595acb69112123c3bfd",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "c42f03d72dbc4e3daf772d1bb47c9ee7",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.Civil.DynamoNodes.Selection.SurfaceByName@string,Autodesk.AutoCAD.DynamoNodes.Document",
+      "Id": "22fa4f69b1554d5b9f18280f71fc962c",
+      "Inputs": [
+        {
+          "Id": "861f296b651b46cb89a18ba48d2a477a",
+          "Name": "name",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "41b4519cfc864ef09046395e3e7bdeec",
+          "Name": "document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "b9971aed2b4646b0987bc87d524c6fcb",
+          "Name": "Surface",
+          "Description": "Surface",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Select a surface by a specified surface name.\n\nSelection.SurfaceByName (name: string, document: Document): Surface"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Document.Current",
+      "Id": "77e101b099194ac3863e18c9f3182c66",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "1c63734a2b4945279d105fa5e040b2d7",
+          "Name": "Document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the current AutoCAD document.\n\nDocument.Current: Document"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Corridor Surface",
+      "Id": "b05340819feb42e5928ce22020540760",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "c48c4eb5242b41a9849a0d473e7e85c6",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.Civil.CivilObjects.Surfaces.TinVolumeSurface.ByTwoSurfaces@Autodesk.AutoCAD.DynamoNodes.Document,string,Autodesk.Civil.DynamoNodes.Surface,Autodesk.Civil.DynamoNodes.Surface,Camber.Civil.Styles.Objects.SurfaceStyle,double,double",
+      "Id": "cf0a1e91ee634aa2bc215da822d4147d",
+      "Inputs": [
+        {
+          "Id": "eaceb1f47a56408695d57da8647d86e3",
+          "Name": "document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "5e142e78e3734df684a4c070a6dada61",
+          "Name": "surfaceName",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "bf24b8604ab04e729828b71c1c512ebf",
+          "Name": "baseSurface",
+          "Description": "Surface",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "d06fc2ac864d4f14800119466cef3b2b",
+          "Name": "comparisonSurface",
+          "Description": "Surface",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "45ac060f57e94945a9fa923bcafb0062",
+          "Name": "style",
+          "Description": "SurfaceStyle",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "2a83af9f452349f2b4399c6fe0a7b59f",
+          "Name": "cutFactor",
+          "Description": "double\nDefault value : 1",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "33c01bb59498475c8bf0225dfe682078",
+          "Name": "fillFactor",
+          "Description": "double\nDefault value : 1",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "84d4766608aa4e8797ca9bf3bf0b196c",
+          "Name": "TinVolumeSurface",
+          "Description": "TinVolumeSurface",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Creates a new TIN Volume Surface by base surface and comparison surface.\n\nTinVolumeSurface.ByTwoSurfaces (document: Document, surfaceName: string, baseSurface: Surface, comparisonSurface: Surface, style: SurfaceStyle, cutFactor: double = 1, fillFactor: double = 1): TinVolumeSurface"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Document.Current",
+      "Id": "b3b097060caf404294a9cbc10ffc78f3",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "12c7cad5fb0d4a119167a151b43a87c6",
+          "Name": "Document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the current AutoCAD document.\n\nDocument.Current: Document"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Volume",
+      "Id": "4435111bd1b947309a0c73654126d2ff",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "033fd793ee0e4b3ab050590a43124df6",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "Camber.UI.SurfaceStyleDropDown, CamberUI",
+      "SelectedIndex": 9,
+      "SelectedString": "Cut and Fill Banding 1’ Interval (2D)",
+      "NodeType": "ExtensionNode",
+      "Id": "5fa402d384b34098b5864d16c3d6bd78",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "676585065fbd4c619cb0c7d59b0d8ec1",
+          "Name": "surfaceStyle",
+          "Description": "The selected surfaceStyle",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Select Surface Style."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "8252833190cb42cd986474c24b4c3b67",
+      "End": "bf24b8604ab04e729828b71c1c512ebf",
+      "Id": "0c5826a40c3f41dbb1c51a43cac02f15",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "ec83f226aefd41429eafadb27604b2d4",
+      "End": "f7ca7e8717484aef87e792374fdff428",
+      "Id": "057b34de9f704ff189ede379dbbf478c",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "c42f03d72dbc4e3daf772d1bb47c9ee7",
+      "End": "4f074cbee64343c1a80d89ce665a61b8",
+      "Id": "941ebe0b07234bf9a2d0ba83287aa2fd",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "b9971aed2b4646b0987bc87d524c6fcb",
+      "End": "d06fc2ac864d4f14800119466cef3b2b",
+      "Id": "ab474687812646a49514e74a62b16caa",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "1c63734a2b4945279d105fa5e040b2d7",
+      "End": "41b4519cfc864ef09046395e3e7bdeec",
+      "Id": "f29299e27356429ebde69d2d82324039",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "c48c4eb5242b41a9849a0d473e7e85c6",
+      "End": "861f296b651b46cb89a18ba48d2a477a",
+      "Id": "4b7988f7af734ee49e9b9b552688d88f",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "12c7cad5fb0d4a119167a151b43a87c6",
+      "End": "eaceb1f47a56408695d57da8647d86e3",
+      "Id": "12f83c5f3a7441daa3708f1384afe251",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "033fd793ee0e4b3ab050590a43124df6",
+      "End": "5e142e78e3734df684a4c070a6dada61",
+      "Id": "b1131a31c24d4fc5b66032a6d3990049",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "676585065fbd4c619cb0c7d59b0d8ec1",
+      "End": "45ac060f57e94945a9fa923bcafb0062",
+      "Id": "a0c02bf097b44df7a6c2f4a556693e98",
+      "IsHidden": "False"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Camber",
+      "Version": "4.0.0",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "cf0a1e91ee634aa2bc215da822d4147d",
+        "5fa402d384b34098b5864d16c3d6bd78"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.13",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.13.1.3887",
+      "RunType": "Automatic",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "ConnectorPins": [],
+    "NodeViews": [
+      {
+        "Name": "Selection.SurfaceByName",
+        "ShowGeometry": true,
+        "Id": "8d996d0d3f124f509f01523e171048c0",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 341.60000000000008,
+        "Y": 13.200000000000017
+      },
+      {
+        "Name": "Document.Current",
+        "ShowGeometry": true,
+        "Id": "c07273c6cbf14cdea4c6606dadae0047",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 64.799999999999955,
+        "Y": 85.999999999999986
+      },
+      {
+        "Name": "String",
+        "ShowGeometry": true,
+        "Id": "53ce57c3bf054595acb69112123c3bfd",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 115.59999999999997,
+        "Y": -65.599999999999937
+      },
+      {
+        "Name": "Selection.SurfaceByName",
+        "ShowGeometry": true,
+        "Id": "22fa4f69b1554d5b9f18280f71fc962c",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 345.3831040193395,
+        "Y": 347.109002248014
+      },
+      {
+        "Name": "Document.Current",
+        "ShowGeometry": true,
+        "Id": "77e101b099194ac3863e18c9f3182c66",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 68.583104019339544,
+        "Y": 419.90900224801396
+      },
+      {
+        "Name": "String",
+        "ShowGeometry": true,
+        "Id": "b05340819feb42e5928ce22020540760",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 119.3831040193395,
+        "Y": 268.30900224801405
+      },
+      {
+        "Name": "TinVolumeSurface.ByTwoSurfaces",
+        "ShowGeometry": true,
+        "Id": "cf0a1e91ee634aa2bc215da822d4147d",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 949.68686569232432,
+        "Y": 32.379744721579954
+      },
+      {
+        "Name": "Document.Current",
+        "ShowGeometry": true,
+        "Id": "b3b097060caf404294a9cbc10ffc78f3",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 579.99371841291838,
+        "Y": -207.96976808327389
+      },
+      {
+        "Name": "String",
+        "ShowGeometry": true,
+        "Id": "4435111bd1b947309a0c73654126d2ff",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 644.66553565019444,
+        "Y": -73.236815505615482
+      },
+      {
+        "Name": "Surface Styles",
+        "ShowGeometry": true,
+        "Id": "5fa402d384b34098b5864d16c3d6bd78",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 433.33905344467803,
+        "Y": 526.35839546967213
+      }
+    ],
+    "Annotations": [],
+    "X": 167.43469203532706,
+    "Y": 156.66129606398511,
+    "Zoom": 0.41570248045171554
+  }
+}

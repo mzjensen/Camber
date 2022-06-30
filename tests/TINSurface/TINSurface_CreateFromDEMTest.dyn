@@ -1,0 +1,359 @@
+{
+  "Uuid": "c5a20922-96e3-47b0-b498-6848efe1675c",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "TINSurface_CreateFromDEMTest",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.Civil.CivilObjects.Surfaces.TinSurface.ByName@Autodesk.AutoCAD.DynamoNodes.Document,string,Camber.Civil.Styles.Objects.SurfaceStyle",
+      "Id": "e59cdc40afbf46d0b581e79514e10208",
+      "Inputs": [
+        {
+          "Id": "5d6a3f770335443e971b0c59a51f4dcf",
+          "Name": "document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "55da553fe0bd4af6803431e101ccce44",
+          "Name": "name",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "7d134e5b2192495bb86e1fd07fea966d",
+          "Name": "surfaceStyle",
+          "Description": "SurfaceStyle",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "bcdab8b19d1b4cda9e00ebbc7c881908",
+          "Name": "Surface",
+          "Description": "Surface",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Creates a new empty TIN Surface by name and style.\n\nTinSurface.ByName (document: Document, name: string, surfaceStyle: SurfaceStyle): Surface"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Document.Current",
+      "Id": "fc492a5575754ba39d660e8aa2c3c345",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "3db1fac335dc40858f2cf86e6cddc605",
+          "Name": "Document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the current AutoCAD document.\n\nDocument.Current: Document"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"test1\";",
+      "Id": "6016c2a9014d4b73a2ce2bccc674f382",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "fd481e0597d048e5910f6888ef031d84",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Camber.UI.SurfaceStyleDropDown, CamberUI",
+      "SelectedIndex": 1,
+      "SelectedString": "Border Only",
+      "NodeType": "ExtensionNode",
+      "Id": "295df2231bf7442184a1bebd8a620fd9",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "5404cecd1e1040cf9030280d05ed5611",
+          "Name": "surfaceStyle",
+          "Description": "The selected surfaceStyle",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Select Surface Style."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.Civil.CivilObjects.Surfaces.TinSurface.AddDEMFile@Autodesk.Civil.DynamoNodes.TinSurface,string,double,string",
+      "Id": "86fed31606754345b007a495a1199252",
+      "Inputs": [
+        {
+          "Id": "4380e94589274d5a9314222a12f42e55",
+          "Name": "tinSurface",
+          "Description": "TinSurface",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "41320889956f4f14903c4855ffd611e6",
+          "Name": "filePath",
+          "Description": "The path to the DEM file\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "2e33a2b8577e413e8b15d06cd9f6901c",
+          "Name": "customNullElevation",
+          "Description": "double\nDefault value : null",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "f23e0e5eb100448bae89137083ed4f65",
+          "Name": "coordinateSystemCode",
+          "Description": "The coordinate system code to transform the data in the DEM file.\n\nstring\nDefault value : \"\"",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "5711571c7412415c8050b9e73940b1c5",
+          "Name": "Surface",
+          "Description": "Surface",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Adds DEM file data to a TIN Surface with custom null elevation and coordinate system information. If the DEM file coordinate system is different from the current coordinate system of the drawing, you can specify a coordinate system for the DEM file. The coordinate system you specify for the DEM file should match the data defined in the DEM file itself. An empty string input for the coordinate system code means that no transformation is needed.\n\nTinSurface.AddDEMFile (tinSurface: TinSurface, filePath: string, customNullElevation: double = null, coordinateSystemCode: string = \"\"): Surface"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.Filename, CoreNodeModels",
+      "HintPath": "C:\\Software Projects\\Camber\\tests\\GridSurface\\491_926.asc",
+      "InputValue": "..\\GridSurface\\491_926.asc",
+      "NodeType": "ExtensionNode",
+      "Id": "b2eb83feac5442e0b6e977c5599d7f4f",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "08c0eeb116524925a09040ec2738c6fe",
+          "Name": "",
+          "Description": "File Path",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows you to select a file on the system to get its file path."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "bcdab8b19d1b4cda9e00ebbc7c881908",
+      "End": "4380e94589274d5a9314222a12f42e55",
+      "Id": "2def8846f81e4446b16a6c067bcf0ca1",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "3db1fac335dc40858f2cf86e6cddc605",
+      "End": "5d6a3f770335443e971b0c59a51f4dcf",
+      "Id": "b5c7320cdc3d41cea058da746f252ba8",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "fd481e0597d048e5910f6888ef031d84",
+      "End": "55da553fe0bd4af6803431e101ccce44",
+      "Id": "ebf3b0eca3374057be7914f76abce263",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "5404cecd1e1040cf9030280d05ed5611",
+      "End": "7d134e5b2192495bb86e1fd07fea966d",
+      "Id": "d57beb435f1a4ef1b2091889086dc191",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "08c0eeb116524925a09040ec2738c6fe",
+      "End": "41320889956f4f14903c4855ffd611e6",
+      "Id": "7c8ec614974e49f789da80ad5a51eff0",
+      "IsHidden": "False"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Camber",
+      "Version": "4.0.0",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "e59cdc40afbf46d0b581e79514e10208",
+        "295df2231bf7442184a1bebd8a620fd9",
+        "86fed31606754345b007a495a1199252"
+      ]
+    },
+    {
+      "Name": "491_926.asc",
+      "ReferenceType": "External",
+      "Nodes": [
+        "b2eb83feac5442e0b6e977c5599d7f4f"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.13",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.13.1.3887",
+      "RunType": "Automatic",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": 492049.6875,
+      "EyeY": 576.76239013671875,
+      "EyeZ": -926646.9375,
+      "LookX": -122.875,
+      "LookY": -60.055908203125,
+      "LookZ": -123.0,
+      "UpX": -0.081018231809139252,
+      "UpY": 0.99337285757064819,
+      "UpZ": -0.0815262719988823
+    },
+    "ConnectorPins": [],
+    "NodeViews": [
+      {
+        "Name": "TinSurface.ByName",
+        "ShowGeometry": true,
+        "Id": "e59cdc40afbf46d0b581e79514e10208",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 355.2,
+        "Y": 228.0
+      },
+      {
+        "Name": "Document.Current",
+        "ShowGeometry": true,
+        "Id": "fc492a5575754ba39d660e8aa2c3c345",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 62.800000000000011,
+        "Y": 181.99999999999994
+      },
+      {
+        "Name": "Code Block",
+        "ShowGeometry": true,
+        "Id": "6016c2a9014d4b73a2ce2bccc674f382",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 124.71414703883795,
+        "Y": 320.74085088733375
+      },
+      {
+        "Name": "Surface Styles",
+        "ShowGeometry": true,
+        "Id": "295df2231bf7442184a1bebd8a620fd9",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 54.094774835196688,
+        "Y": 459.64843050910281
+      },
+      {
+        "Name": "TinSurface.AddDEMFile",
+        "ShowGeometry": true,
+        "Id": "86fed31606754345b007a495a1199252",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 750.328632540021,
+        "Y": 306.49837536363776
+      },
+      {
+        "Name": "File Path",
+        "ShowGeometry": true,
+        "Id": "b2eb83feac5442e0b6e977c5599d7f4f",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 371.76351653633571,
+        "Y": 448.72498117908071
+      }
+    ],
+    "Annotations": [],
+    "X": 168.78246722004548,
+    "Y": 32.940415253929189,
+    "Zoom": 0.6274081265976349
+  }
+}
