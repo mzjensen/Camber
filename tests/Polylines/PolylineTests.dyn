@@ -1,0 +1,792 @@
+{
+  "Uuid": "a7a33e3e-48f7-476c-9835-de5e9ac2f452",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "PolylineTests",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Autodesk.AutoCAD.DynamoNodes.AcObjectsOfType, AutoCADNodesUI",
+      "NodeType": "ExtensionNode",
+      "Id": "d988fc6b6eb64252987f83fb41a7e362",
+      "Inputs": [
+        {
+          "Id": "00169ff388f0463e9174368e4bb88fca",
+          "Name": "type",
+          "Description": "",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "2058763e3e8c4388b10426a995b67e05",
+          "Name": "block",
+          "Description": "",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "04243c10dd5c485ca9d1f06748f464d2",
+          "Name": "Object[]",
+          "Description": "Object[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Select all objects of the type."
+    },
+    {
+      "ConcreteType": "Autodesk.AutoCAD.DynamoNodes.AcObjectTypes, AutoCADNodesUI",
+      "SelectedIndex": 8,
+      "SelectedString": "Polyline",
+      "NodeType": "ExtensionNode",
+      "Id": "98ab27c7066c4e40b277b11eaebf372a",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "f3dc3d5151254ca5bb7f16699d81fefd",
+          "Name": "Object Type",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Select object type."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Document.ModelSpace",
+      "Id": "262be14423a94426b472890dbbb8c546",
+      "Inputs": [
+        {
+          "Id": "4a18a648b0244ae58a6efe0d875f51a3",
+          "Name": "document",
+          "Description": "Autodesk.AutoCAD.DynamoNodes.Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "094c0815f3b541f799a148ec08174a9c",
+          "Name": "Block",
+          "Description": "Block",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the model space block table record.\n\nDocument.ModelSpace: Block"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Document.Current",
+      "Id": "df2a83b16da04a178a6482600b480486",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "b9bbd40c53034ae5863864656c4cb407",
+          "Name": "Document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the current AutoCAD document.\n\nDocument.Current: Document"
+    },
+    {
+      "ConcreteType": "Autodesk.AutoCAD.DynamoNodes.AcObjectsOfType, AutoCADNodesUI",
+      "NodeType": "ExtensionNode",
+      "Id": "c876f08ed9e34ba681058d5ad748d46b",
+      "Inputs": [
+        {
+          "Id": "ba220c020ac74261941e0cc75b319efc",
+          "Name": "type",
+          "Description": "",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "6ee3a0ff0b704a0a9287288c3f219024",
+          "Name": "block",
+          "Description": "",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "d81b111860c6405b9fde5b38d790e997",
+          "Name": "Object[]",
+          "Description": "Object[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Select all objects of the type."
+    },
+    {
+      "ConcreteType": "Autodesk.AutoCAD.DynamoNodes.AcObjectTypes, AutoCADNodesUI",
+      "SelectedIndex": 9,
+      "SelectedString": "Polyline3D",
+      "NodeType": "ExtensionNode",
+      "Id": "02273bc91ab24ed4bc3f80217ef29350",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "1e0dce84854a4402b417621b9a1a5584",
+          "Name": "Object Type",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Select object type."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.AutoCAD.Objects.Polyline.PruneDuplicateVertices@Autodesk.AutoCAD.DynamoNodes.Polyline,bool,double",
+      "Id": "4fa33b61fd8647429f97da4aba0ac09e",
+      "Inputs": [
+        {
+          "Id": "e58e1afae07944aba568a61cf0ed0128",
+          "Name": "polyline",
+          "Description": "Polyline",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "9a25a070b35c418e9035d752386f7fc0",
+          "Name": "keepFirst",
+          "Description": "If true, the first duplicate vertex is preserved from each group of duplicates. If false, the last duplicate vertex is preserved.\n\nbool\nDefault value : true",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "31c589402b1047e791a0e165e7057b13",
+          "Name": "tolerance",
+          "Description": "Two vertices are considered equal if the distance between them is less than the tolerance.\n\ndouble\nDefault value : 0.001",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "5696a1d8efb84020af339cfa7c5bc753",
+          "Name": "Polyline",
+          "Description": "Polyline",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Removes duplicate vertices from a Polyline. If the Polyline is closed, the shared start/end vertex is not removed.\n\nPolyline.PruneDuplicateVertices (polyline: Polyline, keepFirst: bool = true, tolerance: double = 0.001): Polyline"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.AutoCAD.Objects.Polyline.Vertices@Autodesk.AutoCAD.DynamoNodes.Polyline",
+      "Id": "aa45f77c73854fafa24b9c5a0db0da12",
+      "Inputs": [
+        {
+          "Id": "9c7916caf26c4c5b8b9643ca95a459c6",
+          "Name": "polyline",
+          "Description": "Polyline",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "57bc16a77baa4a7fb64d95850f740a2b",
+          "Name": "Point[]",
+          "Description": "Point[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the vertices of a Polyline.\n\nPolyline.Vertices (polyline: Polyline): Point[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.AutoCAD.Objects.Polyline.DuplicateVerticesCount@Autodesk.AutoCAD.DynamoNodes.Polyline",
+      "Id": "4c021dc49e8e4780990354890fe3f109",
+      "Inputs": [
+        {
+          "Id": "a7719547da5b4f59acba9cc98bf555ff",
+          "Name": "polyline",
+          "Description": "Polyline",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "1b9dc841d98340098868aafcdd025fd8",
+          "Name": "int",
+          "Description": "int",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the number of duplicate vertices in a Polyline. For example, if there are 3 vertices at the same location, this node would return '2'. If the Polyline is closed, the common start/end vertex is not considered a duplicate.\n\nPolyline.DuplicateVerticesCount (polyline: Polyline): int"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "c58c30db60ab4593b1a371892dc00e55",
+      "Inputs": [
+        {
+          "Id": "121e29a67c3f479ab9995d131caa1331",
+          "Name": "",
+          "Description": "Node to show output from",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "3983907b4c144a769f340a52273a2546",
+          "Name": "",
+          "Description": "Node output",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the node's output"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "910764a9852d44ae943e5c7f4be6c040",
+      "Inputs": [
+        {
+          "Id": "a95fb9412b754f76816c44b575ab5b97",
+          "Name": "",
+          "Description": "Node to show output from",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "a5d4ca72bb5f44f78c0cd10d626be8dc",
+          "Name": "",
+          "Description": "Node output",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the node's output"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.AutoCAD.Objects.Polyline3D.DuplicateVerticesCount@Autodesk.AutoCAD.DynamoNodes.Polyline3D",
+      "Id": "1bcdb753ae68403e9eefdef3fdaa96ad",
+      "Inputs": [
+        {
+          "Id": "f534c5f115e544fa9872b5fe55e34dc1",
+          "Name": "polyline3d",
+          "Description": "Polyline3D",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "341a6904e01c4ba0bee97db306001f6f",
+          "Name": "int",
+          "Description": "int",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the number of duplicate vertices in a 3D Polyline. For example, if there are 3 vertices at the same location, this node would return '2'. If the 3D Polyline is closed, the common start/end vertex is not considered a duplicate.\n\nPolyline3D.DuplicateVerticesCount (polyline3d: Polyline3D): int"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.AutoCAD.Objects.Polyline3D.Vertices@Autodesk.AutoCAD.DynamoNodes.Polyline3D",
+      "Id": "25cfcda10c1748dfa267dca0b7529c3e",
+      "Inputs": [
+        {
+          "Id": "b6bf3833aa0e4c9385163ece82162432",
+          "Name": "polyline3d",
+          "Description": "Polyline3D",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "092bb6af0f0d4bc0a1953bb54ea2194a",
+          "Name": "Point[]",
+          "Description": "Point[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the vertices of a 3D Polyline.\n\nPolyline3D.Vertices (polyline3d: Polyline3D): Point[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.AutoCAD.Objects.Polyline3D.PruneDuplicateVertices@Autodesk.AutoCAD.DynamoNodes.Polyline3D,bool,double",
+      "Id": "54b9b4fa04d244d99e92eae933641e61",
+      "Inputs": [
+        {
+          "Id": "f4f3063b9faa425abbe747ef3d186a0c",
+          "Name": "polyline3d",
+          "Description": "Polyline3D",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "a55efa74c4864a4485eae8150f8ada32",
+          "Name": "keepFirst",
+          "Description": "If true, the first duplicate vertex is preserved from each group of duplicates. If false, the last duplicate vertex is preserved.\n\nbool\nDefault value : true",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "e91fa1c0b95d4cfca3b505eebb09bca9",
+          "Name": "tolerance",
+          "Description": "double\nDefault value : 0.001",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "ed75fe11228a4815878b79c5e52ebbdf",
+          "Name": "Polyline3D",
+          "Description": "Polyline3D",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Removes duplicate vertices from a 3D Polyline. If the 3D Polyline is closed, the shared start/end vertex is not removed.\n\nPolyline3D.PruneDuplicateVertices (polyline3d: Polyline3D, keepFirst: bool = true, tolerance: double = 0.001): Polyline3D"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": true,
+      "Id": "b464e97a7a024ff09433c00f9e349cc9",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "abdb2fa24bc94507b25145109ddad0c5",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Selection between a true and false."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "false;",
+      "Id": "510de1b9639c477caef984efd9eaa740",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "cbd292fb0a8d43b397181249a3a744f3",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "04243c10dd5c485ca9d1f06748f464d2",
+      "End": "9c7916caf26c4c5b8b9643ca95a459c6",
+      "Id": "d09e8da443b946368280b95f5a0e316d",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "04243c10dd5c485ca9d1f06748f464d2",
+      "End": "a7719547da5b4f59acba9cc98bf555ff",
+      "Id": "ac77925be1804ee7a3adf7104be51ce8",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "f3dc3d5151254ca5bb7f16699d81fefd",
+      "End": "00169ff388f0463e9174368e4bb88fca",
+      "Id": "c9408b6630184320a265336f53054f7d",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "094c0815f3b541f799a148ec08174a9c",
+      "End": "2058763e3e8c4388b10426a995b67e05",
+      "Id": "36f3bf78560b43e5976b8ec80d79c902",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "094c0815f3b541f799a148ec08174a9c",
+      "End": "6ee3a0ff0b704a0a9287288c3f219024",
+      "Id": "0429f8180f354699bc4a53fb30b0ad14",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "b9bbd40c53034ae5863864656c4cb407",
+      "End": "4a18a648b0244ae58a6efe0d875f51a3",
+      "Id": "63e0f570d078483480d934c4fb22621a",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "d81b111860c6405b9fde5b38d790e997",
+      "End": "b6bf3833aa0e4c9385163ece82162432",
+      "Id": "e4ddccf9a76f46e098587ac65a72057d",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "d81b111860c6405b9fde5b38d790e997",
+      "End": "f534c5f115e544fa9872b5fe55e34dc1",
+      "Id": "161a04bf45b34150b231feb02eddb74b",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "1e0dce84854a4402b417621b9a1a5584",
+      "End": "ba220c020ac74261941e0cc75b319efc",
+      "Id": "7c82970dda4e4fa0978f9a206802ea55",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "57bc16a77baa4a7fb64d95850f740a2b",
+      "End": "121e29a67c3f479ab9995d131caa1331",
+      "Id": "624951cdb12542888295bf57571e0569",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "1b9dc841d98340098868aafcdd025fd8",
+      "End": "a95fb9412b754f76816c44b575ab5b97",
+      "Id": "107057ba4a9b49c199f371a49d6edc9b",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "abdb2fa24bc94507b25145109ddad0c5",
+      "End": "9a25a070b35c418e9035d752386f7fc0",
+      "Id": "635603eee29142abaa0998862250c7f8",
+      "IsHidden": "False"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Camber",
+      "Version": "4.0.0",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "4fa33b61fd8647429f97da4aba0ac09e",
+        "aa45f77c73854fafa24b9c5a0db0da12",
+        "4c021dc49e8e4780990354890fe3f109",
+        "1bcdb753ae68403e9eefdef3fdaa96ad",
+        "25cfcda10c1748dfa267dca0b7529c3e",
+        "54b9b4fa04d244d99e92eae933641e61"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.13",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.13.1.3887",
+      "RunType": "Automatic",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": 2137.8837890625,
+      "EyeY": 113.34241485595703,
+      "EyeZ": -7280.55419921875,
+      "LookX": 81.79150390625,
+      "LookY": -127.155517578125,
+      "LookZ": -205.64453125,
+      "UpX": 0.11113183945417404,
+      "UpY": 0.95371699333190918,
+      "UpZ": -0.27941671013832092
+    },
+    "ConnectorPins": [],
+    "NodeViews": [
+      {
+        "Name": "All Objects of Type",
+        "ShowGeometry": true,
+        "Id": "d988fc6b6eb64252987f83fb41a7e362",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 460.0598409770821,
+        "Y": 221.87339940167845
+      },
+      {
+        "Name": "Objects Types",
+        "ShowGeometry": true,
+        "Id": "98ab27c7066c4e40b277b11eaebf372a",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 58.794015934183108,
+        "Y": 187.80800670912981
+      },
+      {
+        "Name": "Document.ModelSpace",
+        "ShowGeometry": true,
+        "Id": "262be14423a94426b472890dbbb8c546",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 75.726042870884385,
+        "Y": 486.98962203376368
+      },
+      {
+        "Name": "Document.Current",
+        "ShowGeometry": true,
+        "Id": "df2a83b16da04a178a6482600b480486",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -198.27395712911562,
+        "Y": 487.22552662001283
+      },
+      {
+        "Name": "All Objects of Type",
+        "ShowGeometry": true,
+        "Id": "c876f08ed9e34ba681058d5ad748d46b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 479.85428764279436,
+        "Y": 809.43603421968885
+      },
+      {
+        "Name": "Objects Types",
+        "ShowGeometry": true,
+        "Id": "02273bc91ab24ed4bc3f80217ef29350",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 62.942885071820456,
+        "Y": 819.18314734390037
+      },
+      {
+        "Name": "Polyline.PruneDuplicateVertices",
+        "ShowGeometry": true,
+        "Id": "4fa33b61fd8647429f97da4aba0ac09e",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 810.59826243134046,
+        "Y": 489.37761211051821
+      },
+      {
+        "Name": "Polyline.Vertices",
+        "ShowGeometry": true,
+        "Id": "aa45f77c73854fafa24b9c5a0db0da12",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 807.13070411589342,
+        "Y": -35.891620799524787
+      },
+      {
+        "Name": "Polyline.DuplicateVerticesCount",
+        "ShowGeometry": true,
+        "Id": "4c021dc49e8e4780990354890fe3f109",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 805.42945992033265,
+        "Y": 232.59941386036888
+      },
+      {
+        "Name": "Watch",
+        "ShowGeometry": true,
+        "Id": "c58c30db60ab4593b1a371892dc00e55",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1226.0711112171366,
+        "Y": -112.75168085622246
+      },
+      {
+        "Name": "Watch",
+        "ShowGeometry": true,
+        "Id": "910764a9852d44ae943e5c7f4be6c040",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1231.6740128117781,
+        "Y": 232.23344935371949
+      },
+      {
+        "Name": "Polyline3D.DuplicateVerticesCount",
+        "ShowGeometry": true,
+        "Id": "1bcdb753ae68403e9eefdef3fdaa96ad",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 855.24385585110122,
+        "Y": 1078.2295451105133
+      },
+      {
+        "Name": "Polyline3D.Vertices",
+        "ShowGeometry": true,
+        "Id": "25cfcda10c1748dfa267dca0b7529c3e",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 870.40207789956014,
+        "Y": 888.303823012827
+      },
+      {
+        "Name": "Polyline3D.PruneDuplicateVertices",
+        "ShowGeometry": true,
+        "Id": "54b9b4fa04d244d99e92eae933641e61",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 826.04574483320039,
+        "Y": 1322.7312006158231
+      },
+      {
+        "Name": "Boolean",
+        "ShowGeometry": true,
+        "Id": "b464e97a7a024ff09433c00f9e349cc9",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 488.90286349021676,
+        "Y": 595.788128337387
+      },
+      {
+        "Name": "Code Block",
+        "ShowGeometry": true,
+        "Id": "510de1b9639c477caef984efd9eaa740",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 501.86897206865916,
+        "Y": 1254.6013198594524
+      }
+    ],
+    "Annotations": [],
+    "X": 322.23273909241777,
+    "Y": 168.66329448765481,
+    "Zoom": 0.40804865534183771
+  }
+}

@@ -136,6 +136,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoCAD\Objects\Polylines\Polyline3DExtensions.cs" />
+    <Compile Include="AutoCAD\Objects\Polylines\PolylineExtensions.cs" />
     <Compile Include="AutoCAD\Objects\MTextExtensions.cs" />
     <Compile Include="AutoCAD\Objects\Multi-View Blocks\MultiViewBlockReference.cs" />
     <Compile Include="AutoCAD\Objects\Multi-View Blocks\MultiViewBlock.cs" />
@@ -147,6 +149,8 @@
     <Compile Include="AutoCAD\Objects\Dimensions\Dimension.cs" />
     <Compile Include="AutoCAD\Objects\Multi-View Blocks\DisplayRepresentation.cs" />
     <Compile Include="AutoCAD\Objects\Multi-View Blocks\ViewBlock.cs" />
+    <Compile Include="AutoCAD\Objects\Polylines\PolylineUtilities.cs" />
+    <Compile Include="AutoCAD\Objects\Polylines\PolylineVertex.cs" />
     <Compile Include="AutoCAD\Objects\TextExtensions.cs" />
     <Compile Include="AutoCAD\Xref.cs" />
     <Compile Include="Civil\CivilObjects\Intersections\Intersection.cs" />
