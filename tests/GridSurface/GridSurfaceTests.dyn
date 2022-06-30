@@ -1,0 +1,633 @@
+{
+  "Uuid": "84ebbe40-ea03-426f-9b34-86211965d221",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "GridSurfaceTests",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.Civil.CivilObjects.Surfaces.GridSurface.ByName@Autodesk.AutoCAD.DynamoNodes.Document,string,double,double,double,Camber.Civil.Styles.Objects.SurfaceStyle",
+      "Id": "54aefbfb6e83463f8d25425f7f756483",
+      "Inputs": [
+        {
+          "Id": "3d51101e86304f0d9c4e8f385e5803a7",
+          "Name": "document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "5726f60b452c4d9ba7616a478af3fc9a",
+          "Name": "surfaceName",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "b57cbb9098854343845e2e7d1324532b",
+          "Name": "spacingX",
+          "Description": "double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "d957814736794fa2ab03df24bf070de1",
+          "Name": "spacingY",
+          "Description": "double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "83b0c232cc6f41dea17afd7d1e79b0b0",
+          "Name": "orientation",
+          "Description": "double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "f67f212ea8f941bbb9fb88b55b9b90f7",
+          "Name": "style",
+          "Description": "SurfaceStyle",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "08edbcb6beba409a8e898df7603980e5",
+          "Name": "GridSurface",
+          "Description": "GridSurface",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Creates a new Grid Surface by name. The units for the X and Y spacing and orientation are taken from the settings in SettingsCmdCreateSurface.\n\nGridSurface.ByName (document: Document, surfaceName: string, spacingX: double, spacingY: double, orientation: double, style: SurfaceStyle): GridSurface"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Document.Current",
+      "Id": "9a2476b32c0143baa4ad7293f93ab1d1",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "2187eb2ec18d43db894340db52ed1a9d",
+          "Name": "Document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the current AutoCAD document.\n\nDocument.Current: Document"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"Test\";",
+      "Id": "e28a2561f7664e4ba4f941d025e64e13",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "7569294684724a4d9309b55572112742",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.DoubleSlider, CoreNodeModels",
+      "NodeType": "NumberInputNode",
+      "NumberType": "Double",
+      "MaximumValue": 10.0,
+      "MinimumValue": 0.0,
+      "StepValue": 1.0,
+      "InputValue": 5.0,
+      "Id": "5295fdaa9c1a45a3a39930bff577e617",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "896f274b7a954065924b54c4cd7c16f4",
+          "Name": "",
+          "Description": "Double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "A slider that produces numeric values."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "0;",
+      "Id": "3c0903c2932348d99fd2faf290d59af5",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "7fabed59014448eaad8cabe5aa8105e7",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Camber.UI.SurfaceStyleDropDown, CamberUI",
+      "SelectedIndex": 2,
+      "SelectedString": "Contours 1' and 5' (Background)",
+      "NodeType": "ExtensionNode",
+      "Id": "2c159c6f3d144cee874ddd2b5936d10d",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "373d3949eb5c45de95dcbaeac66e933d",
+          "Name": "surfaceStyle",
+          "Description": "The selected surfaceStyle",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Select Surface Style."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.Civil.CivilObjects.Surfaces.GridSurface.ImportFromDEM@Autodesk.AutoCAD.DynamoNodes.Document,string,Camber.Civil.Styles.Objects.SurfaceStyle,string",
+      "Id": "d6961a1dc3a64e2cad3a0e6c2c7c6c6c",
+      "Inputs": [
+        {
+          "Id": "40c68584d0a44d0380cfa3491e50296a",
+          "Name": "document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "94d28f7f3abe4978bc203a938fdd5c4c",
+          "Name": "demFilePath",
+          "Description": "The path to a .tif, .dem, .asc, .txt, or .adf file.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "74e6d2509be24eb680995b1f86b021e5",
+          "Name": "style",
+          "Description": "SurfaceStyle",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "03bc398cbeed4e2e84ce466a58ead4b7",
+          "Name": "surfaceName",
+          "Description": "The surface will take the name of the file unless otherwise specified.\n\nstring\nDefault value : \"\"",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "b7c491b6e93f477fbf4ab15dfc753f7b",
+          "Name": "GridSurface",
+          "Description": "GridSurface",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Creates a new Grid Surface by importing from a DEM file.\n\nGridSurface.ImportFromDEM (document: Document, demFilePath: string, style: SurfaceStyle, surfaceName: string = \"\"): GridSurface"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.Filename, CoreNodeModels",
+      "HintPath": "C:\\Software Projects\\Camber\\tests\\GridSurface\\491_926.asc",
+      "InputValue": ".\\491_926.asc",
+      "NodeType": "ExtensionNode",
+      "Id": "37fa76eafb514104a8f5ea67f168797f",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "22930837c0744a3e83f46d0524b10ad9",
+          "Name": "",
+          "Description": "File Path",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows you to select a file on the system to get its file path."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.Civil.CivilObjects.Surfaces.GridSurface.GetVertices@bool",
+      "Id": "ac75647d89e04eef9f0fd337729776e2",
+      "Inputs": [
+        {
+          "Id": "144a7b30fdd44d319facf302844b9c20",
+          "Name": "gridSurface",
+          "Description": "Camber.Civil.CivilObjects.Surfaces.GridSurface",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "742a34a953614d7b86d2017126338c40",
+          "Name": "includeInvisible",
+          "Description": "Include invisible vertices?\n\nbool\nDefault value : false",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "89fc41c2753f4a0485f34cd777c36b82",
+          "Name": "GridSurfaceVertex[]",
+          "Description": "GridSurfaceVertex[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the vertices of a Grid Surface.\n\nGridSurface.GetVertices (includeInvisible: bool = false): GridSurfaceVertex[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.Civil.CivilObjects.Surfaces.GridSurface.Mesh",
+      "Id": "e7f7b23cdbb944f19f354283b21ff3fd",
+      "Inputs": [
+        {
+          "Id": "e498115e683c4a65ac0edfd107142301",
+          "Name": "gridSurface",
+          "Description": "Camber.Civil.CivilObjects.Surfaces.GridSurface",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "0528f5cdc9d04538b62d5dd2f08350da",
+          "Name": "Mesh",
+          "Description": "Mesh",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the geometry of a Grid Surface as a Mesh.\n\nGridSurface.Mesh: Mesh"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.Civil.CivilObjects.Surfaces.GridSurface.GetCells@bool",
+      "Id": "7e2d6e3710ca46feb8b9d1f53fa8702a",
+      "Inputs": [
+        {
+          "Id": "73b0de9be5994f3ea53ec582d27d0650",
+          "Name": "gridSurface",
+          "Description": "Camber.Civil.CivilObjects.Surfaces.GridSurface",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "9e2c868e6f7e4d6c834c115f5296af01",
+          "Name": "includeInvisible",
+          "Description": "Include invisible cells?\n\nbool\nDefault value : false",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "4276a0859d834e338d512b7da931c5cf",
+          "Name": "GridSurfaceCell[]",
+          "Description": "GridSurfaceCell[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the cells of a Grid Surface.\n\nGridSurface.GetCells (includeInvisible: bool = false): GridSurfaceCell[]"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "2187eb2ec18d43db894340db52ed1a9d",
+      "End": "3d51101e86304f0d9c4e8f385e5803a7",
+      "Id": "38be8c612b19419199ee0f06ee388490",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "2187eb2ec18d43db894340db52ed1a9d",
+      "End": "40c68584d0a44d0380cfa3491e50296a",
+      "Id": "9d1b487822944b67a9ad2bdcb7904c6a",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "7569294684724a4d9309b55572112742",
+      "End": "5726f60b452c4d9ba7616a478af3fc9a",
+      "Id": "d2e7e7218b5b4df3862563bf39d4efc9",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "896f274b7a954065924b54c4cd7c16f4",
+      "End": "b57cbb9098854343845e2e7d1324532b",
+      "Id": "76c1c6572a384a458c1904ab9216e0e1",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "896f274b7a954065924b54c4cd7c16f4",
+      "End": "d957814736794fa2ab03df24bf070de1",
+      "Id": "3c0b42ac2fb044ff948dc50270e57421",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "7fabed59014448eaad8cabe5aa8105e7",
+      "End": "83b0c232cc6f41dea17afd7d1e79b0b0",
+      "Id": "6cb470ef36b448ae9ea5e91d6305dd78",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "373d3949eb5c45de95dcbaeac66e933d",
+      "End": "74e6d2509be24eb680995b1f86b021e5",
+      "Id": "4c2b0f3c45e446cababac01f82f8828c",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "373d3949eb5c45de95dcbaeac66e933d",
+      "End": "f67f212ea8f941bbb9fb88b55b9b90f7",
+      "Id": "ea2ae5e4e9e7404b9a0176a0095f7ae0",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "b7c491b6e93f477fbf4ab15dfc753f7b",
+      "End": "144a7b30fdd44d319facf302844b9c20",
+      "Id": "d61af56c8aea40a4ba2d7b96b1146e74",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "b7c491b6e93f477fbf4ab15dfc753f7b",
+      "End": "e498115e683c4a65ac0edfd107142301",
+      "Id": "41f58ee252b342bc831e9eb83331ec10",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "b7c491b6e93f477fbf4ab15dfc753f7b",
+      "End": "73b0de9be5994f3ea53ec582d27d0650",
+      "Id": "4ac2d2d200b441998ac81028b4f2972c",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "22930837c0744a3e83f46d0524b10ad9",
+      "End": "94d28f7f3abe4978bc203a938fdd5c4c",
+      "Id": "d9eb9ff12e084cad9233d7d4c23c6c3d",
+      "IsHidden": "False"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Camber",
+      "Version": "4.0.0",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "54aefbfb6e83463f8d25425f7f756483",
+        "2c159c6f3d144cee874ddd2b5936d10d",
+        "d6961a1dc3a64e2cad3a0e6c2c7c6c6c",
+        "ac75647d89e04eef9f0fd337729776e2",
+        "e7f7b23cdbb944f19f354283b21ff3fd",
+        "7e2d6e3710ca46feb8b9d1f53fa8702a"
+      ]
+    },
+    {
+      "Name": "491_926.asc",
+      "ReferenceType": "External",
+      "Nodes": [
+        "37fa76eafb514104a8f5ea67f168797f"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.13",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.13.1.3887",
+      "RunType": "Automatic",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": 492096.9375,
+      "EyeY": 669.546630859375,
+      "EyeZ": -926604.125,
+      "LookX": -187.3125,
+      "LookY": -152.5340576171875,
+      "LookZ": -170.1875,
+      "UpX": -0.24357594549655914,
+      "UpY": 0.94552057981491089,
+      "UpZ": -0.21601326763629913
+    },
+    "ConnectorPins": [],
+    "NodeViews": [
+      {
+        "Name": "GridSurface.ByName",
+        "ShowGeometry": true,
+        "Id": "54aefbfb6e83463f8d25425f7f756483",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 497.59759484056815,
+        "Y": 246.11137564545157
+      },
+      {
+        "Name": "Document.Current",
+        "ShowGeometry": true,
+        "Id": "9a2476b32c0143baa4ad7293f93ab1d1",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 97.999999999999943,
+        "Y": 32.399999999999963
+      },
+      {
+        "Name": "Code Block",
+        "ShowGeometry": true,
+        "Id": "e28a2561f7664e4ba4f941d025e64e13",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 153.19999999999993,
+        "Y": 169.0
+      },
+      {
+        "Name": "Number Slider",
+        "ShowGeometry": true,
+        "Id": "5295fdaa9c1a45a3a39930bff577e617",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -29.7258160237389,
+        "Y": 308.37388724035605
+      },
+      {
+        "Name": "Code Block",
+        "ShowGeometry": true,
+        "Id": "3c0903c2932348d99fd2faf290d59af5",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 158.01240447221733,
+        "Y": 450.00826964814496
+      },
+      {
+        "Name": "Surface Styles",
+        "ShowGeometry": true,
+        "Id": "2c159c6f3d144cee874ddd2b5936d10d",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -57.738609860141878,
+        "Y": 599.41113417884776
+      },
+      {
+        "Name": "GridSurface.ImportFromDEM",
+        "ShowGeometry": true,
+        "Id": "d6961a1dc3a64e2cad3a0e6c2c7c6c6c",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 486.23977363402025,
+        "Y": 705.56158315104017
+      },
+      {
+        "Name": "File Path",
+        "ShowGeometry": true,
+        "Id": "37fa76eafb514104a8f5ea67f168797f",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 170.70508923830062,
+        "Y": 746.97486587031972
+      },
+      {
+        "Name": "GridSurface.GetVertices",
+        "ShowGeometry": true,
+        "Id": "ac75647d89e04eef9f0fd337729776e2",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 896.2310003280412,
+        "Y": 709.17259576337085
+      },
+      {
+        "Name": "GridSurface.Mesh",
+        "ShowGeometry": true,
+        "Id": "e7f7b23cdbb944f19f354283b21ff3fd",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 895.30632584986165,
+        "Y": 563.94415950470875
+      },
+      {
+        "Name": "GridSurface.GetCells",
+        "ShowGeometry": true,
+        "Id": "7e2d6e3710ca46feb8b9d1f53fa8702a",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 900.80898545267178,
+        "Y": 871.41484340822046
+      }
+    ],
+    "Annotations": [],
+    "X": 174.60481393715554,
+    "Y": 15.57854472198153,
+    "Zoom": 0.52182602766167
+  }
+}

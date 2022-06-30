@@ -153,6 +153,7 @@
     <Compile Include="Civil\CivilObjects\Pressure Networks\PressurePartSize.cs" />
     <Compile Include="Civil\CivilObjects\Corridor.cs" />
     <Compile Include="Civil\CivilObjects\Surfaces\GridSurface.cs" />
+    <Compile Include="Civil\CivilObjects\Surfaces\GridSurfaceCell.cs" />
     <Compile Include="Civil\CivilObjects\Surfaces\GridSurfaceVertex.cs" />
     <Compile Include="Civil\CivilObjects\Surfaces\GridVolumeSurface.cs" />
     <Compile Include="Civil\CivilObjects\Surfaces\ICamberSurface.cs" />

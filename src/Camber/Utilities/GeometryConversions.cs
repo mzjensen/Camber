@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using acGeom = Autodesk.AutoCAD.Geometry;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
+using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using Autodesk.DesignScript.Geometry;
 using Autodesk.DesignScript.Runtime;
 #endregion
@@ -319,11 +320,19 @@ namespace Camber.Utilities.GeometryConversions
             bool connectLastToFirst = polyline3d.Closed;
 
             List<Point> dynPnts = new List<Point>();
-            foreach (acDb.PolylineVertex3d vert in polyline3d)
+            using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
             {
-                dynPnts.Add(AcPointToDynPoint(vert.Position));
+                var verts = polyline3d.Cast<acDb.ObjectId>().ToArray();
+                foreach (var oid in verts)
+                {
+                    var vt = (acDb.PolylineVertex3d)ctx.Transaction.GetObject(oid, acDb.OpenMode.ForRead);
+                    if (vt != null)
+                    {
+                        dynPnts.Add(AcPointToDynPoint(vt.Position));
+                    }
+                }
+                return PolyCurve.ByPoints(dynPnts, connectLastToFirst);
             }
-            return PolyCurve.ByPoints(dynPnts, connectLastToFirst);
         }
         #endregion
 
