@@ -1,14 +1,17 @@
 ﻿#region references
 using System;
 using System.Collections.Generic;
+using Autodesk.Civil.DatabaseServices.Styles;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using civDb = Autodesk.Civil.DatabaseServices;
 using AeccCodeSetStyle = Autodesk.Civil.DatabaseServices.Styles.CodeSetStyle;
 using AeccCodeSetStyleItem = Autodesk.Civil.DatabaseServices.Styles.CodeSetStyleItem;
-using Camber.Civil.Styles.Objects;
 using Autodesk.DesignScript.Runtime;
+using LinkStyle = Camber.Civil.Styles.Objects.LinkStyle;
+using MarkerStyle = Camber.Civil.Styles.Objects.MarkerStyle;
+using ShapeStyle = Camber.Civil.Styles.Objects.ShapeStyle;
 
 #endregion
 
@@ -84,7 +87,6 @@ namespace Camber.Civil.Styles.CodeSets
         /// <param name="code"></param>
         /// <param name="linkStyle"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         public CodeSetStyle AddLinkItem(string code, LinkStyle linkStyle) => AddItem(code, linkStyle);
 
         /// <summary>
@@ -93,7 +95,6 @@ namespace Camber.Civil.Styles.CodeSets
         /// <param name="code"></param>
         /// <param name="shapeStyle"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         public CodeSetStyle AddShapeItem(string code, ShapeStyle shapeStyle) => AddItem(code, shapeStyle);
 
         /// <summary>
@@ -117,6 +118,18 @@ namespace Camber.Civil.Styles.CodeSets
                 using (var ctx = new acDynApp.DocumentContext(document.AcDocument.Database))
                 {
                     var aeccCodeSetStyle = (AeccCodeSetStyle)ctx.Transaction.GetObject(InternalObjectId, acDb.OpenMode.ForWrite);
+                    if (style is MarkerStyle)
+                    {
+                        aeccCodeSetStyle.SubentityStyleType = SubassemblySubentityStyleType.MarkerType;
+                    }
+                    if (style is LinkStyle)
+                    {
+                        aeccCodeSetStyle.SubentityStyleType = SubassemblySubentityStyleType.LinkType;
+                    }
+                    if (style is ShapeStyle)
+                    {
+                        aeccCodeSetStyle.SubentityStyleType = SubassemblySubentityStyleType.ShapeType;
+                    }
                     var newItem = aeccCodeSetStyle.Add(code, style.InternalObjectId);
                     return this;
                 }

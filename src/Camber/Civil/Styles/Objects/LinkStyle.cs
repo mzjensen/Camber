@@ -1,4 +1,6 @@
 ﻿#region references
+
+using Autodesk.DesignScript.Runtime;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using AeccLinkStyle = Autodesk.Civil.DatabaseServices.Styles.LinkStyle;
 #endregion
@@ -9,6 +11,12 @@ namespace Camber.Civil.Styles.Objects
     {
         #region properties
         internal AeccLinkStyle AeccLinkStyle => AcObject as AeccLinkStyle;
+
+        /// <summary>
+        /// Dummy public member so the class gets imported.
+        /// </summary>
+        [IsVisibleInDynamoLibrary(false)]
+        public object DummyProperty => null;
         #endregion
 
         #region constructors

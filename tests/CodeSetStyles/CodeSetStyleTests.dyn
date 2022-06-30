@@ -1,0 +1,1300 @@
+{
+  "Uuid": "480a048d-70c9-46cc-af31-d07051a1c9d8",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "CodeSetStyleTests",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Camber.UI.CodeSetStyleDropDown, CamberUI",
+      "SelectedIndex": 4,
+      "SelectedString": "Basic",
+      "NodeType": "ExtensionNode",
+      "Id": "38be4b5e2f2044dd99fff890f711679c",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "7ef96f7ea18b4c7788a144646ca19adb",
+          "Name": "codeSetStyle",
+          "Description": "The selected codeSetStyle",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Select Code Set Style."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.Civil.Styles.CodeSets.CodeSetStyle.AddPointItem@string,Camber.Civil.Styles.Objects.MarkerStyle",
+      "Id": "bd701842f4384496adee7f69f690fcb6",
+      "Inputs": [
+        {
+          "Id": "9bcef5f65a894d429c944d1d677b5c43",
+          "Name": "codeSetStyle",
+          "Description": "Camber.Civil.Styles.CodeSets.CodeSetStyle",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "ac90e3becec742b19284a46cfb4b6928",
+          "Name": "code",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "02df8ae35c8b4a56bc9f18cea0ef0786",
+          "Name": "markerStyle",
+          "Description": "MarkerStyle",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "e88a0b2215314beda93e69f84e7ba0c3",
+          "Name": "CodeSetStyle",
+          "Description": "CodeSetStyle",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Adds a new point Code Set Style Item by code and Marker Style to a Code Set Style.\n\nCodeSetStyle.AddPointItem (code: string, markerStyle: MarkerStyle): CodeSetStyle"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.Civil.Styles.CodeSets.CodeSetStyle.AddLinkItem@string,Camber.Civil.Styles.Objects.LinkStyle",
+      "Id": "0c686a218c1246999fa021b59d79676d",
+      "Inputs": [
+        {
+          "Id": "69eeab92c2a041adbde749b7b40fc16d",
+          "Name": "codeSetStyle",
+          "Description": "Camber.Civil.Styles.CodeSets.CodeSetStyle",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "bd04db5f9b734b5b9304246641ace662",
+          "Name": "code",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "29f9700cdf844def93840e3cc6307b20",
+          "Name": "linkStyle",
+          "Description": "LinkStyle",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "9fab9c29bf4240c2a92a5c03b3c8dd18",
+          "Name": "CodeSetStyle",
+          "Description": "CodeSetStyle",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Adds a new link Code Set Style Item by code and Marker Style to a Code Set Style.\n\nCodeSetStyle.AddLinkItem (code: string, linkStyle: LinkStyle): CodeSetStyle"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.Civil.Styles.CodeSets.CodeSetStyle.AddShapeItem@string,Camber.Civil.Styles.Objects.ShapeStyle",
+      "Id": "bc3d7cdc67e04371b3ac6e3700b42766",
+      "Inputs": [
+        {
+          "Id": "087202b99ca546518fb333c0302a00b2",
+          "Name": "codeSetStyle",
+          "Description": "Camber.Civil.Styles.CodeSets.CodeSetStyle",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "0e47c3056a134900903ee9f0ae14187d",
+          "Name": "code",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "4a9c37329cd7484d9ce1e4e9ea8f1b8e",
+          "Name": "shapeStyle",
+          "Description": "ShapeStyle",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "e20a4c5c01b24b72afac60481f4805bc",
+          "Name": "CodeSetStyle",
+          "Description": "CodeSetStyle",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Adds a new shape Code Set Style Item by code and Marker Style to a Code Set Style.\n\nCodeSetStyle.AddShapeItem (code: string, shapeStyle: ShapeStyle): CodeSetStyle"
+    },
+    {
+      "ConcreteType": "Camber.UI.MarkerStyleDropDown, CamberUI",
+      "SelectedIndex": 2,
+      "SelectedString": "Basic",
+      "NodeType": "ExtensionNode",
+      "Id": "b2514a8b4f58423693d41dd06e52c254",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "9d3a3e91181a46a9a17841bba368949e",
+          "Name": "markerStyle",
+          "Description": "The selected markerStyle",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Select Marker Style."
+    },
+    {
+      "ConcreteType": "Camber.UI.ShapeStyleDropDown, CamberUI",
+      "SelectedIndex": 3,
+      "SelectedString": "Barrier",
+      "NodeType": "ExtensionNode",
+      "Id": "998adb46fa76490da6258292dcb18813",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "140549cdb5984b42b006ce469fbdfcde",
+          "Name": "shapeStyle",
+          "Description": "The selected shapeStyle",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Select Shape Style."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"TestShape\";",
+      "Id": "5cc7f6be45714255a81f2941590b4a88",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "002b7b9318ab4749b57b1530c2e0cbd7",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"TestLink\";",
+      "Id": "4ab6cb399f2c42a9a4029a8f363328ae",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "59e4ce753ffb48fab21774677e1f9407",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"TestPoint\";",
+      "Id": "809ed5fed4fb4d63977da908830433d1",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "4fa0204a79cc4510bd1d3300d2bd4818",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Camber.UI.LinkStyleDropDown, CamberUI",
+      "SelectedIndex": 1,
+      "SelectedString": "Barrier",
+      "NodeType": "ExtensionNode",
+      "Id": "69cc00b2d70d4885876c835ff8693c75",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "506c79be7a21474595bf10ab6142d1af",
+          "Name": "linkStyle",
+          "Description": "The selected linkStyle",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Select Link Style."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.Civil.Styles.CodeSets.CodeSetStyleItem.Classification",
+      "Id": "360835c54c6842cdaab11072dfb7864f",
+      "Inputs": [
+        {
+          "Id": "ef3d51dc4dbd4a18be94c0b48470a703",
+          "Name": "codeSetStyleItem",
+          "Description": "Camber.Civil.Styles.CodeSets.CodeSetStyleItem",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "0539ee4650964a059813bde025ca6ff1",
+          "Name": "string",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the classification of a Code Set Style Item.\n\nCodeSetStyleItem.Classification: string"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.Civil.Styles.CodeSets.CodeSetStyleItem.Code",
+      "Id": "928c62daf14945e2b4375db77752bd10",
+      "Inputs": [
+        {
+          "Id": "ea632bc505464880b57535a0c6b6bae4",
+          "Name": "codeSetStyleItem",
+          "Description": "Camber.Civil.Styles.CodeSets.CodeSetStyleItem",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "6debe307e31e40e2a0da537ed8c1b4a9",
+          "Name": "string",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the code of a Code Set Style Item.\n\nCodeSetStyleItem.Code: string"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.Civil.Styles.CodeSets.CodeSetStyle.CodeSetStyleItems",
+      "Id": "1a034b2ddc3a4ab0bdea9b992498e29b",
+      "Inputs": [
+        {
+          "Id": "2aebb311a7db463ba11d72edbe12db8c",
+          "Name": "codeSetStyle",
+          "Description": "Camber.Civil.Styles.CodeSets.CodeSetStyle",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "f78d0ab3b3244996872685c6188dced2",
+          "Name": "CodeSetStyleItem[]",
+          "Description": "CodeSetStyleItem[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets all of the Code Set Style Items in a Code Set Style.\n\nCodeSetStyle.CodeSetStyleItems: CodeSetStyleItem[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "[a,b,c][0];",
+      "Id": "036a88fc13354ef6af52e65b64c05619",
+      "Inputs": [
+        {
+          "Id": "9039203bc72846ba9b8204c9d6a66c53",
+          "Name": "a",
+          "Description": "a",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "04f5ac87377c4efc88d3629ad574b8ab",
+          "Name": "b",
+          "Description": "b",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "4250a72777e744b9acb3d44e432d05c3",
+          "Name": "c",
+          "Description": "c",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "3ca88e2ade114b73be4ef3da55d38c4c",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.Civil.Styles.CodeSets.CodeSetStyleItem.CodeSetStyle",
+      "Id": "d124b669b04d4948a049c122b9d2d3ba",
+      "Inputs": [
+        {
+          "Id": "0fbfd5f347a347cebef41e5346893bbc",
+          "Name": "codeSetStyleItem",
+          "Description": "Camber.Civil.Styles.CodeSets.CodeSetStyleItem",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "a2f77d63d2474e85ae5539f265244da8",
+          "Name": "CodeSetStyle",
+          "Description": "CodeSetStyle",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the Code Set Style that a Code Set Style Item belongs to.\n\nCodeSetStyleItem.CodeSetStyle: CodeSetStyle"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.Civil.Styles.CodeSets.CodeSetStyleItem.CodeStyle",
+      "Id": "d27d468df9e6417391c477159f79cfbd",
+      "Inputs": [
+        {
+          "Id": "7ab6681715bf4c3eb5c4ce2e3766b06d",
+          "Name": "codeSetStyleItem",
+          "Description": "Camber.Civil.Styles.CodeSets.CodeSetStyleItem",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "aa1a6823d22e4564bf88241845069ca6",
+          "Name": "Style",
+          "Description": "Style",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the Marker, Link, or Shape Style assigned to a Code Set Style Item.\n\nCodeSetStyleItem.CodeStyle: Style"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.Civil.Styles.CodeSets.CodeSetStyleItem.Description",
+      "Id": "1f59a1cdc06f47fdb2dbcf8fead78c97",
+      "Inputs": [
+        {
+          "Id": "b68018853fb743a8b61667841dacdf27",
+          "Name": "codeSetStyleItem",
+          "Description": "Camber.Civil.Styles.CodeSets.CodeSetStyleItem",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "1f6829dd9ed34d2790b84a165df96684",
+          "Name": "string",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the description of a Code Set Style Item.\n\nCodeSetStyleItem.Description: string"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.Civil.Styles.CodeSets.CodeSetStyleItem.FeatureLineStyle",
+      "Id": "7d408dcad16b430b8188ce43b1db2742",
+      "Inputs": [
+        {
+          "Id": "e36d4435b0d04abbaa835cfee2d971b7",
+          "Name": "codeSetStyleItem",
+          "Description": "Camber.Civil.Styles.CodeSets.CodeSetStyleItem",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "4e086c4516c14b26b1b7e4c1ed1d5770",
+          "Name": "FeatureLineStyle",
+          "Description": "FeatureLineStyle",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the Feature Line Style of a Code Set Style Item.\n\nCodeSetStyleItem.FeatureLineStyle: FeatureLineStyle"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.Civil.Styles.CodeSets.CodeSetStyleItem.ItemType",
+      "Id": "bc5e4c97304946408048313f089a48d1",
+      "Inputs": [
+        {
+          "Id": "8cfc256057664e8aa561df9331295dc4",
+          "Name": "codeSetStyleItem",
+          "Description": "Camber.Civil.Styles.CodeSets.CodeSetStyleItem",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "9892dfc79cbb46258d838475c4725b25",
+          "Name": "string",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the item type of a Code Set Style Item.\n\nCodeSetStyleItem.ItemType: string"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.Civil.Styles.CodeSets.CodeSetStyleItem.LabelStyle",
+      "Id": "2f3429faf35f41228ac007bb7f84e857",
+      "Inputs": [
+        {
+          "Id": "31608cf25d404de385145d29e1aaafb6",
+          "Name": "codeSetStyleItem",
+          "Description": "Camber.Civil.Styles.CodeSets.CodeSetStyleItem",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "b511db1c5ce340ae8b40836e37e4ce66",
+          "Name": "string",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "CodeSetStyleItem.LabelStyle: string"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.Civil.Styles.CodeSets.CodeSetStyleItem.MaterialAreaFillStyle",
+      "Id": "cc103328c999434ea75e946face7fb42",
+      "Inputs": [
+        {
+          "Id": "6c3df700538e44aab5f5ef4a8760e99b",
+          "Name": "codeSetStyleItem",
+          "Description": "Camber.Civil.Styles.CodeSets.CodeSetStyleItem",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "f48df74472b14f35bc69609085f728f2",
+          "Name": "string",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "CodeSetStyleItem.MaterialAreaFillStyle: string"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.Civil.Styles.CodeSets.CodeSetStyleItem.PayItems",
+      "Id": "f82c3cb6fae54611ab96f64eca018768",
+      "Inputs": [
+        {
+          "Id": "124d25580ef04476a8108ef33d2b990b",
+          "Name": "codeSetStyleItem",
+          "Description": "Camber.Civil.Styles.CodeSets.CodeSetStyleItem",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "444cffdf1ff84cb781e5f1ecad055151",
+          "Name": "string[]",
+          "Description": "string[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the list of Pay Items assigned to a Code Set Style Item.\n\nCodeSetStyleItem.PayItems: string[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.Civil.Styles.CodeSets.CodeSetStyleItem.RenderMaterialStyle",
+      "Id": "9720935a48d8405c8fdb8ac324f4d015",
+      "Inputs": [
+        {
+          "Id": "7b05e7ca22b74c44801efd8bc80e999b",
+          "Name": "codeSetStyleItem",
+          "Description": "Camber.Civil.Styles.CodeSets.CodeSetStyleItem",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "289164bc02fa4d008cc4624791aefa0d",
+          "Name": "string",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the render material style assigned to a Code Set Style Item.\n\nCodeSetStyleItem.RenderMaterialStyle: string"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.Civil.Styles.CodeSets.CodeSetStyleItem.SubentityStyleType",
+      "Id": "4f930f1c6a644501b12b16683d859257",
+      "Inputs": [
+        {
+          "Id": "6b28463d3a014cbcb54a7ff5bf87bf31",
+          "Name": "codeSetStyleItem",
+          "Description": "Camber.Civil.Styles.CodeSets.CodeSetStyleItem",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "df336da65fb94c5489597b62f8b4d227",
+          "Name": "string",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the subassembly subentity style type of a Code Set Style Item.\n\nCodeSetStyleItem.SubentityStyleType: string"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.Civil.Styles.CodeSets.CodeSetStyleItem.SetDescription@string",
+      "Id": "86eb6484641e4de9981afd9b1ee2105f",
+      "Inputs": [
+        {
+          "Id": "0380f44945ab4564825dae5bfaef3f86",
+          "Name": "codeSetStyleItem",
+          "Description": "Camber.Civil.Styles.CodeSets.CodeSetStyleItem",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "f72a9792a73f4a8bac588785f85bb13c",
+          "Name": "description",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "f227dd23e45b45e297b00347dae6ff2b",
+          "Name": "CodeSetStyleItem",
+          "Description": "CodeSetStyleItem",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Sets the description of a Code Set Style Item.\n\nCodeSetStyleItem.SetDescription (description: string): CodeSetStyleItem"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"TestDescription\";",
+      "Id": "02739099ae3e400b88b5c8cc71c231e7",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "bd845098a1ef4443b656f4b3de3c7c5b",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "7ef96f7ea18b4c7788a144646ca19adb",
+      "End": "9bcef5f65a894d429c944d1d677b5c43",
+      "Id": "10e008b603fa4e3596794142fab7c48b",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "7ef96f7ea18b4c7788a144646ca19adb",
+      "End": "69eeab92c2a041adbde749b7b40fc16d",
+      "Id": "1b52871047184db5990e32228769b490",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "7ef96f7ea18b4c7788a144646ca19adb",
+      "End": "087202b99ca546518fb333c0302a00b2",
+      "Id": "63ee0437196643dcbb972125af6097f2",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "e88a0b2215314beda93e69f84e7ba0c3",
+      "End": "9039203bc72846ba9b8204c9d6a66c53",
+      "Id": "c0c63d85843f46e4a751a2dfb9f85c39",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "9fab9c29bf4240c2a92a5c03b3c8dd18",
+      "End": "04f5ac87377c4efc88d3629ad574b8ab",
+      "Id": "c84768f1b1bc44bb892d6995cb634e59",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "e20a4c5c01b24b72afac60481f4805bc",
+      "End": "4250a72777e744b9acb3d44e432d05c3",
+      "Id": "2eb688326b7948fba95a2abbc2811eae",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "9d3a3e91181a46a9a17841bba368949e",
+      "End": "02df8ae35c8b4a56bc9f18cea0ef0786",
+      "Id": "f0eef6c861e949239aa45e92deeaae8f",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "140549cdb5984b42b006ce469fbdfcde",
+      "End": "4a9c37329cd7484d9ce1e4e9ea8f1b8e",
+      "Id": "f917c296b64547aaa3e5242a35a851ad",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "002b7b9318ab4749b57b1530c2e0cbd7",
+      "End": "0e47c3056a134900903ee9f0ae14187d",
+      "Id": "84a475332a014e6582ff12fb802afc72",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "59e4ce753ffb48fab21774677e1f9407",
+      "End": "bd04db5f9b734b5b9304246641ace662",
+      "Id": "ea7f0ac8204942459d4dbdebd28f47a9",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "4fa0204a79cc4510bd1d3300d2bd4818",
+      "End": "ac90e3becec742b19284a46cfb4b6928",
+      "Id": "09a689b36e604b4a8d5497c3166b5c6f",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "506c79be7a21474595bf10ab6142d1af",
+      "End": "29f9700cdf844def93840e3cc6307b20",
+      "Id": "7f5319b3762543759d8fa3417f9371f0",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "f78d0ab3b3244996872685c6188dced2",
+      "End": "ef3d51dc4dbd4a18be94c0b48470a703",
+      "Id": "fb0290118d25419fac8b21b7d548b517",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "f78d0ab3b3244996872685c6188dced2",
+      "End": "ea632bc505464880b57535a0c6b6bae4",
+      "Id": "aca60565f19742b9a9151f84fe4af0b1",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "f78d0ab3b3244996872685c6188dced2",
+      "End": "0fbfd5f347a347cebef41e5346893bbc",
+      "Id": "155c9dde162a481c88d22bca10b5adc0",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "f78d0ab3b3244996872685c6188dced2",
+      "End": "7ab6681715bf4c3eb5c4ce2e3766b06d",
+      "Id": "084863a770f54e9098102b4348cc4c83",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "f78d0ab3b3244996872685c6188dced2",
+      "End": "b68018853fb743a8b61667841dacdf27",
+      "Id": "c36e0bacfda1421797266a442af52406",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "f78d0ab3b3244996872685c6188dced2",
+      "End": "e36d4435b0d04abbaa835cfee2d971b7",
+      "Id": "e66ef4475c5f4f5b85b2ce17fbfa63cc",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "f78d0ab3b3244996872685c6188dced2",
+      "End": "8cfc256057664e8aa561df9331295dc4",
+      "Id": "4e82d068c32b46249238f2bf383694b1",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "f78d0ab3b3244996872685c6188dced2",
+      "End": "31608cf25d404de385145d29e1aaafb6",
+      "Id": "099a541382af4c2589c0e6e12f5f5516",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "f78d0ab3b3244996872685c6188dced2",
+      "End": "7b05e7ca22b74c44801efd8bc80e999b",
+      "Id": "09775accb67e49d98a47f567e0164f24",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "f78d0ab3b3244996872685c6188dced2",
+      "End": "6b28463d3a014cbcb54a7ff5bf87bf31",
+      "Id": "415e811d5ef04c5aae9401e48bfd1a26",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "f78d0ab3b3244996872685c6188dced2",
+      "End": "0380f44945ab4564825dae5bfaef3f86",
+      "Id": "9f85bad1e2f041d6bc2cd3d2200c3419",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "f78d0ab3b3244996872685c6188dced2",
+      "End": "6c3df700538e44aab5f5ef4a8760e99b",
+      "Id": "547e984698c64ac0aaf1a14cc9a0d4c2",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "f78d0ab3b3244996872685c6188dced2",
+      "End": "124d25580ef04476a8108ef33d2b990b",
+      "Id": "8d3f9e36fff14b8b9377f85fa3fc03b1",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "3ca88e2ade114b73be4ef3da55d38c4c",
+      "End": "2aebb311a7db463ba11d72edbe12db8c",
+      "Id": "571de23b8c4e42cfab02ee2dae207b00",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "bd845098a1ef4443b656f4b3de3c7c5b",
+      "End": "f72a9792a73f4a8bac588785f85bb13c",
+      "Id": "b806da22f2f9499db9b0315691e6d0bd",
+      "IsHidden": "False"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Camber",
+      "Version": "4.0.0",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "38be4b5e2f2044dd99fff890f711679c",
+        "bd701842f4384496adee7f69f690fcb6",
+        "0c686a218c1246999fa021b59d79676d",
+        "bc3d7cdc67e04371b3ac6e3700b42766",
+        "b2514a8b4f58423693d41dd06e52c254",
+        "998adb46fa76490da6258292dcb18813",
+        "69cc00b2d70d4885876c835ff8693c75",
+        "360835c54c6842cdaab11072dfb7864f",
+        "928c62daf14945e2b4375db77752bd10",
+        "1a034b2ddc3a4ab0bdea9b992498e29b",
+        "d124b669b04d4948a049c122b9d2d3ba",
+        "d27d468df9e6417391c477159f79cfbd",
+        "1f59a1cdc06f47fdb2dbcf8fead78c97",
+        "7d408dcad16b430b8188ce43b1db2742",
+        "bc5e4c97304946408048313f089a48d1",
+        "2f3429faf35f41228ac007bb7f84e857",
+        "cc103328c999434ea75e946face7fb42",
+        "f82c3cb6fae54611ab96f64eca018768",
+        "9720935a48d8405c8fdb8ac324f4d015",
+        "4f930f1c6a644501b12b16683d859257",
+        "86eb6484641e4de9981afd9b1ee2105f"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.13",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.13.1.3887",
+      "RunType": "Automatic",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "ConnectorPins": [],
+    "NodeViews": [
+      {
+        "Name": "Code Set Styles",
+        "ShowGeometry": true,
+        "Id": "38be4b5e2f2044dd99fff890f711679c",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -294.45677247649172,
+        "Y": 356.31141525381713
+      },
+      {
+        "Name": "CodeSetStyle.AddPointItem",
+        "ShowGeometry": true,
+        "Id": "bd701842f4384496adee7f69f690fcb6",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 562.1434393532254,
+        "Y": 106.58436150279931
+      },
+      {
+        "Name": "CodeSetStyle.AddLinkItem",
+        "ShowGeometry": true,
+        "Id": "0c686a218c1246999fa021b59d79676d",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 570.12273854475779,
+        "Y": 304.56270175960697
+      },
+      {
+        "Name": "CodeSetStyle.AddShapeItem",
+        "ShowGeometry": true,
+        "Id": "bc3d7cdc67e04371b3ac6e3700b42766",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 569.04595655687717,
+        "Y": 641.90131853524611
+      },
+      {
+        "Name": "Marker Styles",
+        "ShowGeometry": true,
+        "Id": "b2514a8b4f58423693d41dd06e52c254",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 162.82751704144835,
+        "Y": 226.32038428878826
+      },
+      {
+        "Name": "Shape Styles",
+        "ShowGeometry": true,
+        "Id": "998adb46fa76490da6258292dcb18813",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 203.9066963661395,
+        "Y": 813.00049464424069
+      },
+      {
+        "Name": "Code Block",
+        "ShowGeometry": true,
+        "Id": "5cc7f6be45714255a81f2941590b4a88",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 265.84982019973893,
+        "Y": 686.18747804065379
+      },
+      {
+        "Name": "Code Block",
+        "ShowGeometry": true,
+        "Id": "4ab6cb399f2c42a9a4029a8f363328ae",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 240.00119866840555,
+        "Y": 514.85101886814482
+      },
+      {
+        "Name": "Code Block",
+        "ShowGeometry": true,
+        "Id": "809ed5fed4fb4d63977da908830433d1",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 187.1920608845594,
+        "Y": 59.659944822273872
+      },
+      {
+        "Name": "Link Styles",
+        "ShowGeometry": true,
+        "Id": "69cc00b2d70d4885876c835ff8693c75",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 171.50621689877755,
+        "Y": 358.81520211068073
+      },
+      {
+        "Name": "CodeSetStyleItem.Classification",
+        "ShowGeometry": true,
+        "Id": "360835c54c6842cdaab11072dfb7864f",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1856.3944186398787,
+        "Y": -418.67463503135224
+      },
+      {
+        "Name": "CodeSetStyleItem.Code",
+        "ShowGeometry": true,
+        "Id": "928c62daf14945e2b4375db77752bd10",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1860.6993172999612,
+        "Y": -271.17234652568794
+      },
+      {
+        "Name": "CodeSetStyle.CodeSetStyleItems",
+        "ShowGeometry": true,
+        "Id": "1a034b2ddc3a4ab0bdea9b992498e29b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1241.5265981837108,
+        "Y": 317.16694225892309
+      },
+      {
+        "Name": "Code Block",
+        "ShowGeometry": true,
+        "Id": "036a88fc13354ef6af52e65b64c05619",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 979.455766907939,
+        "Y": 315.73424149565494
+      },
+      {
+        "Name": "CodeSetStyleItem.CodeSetStyle",
+        "ShowGeometry": true,
+        "Id": "d124b669b04d4948a049c122b9d2d3ba",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1865.180008997304,
+        "Y": -98.836109932965428
+      },
+      {
+        "Name": "CodeSetStyleItem.CodeStyle",
+        "ShowGeometry": true,
+        "Id": "d27d468df9e6417391c477159f79cfbd",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1878.5684234023774,
+        "Y": 51.624166238337466
+      },
+      {
+        "Name": "CodeSetStyleItem.Description",
+        "ShowGeometry": true,
+        "Id": "1f59a1cdc06f47fdb2dbcf8fead78c97",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1880.4810540316741,
+        "Y": 193.79637634935722
+      },
+      {
+        "Name": "CodeSetStyleItem.FeatureLineStyle",
+        "ShowGeometry": true,
+        "Id": "7d408dcad16b430b8188ce43b1db2742",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1893.2319248936487,
+        "Y": 355.73243629643781
+      },
+      {
+        "Name": "CodeSetStyleItem.ItemType",
+        "ShowGeometry": true,
+        "Id": "bc5e4c97304946408048313f089a48d1",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1906.620339298722,
+        "Y": 497.90464640745705
+      },
+      {
+        "Name": "CodeSetStyleItem.LabelStyle",
+        "ShowGeometry": true,
+        "Id": "2f3429faf35f41228ac007bb7f84e857",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1916.0892623180498,
+        "Y": 652.6995328715243
+      },
+      {
+        "Name": "CodeSetStyleItem.MaterialAreaFillStyle",
+        "ShowGeometry": true,
+        "Id": "cc103328c999434ea75e946face7fb42",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1911.1055353308916,
+        "Y": 845.4805164292718
+      },
+      {
+        "Name": "CodeSetStyleItem.PayItems",
+        "ShowGeometry": true,
+        "Id": "f82c3cb6fae54611ab96f64eca018768",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1913.9176962382567,
+        "Y": 1012.5848460731145
+      },
+      {
+        "Name": "CodeSetStyleItem.RenderMaterialStyle",
+        "ShowGeometry": true,
+        "Id": "9720935a48d8405c8fdb8ac324f4d015",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1922.4234407252325,
+        "Y": 1190.3110763440332
+      },
+      {
+        "Name": "CodeSetStyleItem.SubentityStyleType",
+        "ShowGeometry": true,
+        "Id": "4f930f1c6a644501b12b16683d859257",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1928.2762539883922,
+        "Y": 1366.0173831025995
+      },
+      {
+        "Name": "CodeSetStyleItem.SetDescription",
+        "ShowGeometry": true,
+        "Id": "86eb6484641e4de9981afd9b1ee2105f",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2760.013833981081,
+        "Y": 524.2982256781363
+      },
+      {
+        "Name": "Code Block",
+        "ShowGeometry": true,
+        "Id": "02739099ae3e400b88b5c8cc71c231e7",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2404.0,
+        "Y": 693.0
+      }
+    ],
+    "Annotations": [],
+    "X": 202.58722225402937,
+    "Y": 224.63872920210849,
+    "Zoom": 0.23188952311726979
+  }
+}

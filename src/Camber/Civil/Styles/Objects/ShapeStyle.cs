@@ -9,6 +9,11 @@ namespace Camber.Civil.Styles.Objects
     {
         #region properties
         internal AeccShapeStyle AeccShapeStyle => AcObject as AeccShapeStyle;
+
+        /// <summary>
+        /// Dummy public property so that the class gets imported.
+        /// </summary>
+        public object DummyProperty => null;
         #endregion
 
         #region constructors

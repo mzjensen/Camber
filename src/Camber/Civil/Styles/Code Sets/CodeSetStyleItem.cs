@@ -48,11 +48,11 @@ namespace Camber.Civil.Styles.CodeSets
                 }
                 else if (styleType is civDb.Styles.SubassemblySubentityStyleType.LinkType)
                 {
-                    throw new Exception("Not implemented.");
+                    return LinkStyle.GetByObjectId(AeccCodeSetStyleItem.CodeStyleId);
                 }
                 else if (styleType is civDb.Styles.SubassemblySubentityStyleType.ShapeType)
                 {
-                    throw new Exception("Not implemented.");
+                    return ShapeStyle.GetByObjectId(AeccCodeSetStyleItem.CodeStyleId);
                 }
                 else
                 {
@@ -73,6 +73,11 @@ namespace Camber.Civil.Styles.CodeSets
         {
             get
             {
+                if (CodeStyle is LinkStyle || CodeStyle is ShapeStyle)
+                {
+                    return null;
+                }
+                
                 var oid = AeccCodeSetStyleItem.FeatureLineStyleId;
                 if (oid.IsNull) { return null; }
                 return FeatureLineStyle.GetByObjectId(oid);
@@ -87,7 +92,43 @@ namespace Camber.Civil.Styles.CodeSets
         /// <summary>
         /// Gets the list of Pay Items assigned to a Code Set Style Item.
         /// </summary>
-        public string[] PayItems => AeccCodeSetStyleItem.PayItems;
+        public string[] PayItems
+        {
+            get
+            {
+                try
+                {
+                    return AeccCodeSetStyleItem.PayItems;
+                }
+                catch
+                {
+                    return null;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets the material area fill style assigned to a Code Set Style Item.
+        /// </summary>
+        public string MaterialAreaFillStyle
+        {
+            get
+            {
+                try
+                {
+                    return AeccCodeSetStyleItem.MaterialAreaFillStyleName;
+                }
+                catch
+                {
+                    return null;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets the name of the label style assigned to a Code Set Style Item.
+        /// </summary>
+        public string LabelStyle => AeccCodeSetStyleItem.LabelStyleName;
 
         /// <summary>
         /// Gets the render material style assigned to a Code Set Style Item.
@@ -138,12 +179,16 @@ namespace Camber.Civil.Styles.CodeSets
                 using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
                 {
                     var aeccCodeSet = ctx.Transaction.GetObject(CodeSetStyle.InternalObjectId, acDb.OpenMode.ForWrite);
-                    PropertyInfo propInfo = AeccCodeSetStyleItem.GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
+                    PropertyInfo propInfo = AeccCodeSetStyleItem.GetType()
+                        .GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
                     propInfo?.SetValue(AeccCodeSetStyleItem, value);
                     return this;
                 }
             }
-            catch (Exception e) { throw e.InnerException; }
+            catch
+            {
+                throw new InvalidOperationException("Failed to set property value.");
+            }
         }
 
         /// <summary>
@@ -187,6 +232,20 @@ namespace Camber.Civil.Styles.CodeSets
         /// <param name="payItems"></param>
         /// <returns></returns>
         public CodeSetStyleItem SetPayItems(string[] payItems) => SetValue(payItems);
+
+        /// <summary>
+        /// Sets the material area fill style assigned to a Code Set Style item.
+        /// </summary>
+        /// <param name="fillStyleName"></param>
+        /// <returns></returns>
+        public CodeSetStyleItem SetMaterialAreaFillStyle(string fillStyleName) => SetValue((object)fillStyleName, "MaterialAreaFillStyleName");
+
+        /// <summary>
+        /// Sets the label style assigned to a Code Set Style Item.
+        /// </summary>
+        /// <param name="labelStyleName"></param>
+        /// <returns></returns>
+        public CodeSetStyleItem SetLabelStyle(string labelStyleName) => SetValue((object)labelStyleName, "LabelStyleName");
 
         /// <summary>
         /// Sets the render material style assigned to a Code Set Style Item.
