@@ -1,0 +1,191 @@
+{
+  "Uuid": "08e1cfce-2453-4292-a495-ced4be6c9a2f",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "ExternalDocumentTests",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.External.ExternalDocument.LoadFromFile@string",
+      "Id": "d035cf1ef1e148bebf49bf765fc6eaab",
+      "Inputs": [
+        {
+          "Id": "f48b17aed5e0453992f42e3fa97c6168",
+          "Name": "filePath",
+          "Description": "The path to the file.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "7ca6babcbc6e48ff88e691a02672ec89",
+          "Name": "ExternalDocument",
+          "Description": "ExternalDocument",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Loads an External Document from an existing file.\n\nExternalDocument.LoadFromFile (filePath: string): ExternalDocument"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.Filename, CoreNodeModels",
+      "HintPath": "C:\\Software Projects\\Camber\\tests\\ExternalDocument\\ExternalDocumentTests.dwg",
+      "InputValue": ".\\ExternalDocumentTests.dwg",
+      "NodeType": "ExtensionNode",
+      "Id": "ad2d58f1373b4b3e82b4ae74184301f3",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "4596d3b0e09b4b0685edf04a3ac6656c",
+          "Name": "",
+          "Description": "File Path",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows you to select a file on the system to get its file path."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.External.ExternalDocument.Save",
+      "Id": "306b6c3fe8b94e90a3c2a6c3db863bbb",
+      "Inputs": [
+        {
+          "Id": "d42189568c5647fb8896cfc90206e4b0",
+          "Name": "externalDocument",
+          "Description": "Camber.External.ExternalDocument",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "04275b021a314024b61487573188db21",
+          "Name": "ExternalDocument",
+          "Description": "ExternalDocument",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Attempts to save an External Document.\n\nExternalDocument.Save ( ): ExternalDocument"
+    }
+  ],
+  "Connectors": [],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Camber",
+      "Version": "4.0.0",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "d035cf1ef1e148bebf49bf765fc6eaab",
+        "306b6c3fe8b94e90a3c2a6c3db863bbb"
+      ]
+    },
+    {
+      "Name": "ExternalDocumentTests.dwg",
+      "ReferenceType": "External",
+      "Nodes": [
+        "ad2d58f1373b4b3e82b4ae74184301f3"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.13",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.13.1.3887",
+      "RunType": "Automatic",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "ConnectorPins": [],
+    "NodeViews": [
+      {
+        "Name": "ExternalDocument.LoadFromFile",
+        "ShowGeometry": true,
+        "Id": "d035cf1ef1e148bebf49bf765fc6eaab",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 388.19987056692162,
+        "Y": 158.60114508443542
+      },
+      {
+        "Name": "File Path",
+        "ShowGeometry": true,
+        "Id": "ad2d58f1373b4b3e82b4ae74184301f3",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 63.599999999999909,
+        "Y": 158.8
+      },
+      {
+        "Name": "ExternalDocument.Save",
+        "ShowGeometry": true,
+        "Id": "306b6c3fe8b94e90a3c2a6c3db863bbb",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 775.99208547826117,
+        "Y": 160.75247176594456
+      }
+    ],
+    "Annotations": [],
+    "X": -137.68041635379387,
+    "Y": -6.7358667140830732,
+    "Zoom": 0.69134779386718748
+  }
+}

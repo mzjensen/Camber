@@ -166,14 +166,12 @@ namespace Camber.External
         /// <param name="directoryPath">The path to a directory location for the new file.</param>
         /// <param name="fileName">The name of the new file. Be sure to append the desired file extension to the name.</param>
         /// <param name="templateFilePath">The path to a .DWG, .DWT, or .DWS file.</param>
-        /// <param name="lock">True = file can be edited by other applications, False = file can only be opened as read-only by other applications.</param>
         /// <param name="overwrite">Overwrite if a file of the same name already exists in the specified directory?</param>
         /// <returns></returns>
         public static ExternalDocument CreateAndLoad(
             string directoryPath,
             string fileName,
             string templateFilePath,
-            bool @lock,
             bool overwrite = false)
         {
             FileCreationChecks(directoryPath, fileName, templateFilePath, overwrite);
@@ -188,34 +186,45 @@ namespace Camber.External
                     db.ReadDwgFile(templateFilePath, FileShare.Read, true, null);
                     db.SaveAs(filePath, acDb.DwgVersion.Current);
                 }
-                return LoadFromFile(filePath, @lock);
+                return LoadFromFile(filePath);
             }
             catch { throw; }
         }
 
         /// <summary>
         /// Loads an External Document from an existing file.
+        ///  Please note that this node does not prevent other applications
+        ///  from opening and/or modifying the file at the same time. 
         /// </summary>
         /// <param name="filePath">The path to the file.</param>
-        /// <param name="lock">True = file can only be opened as read-only by other applications, False = file can be edited by other applications.</param>
         /// <returns></returns>
         [NodeCategory("Actions")]
-        public static ExternalDocument LoadFromFile(string filePath, bool @lock)
+        public static ExternalDocument LoadFromFile(string filePath)
         {
-            if (string.IsNullOrEmpty(filePath)) { throw new ArgumentNullException(InvalidFilePathMessage); }
+            if (string.IsNullOrEmpty(filePath))
+            {
+                throw new ArgumentNullException(InvalidFilePathMessage);
+            }
 
-            FileShare access = FileShare.ReadWrite;
-            if (@lock) { access = FileShare.Read; }
+            if (!File.Exists(filePath))
+            {
+                throw new ArgumentException("Invalid file path.");
+            }
+
+            if (!HasValidExtension(filePath))
+            {
+                throw new ArgumentException(InvalidFileExtensionMessage);
+            }
 
             try
             {
                 var db = new AcDatabase(false, true);
-                db.ReadDwgFile(filePath, access, true, null);
+                db.ReadDwgFile(filePath, acDb.FileOpenMode.OpenForReadAndAllShare, true, null);
                 return new ExternalDocument(db, filePath);
             }
-            catch
+            catch (Exception ex)
             {
-                throw new InvalidOperationException("The file is currently being edited by another application and cannot be loaded.");
+                throw new InvalidOperationException(ex.Message);
             }
         }
         #endregion
@@ -304,8 +313,15 @@ namespace Camber.External
         /// <returns></returns>
         public ExternalDocument Save()
         {
-            AcDatabase.SaveAs(Path, acDb.DwgVersion.Current);
-            return this;
+            try
+            {
+                AcDatabase.SaveAs(Path, acDb.DwgVersion.Current);
+                return this;
+            }
+            catch
+            {
+                throw new InvalidOperationException("The file is currently in use by another application and cannot be saved.");
+            }
         }
 
         /// <summary>
@@ -377,6 +393,32 @@ namespace Camber.External
         }
 
         /// <summary>
+        /// Ensures that a specified layer exists in an External Document. If not, create a new layer.
+        /// </summary>
+        /// <param name="externalDocument"></param>
+        /// <param name="layer"></param>
+        [IsVisibleInDynamoLibrary(false)]
+        public static void EnsureLayer(ExternalDocument externalDocument, string layer)
+        {
+            if (string.IsNullOrEmpty(layer)) { throw new ArgumentNullException("layer"); }
+
+            using (var tr = externalDocument.AcDatabase.TransactionManager.StartTransaction())
+            {
+                acDb.LayerTable lt = (acDb.LayerTable)tr.GetObject(externalDocument.AcDatabase.LayerTableId, acDb.OpenMode.ForWrite);
+                if (!lt.Has(layer))
+                {
+                    acDb.LayerTableRecord ltr = new acDb.LayerTableRecord();
+                    ltr.Name = layer;
+                    lt.Add(ltr);
+                    tr.AddNewlyCreatedDBObject(ltr, true);
+                }
+                tr.Commit();
+            }
+        }
+        #endregion
+
+        #region private methods
+        /// <summary>
         /// Check file name for valid extensions.
         /// </summary>
         /// <param name="fileName"></param>
@@ -432,27 +474,29 @@ namespace Camber.External
         }
 
         /// <summary>
-        /// Ensures that a specified layer exists in an External Document. If not, create a new layer.
+        /// Determines if a file is locked or not.
         /// </summary>
-        /// <param name="externalDocument"></param>
-        /// <param name="layer"></param>
-        [IsVisibleInDynamoLibrary(false)]
-        public static void EnsureLayer(ExternalDocument externalDocument, string layer)
+        /// <param name="file"></param>
+        /// <returns>
+        /// true if the file is currently being written to,
+        /// is being processed by another thread,
+        /// or does not exist;
+        /// false if not locked.</returns>
+        private static bool IsFileLocked(FileInfo file)
         {
-            if (string.IsNullOrEmpty(layer)) { throw new ArgumentNullException("layer"); }
-
-            using (var tr = externalDocument.AcDatabase.TransactionManager.StartTransaction())
+            try
             {
-                acDb.LayerTable lt = (acDb.LayerTable)tr.GetObject(externalDocument.AcDatabase.LayerTableId, acDb.OpenMode.ForWrite);
-                if (!lt.Has(layer))
+                using (FileStream stream = file.Open(FileMode.Open, FileAccess.Read, FileShare.None))
                 {
-                    acDb.LayerTableRecord ltr = new acDb.LayerTableRecord();
-                    ltr.Name = layer;
-                    lt.Add(ltr);
-                    tr.AddNewlyCreatedDBObject(ltr, true);
+                    stream.Close();
                 }
-                tr.Commit();
             }
+            catch (IOException)
+            {
+                return true;
+            }
+
+            return false;
         }
         #endregion
     }
