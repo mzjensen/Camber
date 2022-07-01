@@ -47,7 +47,7 @@ namespace Camber.AutoCAD.Objects
 
         /// <summary>
         /// Gets the number of duplicate vertices in a Polyline.
-        ///  For example, if there are 3 vertices at the same location, this node would return '2'.
+        ///  For example, if there are 3 vertices at the same location, this node would return 2.
         ///  If the Polyline is closed, the common start/end vertex is not considered a duplicate.
         /// </summary>
         /// <param name="polyline"></param>
