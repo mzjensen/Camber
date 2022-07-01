@@ -3,6 +3,7 @@ using Autodesk.DesignScript.Runtime;
 using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using Dynamo.Graph.Nodes;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 
 namespace Camber.External.ExternalObjects
@@ -76,6 +77,7 @@ namespace Camber.External.ExternalObjects
         /// <summary>
         /// Gets the Dynamo geometry of an External Object.
         /// </summary>
+        [NodeCategory("Query")]
         public virtual Geometry Geometry()
         {
             throw new NotImplementedException(
