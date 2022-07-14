@@ -1,5 +1,4 @@
-﻿#region references
-using Autodesk.AutoCAD.DynamoNodes;
+﻿using Autodesk.AutoCAD.DynamoNodes;
 using Autodesk.DesignScript.Runtime;
 using Camber.External;
 using Dynamo.Graph.Nodes;
@@ -11,8 +10,6 @@ using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using AcLayout = Autodesk.AutoCAD.DatabaseServices.Layout;
-
-#endregion
 
 namespace Camber.AutoCAD
 {
