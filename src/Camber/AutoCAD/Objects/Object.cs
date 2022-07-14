@@ -198,7 +198,7 @@ namespace Camber.AutoCAD.Objects
                 {
                     if (assemblyObjects.Count() == 0)
                     {
-                        throw new InvalidOperationException("Not implemented.");
+                        return @object;
                     }
                     // If there are multiple objects, the first one should be the furthest down the inheritance hierarchy (i.e. the most derived)
                     return assemblyObjects.First();
