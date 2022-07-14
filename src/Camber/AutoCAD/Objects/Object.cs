@@ -61,6 +61,47 @@ namespace Camber.AutoCAD.Objects
         }
 
         /// <summary>
+        /// Gets the Fields associated with an Object.
+        /// </summary>
+        /// <param name="object"></param>
+        /// <returns></returns>
+        [NodeCategory("Query")]
+        public static List<Field> Fields(acDynNodes.Object @object)
+        {
+            var fields = new List<Field>();
+            
+            try
+            {
+                var document = acDynNodes.Document.Current;
+                using (var ctx = new acDynApp.DocumentContext(document.AcDocument.Database))
+                {
+                    var acEnt = (acDb.Entity) ctx.Transaction.GetObject(@object.InternalObjectId, acDb.OpenMode.ForRead);
+                    
+                    if (!acEnt.HasFields)
+                    {
+                        return fields;
+                    }
+
+                    var parentFieldId = acEnt.GetField();
+                    var acParentField = (acDb.Field) ctx.Transaction.GetObject(parentFieldId, acDb.OpenMode.ForRead);
+
+                    var childFields = acParentField.GetChildren();
+
+                    foreach (var field in childFields)
+                    {
+                        fields.Add(new Field(field));
+                    }
+
+                    return fields;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
+
+        /// <summary>
         /// Sets the color of an Object by color index.
         /// 0 = ByBlock, 256 = ByLayer.
         /// </summary>
