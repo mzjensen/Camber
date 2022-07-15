@@ -137,6 +137,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoCAD\Field.cs" />
     <Compile Include="AutoCAD\Objects\Polylines\Polyline3DExtensions.cs" />
     <Compile Include="AutoCAD\Objects\Polylines\PolylineExtensions.cs" />
     <Compile Include="AutoCAD\Objects\MTextExtensions.cs" />

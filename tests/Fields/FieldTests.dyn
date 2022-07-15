@@ -1,0 +1,947 @@
+{
+  "Uuid": "05ef5793-6e40-45bf-b753-9e6ae85a10af",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "FieldTests",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.AutoCAD.Objects.Object.Fields@Autodesk.AutoCAD.DynamoNodes.Object",
+      "Id": "dbf00f6b5dca4a2a87f0d16d4b2d70ef",
+      "Inputs": [
+        {
+          "Id": "ea2023f01a4a4e5899ffd2437afb141e",
+          "Name": "object",
+          "Description": "Object",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "6bca7790ab624197bf8a0ced64af1efb",
+          "Name": "Field[]",
+          "Description": "Field[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the Fields associated with an Object.\n\nObject.Fields (object: Object): Field[]"
+    },
+    {
+      "ConcreteType": "Autodesk.AutoCAD.DynamoNodes.AcObjectsOfType, AutoCADNodesUI",
+      "NodeType": "ExtensionNode",
+      "Id": "23d04279994c450ab5fc58705fe2b467",
+      "Inputs": [
+        {
+          "Id": "caf1a0df1de0493db782b6c33bfdf9b5",
+          "Name": "type",
+          "Description": "",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "13c1b9735769415bb937a16b29543865",
+          "Name": "block",
+          "Description": "",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "98fc8a551cda44718704fbcfb1f8df45",
+          "Name": "Object[]",
+          "Description": "Object[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Select all objects of the type."
+    },
+    {
+      "ConcreteType": "Autodesk.AutoCAD.DynamoNodes.AcObjectTypes, AutoCADNodesUI",
+      "SelectedIndex": 7,
+      "SelectedString": "MText",
+      "NodeType": "ExtensionNode",
+      "Id": "5b47854245dc4cc885cd6249806bd33c",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "2a70c75900ad447db992c48e6392d846",
+          "Name": "Object Type",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Select object type."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Document.ModelSpace",
+      "Id": "1da312d4fe104099b8a1825debe441f9",
+      "Inputs": [
+        {
+          "Id": "6e5eaefc476a4ff6a964ef187bbcf13a",
+          "Name": "document",
+          "Description": "Autodesk.AutoCAD.DynamoNodes.Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "4d8f7aae4503481386a8e8933e4b6eac",
+          "Name": "Block",
+          "Description": "Block",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the model space block table record.\n\nDocument.ModelSpace: Block"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Document.Current",
+      "Id": "cfd1836bcac74414a29d1185f399dc1d",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "1f57566874fb476eb72fc328d62b3f40",
+          "Name": "Document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the current AutoCAD document.\n\nDocument.Current: Document"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.AutoCAD.Field.Value",
+      "Id": "41cc620f859041a6a2da8903470c95c7",
+      "Inputs": [
+        {
+          "Id": "255d18bcfb4e41e2af0c870affcf803b",
+          "Name": "field",
+          "Description": "Camber.AutoCAD.Field",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "254d4a3143e342f3ad4175dfbaa3ecac",
+          "Name": "var[]..[]",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the evaluation result of a Field in its original data type.\n\nField.Value: var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.AutoCAD.Field.State",
+      "Id": "587d56856aeb40948b502f09c94f0ed5",
+      "Inputs": [
+        {
+          "Id": "a1bd9174fb4a4dce82a3a722f5b40cbc",
+          "Name": "field",
+          "Description": "Camber.AutoCAD.Field",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "dbdc4ce53b434e3f986d08ddff9deedc",
+          "Name": "string",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the state of a Field.\n\nField.State: string"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.List.Clean@var[]..[],bool",
+      "Id": "4185e0c7f99b40cd8bd8b01e648ee44a",
+      "Inputs": [
+        {
+          "Id": "1ec658e2b2c449029e426a489603eea4",
+          "Name": "list",
+          "Description": "List containing nulls and empty sublists to clean\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "cf49d40440ba49d9b90fd3f3555a6120",
+          "Name": "preserveIndices",
+          "Description": "Provide an option to preserve the indices of the data\n\nbool\nDefault value : true",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "5504e298a3d74349a344be76c12c8c6c",
+          "Name": "list",
+          "Description": "List of transposed lists",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Cleans data of nulls and empty lists from a given list of arbitrary dimension\n\nList.Clean (list: var[]..[], preserveIndices: bool = true): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "false;",
+      "Id": "35762ad3e2e147be91b74a51acd49709",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "05a0a3b19d3c44e2ac1475f3db6f6c2b",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.AutoCAD.Field.DataType",
+      "Id": "f56445350ff34679b22245941bf18af2",
+      "Inputs": [
+        {
+          "Id": "8c7647e51c08449fb15e01ec86903316",
+          "Name": "field",
+          "Description": "Camber.AutoCAD.Field",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "7c28ba61a42f4a74858632a1b38c93f3",
+          "Name": "string",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the data type of a Field.\n\nField.DataType: string"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.AutoCAD.Field.EvaluationOption",
+      "Id": "8bb39379b5fd4b08b029f53f09e1ac70",
+      "Inputs": [
+        {
+          "Id": "4238774f3a4040d482c3b865759d5b4a",
+          "Name": "field",
+          "Description": "Camber.AutoCAD.Field",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "fa58df5964fd4eb09e8d7e7794f3855f",
+          "Name": "string",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the evaluation option explicitly set for a Field.\n\nField.EvaluationOption: string"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.AutoCAD.Field.Format",
+      "Id": "521bb314109a4159973472fb9bd7fa16",
+      "Inputs": [
+        {
+          "Id": "ae7db9058f6e41f0bfaae4f63a550e78",
+          "Name": "field",
+          "Description": "Camber.AutoCAD.Field",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "44487c17d77e49d79957339800ea27ab",
+          "Name": "string",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the output format set in a Field.\n\nField.Format: string"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.AutoCAD.Field.ValueFormatted",
+      "Id": "c4816eea754744489b33f9b323365d7f",
+      "Inputs": [
+        {
+          "Id": "b23182dc45b64548856a519072215be7",
+          "Name": "field",
+          "Description": "Camber.AutoCAD.Field",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "8fa3adeea26c4e249c310ce383c5d8d8",
+          "Name": "string",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the value of a Field as a formatted string.\n\nField.ValueFormatted: string"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.AutoCAD.Field.GetEmbeddedFields@bool",
+      "Id": "24666b329fc74831954d13efebf03173",
+      "Inputs": [
+        {
+          "Id": "e9646707eb3e4011b4db02bfc049a8f5",
+          "Name": "field",
+          "Description": "Camber.AutoCAD.Field",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "b3ac56769b9b4034b768ed7161b6deaf",
+          "Name": "recursive",
+          "Description": "bool\nDefault value : false",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "bcc7de9f557342f79ec9d09aaff1b3cc",
+          "Name": "Field[]",
+          "Description": "Field[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the list of Fields embedded within a Field, with the option to recursively get all embedded Fields.\n\nField.GetEmbeddedFields (recursive: bool = false): Field[]"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": true,
+      "Id": "ba0865df8bd34d9eaa2ad8155db497de",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "080b6fe9928043b08fa7013dbbca83e5",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Selection between a true and false."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "a[1][0];",
+      "Id": "a8a006327be24e34b42ecf0ff608cf81",
+      "Inputs": [
+        {
+          "Id": "019a219583f44d77933df86316b7a35e",
+          "Name": "a",
+          "Description": "a",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "7390e700fb5b409bb9741d144169bfc7",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.AutoCAD.Field.ReferencedObjects",
+      "Id": "9831ceca3db345c98c26d4b801a99906",
+      "Inputs": [
+        {
+          "Id": "73cd23c90df44fbeb72e64b1f14c0cc7",
+          "Name": "field",
+          "Description": "Camber.AutoCAD.Field",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "6e1e6a5c3ef943b088cc00a0e7538aa8",
+          "Name": "Object[]",
+          "Description": "Object[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the Objects that are referenced by a Field.\n\nField.ReferencedObjects: Object[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.AutoCAD.Field.SetExpression@string",
+      "Id": "a44fd9ff26e74462bff8bad7fd68682c",
+      "Inputs": [
+        {
+          "Id": "4557b19664614d53845227f7dca64fda",
+          "Name": "field",
+          "Description": "Camber.AutoCAD.Field",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "d9938fb290a24c2d9fb832f0ff4fab0f",
+          "Name": "fieldExpression",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "6010df44b4ba483db0d1e7f10c84735e",
+          "Name": "Field",
+          "Description": "Field",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Sets the expression of a Field. It is up to the user to identify the correct field expression syntax to use.\n\nField.SetExpression (fieldExpression: string): Field"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.AutoCAD.Field.Expression",
+      "Id": "e67d7748a8b040e0927d99bd07d19797",
+      "Inputs": [
+        {
+          "Id": "d6acb59664964be69e7353083850028a",
+          "Name": "field",
+          "Description": "Camber.AutoCAD.Field",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "bfb35f903ca84e289998afca791a1c09",
+          "Name": "string",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the expression of a Field.\n\nField.Expression: string"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "6bca7790ab624197bf8a0ced64af1efb",
+      "End": "1ec658e2b2c449029e426a489603eea4",
+      "Id": "51751c6871f74d9d8dd7191892962c3e",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "98fc8a551cda44718704fbcfb1f8df45",
+      "End": "ea2023f01a4a4e5899ffd2437afb141e",
+      "Id": "831576ae148149e193d1bfca29b057a6",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "2a70c75900ad447db992c48e6392d846",
+      "End": "caf1a0df1de0493db782b6c33bfdf9b5",
+      "Id": "19db0ddf987f442fbf0a41934a7604b1",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "4d8f7aae4503481386a8e8933e4b6eac",
+      "End": "13c1b9735769415bb937a16b29543865",
+      "Id": "38ebb6a764e647b78859ef8589120c78",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "1f57566874fb476eb72fc328d62b3f40",
+      "End": "6e5eaefc476a4ff6a964ef187bbcf13a",
+      "Id": "0de847b0a26d4b0bae96423d65104ad4",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "5504e298a3d74349a344be76c12c8c6c",
+      "End": "a1bd9174fb4a4dce82a3a722f5b40cbc",
+      "Id": "be3cce7995c44bb4b5eff7487a3bc18c",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "5504e298a3d74349a344be76c12c8c6c",
+      "End": "4238774f3a4040d482c3b865759d5b4a",
+      "Id": "08b9951bb4ed47bfb1a6351eead6a1a1",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "5504e298a3d74349a344be76c12c8c6c",
+      "End": "8c7647e51c08449fb15e01ec86903316",
+      "Id": "a6e432a0a37846ca8b3925f7de77477b",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "5504e298a3d74349a344be76c12c8c6c",
+      "End": "b23182dc45b64548856a519072215be7",
+      "Id": "8d7db2de94aa404d971eff0bccda64ff",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "5504e298a3d74349a344be76c12c8c6c",
+      "End": "255d18bcfb4e41e2af0c870affcf803b",
+      "Id": "08a217117141472fa1f2285f024f86a4",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "5504e298a3d74349a344be76c12c8c6c",
+      "End": "019a219583f44d77933df86316b7a35e",
+      "Id": "756670cea33442d2bea4d1d5aaa28ff5",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "05a0a3b19d3c44e2ac1475f3db6f6c2b",
+      "End": "cf49d40440ba49d9b90fd3f3555a6120",
+      "Id": "3f763191476c41bcb7bd0a6e7b8e7d42",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "bcc7de9f557342f79ec9d09aaff1b3cc",
+      "End": "d6acb59664964be69e7353083850028a",
+      "Id": "0d4cc0b34e18433b8af24021ed2abffe",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "080b6fe9928043b08fa7013dbbca83e5",
+      "End": "b3ac56769b9b4034b768ed7161b6deaf",
+      "Id": "f3307f3cf9534c5bb71e8725151fbabf",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "7390e700fb5b409bb9741d144169bfc7",
+      "End": "e9646707eb3e4011b4db02bfc049a8f5",
+      "Id": "0b4d19320e174e55adabdcf335baa21b",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "7390e700fb5b409bb9741d144169bfc7",
+      "End": "4557b19664614d53845227f7dca64fda",
+      "Id": "abe611b61fd54e28bba54bd39270e363",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "7390e700fb5b409bb9741d144169bfc7",
+      "End": "73cd23c90df44fbeb72e64b1f14c0cc7",
+      "Id": "8c07c31490054b4bb03e275f26659388",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "7390e700fb5b409bb9741d144169bfc7",
+      "End": "ae7db9058f6e41f0bfaae4f63a550e78",
+      "Id": "14f24df999d44cbcbc7e2b9ae03be62a",
+      "IsHidden": "False"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Camber",
+      "Version": "4.0.1",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "dbf00f6b5dca4a2a87f0d16d4b2d70ef",
+        "41cc620f859041a6a2da8903470c95c7",
+        "587d56856aeb40948b502f09c94f0ed5",
+        "f56445350ff34679b22245941bf18af2",
+        "8bb39379b5fd4b08b029f53f09e1ac70",
+        "521bb314109a4159973472fb9bd7fa16",
+        "c4816eea754744489b33f9b323365d7f",
+        "24666b329fc74831954d13efebf03173",
+        "9831ceca3db345c98c26d4b801a99906",
+        "a44fd9ff26e74462bff8bad7fd68682c",
+        "e67d7748a8b040e0927d99bd07d19797"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.13",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.13.1.3887",
+      "RunType": "Automatic",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -12.852477073669434,
+      "EyeY": 23.832439422607422,
+      "EyeZ": 28.046840667724609,
+      "LookX": 7.8524770736694336,
+      "LookY": -12.832439422607422,
+      "LookZ": -36.046840667724609,
+      "UpX": 0.025202231481671333,
+      "UpY": 0.992965579032898,
+      "UpZ": -0.11569072306156158
+    },
+    "ConnectorPins": [],
+    "NodeViews": [
+      {
+        "Name": "Object.Fields",
+        "ShowGeometry": true,
+        "Id": "dbf00f6b5dca4a2a87f0d16d4b2d70ef",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 564.6181949751583,
+        "Y": 138.49615856402841
+      },
+      {
+        "Name": "All Objects of Type",
+        "ShowGeometry": true,
+        "Id": "23d04279994c450ab5fc58705fe2b467",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 306.14223461616541,
+        "Y": 138.02116893316975
+      },
+      {
+        "Name": "Objects Types",
+        "ShowGeometry": true,
+        "Id": "5b47854245dc4cc885cd6249806bd33c",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -1.6478727816654555,
+        "Y": 78.17032219349268
+      },
+      {
+        "Name": "Document.ModelSpace",
+        "ShowGeometry": true,
+        "Id": "1da312d4fe104099b8a1825debe441f9",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1.8360387232279436,
+        "Y": 231.62850057802456
+      },
+      {
+        "Name": "Document.Current",
+        "ShowGeometry": true,
+        "Id": "cfd1836bcac74414a29d1185f399dc1d",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -311.17523760777283,
+        "Y": 234.54956626101989
+      },
+      {
+        "Name": "Field.Value",
+        "ShowGeometry": true,
+        "Id": "41cc620f859041a6a2da8903470c95c7",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1273.8820965912985,
+        "Y": 606.85172817370517
+      },
+      {
+        "Name": "Field.State",
+        "ShowGeometry": true,
+        "Id": "587d56856aeb40948b502f09c94f0ed5",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1267.4688389606335,
+        "Y": 210.41588405838888
+      },
+      {
+        "Name": "List.Clean",
+        "ShowGeometry": true,
+        "Id": "4185e0c7f99b40cd8bd8b01e648ee44a",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 809.00611615633261,
+        "Y": 210.0869487856321
+      },
+      {
+        "Name": "Code Block",
+        "ShowGeometry": true,
+        "Id": "35762ad3e2e147be91b74a51acd49709",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 606.53874653251114,
+        "Y": 283.88973668361621
+      },
+      {
+        "Name": "Field.DataType",
+        "ShowGeometry": true,
+        "Id": "f56445350ff34679b22245941bf18af2",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1273.4520263135705,
+        "Y": 43.07431357518152
+      },
+      {
+        "Name": "Field.EvaluationOption",
+        "ShowGeometry": true,
+        "Id": "8bb39379b5fd4b08b029f53f09e1ac70",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1273.4520263135705,
+        "Y": -163.75041134771243
+      },
+      {
+        "Name": "Field.Format",
+        "ShowGeometry": true,
+        "Id": "521bb314109a4159973472fb9bd7fa16",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1281.8083280462722,
+        "Y": -325.45110691401715
+      },
+      {
+        "Name": "Field.ValueFormatted",
+        "ShowGeometry": true,
+        "Id": "c4816eea754744489b33f9b323365d7f",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1262.391469208445,
+        "Y": 410.06729576053021
+      },
+      {
+        "Name": "Field.GetEmbeddedFields",
+        "ShowGeometry": true,
+        "Id": "24666b329fc74831954d13efebf03173",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1885.853204722478,
+        "Y": 156.46741648797817
+      },
+      {
+        "Name": "Boolean",
+        "ShowGeometry": true,
+        "Id": "ba0865df8bd34d9eaa2ad8155db497de",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1596.4717009209019,
+        "Y": 177.6304615054695
+      },
+      {
+        "Name": "Code Block",
+        "ShowGeometry": true,
+        "Id": "a8a006327be24e34b42ecf0ff608cf81",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1603.06002540139,
+        "Y": 338.44018627686114
+      },
+      {
+        "Name": "Field.ReferencedObjects",
+        "ShowGeometry": true,
+        "Id": "9831ceca3db345c98c26d4b801a99906",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1882.4671278794854,
+        "Y": 3.9649469556735255
+      },
+      {
+        "Name": "Field.SetExpression",
+        "ShowGeometry": true,
+        "Id": "a44fd9ff26e74462bff8bad7fd68682c",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1841.9049305722942,
+        "Y": 392.15126444257686
+      },
+      {
+        "Name": "Field.Expression",
+        "ShowGeometry": true,
+        "Id": "e67d7748a8b040e0927d99bd07d19797",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2231.703833249047,
+        "Y": 146.03472874800477
+      }
+    ],
+    "Annotations": [],
+    "X": 268.17845460950196,
+    "Y": 227.12834250653935,
+    "Zoom": 0.32767121459101278
+  }
+}
