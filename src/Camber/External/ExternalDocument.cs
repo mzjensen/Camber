@@ -86,8 +86,8 @@ namespace Camber.External
                 ExternalBlock retBlk = null;
                 using (var t = AcDatabase.TransactionManager.StartTransaction())
                 {
-                    acDb.BlockTable bt = (acDb.BlockTable)t.GetObject(AcDatabase.BlockTableId, acDb.OpenMode.ForRead);
-                    acDb.BlockTableRecord btr = (acDb.BlockTableRecord)t.GetObject(bt[acDb.BlockTableRecord.ModelSpace], acDb.OpenMode.ForRead);
+                    var bt = (acDb.BlockTable)t.GetObject(AcDatabase.BlockTableId, acDb.OpenMode.ForRead);
+                    var btr = (acDb.BlockTableRecord)t.GetObject(bt[acDb.BlockTableRecord.ModelSpace], acDb.OpenMode.ForRead);
                     return new ExternalBlock(btr);
                 }
             }
@@ -100,14 +100,14 @@ namespace Camber.External
         {
             get
             {
-                List<ExternalBlock> blocks = new List<ExternalBlock>();
-                acDb.Transaction t = AcDatabase.TransactionManager.StartTransaction();
+                var blocks = new List<ExternalBlock>();
+                var t = AcDatabase.TransactionManager.StartTransaction();
                 using (t)
                 {
-                    acDb.BlockTable bt = (acDb.BlockTable)t.GetObject(AcDatabase.BlockTableId, acDb.OpenMode.ForRead);
-                    foreach (acDb.ObjectId oid in bt)
+                    var bt = (acDb.BlockTable)t.GetObject(AcDatabase.BlockTableId, acDb.OpenMode.ForRead);
+                    foreach (var oid in bt)
                     {
-                        acDb.BlockTableRecord btr = (acDb.BlockTableRecord)t.GetObject(oid, acDb.OpenMode.ForRead);
+                        var btr = (acDb.BlockTableRecord)t.GetObject(oid, acDb.OpenMode.ForRead);
                         if (btr != null)
                         {
                             blocks.Add(new ExternalBlock(btr));
@@ -125,16 +125,16 @@ namespace Camber.External
         {
             get
             {
-                List<ExternalLayer> layers = new List<ExternalLayer>();
-                acDb.Transaction t = AcDatabase.TransactionManager.StartTransaction();
+                var layers = new List<ExternalLayer>();
+                var t = AcDatabase.TransactionManager.StartTransaction();
                 using (t)
                 {
-                    acDb.LayerTable lt = (acDb.LayerTable)t.GetObject(
+                    var lt = (acDb.LayerTable)t.GetObject(
                         AcDatabase.LayerTableId, 
                         acDb.OpenMode.ForRead);
-                    foreach (acDb.ObjectId oid in lt)
+                    foreach (var oid in lt)
                     {
-                        acDb.LayerTableRecord ltr = (acDb.LayerTableRecord)t.GetObject(
+                        var ltr = (acDb.LayerTableRecord)t.GetObject(
                             oid, 
                             acDb.OpenMode.ForRead);
                         if (ltr != null)
@@ -146,6 +146,41 @@ namespace Camber.External
                 return layers;
             }
         }
+
+        /// <summary>
+        /// Gets all of the named page setups in an External Document.
+        /// </summary>
+        public IList<string> NamedPageSetups
+        {
+            get
+            {
+                var setups = new List<string>();
+                try
+                {
+                    using (var tr = AcDatabase.TransactionManager.StartTransaction())
+                    {
+                        var plSets = (acDb.DBDictionary) tr.GetObject(AcDatabase.PlotSettingsDictionaryId,
+                            acDb.OpenMode.ForRead);
+
+                        foreach (var entry in plSets)
+                        {
+                            var plSet = (acDb.PlotSettings) tr.GetObject(entry.Value, acDb.OpenMode.ForRead);
+                            if (plSet.ModelType)
+                            {
+                                continue;
+                            }
+
+                            setups.Add(plSet.PlotSettingsName);
+                        }
+                    }
+                    return setups;
+                }
+                catch (Exception ex)
+                {
+                    throw new InvalidOperationException(ex.Message);
+                }
+            }
+        }
         #endregion
 
         #region constructors
@@ -153,7 +188,7 @@ namespace Camber.External
         {
             try
             {
-                FileInfo fileInfo = new FileInfo(filePath);
+                var fileInfo = new FileInfo(filePath);
                 AcDatabase = acDatabase;
                 FileInfo = fileInfo;
             }
@@ -178,7 +213,7 @@ namespace Camber.External
 
             try
             {
-                string filePath = directoryPath + "\\" + fileName;
+                var filePath = directoryPath + "\\" + fileName;
 
                 // Using false here for buildDefaultDrawing because we are reading from a template file.
                 using (var db = new AcDatabase(false, true))
@@ -253,7 +288,7 @@ namespace Camber.External
 
             try
             {
-                string filePath = directoryPath + "\\" + fileName;
+                var filePath = directoryPath + "\\" + fileName;
 
                 // Using false here for buildDefaultDrawing because we are reading from a template file.
                 using (var db = new AcDatabase(false, true))
@@ -297,7 +332,7 @@ namespace Camber.External
             try
             {
                 AcDatabase.SaveAs(directoryPath + "\\" + fileName, acDb.DwgVersion.Current);
-                FileInfo newFileInfo = new FileInfo(AcDatabase.Filename);
+                var newFileInfo = new FileInfo(AcDatabase.Filename);
                 FileInfo = newFileInfo;
                 return this;
             }
@@ -355,6 +390,55 @@ namespace Camber.External
         }
 
         /// <summary>
+        /// Gets an External Layout in an External Document by name.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public ExternalLayout LayoutByName(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new InvalidOperationException("Layout name is null or empty.");
+            }
+
+            return Layouts(true).FirstOrDefault(
+                item => item.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+        }
+
+        /// <summary>
+        /// Gets all of the External Layouts in an External Document.
+        /// </summary>
+        /// <param name="includeModel">Include Model Space?</param>
+        /// <returns></returns>
+        public IList<ExternalLayout> Layouts(bool includeModel = false)
+        {
+            var layouts = new List<ExternalLayout>();
+            try
+            {
+                using (var tr = AcDatabase.TransactionManager.StartTransaction())
+                {
+                    var layoutDict = (acDb.DBDictionary)tr.GetObject(AcDatabase.LayoutDictionaryId, acDb.OpenMode.ForRead);
+                    foreach (var layoutEntry in layoutDict)
+                    {
+                        if (layoutEntry.Key.ToUpper() == "MODEL" && !includeModel)
+                        {
+                            continue;
+                        }
+
+                        var acLayout = (acDb.Layout)tr.GetObject(layoutEntry.Value, acDb.OpenMode.ForRead);
+
+                        layouts.Add(new ExternalLayout(acLayout));
+                    }
+                    return layouts;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
+
+        /// <summary>
         /// Gets the value of a system variable.
         /// </summary>
         /// <param name="variableName">The name of the system variable.</param>
@@ -404,10 +488,10 @@ namespace Camber.External
 
             using (var tr = externalDocument.AcDatabase.TransactionManager.StartTransaction())
             {
-                acDb.LayerTable lt = (acDb.LayerTable)tr.GetObject(externalDocument.AcDatabase.LayerTableId, acDb.OpenMode.ForWrite);
+                var lt = (acDb.LayerTable)tr.GetObject(externalDocument.AcDatabase.LayerTableId, acDb.OpenMode.ForWrite);
                 if (!lt.Has(layer))
                 {
-                    acDb.LayerTableRecord ltr = new acDb.LayerTableRecord();
+                    var ltr = new acDb.LayerTableRecord();
                     ltr.Name = layer;
                     lt.Add(ltr);
                     tr.AddNewlyCreatedDBObject(ltr, true);
@@ -454,7 +538,7 @@ namespace Camber.External
             if (!File.Exists(templateFilePath)) { throw new ArgumentException("A valid file does not exist at the template file path."); }
 
             // Check for valid DWT file
-            FileInfo fileInfo = new FileInfo(templateFilePath);
+            var fileInfo = new FileInfo(templateFilePath);
             if (fileInfo.Extension != ".dwg"
                 && fileInfo.Extension != ".dwt"
                 && fileInfo.Extension != ".dws")
@@ -486,7 +570,7 @@ namespace Camber.External
         {
             try
             {
-                using (FileStream stream = file.Open(FileMode.Open, FileAccess.Read, FileShare.None))
+                using (var stream = file.Open(FileMode.Open, FileAccess.Read, FileShare.None))
                 {
                     stream.Close();
                 }

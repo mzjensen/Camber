@@ -302,6 +302,7 @@
     <Compile Include="Civil\CivilObjects\Pipe Networks\Rule Sets\RuleSet.cs" />
     <Compile Include="Civil\CivilObjects\ViewFrame.cs" />
     <Compile Include="Civil\CivilObjects\ViewFrameGroup.cs" />
+    <Compile Include="External\ExternalLayout.cs" />
     <Compile Include="LandXML\LandXML.cs" />
     <Compile Include="Utilities\GeometryConversions.cs" />
     <Compile Include="Tools\ModelText.cs" />
