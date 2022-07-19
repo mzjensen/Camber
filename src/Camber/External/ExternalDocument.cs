@@ -1,16 +1,17 @@
-﻿#region references
-using System;
-using System.IO;
-using System.Linq;
-using System.Collections.Generic;
-using acApp = Autodesk.AutoCAD.ApplicationServices;
-using acDb = Autodesk.AutoCAD.DatabaseServices;
-using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
-using AcDatabase = Autodesk.AutoCAD.DatabaseServices.Database;
+﻿using Autodesk.Civil.Settings;
 using Autodesk.DesignScript.Runtime;
 using Camber.External.ExternalObjects;
 using Dynamo.Graph.Nodes;
-#endregion
+using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.IO;
+using System.Linq;
+using acApp = Autodesk.AutoCAD.ApplicationServices;
+using AcDatabase = Autodesk.AutoCAD.DatabaseServices.Database;
+using acDb = Autodesk.AutoCAD.DatabaseServices;
+using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
+using civApp = Autodesk.Civil.ApplicationServices;
 
 namespace Camber.External
 {
@@ -179,6 +180,19 @@ namespace Camber.External
                 {
                     throw new InvalidOperationException(ex.Message);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Gets the list of available coordinate system codes in an External Document.
+        /// </summary>
+        public List<string> CoordinateSystemCodes
+        {
+            get
+            {
+                var codes = SettingsUnitZone.GetAllCodes().ToList();
+                codes.Sort();
+                return codes;
             }
         }
         #endregion
@@ -497,6 +511,217 @@ namespace Camber.External
                     tr.AddNewlyCreatedDBObject(ltr, true);
                 }
                 tr.Commit();
+            }
+        }
+
+        /// <summary>
+        /// Gets the units and zone settings for an External Document.
+        /// </summary>
+        /// <returns></returns>
+        [MultiReturn(
+            "Drawing Units",
+            "Angular Units",
+            "Coordinate System Code",
+            "Imperial to Metric Conversion",
+            "Drawing Scale",
+            "Scale Objects from Other Drawings",
+            "Set AutoCAD Variables to Match")]
+        public Dictionary<string, object> GetUnitsZoneSettings()
+        {
+            using (var tr = AcDatabase.TransactionManager.StartTransaction())
+            {
+                var cdoc = civApp.CivilDocument.GetCivilDocument(AcDatabase);
+                var settings = cdoc.Settings.DrawingSettings.UnitZoneSettings;
+                return new Dictionary<string, object>
+                {
+                    { "Drawing Units", settings.DrawingUnits.ToString() },
+                    { "Angular Units", settings.AngularUnits.ToString() },
+                    { "Coordinate System Code", settings.CoordinateSystemCode },
+                    { "Imperial to Metric Conversion", settings.ImperialToMetricConversion.ToString() },
+                    { "Drawing Scale", settings.DrawingScale },
+                    { "Scale Objects from Other Drawings", settings.ScaleObjectsFromOtherDrawings },
+                    { "Set AutoCAD Variables to Match", settings.MatchAutoCADVariables }
+                };
+            }
+
+        }
+
+        /// <summary>
+        /// Sets the units (feet or meters) for an External Document.
+        /// </summary>
+        /// <param name="useFeet">If true, the units will be set to feet. If false, they will be set to metric.</param>
+        /// <returns></returns>
+        public ExternalDocument SetDrawingUnits(bool useFeet)
+        {
+            try
+            {
+                using (var tr = AcDatabase.TransactionManager.StartTransaction())
+                {
+                    var cdoc = civApp.CivilDocument.GetCivilDocument(AcDatabase);
+                    var settings = cdoc.Settings.DrawingSettings.UnitZoneSettings;
+                    var units = DrawingUnitType.Meters;
+                    if (useFeet)
+                    {
+                        units = DrawingUnitType.Feet;
+                    }
+                    settings.DrawingUnits = units;
+                }
+                return this;
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Sets the angular units for an External Document.
+        /// </summary>
+        /// <param name="angularUnitType">Degree, Grad, or Radian</param>
+        /// <returns></returns>
+        public ExternalDocument SetAngularUnits(string angularUnitType)
+        {
+            try
+            {
+                using (var tr = AcDatabase.TransactionManager.StartTransaction())
+                {
+                    var cdoc = civApp.CivilDocument.GetCivilDocument(AcDatabase);
+                    var settings = cdoc.Settings.DrawingSettings.UnitZoneSettings;
+                    if (!Enum.TryParse(angularUnitType, out Autodesk.Civil.AngleUnitType unitType))
+                    {
+                        throw new InvalidOperationException("Invalid angular units type.");
+                    }
+                    settings.AngularUnits = unitType;
+                }
+                return this;
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Sets the coordinate system code for an External Document.
+        /// </summary>
+        /// <param name="document"></param>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        public ExternalDocument SetCoordinateSystemCode(string code)
+        {
+            try
+            {
+                using (var tr = AcDatabase.TransactionManager.StartTransaction())
+                {
+                    var cdoc = civApp.CivilDocument.GetCivilDocument(AcDatabase);
+                    var settings = cdoc.Settings.DrawingSettings.UnitZoneSettings;
+                    settings.CoordinateSystemCode = code;
+                }
+                return this;
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Sets the imperial to metric conversion type for an External Document.
+        /// </summary>
+        /// <param name="useInternationalFoot">
+        /// If true, the conversion type will be set to International Foot.
+        ///  If false, it will be set to US Survey Foot.
+        /// </param>
+        /// <returns></returns>
+        public ExternalDocument SetImperialToMetricConversion(bool useInternationalFoot)
+        {
+            try
+            {
+                using (var tr = AcDatabase.TransactionManager.StartTransaction())
+                {
+                    var cdoc = civApp.CivilDocument.GetCivilDocument(AcDatabase);
+                    var settings = cdoc.Settings.DrawingSettings.UnitZoneSettings;
+                    var conversionType = ImperialToMetricConversionType.UsSurveyFoot;
+                    if (useInternationalFoot)
+                    {
+                        conversionType = ImperialToMetricConversionType.InternationalFoot;
+                    }
+                    settings.ImperialToMetricConversion = conversionType;
+                }
+                return this;
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Sets the scale for an External Document.
+        /// </summary>
+        /// <param name="scale"></param>
+        /// <returns></returns>
+        public ExternalDocument SetDrawingScale(double scale)
+        {
+            try
+            {
+                using (var tr = AcDatabase.TransactionManager.StartTransaction())
+                {
+                    var cdoc = civApp.CivilDocument.GetCivilDocument(AcDatabase);
+                    var settings = cdoc.Settings.DrawingSettings.UnitZoneSettings;
+                    settings.DrawingScale = scale;
+                }
+                return this;
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Toggles whether to scale objects when inserted from other drawings into an External Document.
+        /// </summary>
+        /// <param name="scaleObjects"></param>
+        /// <returns></returns>
+        public ExternalDocument SetScaleObjectsFromOtherDrawings(bool scaleObjects)
+        {
+            try
+            {
+                using (var tr = AcDatabase.TransactionManager.StartTransaction())
+                {
+                    var cdoc = civApp.CivilDocument.GetCivilDocument(AcDatabase);
+                    var settings = cdoc.Settings.DrawingSettings.UnitZoneSettings;
+                    settings.ScaleObjectsFromOtherDrawings = scaleObjects;
+                }
+                return this;
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Toggles whether to set AutoCAD variables to match for an External Document.
+        /// </summary>
+        /// <param name="matchVariables"></param>
+        /// <returns></returns>
+        public ExternalDocument SetAutoCADVariablesToMatch(bool matchVariables)
+        {
+            try
+            {
+                using (var tr = AcDatabase.TransactionManager.StartTransaction())
+                {
+                    var cdoc = civApp.CivilDocument.GetCivilDocument(AcDatabase);
+                    var settings = cdoc.Settings.DrawingSettings.UnitZoneSettings;
+                    settings.MatchAutoCADVariables = matchVariables;
+                }
+                return this;
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
             }
         }
         #endregion

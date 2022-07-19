@@ -1,0 +1,494 @@
+{
+  "Uuid": "55699190-99a0-43d2-91d7-8cee01d99f27",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "ExternalDocumentSettingsTests",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.External.ExternalDocument.LoadFromFile@string",
+      "Id": "88f0917e533f46ea9b92a5b76a96864b",
+      "Inputs": [
+        {
+          "Id": "c5c982d39d7040098bb6f22bb9569169",
+          "Name": "filePath",
+          "Description": "The path to the file.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "b3fc8e6166584712af1226997bd20bfa",
+          "Name": "ExternalDocument",
+          "Description": "ExternalDocument",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Loads an External Document from an existing file. Please note that this node does not prevent other applications from opening and/or modifying the file at the same time.\n\nExternalDocument.LoadFromFile (filePath: string): ExternalDocument"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.Filename, CoreNodeModels",
+      "HintPath": "C:\\Software Projects\\Camber\\tests\\Document\\DocumentSettingsTests.dwg",
+      "InputValue": "C:\\Software Projects\\Camber\\tests\\Document\\DocumentSettingsTests.dwg",
+      "NodeType": "ExtensionNode",
+      "Id": "436d2f95bc914b42a0c2578b50084459",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "6927e853d43b4bcbbb118bd9aaeb6309",
+          "Name": "",
+          "Description": "File Path",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows you to select a file on the system to get its file path."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.External.ExternalDocument.GetUnitsZoneSettings",
+      "Id": "d07baf2932a84f9aaeca74de011aa5f6",
+      "Inputs": [
+        {
+          "Id": "c68998a50671426ca20b40243536472f",
+          "Name": "externalDocument",
+          "Description": "Camber.External.ExternalDocument",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "9854ca9753484f499992a8549ccfe25a",
+          "Name": "Drawing Units",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "231dcd7986ce4328a9bdce58b803efc7",
+          "Name": "Angular Units",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "1840571046614d2d832db0a992bea786",
+          "Name": "Coordinate System Code",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "c0945f4988474b8aa36bda840ea6ea8b",
+          "Name": "Imperial to Metric Conversion",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "fbc8c6b74c3b4c93ba2f26353a1ad2bb",
+          "Name": "Drawing Scale",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "2b964b8017294a379f512b163ebfdd1f",
+          "Name": "Scale Objects from Other Drawings",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "341dc7c1416947f49e63a7c14e405444",
+          "Name": "Set AutoCAD Variables to Match",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the units and zone settings for an External Document.\n\nExternalDocument.GetUnitsZoneSettings ( ): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.External.ExternalDocument.SetCoordinateSystemCode@string",
+      "Id": "7b89908bd61e43659da205c0c103620b",
+      "Inputs": [
+        {
+          "Id": "e64f4ffa15c84912ba86a8d9855c2f43",
+          "Name": "externalDocument",
+          "Description": "Camber.External.ExternalDocument",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "f15408f24fb54cb980355d7919abdca8",
+          "Name": "code",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "512a254a6daf4f748577f7f96a7e8ab3",
+          "Name": "ExternalDocument",
+          "Description": "ExternalDocument",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Sets the coordinate system code for an External Document.\n\nExternalDocument.SetCoordinateSystemCode (code: string): ExternalDocument"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.External.ExternalDocument.CoordinateSystemCodes",
+      "Id": "3aaa8d8483a94290aad151d8723c475c",
+      "Inputs": [
+        {
+          "Id": "6bb91f43fa7c4912bb90fe56fd7e49e5",
+          "Name": "externalDocument",
+          "Description": "Camber.External.ExternalDocument",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "57ec88b3fd584ebba54b16c4ca708019",
+          "Name": "string[]",
+          "Description": "string[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the list of available coordinate system codes in an External Document.\n\nExternalDocument.CoordinateSystemCodes: string[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.External.ExternalDocument.SetAngularUnits@string",
+      "Id": "6e9aa89d39634848916b95f88892e0ed",
+      "Inputs": [
+        {
+          "Id": "8f6b443feffa4ff6886a9667fad1cadf",
+          "Name": "externalDocument",
+          "Description": "Camber.External.ExternalDocument",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "dfe29dbbcd084cbdb278324b6725d6af",
+          "Name": "angularUnitType",
+          "Description": "Degrees, Grads, or Radians\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "e17a01b59dcb4c9b8958edd511929355",
+          "Name": "ExternalDocument",
+          "Description": "ExternalDocument",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Sets the angular units for an External Document.\n\nExternalDocument.SetAngularUnits (angularUnitType: string): ExternalDocument"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"CA83-IIF\";",
+      "Id": "a88d63ca215f473ea393de791f067171",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "80ef8ba54f9e469597cef27544a23388",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Camber.UI.AngularUnitTypesDropDown, CamberUI",
+      "EnumerationType": "Autodesk.Civil.AngleUnitType, AeccDbMgd, Version=13.5.131.0, Culture=neutral, PublicKeyToken=null",
+      "AddSpaces": false,
+      "DropLastCharacter": false,
+      "SelectedIndex": 1,
+      "SelectedString": "Grad",
+      "NodeType": "ExtensionNode",
+      "Id": "c64da3072c5b4258850aece52ede753b",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "0e06f263091f462390fde40da3bc7e64",
+          "Name": "angularUnitType",
+          "Description": "The selected angularUnitType",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Select angular unit type."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "b3fc8e6166584712af1226997bd20bfa",
+      "End": "6bb91f43fa7c4912bb90fe56fd7e49e5",
+      "Id": "4506f90f255d4abcae73c303b495893f",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "b3fc8e6166584712af1226997bd20bfa",
+      "End": "e64f4ffa15c84912ba86a8d9855c2f43",
+      "Id": "279bc5a6628d4ddcb4fdc0d49707afeb",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "b3fc8e6166584712af1226997bd20bfa",
+      "End": "8f6b443feffa4ff6886a9667fad1cadf",
+      "Id": "3e0d5e584fbc4f049c48211b5a2974a8",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "b3fc8e6166584712af1226997bd20bfa",
+      "End": "c68998a50671426ca20b40243536472f",
+      "Id": "bc63dfdee7944d8fa8181845a614a2f2",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "6927e853d43b4bcbbb118bd9aaeb6309",
+      "End": "c5c982d39d7040098bb6f22bb9569169",
+      "Id": "12aca57bf87446a39afa8e149bdec312",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "80ef8ba54f9e469597cef27544a23388",
+      "End": "f15408f24fb54cb980355d7919abdca8",
+      "Id": "3cd79ecbb80c47639ccaeaf4eb06d1e2",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "0e06f263091f462390fde40da3bc7e64",
+      "End": "dfe29dbbcd084cbdb278324b6725d6af",
+      "Id": "a65e0feda5b64ec7a35eaa323e1e220d",
+      "IsHidden": "False"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Camber",
+      "Version": "4.0.1",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "88f0917e533f46ea9b92a5b76a96864b",
+        "d07baf2932a84f9aaeca74de011aa5f6",
+        "7b89908bd61e43659da205c0c103620b",
+        "3aaa8d8483a94290aad151d8723c475c",
+        "6e9aa89d39634848916b95f88892e0ed",
+        "c64da3072c5b4258850aece52ede753b"
+      ]
+    },
+    {
+      "Name": "DocumentSettingsTests.dwg",
+      "ReferenceType": "External",
+      "Nodes": [
+        "436d2f95bc914b42a0c2578b50084459"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.13",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.13.1.3887",
+      "RunType": "Automatic",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "ConnectorPins": [],
+    "NodeViews": [
+      {
+        "Name": "ExternalDocument.LoadFromFile",
+        "ShowGeometry": true,
+        "Id": "88f0917e533f46ea9b92a5b76a96864b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 534.06528189910978,
+        "Y": 257.54005934718106
+      },
+      {
+        "Name": "File Path",
+        "ShowGeometry": true,
+        "Id": "436d2f95bc914b42a0c2578b50084459",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 47.0,
+        "Y": 255.0
+      },
+      {
+        "Name": "ExternalDocument.GetUnitsZoneSettings",
+        "ShowGeometry": true,
+        "Id": "d07baf2932a84f9aaeca74de011aa5f6",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 897.54599406528189,
+        "Y": 257.54005934718094
+      },
+      {
+        "Name": "ExternalDocument.SetCoordinateSystemCode",
+        "ShowGeometry": true,
+        "Id": "7b89908bd61e43659da205c0c103620b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1008.1104583473375,
+        "Y": -90.015672891632533
+      },
+      {
+        "Name": "ExternalDocument.CoordinateSystemCodes",
+        "ShowGeometry": true,
+        "Id": "3aaa8d8483a94290aad151d8723c475c",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 905.84601809445917,
+        "Y": 651.22856770922692
+      },
+      {
+        "Name": "ExternalDocument.SetAngularUnits",
+        "ShowGeometry": true,
+        "Id": "6e9aa89d39634848916b95f88892e0ed",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1020.3613819040681,
+        "Y": 92.77491682497714
+      },
+      {
+        "Name": "Code Block",
+        "ShowGeometry": true,
+        "Id": "a88d63ca215f473ea393de791f067171",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 718.65372108594306,
+        "Y": -94.99353000423838
+      },
+      {
+        "Name": "Angular Unit Types",
+        "ShowGeometry": true,
+        "Id": "c64da3072c5b4258850aece52ede753b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 587.6299789499825,
+        "Y": 56.3671477997828
+      }
+    ],
+    "Annotations": [],
+    "X": 128.95090584594254,
+    "Y": 174.29213875918913,
+    "Zoom": 0.51197132445820148
+  }
+}
