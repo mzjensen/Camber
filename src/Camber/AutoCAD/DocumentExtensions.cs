@@ -255,7 +255,7 @@ namespace Camber.AutoCAD
         /// Sets the angular units for a Document.
         /// </summary>
         /// <param name="document"></param>
-        /// <param name="angularUnitType">Degrees, Grads, or Radians</param>
+        /// <param name="angularUnitType">Degree, Grad, or Radian</param>
         /// <returns></returns>
         public static acDynNodes.Document SetAngularUnits(this acDynNodes.Document document, string angularUnitType)
         {
