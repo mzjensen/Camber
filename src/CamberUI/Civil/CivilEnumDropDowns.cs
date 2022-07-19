@@ -83,4 +83,19 @@ namespace Camber.UI
         public OverhangCorrectionTypesDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts)
             : base(OutputName, typeof(civDb.OverhangCorrectionType), inPorts, outPorts) { }
     }
+
+    [NodeName("Angular Unit Types")]
+    [NodeCategory("Camber.AutoCAD.Document")]
+    [NodeDescription("Select angular unit type.")]
+    [IsDesignScriptCompatible]
+    public class AngularUnitTypesDropDown : EnumDropDownBase
+    {
+        private const string OutputName = "angularUnitType";
+
+        public AngularUnitTypesDropDown() : base(OutputName, typeof(Autodesk.Civil.AngleUnitType)) { }
+
+        [JsonConstructor]
+        public AngularUnitTypesDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts)
+            : base(OutputName, typeof(Autodesk.Civil.AngleUnitType), inPorts, outPorts) { }
+    }
 }

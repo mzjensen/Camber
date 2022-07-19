@@ -1,0 +1,798 @@
+{
+  "Uuid": "ded26773-b9b6-4cdd-b92d-4ecbafb86a39",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "DrawingSettingsTests",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Camber.UI.AngularUnitTypesDropDown, CamberUI",
+      "EnumerationType": "Autodesk.Civil.AngleUnitType, AeccDbMgd, Version=13.5.131.0, Culture=neutral, PublicKeyToken=null",
+      "AddSpaces": false,
+      "DropLastCharacter": false,
+      "SelectedIndex": 0,
+      "SelectedString": "Degree",
+      "NodeType": "ExtensionNode",
+      "Id": "f240b32a27c4489cb117b3368f2b3cf7",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "a41bb39489f14c7290898a3c07f99f03",
+          "Name": "angularUnitType",
+          "Description": "The selected angularUnitType",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Select angular unit type."
+    },
+    {
+      "ConcreteType": "Camber.UI.CoordinateSystemCodesDropDown, CamberUI",
+      "SelectedIndex": 739,
+      "SelectedString": "CA83IIIF",
+      "NodeType": "ExtensionNode",
+      "Id": "357a537cc31f437a8b7c343e1b5764ef",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "d9ad4dd135f04fb385e98ce05e72d993",
+          "Name": "code",
+          "Description": "The selected code",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Select coordinate system code."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.AutoCAD.Document.UnitsZoneSettings@Autodesk.AutoCAD.DynamoNodes.Document",
+      "Id": "72f1b3a3bec84437ba0c46170c05f67c",
+      "Inputs": [
+        {
+          "Id": "15efc233e4184dc6b6a1e507b4e5ca0c",
+          "Name": "document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "7adeb65a1f1c4ed08b478589544a3600",
+          "Name": "Drawing Units",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "37baa06272f9448c9c8b19d15f74f8bf",
+          "Name": "Angular Units",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "d0e9be8c365a4f878afcec4c8b409ad4",
+          "Name": "Coordinate System Code",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "9d8a67b08f6943298d9cb03350464c9c",
+          "Name": "Imperial to Metric Conversion",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "40b036f39ed34f0593278738f60b31b4",
+          "Name": "Drawing Scale",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "b3826cf0c64c48cdbbf0f5ad8e87e217",
+          "Name": "Scale Objects from Other Drawings",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "f2c91acbd5d14ef8a258d64bcdc55d71",
+          "Name": "Set AutoCAD Variables to Match",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the units and zone settings for a Document.\n\nDocument.UnitsZoneSettings (document: Document): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Document.Current",
+      "Id": "587fbdcbc75c408cb52068fb81b7e0f8",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "4d9fe506ea7a47a4a4d0594e14c875bc",
+          "Name": "Document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the current AutoCAD document.\n\nDocument.Current: Document"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.AutoCAD.Document.SetAngularUnits@Autodesk.AutoCAD.DynamoNodes.Document,string",
+      "Id": "2969a8ce12dc457f89620f740fbc19d9",
+      "Inputs": [
+        {
+          "Id": "c95675f2b7c841d2a3ae9fa665fba63d",
+          "Name": "document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "943912f1831e4ed081e4514a068fa3ed",
+          "Name": "angularUnitType",
+          "Description": "Degrees, Grads, or Radians\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "e5f22dab2cc245bf919b9d7e17622f0e",
+          "Name": "Document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Sets the angular units for a Document.\n\nDocument.SetAngularUnits (document: Document, angularUnitType: string): Document"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.AutoCAD.Document.SetAutoCADVariablesToMatch@Autodesk.AutoCAD.DynamoNodes.Document,bool",
+      "Id": "9c2cab280d4044099d8a98e2492b1a88",
+      "Inputs": [
+        {
+          "Id": "24be609eb1ad42949d91d14a04c1f0d6",
+          "Name": "document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "c1aa416f5f874457aed731ecac0b98a1",
+          "Name": "matchVariables",
+          "Description": "bool",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "1f0e3be5c18e47dcb175d98539dbb086",
+          "Name": "Document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Toggles whether to set AutoCAD variables to match for a Document.\n\nDocument.SetAutoCADVariablesToMatch (document: Document, matchVariables: bool): Document"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.AutoCAD.Document.SetCoordinateSystemCode@Autodesk.AutoCAD.DynamoNodes.Document,string",
+      "Id": "c38a009356384bbea8f29812f6b4adad",
+      "Inputs": [
+        {
+          "Id": "4b341f69e7f34f33b7eefcae893fc2e7",
+          "Name": "document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "adfd8126231c44b790b2dd37532b25ce",
+          "Name": "code",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "10793debfb8d4b48a0db87f1334e9ea4",
+          "Name": "Document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Sets the coordinate system code for a Document.\n\nDocument.SetCoordinateSystemCode (document: Document, code: string): Document"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.AutoCAD.Document.SetDrawingScale@Autodesk.AutoCAD.DynamoNodes.Document,double",
+      "Id": "b9db53446b3e4ad195473010ec6eed40",
+      "Inputs": [
+        {
+          "Id": "7b5a195212aa4010a063d336f3ed16f9",
+          "Name": "document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "dad4a81cd2cb4f4cbd0ba5779798feea",
+          "Name": "scale",
+          "Description": "double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "1394f4ddb2e14439aad62c598864a117",
+          "Name": "Document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Sets the scale for a Document.\n\nDocument.SetDrawingScale (document: Document, scale: double): Document"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.DoubleSlider, CoreNodeModels",
+      "NodeType": "NumberInputNode",
+      "NumberType": "Double",
+      "MaximumValue": 100.0,
+      "MinimumValue": 10.0,
+      "StepValue": 10.0,
+      "InputValue": 30.0,
+      "Id": "29db3153bb8544af92181167b8edf026",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "8cd6e6e9011f4e48aefa84ce3856823b",
+          "Name": "",
+          "Description": "Double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "A slider that produces numeric values."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.AutoCAD.Document.SetDrawingUnits@Autodesk.AutoCAD.DynamoNodes.Document,bool",
+      "Id": "a93f17c830d14060b0038c255e0b96f4",
+      "Inputs": [
+        {
+          "Id": "03b0451f35494fd590ef7628d5559562",
+          "Name": "document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "5952a74e3e5a4aaa820408eb490f8143",
+          "Name": "useFeet",
+          "Description": "If true, the units will be set to feet. If false, they will be set to metric.\n\nbool",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "16896c4e1e7f426285472de85fb81a0b",
+          "Name": "Document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Sets the units (feet or meters) for a Document.\n\nDocument.SetDrawingUnits (document: Document, useFeet: bool): Document"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": false,
+      "Id": "26dbd1b5cfb740868985232a0d20109e",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "7fd3f1413c1a427dbc77d1c88213a2ca",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Selection between a true and false."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.AutoCAD.Document.SetImperialToMetricConversion@Autodesk.AutoCAD.DynamoNodes.Document,bool",
+      "Id": "c597910ef0ea42eba060b0dfe642b32a",
+      "Inputs": [
+        {
+          "Id": "f71e7843abd047ada84b4a09e93c03bf",
+          "Name": "document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "352bad2f6fbe4960883d107ce2119d48",
+          "Name": "useInternationalFoot",
+          "Description": "If true, the conversion type will be set to International Foot. If false, it will be set to US Survey Foot.\n\nbool",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "41bf413f3a384ebd89309d20064eaa92",
+          "Name": "Document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Sets the imperial to metric conversion type for a Document.\n\nDocument.SetImperialToMetricConversion (document: Document, useInternationalFoot: bool): Document"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.AutoCAD.Document.SetScaleObjectsFromOtherDrawings@Autodesk.AutoCAD.DynamoNodes.Document,bool",
+      "Id": "02a1ca921fa44a6eb4656d43a9bb0206",
+      "Inputs": [
+        {
+          "Id": "cfb0e4d6d7e842c18c0f3572d88af42b",
+          "Name": "document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "0738f84c38904b03b06fd91c56e15e54",
+          "Name": "scaleObjects",
+          "Description": "bool",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "0e5e26335cf742e9b36c836965d54762",
+          "Name": "Document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Toggles whether to scale objects when inserted from other drawings into a Document.\n\nDocument.SetScaleObjectsFromOtherDrawings (document: Document, scaleObjects: bool): Document"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": true,
+      "Id": "b5ab43072175476f96e6157481f976ef",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "b5d56224db504dd2b306b22ae721144d",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Selection between a true and false."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "a41bb39489f14c7290898a3c07f99f03",
+      "End": "943912f1831e4ed081e4514a068fa3ed",
+      "Id": "d2dc42c961144b1ab429430f5dbf3ea5",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "d9ad4dd135f04fb385e98ce05e72d993",
+      "End": "adfd8126231c44b790b2dd37532b25ce",
+      "Id": "64e6c835cd0943238e7070266ac619fe",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "4d9fe506ea7a47a4a4d0594e14c875bc",
+      "End": "15efc233e4184dc6b6a1e507b4e5ca0c",
+      "Id": "89db1f1c0c2946ec9dfe324a0677674a",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "4d9fe506ea7a47a4a4d0594e14c875bc",
+      "End": "c95675f2b7c841d2a3ae9fa665fba63d",
+      "Id": "3329af1508bb47e9bad5ee537975bde4",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "4d9fe506ea7a47a4a4d0594e14c875bc",
+      "End": "24be609eb1ad42949d91d14a04c1f0d6",
+      "Id": "72dd1dcc0c3141d493fceacaf16acbe1",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "4d9fe506ea7a47a4a4d0594e14c875bc",
+      "End": "4b341f69e7f34f33b7eefcae893fc2e7",
+      "Id": "cc75577bc7c141a0a769621cb36e1a0d",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "4d9fe506ea7a47a4a4d0594e14c875bc",
+      "End": "7b5a195212aa4010a063d336f3ed16f9",
+      "Id": "f881743ffe4f4adeba3a9c2a4b7a60e5",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "4d9fe506ea7a47a4a4d0594e14c875bc",
+      "End": "03b0451f35494fd590ef7628d5559562",
+      "Id": "d65ec55f22914a0c90e0a1b8399b73a7",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "4d9fe506ea7a47a4a4d0594e14c875bc",
+      "End": "f71e7843abd047ada84b4a09e93c03bf",
+      "Id": "cdd85d569e164586b64faf0411e730be",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "4d9fe506ea7a47a4a4d0594e14c875bc",
+      "End": "cfb0e4d6d7e842c18c0f3572d88af42b",
+      "Id": "c09049464f9940449566263c05e0949b",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "8cd6e6e9011f4e48aefa84ce3856823b",
+      "End": "dad4a81cd2cb4f4cbd0ba5779798feea",
+      "Id": "71e51be93fcf4e5b97ef9580ef3cd68e",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "7fd3f1413c1a427dbc77d1c88213a2ca",
+      "End": "0738f84c38904b03b06fd91c56e15e54",
+      "Id": "ff20b772c16e4822974dbc67bd61da0d",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "7fd3f1413c1a427dbc77d1c88213a2ca",
+      "End": "c1aa416f5f874457aed731ecac0b98a1",
+      "Id": "b972b4b6b7bb46c4a60bbe5f71d7d8ac",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "7fd3f1413c1a427dbc77d1c88213a2ca",
+      "End": "352bad2f6fbe4960883d107ce2119d48",
+      "Id": "5beb25ad834445519fab40505e309b51",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "b5d56224db504dd2b306b22ae721144d",
+      "End": "5952a74e3e5a4aaa820408eb490f8143",
+      "Id": "240e938a44f743cd82e6ba64ee1ddaf5",
+      "IsHidden": "False"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Camber",
+      "Version": "4.0.1",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "f240b32a27c4489cb117b3368f2b3cf7",
+        "357a537cc31f437a8b7c343e1b5764ef",
+        "72f1b3a3bec84437ba0c46170c05f67c",
+        "2969a8ce12dc457f89620f740fbc19d9",
+        "9c2cab280d4044099d8a98e2492b1a88",
+        "c38a009356384bbea8f29812f6b4adad",
+        "b9db53446b3e4ad195473010ec6eed40",
+        "a93f17c830d14060b0038c255e0b96f4",
+        "c597910ef0ea42eba060b0dfe642b32a",
+        "02a1ca921fa44a6eb4656d43a9bb0206"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.13",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.13.1.3887",
+      "RunType": "Automatic",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "ConnectorPins": [],
+    "NodeViews": [
+      {
+        "Name": "Angular Unit Types",
+        "ShowGeometry": true,
+        "Id": "f240b32a27c4489cb117b3368f2b3cf7",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 196.31967805561749,
+        "Y": 286.42628730977327
+      },
+      {
+        "Name": "Coordinate System Codes",
+        "ShowGeometry": true,
+        "Id": "357a537cc31f437a8b7c343e1b5764ef",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 198.0348541494709,
+        "Y": 814.25458851106941
+      },
+      {
+        "Name": "Document.UnitsZoneSettings",
+        "ShowGeometry": true,
+        "Id": "72f1b3a3bec84437ba0c46170c05f67c",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 90.615217350973808,
+        "Y": 448.116298596467
+      },
+      {
+        "Name": "Document.Current",
+        "ShowGeometry": true,
+        "Id": "587fbdcbc75c408cb52068fb81b7e0f8",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -233.78040724247569,
+        "Y": 185.5834399776557
+      },
+      {
+        "Name": "Document.SetAngularUnits",
+        "ShowGeometry": true,
+        "Id": "2969a8ce12dc457f89620f740fbc19d9",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 779.5399343271572,
+        "Y": 196.01815682994931
+      },
+      {
+        "Name": "Document.SetAutoCADVariablesToMatch",
+        "ShowGeometry": true,
+        "Id": "9c2cab280d4044099d8a98e2492b1a88",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 680.62671689135448,
+        "Y": 28.030901879433841
+      },
+      {
+        "Name": "Document.SetCoordinateSystemCode",
+        "ShowGeometry": true,
+        "Id": "c38a009356384bbea8f29812f6b4adad",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 725.0230280245712,
+        "Y": 414.53996350979156
+      },
+      {
+        "Name": "Document.SetDrawingScale",
+        "ShowGeometry": true,
+        "Id": "b9db53446b3e4ad195473010ec6eed40",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 726.25949052529154,
+        "Y": 637.7605026447344
+      },
+      {
+        "Name": "Number Slider",
+        "ShowGeometry": true,
+        "Id": "29db3153bb8544af92181167b8edf026",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 118.84320283778482,
+        "Y": 951.06012933702641
+      },
+      {
+        "Name": "Document.SetDrawingUnits",
+        "ShowGeometry": true,
+        "Id": "a93f17c830d14060b0038c255e0b96f4",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 725.36342143095908,
+        "Y": 864.83762221142626
+      },
+      {
+        "Name": "Boolean",
+        "ShowGeometry": true,
+        "Id": "26dbd1b5cfb740868985232a0d20109e",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 273.36593725828584,
+        "Y": 1095.4401987222914
+      },
+      {
+        "Name": "Document.SetImperialToMetricConversion",
+        "ShowGeometry": true,
+        "Id": "c597910ef0ea42eba060b0dfe642b32a",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 619.87248230318642,
+        "Y": 1074.5785096312766
+      },
+      {
+        "Name": "Document.SetScaleObjectsFromOtherDrawings",
+        "ShowGeometry": true,
+        "Id": "02a1ca921fa44a6eb4656d43a9bb0206",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 613.49244657809686,
+        "Y": 1241.5262470963032
+      },
+      {
+        "Name": "Boolean",
+        "ShowGeometry": true,
+        "Id": "b5ab43072175476f96e6157481f976ef",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 257.81600012064985,
+        "Y": 1223.2686338824433
+      }
+    ],
+    "Annotations": [],
+    "X": 340.54317307891444,
+    "Y": 46.12420332151072,
+    "Zoom": 0.44314570172316264
+  }
+}

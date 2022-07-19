@@ -1,17 +1,18 @@
-﻿#region references
+﻿using Autodesk.Civil.Settings;
+using Autodesk.DesignScript.Runtime;
+using Camber.AutoCAD.Objects;
 using Camber.AutoCAD.Objects.MultiViewBlocks;
 using Dynamo.Graph.Nodes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Camber.AutoCAD.Objects;
+using Autodesk.Civil;
 using acApp = Autodesk.AutoCAD.ApplicationServices;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
-using acGeom = Autodesk.AutoCAD.Geometry;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using aecDb = Autodesk.Aec.DatabaseServices;
-#endregion
+using civApp = Autodesk.Civil.ApplicationServices;
 
 namespace Camber.AutoCAD
 {
@@ -104,6 +105,40 @@ namespace Camber.AutoCAD
             }
             return xrefs;
         }
+
+        /// <summary>
+        /// Gets the units and zone settings for a Document.
+        /// </summary>
+        /// <param name="document"></param>
+        /// <returns></returns>
+        [NodeCategory("Query")]
+        [MultiReturn(
+            "Drawing Units",
+            "Angular Units",
+            "Coordinate System Code",
+            "Imperial to Metric Conversion",
+            "Drawing Scale",
+            "Scale Objects from Other Drawings",
+            "Set AutoCAD Variables to Match")]
+        public static Dictionary<string, object> UnitsZoneSettings(this acDynNodes.Document document)
+        {
+            using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
+            {
+                var cdoc = civApp.CivilDocument.GetCivilDocument(document.AcDocument.Database);
+                var settings = cdoc.Settings.DrawingSettings.UnitZoneSettings;
+                return new Dictionary<string, object>
+                {
+                    { "Drawing Units", settings.DrawingUnits.ToString() },
+                    { "Angular Units", settings.AngularUnits.ToString() },
+                    { "Coordinate System Code", settings.CoordinateSystemCode },
+                    { "Imperial to Metric Conversion", settings.ImperialToMetricConversion.ToString() },
+                    { "Drawing Scale", settings.DrawingScale },
+                    { "Scale Objects from Other Drawings", settings.ScaleObjectsFromOtherDrawings },
+                    { "Set AutoCAD Variables to Match", settings.MatchAutoCADVariables }
+                };
+            }
+
+        }
         #endregion
 
         #region action methods
@@ -186,8 +221,194 @@ namespace Camber.AutoCAD
                 .FirstOrDefault(item => item.Name.Equals
                     (name, StringComparison.OrdinalIgnoreCase));
         }
+
+        /// <summary>
+        /// Sets the units (feet or meters) for a Document.
+        /// </summary>
+        /// <param name="document"></param>
+        /// <param name="useFeet">If true, the units will be set to feet. If false, they will be set to metric.</param>
+        /// <returns></returns>
+        public static acDynNodes.Document SetDrawingUnits(this acDynNodes.Document document, bool useFeet)
+        {
+            try
+            {
+                using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
+                {
+                    var cdoc = civApp.CivilDocument.GetCivilDocument(document.AcDocument.Database);
+                    var settings = cdoc.Settings.DrawingSettings.UnitZoneSettings;
+                    var units = DrawingUnitType.Meters;
+                    if (useFeet)
+                    {
+                        units = DrawingUnitType.Feet;
+                    }
+                    settings.DrawingUnits = units;
+                }
+                return document;
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Sets the angular units for a Document.
+        /// </summary>
+        /// <param name="document"></param>
+        /// <param name="angularUnitType">Degrees, Grads, or Radians</param>
+        /// <returns></returns>
+        public static acDynNodes.Document SetAngularUnits(this acDynNodes.Document document, string angularUnitType)
+        {
+            try
+            {
+                using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
+                {
+                    var cdoc = civApp.CivilDocument.GetCivilDocument(document.AcDocument.Database);
+                    var settings = cdoc.Settings.DrawingSettings.UnitZoneSettings;
+                    if (!Enum.TryParse(angularUnitType, out AngleUnitType unitType))
+                    {
+                        throw new InvalidOperationException("Invalid angular units type.");
+                    }
+                    settings.AngularUnits = unitType;
+                }
+                return document;
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Sets the coordinate system code for a Document.
+        /// </summary>
+        /// <param name="document"></param>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        public static acDynNodes.Document SetCoordinateSystemCode(this acDynNodes.Document document, string code)
+        {
+            try
+            {
+                using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
+                {
+                    var cdoc = civApp.CivilDocument.GetCivilDocument(document.AcDocument.Database);
+                    var settings = cdoc.Settings.DrawingSettings.UnitZoneSettings;
+                    settings.CoordinateSystemCode = code;
+                }
+                return document;
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Sets the imperial to metric conversion type for a Document.
+        /// </summary>
+        /// <param name="document"></param>
+        /// <param name="useInternationalFoot">
+        /// If true, the conversion type will be set to International Foot.
+        ///  If false, it will be set to US Survey Foot.
+        /// </param>
+        /// <returns></returns>
+        public static acDynNodes.Document SetImperialToMetricConversion(this acDynNodes.Document document, bool useInternationalFoot)
+        {
+            try
+            {
+                using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
+                {
+                    var cdoc = civApp.CivilDocument.GetCivilDocument(document.AcDocument.Database);
+                    var settings = cdoc.Settings.DrawingSettings.UnitZoneSettings;
+                    var conversionType = ImperialToMetricConversionType.UsSurveyFoot;
+                    if (useInternationalFoot)
+                    {
+                        conversionType = ImperialToMetricConversionType.InternationalFoot;
+                    }
+                    settings.ImperialToMetricConversion = conversionType;
+                }
+                return document;
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Sets the scale for a Document.
+        /// </summary>
+        /// <param name="document"></param>
+        /// <param name="scale"></param>
+        /// <returns></returns>
+        public static acDynNodes.Document SetDrawingScale(this acDynNodes.Document document, double scale)
+        {
+            try
+            {
+                using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
+                {
+                    var cdoc = civApp.CivilDocument.GetCivilDocument(document.AcDocument.Database);
+                    var settings = cdoc.Settings.DrawingSettings.UnitZoneSettings;
+                    settings.DrawingScale = scale;
+                }
+                return document;
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Toggles whether to scale objects when inserted from other drawings into a Document.
+        /// </summary>
+        /// <param name="document"></param>
+        /// <param name="scaleObjects"></param>
+        /// <returns></returns>
+        public static acDynNodes.Document SetScaleObjectsFromOtherDrawings(this acDynNodes.Document document, bool scaleObjects)
+        {
+            try
+            {
+                using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
+                {
+                    var cdoc = civApp.CivilDocument.GetCivilDocument(document.AcDocument.Database);
+                    var settings = cdoc.Settings.DrawingSettings.UnitZoneSettings;
+                    settings.ScaleObjectsFromOtherDrawings = scaleObjects;
+                }
+                return document;
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Toggles whether to set AutoCAD variables to match for a Document.
+        /// </summary>
+        /// <param name="document"></param>
+        /// <param name="matchVariables"></param>
+        /// <returns></returns>
+        public static acDynNodes.Document SetAutoCADVariablesToMatch(this acDynNodes.Document document, bool matchVariables)
+        {
+            try
+            {
+                using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
+                {
+                    var cdoc = civApp.CivilDocument.GetCivilDocument(document.AcDocument.Database);
+                    var settings = cdoc.Settings.DrawingSettings.UnitZoneSettings;
+                    settings.MatchAutoCADVariables = matchVariables;
+                }
+                return document;
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
         #endregion
 
+        #region helper methods
         /// <summary>
         /// Gets the DWG version of a database.
         /// </summary>
@@ -236,5 +457,6 @@ namespace Camber.AutoCAD
                     return 0;
             }
         }
+        #endregion
     }
 }
