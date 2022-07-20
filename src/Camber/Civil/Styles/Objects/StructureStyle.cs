@@ -1,10 +1,8 @@
-﻿#region references
+﻿using Autodesk.DesignScript.Runtime;
 using System;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
-using civDb = Autodesk.Civil.DatabaseServices;
 using AeccStructureStyle = Autodesk.Civil.DatabaseServices.Styles.StructureStyle;
-using Autodesk.DesignScript.Runtime;
-#endregion
+using civDb = Autodesk.Civil.DatabaseServices;
 
 namespace Camber.Civil.Styles.Objects
 {
@@ -94,54 +92,55 @@ namespace Camber.Civil.Styles.Objects
         /// <returns></returns>
         private StructureStyle SetStructureStyleProperty(StructureViewDirection viewDirection, string propertyName, object value)
         {
-            string invalidNameMessage = "Invalid property name.";
+            const string invalidNameMessage = "Invalid property name.";
 
-            if (viewDirection is StructureViewDirection.ModelOption)
+            switch (viewDirection)
             {
-                if (propertyName == "ModelViewOptions")
-                {
+                case StructureViewDirection.ModelOption when propertyName == "ModelViewOptions":
                     value = Enum.Parse(typeof(civDb.Styles.StructureModelViewOptionType), (string)value);
-                }
-                else if (propertyName == "SimpleSolidType")
+                    break;
+                case StructureViewDirection.ModelOption:
                 {
-                    value = Enum.Parse(typeof(civDb.Styles.StructureSimpleSolidType), (string)value);
+                    if (propertyName == "SimpleSolidType")
+                    {
+                        value = Enum.Parse(typeof(civDb.Styles.StructureSimpleSolidType), (string)value);
+                    }
+                    break;
                 }
-                else { throw new ArgumentException(invalidNameMessage); }
-            }
-            else if (viewDirection is StructureViewDirection.PlanOption)
-            {
-                if (propertyName == "PlanViewOptions")
-                {
+                case StructureViewDirection.PlanOption when propertyName == "PlanViewOptions":
                     value = Enum.Parse(typeof(civDb.Styles.StructurePlanViewType), (string)value);
-                }
-                else if (propertyName == "SizeType")
+                    break;
+                case StructureViewDirection.PlanOption:
                 {
-                    value = Enum.Parse(typeof(civDb.Styles.StructureSizeOptionsType), (string)value);
-                }
-                else { throw new ArgumentException(invalidNameMessage); }
-            }
-            else
-            {
-                switch (propertyName)
-                {
-                    case "BlockInsertLocation":
-                        value = Enum.Parse(typeof(civDb.Styles.StructureInsertionLocation), (string)value);
-                        break;
-                    case "SizeType":
+                    if (propertyName == "SizeType")
+                    {
                         value = Enum.Parse(typeof(civDb.Styles.StructureSizeOptionsType), (string)value);
-                        break;
-                    case "ViewOptions":
-                        value = Enum.Parse(typeof(civDb.Styles.StructureViewType), (string)value);
-                        break;
-                    default:
-                        throw new ArgumentException(invalidNameMessage);
+                    }
+                    break;
                 }
+                case StructureViewDirection.ProfileOption:
+                case StructureViewDirection.SectionOption:
+                default:
+                    switch (propertyName)
+                    {
+                        case "BlockInsertLocation":
+                            value = Enum.Parse(typeof(civDb.Styles.StructureInsertionLocation), (string)value);
+                            break;
+                        case "SizeType":
+                            value = Enum.Parse(typeof(civDb.Styles.StructureSizeOptionsType), (string)value);
+                            break;
+                        case "ViewOptions":
+                            value = Enum.Parse(typeof(civDb.Styles.StructureViewType), (string)value);
+                            break;
+                        default:
+                            throw new ArgumentException(invalidNameMessage);
+                    }
+                    break;
             }
 
-
-            bool openedForWrite = AeccStructureStyle.IsWriteEnabled;
+            var openedForWrite = AeccStructureStyle.IsWriteEnabled;
             if (!openedForWrite) { AeccStructureStyle.UpgradeOpen(); }
-            var res = Utilities.ReflectionUtilities.SetNestedProperty(AeccStructureStyle, viewDirection.ToString() + "." + propertyName, value);
+            var res = Utilities.ReflectionUtilities.SetNestedProperty(AeccStructureStyle, viewDirection + "." + propertyName, value);
             if (res == null) { throw new Exception("Value not set."); }
             if (!openedForWrite) { AeccStructureStyle.DowngradeOpen(); }
             return this;
@@ -156,11 +155,7 @@ namespace Camber.Civil.Styles.Objects
         private object GetStructureStyleProperty(StructureViewDirection viewDirection, string propertyName)
         {
             var propVal = Utilities.ReflectionUtilities.GetNestedProperty(AeccStructureStyle, viewDirection.ToString() + "." + propertyName, null);
-            if (propVal is Enum)
-            {
-                return propVal.ToString();
-            }
-            return propVal;
+            return propVal is Enum ? propVal.ToString() : propVal;
         }
 
         [IsVisibleInDynamoLibrary(false)]
