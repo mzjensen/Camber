@@ -176,6 +176,10 @@ namespace Camber.AutoCAD.Objects
         public static acDynNodes.Object ConvertToCamberObject(acDynNodes.Object @object)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
+            if (@object == null)
+            {
+                return null;
+            }
             using (var ctx = new acDynApp.DocumentContext(document?.AcDocument))
             {
                 IEnumerable<acDynNodes.Object> assemblyObjects = null;
