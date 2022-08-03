@@ -1,5 +1,4 @@
-﻿#region references
-using Camber.External.ExternalObjects;
+﻿using Camber.External.ExternalObjects;
 using Camber.Utilities;
 using System;
 using System.Collections.Generic;
@@ -8,9 +7,6 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using AcBlock = Autodesk.AutoCAD.DatabaseServices.BlockTableRecord;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
-using civDb = Autodesk.Civil.DatabaseServices;
-
-#endregion
 
 namespace Camber.External
 {
@@ -160,6 +156,11 @@ namespace Camber.External
                 return brefs;
             }
         }
+
+        /// <summary>
+        /// Gets the External Document that an External Block belongs to.
+        /// </summary>
+        public ExternalDocument ExternalDocument => new ExternalDocument(AcDatabase, AcDatabase.Filename);
         #endregion
 
         #region constructors
