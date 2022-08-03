@@ -50,6 +50,11 @@ namespace Camber.External
                 }
             }
         }
+
+        /// <summary>
+        /// Gets the External Document that an External Layout belongs to.
+        /// </summary>
+        public ExternalDocument ExternalDocument => new ExternalDocument(AcDatabase, AcDatabase.Filename);
         #endregion
 
         #region constructors
