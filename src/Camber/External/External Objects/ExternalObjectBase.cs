@@ -1,11 +1,8 @@
-﻿#region references
-
+﻿using Autodesk.DesignScript.Runtime;
 using System;
-using acDb = Autodesk.AutoCAD.DatabaseServices;
-using Autodesk.DesignScript.Runtime;
-using System.Runtime.CompilerServices;
 using System.Reflection;
-#endregion
+using System.Runtime.CompilerServices;
+using acDb = Autodesk.AutoCAD.DatabaseServices;
 
 namespace Camber.External.ExternalObjects
 {
@@ -16,8 +13,8 @@ namespace Camber.External.ExternalObjects
         protected acDb.DBObject AcObject { get; set; }
         protected acDb.ObjectId AcObjectId { get; set; }
         protected acDb.Database AcDatabase { get; set; }
-        public acDb.DBObject InternalDBObject { get { return AcObject; } }
-        public acDb.ObjectId InternalObjectId { get { return AcObjectId; } }
+        public acDb.DBObject InternalDBObject => AcObject;
+        public acDb.ObjectId InternalObjectId => AcObjectId;
         #endregion
 
         #region constructors

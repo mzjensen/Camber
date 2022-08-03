@@ -65,6 +65,11 @@ namespace Camber.External.ExternalObjects
                 return typeString;
             }
         }
+
+        /// <summary>
+        /// Gets the External Document that an External Object belongs to.
+        /// </summary>
+        public ExternalDocument ExternalDocument => new ExternalDocument(AcDatabase, AcDatabase.Filename);
         #endregion
 
         #region constructors
