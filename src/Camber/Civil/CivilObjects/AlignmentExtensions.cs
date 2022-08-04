@@ -1,16 +1,19 @@
-﻿using Dynamo.Graph.Nodes;
-using DynamoServices;
+﻿using Autodesk.Civil.Settings;
+using Autodesk.DesignScript.Geometry;
+using Camber.AutoCAD.Objects;
+using Dynamo.Graph.Nodes;
 using System;
 using System.Collections.Generic;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using AeccAlignment = Autodesk.Civil.DatabaseServices.Alignment;
+using civApp = Autodesk.Civil.ApplicationServices;
+using civDb = Autodesk.Civil.DatabaseServices;
 using civDynNodes = Autodesk.Civil.DynamoNodes;
 
 namespace Camber.Civil.CivilObjects
 {
-    [RegisterForTrace]
     public static class Alignment
     {
         /// <summary>
@@ -140,6 +143,33 @@ namespace Camber.Civil.CivilObjects
                 throw new InvalidOperationException(e.Message);
             }
         }
+
+        /// <summary>
+        /// Gets the Polycurve geometry of an Alignment. Note that spiral entities will be tessellated.
+        /// </summary>
+        /// <param name="alignment"></param>
+        /// <returns></returns>
+        [NodeCategory("Query")]
+        public static PolyCurve Geometry(this civDynNodes.Alignment alignment)
+        {
+            try
+            {
+                using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
+                {
+                    var aeccAlign = (AeccAlignment) ctx.Transaction.GetObject(alignment.InternalObjectId, acDb.OpenMode.ForRead);
+                    var plineId = aeccAlign.GetPolyline();
+                    var acPline = (acDb.Polyline) ctx.Transaction.GetObject(plineId, acDb.OpenMode.ForWrite);
+                    var dynPline = (acDynNodes.Polyline) acDynNodes.SelectionByQuery.GetObjectByObjectHandle(plineId.Handle.ToString());
+                    dynPline.PruneDuplicateVertices(false);
+                    acPline.Erase();
+                    return (PolyCurve)dynPline.Geometry;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
         #endregion
 
         #region action methods
@@ -172,6 +202,93 @@ namespace Camber.Civil.CivilObjects
             catch (Exception ex)
             {
                 throw new InvalidOperationException(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Sets the start station for an Alignment.
+        /// </summary>
+        /// <param name="alignment"></param>
+        /// <param name="startStation"></param>
+        /// <returns></returns>
+        public static civDynNodes.Alignment SetStartStation(this civDynNodes.Alignment alignment, double startStation)
+        {
+            if (alignment == null)
+            {
+                return null;
+            }
+
+            try
+            {
+                using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
+                {
+                    var aeccAlign = (AeccAlignment)ctx.Transaction.GetObject(
+                        alignment.InternalObjectId, 
+                        acDb.OpenMode.ForWrite);
+                    aeccAlign.ReferencePointStation = startStation;
+                    return alignment;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
+        #endregion
+
+        #region create methods
+        /// <summary>
+        /// Creates a new Alignment from a Polyline or 3D Polyline. Note that the value for "Add Curves Between Tangents" will be taken from the Civil 3D settings.
+        /// </summary>
+        /// <param name="document"></param>
+        /// <param name="polyline">The Polyline or 3D Polyline to create the Alignment from.</param>
+        /// <param name="name">The name of the new Alignment.</param>
+        /// <param name="layer"></param>
+        /// <param name="style"></param>
+        /// <param name="labelSet">The name of the label set style to apply.</param>
+        /// <param name="site">The name of the Site to add the Alignment to. The Alignment will be siteless by default if this input is not supplied.</param>
+        /// <param name="startStation"></param>
+        /// <param name="erasePolyline">If true, the Polyline will be erased after the Alignment is created.</param>
+        /// <returns></returns>
+        [NodeCategory("Create")]
+        public static civDynNodes.Alignment ByPolyline(
+            acDynNodes.Document document, 
+            acDynNodes.Object polyline,
+            string name, 
+            string layer, 
+            Styles.Objects.AlignmentStyle style,
+            string labelSet,
+            string site = "",
+            double startStation = 0.0,
+            bool erasePolyline = false)
+        {
+            if (!(polyline is acDynNodes.Polyline) && !(polyline is acDynNodes.Polyline3D))
+            {
+                throw new InvalidOperationException("The input Polyline object must be a Polyline or 3D Polyline.");
+            }
+
+            using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
+            {
+                var cdoc = civApp.CivilDocument.GetCivilDocument(document.AcDocument.Database);
+                try
+                {
+                    var plineOptions = new civDb.PolylineOptions
+                    {
+                        AddCurvesBetweenTangents = cdoc.Settings.GetSettings<SettingsCmdCreateAlignmentEntities>()
+                            .CreateFromEntities.AddCurveBetweenTangents.Value,
+                        EraseExistingEntities = erasePolyline,
+                        PlineId = polyline.InternalObjectId
+                    };
+                    acDynNodes.AutoCADUtility.EnsureLayer(ctx, layer);
+                    var alignId = AeccAlignment.Create(cdoc, plineOptions, name, site, layer, style.Name, labelSet);
+                    var aeccAlign = (AeccAlignment) ctx.Transaction.GetObject(alignId, acDb.OpenMode.ForWrite);
+                    aeccAlign.ReferencePointStation = startStation;
+                    return GetByObjectId(alignId);
+                }
+                catch (Exception ex)
+                {
+                    throw new InvalidOperationException(ex.Message);
+                }
             }
         }
         #endregion
