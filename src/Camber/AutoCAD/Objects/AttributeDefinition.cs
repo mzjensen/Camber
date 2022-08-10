@@ -1,5 +1,4 @@
-﻿#region references
-using Autodesk.DesignScript.Geometry;
+﻿using Autodesk.DesignScript.Geometry;
 using Autodesk.DesignScript.Runtime;
 using Camber.Utilities.GeometryConversions;
 using DynamoServices;
@@ -8,7 +7,6 @@ using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using acGeom = Autodesk.AutoCAD.Geometry;
-#endregion
 
 namespace Camber.AutoCAD.Objects
 {
@@ -19,46 +17,48 @@ namespace Camber.AutoCAD.Objects
         internal AcAttDef AcAttDef => AcObject as AcAttDef;
 
         /// <summary>
-        /// Gets whether the Attribute Definition is set to be constant or not.
+        /// Gets whether an Attribute Definition is set to be constant or not.
         /// </summary>
         public bool Constant => GetBool();
 
         /// <summary>
-        /// Gets the Attribute Definition's field length value.
+        /// Gets an Attribute Definition's field length value.
         /// </summary>
         public int FieldLength => GetInt();
 
         /// <summary>
-        /// Gets whether the Attribute Definition is set to be visible or invisible.
+        /// Gets whether an Attribute Definition is set to be visible or invisible.
         /// </summary>
         public bool Invisible => GetBool();
 
         /// <summary>
-        /// Gets whether the Attribute Definition is multi-line.
+        /// Gets whether an Attribute Definition is multi-line.
         /// </summary>
         public bool MultiLine => GetBool("IsMTextAttributeDefinition");
 
         /// <summary>
-        /// Gets whether the Attribute Definition's position is locked or movable.
+        /// Gets whether an Attribute Definition's position is locked or movable.
         /// </summary>
         public bool LockPosition => GetBool("LockPositionInBlock");
 
         /// <summary>
-        /// Gets whether the Attribute Definition is set to be preset.
+        /// Gets whether an Attribute Definition is set to be preset.
         /// </summary>
         public bool Preset => GetBool();
 
         /// <summary>
-        /// Gets the prompt for the Attribute Definition.
+        /// Gets the prompt for an Attribute Definition.
         /// </summary>
         public string Prompt => GetString();
 
         /// <summary>
-        /// Gets the tag of the Attribute Definition.
+        /// Gets the tag of an Attribute Definition.
         /// </summary>
         public string Tag => GetString();
 
-
+        /// <summary>
+        /// Gets the value of an Attribute Definition.
+        /// </summary>
         public string Value => GetString("TextString");
 
         /// <summary>
@@ -158,7 +158,7 @@ namespace Camber.AutoCAD.Objects
         public override string ToString() => $"AttributeDefinition(Tag = {Tag}, Value = {Value}";
 
         /// <summary>
-        /// Sets whether the Attribute Definition is constant or not.
+        /// Sets whether an Attribute Definition is constant or not.
         /// </summary>
         /// <param name="bool"></param>
         /// <returns></returns>
@@ -169,7 +169,7 @@ namespace Camber.AutoCAD.Objects
         }
 
         /// <summary>
-        /// Sets the Attribute Definition's field length value.
+        /// Sets an Attribute Definition's field length value.
         /// </summary>
         /// <param name="length"></param>
         /// <returns></returns>
@@ -180,7 +180,7 @@ namespace Camber.AutoCAD.Objects
         }
 
         /// <summary>
-        /// Sets whether the Attribute Definition is visible or invisible.
+        /// Sets whether an Attribute Definition is visible or invisible.
         /// </summary>
         /// <param name="bool"></param>
         /// <returns></returns>
@@ -191,7 +191,7 @@ namespace Camber.AutoCAD.Objects
         }
 
         /// <summary>
-        /// Sets whether the Attribute Definition is multi-line.
+        /// Sets whether an Attribute Definition is multi-line.
         /// </summary>
         /// <param name="bool"></param>
         /// <returns></returns>
@@ -202,7 +202,7 @@ namespace Camber.AutoCAD.Objects
         }
 
         /// <summary>
-        /// Sets whether the Attribute Definition's position is locked or movable.
+        /// Sets whether an Attribute Definition's position is locked or movable.
         /// </summary>
         /// <param name="bool"></param>
         /// <returns></returns>
@@ -213,7 +213,7 @@ namespace Camber.AutoCAD.Objects
         }
 
         /// <summary>
-        /// Sets whether the Attribute Definition is preset.
+        /// Sets whether an Attribute Definition is preset.
         /// </summary>
         /// <param name="bool"></param>
         /// <returns></returns>
@@ -224,7 +224,7 @@ namespace Camber.AutoCAD.Objects
         }
 
         /// <summary>
-        /// Sets the prompt for the Attribute Definition.
+        /// Sets the prompt for an Attribute Definition.
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
@@ -235,7 +235,7 @@ namespace Camber.AutoCAD.Objects
         }
 
         /// <summary>
-        /// Sets the tag of the Attribute Definition.
+        /// Sets the tag of an Attribute Definition.
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
@@ -246,7 +246,7 @@ namespace Camber.AutoCAD.Objects
         }
 
         /// <summary>
-        /// Sets whether the Attribute Definition is verifiable.
+        /// Sets whether an Attribute Definition is verifiable.
         /// </summary>
         /// <param name="bool"></param>
         /// <returns></returns>
