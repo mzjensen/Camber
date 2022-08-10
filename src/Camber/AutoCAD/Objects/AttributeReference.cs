@@ -41,11 +41,6 @@ namespace Camber.AutoCAD.Objects
         public bool LockPositionInBlock => GetBool();
 
         /// <summary>
-        /// Gets the MText object of a multi-line Attribute Reference.
-        /// </summary>
-        public acDynNodes.MText MText => (acDynNodes.MText) acDynNodes.SelectionByQuery.GetObjectByObjectHandle(AcAttRef.MTextAttribute.Handle.ToString());
-
-        /// <summary>
         /// Gets the tag of an Attribute Reference.
         ///  This is the identifier you see if you explode a Block Reference that owns the attribute,
         ///  so that the attribute reverts back to the Attribute Definition that was part of the original reference’s block definition.
@@ -63,7 +58,7 @@ namespace Camber.AutoCAD.Objects
         #endregion
 
         #region methods
-        public override string ToString() => $"{nameof(AttributeReference)}(Tag = {Tag}";
+        public override string ToString() => $"{nameof(AttributeReference)}(Tag = {Tag})";
 
         /// <summary>
         /// Sets the visibility of an Attribute Reference.

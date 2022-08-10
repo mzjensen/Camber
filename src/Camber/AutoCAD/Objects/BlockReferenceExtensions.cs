@@ -25,9 +25,9 @@ namespace Camber.AutoCAD.Objects
             using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
             {
                 var acBlkRef = (AcBlockReference)ctx.Transaction.GetObject(blockReference.InternalObjectId, acDb.OpenMode.ForRead);
-                foreach (AcAttRef attRef in acBlkRef.AttributeCollection)
+                foreach (acDb.ObjectId oid in acBlkRef.AttributeCollection)
                 {
-                    attRefs.Add(new AttributeReference(attRef));
+                    attRefs.Add(AttributeReference.GetByObjectId(oid));
                 }
             }
             return attRefs;
