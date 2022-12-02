@@ -34,7 +34,7 @@ namespace Camber.AutoCAD
         /// </summary>
         public int TabOrder => AcLayout.TabOrder;
 
-        /// <summary>P
+        /// <summary>
         /// Gets the Block associated with a Layout.
         /// </summary>
         public acDynNodes.Block Block
