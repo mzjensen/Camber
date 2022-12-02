@@ -74,6 +74,25 @@ namespace Camber.AutoCAD.Objects
         public Point TextLocation => GeometryConversions.AcPointToDynPoint(AcMLeader.TextLocation);
 
         /// <summary>
+        /// Gets the first vertex of each leader line in an MLeader.
+        /// </summary>
+        public IList<Point> LeaderPoints
+        {
+            get
+            {
+                var pnts = new List<Point>();
+                for (int i = 0; i < AcMLeader.LeaderLineCount; i++)
+                {
+                    var acPnt = AcMLeader.GetFirstVertex(i);
+                    var dynPnt = GeometryConversions.AcPointToDynPoint(acPnt);
+                    pnts.Add(dynPnt);
+                }
+
+                return pnts;
+            }
+        }
+
+        /// <summary>
         /// Gets the Attribute References of an MLeader with block content.
         /// </summary>
         private IList<acDb.AttributeReference> AttributeReferences
