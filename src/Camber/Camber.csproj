@@ -38,7 +38,7 @@
     <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <C3DVersion>2023</C3DVersion>
-    <DynamoPackageFolder>2.13</DynamoPackageFolder>
+    <DynamoPackageFolder>2.15</DynamoPackageFolder>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug2022|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
