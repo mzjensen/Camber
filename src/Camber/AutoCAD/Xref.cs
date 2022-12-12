@@ -91,6 +91,7 @@ namespace Camber.AutoCAD
         /// <param name="overlay">true = overlay, false = attach</param>
         /// <param name="coordinateSystem">Defines the insertion point, rotation, and scale factors</param>
         /// <param name="name">The name to assign to the Xref. By default it will be the name of the file.</param>
+        /// <param name="layer">The layer to place the Xref on. By default it will be placed on the current layer.</param>
         /// <returns></returns>
         public static Xref InsertFromFile(
             acDynNodes.Document document,
@@ -99,7 +100,8 @@ namespace Camber.AutoCAD
             bool overlay,
             [DefaultArgument("CoordinateSystem.Identity()")]
             CoordinateSystem coordinateSystem,
-            string name = "")
+            string name = "",
+            string layer = "")
         {
             bool hasBlockWithSameName = false;
             bool fileNotExists = false;
@@ -150,6 +152,12 @@ namespace Camber.AutoCAD
 
                         btr.AppendEntity(blkRef);
                         ctx.Transaction.AddNewlyCreatedDBObject(blkRef, true);
+
+                        if (layer != "")
+                        {
+                            acDynNodes.AutoCADUtility.EnsureLayer(ctx, layer);
+                            blkRef.Layer = layer;
+                        }
 
                         return new Xref(blkRef, true).AcBlockReference;
                     }
@@ -207,6 +215,14 @@ namespace Camber.AutoCAD
                             btr.IsFromOverlayReference = overlay;
                             ctx.Database.ReloadXrefs(new acDb.ObjectIdCollection(new[] { btr.ObjectId }));
                         }
+
+                        // Update layer
+                        if (!string.Equals(xref.Layer, layer, StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            acDynNodes.AutoCADUtility.EnsureLayer(ctx, layer);
+                            xref.Layer = layer;
+                        }
+
                         xref.DowngradeOpen();
                     }
                     return true;

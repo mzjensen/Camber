@@ -1,0 +1,408 @@
+{
+  "Uuid": "76fbbb8b-d542-4e9c-a11d-5c84b8bdaed5",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "XrefTests",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.AutoCAD.Xref.InsertFromFile@Autodesk.AutoCAD.DynamoNodes.Document,Autodesk.AutoCAD.DynamoNodes.Block,string,bool,Autodesk.DesignScript.Geometry.CoordinateSystem,string,string",
+      "Id": "eda0e116d21b449b98ddc04f0af7f6de",
+      "Inputs": [
+        {
+          "Id": "eb98970c704c42e98d23e9133d314b84",
+          "Name": "document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "28e74859056d4678af8fd81102dc4e31",
+          "Name": "block",
+          "Description": "The destination Block to insert the Xref into\n\nBlock",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "3d34506d83694e9fa9704fdb5a538684",
+          "Name": "filePath",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "e40c3ac902b0421aa5776f2e13eab624",
+          "Name": "overlay",
+          "Description": "true = overlay, false = attach\n\nbool",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "ebe8b9d3d07b4313aac3d6749d660271",
+          "Name": "coordinateSystem",
+          "Description": "Defines the insertion point, rotation, and scale factors\n\nCoordinateSystem\nDefault value : Autodesk.DesignScript.Geometry.CoordinateSystem.Identity()",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "9fc27e304a614d3c87229826f1ad913f",
+          "Name": "name",
+          "Description": "The name to assign to the Xref. By default it will be the name of the file.\n\nstring\nDefault value : \"\"",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "c47fccdd56e2428bbbd3b94a6817b51f",
+          "Name": "layer",
+          "Description": "The layer to place the Xref on. By default it will be placed on the current layer.\n\nstring\nDefault value : \"\"",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "0189419360e04e8291f37011d3bfb978",
+          "Name": "Xref",
+          "Description": "Xref",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Creates a new external reference to a DWG file.\n\nXref.InsertFromFile (document: Document, block: Block, filePath: string, overlay: bool, coordinateSystem: CoordinateSystem = Autodesk.DesignScript.Geometry.CoordinateSystem.Identity(), name: string = \"\", layer: string = \"\"): Xref"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Document.Current",
+      "Id": "438f1597594946a3bb9f31439b85a046",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "01960b264c844974bec28e0d16a12d09",
+          "Name": "Document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the current AutoCAD document.\n\nDocument.Current: Document"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Document.ModelSpace",
+      "Id": "9e6d0ee9d33041efb426c0a53f3dd517",
+      "Inputs": [
+        {
+          "Id": "da7420750a4c4822894790782e97cdb1",
+          "Name": "document",
+          "Description": "Autodesk.AutoCAD.DynamoNodes.Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "658d6374d8bc425ba4e96200a8ac75c3",
+          "Name": "Block",
+          "Description": "Block",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the model space block table record.\n\nDocument.ModelSpace: Block"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Document.Current",
+      "Id": "7f8fb385d473495b9e4146c89c0144c6",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "56f847cc145042eeb70aeb564459aa6d",
+          "Name": "Document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the current AutoCAD document.\n\nDocument.Current: Document"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.Filename, CoreNodeModels",
+      "HintPath": "C:\\Software Projects\\Camber\\tests\\Xref\\Xref01.dwg",
+      "InputValue": "C:\\Software Projects\\Camber\\tests\\Xref\\Xref01.dwg",
+      "NodeType": "ExtensionNode",
+      "Id": "e6e0cfff903f40ac8d06648068182f7f",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "ed7c62d492da40ac8a71ffe5554ce4c0",
+          "Name": "",
+          "Description": "File Path",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows you to select a file on the system to get its file path."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": true,
+      "Id": "ec5c0dabba21478e95be567dd3850d25",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "10443d19902b48348fbf57a89f79e039",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Selection between a true and false."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"Test\";",
+      "Id": "d6d4821c8247446dbedef9114deb6ce9",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "46c55eaf07684f8db2f83441e83f2277",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "01960b264c844974bec28e0d16a12d09",
+      "End": "eb98970c704c42e98d23e9133d314b84",
+      "Id": "41a4c1aba8fa401c90779655240aaef1",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "658d6374d8bc425ba4e96200a8ac75c3",
+      "End": "28e74859056d4678af8fd81102dc4e31",
+      "Id": "8a6fd8fe8fb346d69b543e18f1e0c5bc",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "56f847cc145042eeb70aeb564459aa6d",
+      "End": "da7420750a4c4822894790782e97cdb1",
+      "Id": "9ff990c70d1945ef9ccc61cd3f78a14e",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "ed7c62d492da40ac8a71ffe5554ce4c0",
+      "End": "3d34506d83694e9fa9704fdb5a538684",
+      "Id": "5d4f60303eb94cd68056c912fc5e5b31",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "10443d19902b48348fbf57a89f79e039",
+      "End": "e40c3ac902b0421aa5776f2e13eab624",
+      "Id": "7edcb8ba39e74027a220818deb7fd0a7",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "46c55eaf07684f8db2f83441e83f2277",
+      "End": "c47fccdd56e2428bbbd3b94a6817b51f",
+      "Id": "c22feeaa7c93432c965290b35534bddc",
+      "IsHidden": "False"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Camber",
+      "Version": "4.1.4",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "eda0e116d21b449b98ddc04f0af7f6de"
+      ]
+    },
+    {
+      "Name": "Xref01.dwg",
+      "ReferenceType": "External",
+      "Nodes": [
+        "e6e0cfff903f40ac8d06648068182f7f"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.15",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [
+    {
+      "NodeId": "eda0e116-d21b-449b-98dd-c04f0af7f6de",
+      "Binding": {
+        "InsertFromFile_InClassDecl-1_InFunctionScope-1_Instance1_eda0e116-d21b-449b-98dd-c04f0af7f6de": "PFNPQVAtRU5WOkVudmVsb3BlIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiIHhtbG5zOnhzZD0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEiIHhtbG5zOlNPQVAtRU5DPSJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy9zb2FwL2VuY29kaW5nLyIgeG1sbnM6U09BUC1FTlY9Imh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3NvYXAvZW52ZWxvcGUvIiB4bWxuczpjbHI9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vc29hcC9lbmNvZGluZy9jbHIvMS4wIiBTT0FQLUVOVjplbmNvZGluZ1N0eWxlPSJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy9zb2FwL2VuY29kaW5nLyI+DQo8U09BUC1FTlY6Qm9keT4NCjxhMTpDYWxsU2l0ZV94MDAyQl9UcmFjZVNlcmlhbGlzZXJIZWxwZXIgaWQ9InJlZi0xIiB4bWxuczphMT0iaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS9jbHIvbnNhc3NlbS9Qcm90b0NvcmUvUHJvdG9Db3JlJTJDJTIwVmVyc2lvbiUzRDIuMTUuMS42MDc2JTJDJTIwQ3VsdHVyZSUzRG5ldXRyYWwlMkMlMjBQdWJsaWNLZXlUb2tlbiUzRG51bGwiPg0KPE51bWJlck9mRWxlbWVudHM+MTwvTnVtYmVyT2ZFbGVtZW50cz4NCjxCYXNlLTBfSGFzRGF0YT50cnVlPC9CYXNlLTBfSGFzRGF0YT4NCjxCYXNlLTBfRGF0YSBpZD0icmVmLTMiPlBGTlBRVkF0UlU1V09rVnVkbVZzYjNCbElIaHRiRzV6T25oemFUMGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TVM5WVRVeFRZMmhsYldFdGFXNXpkR0Z1WTJVaUlIaHRiRzV6T25oelpEMGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TVM5WVRVeFRZMmhsYldFaUlIaHRiRzV6T2xOUFFWQXRSVTVEUFNKb2RIUndPaTh2YzJOb1pXMWhjeTU0Yld4emIyRndMbTl5Wnk5emIyRndMMlZ1WTI5a2FXNW5MeUlnZUcxc2JuTTZVMDlCVUMxRlRsWTlJbWgwZEhBNkx5OXpZMmhsYldGekxuaHRiSE52WVhBdWIzSm5MM052WVhBdlpXNTJaV3h2Y0dVdklpQjRiV3h1Y3pwamJISTlJbWgwZEhBNkx5OXpZMmhsYldGekxtMXBZM0p2YzI5bWRDNWpiMjB2YzI5aGNDOWxibU52WkdsdVp5OWpiSEl2TVM0d0lpQlRUMEZRTFVWT1ZqcGxibU52WkdsdVoxTjBlV3hsUFNKb2RIUndPaTh2YzJOb1pXMWhjeTU0Yld4emIyRndMbTl5Wnk5emIyRndMMlZ1WTI5a2FXNW5MeUkrRFFvOFUwOUJVQzFGVGxZNlFtOWtlVDROQ2p4aE1UcFRaWEpwWVd4cGVtRmliR1ZJWVc1a2JHVWdhV1E5SW5KbFppMHhJaUI0Yld4dWN6cGhNVDBpYUhSMGNEb3ZMM05qYUdWdFlYTXViV2xqY205emIyWjBMbU52YlM5amJISXZibk5oYzNObGJTOUJkWFJ2WkdWemF5NUJkWFJ2UTBGRUxrUjVibUZ0YjBGd2NDNVRaWEoyYVdObGN5OUJZMFI1Ym1GdGIxTmxjblpwWTJWekpUSkRKVEl3Vm1WeWMybHZiaVV6UkRFekxqVXVNVEV5TlM0d0pUSkRKVEl3UTNWc2RIVnlaU1V6Ukc1bGRYUnlZV3dsTWtNbE1qQlFkV0pzYVdOTFpYbFViMnRsYmlVelJHNTFiR3dpUGcwS1BITjBjbWx1WjBsRUlHbGtQU0p5WldZdE15SStPVEJEUlR3dmMzUnlhVzVuU1VRK0RRbzhMMkV4T2xObGNtbGhiR2w2WVdKc1pVaGhibVJzWlQ0TkNqd3ZVMDlCVUMxRlRsWTZRbTlrZVQ0TkNqd3ZVMDlCVUMxRlRsWTZSVzUyWld4dmNHVStEUW89PC9CYXNlLTBfRGF0YT4NCjxCYXNlLTBfSGFzTmVzdGVkRGF0YT5mYWxzZTwvQmFzZS0wX0hhc05lc3RlZERhdGE+DQo8L2ExOkNhbGxTaXRlX3gwMDJCX1RyYWNlU2VyaWFsaXNlckhlbHBlcj4NCjwvU09BUC1FTlY6Qm9keT4NCjwvU09BUC1FTlY6RW52ZWxvcGU+DQo="
+      }
+    }
+  ],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.15.1.6076",
+      "RunType": "Automatic",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "ConnectorPins": [],
+    "NodeViews": [
+      {
+        "Name": "Xref.InsertFromFile",
+        "ShowGeometry": true,
+        "Id": "eda0e116d21b449b98ddc04f0af7f6de",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 749.5,
+        "Y": 241.0
+      },
+      {
+        "Name": "Document.Current",
+        "ShowGeometry": true,
+        "Id": "438f1597594946a3bb9f31439b85a046",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 266.0,
+        "Y": 150.0
+      },
+      {
+        "Name": "Document.ModelSpace",
+        "ShowGeometry": true,
+        "Id": "9e6d0ee9d33041efb426c0a53f3dd517",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 231.0,
+        "Y": 290.0
+      },
+      {
+        "Name": "Document.Current",
+        "ShowGeometry": true,
+        "Id": "7f8fb385d473495b9e4146c89c0144c6",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -12.0,
+        "Y": 290.0
+      },
+      {
+        "Name": "File Path",
+        "ShowGeometry": true,
+        "Id": "e6e0cfff903f40ac8d06648068182f7f",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 222.0,
+        "Y": 438.0
+      },
+      {
+        "Name": "Boolean",
+        "ShowGeometry": true,
+        "Id": "ec5c0dabba21478e95be567dd3850d25",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 282.0,
+        "Y": 580.0
+      },
+      {
+        "Name": "Code Block",
+        "ShowGeometry": true,
+        "Id": "d6d4821c8247446dbedef9114deb6ce9",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 324.0,
+        "Y": 728.0
+      }
+    ],
+    "Annotations": [],
+    "X": 196.7383092098662,
+    "Y": 43.13542148073418,
+    "Zoom": 0.822695359375
+  }
+}
