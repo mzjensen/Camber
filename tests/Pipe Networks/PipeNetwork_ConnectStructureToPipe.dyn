@@ -1,0 +1,333 @@
+{
+  "Uuid": "05c01131-3b7a-43a3-86a2-33c712cd6452",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "PipeNetwork_ConnectStructureToPipe",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Autodesk.AutoCAD.DynamoNodes.ObjectSelection, AutoCADNodesUI",
+      "NodeType": "ExtensionNode",
+      "InstanceId": [
+        "8C5B"
+      ],
+      "Id": "3ee179df535240c7b557d2fb5971cbd3",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "d2714c470e034b52aa54536ff6134e1c",
+          "Name": "Object",
+          "Description": "Object",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled"
+    },
+    {
+      "ConcreteType": "Autodesk.AutoCAD.DynamoNodes.ObjectSelection, AutoCADNodesUI",
+      "NodeType": "ExtensionNode",
+      "InstanceId": [
+        "8DA1"
+      ],
+      "Id": "87a49e68564d4908b2e50e121db950a2",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "720a246848754b07ac7e2fcc0d2fa5d5",
+          "Name": "Object",
+          "Description": "Object",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.Civil.PipeNetworks.Parts.Structure.ConnectToPipe@Camber.Civil.PipeNetworks.Parts.Pipe,bool",
+      "Id": "3b319050db864a8295135e2dfd6bef8e",
+      "Inputs": [
+        {
+          "Id": "979e685d2c6843988988a58f1a1f7ee6",
+          "Name": "structure",
+          "Description": "Camber.Civil.PipeNetworks.Parts.Structure",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "32329f83d5754d14808ff071552a6fbb",
+          "Name": "pipe",
+          "Description": "Pipe",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "8f0bddf54b414d899fa2425c546c8d04",
+          "Name": "connectToStart",
+          "Description": "True = connect to Pipe start, False = connect to Pipe end\n\nbool",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "c736fbecdbe64da0882f57d5b1eecbb4",
+          "Name": "Structure",
+          "Description": "Structure",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Connects a Structure to a specified Pipe.\n\nStructure.ConnectToPipe (pipe: Pipe, connectToStart: bool): Structure"
+    },
+    {
+      "ConcreteType": "Camber.UI.ConvertToCamberObject, CamberUI",
+      "NodeType": "ExtensionNode",
+      "Id": "0a13b5e514534a518c9e1dcd1e4a89ae",
+      "Inputs": [
+        {
+          "Id": "ee918d02c2ac4bf780bfce0fa01d27b3",
+          "Name": "object",
+          "Description": "Autodesk.AutoCAD.DynamoNodes.Object",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "6239d98fbc3f43b4a506c17740a94fb0",
+          "Name": "Object",
+          "Description": "Object",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Converts a Dynamo Object to a Camber Object."
+    },
+    {
+      "ConcreteType": "Camber.UI.ConvertToCamberObject, CamberUI",
+      "NodeType": "ExtensionNode",
+      "Id": "3d2e5554053240b0a4635814beae5b16",
+      "Inputs": [
+        {
+          "Id": "6bb897dc39f449a5996c4d1bdbd7e813",
+          "Name": "object",
+          "Description": "Autodesk.AutoCAD.DynamoNodes.Object",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "cf79c8341317476bb2bcda14a80b7cc7",
+          "Name": "Object",
+          "Description": "Object",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Converts a Dynamo Object to a Camber Object."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": false,
+      "Id": "0e7df908b27d47009e8e37f800929e70",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "73ab29132a6449d9ae652f94f1ae9200",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Selection between a true and false."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "d2714c470e034b52aa54536ff6134e1c",
+      "End": "ee918d02c2ac4bf780bfce0fa01d27b3",
+      "Id": "94d21b9c8d6641c6ac54e8f9af0840d7",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "720a246848754b07ac7e2fcc0d2fa5d5",
+      "End": "6bb897dc39f449a5996c4d1bdbd7e813",
+      "Id": "14df817694964347a623bf34708cb342",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "6239d98fbc3f43b4a506c17740a94fb0",
+      "End": "979e685d2c6843988988a58f1a1f7ee6",
+      "Id": "1a60d5382d614047af914670fdd74dc6",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "cf79c8341317476bb2bcda14a80b7cc7",
+      "End": "32329f83d5754d14808ff071552a6fbb",
+      "Id": "5e96cf564cfd4fbf94c45ff9b9eea5a3",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "73ab29132a6449d9ae652f94f1ae9200",
+      "End": "8f0bddf54b414d899fa2425c546c8d04",
+      "Id": "5c65b23c56a24199830cf2626f41c068",
+      "IsHidden": "False"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Camber",
+      "Version": "4.1.4",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "3b319050db864a8295135e2dfd6bef8e",
+        "0a13b5e514534a518c9e1dcd1e4a89ae",
+        "3d2e5554053240b0a4635814beae5b16"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.15",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.15.1.6076",
+      "RunType": "Automatic",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "ConnectorPins": [],
+    "NodeViews": [
+      {
+        "Name": "Select Object",
+        "ShowGeometry": true,
+        "Id": "3ee179df535240c7b557d2fb5971cbd3",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 185.0,
+        "Y": 66.0
+      },
+      {
+        "Name": "Select Object",
+        "ShowGeometry": true,
+        "Id": "87a49e68564d4908b2e50e121db950a2",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 182.84346659781954,
+        "Y": 233.68508567002687
+      },
+      {
+        "Name": "Structure.ConnectToPipe",
+        "ShowGeometry": true,
+        "Id": "3b319050db864a8295135e2dfd6bef8e",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 947.72556247520924,
+        "Y": 167.57734293828409
+      },
+      {
+        "Name": "Convert to Camber Object",
+        "ShowGeometry": true,
+        "Id": "0a13b5e514534a518c9e1dcd1e4a89ae",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 448.05710453569282,
+        "Y": 83.897799845093971
+      },
+      {
+        "Name": "Convert to Camber Object",
+        "ShowGeometry": true,
+        "Id": "3d2e5554053240b0a4635814beae5b16",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 449.01293267928554,
+        "Y": 243.57826670109026
+      },
+      {
+        "Name": "Boolean",
+        "ShowGeometry": true,
+        "Id": "0e7df908b27d47009e8e37f800929e70",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 520.147211346849,
+        "Y": 395.87064163015896
+      }
+    ],
+    "Annotations": [],
+    "X": 15.153677614513754,
+    "Y": 11.945021061876361,
+    "Zoom": 0.59376714062500013
+  }
+}

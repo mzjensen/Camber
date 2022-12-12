@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acGeom = Autodesk.AutoCAD.Geometry;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
+using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using civDb = Autodesk.Civil.DatabaseServices;
 using AeccStructure = Autodesk.Civil.DatabaseServices.Structure;
 using AeccStructureLabel = Autodesk.Civil.DatabaseServices.StructureLabel;
@@ -312,11 +313,15 @@ namespace Camber.Civil.PipeNetworks.Parts
             {
                 position = civDb.ConnectorPositionType.Start;
             }
-
-            bool openedForWrite = AeccStructure.IsWriteEnabled;
-            if (!openedForWrite) AeccStructure.UpgradeOpen();
-            AeccStructure.ConnectToPipe(pipe.InternalObjectId, position);
-            if (!openedForWrite) AeccStructure.DowngradeOpen();
+            
+            using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
+            {
+                var aeccPipe = (civDb.Pipe) ctx.Transaction.GetObject(pipe.InternalObjectId, acDb.OpenMode.ForWrite);
+                AeccStructure.UpgradeOpen();
+                AeccStructure.ConnectToPipe(pipe.InternalObjectId, position);
+                AeccStructure.DowngradeOpen();
+                aeccPipe.DowngradeOpen();
+            }
             return this;
         }
 
@@ -327,10 +332,15 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <returns></returns>
         public Structure DisconnectFromPipe(Pipe pipe)
         {
-            bool openedForWrite = AeccStructure.IsWriteEnabled;
-            if (!openedForWrite) AeccStructure.UpgradeOpen();
-            AeccStructure.Disconnect(pipe.InternalObjectId);
-            if (!openedForWrite) AeccStructure.DowngradeOpen();
+            using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
+            {
+                var aeccPipe = (civDb.Pipe)ctx.Transaction.GetObject(pipe.InternalObjectId, acDb.OpenMode.ForWrite);
+                AeccStructure.UpgradeOpen();
+                AeccStructure.Disconnect(pipe.InternalObjectId);
+                AeccStructure.DowngradeOpen();
+                aeccPipe.DowngradeOpen();
+            }
+
             return this;
         }
 
