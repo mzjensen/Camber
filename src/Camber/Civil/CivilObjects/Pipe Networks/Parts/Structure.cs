@@ -225,6 +225,7 @@ namespace Camber.Civil.PipeNetworks.Parts
                 document,
                 (ctx) =>
                 {
+                    pipeNetwork.AeccPipeNetwork.UpgradeOpen();
                     acDb.ObjectId oid = acDb.ObjectId.Null;
                     pipeNetwork.AeccPipeNetwork.AddStructure(
                         partFamily.InternalObjectId,
@@ -233,6 +234,7 @@ namespace Camber.Civil.PipeNetworks.Parts
                         rotation,
                         ref oid,
                         applyRules);
+                    pipeNetwork.AeccPipeNetwork.DowngradeOpen();
                     return ctx.Transaction.GetObject(oid, acDb.OpenMode.ForWrite) as AeccStructure;
                 },
                 (ctx, structure, existing) =>

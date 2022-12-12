@@ -1,0 +1,577 @@
+{
+  "Uuid": "cb2ba147-5943-4bdd-b7ec-5403b0ced6e1",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "PipeNetwork_AddStructure",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.Civil.PipeNetworks.Parts.Structure.ByPoint@Camber.Civil.PipeNetworks.PipeNetwork,Autodesk.DesignScript.Geometry.Point,Camber.Civil.PipeNetworks.PartFamily,Camber.Civil.PipeNetworks.PartSize,double,bool",
+      "Id": "2dcce82ac0d24338adae80d53650ff15",
+      "Inputs": [
+        {
+          "Id": "d0425089d20f48698895a4848cc17bbe",
+          "Name": "pipeNetwork",
+          "Description": "PipeNetwork",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "799cd788e56b49ddb229855c1efb6011",
+          "Name": "point",
+          "Description": "Point",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "bbb41acd2b814340893c37f9790739f9",
+          "Name": "partFamily",
+          "Description": "PartFamily",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "856c418d837a4994adf166269a3b4878",
+          "Name": "partSize",
+          "Description": "PartSize",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "c1009256e0b54359805f0bf405e47f1e",
+          "Name": "rotation",
+          "Description": "double\nDefault value : 0",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "6c075f44b577487cbbccd8d04afc761e",
+          "Name": "applyRules",
+          "Description": "bool\nDefault value : false",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "153b67f18dc948bd8656941369e37c21",
+          "Name": "Structure",
+          "Description": "Structure",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Adds a new Structure to a Pipe Network.\n\nStructure.ByPoint (pipeNetwork: PipeNetwork, point: Point, partFamily: PartFamily, partSize: PartSize, rotation: double = 0, applyRules: bool = false): Structure"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Document.Current",
+      "Id": "46676df452c54caaa7d4d5a09b1a95da",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "7e4fc9b75e6d45a2b5b2d50c383962c0",
+          "Name": "Document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the current AutoCAD document.\n\nDocument.Current: Document"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.Civil.PipeNetworks.PipeNetwork.GetPipeNetworks@Autodesk.AutoCAD.DynamoNodes.Document,bool",
+      "Id": "b84adefa5ae947f09206eab921754855",
+      "Inputs": [
+        {
+          "Id": "73544259da94416188768050c1f41fe2",
+          "Name": "document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "dd52ef266e5f4ccdb10d921d0de5afd9",
+          "Name": "allowReference",
+          "Description": "Include data references?\n\nbool\nDefault value : false",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "bf1c9878be7c49a88c231a020ef8eaa0",
+          "Name": "PipeNetwork[]",
+          "Description": "PipeNetwork[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the Pipe Networks in the document.\n\nPipeNetwork.GetPipeNetworks (document: Document, allowReference: bool = false): PipeNetwork[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "a[0];",
+      "Id": "19fbd6a3a63c4b8a8c8d55cc44c05f07",
+      "Inputs": [
+        {
+          "Id": "410f6bdeda07479e8d07ad6b173daa50",
+          "Name": "a",
+          "Description": "a",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "0ead8e2ab1ce4c07895a8b0699c7d7d6",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.Civil.PipeNetworks.PartFamily.PartSizes",
+      "Id": "7517284343a040849edc0335f9247ede",
+      "Inputs": [
+        {
+          "Id": "8447e544e2b54bd2b1382da54f679a88",
+          "Name": "partFamily",
+          "Description": "Camber.Civil.PipeNetworks.PartFamily",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "f50559dd6af44d489f3cf49f41a078f3",
+          "Name": "PartSize[]",
+          "Description": "PartSize[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the Part Sizes in a Part Family.\n\nPartFamily.PartSizes: PartSize[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.Civil.PipeNetworks.PartsList.GetPartsLists@Autodesk.AutoCAD.DynamoNodes.Document",
+      "Id": "7a2a690dc4984b159daeb1409a7f48f7",
+      "Inputs": [
+        {
+          "Id": "9d1a34f01ab24125809587a2c0008a20",
+          "Name": "document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "0be711fd89074f42a4831b8d23616c6f",
+          "Name": "PartsList[]",
+          "Description": "PartsList[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets all of the Parts Lists in the document.\n\nPartsList.GetPartsLists (document: Document): PartsList[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "a[1];",
+      "Id": "6a14fe8c35b04445904da6b4dc1ed053",
+      "Inputs": [
+        {
+          "Id": "34492ab2bd61449899d06d1c9c1f5ba7",
+          "Name": "a",
+          "Description": "a",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "2e1e6f85e5db40d8a9117008e9e0c790",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.Civil.PipeNetworks.PartsList.StructureFamilies",
+      "Id": "a7e22e77b0be400c93bad7a067f1e5e5",
+      "Inputs": [
+        {
+          "Id": "b298e1756c324ffdb119d6d1c5531a29",
+          "Name": "partsList",
+          "Description": "Camber.Civil.PipeNetworks.PartsList",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "25cd2ca590f947f99498fe26851efce5",
+          "Name": "PartFamily[]",
+          "Description": "PartFamily[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets all Structure Part Families in a Pipe Network Parts List.\n\nPartsList.StructureFamilies: PartFamily[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "a[1];",
+      "Id": "53634c9d8136410387033af0ec989ca2",
+      "Inputs": [
+        {
+          "Id": "fe972cfffabb434c8881913e4291a542",
+          "Name": "a",
+          "Description": "a",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "31ce17ef2de14f6a84655d324607dcf5",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.DesignScript.Geometry.Point.Origin",
+      "Id": "e92bced8df08497f94b360dc5647204e",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "dc8b0b365229400282690d38eda92b17",
+          "Name": "Point",
+          "Description": "Origin point",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the Origin point (0,0,0)\n\nPoint.Origin ( ): Point"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "7e4fc9b75e6d45a2b5b2d50c383962c0",
+      "End": "73544259da94416188768050c1f41fe2",
+      "Id": "b3ba6ba27d4d4d7990a5c079ad902a93",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "7e4fc9b75e6d45a2b5b2d50c383962c0",
+      "End": "9d1a34f01ab24125809587a2c0008a20",
+      "Id": "d4f524e4e93c48bca89b646b45c47881",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "bf1c9878be7c49a88c231a020ef8eaa0",
+      "End": "410f6bdeda07479e8d07ad6b173daa50",
+      "Id": "a13d6ea47d18454db0255b7c60c2a441",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "0ead8e2ab1ce4c07895a8b0699c7d7d6",
+      "End": "d0425089d20f48698895a4848cc17bbe",
+      "Id": "029b5c8b13af4b3bb9ed34d92891bd40",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "f50559dd6af44d489f3cf49f41a078f3",
+      "End": "856c418d837a4994adf166269a3b4878",
+      "Id": "085e0c80803d4db5a685d6f9fd5e16ac",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "0be711fd89074f42a4831b8d23616c6f",
+      "End": "34492ab2bd61449899d06d1c9c1f5ba7",
+      "Id": "761fbfba677f46e8a8958d945945bf32",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "2e1e6f85e5db40d8a9117008e9e0c790",
+      "End": "b298e1756c324ffdb119d6d1c5531a29",
+      "Id": "fc9db57a82914740997f391e34f10eaf",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "25cd2ca590f947f99498fe26851efce5",
+      "End": "fe972cfffabb434c8881913e4291a542",
+      "Id": "59599caef01f48969d2a26f991e8ca5f",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "31ce17ef2de14f6a84655d324607dcf5",
+      "End": "8447e544e2b54bd2b1382da54f679a88",
+      "Id": "fdf2c871e17c4df784d7d2ea8e81e03a",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "31ce17ef2de14f6a84655d324607dcf5",
+      "End": "bbb41acd2b814340893c37f9790739f9",
+      "Id": "23d06203c2944e639e9442d0641adda8",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "dc8b0b365229400282690d38eda92b17",
+      "End": "799cd788e56b49ddb229855c1efb6011",
+      "Id": "4c41097f518d4b80b241261cfdff04ba",
+      "IsHidden": "False"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Camber",
+      "Version": "4.1.4",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "2dcce82ac0d24338adae80d53650ff15",
+        "b84adefa5ae947f09206eab921754855",
+        "7517284343a040849edc0335f9247ede",
+        "7a2a690dc4984b159daeb1409a7f48f7",
+        "a7e22e77b0be400c93bad7a067f1e5e5"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.15",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.15.1.6076",
+      "RunType": "Automatic",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "ConnectorPins": [],
+    "NodeViews": [
+      {
+        "Name": "Structure.ByPoint",
+        "ShowGeometry": true,
+        "Id": "2dcce82ac0d24338adae80d53650ff15",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1487.1840911033844,
+        "Y": -136.6259732575719
+      },
+      {
+        "Name": "Document.Current",
+        "ShowGeometry": true,
+        "Id": "46676df452c54caaa7d4d5a09b1a95da",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -177.57272412425345,
+        "Y": -69.308447990330592
+      },
+      {
+        "Name": "PipeNetwork.GetPipeNetworks",
+        "ShowGeometry": true,
+        "Id": "b84adefa5ae947f09206eab921754855",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 79.4797615974087,
+        "Y": -197.30475293910604
+      },
+      {
+        "Name": "Code Block",
+        "ShowGeometry": true,
+        "Id": "19fbd6a3a63c4b8a8c8d55cc44c05f07",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 421.4797615974087,
+        "Y": -194.30475293910604
+      },
+      {
+        "Name": "PartFamily.PartSizes",
+        "ShowGeometry": true,
+        "Id": "7517284343a040849edc0335f9247ede",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1084.6802219847443,
+        "Y": 133.34649130558523
+      },
+      {
+        "Name": "PartsList.GetPartsLists",
+        "ShowGeometry": true,
+        "Id": "7a2a690dc4984b159daeb1409a7f48f7",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 76.9797615974087,
+        "Y": 20.695247060893962
+      },
+      {
+        "Name": "Code Block",
+        "ShowGeometry": true,
+        "Id": "6a14fe8c35b04445904da6b4dc1ed053",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 371.4797615974087,
+        "Y": 25.695247060893962
+      },
+      {
+        "Name": "PartsList.StructureFamilies",
+        "ShowGeometry": true,
+        "Id": "a7e22e77b0be400c93bad7a067f1e5e5",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 565.9797615974087,
+        "Y": 26.695247060893962
+      },
+      {
+        "Name": "Code Block",
+        "ShowGeometry": true,
+        "Id": "53634c9d8136410387033af0ec989ca2",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 868.94843804114407,
+        "Y": 25.175008658302772
+      },
+      {
+        "Name": "Point.Origin",
+        "ShowGeometry": true,
+        "Id": "e92bced8df08497f94b360dc5647204e",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1186.425958838221,
+        "Y": -222.22442013254675
+      }
+    ],
+    "Annotations": [],
+    "X": 293.33248577797031,
+    "Y": 403.24659083033811,
+    "Zoom": 0.612283078543345
+  }
+}
