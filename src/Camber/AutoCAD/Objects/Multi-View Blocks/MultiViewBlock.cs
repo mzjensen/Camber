@@ -1,11 +1,13 @@
 ﻿using System;
 using Autodesk.AutoCAD.DynamoNodes;
 using System.Collections.Generic;
+using System.Threading;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using aecDb = Autodesk.Aec.DatabaseServices;
 using AecMultiViewBlock = Autodesk.Aec.DatabaseServices.MultiViewBlockDefinition;
+using AecMultiViewBlockReference = Autodesk.Aec.DatabaseServices.MultiViewBlockReference;
 
 namespace Camber.AutoCAD.Objects.MultiViewBlocks
 {
@@ -92,6 +94,37 @@ namespace Camber.AutoCAD.Objects.MultiViewBlocks
                     }
                 }
                 return dispReps;
+            }
+        }
+
+        /// <summary>
+        /// Gets the Multi-View Block References of a Multi-View Block.
+        /// </summary>
+        public List<MultiViewBlockReference> MultiViewBlockReferences
+        {
+            get
+            {
+                var document = acDynNodes.Document.Current;
+                var mvBlkRefs = new List<MultiViewBlockReference>();
+
+                using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
+                {
+                    // Strange that there isn't a method to get the MVBlock Ref IDs of an MVBlock like there is for normal Blocks...
+                    var bt = (acDb.BlockTable)ctx.Transaction.GetObject(AcDatabase.BlockTableId, acDb.OpenMode.ForRead);
+                    foreach (var btrOid in bt)
+                    {
+                        var btr = (acDb.BlockTableRecord) ctx.Transaction.GetObject(btrOid, acDb.OpenMode.ForRead);
+                        foreach (var oid in btr)
+                        {
+                            var obj = ctx.Transaction.GetObject(oid, acDb.OpenMode.ForRead);
+                            if (obj is AecMultiViewBlockReference mvBlkRef)
+                            {
+                                mvBlkRefs.Add(new MultiViewBlockReference(mvBlkRef, false));
+                            }
+                        }
+                    }
+                }
+                return mvBlkRefs;
             }
         }
         #endregion

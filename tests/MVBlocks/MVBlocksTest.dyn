@@ -1,0 +1,196 @@
+{
+  "Uuid": "f1403bac-4aa8-4aa6-b30b-9f81422b4ef3",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "MVBlocksTest",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.AutoCAD.Document.MultiViewBlocks@Autodesk.AutoCAD.DynamoNodes.Document",
+      "Id": "00da0617393c478da8b355ba0356952e",
+      "Inputs": [
+        {
+          "Id": "0eb1501a29904038b6049fd146009bea",
+          "Name": "document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "a633a057f9994f1f93b00cad84172fff",
+          "Name": "MultiViewBlock[]",
+          "Description": "MultiViewBlock[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the Multi-View Block definitions in a Document.\n\nDocument.MultiViewBlocks (document: Document): MultiViewBlock[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.AutoCAD.Objects.MultiViewBlocks.MultiViewBlock.MultiViewBlockReferences",
+      "Id": "916f0dc21d384c8e8b3d2e1955c270e3",
+      "Inputs": [
+        {
+          "Id": "d52e0284956e4701b12abfcb1475dc72",
+          "Name": "multiViewBlock",
+          "Description": "Camber.AutoCAD.Objects.MultiViewBlocks.MultiViewBlock",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "d98dff8a83404ce2a763fc3b428af337",
+          "Name": "MultiViewBlockReference[]",
+          "Description": "MultiViewBlockReference[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the Multi-View Block References of a Multi-View Block.\n\nMultiViewBlock.MultiViewBlockReferences: MultiViewBlockReference[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Document.Current",
+      "Id": "8222a216da384f928681bea0aaac6a0b",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "c656236442934a4db7c7715a09bf4699",
+          "Name": "Document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the current AutoCAD document.\n\nDocument.Current: Document"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "a633a057f9994f1f93b00cad84172fff",
+      "End": "d52e0284956e4701b12abfcb1475dc72",
+      "Id": "5e8a5a02d7a64bc29293bc1350b09cae",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "c656236442934a4db7c7715a09bf4699",
+      "End": "0eb1501a29904038b6049fd146009bea",
+      "Id": "844155c57cb94ca8b47434c2ce07cc3b",
+      "IsHidden": "False"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Camber",
+      "Version": "4.1.4",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "00da0617393c478da8b355ba0356952e",
+        "916f0dc21d384c8e8b3d2e1955c270e3"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.15",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.15.1.6076",
+      "RunType": "Automatic",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "ConnectorPins": [],
+    "NodeViews": [
+      {
+        "Name": "Document.MultiViewBlocks",
+        "ShowGeometry": true,
+        "Id": "00da0617393c478da8b355ba0356952e",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 428.5,
+        "Y": 263.0
+      },
+      {
+        "Name": "MultiViewBlock.MultiViewBlockReferences",
+        "ShowGeometry": true,
+        "Id": "916f0dc21d384c8e8b3d2e1955c270e3",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 790.5,
+        "Y": 262.0
+      },
+      {
+        "Name": "Document.Current",
+        "ShowGeometry": true,
+        "Id": "8222a216da384f928681bea0aaac6a0b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 152.0,
+        "Y": 263.0
+      }
+    ],
+    "Annotations": [],
+    "X": 0.0,
+    "Y": 0.0,
+    "Zoom": 1.0
+  }
+}
