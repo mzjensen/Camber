@@ -17,6 +17,11 @@ namespace Camber.AutoCAD.Objects.MultiViewBlocks
         internal AecMultiViewBlockReference AecMultiViewBlockReference => AcObject as AecMultiViewBlockReference;
 
         /// <summary>
+        /// Gets the Block that a Multi-View Block Reference resides in.
+        /// </summary>
+        public acDynNodes.Block Block => acDynNodes.Document.Current.BlockByName(AecMultiViewBlockReference.BlockName);
+
+        /// <summary>
         /// Gets the Multi-View Block that defines a Multi-View Block Reference.
         /// </summary>
         public MultiViewBlock MultiViewBlock
