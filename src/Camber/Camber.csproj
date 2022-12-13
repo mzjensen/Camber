@@ -25,7 +25,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>..\..\build\Release\Camber.xml</DocumentationFile>
-    <C3DVersion>2023</C3DVersion>
+    <C3DVersion>2022</C3DVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug2023|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
@@ -34,7 +34,7 @@
     <DocumentationFile>..\..\build\Debug2023\Camber.xml</DocumentationFile>
     <WarningLevel>1</WarningLevel>
     <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <C3DVersion>2023</C3DVersion>
@@ -47,7 +47,7 @@
     <DocumentationFile>..\..\build\Debug2022\Camber.xml</DocumentationFile>
     <WarningLevel>1</WarningLevel>
     <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <C3DVersion>2022</C3DVersion>
@@ -68,9 +68,9 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug2020|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>..\..\build\</OutputPath>
+    <OutputPath>..\..\build\Debug2020\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DocumentationFile>..\..\build\Camber.xml</DocumentationFile>
+    <DocumentationFile>..\..\build\Debug2020\Camber.xml</DocumentationFile>
     <WarningLevel>1</WarningLevel>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
