@@ -132,18 +132,17 @@ namespace Camber.Civil.Styles.Objects
                         case "ViewOptions":
                             value = Enum.Parse(typeof(civDb.Styles.StructureViewType), (string)value);
                             break;
-                        default:
-                            throw new ArgumentException(invalidNameMessage);
                     }
                     break;
             }
 
-            var openedForWrite = AeccStructureStyle.IsWriteEnabled;
-            if (!openedForWrite) { AeccStructureStyle.UpgradeOpen(); }
-            var res = Utilities.ReflectionUtilities.SetNestedProperty(AeccStructureStyle, viewDirection + "." + propertyName, value);
-            if (res == null) { throw new Exception("Value not set."); }
-            if (!openedForWrite) { AeccStructureStyle.DowngradeOpen(); }
-            return this;
+            using (var ctx = new Autodesk.AutoCAD.DynamoApp.Services.DocumentContext(AcDatabase))
+            {
+                var aeccStructureStyle = (AeccStructureStyle) ctx.Transaction.GetObject(InternalObjectId, acDb.OpenMode.ForWrite);
+                var res = Utilities.ReflectionUtilities.SetNestedProperty(aeccStructureStyle, viewDirection + "." + propertyName, value);
+                if (res == null) { throw new Exception("Value not set."); }
+                return this;
+            }
         }
 
         /// <summary>

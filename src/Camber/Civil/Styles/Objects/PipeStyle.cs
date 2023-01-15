@@ -3,6 +3,7 @@ using System;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using civDb = Autodesk.Civil.DatabaseServices;
 using AeccPipeStyle = Autodesk.Civil.DatabaseServices.Styles.PipeStyle;
+using Autodesk.Aec.DatabaseServices;
 #endregion
 
 namespace Camber.Civil.Styles.Objects
@@ -116,16 +117,15 @@ namespace Camber.Civil.Styles.Objects
                 case "WallSizeType":
                     value = Enum.Parse(typeof(civDb.Styles.PipeWallSizeType), (string)value);
                     break;
-                default:
-                    throw new ArgumentException(invalidNameMessage);
             }
 
-            bool openedForWrite = AeccPipeStyle.IsWriteEnabled;
-            if (!openedForWrite) { AeccPipeStyle.UpgradeOpen(); }
-            var res = Utilities.ReflectionUtilities.SetNestedProperty(AeccPipeStyle, planOrProfile + "." + propertyName, value);
-            if (res == null) { throw new Exception("Value not set."); }
-            if (!openedForWrite) { AeccPipeStyle.DowngradeOpen(); }
-            return this;
+            using (var ctx = new Autodesk.AutoCAD.DynamoApp.Services.DocumentContext(AcDatabase))
+            {
+                var aeccPipeStyle = (AeccPipeStyle)ctx.Transaction.GetObject(InternalObjectId, acDb.OpenMode.ForWrite);
+                var res = Utilities.ReflectionUtilities.SetNestedProperty(aeccPipeStyle, planOrProfile + "." + propertyName, value);
+                if (res == null) { throw new Exception("Value not set."); }
+                return this;
+            }
         }
 
         /// <summary>
