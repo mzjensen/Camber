@@ -2,7 +2,7 @@
   "license": "BSD-3 Clause",
   "file_hash": null,
   "name": "Camber",
-  "version": "4.2.1",
+  "version": "4.2.2",
   "description": "An open source Dynamo package for Civil 3D.",
   "group": "",
   "keywords": [ "civil", "engineering", "infrastructure" ],
@@ -16,7 +16,7 @@
   "repository_url": "https://github.com/mzjensen/Camber",
   "contains_binaries": true,
   "node_libraries": [
-    "Camber, Version=4.2.1.0, Culture=neutral, PublicKeyToken=null",
-    "CamberUI, Version=4.2.1.0, Culture=neutral, PublicKeyToken=null"
+    "Camber, Version=4.2.2.0, Culture=neutral, PublicKeyToken=null",
+    "CamberUI, Version=4.2.2.0, Culture=neutral, PublicKeyToken=null"
   ]
 }
