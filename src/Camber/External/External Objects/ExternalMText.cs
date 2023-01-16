@@ -39,12 +39,12 @@ namespace Camber.External.ExternalObjects
         }
 
         /// <summary>
-        /// Gets the overall height of an External MText.
+        /// Gets the defined height of an External MText.
         /// </summary>
         public double Height => AcMText.Height;
 
         /// <summary>
-        /// Gets the overall width of an External MText.
+        /// Gets the defined width of an External MText.
         /// </summary>
         public double Width => AcMText.Width;
 
@@ -152,14 +152,14 @@ namespace Camber.External.ExternalObjects
         public ExternalMText SetTextHeight(double textHeight) => (ExternalMText)SetValue(textHeight);
 
         /// <summary>
-        /// Sets the overall height of External MText.
+        /// Sets the defined height of External MText.
         /// </summary>
         /// <param name="height"></param>
         /// <returns></returns>
         public ExternalMText SetHeight(double height) => (ExternalMText) SetValue(height);
 
         /// <summary>
-        /// Sets the overall width of External MText.
+        /// Sets the defined width of External MText.
         /// </summary>
         /// <param name="height"></param>
         /// <returns></returns>
