@@ -1,0 +1,586 @@
+{
+  "Uuid": "5063b920-6702-4145-b3a3-1af98483d111",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "ByPoint",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.External.ExternalObjects.ExternalMText.ByPoint@Autodesk.DesignScript.Geometry.Point,string,string,Camber.External.ExternalBlock,double,double",
+      "Id": "596ccfbb09594ec6a201a98ef7331107",
+      "Inputs": [
+        {
+          "Id": "735e2936d2984a0e9681d1eb8f0dad02",
+          "Name": "point",
+          "Description": "The insertion point of the MText.\n\nPoint",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "a9025ad6445d462abc3582d3ab7656ee",
+          "Name": "contents",
+          "Description": "The text contents.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "dd6318d8e3a74cbf8ca70a3690dc1074",
+          "Name": "layer",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "1dbc2c8a26114aa9abc4d02f8748aa98",
+          "Name": "block",
+          "Description": "ExternalBlock",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "cb94259f964545b1bba14bdb85082d85",
+          "Name": "textHeight",
+          "Description": "double\nDefault value : 1 (disabled)",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "359935851e9f433d80a4a360a95441ac",
+          "Name": "rotation",
+          "Description": "double\nDefault value : 0 (disabled)",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "34d7dce1043d42829a83a430a7ab60ab",
+          "Name": "ExternalMText",
+          "Description": "ExternalMText",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Creates an External MText.\n\nExternalMText.ByPoint (point: Point, contents: string, layer: string, block: ExternalBlock, textHeight: double = 1, rotation: double = 0): ExternalMText"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.External.ExternalDocument.LoadFromFile@string",
+      "Id": "d0b9a9ceff5043c6a0b1641d7f5b1adf",
+      "Inputs": [
+        {
+          "Id": "759d12f24ee74b9da7b3f8b756c22b2f",
+          "Name": "filePath",
+          "Description": "The path to the file.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "38ab5d92a5574093b82dc08b0b4002a6",
+          "Name": "ExternalDocument",
+          "Description": "ExternalDocument",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Loads an External Document from an existing file. Please note that this node does not prevent other applications from opening and/or modifying the file at the same time.\n\nExternalDocument.LoadFromFile (filePath: string): ExternalDocument"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.Filename, CoreNodeModels",
+      "HintPath": "C:\\Software Projects\\Camber\\tests\\ExternalMText\\ExternalMTextTests.dwg",
+      "InputValue": ".\\ExternalMTextTests.dwg",
+      "NodeType": "ExtensionNode",
+      "Id": "e30b1e10db594cf0a6fdeb92cb7a09e4",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "1b8e9c611c1c4cffb1b21964a27fed89",
+          "Name": "",
+          "Description": "File Path",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows you to select a file on the system to get its file path."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.External.ExternalDocument.ModelSpace",
+      "Id": "4309dc294aa447089eb1363356bfbbcb",
+      "Inputs": [
+        {
+          "Id": "858d5d39cc204976bdfd3b4362ed098d",
+          "Name": "externalDocument",
+          "Description": "Camber.External.ExternalDocument",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "d74adcc334054239b6ff95b697c72816",
+          "Name": "ExternalBlock",
+          "Description": "ExternalBlock",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the Model Space block of an External Document.\n\nExternalDocument.ModelSpace: ExternalBlock"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.External.ExternalDocument.Save",
+      "Id": "af9ba17bec404c57b47bfadc9f906255",
+      "Inputs": [
+        {
+          "Id": "db0bf5443227417a9ff25ba5aedd79d6",
+          "Name": "externalDocument",
+          "Description": "Camber.External.ExternalDocument",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "61a2fda6acf144148f53dbcc31ecc974",
+          "Name": "ExternalDocument",
+          "Description": "ExternalDocument",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Attempts to save an External Document.\n\nExternalDocument.Save ( ): ExternalDocument"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "[pass, wait][0];",
+      "Id": "071d7ea4254048228cc1c5dc35fc57d0",
+      "Inputs": [
+        {
+          "Id": "22df3c43a3df458b94353311bbfc709f",
+          "Name": "pass",
+          "Description": "pass",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "dd1adbc96014476abad15090d7a21fbb",
+          "Name": "wait",
+          "Description": "wait",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "6609614c7cd547e08c26a261b02906c9",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.DesignScript.Geometry.Point.Origin",
+      "Id": "004b60193f494a9f9bfd735c63ad4cef",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "7575aa330d0d4e7aa1a37aeb70634386",
+          "Name": "Point",
+          "Description": "Origin point",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the Origin point (0,0,0)\n\nPoint.Origin ( ): Point"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "[\"Single line test\",\n\"First line\\nSecond line\"];",
+      "Id": "85d363c9f88b4d7caacbdbc73541ad3d",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "094b9e0a31b4442c8be063afa3b06137",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "NewTestLayer",
+      "Id": "b9c5f1350c0d44999aa96fe1ab538882",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "60779e7015fd41f39cd636f228827345",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.DoubleInput, CoreNodeModels",
+      "NodeType": "NumberInputNode",
+      "NumberType": "Double",
+      "InputValue": 1.0,
+      "Id": "4e6c01c5d3bd4e04a885953c1198ee54",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "17fdca79ac3b4d20a40008de659c3cbb",
+          "Name": "",
+          "Description": "Double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a number."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.DoubleInput, CoreNodeModels",
+      "NodeType": "NumberInputNode",
+      "NumberType": "Double",
+      "InputValue": 0.0,
+      "Id": "b7e3b653533145dbae2c2af8aec1e4b8",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "8d7b086f02ac4285a69dcaa14312b0f4",
+          "Name": "",
+          "Description": "Double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a number."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "34d7dce1043d42829a83a430a7ab60ab",
+      "End": "dd1adbc96014476abad15090d7a21fbb",
+      "Id": "33998bfe14d8440988fc4ffdaab31ef0",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "38ab5d92a5574093b82dc08b0b4002a6",
+      "End": "858d5d39cc204976bdfd3b4362ed098d",
+      "Id": "79b3ec3025ec49c7a3337f1757856a73",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "38ab5d92a5574093b82dc08b0b4002a6",
+      "End": "22df3c43a3df458b94353311bbfc709f",
+      "Id": "1a5750dba8d74889952d9546a5599f68",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "1b8e9c611c1c4cffb1b21964a27fed89",
+      "End": "759d12f24ee74b9da7b3f8b756c22b2f",
+      "Id": "69dc1719c51c46a1993a31d75b8bf190",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "d74adcc334054239b6ff95b697c72816",
+      "End": "1dbc2c8a26114aa9abc4d02f8748aa98",
+      "Id": "11408c1320164781b855a671ed7ca56a",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "6609614c7cd547e08c26a261b02906c9",
+      "End": "db0bf5443227417a9ff25ba5aedd79d6",
+      "Id": "ffdf1badda6741bd9b85f9db3b5e53a1",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "7575aa330d0d4e7aa1a37aeb70634386",
+      "End": "735e2936d2984a0e9681d1eb8f0dad02",
+      "Id": "d019825557764e1d94d1abfc7fb6b6be",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "094b9e0a31b4442c8be063afa3b06137",
+      "End": "a9025ad6445d462abc3582d3ab7656ee",
+      "Id": "cdf7e0cc593b4cf9ad9fcbbbd06389fd",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "60779e7015fd41f39cd636f228827345",
+      "End": "dd6318d8e3a74cbf8ca70a3690dc1074",
+      "Id": "a7be17049fac46f69a0e303166f2ec00",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "17fdca79ac3b4d20a40008de659c3cbb",
+      "End": "cb94259f964545b1bba14bdb85082d85",
+      "Id": "9e8b90fb3e704de99baa4776503f751d",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "8d7b086f02ac4285a69dcaa14312b0f4",
+      "End": "359935851e9f433d80a4a360a95441ac",
+      "Id": "2578aef542a244049dee606a0d3b9ac5",
+      "IsHidden": "False"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Camber",
+      "Version": "4.2.1",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "596ccfbb09594ec6a201a98ef7331107",
+        "d0b9a9ceff5043c6a0b1641d7f5b1adf",
+        "4309dc294aa447089eb1363356bfbbcb",
+        "af9ba17bec404c57b47bfadc9f906255"
+      ]
+    },
+    {
+      "Name": "ExternalMTextTests.dwg",
+      "ReferenceType": "External",
+      "Nodes": [
+        "e30b1e10db594cf0a6fdeb92cb7a09e4"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.15",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.15.1.6076",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "ConnectorPins": [],
+    "NodeViews": [
+      {
+        "Name": "ExternalMText.ByPoint",
+        "ShowGeometry": true,
+        "Id": "596ccfbb09594ec6a201a98ef7331107",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1037.6042885976258,
+        "Y": 603.38446926784422
+      },
+      {
+        "Name": "ExternalDocument.LoadFromFile",
+        "ShowGeometry": true,
+        "Id": "d0b9a9ceff5043c6a0b1641d7f5b1adf",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1.9467104624945932,
+        "Y": 295.07106852754805
+      },
+      {
+        "Name": "File Path",
+        "ShowGeometry": true,
+        "Id": "e30b1e10db594cf0a6fdeb92cb7a09e4",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -278.83478839873339,
+        "Y": 293.71286494665827
+      },
+      {
+        "Name": "ExternalDocument.ModelSpace",
+        "ShowGeometry": true,
+        "Id": "4309dc294aa447089eb1363356bfbbcb",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 534.01098874814284,
+        "Y": 788.70745527671193
+      },
+      {
+        "Name": "ExternalDocument.Save",
+        "ShowGeometry": true,
+        "Id": "af9ba17bec404c57b47bfadc9f906255",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1678.9838998845648,
+        "Y": 286.52345688595631
+      },
+      {
+        "Name": "Code Block",
+        "ShowGeometry": true,
+        "Id": "071d7ea4254048228cc1c5dc35fc57d0",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1308.0780050131968,
+        "Y": 290.88799976580532
+      },
+      {
+        "Name": "Point.Origin",
+        "ShowGeometry": true,
+        "Id": "004b60193f494a9f9bfd735c63ad4cef",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 687.09700067454764,
+        "Y": 400.02415357300595
+      },
+      {
+        "Name": "Code Block",
+        "ShowGeometry": true,
+        "Id": "85d363c9f88b4d7caacbdbc73541ad3d",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 550.22776571414443,
+        "Y": 525.17151123844326
+      },
+      {
+        "Name": "String",
+        "ShowGeometry": true,
+        "Id": "b9c5f1350c0d44999aa96fe1ab538882",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 676.72404334128,
+        "Y": 659.3480869046931
+      },
+      {
+        "Name": "Number",
+        "ShowGeometry": true,
+        "Id": "4e6c01c5d3bd4e04a885953c1198ee54",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 719.45031528521474,
+        "Y": 921.93458458609291
+      },
+      {
+        "Name": "Number",
+        "ShowGeometry": true,
+        "Id": "b7e3b653533145dbae2c2af8aec1e4b8",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 717.588815779489,
+        "Y": 1057.7211056574129
+      }
+    ],
+    "Annotations": [],
+    "X": -200.11975832366193,
+    "Y": -19.257356487536555,
+    "Zoom": 0.73029590970747993
+  }
+}

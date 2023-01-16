@@ -245,7 +245,7 @@ namespace Camber.External.ExternalObjects
                 }
                 catch (Exception e)
                 {
-                    throw new InvalidOperationException(e.Message);
+                    throw new InvalidOperationException(e.InnerException.Message);
                 }
             }
         }
