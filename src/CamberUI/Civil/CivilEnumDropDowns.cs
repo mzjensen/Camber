@@ -1,5 +1,6 @@
 ﻿#region references
 using System.Collections.Generic;
+using Autodesk.Civil;
 using civDs = Autodesk.Civil.DataShortcuts;
 using civDb = Autodesk.Civil.DatabaseServices;
 using Newtonsoft.Json;
@@ -97,5 +98,20 @@ namespace Camber.UI
         [JsonConstructor]
         public AngularUnitTypesDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts)
             : base(OutputName, typeof(Autodesk.Civil.AngleUnitType), inPorts, outPorts) { }
+    }
+
+    [NodeName("Surface Boundary Types")]
+    [NodeCategory("Camber.Civil 3D.CivilObjects.Surfaces.Surface")]
+    [NodeDescription("Select Surface boundary type.")]
+    [IsDesignScriptCompatible]
+    public class SurfaceBoundaryTypesDropDown : EnumDropDownBase
+    {
+        private const string OutputName = "boundaryType";
+
+        public SurfaceBoundaryTypesDropDown() : base(OutputName, typeof(SurfaceBoundaryType), true) { }
+
+        [JsonConstructor]
+        public SurfaceBoundaryTypesDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts)
+            : base(OutputName, typeof(SurfaceBoundaryType), inPorts, outPorts, true) { }
     }
 }

@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using Autodesk.AutoCAD.ApplicationServices;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
@@ -65,6 +66,99 @@ namespace Camber.Civil.CivilObjects.Surfaces
         #endregion
 
         #region action methods
+        /// <summary>
+        /// Adds a boundary to a Surface from an existing object (e.g., a Polyline). Note that the boundary object must be closed when adding a Data Clip boundary.
+        /// </summary>
+        /// <param name="surface"></param>
+        /// <param name="boundaryObject">The object used to define the boundary.</param>
+        /// <param name="boundaryType">Specifies the boundary type.</param>
+        /// <param name="midOrdinateDistance">Used to tessellate arc segments in boundary curves.</param>
+        /// <param name="useNonDestructiveBreakline">This is ignored for Grid Volume Surfaces, or TIN Surfaces with a data clip boundary type.</param>
+        /// <returns></returns>
+        public static civDynNodes.Surface AddBoundary(
+            this civDynNodes.Surface surface,
+            acDynNodes.Object boundaryObject,
+            string boundaryType,
+            double midOrdinateDistance = 0.1,
+            bool useNonDestructiveBreakline = true)
+        {
+            if (midOrdinateDistance <= 0)
+            {
+                throw new InvalidOperationException("Mid-ordinate distance must be greater than zero.");
+            }
+
+            if (!Enum.IsDefined(typeof(SurfaceBoundaryType), boundaryType))
+            {
+                throw new InvalidOperationException("Invalid surface boundary type.");
+            }
+
+            try
+            {
+                using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
+                {
+                    AeccSurface aeccSurf = surface.GetAeccSurface(acDb.OpenMode.ForWrite);
+                    var bndyDef = aeccSurf.BoundariesDefinition;
+                    var bndyIds = new acDb.ObjectIdCollection()
+                    {
+                        boundaryObject.InternalObjectId
+                    };
+                    SurfaceBoundaryType bndyType = (SurfaceBoundaryType) Enum.Parse(typeof(SurfaceBoundaryType), boundaryType);
+                    bndyDef.AddBoundaries(bndyIds, midOrdinateDistance, bndyType, useNonDestructiveBreakline);
+                    aeccSurf.Rebuild();
+                }
+                return surface;
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Adds a boundary to a Surface defined by a list of points.
+        /// </summary>
+        /// <param name="surface"></param>
+        /// <param name="boundaryPolygon">A Dynamo Polygon that defines the boundary.</param>
+        /// <param name="boundaryType">Specifies the boundary type.</param>
+        /// <param name="useNonDestructiveBreakline">This is ignored for Grid Volume Surfaces, or TIN Surfaces with a data clip boundary type.</param>
+        /// <returns></returns>
+        public static civDynNodes.Surface AddBoundary(
+            this civDynNodes.Surface surface,
+            Polygon boundaryPolygon,
+            string boundaryType,
+            bool useNonDestructiveBreakline = true)
+        {
+            if (!Enum.IsDefined(typeof(SurfaceBoundaryType), boundaryType))
+            {
+                throw new InvalidOperationException("Invalid surface boundary type.");
+            }
+
+            if (boundaryPolygon.SelfIntersections().Length > 0)
+            {
+                throw new InvalidOperationException("Boundary polygon cannot have self intersections.");
+            }
+
+            try
+            {
+                using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
+                {
+                    AeccSurface aeccSurf = surface.GetAeccSurface(acDb.OpenMode.ForWrite);
+                    var bndyDef = aeccSurf.BoundariesDefinition;
+                    var bndyPnts = GeometryConversions.DynPolygonToAcPoint3dCollection(boundaryPolygon, true);
+                    SurfaceBoundaryType bndyType = (SurfaceBoundaryType)Enum.Parse(typeof(SurfaceBoundaryType), boundaryType);
+                    
+                    // Is the mid-ordinate distance even necessary in this case?
+                    bndyDef.AddBoundaries(bndyPnts, 0.1, bndyType, useNonDestructiveBreakline);
+                    aeccSurf.Rebuild();
+                }
+                return surface;
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
+
         /// <summary>
         /// Performs an elevation analysis on a Surface. 
         /// </summary>

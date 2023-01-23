@@ -1,0 +1,485 @@
+{
+  "Uuid": "ca97b3b4-45ef-458d-b8fe-05df4f7f42b9",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "BoundaryTests",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.Civil.CivilObjects.Surfaces.Surface.AddBoundary@Autodesk.Civil.DynamoNodes.Surface,Autodesk.AutoCAD.DynamoNodes.Object,string,double,bool",
+      "Id": "e9fe3b09376740d7bf431b802c070c19",
+      "Inputs": [
+        {
+          "Id": "ea4e585f85df4605bcb903c58960149d",
+          "Name": "surface",
+          "Description": "Surface",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "8af8a9efd94c47d3ae254eb4916eaa83",
+          "Name": "boundaryObject",
+          "Description": "The object used to define the boundary.\n\nObject",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "436642b8b12b46bbb8d5a912edca7eac",
+          "Name": "boundaryType",
+          "Description": "Specifies the boundary type.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "83b71325e70c467a8740255aacc3b926",
+          "Name": "midOrdinateDistance",
+          "Description": "Used to tessellate arc segments in boundary curves.\n\ndouble\nDefault value : 0.1",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "77b4a94b9ee2492e8865d1bde73c8195",
+          "Name": "useNonDestructiveBreakline",
+          "Description": "This is ignored for Grid Volume Surfaces, or TIN Surfaces with a data clip boundary type.\n\nbool\nDefault value : true",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "d156d52541a8486e81f19738b52270a2",
+          "Name": "Surface",
+          "Description": "Surface",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Adds a boundary to a Surface from an existing object (e.g., a Polyline). Note that the boundary object must be closed when adding a Data Clip boundary.\n\nSurface.AddBoundary (surface: Surface, boundaryObject: Object, boundaryType: string, midOrdinateDistance: double = 0.1, useNonDestructiveBreakline: bool = true): Surface"
+    },
+    {
+      "ConcreteType": "Autodesk.AutoCAD.DynamoNodes.ObjectSelection, AutoCADNodesUI",
+      "NodeType": "ExtensionNode",
+      "InstanceId": [
+        "8C4F"
+      ],
+      "Id": "60e9909bf4f74797acac5ec718a1d907",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "7da20a3cfe794131916cf4839ce0ce67",
+          "Name": "Object",
+          "Description": "Object",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.Civil.CivilObjects.Surfaces.Surface.AddBoundary@Autodesk.Civil.DynamoNodes.Surface,Autodesk.DesignScript.Geometry.Polygon,string,bool",
+      "Id": "7bfbc919d53949b8898211c20c095242",
+      "Inputs": [
+        {
+          "Id": "8e8b9657d1c348d6aa4154af0c94760c",
+          "Name": "surface",
+          "Description": "Surface",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "f165f0313f0547028591d273f91823da",
+          "Name": "boundaryPolygon",
+          "Description": "A Dynamo Polygon that defines the boundary.\n\nPolygon",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "4fc15436e0f94090a9d5bce79be7f5c6",
+          "Name": "boundaryType",
+          "Description": "Specifies the boundary type.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "873c4e60ad354f78a9fc0915a9fc712c",
+          "Name": "useNonDestructiveBreakline",
+          "Description": "This is ignored for Grid Volume Surfaces, or TIN Surfaces with a data clip boundary type.\n\nbool\nDefault value : true",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "dd1c957d7ede49da9436262d6c957e01",
+          "Name": "Surface",
+          "Description": "Surface",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Adds a boundary to a Surface defined by a list of points.\n\nSurface.AddBoundary (surface: Surface, boundaryPolygon: Polygon, boundaryType: string, useNonDestructiveBreakline: bool = true): Surface"
+    },
+    {
+      "ConcreteType": "Autodesk.AutoCAD.DynamoNodes.ObjectSelection, AutoCADNodesUI",
+      "NodeType": "ExtensionNode",
+      "InstanceId": [
+        "8C65"
+      ],
+      "Id": "1af6d39ca1114202af8702f278f4608b",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "7b1ba1015b4347fa8253f2706f84ef7a",
+          "Name": "Object",
+          "Description": "Object",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Camber.AutoCAD.Objects.Polyline.Vertices@Autodesk.AutoCAD.DynamoNodes.Polyline",
+      "Id": "520856f7ed924a7487c12b62466562e0",
+      "Inputs": [
+        {
+          "Id": "7355913c79bb41b5b4e577af248968c3",
+          "Name": "polyline",
+          "Description": "Polyline",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "396cf32813da4306bc8ef18db27f2eab",
+          "Name": "Point[]",
+          "Description": "Point[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the vertices of a Polyline.\n\nPolyline.Vertices (polyline: Polyline): Point[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.DesignScript.Geometry.Polygon.ByPoints@Autodesk.DesignScript.Geometry.Point[]",
+      "Id": "4018ed5a92ac4ff497af64429da0c9bd",
+      "Inputs": [
+        {
+          "Id": "70e9a5646c8147b2a15b686962fabc1d",
+          "Name": "points",
+          "Description": "Point[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "2a4d5322520848e9aa693c5961c49ed5",
+          "Name": "Polygon",
+          "Description": "Polygon",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Construct a Polygon Curve by connecting Points.\n\nPolygon.ByPoints (points: Point[]): Polygon"
+    },
+    {
+      "ConcreteType": "Autodesk.AutoCAD.DynamoNodes.ObjectsSelection, Autodesk.Civil3DToolkitUI",
+      "NodeType": "ExtensionNode",
+      "InstanceId": [
+        "8C5A",
+        "8C62",
+        "8C5F",
+        "8C5B"
+      ],
+      "Id": "1a406379e69742e09f874f269bef740c",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "dca58106c71a4941a07c7c732ad2d67d",
+          "Name": "Objects",
+          "Description": "Objects",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled"
+    },
+    {
+      "ConcreteType": "Camber.UI.SurfaceBoundaryTypesDropDown, CamberUI",
+      "EnumerationType": "Autodesk.Civil.SurfaceBoundaryType, AeccDbMgd, Version=13.5.1125.0, Culture=neutral, PublicKeyToken=null",
+      "AddSpaces": true,
+      "DropLastCharacter": false,
+      "SelectedIndex": 1,
+      "SelectedString": "Hide",
+      "NodeType": "ExtensionNode",
+      "Id": "5ac97c58da254a72becdbbf2862a1feb",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "92580702299748299c04eee049b0512c",
+          "Name": "boundaryType",
+          "Description": "The selected boundaryType",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Select Surface boundary type."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "7da20a3cfe794131916cf4839ce0ce67",
+      "End": "ea4e585f85df4605bcb903c58960149d",
+      "Id": "e6de4efaf5c1495f924d10afc0d73fbe",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "7da20a3cfe794131916cf4839ce0ce67",
+      "End": "8e8b9657d1c348d6aa4154af0c94760c",
+      "Id": "f9d1d2d3a3da46b496782df3b29992d2",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "7b1ba1015b4347fa8253f2706f84ef7a",
+      "End": "7355913c79bb41b5b4e577af248968c3",
+      "Id": "e50ba2543b6c4e0e94cdc3c10701219a",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "396cf32813da4306bc8ef18db27f2eab",
+      "End": "70e9a5646c8147b2a15b686962fabc1d",
+      "Id": "a1e158d188ba495bb44a44e36e3120d7",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "2a4d5322520848e9aa693c5961c49ed5",
+      "End": "f165f0313f0547028591d273f91823da",
+      "Id": "1a52eb8132fb4302ae27576a5127ad12",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "dca58106c71a4941a07c7c732ad2d67d",
+      "End": "8af8a9efd94c47d3ae254eb4916eaa83",
+      "Id": "42c581a6e7b14b01b83d9c71d4364a43",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "92580702299748299c04eee049b0512c",
+      "End": "436642b8b12b46bbb8d5a912edca7eac",
+      "Id": "4e01473e89d44791a20fb81fdda442bb",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "92580702299748299c04eee049b0512c",
+      "End": "4fc15436e0f94090a9d5bce79be7f5c6",
+      "Id": "1fcb396c8b3649b88819002fd16ef4fa",
+      "IsHidden": "False"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Camber",
+      "Version": "4.2.2",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "e9fe3b09376740d7bf431b802c070c19",
+        "7bfbc919d53949b8898211c20c095242",
+        "520856f7ed924a7487c12b62466562e0",
+        "5ac97c58da254a72becdbbf2862a1feb"
+      ]
+    },
+    {
+      "Name": "Civil3DToolkit",
+      "Version": "1.1.32",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "1a406379e69742e09f874f269bef740c"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.15",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.15.1.6076",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "ConnectorPins": [],
+    "NodeViews": [
+      {
+        "Name": "Surface.AddBoundary",
+        "ShowGeometry": true,
+        "Id": "e9fe3b09376740d7bf431b802c070c19",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 496.5,
+        "Y": 274.0
+      },
+      {
+        "Name": "Select Object",
+        "ShowGeometry": true,
+        "Id": "60e9909bf4f74797acac5ec718a1d907",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 95.0,
+        "Y": 173.0
+      },
+      {
+        "Name": "Surface.AddBoundary",
+        "ShowGeometry": true,
+        "Id": "7bfbc919d53949b8898211c20c095242",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 526.5,
+        "Y": 579.0
+      },
+      {
+        "Name": "Select Object",
+        "ShowGeometry": true,
+        "Id": "1af6d39ca1114202af8702f278f4608b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -309.0,
+        "Y": 806.0
+      },
+      {
+        "Name": "Polyline.Vertices",
+        "ShowGeometry": true,
+        "Id": "520856f7ed924a7487c12b62466562e0",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -69.0,
+        "Y": 803.0
+      },
+      {
+        "Name": "Polygon.ByPoints",
+        "ShowGeometry": true,
+        "Id": "4018ed5a92ac4ff497af64429da0c9bd",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 192.0,
+        "Y": 803.0
+      },
+      {
+        "Name": "Select Objects",
+        "ShowGeometry": true,
+        "Id": "1a406379e69742e09f874f269bef740c",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -6.5667655786351133,
+        "Y": 360.49851632047489
+      },
+      {
+        "Name": "Surface Boundary Types",
+        "ShowGeometry": true,
+        "Id": "5ac97c58da254a72becdbbf2862a1feb",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -40.988130563798336,
+        "Y": 580.08308605341244
+      }
+    ],
+    "Annotations": [],
+    "X": 329.5325,
+    "Y": -67.720000000000027,
+    "Zoom": 0.8425
+  }
+}
