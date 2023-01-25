@@ -3,6 +3,7 @@ using Autodesk.DesignScript.Geometry;
 using Autodesk.DesignScript.Runtime;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using AcBlockReference = Autodesk.AutoCAD.DatabaseServices.BlockReference;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
@@ -251,7 +252,7 @@ namespace Camber.External.ExternalObjects
                 {
                     if (prop == null || !prop.Show || prop.PropertyName.ToUpper() != name.ToUpper())
                     {
-                        throw new InvalidOperationException("Dynamic property not found.");
+                        continue;
                     }
 
                     dict.Add("Description", prop.Description);
@@ -262,6 +263,12 @@ namespace Camber.External.ExternalObjects
 
                     break;
                 }
+
+                if (dict.Count == 0)
+                {
+                    throw new InvalidOperationException("Dynamic property not found.");
+                }
+
                 tr.Commit();
             }
             return dict;
