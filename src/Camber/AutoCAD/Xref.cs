@@ -39,7 +39,7 @@ namespace Camber.AutoCAD
         public string Name => AcBlockReference.Name;
 
         /// <summary>
-        /// Gets the path of the source file that defines an Xref.
+        /// Gets the path of the source file that defines an Xref. This may be a relative or full path.
         /// </summary>
         public string Path
         {
@@ -77,6 +77,24 @@ namespace Camber.AutoCAD
         /// </summary>
         public CoordinateSystem CoordinateSystem =>
             acDynNodes.AutoCADUtility.MatrixToCoordinateSystem(AcBlockReference.BlockTransform);
+
+        /// <summary>
+        /// Gets the full path of the source file that defines an Xref. 
+        /// </summary>
+        public string FullPath
+        {
+            get
+            {
+                using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
+                {
+                    var btr = (AcBlock)ctx.Transaction.GetObject(
+                        AcBlockReference.BlockTableRecord,
+                        acDb.OpenMode.ForRead);
+                    var db = btr.GetXrefDatabase(true);
+                    return db.Filename;
+                }
+            }
+        }
         #endregion
 
         #region constructors
