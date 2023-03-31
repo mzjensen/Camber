@@ -170,32 +170,39 @@ namespace Camber.External
         /// Imports an External Block from one External Document to another.
         /// If successful, the new External Block is returned in the context of the destination document.
         /// </summary>
-        /// <param name="sourceBlock"></param>
-        /// <param name="destinationDocument"></param>
-        /// <param name="overwrite"></param>
+        /// <param name="sourceBlock">The block that will be imported.</param>
+        /// <param name="destinationDocument">The destination document where the block will be imported to.</param>
+        /// <param name="overwrite">Overwrite the block definition if it already exists in the destination document?</param>
         /// <returns></returns>
         public static ExternalBlock Import(ExternalBlock sourceBlock, ExternalDocument destinationDocument, bool overwrite)
         {
             if (sourceBlock.IsAnonymous) { throw new InvalidOperationException("Cannot import anonymous blocks."); }
             if (sourceBlock.IsLayout) { throw new InvalidOperationException("Cannot import layout blocks."); }
 
-            ExternalBlock existingBlock = destinationDocument.BlockByName(sourceBlock.Name);
+            ExternalBlock destBlock = destinationDocument.BlockByName(sourceBlock.Name);
 
             var overwriteSwitch = acDb.DuplicateRecordCloning.Ignore;
-            if (overwrite) { overwriteSwitch = acDb.DuplicateRecordCloning.Replace; }
-
-            if (!overwrite && existingBlock != null)
+            if (overwrite)
             {
-                return existingBlock;
+                overwriteSwitch = acDb.DuplicateRecordCloning.Replace;
             }
+
+            if (!overwrite && destBlock != null)
+            {
+                return destBlock;
+            }
+            
             try
             {
                 acDb.Database destDb = destinationDocument.AcDatabase;
-                acDb.Database sourceDb = destinationDocument.AcDatabase;
+                acDb.Database sourceDb = sourceBlock.AcDatabase;
                 using (var tr = sourceDb.TransactionManager.StartTransaction())
                 {
                     acDb.IdMapping mapping = new acDb.IdMapping();
-                    acDb.ObjectIdCollection ids = new acDb.ObjectIdCollection() { sourceBlock.InternalObjectId };
+                    acDb.ObjectIdCollection ids = new acDb.ObjectIdCollection()
+                    {
+                        sourceBlock.InternalObjectId
+                    };
                     sourceDb.WblockCloneObjects(ids, destDb.BlockTableId, mapping, overwriteSwitch, false);
                     ExternalBlock newBlk = destinationDocument.BlockByName(sourceBlock.Name);
                     if (newBlk != null)
