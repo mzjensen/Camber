@@ -8,6 +8,9 @@
 ## A Word from the Author - October 2024
 You may have noticed that there have not been any updates for quite some time (last release was 4.2.6 in March 2023). This is because I joined Autodesk in the summer of 2023, and so it no longer makes sense for me to maintain a side project when I am also working on Civil 3D directly. From this point forward, I do not have plans to make any more updates to Camber. Even though I am no longer actively maintaining the project, the doors are still open for contributions!
 
+## Disclaimer
+Camber is an independent open source initiative and is not affiliated with, endorsed by, or connected to Autodesk, Inc. in any way. The views, opinions, and content of this project are solely those of the individual contributors and do not represent the views or opinions of Autodesk, Inc. All trademarks and registered trademarks are the property of their respective owners.
+
 ## Features
 Camber includes hundreds of nodes that utilize the AutoCAD and Civil 3D .NET APIs to provide read/write access to:
 
