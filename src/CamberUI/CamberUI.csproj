@@ -1,79 +1,74 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\Camber\packages\NUnit.3.13.2\build\NUnit.props" Condition="Exists('..\Camber\packages\NUnit.3.13.2\build\NUnit.props')" />
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1BC882EB-92D5-43DE-BB73-C910DCC78729}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Camber</RootNamespace>
-    <AssemblyName>CamberUI</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <TargetFramework>net48</TargetFramework>
+    <AssemblyTitle>CamberUI</AssemblyTitle>
+    <Product>Camber</Product>
+    <Description>UI nodes for the Camber Dynamo package.</Description>
+    <Copyright>Copyright © 2023</Copyright>
+    <AssemblyVersion>4.2.6.0</AssemblyVersion>
+    <FileVersion>4.2.6.0</FileVersion>
+    <OutputPath>..\..\build\$(Configuration)\</OutputPath>
+    <DocumentationFile>..\..\build\$(Configuration)\CamberUI.xml</DocumentationFile>
+    <BuildDependsOn>$(BuildDependsOn);AfterBuildMigrated</BuildDependsOn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\..\build\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\build\Release\CamberUI.xml</DocumentationFile>
     <C3DVersion>2022</C3DVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug2023|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>..\..\build\Debug2023\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DocumentationFile>..\..\build\Debug2023\CamberUI.xml</DocumentationFile>
     <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
     <C3DVersion>2023</C3DVersion>
     <DynamoPackageFolder>2.15</DynamoPackageFolder>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug2022|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>..\..\build\Debug2022\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DocumentationFile>..\..\build\Debug2022\CamberUI.xml</DocumentationFile>
     <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
     <C3DVersion>2022</C3DVersion>
     <DynamoPackageFolder>2.12</DynamoPackageFolder>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug2021|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>..\..\build\Debug2021\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DocumentationFile>..\..\build\Debug2021\CamberUI.xml</DocumentationFile>
     <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
     <C3DVersion>2021</C3DVersion>
     <DynamoPackageFolder>2.5</DynamoPackageFolder>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug2020|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>..\..\build\Debug2020\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DocumentationFile>..\..\build\Debug2020\CamberUI.xml</DocumentationFile>
     <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
     <C3DVersion>2020</C3DVersion>
     <DynamoPackageFolder>2.4</DynamoPackageFolder>
   </PropertyGroup>
+  <Import Project="..\Camber\packages\NUnit.3.13.2\build\NUnit.props" Condition="Exists('..\Camber\packages\NUnit.3.13.2\build\NUnit.props')" />
+  <Target Name="AfterBuildMigrated" Condition="$(Configuration.Contains('Debug'))">
+    <GetReferenceAssemblyPaths TargetFrameworkMoniker=".NETFramework, Version=v4.8">
+      <Output TaskParameter="FullFrameworkReferenceAssemblyPaths" PropertyName="FrameworkAssembliesPath" />
+    </GetReferenceAssemblyPaths>
+    <GetAssemblyIdentity AssemblyFiles="$(OutDir)$(TargetName).dll">
+      <Output TaskParameter="Assemblies" ItemName="AssemblyInfo" />
+    </GetAssemblyIdentity>
+    <ItemGroup>
+      <SourceDlls Include="$(TargetDir)*.dll" />
+      <SourcePdbs Include="$(TargetDir)*.pdb" />
+      <SourcePdbs Include="$(TargetDir)*.pdb" />
+      <SourceXmls Include="$(TargetDir)*.xml" />
+    </ItemGroup>
+    <!--Copy the package to the Dynamo for Civil 3D package root directory-->
+    <RemoveDir Directories="$(AppData)\Autodesk\C3D $(C3DVersion)\Dynamo\$(DynamoPackageFolder)\packages\$(ProjectName)\bin" />
+    <Copy SourceFiles="@(SourceDlls)" DestinationFolder="$(AppData)\Autodesk\C3D $(C3DVersion)\Dynamo\$(DynamoPackageFolder)\packages\Camber\bin\%(RecursiveDir)" />
+    <Copy SourceFiles="@(SourcePkg)" DestinationFolder="$(AppData)\Autodesk\C3D $(C3DVersion)\Dynamo\$(DynamoPackageFolder)\packages\Camber\" />
+    <Copy SourceFiles="@(SourcePdbs)" DestinationFolder="$(AppData)\Autodesk\C3D $(C3DVersion)\Dynamo\$(DynamoPackageFolder)\packages\Camber\bin\" />
+    <Copy SourceFiles="@(SourceXmls)" DestinationFolder="$(AppData)\Autodesk\C3D $(C3DVersion)\Dynamo\$(DynamoPackageFolder)\packages\Camber\bin\" />
+  </Target>
   <ItemGroup>
     <Reference Include="accoremgd">
       <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\accoremgd.dll</HintPath>
@@ -104,101 +99,20 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="PresentationCore" />
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Xaml" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DynamoVisualProgramming.WpfUILibrary" Version="2.4.0.6186">
-      <ExcludeAssets>runtime</ExcludeAssets>
-    </PackageReference>
+    <PackageReference Include="DynamoVisualProgramming.WpfUILibrary" Version="2.4.0.6186" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoCAD\ConvertToCamberObject.cs" />
-    <Compile Include="AutoCAD\TextStylesDropDown.cs" />
-    <Compile Include="AutoCAD\NamedPageSetupsDropDown.cs" />
-    <Compile Include="Civil\CoordinateSystemCodesDropDown.cs" />
-    <Compile Include="Civil\Styles\Label Styles\LabelStyleDropDownBase.cs" />
-    <Compile Include="Civil\Styles\StyleDropDownBase.cs" />
-    <Compile Include="Civil\QTODropDowns.cs" />
-    <Compile Include="Civil\GradingCriteriaDropDowns.cs" />
-    <Compile Include="Civil\Design Checks\DesignCheckEnumDropDowns.cs" />
-    <Compile Include="Civil\QTOEnumDropDowns.cs" />
-    <Compile Include="Civil\GradingCriteriaEnumDropDowns.cs" />
-    <Compile Include="Civil\Styles\AlignmentLabelSetStyleNamesDropDown.cs" />
-    <Compile Include="EnumDropDownBase.cs" />
-    <Compile Include="Civil\Data Shortcuts\SetWorkingFolder.cs" />
-    <Compile Include="Civil\Data Shortcuts\Validate.cs" />
-    <Compile Include="Civil\Data Shortcuts\Refresh.cs" />
-    <Compile Include="Civil\Data Shortcuts\GetCurrentProject.cs" />
-    <Compile Include="AutoCAD\AutoCADEnumDropDowns.cs" />
-    <Compile Include="Civil\CivilEnumDropDowns.cs" />
-    <Compile Include="Civil\CivilObjects\TimeOfConcentrationCalculationMethodsDropDown.cs" />
-    <Compile Include="Civil\Styles\Label Styles\PointLabelStyleDropDowns.cs" />
-    <Compile Include="Civil\Styles\Label Styles\ViewFrameLabelStyleDropDowns.cs" />
-    <Compile Include="Civil\Styles\Label Styles\SurfaceLabelStyleDropDowns.cs" />
-    <Compile Include="Civil\Styles\Label Styles\StructureLabelStyleDropDowns.cs" />
-    <Compile Include="Civil\Styles\Label Styles\SectionViewLabelStyleDropDowns.cs" />
-    <Compile Include="Civil\Styles\Label Styles\SectionLabelStyleDropDowns.cs" />
-    <Compile Include="Civil\Styles\Label Styles\SampleLineLabelStyleDropDowns.cs" />
-    <Compile Include="Civil\Styles\Label Styles\ProjectionLabelStyleDropDowns.cs" />
-    <Compile Include="Civil\Styles\Label Styles\ProfileViewLabelStyleDropDowns.cs" />
-    <Compile Include="Civil\Styles\Label Styles\ProfileLabelStyleDropDowns.cs" />
-    <Compile Include="Civil\Styles\Label Styles\PipeLabelStyleDropDowns.cs" />
-    <Compile Include="Civil\Styles\Label Styles\ParcelLabelStyleDropDowns.cs" />
-    <Compile Include="Civil\Styles\Label Styles\MatchLineLabelStyleDropDowns.cs" />
-    <Compile Include="Civil\Styles\Label Styles\IntersectionLabelStyleDropDowns.cs" />
-    <Compile Include="Civil\Styles\Label Styles\CatchmentLabelStyleDropDowns.cs" />
-    <Compile Include="Civil\Design Checks\DesignCheckDropDowns.cs" />
-    <Compile Include="Civil\Styles\Object Styles\Structure Styles\StructureStyleSectionOptionsDropDown.cs" />
-    <Compile Include="Civil\Styles\Object Styles\Structure Styles\StructureStyleProfileOptionsDropDown.cs" />
-    <Compile Include="Civil\Styles\Object Styles\Structure Styles\StructureStylePlanOptionsDropDown.cs" />
-    <Compile Include="Civil\Styles\Object Styles\Structure Styles\StructureStyleModelOptionsDropDown.cs" />
-    <Compile Include="Civil\Styles\Object Styles\Pipe Styles\PipeStyleProfileOptionsDropDown.cs" />
-    <Compile Include="Civil\Styles\Object Styles\Pipe Styles\PipeStylePlanOptionsDropDown.cs" />
-    <Compile Include="Civil\Styles\ViewStyleDropDowns.cs" />
-    <Compile Include="Civil\Styles\Object Styles\ObjectStyleDropDowns.cs" />
-    <Compile Include="Civil\Styles\CodeSetStyleDropDown.cs" />
-    <Compile Include="Civil\Styles\StyleEnumDropDowns.cs" />
-    <Compile Include="Civil\Styles\Label Styles\GeneralLabelStylesDropDown.cs" />
-    <Compile Include="Tools\ModelText\TextAlignmentDropDown.cs" />
-    <Compile Include="Tools\ModelText\SystemFontsDropDown.cs" />
-    <Compile Include="Civil\Data Shortcuts\GetWorkingFolder.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Civil\Styles\Label Styles\AlignmentLabelStyleDropDowns.cs" />
+    <PackageReference Include="DynamoVisualProgramming.WpfUILibrary" Version="2.4.0.6186" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DynamoVisualProgramming.WpfUILibrary">
-      <Version>2.4.0.6186</Version>
-    </PackageReference>
+    <ProjectReference Include="..\Camber\Camber.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Camber\Camber.csproj">
-      <Project>{23bbab73-5a3b-4ee8-a757-a1f37c67ab1f}</Project>
-      <Name>Camber</Name>
-    </ProjectReference>
+    <Compile Remove="obj\Debug2020\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
+    <Compile Remove="obj\Debug2024\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="AfterBuild" Condition="$(Configuration.Contains('Debug'))">
-    <GetReferenceAssemblyPaths TargetFrameworkMoniker=".NETFramework, Version=v4.8">
-      <Output TaskParameter="FullFrameworkReferenceAssemblyPaths" PropertyName="FrameworkAssembliesPath" />
-    </GetReferenceAssemblyPaths>
-    <GetAssemblyIdentity AssemblyFiles="$(OutDir)$(TargetName).dll">
-      <Output TaskParameter="Assemblies" ItemName="AssemblyInfo" />
-    </GetAssemblyIdentity>
-    <ItemGroup>
-      <SourceDlls Include="$(TargetDir)*.dll" />
-      <SourcePdbs Include="$(TargetDir)*.pdb" />
-      <SourcePdbs Include="$(TargetDir)*.pdb" />
-      <SourceXmls Include="$(TargetDir)*.xml" />
-    </ItemGroup>
-    <!--Copy the package to the Dynamo for Civil 3D package root directory-->
-    <RemoveDir Directories="$(AppData)\Autodesk\C3D $(C3DVersion)\Dynamo\$(DynamoPackageFolder)\packages\$(ProjectName)\bin" />
-    <Copy SourceFiles="@(SourceDlls)" DestinationFolder="$(AppData)\Autodesk\C3D $(C3DVersion)\Dynamo\$(DynamoPackageFolder)\packages\Camber\bin\%(RecursiveDir)" />
-    <Copy SourceFiles="@(SourcePkg)" DestinationFolder="$(AppData)\Autodesk\C3D $(C3DVersion)\Dynamo\$(DynamoPackageFolder)\packages\Camber\" />
-    <Copy SourceFiles="@(SourcePdbs)" DestinationFolder="$(AppData)\Autodesk\C3D $(C3DVersion)\Dynamo\$(DynamoPackageFolder)\packages\Camber\bin\" />
-    <Copy SourceFiles="@(SourceXmls)" DestinationFolder="$(AppData)\Autodesk\C3D $(C3DVersion)\Dynamo\$(DynamoPackageFolder)\packages\Camber\bin\" />
-  </Target>
 </Project>
