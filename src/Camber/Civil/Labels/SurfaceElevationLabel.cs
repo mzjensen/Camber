@@ -44,7 +44,7 @@ namespace Camber.Civil.Labels
         /// <summary>
         /// Gets the elevation of a Surface Elevation Label's location.
         /// </summary>
-        public double Elevation => Surface.ElevationByXY(AnchorPoint.X, AnchorPoint.Y);
+        public double Elevation => Surface.ElevationAtXY(AnchorPoint.X, AnchorPoint.Y);
         #endregion
 
         #region constructors

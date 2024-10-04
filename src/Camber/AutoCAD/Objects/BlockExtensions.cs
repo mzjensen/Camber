@@ -187,7 +187,7 @@ namespace Camber.AutoCAD.Objects
                     foreach (acDb.ObjectId oid in btr.GetAnonymousBlockIds())
                     {
                         var acAnonBlock = (acDb.BlockTableRecord)ctx.Transaction.GetObject(oid, acDb.OpenMode.ForRead);
-                        anonBlocks.Add(document.BlockByName(acAnonBlock.Name));
+                        anonBlocks.Add(acDynNodes.Block.GetBlockByName(document, acAnonBlock.Name));
                     }
                     return anonBlocks;
                 }

@@ -131,7 +131,7 @@ namespace Camber.DynamoExtensions.GeometryExtensions
         public static bool CheckNormal(Curve curve)
         {
             // Get curve normal
-            var vNorm = curve.NormalAtParameter();
+            var vNorm = curve.NormalAtParameter(0);
             // Return false if Z component is nonzero, else return true
             if(vNorm.Z != 0)
             {

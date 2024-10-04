@@ -2,7 +2,6 @@
 using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Windows.Controls;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;

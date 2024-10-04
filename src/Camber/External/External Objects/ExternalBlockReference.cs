@@ -4,6 +4,7 @@ using Autodesk.DesignScript.Runtime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Autodesk.AutoCAD.DynamoNodes;
 using AcBlockReference = Autodesk.AutoCAD.DatabaseServices.BlockReference;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
@@ -36,7 +37,7 @@ namespace Camber.External.ExternalObjects
         /// <summary>
         /// Gets the coordinate system of an External Block Reference.
         /// </summary>
-        public CoordinateSystem CoordinateSystem => acDynNodes.AutoCADUtility.MatrixToCoordinateSystem(AcEntity.BlockTransform);
+        public CoordinateSystem CoordinateSystem => AcEntity.BlockTransform.ToDyn();
 
         /// <summary>
         /// Gets whether an External Block Reference has dynamic properties.
@@ -167,7 +168,7 @@ namespace Camber.External.ExternalObjects
                     btr.AppendEntity(bref);
                     tr.AddNewlyCreatedDBObject(bref, true);
                     // Set properties
-                    bref.BlockTransform = acDynNodes.AutoCADUtility.CooridnateSystemToMatrix(cs);
+                    bref.BlockTransform = cs.ToAc();
                     // Ensure destination has input layer
                     ExternalDocument.EnsureLayer(destDoc, layer);
                     bref.Layer = layer;
@@ -192,9 +193,7 @@ namespace Camber.External.ExternalObjects
         /// <param name="cs"></param>
         /// <returns></returns>
         public ExternalBlockReference SetCoordinateSystem(CoordinateSystem cs) =>
-            (ExternalBlockReference)SetValue(
-            acDynNodes.AutoCADUtility.CooridnateSystemToMatrix(cs),
-            "BlockTransform");
+            (ExternalBlockReference)SetValue(cs.ToAc(), "BlockTransform");
 
         /// <summary>
         /// Gets the text string of an External Block Reference's attribute value by tag.

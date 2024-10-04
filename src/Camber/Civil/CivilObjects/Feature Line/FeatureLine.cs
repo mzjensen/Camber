@@ -104,7 +104,7 @@ namespace Camber.Civil.CivilObjects
                 {
                     subCurves.Add(CurveExtensions.ByStartPointEndPointBulge(dynPoints[i], dynPoints[i + 1], Bulges[i]));
                 }
-                return PolyCurve.ByJoinedCurves(subCurves);
+                return PolyCurve.ByJoinedCurves(subCurves, 0.001D, false);
             }
         }
 
@@ -120,7 +120,7 @@ namespace Camber.Civil.CivilObjects
                 {
                     segmentCurves.Add(segment.Curve3D);
                 }
-                return PolyCurve.ByJoinedCurves(segmentCurves);
+                return PolyCurve.ByJoinedCurves(segmentCurves, 0.001D, false);
             }
         }
         [IsVisibleInDynamoLibrary(false)]

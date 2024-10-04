@@ -46,7 +46,7 @@ namespace Camber.AutoCAD.Objects.MultiViewBlocks
                     foreach (acDb.ObjectId oid in AecMultiViewBlock.GetAllBlocksReferenced())
                     {
                         var acBlk = (acDb.BlockTableRecord) ctx.Transaction.GetObject(oid, acDb.OpenMode.ForRead);
-                        blks.Add(document.BlockByName(acBlk.Name));
+                        blks.Add(acDynNodes.Block.GetBlockByName(document, acBlk.Name));
                     }
                 }
                 return blks;
@@ -69,7 +69,7 @@ namespace Camber.AutoCAD.Objects.MultiViewBlocks
                         var acBlk = (acDb.BlockTableRecord)ctx.Transaction.GetObject(
                             AecMultiViewBlock.InterferenceBlockId,
                             acDb.OpenMode.ForRead);
-                        return document.BlockByName(acBlk.Name);
+                        return acDynNodes.Block.GetBlockByName(document, acBlk.Name);
                     }
                 }
                 return null;

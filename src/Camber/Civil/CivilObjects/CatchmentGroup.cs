@@ -1,19 +1,19 @@
 ﻿#region references
+using Autodesk.DesignScript.Runtime;
+using DynamoServices;
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using AeccCatchmentGroup = Autodesk.Civil.DatabaseServices.CatchmentGroup;
-using Autodesk.DesignScript.Runtime;
-using DynamoServices;
 #endregion
 
 namespace Camber.Civil.CivilObjects
 {
     [RegisterForTrace]
-    public sealed class CatchmentGroup : CivilObject
+    public sealed class CatchmentGroup : acDynNodes.ObjectBase
     {
         #region properties
         internal AeccCatchmentGroup AeccCatchmentGroup => AcObject as AeccCatchmentGroup;
@@ -33,6 +33,16 @@ namespace Camber.Civil.CivilObjects
                 return catchments;
             }
         }
+
+        /// <summary>
+        /// Gets the name of a Catchment Group
+        /// </summary>
+        public string Name => AeccCatchmentGroup.Name;
+
+        /// <summary>
+        /// Gets the description of a Catchment Group
+        /// </summary>
+        public string Description => AeccCatchmentGroup.Description;
         #endregion
 
         #region constructors
@@ -40,8 +50,14 @@ namespace Camber.Civil.CivilObjects
 
         [SupressImportIntoVM]
         internal static CatchmentGroup GetByObjectId(acDb.ObjectId catchmentGroupId)
-            => CivilObjectSupport.Get<CatchmentGroup, AeccCatchmentGroup>
-            (catchmentGroupId, (catchmentGroup) => new CatchmentGroup(catchmentGroup));
+        {
+            acDynNodes.Document document = acDynNodes.Document.Current;
+            using (acDynApp.DocumentContext ctx = new acDynApp.DocumentContext(document.AcDocument))
+            {
+                AeccCatchmentGroup aeccCatchmentGroup = ctx.Transaction.GetObject(catchmentGroupId, acDb.OpenMode.ForWrite) as AeccCatchmentGroup;
+                return new CatchmentGroup(aeccCatchmentGroup);
+            }
+        }
 
         /// <summary>
         /// Creates a Catchment Group by name.
@@ -174,6 +190,32 @@ namespace Camber.Civil.CivilObjects
             return GetCatchmentGroups(document)
                 .FirstOrDefault(item => item.Name.Equals
                 (name, StringComparison.OrdinalIgnoreCase));
+        }
+
+        /// <summary>
+        /// Sets the name of a Catchment Group
+        /// </summary>
+        /// <param name="name">Name of the Catchment Group</param>
+        /// <returns>Catchment Group</returns>
+        public CatchmentGroup SetName(string name)
+        {
+            AeccCatchmentGroup.UpgradeOpen();
+            AeccCatchmentGroup.Name = name;
+            AeccCatchmentGroup.DowngradeOpen();
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the description of a Catchment Group
+        /// </summary>
+        /// <param name="description">Description of the Catchment Group</param>
+        /// <returns>Catchment Group</returns>
+        public CatchmentGroup SetDescription(string description)
+        {
+            AeccCatchmentGroup.UpgradeOpen();
+            AeccCatchmentGroup.Description = description;
+            AeccCatchmentGroup.DowngradeOpen();
+            return this;
         }
         #endregion        
     }

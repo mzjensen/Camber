@@ -1,136 +1,79 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net48</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
     <AssemblyTitle>Camber</AssemblyTitle>
     <Product>Camber</Product>
     <Description>Core node library for the Camber Dynamo package.</Description>
     <Copyright>Copyright © 2023</Copyright>
     <AssemblyVersion>4.2.6.0</AssemblyVersion>
     <FileVersion>4.2.6.0</FileVersion>
-    <OutputPath>..\..\build\$(Configuration)\</OutputPath>
-    <DocumentationFile>..\..\build\$(Configuration)\Camber.xml</DocumentationFile>
     <BuildDependsOn>$(BuildDependsOn);AfterBuildMigrated</BuildDependsOn>
-    <PreBuildEvent />
-    <PreBuildEvent />
-    <PreBuildEvent />
+    <BaseOutputPath>bin\</BaseOutputPath>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+	<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+	<BaseOutputPath>..\..\build</BaseOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <C3DVersion>2022</C3DVersion>
+	<DebugType>pdbonly</DebugType>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug2023|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <WarningLevel>1</WarningLevel>
-    <DebugType>full</DebugType>
-    <LangVersion>7.3</LangVersion>
-    <C3DVersion>2023</C3DVersion>
-    <DynamoPackageFolder>2.15</DynamoPackageFolder>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug2022|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <WarningLevel>1</WarningLevel>
-    <DebugType>full</DebugType>
-    <LangVersion>7.3</LangVersion>
-    <C3DVersion>2022</C3DVersion>
-    <DynamoPackageFolder>2.12</DynamoPackageFolder>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug2021|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <WarningLevel>1</WarningLevel>
-    <DebugType>full</DebugType>
-    <LangVersion>7.3</LangVersion>
-    <C3DVersion>2021</C3DVersion>
-    <DynamoPackageFolder>2.5</DynamoPackageFolder>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug2020|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <WarningLevel>1</WarningLevel>
-    <DebugType>full</DebugType>
-    <LangVersion>7.3</LangVersion>
-    <C3DVersion>2020</C3DVersion>
-    <DynamoPackageFolder>2.4</DynamoPackageFolder>
-  </PropertyGroup>
-  <PropertyGroup>
-    <PreBuildEvent />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+	<DebugSymbols>true</DebugSymbols>
+	<DefineConstants>DEBUG;TRACE</DefineConstants>
+	<DebugType>full</DebugType>
+	<LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <Import Project="packages\NUnit.3.13.2\build\NUnit.props" Condition="Exists('packages\NUnit.3.13.2\build\NUnit.props')" />
-  <Target Name="AfterBuildMigrated" Condition="$(Configuration.Contains('Debug'))">
-    <GetReferenceAssemblyPaths TargetFrameworkMoniker=".NETFramework, Version=v4.8">
-      <Output TaskParameter="FullFrameworkReferenceAssemblyPaths" PropertyName="FrameworkAssembliesPath" />
-    </GetReferenceAssemblyPaths>
-    <GetAssemblyIdentity AssemblyFiles="$(OutDir)$(TargetName).dll">
-      <Output TaskParameter="Assemblies" ItemName="AssemblyInfo" />
-    </GetAssemblyIdentity>
-    <ItemGroup>
-      <SourceDlls Include="$(TargetDir)*.dll" />
-      <SourcePdbs Include="$(TargetDir)*.pdb" />
-      <SourcePdbs Include="$(TargetDir)*.pdb" />
-      <SourceXmls Include="$(TargetDir)*.xml" />
-      <SourcePkg Include="pkg.json" />
-    </ItemGroup>
-    <!--Copy the package to the Dynamo for Civil 3D package root directory-->
-    <RemoveDir Directories="$(AppData)\Autodesk\C3D $(C3DVersion)\Dynamo\$(DynamoPackageFolder)\packages\$(ProjectName)\bin" />
-    <Copy SourceFiles="@(SourceDlls)" DestinationFolder="$(AppData)\Autodesk\C3D $(C3DVersion)\Dynamo\$(DynamoPackageFolder)\packages\$(ProjectName)\bin\%(RecursiveDir)" />
-    <Copy SourceFiles="@(SourcePkg)" DestinationFolder="$(AppData)\Autodesk\C3D $(C3DVersion)\Dynamo\$(DynamoPackageFolder)\packages\$(ProjectName)\" />
-    <Copy SourceFiles="@(SourcePdbs)" DestinationFolder="$(AppData)\Autodesk\C3D $(C3DVersion)\Dynamo\$(DynamoPackageFolder)\packages\$(ProjectName)\bin\" />
-    <Copy SourceFiles="@(SourceXmls)" DestinationFolder="$(AppData)\Autodesk\C3D $(C3DVersion)\Dynamo\$(DynamoPackageFolder)\packages\$(ProjectName)\bin\" />
-  </Target>
   <ItemGroup>
     <Reference Include="accoremgd">
-      <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\accoremgd.dll</HintPath>
+      <HintPath>..\..\lib\Autodesk\AutoCAD 2025\accoremgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="acdbmgd">
-      <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\acdbmgd.dll</HintPath>
+    <Reference Include="Acdbmgd">
+      <HintPath>..\..\lib\Autodesk\AutoCAD 2025\acdbmgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="AcDynamoServices">
-      <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\C3D\Dynamo\AcDynamoServices.dll</HintPath>
+      <HintPath>..\..\lib\Autodesk\AutoCAD 2025\C3D\Dynamo\AcDynamoServices.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="acmgd">
-      <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\acmgd.dll</HintPath>
+    <Reference Include="Acmgd">
+      <HintPath>..\..\lib\Autodesk\AutoCAD 2025\acmgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="AecBaseMgd">
-      <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\AecBaseMgd.dll</HintPath>
+      <HintPath>..\..\lib\Autodesk\AutoCAD 2025\ACA\AecBaseMgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="AeccDataShortcutMgd">
-      <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\C3D\AeccDataShortcutMgd.dll</HintPath>
+      <HintPath>..\..\lib\Autodesk\AutoCAD 2025\C3D\AeccDataShortcutMgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="AeccDbMgd">
-      <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\C3D\AeccDbMgd.dll</HintPath>
+      <HintPath>..\..\lib\Autodesk\AutoCAD 2025\C3D\AeccDbMgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="AeccPressurePipesMgd">
-      <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\C3D\AeccPressurePipesMgd.dll</HintPath>
+      <HintPath>..\..\lib\Autodesk\AutoCAD 2025\C3D\AeccPressurePipesMgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="AutoCADNodes">
-      <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\C3D\Dynamo\AutoCADNodes.dll</HintPath>
+      <HintPath>..\..\lib\Autodesk\AutoCAD 2025\C3D\Dynamo\AutoCADNodes.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Civil3DNodes">
-      <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\AutoCAD $(C3DVersion)\C3D\Dynamo\Civil3DNodes.dll</HintPath>
+      <HintPath>..\..\lib\Autodesk\AutoCAD 2025\C3D\Dynamo\Civil3DNodes.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="DSCoreNodes">
-      <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2022\C3D\Dynamo\Core\DSCoreNodes.dll</HintPath>
+      <HintPath>..\..\lib\Autodesk\AutoCAD 2025\C3D\Dynamo\Core\DSCoreNodes.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="pkg.json" />
+    <None Include="Civil\CivilObjects\Feature Line\FeatureLine.cs" />
+    <None Include="Civil\CivilObjects\Feature Line\FeatureLineSegment.cs" />
+    <None Include="Civil\CivilObjects\Feature Line\FeatureLineSegmentType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Camber_DynamoCustomization.xml">
@@ -138,11 +81,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DynamoVisualProgramming.Core" Version="2.15.0.5383" />
+    <PackageReference Include="DynamoVisualProgramming.Core" Version="3.2.2.5494" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="obj\Debug2020\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
-    <Compile Remove="obj\Debug2024\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
-    <Compile Remove="Civil\CivilObjects\Surfaces\TinSurface.cs" />
+    <Compile Remove="Civil\CivilObjects\Feature Line\FeatureLine.cs" />
+    <Compile Remove="Civil\CivilObjects\Feature Line\FeatureLineSegment.cs" />
+    <Compile Remove="Civil\CivilObjects\Feature Line\FeatureLineSegmentType.cs" />
   </ItemGroup>
 </Project>

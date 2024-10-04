@@ -38,7 +38,7 @@ namespace Camber.AutoCAD.Objects
                 {
                     acDb.ObjectId blockId = AcMLeader.BlockContentId;
                     acDb.BlockTableRecord acBlock = (acDb.BlockTableRecord)blockId.GetObject(acDb.OpenMode.ForRead);
-                    return acDynNodes.Document.Current.BlockByName(acBlock.Name);
+                    return acDynNodes.Block.GetBlockByName(acDynNodes.Document.Current, acBlock.Name);
                 }
             }
         }
