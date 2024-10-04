@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<BaseOutputPath>..\..\build</BaseOutputPath>
+		<OutputType>Library</OutputType>
+		<!-- Don't build DLL -->
+		<SkipCopyBuildProduct>true</SkipCopyBuildProduct>
+		<!-- Don't generate dependencies file -->
+		<GenerateDependencyFile>false</GenerateDependencyFile>
+		<!-- Don't generate debug symbols -->
+		<DebugType>none</DebugType>
+		<RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Update="pkg.json">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="call &quot;$(ProjectDir)CreatePackage.bat&quot;" />
+	</Target>
+
+</Project>
