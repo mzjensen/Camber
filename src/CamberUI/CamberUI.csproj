@@ -6,9 +6,9 @@
     <AssemblyTitle>CamberUI</AssemblyTitle>
     <Product>Camber</Product>
     <Description>UI nodes for the Camber Dynamo package.</Description>
-    <Copyright>Copyright © 2023</Copyright>
-    <AssemblyVersion>4.2.6.0</AssemblyVersion>
-    <FileVersion>4.2.6.0</FileVersion>
+    <Copyright>Copyright © 2024</Copyright>
+    <AssemblyVersion>5.0.0.0</AssemblyVersion>
+    <FileVersion>5.0.0.0</FileVersion>
     <BuildDependsOn>$(BuildDependsOn);AfterBuildMigrated</BuildDependsOn>
     <BaseOutputPath>bin\</BaseOutputPath>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
