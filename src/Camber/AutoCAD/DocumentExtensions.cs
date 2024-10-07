@@ -7,40 +7,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Autodesk.Civil;
+using Camber.Properties;
 using acApp = Autodesk.AutoCAD.ApplicationServices;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using aecDb = Autodesk.Aec.DatabaseServices;
 using civApp = Autodesk.Civil.ApplicationServices;
+using DynamoServices;
 
 namespace Camber.AutoCAD
 {
     public static class Document
     {
         #region query methods
-        /// <summary>
-        /// Gets if a Document is a named file on the disk (as opposed to a new drawing that has not yet been saved).
-        /// </summary>
-        /// <param name="document"></param>
-        /// <returns></returns>
-        [NodeCategory("Query")]
-        public static bool IsNamedDrawing(this acDynNodes.Document document)
-        {
-            return document.AcDocument.IsNamedDrawing;
-        }
-
-        /// <summary>
-        /// Gets if a Document is read-only.
-        /// </summary>
-        /// <param name="document"></param>
-        /// <returns></returns>
-        [NodeCategory("Query")]
-        public static bool IsReadOnly(this acDynNodes.Document document)
-        {
-            return document.AcDocument.IsReadOnly;
-        }
-
         /// <summary>
         /// Gets the version of a Document when it was last saved with the current session.
         /// Returns null if the Document has not been saved with the current session.
@@ -165,41 +145,6 @@ namespace Camber.AutoCAD
         }
 
         /// <summary>
-        /// Gets the value of a system variable.
-        /// </summary>
-        /// <param name="document"></param>
-        /// <param name="variableName">The name of the system variable.</param>
-        /// <returns></returns>
-        public static object GetSystemVariable(this acDynNodes.Document document, string variableName)
-        {
-            return acApp.Application.GetSystemVariable(variableName);
-        }
-
-        /// <summary>
-        /// Sets the value of a system variable.
-        /// </summary>
-        /// <param name="document"></param>
-        /// <param name="variableName">The name of the system variable.</param>
-        /// <param name="newValue">The new value to assign.</param>
-        /// <returns></returns>
-        public static acDynNodes.Document SetSystemVariable(this acDynNodes.Document document, string variableName, object newValue)
-        {
-            // AutoCAD needs 16-bit integers, but from Dynamo they come as 64-bit.
-            // Without this check, an eInvalidInput exception will be thrown when trying to set integer values.
-            if (newValue is long) { newValue = Convert.ToInt16(newValue); }
-            
-            try
-            {
-                acApp.Application.SetSystemVariable(variableName, newValue);
-                return document;
-            }
-            catch (Exception e)
-            {
-                throw new InvalidOperationException(e.Message);
-            }
-        }
-
-        /// <summary>
         /// Gets a Multi-View Block definition in a Document by name.
         /// </summary>
         /// <param name="document"></param>
@@ -280,30 +225,6 @@ namespace Camber.AutoCAD
         }
 
         /// <summary>
-        /// Sets the coordinate system code for a Document.
-        /// </summary>
-        /// <param name="document"></param>
-        /// <param name="code"></param>
-        /// <returns></returns>
-        public static acDynNodes.Document SetCoordinateSystemCode(this acDynNodes.Document document, string code)
-        {
-            try
-            {
-                using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
-                {
-                    var cdoc = civApp.CivilDocument.GetCivilDocument(document.AcDocument.Database);
-                    var settings = cdoc.Settings.DrawingSettings.UnitZoneSettings;
-                    settings.CoordinateSystemCode = code;
-                }
-                return document;
-            }
-            catch (Exception ex)
-            {
-                throw new InvalidOperationException(ex.Message);
-            }
-        }
-
-        /// <summary>
         /// Sets the imperial to metric conversion type for a Document.
         /// </summary>
         /// <param name="document"></param>
@@ -326,30 +247,6 @@ namespace Camber.AutoCAD
                         conversionType = ImperialToMetricConversionType.InternationalFoot;
                     }
                     settings.ImperialToMetricConversion = conversionType;
-                }
-                return document;
-            }
-            catch (Exception ex)
-            {
-                throw new InvalidOperationException(ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// Sets the scale for a Document.
-        /// </summary>
-        /// <param name="document"></param>
-        /// <param name="scale"></param>
-        /// <returns></returns>
-        public static acDynNodes.Document SetDrawingScale(this acDynNodes.Document document, double scale)
-        {
-            try
-            {
-                using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
-                {
-                    var cdoc = civApp.CivilDocument.GetCivilDocument(document.AcDocument.Database);
-                    var settings = cdoc.Settings.DrawingSettings.UnitZoneSettings;
-                    settings.DrawingScale = scale;
                 }
                 return document;
             }
@@ -455,6 +352,140 @@ namespace Camber.AutoCAD
                     return null;
                 default:
                     return 0;
+            }
+        }
+        #endregion
+
+        #region deprecated
+        /// <summary>
+        /// Gets the value of a system variable.
+        /// </summary>
+        /// <param name="document"></param>
+        /// <param name="variableName">The name of the system variable.</param>
+        /// <returns></returns>
+        [IsVisibleInDynamoLibrary(false)]
+        public static object GetSystemVariable(this acDynNodes.Document document, string variableName)
+        {
+            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "Document.SystemVariable"));
+            return acApp.Application.GetSystemVariable(variableName);
+        }
+
+        /// <summary>
+        /// Gets if a Document is a named file on the disk (as opposed to a new drawing that has not yet been saved).
+        /// </summary>
+        /// <param name="document"></param>
+        /// <returns></returns>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeCategory("Query")]
+        public static bool IsNamedDrawing(this acDynNodes.Document document)
+        {
+            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "Document.IsNew"));
+            return document.AcDocument.IsNamedDrawing;
+        }
+
+        /// <summary>
+        /// Gets if a Document is read-only.
+        /// </summary>
+        /// <param name="document"></param>
+        /// <returns></returns>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.AutoCAD.Document.IsReadOnly",
+            "Autodesk.AutoCAD.DynamoNodes.Document.IsReadOnly")]
+        [NodeCategory("Query")]
+        public static bool IsReadOnly(this acDynNodes.Document document)
+        {
+            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Document.IsReadOnly"));
+            return document.AcDocument.IsReadOnly;
+        }
+
+        /// <summary>
+        /// Sets the coordinate system code for a Document.
+        /// </summary>
+        /// <param name="document"></param>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.AutoCAD.Document.SetCoordinateSystemCode",
+            "Autodesk.AutoCAD.DynamoNodes.Document.SetCoordinateReferenceSystem")]
+        public static acDynNodes.Document SetCoordinateSystemCode(this acDynNodes.Document document, string code)
+        {
+            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Document.SetCoordinateReferenceSystem"));
+
+            try
+            {
+                using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
+                {
+                    var cdoc = civApp.CivilDocument.GetCivilDocument(document.AcDocument.Database);
+                    var settings = cdoc.Settings.DrawingSettings.UnitZoneSettings;
+                    settings.CoordinateSystemCode = code;
+                }
+                return document;
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Sets the scale for a Document.
+        /// </summary>
+        /// <param name="document"></param>
+        /// <param name="scale"></param>
+        /// <returns></returns>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.AutoCAD.Document.SetDrawingScale",
+            "Autodesk.Civil.DynamoNodes.CivilDocument.SetScale")]
+        public static acDynNodes.Document SetDrawingScale(this acDynNodes.Document document, double scale)
+        {
+            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "CivilDocument.SetScale"));
+
+            try
+            {
+                using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
+                {
+                    var cdoc = civApp.CivilDocument.GetCivilDocument(document.AcDocument.Database);
+                    var settings = cdoc.Settings.DrawingSettings.UnitZoneSettings;
+                    settings.DrawingScale = scale;
+                }
+                return document;
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Sets the value of a system variable.
+        /// </summary>
+        /// <param name="document"></param>
+        /// <param name="variableName">The name of the system variable.</param>
+        /// <param name="newValue">The new value to assign.</param>
+        /// <returns></returns>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.AutoCAD.Document.SetSystemVariable",
+            "Autodesk.AutoCAD.DynamoNodes.Document.SetSystemVariable")]
+        public static acDynNodes.Document SetSystemVariable(this acDynNodes.Document document, string variableName, object newValue)
+        {
+            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Document.SetSystemVariable"));
+
+            // AutoCAD needs 16-bit integers, but from Dynamo they come as 64-bit.
+            // Without this check, an eInvalidInput exception will be thrown when trying to set integer values.
+            if (newValue is long) { newValue = Convert.ToInt16(newValue); }
+
+            try
+            {
+                acApp.Application.SetSystemVariable(variableName, newValue);
+                return document;
+            }
+            catch (Exception e)
+            {
+                throw new InvalidOperationException(e.Message);
             }
         }
         #endregion
