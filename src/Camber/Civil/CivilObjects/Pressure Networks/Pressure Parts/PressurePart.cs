@@ -15,6 +15,8 @@ using Autodesk.DesignScript.Geometry;
 using DynamoServices;
 using Camber.Civil.CivilObjects;
 using Camber.Utilities.GeometryConversions;
+using Autodesk.DesignScript.Runtime;
+using Camber.Properties;
 #endregion
 
 namespace Camber.Civil.PressureNetworks.Parts
@@ -49,19 +51,82 @@ namespace Camber.Civil.PressureNetworks.Parts
                 }
             }
         }
+        #endregion
+
+        #region constructors
+        internal PressurePart(
+            AeccPressurePart aeccPressurePart, 
+            bool isDynamoOwned = false) 
+            : base(aeccPressurePart, isDynamoOwned) { }
+        #endregion
+
+        #region methods
+        public override string ToString() => $"PressurePart(Name = {Name})";
+
+        /// <summary>
+        /// Removes the Pressure Part from all Profile Views in which it is drawn. 
+        /// </summary>
+        /// <returns></returns>
+        public PressurePart RemoveFromAllProfileViews()
+        {
+            bool openedForWrite = AeccPressurePart.IsWriteEnabled;
+            if (!openedForWrite) AeccPressurePart.UpgradeOpen();
+            AeccPressurePart.RemoveFromAllProfileViews();
+            if (!openedForWrite) AeccPressurePart.DowngradeOpen();
+            return this;
+        }
+        #endregion
+
+        #region deprecated
+        /// <summary>
+        /// Adds the Pressure Part to the specified Profile View.
+        /// </summary>
+        /// <param name="profileView"></param>
+        /// <returns></returns>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.Civil.PressureNetworks.Parts.PressurePart.AddToProfileView",
+            "Autodesk.Civil.DynamoNodes.PressurePart.AddToProfileView")]
+        public PressurePart AddToProfileView(ProfileView profileView)
+        {
+            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PressurePart.AddToProfileView"));
+
+            bool openedForWrite = AeccPressurePart.IsWriteEnabled;
+            if (!openedForWrite) AeccPressurePart.UpgradeOpen();
+            AeccPressurePart.AddToProfileView(profileView.InternalObjectId);
+            if (!openedForWrite) AeccPressurePart.DowngradeOpen();
+            return this;
+        }
 
         /// <summary>
         /// Gets the Pressure Part's domain.
         /// </summary>
-        public string Domain => GetString("PartDomain");
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.Civil.PressureNetworks.Parts.PressurePart.Domain",
+            "Autodesk.Civil.DynamoNodes.PressurePart.Domain")]
+        public string Domain
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PressurePart.Domain"));
+                return GetString("PartDomain");
+            }
+        }
 
         /// <summary>
         /// Gets the part data dictionary for a Pressure Part.
         /// </summary>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.Civil.PressureNetworks.Parts.PressurePart.PartData",
+            "Autodesk.Civil.DynamoNodes.PressurePart.PartData")]
         public Dictionary<string, object> PartData
         {
             get
             {
+                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PressurePart.PartData"));
+
                 Dictionary<string, object> propDict = new Dictionary<string, object>();
                 civDb.PressureNetworkPartData partData = AeccPressurePart.PartData;
                 uint[] propIds = partData.GetAllPropertyIds();
@@ -69,7 +134,7 @@ namespace Camber.Civil.PressureNetworks.Parts
                 {
                     civDb.PressurePartProperty prop = partData.GetProperty(propId);
                     propDict.Add(prop.DisplayName, prop.Value);
-                } 
+                }
                 return propDict;
             }
         }
@@ -77,25 +142,64 @@ namespace Camber.Civil.PressureNetworks.Parts
         /// <summary>
         /// Gets the Pressure Part's description.
         /// </summary>
-        public string PartDescription => GetString();
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.Civil.PressureNetworks.Parts.PressurePart.PartDescription",
+            "Autodesk.Civil.DynamoNodes.PressurePart.PartDescription")]
+        public string PartDescription
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PressurePart.PartDescription"));
+                return GetString();
+            }
+        }
 
         /// <summary>
         /// Gets the Pressure Part's type.
         /// </summary>
-        public string PartType => GetString();
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.Civil.PressureNetworks.Parts.PressurePart.PartType",
+            "Autodesk.Civil.DynamoNodes.PressurePart.PartType")]
+        public string PartType
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PressurePart.PartType"));
+                return GetString();
+            }
+        }
 
         /// <summary>
         /// Gets the Pressure Network that the Pressure Part belongs to.
         /// </summary>
-        public PressureNetwork PressureNetwork => PressureNetwork.GetByObjectId(AeccPressurePart.NetworkId);
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.Civil.PressureNetworks.Parts.PressurePart.PressureNetwork",
+            "Autodesk.Civil.DynamoNodes.PressurePart.PressureNetwork")]
+        public PressureNetwork PressureNetwork
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PressurePart.PressureNetwork"));
+                return PressureNetwork.GetByObjectId(AeccPressurePart.NetworkId);
+            }
+        }
 
         /// <summary>
         /// Gets the Profile Views that the Pressure Part is displayed in.
         /// </summary>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.Civil.PressureNetworks.Parts.PressurePart.ProfileViewsDisplayedIn",
+            "Autodesk.Civil.DynamoNodes.PressurePart.ProfileViewsDisplayedIn")]
         public IList<ProfileView> ProfileViewsDisplayedIn
         {
             get
             {
+                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PressurePart.ProfileViewsDisplayedIn"));
+
                 var views = new List<ProfileView>();
                 acDb.ObjectIdCollection viewIds = AeccPressurePart.GetProfileViewsDisplayingMe();
                 foreach (acDb.ObjectId oid in viewIds)
@@ -109,10 +213,16 @@ namespace Camber.Civil.PressureNetworks.Parts
         /// <summary>
         /// Gets the Pressure Part's reference Alignment.
         /// </summary>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.Civil.PressureNetworks.Parts.PressurePart.ReferenceAlignment",
+            "Autodesk.Civil.DynamoNodes.PressurePart.ReferenceAlignment")]
         public civDynNodes.Alignment ReferenceAlignment
         {
             get
             {
+                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PressurePart.ReferenceAlignment"));
+
                 try
                 {
                     return civDynNodes.Selection.AlignmentByName(AeccPressurePart.ReferenceAlignmentName, acDynNodes.Document.Current);
@@ -127,10 +237,16 @@ namespace Camber.Civil.PressureNetworks.Parts
         /// <summary>
         /// Gets the Pressure Part's reference Surface.
         /// </summary>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.Civil.PressureNetworks.Parts.PressurePart.ReferenceSurface",
+            "Autodesk.Civil.DynamoNodes.PressurePart.ReferenceSurface")]
         public civDynNodes.Surface ReferenceSurface
         {
             get
             {
+                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PressurePart.ReferenceSurface"));
+
                 try
                 {
                     return civDynNodes.Selection.SurfaceByName(AeccPressurePart.ReferenceSurfaceName, acDynNodes.Document.Current);
@@ -143,57 +259,18 @@ namespace Camber.Civil.PressureNetworks.Parts
         }
 
         /// <summary>
-        /// Gets the Pressure Part represented as a Dynamo solid.
-        /// </summary>
-        public Solid Solid => GeometryConversions.AcSolidToDynSolid(AeccPressurePart.Get3dBody());
-        #endregion
-
-        #region constructors
-        internal PressurePart(
-            AeccPressurePart aeccPressurePart, 
-            bool isDynamoOwned = false) 
-            : base(aeccPressurePart, isDynamoOwned) { }
-        #endregion
-
-        #region methods
-        public override string ToString() => $"PressurePart(Name = {Name})";
-
-        /// <summary>
-        /// Adds the Pressure Part to the specified Profile View.
-        /// </summary>
-        /// <param name="profileView"></param>
-        /// <returns></returns>
-        public PressurePart AddToProfileView(ProfileView profileView)
-        {
-            bool openedForWrite = AeccPressurePart.IsWriteEnabled;
-            if (!openedForWrite) AeccPressurePart.UpgradeOpen();
-            AeccPressurePart.AddToProfileView(profileView.InternalObjectId);
-            if (!openedForWrite) AeccPressurePart.DowngradeOpen();
-            return this;
-        }
-
-
-        /// <summary>
-        /// Removes the Pressure Part from all Profile Views in which it is drawn. 
-        /// </summary>
-        /// <returns></returns>
-        public PressurePart RemoveFromAllProfileViews()
-        {
-            bool openedForWrite = AeccPressurePart.IsWriteEnabled;
-            if (!openedForWrite) AeccPressurePart.UpgradeOpen();
-            AeccPressurePart.RemoveFromAllProfileViews();
-            if (!openedForWrite) AeccPressurePart.DowngradeOpen();
-            return this;
-        }
-
-
-        /// <summary>
         /// Removes the Pressure Part from a specified Profile View in which it is drawn.
         /// </summary>
         /// <param name="profileView"></param>
         /// <returns></returns>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.Civil.PressureNetworks.Parts.PressurePart.RemoveFromProfileView",
+            "Autodesk.Civil.DynamoNodes.PressurePart.RemoveFromProfileView")]
         public PressurePart RemoveFromProfileView(ProfileView profileView)
         {
+            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PressurePart.RemoveFromProfileView"));
+
             bool openedForWrite = AeccPressurePart.IsWriteEnabled;
             if (!openedForWrite) AeccPressurePart.UpgradeOpen();
             AeccPressurePart.RemoveFromProfileView(profileView.InternalObjectId);
@@ -206,8 +283,14 @@ namespace Camber.Civil.PressureNetworks.Parts
         /// </summary>
         /// <param name="point"></param>
         /// <returns></returns>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.Civil.PressureNetworks.Parts.PressurePart.SetPosition",
+            "Autodesk.AutoCAD.DynamoNodes.Object.SetLocation")]
         public PressurePart SetPosition(Point point)
         {
+            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Object.SetLocation"));
+
             bool openedForWrite = AeccPressurePart.IsWriteEnabled;
             if (!openedForWrite) AeccPressurePart.UpgradeOpen();
             AeccPressurePart.Position = (acGeom.Point3d)GeometryConversions.DynPointToAcPoint(point, true);
@@ -220,8 +303,14 @@ namespace Camber.Civil.PressureNetworks.Parts
         /// </summary>
         /// <param name="alignment"></param>
         /// <returns></returns>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.Civil.PressureNetworks.Parts.PressurePart.SetReferenceAlignment",
+            "Autodesk.Civil.DynamoNodes.PressurePart.SetReferenceAlignment")]
         public PressurePart SetReferenceAlignment(civDynNodes.Alignment alignment)
         {
+            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PressurePart.SetReferenceAlignment"));
+
             bool openedForWrite = AeccPressurePart.IsWriteEnabled;
             if (!openedForWrite) AeccPressurePart.UpgradeOpen();
             AeccPressurePart.ReferenceAlignmentId = alignment.InternalObjectId;
@@ -234,13 +323,35 @@ namespace Camber.Civil.PressureNetworks.Parts
         /// </summary>
         /// <param name="surface"></param>
         /// <returns></returns>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.Civil.PressureNetworks.Parts.PressurePart.SetReferenceSurface",
+            "Autodesk.Civil.DynamoNodes.PressurePart.SetReferenceSurface")]
         public PressurePart SetReferenceSurface(civDynNodes.Surface surface)
         {
+            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PressurePart.SetReferenceSurface"));
+
             bool openedForWrite = AeccPressurePart.IsWriteEnabled;
             if (!openedForWrite) AeccPressurePart.UpgradeOpen();
             AeccPressurePart.ReferenceSurfaceId = surface.InternalObjectId;
             if (!openedForWrite) AeccPressurePart.DowngradeOpen();
             return this;
+        }
+
+        /// <summary>
+        /// Gets the Pressure Part represented as a Dynamo solid.
+        /// </summary>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.Civil.PressureNetworks.Parts.PressurePart.Solid",
+            "Autodesk.AutoCAD.DynamoNodes.Object.Geometry")]
+        public Solid Solid
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Object.Geometry"));
+                return GeometryConversions.AcSolidToDynSolid(AeccPressurePart.Get3dBody());
+            }
         }
         #endregion
     }
