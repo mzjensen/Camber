@@ -435,7 +435,7 @@ namespace Camber.Civil.CivilObjects
         [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.CivilObjects.CivilObject.IsReference",
-            "Autodesk.Civil.DynamoNodes.CivilObject.CivilObject.IsReferenceObject")]
+            "Autodesk.Civil.DynamoNodes.CivilObject.IsReferenceObject")]
         [NodeCategory("Query")]
         public static bool IsReference(civDynNodes.CivilObject civilObject)
         {
