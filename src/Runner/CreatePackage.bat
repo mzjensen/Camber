@@ -1,13 +1,16 @@
 @echo off
 setlocal
 
+echo Starting to create package...
+
 set "C3DVersion=2025"
 set "DynamoVersion=3.2"
 set "PackageName=Camber"
 set "SourceDir=%CD%\..\..\build\Debug"
 set "DestDir=%APPDATA%\Autodesk\C3D %C3DVersion%\Dynamo\%DynamoVersion%\packages\%PackageName%"
 
-echo Package directory: %destDir%
+echo Source directory: %SourceDir%
+echo Package directory: %DestDir%
 
 if exist "%DestDir%" (
     echo Deleting existing package directory...
