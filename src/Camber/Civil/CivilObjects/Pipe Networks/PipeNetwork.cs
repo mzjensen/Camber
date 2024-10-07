@@ -15,6 +15,8 @@ using DynamoServices;
 using Dynamo.Graph.Nodes;
 using Camber.Civil.PipeNetworks.Parts;
 using Camber.Civil.CivilObjects;
+using Camber.Properties;
+
 #endregion
 
 namespace Camber.Civil.PipeNetworks
@@ -82,42 +84,6 @@ namespace Camber.Civil.PipeNetworks
         public string PipeProfileLayer => GetString("PipeProfileLayerName");
 
         /// <summary>
-        /// Gets the reference Alignment for a Pipe Network.
-        /// </summary>
-        public civDynNodes.Alignment ReferenceAlignment
-        {
-            get
-            {
-                try
-                {
-                    return civDynNodes.Selection.AlignmentByName(AeccPipeNetwork.ReferenceAlignmentName, acDynNodes.Document.Current);
-                }
-                catch
-                {
-                    return null;
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Gets the reference Surface for a Pipe Network.
-        /// </summary>
-        public civDynNodes.Surface ReferenceSurface
-        {
-            get
-            {
-                try 
-                {
-                    return civDynNodes.Selection.SurfaceByName(AeccPipeNetwork.ReferenceSurfaceName, acDynNodes.Document.Current);
-                }
-                catch
-                {
-                    return null;
-                }
-            }
-        }
-
-        /// <summary>
         /// Gets a Pipe Network's Structure naming template string.
         /// </summary>
         public string StructureNameTemplate => GetString();
@@ -131,40 +97,6 @@ namespace Camber.Civil.PipeNetworks
         /// Gets a Pipe Network's Structure profile layer name.
         /// </summary>
         public string StructureProfileLayer => GetString("StructureProfileLayerName");
-
-        /// <summary>
-        /// Gets all of the Pipes in a Pipe Network.
-        /// </summary>
-        public IList<Pipe> Pipes
-        {
-            get
-            {
-                var pipes = new List<Pipe>();
-                acDb.ObjectIdCollection pipeIds = AeccPipeNetwork.GetPipeIds();
-                foreach (acDb.ObjectId oid in pipeIds)
-                {
-                    pipes.Add(Pipe.GetByObjectId(oid));
-                }
-                return pipes;
-            }
-        }
-
-        /// <summary>
-        /// Gets all of the Structures in a Pipe Network.
-        /// </summary>
-        public IList<Structure> Structures
-        {
-            get
-            {
-                var structures = new List<Structure>();
-                acDb.ObjectIdCollection structureIds = AeccPipeNetwork.GetStructureIds();
-                foreach (acDb.ObjectId oid in structureIds)
-                {
-                    structures.Add(Structure.GetByObjectId(oid));
-                }
-                return structures;
-            }
-        }
         #endregion
 
         #region constructors
@@ -174,14 +106,26 @@ namespace Camber.Civil.PipeNetworks
         internal static PipeNetwork GetByObjectId(acDb.ObjectId networkId)
             => CivilObjectSupport.Get<PipeNetwork, AeccPipeNetwork>
             (networkId, (network) => new PipeNetwork(network));
+        #endregion
 
+        #region methods
+        public override string ToString() => $"PipeNetwork(Name = {Name})";
+        #endregion
+
+        #region deprecated
         /// <summary>
         /// Creates a Pipe Network by name.
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.Civil.PipeNetworks.PipeNetwork.ByName",
+            "Autodesk.Civil.DynamoNodes.PipeNetwork.ByName")]
         public static PipeNetwork ByName(string name)
         {
+            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PipeNetwork.ByName"));
+
             if (string.IsNullOrEmpty(name))
             {
                 throw new ArgumentException(NameIsNullOrEmptyMessage);
@@ -230,15 +174,77 @@ namespace Camber.Civil.PipeNetworks
         }
 
         /// <summary>
+        /// Finds the shortest path between two Parts in the same Pipe Network.
+        /// </summary>
+        /// <param name="startPart"></param>
+        /// <param name="endPart"></param>
+        /// <returns></returns>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.Civil.PipeNetworks.PipeNetwork.FindShortestNetworkPath",
+            "Autodesk.Civil.DynamoNodes.PipeNetwork.ShortestPathBetweenParts")]
+        [MultiReturn(new[] { "Parts", "Path Length" })]
+        public static Dictionary<string, object> FindShortestNetworkPath(Part startPart, Part endPart)
+        {
+            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PipeNetwork.ShortestPathBetweenParts"));
+
+            if (startPart.PipeNetwork.Name != endPart.PipeNetwork.Name)
+            {
+                throw new InvalidOperationException(
+                    "The Parts must be in the same Pipe Network.");
+            }
+
+            double pathLength = 0.0;
+            var parts = new List<Part>();
+
+            var document = acDynNodes.Document.Current;
+            using (var ctx = new acDynApp.DocumentContext(document.AcDocument.Database))
+            {
+                var pathParts = AeccPipeNetwork.FindShortestNetworkPath(
+                    startPart.InternalObjectId,
+                    endPart.InternalObjectId,
+                    ref pathLength);
+                foreach (acDb.ObjectId oid in pathParts)
+                {
+                    var aeccPart = ctx.Transaction.GetObject(
+                        oid,
+                        acDb.OpenMode.ForRead,
+                        false);
+                    if (aeccPart is AeccPipe)
+                    {
+                        parts.Add(Pipe.GetByObjectId(oid));
+                    }
+                    else if (aeccPart is AeccStructure)
+                    {
+                        parts.Add(Structure.GetByObjectId(oid));
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException(
+                            "Part is not a Pipe or Structure.");
+                    }
+                }
+            }
+            return new Dictionary<string, object>
+            {
+                { "Parts", parts },
+                { "Path Length", pathLength }
+            };
+        }
+
+        /// <summary>
         /// Gets a Pipe Network in a Document by name.
         /// </summary>
         /// <param name="document"></param>
         /// <param name="name"></param>
         /// <param name="allowReference">Include data references?</param>
         /// <returns></returns>
+        [IsVisibleInDynamoLibrary(false)]
         [NodeCategory("Actions")]
         public static PipeNetwork GetPipeNetworkByName(acDynNodes.Document document, string name, bool allowReference = false)
         {
+            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "PipeNetwork.GetPipeNetworkByName"));
+
             if (document is null)
             {
                 throw new ArgumentNullException(DocumentIsNullMessage);
@@ -251,12 +257,8 @@ namespace Camber.Civil.PipeNetworks
 
             return GetPipeNetworks(document, allowReference)
                 .FirstOrDefault(item => item.Name.Equals
-                (name, StringComparison.OrdinalIgnoreCase));
+                    (name, StringComparison.OrdinalIgnoreCase));
         }
-        #endregion
-
-        #region methods
-        public override string ToString() => $"PipeNetwork(Name = {Name})";
 
         /// <summary>
         /// Gets the Pipe Networks in the document.
@@ -264,10 +266,14 @@ namespace Camber.Civil.PipeNetworks
         /// <param name="document"></param>
         /// <param name="allowReference">Include data references?</param>
         /// <returns></returns>
-        public static IList<PipeNetwork> GetPipeNetworks(
-            acDynNodes.Document document, 
-            bool allowReference = false)
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.Civil.PipeNetworks.PipeNetwork.GetPipeNetworks",
+            "Autodesk.Civil.DynamoNodes.PipeNetwork.GetPipeNetworks")]
+        public static IList<PipeNetwork> GetPipeNetworks(acDynNodes.Document document, bool allowReference = false)
         {
+            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PipeNetwork.GetPipeNetworks"));
+
             if (document is null)
             {
                 throw new ArgumentNullException(DocumentIsNullMessage);
@@ -291,14 +297,14 @@ namespace Camber.Civil.PipeNetworks
                         }
 
                         if (tr.GetObject(
-                                oid, 
-                                acDb.OpenMode.ForRead, 
-                                false, 
+                                oid,
+                                acDb.OpenMode.ForRead,
+                                false,
                                 true) is AeccPipeNetwork network)
                         {
                             if (
-                                allowReference || 
-                                (!network.IsReferenceObject && 
+                                allowReference ||
+                                (!network.IsReferenceObject &&
                                  !network.IsReferenceSubObject))
                             {
                                 networks.Add(new PipeNetwork(network));
@@ -311,58 +317,97 @@ namespace Camber.Civil.PipeNetworks
         }
 
         /// <summary>
-        /// Finds the shortest path between two Parts in the same Pipe Network.
+        /// Gets all of the Pipes in a Pipe Network.
         /// </summary>
-        /// <param name="startPart"></param>
-        /// <param name="endPart"></param>
-        /// <returns></returns>
-        [MultiReturn(new[] { "Parts", "Path Length" })]
-        public static Dictionary<string, object> FindShortestNetworkPath(
-            Part startPart, 
-            Part endPart)
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.Civil.PipeNetworks.PipeNetwork.Pipes",
+            "Autodesk.Civil.DynamoNodes.PipeNetwork.Pipes")]
+        public IList<Pipe> Pipes
         {
-            if (startPart.PipeNetwork.Name != endPart.PipeNetwork.Name)
+            get
             {
-                throw new InvalidOperationException(
-                    "The Parts must be in the same Pipe Network.");
-            }
-            
-            double pathLength = 0.0;
-            var parts = new List<Part>();
+                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PipeNetwork.Pipes"));
 
-            var document = acDynNodes.Document.Current;
-            using(var ctx = new acDynApp.DocumentContext(document.AcDocument.Database))
-            {
-                var pathParts = AeccPipeNetwork.FindShortestNetworkPath(
-                    startPart.InternalObjectId, 
-                    endPart.InternalObjectId, 
-                    ref pathLength);
-                foreach (acDb.ObjectId oid in pathParts)
+                var pipes = new List<Pipe>();
+                acDb.ObjectIdCollection pipeIds = AeccPipeNetwork.GetPipeIds();
+                foreach (acDb.ObjectId oid in pipeIds)
                 {
-                    var aeccPart = ctx.Transaction.GetObject(
-                        oid, 
-                        acDb.OpenMode.ForRead, 
-                        false);
-                    if (aeccPart is AeccPipe)
-                    {
-                        parts.Add(Pipe.GetByObjectId(oid));
-                    }
-                    else if (aeccPart is AeccStructure)
-                    {
-                        parts.Add(Structure.GetByObjectId(oid));
-                    }
-                    else
-                    {
-                        throw new InvalidOperationException(
-                            "Part is not a Pipe or Structure.");
-                    }
+                    pipes.Add(Pipe.GetByObjectId(oid));
+                }
+                return pipes;
+            }
+        }
+
+        /// <summary>
+        /// Gets all of the Structures in a Pipe Network.
+        /// </summary>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.Civil.PipeNetworks.PipeNetwork.Structures",
+            "Autodesk.Civil.DynamoNodes.PipeNetwork.Structures")]
+        public IList<Structure> Structures
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PipeNetwork.Structures"));
+
+                var structures = new List<Structure>();
+                acDb.ObjectIdCollection structureIds = AeccPipeNetwork.GetStructureIds();
+                foreach (acDb.ObjectId oid in structureIds)
+                {
+                    structures.Add(Structure.GetByObjectId(oid));
+                }
+                return structures;
+            }
+        }
+
+        /// <summary>
+        /// Gets the reference Alignment for a Pipe Network.
+        /// </summary>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.Civil.PipeNetworks.PipeNetwork.ReferenceAlignment",
+            "Autodesk.Civil.DynamoNodes.PipeNetwork.ReferenceAlignment")]
+        public civDynNodes.Alignment ReferenceAlignment
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PipeNetwork.ReferenceAlignment"));
+
+                try
+                {
+                    return civDynNodes.Selection.AlignmentByName(AeccPipeNetwork.ReferenceAlignmentName, acDynNodes.Document.Current);
+                }
+                catch
+                {
+                    return null;
                 }
             }
-            return new Dictionary<string, object>
+        }
+
+        /// <summary>
+        /// Gets the reference Surface for a Pipe Network.
+        /// </summary>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.Civil.PipeNetworks.PipeNetwork.ReferenceSurface",
+            "Autodesk.Civil.DynamoNodes.PipeNetwork.ReferenceSurface")]
+        public civDynNodes.Surface ReferenceSurface
+        {
+            get
             {
-                { "Parts", parts },
-                { "Path Length", pathLength }
-            };
+                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PipeNetwork.ReferenceSurface"));
+
+                try
+                {
+                    return civDynNodes.Selection.SurfaceByName(AeccPipeNetwork.ReferenceSurfaceName, acDynNodes.Document.Current);
+                }
+                catch
+                {
+                    return null;
+                }
+            }
         }
         #endregion
     }
