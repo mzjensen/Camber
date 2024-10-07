@@ -1,10 +1,13 @@
 ﻿using Autodesk.DesignScript.Geometry;
+using Autodesk.DesignScript.Runtime;
 using Camber.Utilities.GeometryConversions;
 using Dynamo.Graph.Nodes;
+using DynamoServices;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using Camber.Properties;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
@@ -55,14 +58,6 @@ namespace Camber.AutoCAD.Objects
         public static int DuplicateVerticesCount(this acDynNodes.Polyline3D polyline3d) => GetDuplicateVertices(polyline3d).Count;
 
         /// <summary>
-        /// Gets whether a 3D Polyline is closed or not.
-        /// </summary>
-        /// <param name="polyline3d"></param>
-        /// <returns></returns>
-        [NodeCategory("Query")]
-        public static bool IsClosed(this acDynNodes.Polyline3D polyline3d) => GetBool(polyline3d, "Closed");
-
-        /// <summary>
         /// Gets the total length of a 3D Polyline.
         /// </summary>
         /// <param name="polyline3d"></param>
@@ -99,15 +94,6 @@ namespace Camber.AutoCAD.Objects
                 throw new InvalidOperationException(ex.Message);
             }
         }
-
-        /// <summary>
-        /// Sets if a 3D Polyline is closed or not.
-        /// </summary>
-        /// <param name="polyline3d"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public static acDynNodes.Polyline3D SetIsClosed(this acDynNodes.Polyline3D polyline3d, bool value) =>
-            SetValue(polyline3d, value, "Closed");
         #endregion
 
         #region private methods
@@ -261,6 +247,41 @@ namespace Camber.AutoCAD.Objects
                 catch { throw; }
             }
         }
+        #endregion
+
+        #region deprecated
+        /// <summary>
+        /// Gets whether a 3D Polyline is closed or not.
+        /// </summary>
+        /// <param name="polyline3d"></param>
+        /// <returns></returns>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.AutoCAD.Objects.Polyline3D.IsClosed",
+            "Autodesk.AutoCAD.DynamoNodes.Curve.IsClosed")]
+        [NodeCategory("Query")]
+        public static bool IsClosed(this acDynNodes.Polyline3D polyline3d)
+        {
+            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Curve.IsClosed"));
+            return GetBool(polyline3d, "Closed");
+        }
+
+        /// <summary>
+        /// Sets if a 3D Polyline is closed or not.
+        /// </summary>
+        /// <param name="polyline3d"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.AutoCAD.Objects.Polyline3D.SetIsClosed",
+            "Autodesk.AutoCAD.DynamoNodes.Curve.SetClosed")]
+        public static acDynNodes.Polyline3D SetIsClosed(this acDynNodes.Polyline3D polyline3d, bool value)
+        {
+            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Curve.SetClosed"));
+            return SetValue(polyline3d, value, "Closed");
+        }
+
         #endregion
     }
 }
