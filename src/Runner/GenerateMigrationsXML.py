@@ -5,7 +5,7 @@ def extract_migrations(file_path):
     migrations = []
     
     # Regular expression to find the pattern
-    pattern = re.compile(r'\[NodeMigration\(\s*"([^"]+)",\s*"([^"]+)"\s*\)\]', re.MULTILINE)
+    pattern = re.compile(r'\[NodeMigrationMapping\(\s*"([^"]+)",\s*"([^"]+)"\s*\)\]', re.MULTILINE)
 
     with open(file_path, 'r') as file:
         content = file.read()
@@ -48,8 +48,7 @@ def generate_xml(migrations, output_file):
 # Set directories
 script_dir = os.path.dirname(os.path.abspath(__file__))
 proj_directory = os.path.join(script_dir, '..', 'Camber')
-output_dir = os.path.join(script_dir, '..', '..', 'build', 'Debug')
-output_xml = os.path.join(output_dir, "Camber.Migrations.xml")
+output_xml = os.path.join(script_dir, "Camber.Migrations.xml")
 
 # Scan project files
 migrations = scan_directory(proj_directory)
