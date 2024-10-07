@@ -77,7 +77,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Camber_DynamoCustomization.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
