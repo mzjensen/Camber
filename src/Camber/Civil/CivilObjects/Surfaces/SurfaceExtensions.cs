@@ -11,6 +11,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using Autodesk.AutoCAD.ApplicationServices;
+using Camber.Properties;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
@@ -18,6 +19,7 @@ using acGeom = Autodesk.AutoCAD.Geometry;
 using AeccSurface = Autodesk.Civil.DatabaseServices.Surface;
 using civDb = Autodesk.Civil.DatabaseServices;
 using civDynNodes = Autodesk.Civil.DynamoNodes;
+using DynamoServices;
 
 namespace Camber.Civil.CivilObjects.Surfaces
 {
@@ -25,44 +27,12 @@ namespace Camber.Civil.CivilObjects.Surfaces
     {
         #region query methods
         /// <summary>
-        /// Gets whether a Surface is automatically rebuilt when its definition is changed.
-        /// </summary>
-        /// <param name="surface"></param>
-        /// <returns></returns>
-        [NodeCategory("Query")]
-        public static bool AutoRebuild(this civDynNodes.Surface surface) => surface.GetBoolProperty();
-
-        /// <summary>
-        /// Gets a boolean value that specifies whether a Surface has a snapshot.
-        /// </summary>
-        /// <param name="surface"></param>
-        /// <returns></returns>
-        [NodeCategory("Query")]
-        public static bool HasSnapshot(this civDynNodes.Surface surface) => surface.GetBoolProperty();
-
-        /// <summary>
-        /// Gets whether a Surface is out-of-date.
-        /// </summary>
-        /// <param name="surface"></param>
-        /// <returns></returns>
-        [NodeCategory("Query")]
-        public static bool IsOutOfDate(this civDynNodes.Surface surface) => surface.GetBoolProperty();
-
-        /// <summary>
         /// Gets whether the snapshot of a Surface is out-of-date.
         /// </summary>
         /// <param name="surface"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
         public static bool IsSnapshotOutOfDate(this civDynNodes.Surface surface) => surface.GetBoolProperty();
-
-        /// <summary>
-        /// Gets whether the Civil 3D GUI shows a Surface as locked.
-        /// </summary>
-        /// <param name="surface"></param>
-        /// <returns></returns>
-        [NodeCategory("Query")]
-        public static bool IsLocked(this civDynNodes.Surface surface) => surface.GetBoolProperty("Lock");
         #endregion
 
         #region action methods
@@ -218,89 +188,6 @@ namespace Camber.Civil.CivilObjects.Surfaces
             List<double> maxSlopes,
             List<Color> colors)
             => RunMinMaxAnalysis(surface, SurfaceMinMaxAnalysisType.SlopeArrows, minSlopes, maxSlopes, colors);
-
-        /// <summary>
-        /// Sets whether to automatically rebuild a Surface when its definition is changed.
-        /// </summary>
-        /// <param name="surface"></param>
-        /// <returns></returns>
-        public static civDynNodes.Surface SetAutoRebuild(this civDynNodes.Surface surface, bool @bool) =>
-            surface.SetProperty(@bool);
-
-        /// <summary>
-        /// Sets whether the Civil 3D GUI shows a Surface as locked.
-        /// </summary>
-        /// <param name="surface"></param>
-        /// <param name="bool"></param>
-        /// <returns></returns>
-        public static civDynNodes.Surface SetIsLocked(this civDynNodes.Surface surface, bool @bool) => 
-            surface.SetProperty(@bool, "Lock");
-
-        /// <summary>
-        /// Creates one or more PolyCurves that represent the flow of water along a Surface from a given start point.
-        /// If the point is on a peak, multiple curves are created. If the location is on a flat area, no curves are created. Otherwise, only one curve is created.
-        /// </summary>
-        /// <param name="surface"></param>
-        /// <param name="startPoint"></param>
-        /// <param name="create3DCurves">True = create 3D PolyCurves, False = create 2D PolyCurves</param>
-        /// <returns></returns>
-        public static List<PolyCurve> CreateWaterDrop(
-            this civDynNodes.Surface surface,
-            Point startPoint,
-            bool create3DCurves)
-        {
-            List<PolyCurve> pcurves = new List<PolyCurve>();
-
-            try
-            {
-                using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
-                {
-                    AeccSurface aeccSurf = surface.GetAeccSurface(acDb.OpenMode.ForRead);
-
-                    acGeom.Point2d location = (acGeom.Point2d)GeometryConversions.DynPointToAcPoint(startPoint, false);
-
-                    var dropType = WaterdropObjectType.Polyline2D;
-                    if (create3DCurves)
-                    {
-                        dropType = WaterdropObjectType.Polyline3D;
-                    }
-
-                    acDb.ObjectIdCollection plineIds = aeccSurf.Analysis.CreateWaterdrop(location, dropType);
-
-                    foreach (acDb.ObjectId plineId in plineIds)
-                    {
-                        List<Point> dynPnts = new List<Point>();
-                        if (dropType == WaterdropObjectType.Polyline2D)
-                        {
-                            var pline = (acDb.Polyline)ctx.Transaction.GetObject(plineId, acDb.OpenMode.ForWrite);
-                            for (int i = 0; i < pline.NumberOfVertices; i++)
-                            {
-                                dynPnts.Add(GeometryConversions.AcPointToDynPoint(pline.GetPoint3dAt(i)));
-                            }
-                            pline.Erase();
-                        }
-                        else
-                        {
-                            var pline3d = (acDb.Polyline3d)ctx.Transaction.GetObject(plineId, acDb.OpenMode.ForWrite);
-                            foreach (acDb.ObjectId vertexId in pline3d)
-                            {
-                                var vertex = (acDb.PolylineVertex3d) ctx.Transaction.GetObject(
-                                        vertexId,
-                                        acDb.OpenMode.ForRead);
-                                dynPnts.Add(GeometryConversions.AcPointToDynPoint(vertex.Position));
-                            }
-                            pline3d.Erase();
-                        }
-                        pcurves.Add(PolyCurve.ByPoints(dynPnts));
-                    }
-                }
-                return pcurves;
-            }
-            catch (Exception ex)
-            {
-                throw new InvalidOperationException(ex.Message);
-            }
-        }
 
         /// <summary>
         /// Calculates the volume between a Surface and a datum elevation within an area defined by a Polygon.
@@ -607,5 +494,175 @@ namespace Camber.Civil.CivilObjects.Surfaces
             Slopes,
             SlopeArrows
         }
+
+        #region deprecated
+        /// <summary>
+        /// Gets whether a Surface is automatically rebuilt when its definition is changed.
+        /// </summary>
+        /// <param name="surface"></param>
+        /// <returns></returns>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.Civil.CivilObjects.Surfaces.Surface.AutoRebuild",
+            "Autodesk.Civil.DynamoNodes.Surface.AutomaticRebuild")]
+        [NodeCategory("Query")]
+        public static bool AutoRebuild(this civDynNodes.Surface surface)
+        {
+            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Surface.AutomaticRebuild"));
+            return surface.GetBoolProperty();
+        }
+
+        /// <summary>
+        /// Gets a boolean value that specifies whether a Surface has a snapshot.
+        /// </summary>
+        /// <param name="surface"></param>
+        /// <returns></returns>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.Civil.CivilObjects.Surfaces.Surface.HasSnapshot",
+            "Autodesk.Civil.DynamoNodes.Surface.HasSnapshot")]
+        [NodeCategory("Query")]
+        public static bool HasSnapshot(this civDynNodes.Surface surface)
+        {
+            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Surface.HasSnapshot"));
+            return surface.GetBoolProperty();
+        }
+
+        /// <summary>
+        /// Gets whether a Surface is out-of-date.
+        /// </summary>
+        /// <param name="surface"></param>
+        /// <returns></returns>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.Civil.CivilObjects.Surfaces.Surface.IsOutOfDate",
+            "Autodesk.Civil.DynamoNodes.Surface.IsOutOfDate")]
+        [NodeCategory("Query")]
+        public static bool IsOutOfDate(this civDynNodes.Surface surface)
+        {
+            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Surface.IsOutOfDate"));
+            return surface.GetBoolProperty();
+        }
+
+        /// <summary>
+        /// Creates one or more PolyCurves that represent the flow of water along a Surface from a given start point.
+        /// If the point is on a peak, multiple curves are created. If the location is on a flat area, no curves are created. Otherwise, only one curve is created.
+        /// </summary>
+        /// <param name="surface"></param>
+        /// <param name="startPoint"></param>
+        /// <param name="create3DCurves">True = create 3D PolyCurves, False = create 2D PolyCurves</param>
+        /// <returns></returns>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.Civil.CivilObjects.Surfaces.Surface.CreateWaterDrop",
+            "Autodesk.Civil.DynamoNodes.Surface.WaterDropPaths")]
+        public static List<PolyCurve> CreateWaterDrop(
+            this civDynNodes.Surface surface,
+            Point startPoint,
+            bool create3DCurves)
+        {
+            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Surface.WaterDropPaths"));
+
+            List<PolyCurve> pcurves = new List<PolyCurve>();
+
+            try
+            {
+                using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
+                {
+                    AeccSurface aeccSurf = surface.GetAeccSurface(acDb.OpenMode.ForRead);
+
+                    acGeom.Point2d location = (acGeom.Point2d)GeometryConversions.DynPointToAcPoint(startPoint, false);
+
+                    var dropType = WaterdropObjectType.Polyline2D;
+                    if (create3DCurves)
+                    {
+                        dropType = WaterdropObjectType.Polyline3D;
+                    }
+
+                    acDb.ObjectIdCollection plineIds = aeccSurf.Analysis.CreateWaterdrop(location, dropType);
+
+                    foreach (acDb.ObjectId plineId in plineIds)
+                    {
+                        List<Point> dynPnts = new List<Point>();
+                        if (dropType == WaterdropObjectType.Polyline2D)
+                        {
+                            var pline = (acDb.Polyline)ctx.Transaction.GetObject(plineId, acDb.OpenMode.ForWrite);
+                            for (int i = 0; i < pline.NumberOfVertices; i++)
+                            {
+                                dynPnts.Add(GeometryConversions.AcPointToDynPoint(pline.GetPoint3dAt(i)));
+                            }
+                            pline.Erase();
+                        }
+                        else
+                        {
+                            var pline3d = (acDb.Polyline3d)ctx.Transaction.GetObject(plineId, acDb.OpenMode.ForWrite);
+                            foreach (acDb.ObjectId vertexId in pline3d)
+                            {
+                                var vertex = (acDb.PolylineVertex3d)ctx.Transaction.GetObject(
+                                        vertexId,
+                                        acDb.OpenMode.ForRead);
+                                dynPnts.Add(GeometryConversions.AcPointToDynPoint(vertex.Position));
+                            }
+                            pline3d.Erase();
+                        }
+                        pcurves.Add(PolyCurve.ByPoints(dynPnts));
+                    }
+                }
+                return pcurves;
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Gets whether the Civil 3D GUI shows a Surface as locked.
+        /// </summary>
+        /// <param name="surface"></param>
+        /// <returns></returns>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.Civil.CivilObjects.Surfaces.Surface.IsLocked",
+            "Autodesk.Civil.DynamoNodes.Surface.IsLocked")]
+        [NodeCategory("Query")]
+        public static bool IsLocked(this civDynNodes.Surface surface)
+        {
+            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Surface.IsLocked"));
+            return surface.GetBoolProperty("Lock");
+        }
+
+        /// <summary>
+        /// Sets whether to automatically rebuild a Surface when its definition is changed.
+        /// </summary>
+        /// <param name="surface"></param>
+        /// <returns></returns>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.Civil.CivilObjects.Surfaces.Surface.SetAutoRebuild",
+            "Autodesk.Civil.DynamoNodes.Surface.SetAutomaticRebuild")]
+        public static civDynNodes.Surface SetAutoRebuild(this civDynNodes.Surface surface, bool @bool)
+        {
+            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Surface.SetAutomaticRebuild"));
+            return surface.SetProperty(@bool);
+        }
+
+        /// <summary>
+        /// Sets whether the Civil 3D GUI shows a Surface as locked.
+        /// </summary>
+        /// <param name="surface"></param>
+        /// <param name="bool"></param>
+        /// <returns></returns>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.Civil.CivilObjects.Surfaces.Surface.SetIsLocked",
+            "Autodesk.Civil.DynamoNodes.Surface.SetLocked")]
+        public static civDynNodes.Surface SetIsLocked(this civDynNodes.Surface surface, bool @bool)
+        {
+            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Surface.SetLocked"));
+            return surface.SetProperty(@bool, "Lock");
+        }
+
+        #endregion
     }
 }
