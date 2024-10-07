@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Autodesk.DesignScript.Geometry;
+using Camber.Properties;
 using Camber.Utilities.GeometryConversions;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
@@ -13,6 +14,7 @@ using AeccTinSurface = Autodesk.Civil.DatabaseServices.TinSurface;
 using civDb = Autodesk.Civil.DatabaseServices;
 using civDynNodes = Autodesk.Civil.DynamoNodes;
 using acGeom = Autodesk.AutoCAD.Geometry;
+using DynamoServices;
 
 namespace Camber.Civil.CivilObjects.Surfaces
 {
@@ -22,38 +24,6 @@ namespace Camber.Civil.CivilObjects.Surfaces
         #endregion
 
         #region create methods
-        /// <summary>
-        /// Creates a new empty TIN Surface by name and style.
-        /// </summary>
-        /// <param name="document"></param>
-        /// <param name="name"></param>
-        /// <param name="surfaceStyle"></param>
-        /// <returns></returns>
-        [NodeCategory("Create")]
-        public static civDynNodes.Surface ByName(
-            acDynNodes.Document document,
-            string name,
-            SurfaceStyle surfaceStyle)
-        {
-            if (civDynNodes.Selection.SurfaceByName(name, document) != null)
-            {
-                throw new InvalidOperationException("A TIN Surface with the same name already exists.");
-            }
-            
-            try
-            {
-                using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
-                {
-                    AeccTinSurface.Create(name, surfaceStyle.InternalObjectId);
-                    return civDynNodes.Selection.SurfaceByName(name, document);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new InvalidOperationException(ex.Message);
-            }
-        }
-
         /// <summary>
         /// Creates a new TIN Surface by importing a TIN file.
         /// </summary>
@@ -88,7 +58,6 @@ namespace Camber.Civil.CivilObjects.Surfaces
             }
         }
 
-        [NodeCategory("Create")]
         /// <summary>
         /// Creates a new TIN Surface by importing from a LandXML file.
         /// </summary>
@@ -97,6 +66,7 @@ namespace Camber.Civil.CivilObjects.Surfaces
         /// <param name="filePath">The full path to the LandXML file</param>
         /// <param name="surfaceNameInFile">The name of the TIN Surface as defined in the LandXML file</param>
         /// <returns></returns>
+        [NodeCategory("Create")]
         // Leaving this node out because the API function will create an empty surface if the surface name isn't found in the LandXML, which is undesirable behavior.
         private static civDynNodes.Surface ImportFromLandXML(
             acDynNodes.Document document,
@@ -386,6 +356,43 @@ namespace Camber.Civil.CivilObjects.Surfaces
                 }
             }
             return pcurves;
+        }
+        #endregion
+
+        #region deprecated
+        /// <summary>
+        /// Creates a new empty TIN Surface by name and style.
+        /// </summary>
+        /// <param name="document"></param>
+        /// <param name="name"></param>
+        /// <param name="surfaceStyle"></param>
+        /// <returns></returns>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeCategory("Create")]
+        public static civDynNodes.Surface ByName(
+            acDynNodes.Document document,
+            string name,
+            SurfaceStyle surfaceStyle)
+        {
+            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "TinSurface.ByName"));
+
+            if (civDynNodes.Selection.SurfaceByName(name, document) != null)
+            {
+                throw new InvalidOperationException("A TIN Surface with the same name already exists.");
+            }
+
+            try
+            {
+                using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
+                {
+                    AeccTinSurface.Create(name, surfaceStyle.InternalObjectId);
+                    return civDynNodes.Selection.SurfaceByName(name, document);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
         }
         #endregion
     }
