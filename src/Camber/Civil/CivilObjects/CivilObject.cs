@@ -19,6 +19,7 @@ using DynamoServices;
 using Dynamo.Graph.Nodes;
 using Camber.Civil.DataShortcuts;
 using Camber.Civil.Styles;
+using Camber.Properties;
 using Camber.Utilities;
 #endregion
 
@@ -64,29 +65,6 @@ namespace Camber.Civil.CivilObjects
                     throw new Exception("No Style found.");
                 }
                 return styles.First();
-            }
-        }
-
-        /// <summary>
-        /// Gets whether the Civil Object is a reference object.
-        /// A reference object is located in another drawing and linked using a data shortcut or through Autodesk Vault.
-        /// </summary>
-        /// <param name="civilObject"></param>
-        /// <returns></returns>
-        [NodeCategory("Query")]
-        public static bool IsReference(civDynNodes.CivilObject civilObject)
-        {
-            acDynNodes.Document document = acDynNodes.Document.Current;
-            using (var ctx = new acDynApp.DocumentContext(document?.AcDocument))
-            {
-                var cdoc = civApp.CivilDocument.GetCivilDocument(ctx.Database);
-                acDb.ObjectId oid = civilObject.InternalObjectId;
-                var aeccEntity = (civDb.Entity)oid.GetObject(acDb.OpenMode.ForRead);
-                if (aeccEntity.IsReferenceObject || aeccEntity.IsReferenceSubObject)
-                {
-                    return true;
-                }
-                return false;
             }
         }
 
@@ -229,33 +207,6 @@ namespace Camber.Civil.CivilObjects
                 throw new Exception("The reference for the specified Civil Object could not be repaired.");
             }
             catch { throw; }
-        }
-
-        /// <summary>
-        /// Gets reference information for a Civil Object whose source is a Data Shortcut.
-        /// </summary>
-        /// <param name="civilObject"></param>
-        /// <returns></returns>
-        [MultiReturn(new[] { "Name", "Type", "Is Broken", "Source Drawing" })]
-        public static Dictionary<string, object> GetReferenceInfo(civDynNodes.CivilObject civilObject)
-        {
-            if (!IsReference(civilObject)) { throw new ArgumentException(NotReferenceEntityMsg); }
-
-            var document = acDynNodes.Document.Current;
-
-            using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
-            {
-                var aeccEntity = (civDb.Entity)ctx.Transaction.GetObject(civilObject.InternalObjectId, acDb.OpenMode.ForRead);
-                var refInfo = aeccEntity.GetReferenceInfo();
-
-                return new Dictionary<string, object>
-                {
-                    { "Name", refInfo.Name },
-                    { "Type", refInfo.Type.ToString() },
-                    { "Is Broken", !refInfo.IsSourceDrawingExistent },
-                    { "Source Drawing", refInfo.SourceDrawing }
-                };
-            }
         }
 
         /// <summary>
@@ -438,6 +389,70 @@ namespace Camber.Civil.CivilObjects
             }
             catch { }
             return false;
+        }
+        #endregion
+
+        #region deprecated
+        /// <summary>
+        /// Gets reference information for a Civil Object whose source is a Data Shortcut.
+        /// </summary>
+        /// <param name="civilObject"></param>
+        /// <returns></returns>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.Civil.CivilObjects.CivilObject.GetReferenceInfo",
+            "Autodesk.Civil.DynamoNodes.CivilObject.ReferenceInfo")]
+        [MultiReturn(new[] { "Name", "Type", "Is Broken", "Source Drawing" })]
+        public static Dictionary<string, object> GetReferenceInfo(civDynNodes.CivilObject civilObject)
+        {
+            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "CivilObject.ReferenceInfo"));
+
+            if (!IsReference(civilObject)) { throw new ArgumentException(NotReferenceEntityMsg); }
+
+            var document = acDynNodes.Document.Current;
+
+            using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
+            {
+                var aeccEntity = (civDb.Entity)ctx.Transaction.GetObject(civilObject.InternalObjectId, acDb.OpenMode.ForRead);
+                var refInfo = aeccEntity.GetReferenceInfo();
+
+                return new Dictionary<string, object>
+                {
+                    { "Name", refInfo.Name },
+                    { "Type", refInfo.Type.ToString() },
+                    { "Is Broken", !refInfo.IsSourceDrawingExistent },
+                    { "Source Drawing", refInfo.SourceDrawing }
+                };
+            }
+        }
+
+        /// <summary>
+        /// Gets whether the Civil Object is a reference object.
+        /// A reference object is located in another drawing and linked using a data shortcut or through Autodesk Vault.
+        /// </summary>
+        /// <param name="civilObject"></param>
+        /// <returns></returns>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.Civil.CivilObjects.CivilObject.IsReference",
+            "Autodesk.Civil.DynamoNodes.CivilObject.CivilObject.IsReferenceObject")]
+        [NodeCategory("Query")]
+        public static bool IsReference(civDynNodes.CivilObject civilObject)
+        {
+            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "CivilObject.IsReferenceObject"));
+
+            acDynNodes.Document document = acDynNodes.Document.Current;
+            using (var ctx = new acDynApp.DocumentContext(document?.AcDocument))
+            {
+                var cdoc = civApp.CivilDocument.GetCivilDocument(ctx.Database);
+                acDb.ObjectId oid = civilObject.InternalObjectId;
+                var aeccEntity = (civDb.Entity)oid.GetObject(acDb.OpenMode.ForRead);
+                if (aeccEntity.IsReferenceObject || aeccEntity.IsReferenceSubObject)
+                {
+                    return true;
+                }
+                return false;
+            }
         }
         #endregion
     }
