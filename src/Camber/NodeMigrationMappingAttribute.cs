@@ -4,7 +4,7 @@ using System;
 namespace Camber
 {
     [SupressImportIntoVM]
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property)]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Property)]
     public class NodeMigrationMappingAttribute : Attribute
     {
         public string OldName { get; }
