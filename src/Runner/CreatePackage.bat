@@ -18,10 +18,16 @@ if exist "%DestDir%" (
 )
 
 mkdir "%DestDir%\bin"
+mkdir "%DestDir%\extra"
 
 echo Copying built source files...
-copy "%~dp0pkg.json" "%DestDir%" /y
 xcopy "%SourceDir%\*" "%DestDir%\bin" /s /i /y
+
+echo Copying pkg.json...
+copy "%~dp0pkg.json" "%DestDir%" /y
+
+echo Copying extras...
+copy "%~dp0Camber.Migrations.xml" "%DestDir%\extra" /y
 
 echo Finished creating '%PackageName%' package
 
