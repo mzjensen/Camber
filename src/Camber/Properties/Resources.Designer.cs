@@ -61,11 +61,20 @@ namespace Camber.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This node has been deprecated. Please replace it with the &apos;{0}&apos; node from the main library..
+        ///   Looks up a localized string similar to This node has been deprecated from Camber. Please replace it with the &apos;{0}&apos; node from the main library..
         /// </summary>
         internal static string NODE_DEPRECATED_MESSAGE {
             get {
                 return ResourceManager.GetString("NODE_DEPRECATED_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This node has been deprecated from Camber. Please replace it with the &apos;{0}&apos; node from the main library, or use the Migration Assistant to automatically upgrade graphs that contain deprecated Camber nodes..
+        /// </summary>
+        internal static string NODE_DEPRECATED_MIGRATION_MESSAGE {
+            get {
+                return ResourceManager.GetString("NODE_DEPRECATED_MIGRATION_MESSAGE", resourceCulture);
             }
         }
     }

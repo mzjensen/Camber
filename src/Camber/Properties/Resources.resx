@@ -118,6 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="NODE_DEPRECATED_MESSAGE" xml:space="preserve">
-    <value>This node has been deprecated. Please replace it with the '{0}' node from the main library.</value>
+    <value>This node has been deprecated from Camber. Please replace it with the '{0}' node from the main library.</value>
+  </data>
+  <data name="NODE_DEPRECATED_MIGRATION_MESSAGE" xml:space="preserve">
+    <value>This node has been deprecated from Camber. Please replace it with the '{0}' node from the main library, or use the Migration Assistant to automatically upgrade graphs that contain deprecated Camber nodes.</value>
   </data>
 </root>
