@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using ProtoCore.AST.AssociativeAST;
 using System.Collections.Generic;
 using System.Linq;
+using Camber.Properties;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
@@ -15,6 +16,9 @@ namespace Camber.UI
     [NodeCategory("Camber.AutoCAD.Objects")]
     [NodeDescription("Select text style.")]
     [IsDesignScriptCompatible]
+    [NodeMigrationMapping(
+        "Camber.UI.TextStylesDropDown",
+        "Autodesk.AutoCAD.DynamoNodes.ListTextStyle ")]
     public class TextStylesDropDown : DSDropDownBase
     {
         #region fields
@@ -27,6 +31,7 @@ namespace Camber.UI
         /// </summary>
         public TextStylesDropDown() : base(_outputName)
         {
+            this.Warning(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Choose Text Style"), true);
             PopulateDropDownItems();
         }
 
@@ -39,6 +44,7 @@ namespace Camber.UI
         public TextStylesDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts) 
             : base(_outputName, inPorts, outPorts)
         {
+            this.Warning(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Choose Text Style"), true);
             PopulateDropDownItems();
         }
         #endregion
