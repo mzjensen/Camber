@@ -5,6 +5,8 @@ using Newtonsoft.Json;
 using ProtoCore.AST.AssociativeAST;
 using System.Collections.Generic;
 using System.Linq;
+using Autodesk.DesignScript.Runtime;
+using Camber.Properties;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
@@ -15,6 +17,10 @@ namespace Camber.UI
     [NodeCategory("Camber.AutoCAD.Layout")]
     [NodeDescription("Select named page setup.")]
     [IsDesignScriptCompatible]
+    [IsVisibleInDynamoLibrary(false)]
+    [NodeMigrationMapping(
+        "Camber.UI.NamedPageSetupsDropDown",
+        "Autodesk.AutoCAD.DynamoNodes.ListNamedPageSetup")]
     public class NamedPageSetupsDropDown : DSDropDownBase
     {
         #region fields
@@ -27,6 +33,7 @@ namespace Camber.UI
         /// </summary>
         public NamedPageSetupsDropDown() : base(_outputName)
         {
+            this.Warning(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Choose Named Page Setup"), true);
             PopulateDropDownItems();
         }
 
@@ -39,6 +46,7 @@ namespace Camber.UI
         public NamedPageSetupsDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts) 
             : base(_outputName, inPorts, outPorts)
         {
+            this.Warning(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Choose Named Page Setup"), true);
             PopulateDropDownItems();
         }
         #endregion
