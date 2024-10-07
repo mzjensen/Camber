@@ -11,7 +11,9 @@ using civDb = Autodesk.Civil.DatabaseServices;
 using Dynamo.Graph.Nodes;
 using Autodesk.DesignScript.Runtime;
 using Camber.Civil.CivilObjects;
+using Camber.Properties;
 using Camber.Utilities;
+using DynamoServices;
 #endregion
 
 namespace Camber.AutoCAD.Objects
@@ -41,22 +43,6 @@ namespace Camber.AutoCAD.Objects
             {
                 acDb.Entity acEnt = (acDb.Entity)ctx.Transaction.GetObject(@object.InternalObjectId, acDb.OpenMode.ForRead);
                 return acEnt.Handle.ToString();
-            }
-        }
-
-        /// <summary>
-        /// Gets the color index assigned to an Object.
-        /// </summary>
-        /// <param name="object"></param>
-        /// <returns></returns>
-        [NodeCategory("Query")]
-        public static int ColorIndex(acDynNodes.Object @object)
-        {
-            acDynNodes.Document document = acDynNodes.Document.Current;
-            using (var ctx = new acDynApp.DocumentContext(document.AcDocument.Database))
-            {
-                acDb.Entity acEnt = (acDb.Entity)ctx.Transaction.GetObject(@object.InternalObjectId, acDb.OpenMode.ForRead);
-                return acEnt.ColorIndex;
             }
         }
 
@@ -99,34 +85,6 @@ namespace Camber.AutoCAD.Objects
             {
                 throw new InvalidOperationException(ex.Message);
             }
-        }
-
-        /// <summary>
-        /// Sets the color of an Object by color index.
-        /// 0 = ByBlock, 256 = ByLayer.
-        /// </summary>
-        /// <param name="object"></param>
-        /// <param name="colorIndex"></param>
-        /// <returns></returns>
-        public static acDynNodes.Object SetColor(acDynNodes.Object @object, int colorIndex)
-        {
-            acDynNodes.Document document = acDynNodes.Document.Current;
-            try
-            {
-                using (var ctx = new acDynApp.DocumentContext(document.AcDocument.Database))
-                {
-                    acDb.Entity acEnt = (acDb.Entity)ctx.Transaction.GetObject(
-                        @object.InternalObjectId,
-                        acDb.OpenMode.ForWrite);
-                    acEnt.ColorIndex = colorIndex;
-                    return @object;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new InvalidOperationException(ex.Message);
-            }
-            
         }
 
         /// <summary>
@@ -300,6 +258,61 @@ namespace Camber.AutoCAD.Objects
             return false;
         }
         #endregion
+        #endregion
+
+        #region deprecated
+        /// <summary>
+        /// Gets the color index assigned to an Object.
+        /// </summary>
+        /// <param name="object"></param>
+        /// <returns></returns>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeCategory("Query")]
+        public static int ColorIndex(acDynNodes.Object @object)
+        {
+            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "Object.Color"));
+
+            acDynNodes.Document document = acDynNodes.Document.Current;
+            using (var ctx = new acDynApp.DocumentContext(document.AcDocument.Database))
+            {
+                acDb.Entity acEnt = (acDb.Entity)ctx.Transaction.GetObject(@object.InternalObjectId, acDb.OpenMode.ForRead);
+                return acEnt.ColorIndex;
+            }
+        }
+
+        /// <summary>
+        /// Sets the color of an Object by color index.
+        /// 0 = ByBlock, 256 = ByLayer.
+        /// </summary>
+        /// <param name="object"></param>
+        /// <param name="colorIndex"></param>
+        /// <returns></returns>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.AutoCAD.Objects.Object.SetColor",
+            "Autodesk.AutoCAD.DynamoNodes.Object.SetColor")]
+        public static acDynNodes.Object SetColor(acDynNodes.Object @object, int colorIndex)
+        {
+            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Object.SetColor"));
+
+            acDynNodes.Document document = acDynNodes.Document.Current;
+            try
+            {
+                using (var ctx = new acDynApp.DocumentContext(document.AcDocument.Database))
+                {
+                    acDb.Entity acEnt = (acDb.Entity)ctx.Transaction.GetObject(
+                        @object.InternalObjectId,
+                        acDb.OpenMode.ForWrite);
+                    acEnt.ColorIndex = colorIndex;
+                    return @object;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+
+        }
         #endregion
     }
 }
