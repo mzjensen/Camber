@@ -11,8 +11,10 @@ using AeccSampleLine = Autodesk.Civil.DatabaseServices.SampleLine;
 using AeccSampleLineVertex = Autodesk.Civil.DatabaseServices.SampleLineVertex;
 using Autodesk.DesignScript.Runtime;
 using Autodesk.DesignScript.Geometry;
+using Camber.Properties;
 using DynamoServices;
 using Camber.Utilities.GeometryConversions;
+using Dynamo.Graph.Nodes;
 #endregion;
 
 namespace Camber.Civil.CivilObjects
@@ -22,55 +24,6 @@ namespace Camber.Civil.CivilObjects
     {
         #region properties
         internal AeccSampleLine AeccSampleLine => AcObject as AeccSampleLine;
-
-        /// <summary>
-        /// Gets the Sample Line Group to which the Sample Line belongs.
-        /// </summary>
-        public SampleLineGroup SampleLineGroup => SampleLineGroup.GetByObjectId(AeccSampleLine.GroupId);
-
-        /// <summary>
-        /// Gets the boolean value which specifies whether the Sample Line is locked to a station.
-        /// </summary>
-        public bool LockToStation => GetBool();
-
-        /// <summary>
-        /// Gets the number assigned to the Sample Line.
-        /// </summary>
-        public int Number => GetInt();
-
-        /// <summary>
-        /// Gets the station of the Sample Line.
-        /// </summary>
-        public double Station => GetDouble();
-
-        /// <summary>
-        /// Gets the PolyCurve representation of the Sample Line.
-        /// </summary>
-        public PolyCurve Geometry
-        {
-            get
-            {
-                var dict = GetVertices();
-                return PolyCurve.ByPoints((List<Point>)dict["Points"]);
-            }
-        }
-
-        /// <summary>
-        /// Gets the Section Views associated with a Sample Line.
-        /// </summary>
-        public IList<SectionView> SectionViews
-        {
-            get
-            {
-                List<SectionView> sectViews = new List<SectionView>();
-                foreach (acDb.ObjectId oid in AeccSampleLine.GetSectionViewIds())
-                {
-                    sectViews.Add(SectionView.GetByObjectId(oid));
-                }
-
-                return sectViews;
-            }
-        }
         #endregion
 
         #region constructors
@@ -123,61 +76,6 @@ namespace Camber.Civil.CivilObjects
                 }
             }
             return sampleLine;
-        }
-
-        /// <summary>
-        /// Returns a Sample Line at the specified station. A new Sample Line will be created if it does not already exist.
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="sampleLineGroup"></param>
-        /// <param name="station"></param>
-        /// <returns></returns>
-        public static SampleLine ByStation(string name, SampleLineGroup sampleLineGroup, double station)
-        {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentNullException("Sample Line name is null");
-            }
-
-            acDynNodes.Document document = acDynNodes.Document.Current;
-
-            using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
-            {
-                civApp.CivilDocument cdoc = civApp.CivilDocument.GetCivilDocument(ctx.Database);
-                acDb.ObjectId sampleLineId = acDynApp.ElementBinder.GetObjectIdFromTrace(ctx.Database);
-
-                if (sampleLineId.IsValid && !sampleLineId.IsErased)
-                {
-                    AeccSampleLine aeccSampleLine = (AeccSampleLine)sampleLineId.GetObject(acDb.OpenMode.ForWrite);
-                    if (aeccSampleLine != null)
-                    {
-                        if (aeccSampleLine.GroupId == sampleLineGroup.InternalObjectId)
-                        {
-                            // Update properties
-                            aeccSampleLine.Name = name;
-                            aeccSampleLine.Station = station;
-                        }
-                        else
-                        {
-                            // If the group ID has changed, erase the old Sample Line and create a new one
-                            aeccSampleLine.Erase();
-                            sampleLineId = AeccSampleLine.Create(name, sampleLineGroup.InternalObjectId, station);
-                        }
-                    }
-                }
-                else
-                {
-                    // Create new Sample Line
-                    sampleLineId = AeccSampleLine.Create(name, sampleLineGroup.InternalObjectId, station);
-                }
-
-                var createdSampleLine = sampleLineId.GetObject(acDb.OpenMode.ForRead) as AeccSampleLine;
-                if (createdSampleLine != null)
-                {
-                    return new SampleLine(createdSampleLine, true);
-                }
-                return null;
-            }
         }
         #endregion
 
@@ -235,28 +133,6 @@ namespace Camber.Civil.CivilObjects
         }
 
         /// <summary>
-        /// Sets the boolean value which specifies whether the Sample Line is locked to a station.
-        /// </summary>
-        /// <param name="station"></param>
-        /// <returns></returns>
-        public SampleLine SetLockToStation(bool @bool)
-        {
-            SetValue(@bool);
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the station of the Sample Line.
-        /// </summary>
-        /// <param name="station"></param>
-        /// <returns></returns>
-        public SampleLine SetStation(double station)
-        {
-            SetValue(station);
-            return this;
-        }
-
-        /// <summary>
         /// Sets the location of a vertex point at the given index.
         /// The index is not the same as the Offset Index, but rather an
         /// index of 0 corresponds to the vertex furthest to the left of the Alignment.
@@ -274,6 +150,202 @@ namespace Camber.Civil.CivilObjects
             if (!openedForWrite) AeccEntity.DowngradeOpen();
             return this;
         }
+        #endregion
+
+        #region deprecated
+        /// <summary>
+        /// Returns a Sample Line at the specified station. A new Sample Line will be created if it does not already exist.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="sampleLineGroup"></param>
+        /// <param name="station"></param>
+        /// <returns></returns>
+        [IsVisibleInDynamoLibrary(false)]
+        public static SampleLine ByStation(string name, SampleLineGroup sampleLineGroup, double station)
+        {
+            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "SampleLine.ByStationSwathWidths"));
+
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentNullException("Sample Line name is null");
+            }
+
+            acDynNodes.Document document = acDynNodes.Document.Current;
+
+            using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
+            {
+                civApp.CivilDocument cdoc = civApp.CivilDocument.GetCivilDocument(ctx.Database);
+                acDb.ObjectId sampleLineId = acDynApp.ElementBinder.GetObjectIdFromTrace(ctx.Database);
+
+                if (sampleLineId.IsValid && !sampleLineId.IsErased)
+                {
+                    AeccSampleLine aeccSampleLine = (AeccSampleLine)sampleLineId.GetObject(acDb.OpenMode.ForWrite);
+                    if (aeccSampleLine != null)
+                    {
+                        if (aeccSampleLine.GroupId == sampleLineGroup.InternalObjectId)
+                        {
+                            // Update properties
+                            aeccSampleLine.Name = name;
+                            aeccSampleLine.Station = station;
+                        }
+                        else
+                        {
+                            // If the group ID has changed, erase the old Sample Line and create a new one
+                            aeccSampleLine.Erase();
+                            sampleLineId = AeccSampleLine.Create(name, sampleLineGroup.InternalObjectId, station);
+                        }
+                    }
+                }
+                else
+                {
+                    // Create new Sample Line
+                    sampleLineId = AeccSampleLine.Create(name, sampleLineGroup.InternalObjectId, station);
+                }
+
+                var createdSampleLine = sampleLineId.GetObject(acDb.OpenMode.ForRead) as AeccSampleLine;
+                if (createdSampleLine != null)
+                {
+                    return new SampleLine(createdSampleLine, true);
+                }
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Gets the PolyCurve representation of the Sample Line.
+        /// </summary>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.Civil.CivilObjects.SampleLine.Geometry",
+            "Autodesk.AutoCAD.DynamoNodes.Object.Geometry")]
+        public PolyCurve Geometry
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Object.Geometry"));
+                var dict = GetVertices();
+                return PolyCurve.ByPoints((List<Point>)dict["Points"]);
+            }
+        }
+
+        /// <summary>
+        /// Gets the boolean value which specifies whether the Sample Line is locked to a station.
+        /// </summary>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.Civil.CivilObjects.SampleLine.LockToStation",
+            "Autodesk.Civil.DynamoNodes.SampleLine.IsLockedToStation")]
+        public bool LockToStation
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "SampleLine.IsLockedToStation"));
+                return GetBool();
+            }
+        }
+
+        /// <summary>
+        /// Gets the number assigned to the Sample Line.
+        /// </summary>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.Civil.CivilObjects.SampleLine.Number",
+            "Autodesk.Civil.DynamoNodes.SampleLine.Number")]
+        public int Number
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "SampleLine.Number"));
+                return GetInt();
+            }
+        }
+
+        /// <summary>
+        /// Gets the Sample Line Group to which the Sample Line belongs.
+        /// </summary>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.Civil.CivilObjects.SampleLine.SampleLineGroup",
+            "Autodesk.Civil.DynamoNodes.SampleLine.SampleLineGroup")]
+        public SampleLineGroup SampleLineGroup
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "SampleLine.SampleLineGroup"));
+                return SampleLineGroup.GetByObjectId(AeccSampleLine.GroupId);
+            }
+        }
+
+        /// <summary>
+        /// Gets the Section Views associated with a Sample Line.
+        /// </summary>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.Civil.CivilObjects.SampleLine.SectionViews",
+            "Autodesk.Civil.DynamoNodes.SampleLine.SectionViews")]
+        public IList<SectionView> SectionViews
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "SampleLine.SectionViews"));
+                List<SectionView> sectViews = new List<SectionView>();
+                foreach (acDb.ObjectId oid in AeccSampleLine.GetSectionViewIds())
+                {
+                    sectViews.Add(SectionView.GetByObjectId(oid));
+                }
+
+                return sectViews;
+            }
+        }
+
+        /// <summary>
+        /// Sets the boolean value which specifies whether the Sample Line is locked to a station.
+        /// </summary>
+        /// <param name="bool"></param>
+        /// <returns></returns>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.Civil.CivilObjects.SampleLine.SetLockToStation",
+            "Autodesk.Civil.DynamoNodes.SampleLine.SetLockedToStation")]
+        public SampleLine SetLockToStation(bool @bool)
+        {
+            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "SampleLine.SetLockedToStation"));
+            SetValue(@bool);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the station of the Sample Line.
+        /// </summary>
+        /// <param name="station"></param>
+        /// <returns></returns>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.Civil.CivilObjects.SampleLine.SetStation",
+            "Autodesk.Civil.DynamoNodes.SampleLine.SetStation")]
+        public SampleLine SetStation(double station)
+        {
+            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "SampleLine.SetStation"));
+            SetValue(station);
+            return this;
+        }
+
+        /// <summary>
+        /// Gets the station of the Sample Line.
+        /// </summary>
+        [IsVisibleInDynamoLibrary(false)]
+        [NodeMigrationMapping(
+            "Camber.Civil.CivilObjects.SampleLine.Station",
+            "Autodesk.Civil.DynamoNodes.SampleLine.Station")]
+        public double Station
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "SampleLine.Station"));
+                return GetDouble();
+            }
+        }
+
         #endregion
     }
 }
