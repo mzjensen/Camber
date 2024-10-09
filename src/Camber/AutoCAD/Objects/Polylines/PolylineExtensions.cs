@@ -260,7 +260,6 @@ namespace Camber.AutoCAD.Objects
         /// </summary>
         /// <param name="polyline"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.Polyline.Elevation",
             "Autodesk.AutoCAD.DynamoNodes.Polyline.Elevation")]
@@ -276,7 +275,6 @@ namespace Camber.AutoCAD.Objects
         /// </summary>
         /// <param name="polyline"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.Polyline.GlobalWidth",
             "Autodesk.AutoCAD.DynamoNodes.Polyline.GlobalWidth")]
@@ -292,7 +290,6 @@ namespace Camber.AutoCAD.Objects
         /// </summary>
         /// <param name="polyline"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.Polyline.IsClosed",
             "Autodesk.AutoCAD.DynamoNodes.Curve.IsClosed")]
@@ -309,7 +306,6 @@ namespace Camber.AutoCAD.Objects
         /// <param name="polyline"></param>
         /// <param name="elevation"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.Polyline.SetElevation",
             "Autodesk.AutoCAD.DynamoNodes.Polyline.SetElevation")]
@@ -325,7 +321,6 @@ namespace Camber.AutoCAD.Objects
         /// <param name="polyline"></param>
         /// <param name="width">A positive width value.</param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.Polyline.SetGlobalWidth",
             "Autodesk.AutoCAD.DynamoNodes.Polyline.SetGlobalWidth")]
@@ -347,7 +342,6 @@ namespace Camber.AutoCAD.Objects
         /// <param name="polyline"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.Polyline.SetIsClosed",
             "Autodesk.AutoCAD.DynamoNodes.Curve.SetClosed")]

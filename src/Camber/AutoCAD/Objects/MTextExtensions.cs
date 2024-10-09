@@ -140,7 +140,6 @@ namespace Camber.AutoCAD.Objects
         /// </summary>
         /// <param name="mText"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.MText.TextStyle",
             "Autodesk.AutoCAD.DynamoNodes.MText.TextStyle")]
@@ -157,7 +156,6 @@ namespace Camber.AutoCAD.Objects
         /// <param name="mText"></param>
         /// <param name="textStyleName">The name of the text style to assign.</param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.MText.SetTextStyle",
             "Autodesk.AutoCAD.DynamoNodes.MText.SetTextStyle")]

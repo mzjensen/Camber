@@ -501,7 +501,6 @@ namespace Camber.Civil.CivilObjects.Surfaces
         /// </summary>
         /// <param name="surface"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.CivilObjects.Surfaces.Surface.AutoRebuild",
             "Autodesk.Civil.DynamoNodes.Surface.AutomaticRebuild")]
@@ -517,7 +516,6 @@ namespace Camber.Civil.CivilObjects.Surfaces
         /// </summary>
         /// <param name="surface"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.CivilObjects.Surfaces.Surface.HasSnapshot",
             "Autodesk.Civil.DynamoNodes.Surface.HasSnapshot")]
@@ -533,7 +531,6 @@ namespace Camber.Civil.CivilObjects.Surfaces
         /// </summary>
         /// <param name="surface"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.CivilObjects.Surfaces.Surface.IsOutOfDate",
             "Autodesk.Civil.DynamoNodes.Surface.IsOutOfDate")]
@@ -552,7 +549,6 @@ namespace Camber.Civil.CivilObjects.Surfaces
         /// <param name="startPoint"></param>
         /// <param name="create3DCurves">True = create 3D PolyCurves, False = create 2D PolyCurves</param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.CivilObjects.Surfaces.Surface.CreateWaterDrop",
             "Autodesk.Civil.DynamoNodes.Surface.WaterDropPaths")]
@@ -621,7 +617,6 @@ namespace Camber.Civil.CivilObjects.Surfaces
         /// </summary>
         /// <param name="surface"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.CivilObjects.Surfaces.Surface.IsLocked",
             "Autodesk.Civil.DynamoNodes.Surface.IsLocked")]
@@ -637,7 +632,6 @@ namespace Camber.Civil.CivilObjects.Surfaces
         /// </summary>
         /// <param name="surface"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.CivilObjects.Surfaces.Surface.SetAutoRebuild",
             "Autodesk.Civil.DynamoNodes.Surface.SetAutomaticRebuild")]
@@ -653,7 +647,6 @@ namespace Camber.Civil.CivilObjects.Surfaces
         /// <param name="surface"></param>
         /// <param name="bool"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.CivilObjects.Surfaces.Surface.SetIsLocked",
             "Autodesk.Civil.DynamoNodes.Surface.SetLocked")]

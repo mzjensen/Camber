@@ -398,7 +398,6 @@ namespace Camber.Civil.CivilObjects
         /// </summary>
         /// <param name="civilObject"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.CivilObjects.CivilObject.GetReferenceInfo",
             "Autodesk.Civil.DynamoNodes.CivilObject.ReferenceInfo")]
@@ -432,7 +431,6 @@ namespace Camber.Civil.CivilObjects
         /// </summary>
         /// <param name="civilObject"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.CivilObjects.CivilObject.IsReference",
             "Autodesk.Civil.DynamoNodes.CivilObject.IsReferenceObject")]

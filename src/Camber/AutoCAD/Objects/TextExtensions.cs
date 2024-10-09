@@ -235,7 +235,6 @@ namespace Camber.AutoCAD.Objects
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.Text.Contents",
             "Autodesk.AutoCAD.DynamoNodes.Text.Contents")]
@@ -251,7 +250,6 @@ namespace Camber.AutoCAD.Objects
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.Text.Height",
             "Autodesk.AutoCAD.DynamoNodes.Text.TextHeight")]
@@ -267,7 +265,6 @@ namespace Camber.AutoCAD.Objects
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeCategory("Query")]
         public static string HorizontalMode(this acDynNodes.Text text)
         {
@@ -280,7 +277,6 @@ namespace Camber.AutoCAD.Objects
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.Text.IsBackward",
             "Autodesk.AutoCAD.DynamoNodes.Text.IsBackward")]
@@ -296,7 +292,6 @@ namespace Camber.AutoCAD.Objects
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.Text.IsUpsideDown",
             "Autodesk.AutoCAD.DynamoNodes.Text.IsUpsideDown")]
@@ -312,7 +307,6 @@ namespace Camber.AutoCAD.Objects
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.Text.Obliquing",
             "Autodesk.AutoCAD.DynamoNodes.Text.ObliqueAngle")]
@@ -328,7 +322,6 @@ namespace Camber.AutoCAD.Objects
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.Text.Position",
             "Autodesk.AutoCAD.DynamoNodes.Object.Location")]
@@ -352,7 +345,6 @@ namespace Camber.AutoCAD.Objects
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.Text.Rotation",
             "Autodesk.AutoCAD.DynamoNodes.Object.Rotation")]
@@ -369,7 +361,6 @@ namespace Camber.AutoCAD.Objects
         /// <param name="text"></param>
         /// <param name="contents"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.Text.SetContents",
             "Autodesk.AutoCAD.DynamoNodes.Text.SetContents")]
@@ -385,7 +376,6 @@ namespace Camber.AutoCAD.Objects
         /// <param name="text"></param>
         /// <param name="height"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.Text.SetHeight",
             "Autodesk.AutoCAD.DynamoNodes.Text.SetTextHeight")]
@@ -401,7 +391,6 @@ namespace Camber.AutoCAD.Objects
         /// <param name="text"></param>
         /// <param name="bool"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.Text.SetIsBackward",
             "Autodesk.AutoCAD.DynamoNodes.Text.SetBackward")]
@@ -417,7 +406,6 @@ namespace Camber.AutoCAD.Objects
         /// <param name="text"></param>
         /// <param name="bool"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.Text.SetIsUpsideDown",
             "Autodesk.AutoCAD.DynamoNodes.Text.SetUpsideDown")]
@@ -433,7 +421,6 @@ namespace Camber.AutoCAD.Objects
         /// <param name="text"></param>
         /// <param name="angle"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.Text.SetObliquing",
             "Autodesk.AutoCAD.DynamoNodes.Text.SetObliqueAngle")]
@@ -449,7 +436,6 @@ namespace Camber.AutoCAD.Objects
         /// <param name="text"></param>
         /// <param name="point"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.Text.SetPosition",
             "Autodesk.AutoCAD.DynamoNodes.Object.SetLocation")]
@@ -465,7 +451,6 @@ namespace Camber.AutoCAD.Objects
         /// <param name="text"></param>
         /// <param name="angle"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.Text.SetRotation",
             "Autodesk.AutoCAD.DynamoNodes.Object.SetRotation")]
@@ -481,7 +466,6 @@ namespace Camber.AutoCAD.Objects
         /// <param name="text"></param>
         /// <param name="textStyleName">The name of the text style to assign.</param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.Text.SetTextStyle",
             "Autodesk.AutoCAD.DynamoNodes.Text.SetTextStyle")]
@@ -524,7 +508,6 @@ namespace Camber.AutoCAD.Objects
         /// <param name="text"></param>
         /// <param name="widthFactor"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.Text.SetWidthFactor",
             "Autodesk.AutoCAD.DynamoNodes.Text.SetWidthFactor")]
@@ -545,7 +528,6 @@ namespace Camber.AutoCAD.Objects
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.Text.TextStyle",
             "Autodesk.AutoCAD.DynamoNodes.Text.TextStyle")]
@@ -561,7 +543,6 @@ namespace Camber.AutoCAD.Objects
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeCategory("Query")]
         public static double VerticalMode(this acDynNodes.Text text)
         {
@@ -574,7 +555,6 @@ namespace Camber.AutoCAD.Objects
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.Text.WidthFactor",
             "Autodesk.AutoCAD.DynamoNodes.Text.WidthFactor")]

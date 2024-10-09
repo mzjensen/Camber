@@ -363,7 +363,6 @@ namespace Camber.AutoCAD
         /// <param name="document"></param>
         /// <param name="variableName">The name of the system variable.</param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         public static object GetSystemVariable(this acDynNodes.Document document, string variableName)
         {
             LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "Document.SystemVariable"));
@@ -375,7 +374,6 @@ namespace Camber.AutoCAD
         /// </summary>
         /// <param name="document"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeCategory("Query")]
         public static bool IsNamedDrawing(this acDynNodes.Document document)
         {
@@ -388,7 +386,6 @@ namespace Camber.AutoCAD
         /// </summary>
         /// <param name="document"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Document.IsReadOnly",
             "Autodesk.AutoCAD.DynamoNodes.Document.IsReadOnly")]
@@ -405,7 +402,6 @@ namespace Camber.AutoCAD
         /// <param name="document"></param>
         /// <param name="code"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Document.SetCoordinateSystemCode",
             "Autodesk.AutoCAD.DynamoNodes.Document.SetCoordinateReferenceSystem")]
@@ -435,7 +431,6 @@ namespace Camber.AutoCAD
         /// <param name="document"></param>
         /// <param name="scale"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Document.SetDrawingScale",
             "Autodesk.Civil.DynamoNodes.CivilDocument.SetScale")]
@@ -466,7 +461,6 @@ namespace Camber.AutoCAD
         /// <param name="variableName">The name of the system variable.</param>
         /// <param name="newValue">The new value to assign.</param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Document.SetSystemVariable",
             "Autodesk.AutoCAD.DynamoNodes.Document.SetSystemVariable")]

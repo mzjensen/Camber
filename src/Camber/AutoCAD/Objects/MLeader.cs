@@ -85,7 +85,6 @@ namespace Camber.AutoCAD.Objects
         /// <summary>
         /// Gets the Block object of MLeader Block content.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.MLeader.Block",
             "Autodesk.AutoCAD.DynamoNodes.Multileader.SourceBlock")]
@@ -108,7 +107,6 @@ namespace Camber.AutoCAD.Objects
         /// <summary>
         /// Gets the position of MLeader Block content.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.MLeader.BlockPosition",
             "Autodesk.AutoCAD.DynamoNodes.Multileader.BlockLocation")]
@@ -128,7 +126,6 @@ namespace Camber.AutoCAD.Objects
         /// <param name="block"></param>
         /// <param name="draggedOffset"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         public static MLeader ByPointBlock(Point point, acDynNodes.Block block, Vector draggedOffset)
         {
             LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "Multileader.ByPointsBlock"));
@@ -193,7 +190,6 @@ namespace Camber.AutoCAD.Objects
         /// <param name="text">MText contents</param>
         /// <param name="draggedOffset"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         public static MLeader ByPointText(Point point, string text, Vector draggedOffset)
         {
             LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "Multileader.ByPointsText"));
@@ -258,7 +254,6 @@ namespace Camber.AutoCAD.Objects
         /// <summary>
         /// Gets the MLeader's content type.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.MLeader.ContentType",
             "Autodesk.AutoCAD.DynamoNodes.Multileader.ContentType")]
@@ -276,7 +271,6 @@ namespace Camber.AutoCAD.Objects
         /// </summary>
         /// <param name="tagName"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.MLeader.GetAttributeValueByTag",
             "Autodesk.AutoCAD.DynamoNodes.Multileader.BlockAttributeValueByTag")]
@@ -309,7 +303,6 @@ namespace Camber.AutoCAD.Objects
         /// <param name="tagName"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.MLeader.SetAttributeValueByTag",
             "Autodesk.AutoCAD.DynamoNodes.Multileader.SetBlockAttributeValueByTag")]
@@ -357,7 +350,6 @@ namespace Camber.AutoCAD.Objects
         /// <summary>
         /// Gets the first vertex of each leader line in an MLeader.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.MLeader.LeaderPoints",
             "Autodesk.AutoCAD.DynamoNodes.Multileader.ArrowheadLocations")]
@@ -382,7 +374,6 @@ namespace Camber.AutoCAD.Objects
         /// <summary>
         /// Gets the scale of the MLeader.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.MLeader.Scale",
             "Autodesk.AutoCAD.DynamoNodes.Multileader.OverallScale")]
@@ -398,7 +389,6 @@ namespace Camber.AutoCAD.Objects
         /// <summary>
         /// Gets the location of MLeader MText content.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.MLeader.TextLocation",
             "Autodesk.AutoCAD.DynamoNodes.Multileader.TextLocation")]
@@ -414,7 +404,6 @@ namespace Camber.AutoCAD.Objects
         /// <summary>
         /// Gets the number of leader lines in the MLeader.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.MLeader.LeaderLineCount",
             "Autodesk.AutoCAD.DynamoNodes.Multileader.LeaderCount")]

@@ -14,7 +14,6 @@ namespace Camber.UI
     [NodeCategory("Camber.AutoCAD.Objects.Block")]
     [NodeDescription("Select Block units.")]
     [IsDesignScriptCompatible]
-    [IsVisibleInDynamoLibrary(false)]
     public class BlockUnitsDropDown : EnumDropDownBase
     {
         private const string OutputName = "units";

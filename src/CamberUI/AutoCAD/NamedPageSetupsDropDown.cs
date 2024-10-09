@@ -17,7 +17,6 @@ namespace Camber.UI
     [NodeCategory("Camber.AutoCAD.Layout")]
     [NodeDescription("Select named page setup.")]
     [IsDesignScriptCompatible]
-    [IsVisibleInDynamoLibrary(false)]
     [NodeMigrationMapping(
         "Camber.UI.NamedPageSetupsDropDown",
         "Autodesk.AutoCAD.DynamoNodes.ListNamedPageSetup")]

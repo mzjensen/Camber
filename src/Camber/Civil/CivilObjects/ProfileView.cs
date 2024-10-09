@@ -97,7 +97,6 @@ namespace Camber.Civil.CivilObjects
         /// <summary>
         /// Gets the parent Alignment for the Profile View.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.CivilObjects.ProfileView.Alignment",
             "Autodesk.Civil.DynamoNodes.ProfileView.Alignment")]
@@ -120,7 +119,6 @@ namespace Camber.Civil.CivilObjects
         /// <param name="alignment"></param>
         /// <param name="location"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.CivilObjects.ProfileView.ByPoint",
             "Autodesk.Civil.DynamoNodes.ProfileView.ByAlignment")]
@@ -172,7 +170,6 @@ namespace Camber.Civil.CivilObjects
         /// <summary>
         /// Gets the maximum elevation of the Profile View.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.CivilObjects.ProfileView.MaxElevation",
             "Autodesk.Civil.DynamoNodes.ProfileView.MaxElevation")]
@@ -188,7 +185,6 @@ namespace Camber.Civil.CivilObjects
         /// <summary>
         /// Gets the minimum elevation of the ProfileView.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.CivilObjects.ProfileView.MinElevation",
             "Autodesk.Civil.DynamoNodes.ProfileView.MinElevation")]
@@ -216,7 +212,6 @@ namespace Camber.Civil.CivilObjects
         /// <summary>
         /// Gets the location of the Profile View.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.CivilObjects.ProfileView.Location",
             "Autodesk.AutoCAD.DynamoNodes.Object.Location")]
@@ -232,7 +227,6 @@ namespace Camber.Civil.CivilObjects
         /// <summary>
         /// Gets the end station of the Profile View.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.CivilObjects.ProfileView.EndStation",
             "Autodesk.Civil.DynamoNodes.ProfileView.EndStation")]
@@ -248,7 +242,6 @@ namespace Camber.Civil.CivilObjects
         /// <summary>
         /// Gets the start station of the Profile View.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.CivilObjects.ProfileView.StartStation",
             "Autodesk.Civil.DynamoNodes.ProfileView.StartStation")]
@@ -264,7 +257,6 @@ namespace Camber.Civil.CivilObjects
         /// <summary>
         /// Gets how the horizontal range of the Profile View is specified.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         public string StationRangeMode
         {
             get
@@ -317,7 +309,6 @@ namespace Camber.Civil.CivilObjects
         /// <param name="station"></param>
         /// <param name="elevation"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.CivilObjects.ProfileView.GetPointAtStationElevation",
             "Autodesk.Civil.DynamoNodes.ProfileView.PointAtStationElevation")]
@@ -346,7 +337,6 @@ namespace Camber.Civil.CivilObjects
         /// <param name="profileView"></param>
         /// <param name="point"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.CivilObjects.ProfileView.GetStationElevationAtPoint",
             "Autodesk.Civil.DynamoNodes.ProfileView.StationElevationAtPoint")]
@@ -379,7 +369,6 @@ namespace Camber.Civil.CivilObjects
         /// <param name="minElevation"></param>
         /// <param name="maxElevation"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         public ProfileView SetElevations(double minElevation, double maxElevation)
         {
             LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "ProfileView.SetMaxElevation or ProfileView.SetMinElevation"));
@@ -395,7 +384,6 @@ namespace Camber.Civil.CivilObjects
         /// </summary>
         /// <param name="modeToggle">True = Automatic, False = User specified</param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         public ProfileView SetElevationRangeMode(bool modeToggle)
         {
             LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "ProfileView.SetElevationRangeAutomatic"));
@@ -415,7 +403,6 @@ namespace Camber.Civil.CivilObjects
         /// </summary>
         /// <param name="point"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.CivilObjects.ProfileView.SetLocation",
             "Autodesk.AutoCAD.DynamoNodes.Object.SetLocation")]
@@ -434,7 +421,6 @@ namespace Camber.Civil.CivilObjects
         /// <param name="startStation"></param>
         /// <param name="endStation"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         public ProfileView SetStations(double startStation, double endStation)
         {
             LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "ProfileView.SetStartStation or ProfileView.SetEndStation"));
@@ -451,7 +437,6 @@ namespace Camber.Civil.CivilObjects
         /// </summary>
         /// <param name="modeToggle">True = Automatic, False = User specified</param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         public ProfileView SetStationRangeMode(bool modeToggle)
         {
             LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "ProfileView.SetStationRangeAutomatic"));

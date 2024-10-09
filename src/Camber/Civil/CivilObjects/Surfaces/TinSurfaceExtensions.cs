@@ -367,7 +367,6 @@ namespace Camber.Civil.CivilObjects.Surfaces
         /// <param name="name"></param>
         /// <param name="surfaceStyle"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeCategory("Create")]
         public static civDynNodes.Surface ByName(
             acDynNodes.Document document,

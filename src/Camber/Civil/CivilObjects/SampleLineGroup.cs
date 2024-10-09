@@ -77,7 +77,6 @@ namespace Camber.Civil.CivilObjects
         /// <summary>
         /// Gets the parent Alignment of a Sample Line Group.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.CivilObjects.SampleLineGroup.Alignment",
             "Autodesk.Civil.DynamoNodes.SampleLineGroup.Alignment")]
@@ -100,7 +99,6 @@ namespace Camber.Civil.CivilObjects
         /// <param name="alignment"></param>
         /// <param name="groupName"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         public static SampleLineGroup ByAlignment(civDynNodes.Alignment alignment, string groupName)
         {
             LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "SampleLineGroup.ByName"));
@@ -153,7 +151,6 @@ namespace Camber.Civil.CivilObjects
         /// <summary>
         /// Gets all the Sample Lines in a Sample Line Group.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.CivilObjects.SampleLineGroup.SampleLines",
             "Autodesk.Civil.DynamoNodes.SampleLineGroup.SampleLines")]

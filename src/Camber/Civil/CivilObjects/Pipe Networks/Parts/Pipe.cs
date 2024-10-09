@@ -178,7 +178,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// Gets the bearing of a Pipe. For straight Pipes, the returned value is the horizontal bearing.
         /// For curved Pipes, the returned bearing is the chord bearing.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Pipe.Bearing",
             "Autodesk.Civil.DynamoNodes.Pipe.Bearing")]
@@ -194,7 +193,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets the depth of cover at a Pipe's start point, measured from the top outside edge of the Pipe to its reference Surface.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Pipe.CoverStart",
             "Autodesk.Civil.DynamoNodes.Pipe.StartCover")]
@@ -210,7 +208,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets the cover at a Pipe's end point, measured from the top outside edge of the Pipe to its reference Surface.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Pipe.CoverEnd",
             "Autodesk.Civil.DynamoNodes.Pipe.EndCover")]
@@ -226,7 +223,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets a Pipe's cross sectional shape.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Pipe.CrossSectionalShape",
             "Autodesk.Civil.DynamoNodes.Pipe.CrossSectionalShape")]
@@ -242,7 +238,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets the end point of a Pipe at the centerline.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Pipe.EndPoint",
             "Autodesk.Civil.DynamoNodes.Pipe.EndPoint")]
@@ -258,7 +253,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets the offset of a Pipe's end point from its reference Alignment.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Pipe.EndOffset",
             "Autodesk.Civil.DynamoNodes.Pipe.EndOffset")]
@@ -274,7 +268,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets the station of a Pipe's end point along its reference Alignment.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Pipe.EndStation",
             "Autodesk.Civil.DynamoNodes.Pipe.EndStation")]
@@ -290,7 +283,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets a Pipe's end Structure if it exists.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Pipe.EndStructure",
             "Autodesk.Civil.DynamoNodes.Pipe.EndStructure")]
@@ -306,7 +298,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets the downstream elevation of the energy grade line for a Pipe.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Pipe.EGLDown",
             "Autodesk.Civil.DynamoNodes.Pipe.EnergyGradeLineDown")]
@@ -322,7 +313,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets the upstream elevation of the energy grade line for a Pipe.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Pipe.EGLUp",
             "Autodesk.Civil.DynamoNodes.Pipe.EnergyGradeLineUp")]
@@ -338,7 +328,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets the method that is used to determine the flow direction of a Pipe.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Pipe.FlowDirectionMethod",
             "Autodesk.Civil.DynamoNodes.Pipe.FlowDirectionMethod")]
@@ -354,7 +343,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets the flow rate value assigned to a Pipe.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Pipe.FlowRate",
             "Autodesk.Civil.DynamoNodes.Pipe.FlowRate")]
@@ -370,7 +358,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets the downstream elevation of the hydraulic grade line for a Pipe.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Pipe.HGLDown",
             "Autodesk.Civil.DynamoNodes.Pipe.HydraulicGradeLineDown")]
@@ -386,7 +373,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets the upstream elevation of the hydraulic grade line for a Pipe.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Pipe.HGLUp",
             "Autodesk.Civil.DynamoNodes.Pipe.HydraulicGradeLineUp")]
@@ -402,7 +388,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets the inner diameter or width of a Pipe.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Pipe.InnerDiameterOrWidth",
             "Autodesk.Civil.DynamoNodes.Pipe.InnerDiameterOrWidth")]
@@ -418,7 +403,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets the inner height of a Pipe.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Pipe.InnerHeight",
             "Autodesk.Civil.DynamoNodes.Pipe.InnerHeight")]
@@ -434,7 +418,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets the junction loss value assigned to a Pipe.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Pipe.JunctionLoss",
             "Autodesk.Civil.DynamoNodes.Pipe.JunctionLoss")]
@@ -450,7 +433,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets the 2D length of a Pipe measured from the centers of its start and end Structures. 
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         public double Length2DCenterToCenter
         {
             get
@@ -463,7 +445,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets the 2D length of a Pipe measured from the inside edges of its start and end Structures. 
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         public double Length2DToInsideEdge
         {
             get
@@ -476,7 +457,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets the 3D length of a Pipe measured from the centers of its start and end Structures. 
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         public double Length3DCenterToCenter
         {
             get
@@ -489,7 +469,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets the 3D length of a Pipe measured from the inside edges of its start and end Structures. 
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         public double Length3DToInsideEdge
         {
             get
@@ -502,7 +481,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets the maximum depth of cover along the entire length of a Pipe, measured from the top outside of the Pipe to its reference Surface.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Pipe.CoverMax",
             "Autodesk.Civil.DynamoNodes.Pipe.MaxCover")]
@@ -518,7 +496,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets the minimum depth of cover along the entire length of a Pipe, measured from the top outside of the Pipe to its reference Surface.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Pipe.CoverMin",
             "Autodesk.Civil.DynamoNodes.Pipe.MinCover")]
@@ -534,7 +511,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets the outer diameter or width of a Pipe.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Pipe.OuterDiameterOrWidth",
             "Autodesk.Civil.DynamoNodes.Pipe.OuterDiameterOrWidth")]
@@ -550,7 +526,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets the outer height of a Pipe.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Pipe.OuterHeight",
             "Autodesk.Civil.DynamoNodes.Pipe.OuterHeight")]
@@ -566,7 +541,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets the radius of a Pipe.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Pipe.Radius",
             "Autodesk.Civil.DynamoNodes.Pipe.Radius")]
@@ -582,7 +556,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets the return period value assigned to a Pipe.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Pipe.ReturnPeriod",
             "Autodesk.Civil.DynamoNodes.Pipe.ReturnPeriod")]
@@ -598,7 +571,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets the slope of a Pipe in absolute value.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Pipe.Slope",
             "Autodesk.Civil.DynamoNodes.Pipe.Slope")]
@@ -614,7 +586,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets the start point of a Pipe at the centerline.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Pipe.StartPoint",
             "Autodesk.Civil.DynamoNodes.Pipe.StartPoint")]
@@ -630,7 +601,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets the offset of a Pipe's start point from its reference Alignment.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Pipe.StartOffset",
             "Autodesk.Civil.DynamoNodes.Pipe.StartOffset")]
@@ -646,7 +616,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets the station of a Pipe's end point along its reference Alignment.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Pipe.StartStation",
             "Autodesk.Civil.DynamoNodes.Pipe.StartStation")]
@@ -662,7 +631,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets a Pipe's start Structure if it exists.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Pipe.StartStructure",
             "Autodesk.Civil.DynamoNodes.Pipe.StartStructure")]
@@ -681,7 +649,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <param name="newSize">Inner diameter or width</param>
         /// <param name="useClosestSize"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Pipe.ResizeByInnerDimension",
             "Autodesk.Civil.DynamoNodes.Pipe.Resize")]
@@ -701,7 +668,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// </summary>
         /// <param name="slope"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         public Pipe SetSlopeHoldEnd(double slope)
         {
             LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "Pipe.SetSlope"));
@@ -718,7 +684,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// </summary>
         /// <param name="slope"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         public Pipe SetSlopeHoldStart(double slope)
         {
             LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "Pipe.SetSlope"));

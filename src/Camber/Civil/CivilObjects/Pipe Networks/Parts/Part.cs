@@ -132,7 +132,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// </summary>
         /// <param name="profileView"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Part.AddToProfileView",
             "Autodesk.Civil.DynamoNodes.Part.AddToProfileView")]
@@ -150,7 +149,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Applies the rules that are assigned to a Pipe Network Part.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Part.ApplyRules",
             "Autodesk.Civil.DynamoNodes.Part.AddToProfileView")]
@@ -168,7 +166,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets the domain of the Part (Pipe or Structure).
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Part.Domain",
             "Autodesk.Civil.DynamoNodes.Part.Domain")]
@@ -184,7 +181,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets the material defined for the Part.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Part.Material",
             "Autodesk.Civil.DynamoNodes.Part.Material")]
@@ -200,7 +196,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets the Part's description.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Part.PartDescription",
             "Autodesk.Civil.DynamoNodes.Part.PartDescription")]
@@ -216,7 +211,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets the sub type of the Part.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Part.PartSubType",
             "Autodesk.Civil.DynamoNodes.Part.PartSubType")]
@@ -232,7 +226,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets the Pipe Network that the Part belongs to.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Part.PipeNetwork",
             "Autodesk.Civil.DynamoNodes.Part.PipeNetwork")]
@@ -248,7 +241,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets the Profile Views that the Part is displayed in.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Part.ProfileViewsDisplayedIn",
             "Autodesk.Civil.DynamoNodes.Part.ProfileViewsDisplayedIn")]
@@ -271,7 +263,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets the Part's reference Alignment.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Part.ReferenceAlignment",
             "Autodesk.Civil.DynamoNodes.Part.ReferenceAlignment")]
@@ -295,7 +286,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets the Part's reference Surface.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Part.ReferenceSurface",
             "Autodesk.Civil.DynamoNodes.Part.ReferenceSurface")]
@@ -321,7 +311,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// </summary>
         /// <param name="profileView"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Part.RemoveFromProfileView",
             "Autodesk.Civil.DynamoNodes.Part.RemoveFromProfileView")]
@@ -339,7 +328,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <summary>
         /// Gets the Sections Views that the Part is displayed in.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Part.SectionsViewsDisplayedIn",
             "Autodesk.Civil.DynamoNodes.Part.SectionsViewsDisplayedIn")]
@@ -364,7 +352,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// </summary>
         /// <param name="alignment"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Part.SetReferenceAlignment",
             "Autodesk.Civil.DynamoNodes.Part.SetReferenceAlignment")]
@@ -380,7 +367,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// </summary>
         /// <param name="surface"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Part.SetReferenceSurface",
             "Autodesk.Civil.DynamoNodes.Part.SetReferenceSurface")]
@@ -397,7 +383,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <param name="newPartFamily"></param>
         /// <param name="newPartSize"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         public Part Swap(PartFamily newPartFamily, PartSize newPartSize)
         {
             LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Pipe.Swap or Structure.Swap"));

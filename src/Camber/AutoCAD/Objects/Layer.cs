@@ -77,7 +77,6 @@ namespace Camber.AutoCAD.Objects
         /// </summary>
         /// <param name="layer"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [MultiReturn(new[] {
             "Index",
             "Color name",
@@ -114,7 +113,6 @@ namespace Camber.AutoCAD.Objects
         /// <param name="layer"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.Layer.Lineweight",
             "Autodesk.AutoCAD.DynamoNodes.Layer.Lineweight")]
@@ -151,7 +149,6 @@ namespace Camber.AutoCAD.Objects
         /// <param name="layer"></param>
         /// <param name="colorIndex"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.Layer.SetColor",
             "Autodesk.AutoCAD.DynamoNodes.Layer.SetColor")]
@@ -170,7 +167,6 @@ namespace Camber.AutoCAD.Objects
         /// <param name="layer"></param>
         /// <param name="lineweight"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.Layer.SetLineweight",
             "Autodesk.AutoCAD.DynamoNodes.Layer.SetLineweight")]

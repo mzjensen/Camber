@@ -151,7 +151,6 @@ namespace Camber.Civil.CivilObjects
         /// </summary>
         /// <param name="alignment"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.CivilObjects.Alignment.Geometry",
             "Autodesk.Civil.DynamoNodes.Alignment.PolyCurve")]
@@ -185,7 +184,6 @@ namespace Camber.Civil.CivilObjects
         /// <param name="alignment"></param>
         /// <param name="labelSetStyleName">The name of the label set style to import.</param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         public static civDynNodes.Alignment ImportLabelSet(
             this civDynNodes.Alignment alignment,
             string labelSetStyleName)
@@ -219,7 +217,6 @@ namespace Camber.Civil.CivilObjects
         /// </summary>
         /// <param name="alignment"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.CivilObjects.Alignment.ProfileViews",
             "Autodesk.Civil.DynamoNodes.Alignment.ProfileViews")]
@@ -255,7 +252,6 @@ namespace Camber.Civil.CivilObjects
         /// </summary>
         /// <param name="alignment"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.CivilObjects.Alignment.SampleLineGroups",
             "Autodesk.Civil.DynamoNodes.Alignment.SampleLineGroups")]
@@ -292,7 +288,6 @@ namespace Camber.Civil.CivilObjects
         /// <param name="alignment"></param>
         /// <param name="startStation"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.CivilObjects.Alignment.SetStartStation",
             "Autodesk.Civil.DynamoNodes.Alignment.SetReferencePointStation")]

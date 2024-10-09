@@ -160,7 +160,6 @@ namespace Camber.Civil.CivilObjects
         /// <param name="sampleLineGroup"></param>
         /// <param name="station"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         public static SampleLine ByStation(string name, SampleLineGroup sampleLineGroup, double station)
         {
             LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "SampleLine.ByStationSwathWidths"));
@@ -214,7 +213,6 @@ namespace Camber.Civil.CivilObjects
         /// <summary>
         /// Gets the PolyCurve representation of the Sample Line.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.CivilObjects.SampleLine.Geometry",
             "Autodesk.AutoCAD.DynamoNodes.Object.Geometry")]
@@ -231,7 +229,6 @@ namespace Camber.Civil.CivilObjects
         /// <summary>
         /// Gets the boolean value which specifies whether the Sample Line is locked to a station.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.CivilObjects.SampleLine.LockToStation",
             "Autodesk.Civil.DynamoNodes.SampleLine.IsLockedToStation")]
@@ -247,7 +244,6 @@ namespace Camber.Civil.CivilObjects
         /// <summary>
         /// Gets the number assigned to the Sample Line.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.CivilObjects.SampleLine.Number",
             "Autodesk.Civil.DynamoNodes.SampleLine.Number")]
@@ -263,7 +259,6 @@ namespace Camber.Civil.CivilObjects
         /// <summary>
         /// Gets the Sample Line Group to which the Sample Line belongs.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.CivilObjects.SampleLine.SampleLineGroup",
             "Autodesk.Civil.DynamoNodes.SampleLine.SampleLineGroup")]
@@ -279,7 +274,6 @@ namespace Camber.Civil.CivilObjects
         /// <summary>
         /// Gets the Section Views associated with a Sample Line.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.CivilObjects.SampleLine.SectionViews",
             "Autodesk.Civil.DynamoNodes.SampleLine.SectionViews")]
@@ -303,7 +297,6 @@ namespace Camber.Civil.CivilObjects
         /// </summary>
         /// <param name="bool"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.CivilObjects.SampleLine.SetLockToStation",
             "Autodesk.Civil.DynamoNodes.SampleLine.SetLockedToStation")]
@@ -319,7 +312,6 @@ namespace Camber.Civil.CivilObjects
         /// </summary>
         /// <param name="station"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.CivilObjects.SampleLine.SetStation",
             "Autodesk.Civil.DynamoNodes.SampleLine.SetStation")]
@@ -333,7 +325,6 @@ namespace Camber.Civil.CivilObjects
         /// <summary>
         /// Gets the station of the Sample Line.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.CivilObjects.SampleLine.Station",
             "Autodesk.Civil.DynamoNodes.SampleLine.Station")]

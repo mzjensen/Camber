@@ -83,7 +83,6 @@ namespace Camber.Civil.PressureNetworks.Parts
         /// </summary>
         /// <param name="profileView"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PressureNetworks.Parts.PressurePart.AddToProfileView",
             "Autodesk.Civil.DynamoNodes.PressurePart.AddToProfileView")]
@@ -101,7 +100,6 @@ namespace Camber.Civil.PressureNetworks.Parts
         /// <summary>
         /// Gets the Pressure Part's domain.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PressureNetworks.Parts.PressurePart.Domain",
             "Autodesk.Civil.DynamoNodes.PressurePart.Domain")]
@@ -117,7 +115,6 @@ namespace Camber.Civil.PressureNetworks.Parts
         /// <summary>
         /// Gets the part data dictionary for a Pressure Part.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PressureNetworks.Parts.PressurePart.PartData",
             "Autodesk.Civil.DynamoNodes.PressurePart.PartData")]
@@ -142,7 +139,6 @@ namespace Camber.Civil.PressureNetworks.Parts
         /// <summary>
         /// Gets the Pressure Part's description.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PressureNetworks.Parts.PressurePart.PartDescription",
             "Autodesk.Civil.DynamoNodes.PressurePart.PartDescription")]
@@ -158,7 +154,6 @@ namespace Camber.Civil.PressureNetworks.Parts
         /// <summary>
         /// Gets the Pressure Part's type.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PressureNetworks.Parts.PressurePart.PartType",
             "Autodesk.Civil.DynamoNodes.PressurePart.PartType")]
@@ -174,7 +169,6 @@ namespace Camber.Civil.PressureNetworks.Parts
         /// <summary>
         /// Gets the Pressure Network that the Pressure Part belongs to.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PressureNetworks.Parts.PressurePart.PressureNetwork",
             "Autodesk.Civil.DynamoNodes.PressurePart.PressureNetwork")]
@@ -190,7 +184,6 @@ namespace Camber.Civil.PressureNetworks.Parts
         /// <summary>
         /// Gets the Profile Views that the Pressure Part is displayed in.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PressureNetworks.Parts.PressurePart.ProfileViewsDisplayedIn",
             "Autodesk.Civil.DynamoNodes.PressurePart.ProfileViewsDisplayedIn")]
@@ -213,7 +206,6 @@ namespace Camber.Civil.PressureNetworks.Parts
         /// <summary>
         /// Gets the Pressure Part's reference Alignment.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PressureNetworks.Parts.PressurePart.ReferenceAlignment",
             "Autodesk.Civil.DynamoNodes.PressurePart.ReferenceAlignment")]
@@ -237,7 +229,6 @@ namespace Camber.Civil.PressureNetworks.Parts
         /// <summary>
         /// Gets the Pressure Part's reference Surface.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PressureNetworks.Parts.PressurePart.ReferenceSurface",
             "Autodesk.Civil.DynamoNodes.PressurePart.ReferenceSurface")]
@@ -263,7 +254,6 @@ namespace Camber.Civil.PressureNetworks.Parts
         /// </summary>
         /// <param name="profileView"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PressureNetworks.Parts.PressurePart.RemoveFromProfileView",
             "Autodesk.Civil.DynamoNodes.PressurePart.RemoveFromProfileView")]
@@ -283,7 +273,6 @@ namespace Camber.Civil.PressureNetworks.Parts
         /// </summary>
         /// <param name="point"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PressureNetworks.Parts.PressurePart.SetPosition",
             "Autodesk.AutoCAD.DynamoNodes.Object.SetLocation")]
@@ -303,7 +292,6 @@ namespace Camber.Civil.PressureNetworks.Parts
         /// </summary>
         /// <param name="alignment"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PressureNetworks.Parts.PressurePart.SetReferenceAlignment",
             "Autodesk.Civil.DynamoNodes.PressurePart.SetReferenceAlignment")]
@@ -323,7 +311,6 @@ namespace Camber.Civil.PressureNetworks.Parts
         /// </summary>
         /// <param name="surface"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PressureNetworks.Parts.PressurePart.SetReferenceSurface",
             "Autodesk.Civil.DynamoNodes.PressurePart.SetReferenceSurface")]
@@ -341,7 +328,6 @@ namespace Camber.Civil.PressureNetworks.Parts
         /// <summary>
         /// Gets the Pressure Part represented as a Dynamo solid.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PressureNetworks.Parts.PressurePart.Solid",
             "Autodesk.AutoCAD.DynamoNodes.Object.Geometry")]

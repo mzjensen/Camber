@@ -61,7 +61,6 @@ namespace Camber.Civil.PressureNetworks
         /// <summary>
         /// Gets the collection of Pressure Appurtenances that belong to the Pressure Network.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PressureNetworks.PressureNetwork.Appurtenances",
             "Autodesk.Civil.DynamoNodes.PressureNetwork.Appurtenances")]
@@ -85,7 +84,6 @@ namespace Camber.Civil.PressureNetworks
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PressureNetworks.PressureNetwork.ByName",
             "Autodesk.Civil.DynamoNodes.PressureNetwork.ByName")]
@@ -142,7 +140,6 @@ namespace Camber.Civil.PressureNetworks
         /// <summary>
         /// Gets the collection of Pressure Pipes that belong to the Pressure Network.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PressureNetworks.PressureNetwork.PressurePipes",
             "Autodesk.Civil.DynamoNodes.PressureNetwork.PressurePipes")]
@@ -164,7 +161,6 @@ namespace Camber.Civil.PressureNetworks
         /// <summary>
         /// Gets the collection of Pressure Fittings that belong to the Pressure Network.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PressureNetworks.PressureNetwork.Fittings",
             "Autodesk.Civil.DynamoNodes.PressureNetwork.Fittings")]
@@ -189,7 +185,6 @@ namespace Camber.Civil.PressureNetworks
         /// <param name="document"></param>
         /// <param name="allowReference">Include data references?</param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PressureNetworks.PressureNetwork.GetPressureNetworks",
             "Autodesk.Civil.DynamoNodes.PressureNetwork.GetPressureNetworks")]
@@ -239,7 +234,6 @@ namespace Camber.Civil.PressureNetworks
         /// <param name="name"></param>
         /// <param name="allowReference">Include data references?</param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeCategory("Actions")]
         public static PressureNetwork GetPressureNetworkByName(acDynNodes.Document document, string name, bool allowReference = false)
         {

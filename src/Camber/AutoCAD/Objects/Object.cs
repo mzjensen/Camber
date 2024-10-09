@@ -266,7 +266,6 @@ namespace Camber.AutoCAD.Objects
         /// </summary>
         /// <param name="object"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeCategory("Query")]
         public static int ColorIndex(acDynNodes.Object @object)
         {
@@ -287,7 +286,6 @@ namespace Camber.AutoCAD.Objects
         /// <param name="object"></param>
         /// <param name="colorIndex"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.Object.SetColor",
             "Autodesk.AutoCAD.DynamoNodes.Object.SetColor")]

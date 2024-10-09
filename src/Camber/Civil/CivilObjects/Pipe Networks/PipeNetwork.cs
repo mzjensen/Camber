@@ -118,7 +118,6 @@ namespace Camber.Civil.PipeNetworks
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.PipeNetwork.ByName",
             "Autodesk.Civil.DynamoNodes.PipeNetwork.ByName")]
@@ -179,7 +178,6 @@ namespace Camber.Civil.PipeNetworks
         /// <param name="startPart"></param>
         /// <param name="endPart"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.PipeNetwork.FindShortestNetworkPath",
             "Autodesk.Civil.DynamoNodes.PipeNetwork.ShortestPathBetweenParts")]
@@ -239,7 +237,6 @@ namespace Camber.Civil.PipeNetworks
         /// <param name="name"></param>
         /// <param name="allowReference">Include data references?</param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeCategory("Actions")]
         public static PipeNetwork GetPipeNetworkByName(acDynNodes.Document document, string name, bool allowReference = false)
         {
@@ -266,7 +263,6 @@ namespace Camber.Civil.PipeNetworks
         /// <param name="document"></param>
         /// <param name="allowReference">Include data references?</param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.PipeNetwork.GetPipeNetworks",
             "Autodesk.Civil.DynamoNodes.PipeNetwork.GetPipeNetworks")]
@@ -319,7 +315,6 @@ namespace Camber.Civil.PipeNetworks
         /// <summary>
         /// Gets all of the Pipes in a Pipe Network.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.PipeNetwork.Pipes",
             "Autodesk.Civil.DynamoNodes.PipeNetwork.Pipes")]
@@ -342,7 +337,6 @@ namespace Camber.Civil.PipeNetworks
         /// <summary>
         /// Gets all of the Structures in a Pipe Network.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.PipeNetwork.Structures",
             "Autodesk.Civil.DynamoNodes.PipeNetwork.Structures")]
@@ -365,7 +359,6 @@ namespace Camber.Civil.PipeNetworks
         /// <summary>
         /// Gets the reference Alignment for a Pipe Network.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.PipeNetwork.ReferenceAlignment",
             "Autodesk.Civil.DynamoNodes.PipeNetwork.ReferenceAlignment")]
@@ -389,7 +382,6 @@ namespace Camber.Civil.PipeNetworks
         /// <summary>
         /// Gets the reference Surface for a Pipe Network.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.PipeNetwork.ReferenceSurface",
             "Autodesk.Civil.DynamoNodes.PipeNetwork.ReferenceSurface")]

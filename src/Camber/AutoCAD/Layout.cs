@@ -313,7 +313,6 @@ namespace Camber.AutoCAD
         /// <summary>
         /// Gets the Block associated with a Layout.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Layout.Block",
             "Autodesk.AutoCAD.DynamoNodes.Layout.Block")]
@@ -351,7 +350,6 @@ namespace Camber.AutoCAD
         /// <param name="document"></param>
         /// <param name="includeModel">Include Model Space?</param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Layout.GetLayouts",
             "Autodesk.AutoCAD.DynamoNodes.Layout.GetLayouts")]
@@ -397,7 +395,6 @@ namespace Camber.AutoCAD
         /// <param name="document"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeCategory("Actions")]
         public static Layout GetLayoutByName(acDynNodes.Document document, string name)
         {
@@ -417,7 +414,6 @@ namespace Camber.AutoCAD
         /// <summary>
         /// Gets the name of a Layout.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Layout.Name",
             "Autodesk.AutoCAD.DynamoNodes.Layout.Name")]
@@ -433,7 +429,6 @@ namespace Camber.AutoCAD
         /// <summary>
         /// Gets the tab order of a Layout.
         /// </summary>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Layout.TabOrder",
             "Autodesk.AutoCAD.DynamoNodes.Layout.TabOrder")]
@@ -451,7 +446,6 @@ namespace Camber.AutoCAD
         /// </summary>
         /// <param name="layouts"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Layout.Reorder",
             "Autodesk.AutoCAD.DynamoNodes.Layout.Reorder")]
@@ -491,7 +485,6 @@ namespace Camber.AutoCAD
         /// </summary>
         /// <param name="newName"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Layout.SetName",
             "Autodesk.AutoCAD.DynamoNodes.Layout.SetName")]

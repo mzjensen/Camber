@@ -255,7 +255,6 @@ namespace Camber.AutoCAD.Objects
         /// </summary>
         /// <param name="polyline3d"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.Polyline3D.IsClosed",
             "Autodesk.AutoCAD.DynamoNodes.Curve.IsClosed")]
@@ -272,7 +271,6 @@ namespace Camber.AutoCAD.Objects
         /// <param name="polyline3d"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.Polyline3D.SetIsClosed",
             "Autodesk.AutoCAD.DynamoNodes.Curve.SetClosed")]

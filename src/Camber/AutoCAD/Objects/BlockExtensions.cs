@@ -262,7 +262,6 @@ namespace Camber.AutoCAD.Objects
         /// <param name="block"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.Block.SetName", 
             "Autodesk.AutoCAD.DynamoNodes.Block.SetName")]
@@ -285,7 +284,6 @@ namespace Camber.AutoCAD.Objects
         /// <param name="block"></param>
         /// <param name="description"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.Block.SetDescription", 
             "Autodesk.AutoCAD.DynamoNodes.Block.SetDescription")]
@@ -301,7 +299,6 @@ namespace Camber.AutoCAD.Objects
         /// <param name="block"></param>
         /// <param name="bool"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.Block.SetExplodable", 
             "Autodesk.AutoCAD.DynamoNodes.Block.SetExplodable")]
@@ -316,7 +313,6 @@ namespace Camber.AutoCAD.Objects
         /// </summary>
         /// <param name="block"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.Block.IsAnonymous", 
             "Autodesk.AutoCAD.DynamoNodes.Block.IsAnonymous")]
@@ -332,7 +328,6 @@ namespace Camber.AutoCAD.Objects
         /// </summary>
         /// <param name="block"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.Block.IsDynamic", 
             "Autodesk.AutoCAD.DynamoNodes.Block.IsDynamic")]
@@ -348,7 +343,6 @@ namespace Camber.AutoCAD.Objects
         /// </summary>
         /// <param name="block"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         [NodeMigrationMapping(
             "Camber.AutoCAD.Objects.Block.Explodable", 
             "Autodesk.AutoCAD.DynamoNodes.Block.IsExplodable")]
@@ -365,7 +359,6 @@ namespace Camber.AutoCAD.Objects
         /// <param name="block"></param>
         /// <param name="units"></param>
         /// <returns></returns>
-        [IsVisibleInDynamoLibrary(false)]
         public static acDynNodes.Block SetUnits(this acDynNodes.Block block, string units)
         {
             LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "Block.SetUnits"));
@@ -383,7 +376,6 @@ namespace Camber.AutoCAD.Objects
         /// <param name="block"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
-        [IsVisibleInDynamoLibrary(false)]
         public static string Units(this acDynNodes.Block block)
         {
             LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "Block.Units"));
