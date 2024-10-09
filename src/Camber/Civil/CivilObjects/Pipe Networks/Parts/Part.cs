@@ -137,7 +137,7 @@ namespace Camber.Civil.PipeNetworks.Parts
             "Autodesk.Civil.DynamoNodes.Part.AddToProfileView")]
         public Part AddToProfileView(ProfileView profileView)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Part.AddToProfileView"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Part.AddToProfileView"));
 
             bool openedForWrite = AeccPart.IsWriteEnabled;
             if (!openedForWrite) AeccPart.UpgradeOpen();
@@ -154,7 +154,7 @@ namespace Camber.Civil.PipeNetworks.Parts
             "Autodesk.Civil.DynamoNodes.Part.AddToProfileView")]
         public Part ApplyRules()
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Part.ApplyRules"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Part.ApplyRules"));
 
             bool openedForWrite = AeccPart.IsWriteEnabled;
             if (!openedForWrite) AeccPart.UpgradeOpen();
@@ -173,7 +173,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Part.Domain"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Part.Domain"));
                 return GetString();
             }
         }
@@ -188,7 +188,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Part.Material"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Part.Material"));
                 return GetString();
             }
         }
@@ -203,7 +203,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Part.PartDescription"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Part.PartDescription"));
                 return GetString();
             }
         }
@@ -218,7 +218,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Part.PartSubType"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Part.PartSubType"));
                 return GetString();
             }
         }
@@ -233,7 +233,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Part.PipeNetwork"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Part.PipeNetwork"));
                 return PipeNetwork.GetByObjectId(AeccPart.NetworkId);
             }
         }
@@ -248,7 +248,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Part.ProfileViewsDisplayedIn"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Part.ProfileViewsDisplayedIn"));
 
                 var views = new List<ProfileView>();
                 acDb.ObjectIdCollection viewIds = AeccPart.GetProfileViewsDisplayingMe();
@@ -270,7 +270,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Part.ReferenceAlignment"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Part.ReferenceAlignment"));
 
                 try
                 {
@@ -293,7 +293,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Part.ReferenceSurface"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Part.ReferenceSurface"));
 
                 try
                 {
@@ -316,7 +316,7 @@ namespace Camber.Civil.PipeNetworks.Parts
             "Autodesk.Civil.DynamoNodes.Part.RemoveFromProfileView")]
         public Part RemoveFromProfileView(ProfileView profileView)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Part.RemoveFromProfileView"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Part.RemoveFromProfileView"));
 
             bool openedForWrite = AeccPart.IsWriteEnabled;
             if (!openedForWrite) AeccPart.UpgradeOpen();
@@ -335,7 +335,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Part.SectionsViewsDisplayedIn"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Part.SectionsViewsDisplayedIn"));
 
                 var views = new List<SectionView>();
                 acDb.ObjectIdCollection viewIds = AeccPart.GetSectionViewsDisplayingMe();
@@ -357,7 +357,7 @@ namespace Camber.Civil.PipeNetworks.Parts
             "Autodesk.Civil.DynamoNodes.Part.SetReferenceAlignment")]
         public Part SetReferenceAlignment(civDynNodes.Alignment alignment)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Part.SetReferenceAlignment"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Part.SetReferenceAlignment"));
             SetValue(alignment.InternalObjectId, "RefAlignmentId");
             return this;
         }
@@ -372,7 +372,7 @@ namespace Camber.Civil.PipeNetworks.Parts
             "Autodesk.Civil.DynamoNodes.Part.SetReferenceSurface")]
         public Part SetReferenceSurface(civDynNodes.Surface surface)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Part.SetReferenceSurface"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Part.SetReferenceSurface"));
             SetValue(surface.InternalObjectId, "RefSurfaceId");
             return this;
         }
@@ -385,7 +385,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <returns></returns>
         public Part Swap(PartFamily newPartFamily, PartSize newPartSize)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Pipe.Swap or Structure.Swap"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Pipe.Swap or Structure.Swap"));
 
             bool openedForWrite = AeccPart.IsWriteEnabled;
             if (!openedForWrite) AeccPart.UpgradeOpen();
@@ -402,7 +402,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "Pipe.WallThickness or Structure.WallThickness"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MESSAGE, "Pipe.WallThickness or Structure.WallThickness"));
                 return GetDouble();
             }
         }

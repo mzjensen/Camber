@@ -266,7 +266,7 @@ namespace Camber.AutoCAD.Objects
         [NodeCategory("Query")]
         public static double Elevation(this acDynNodes.Polyline polyline)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Polyline.Elevation"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Polyline.Elevation"));
             return GetDouble(polyline);
         }
 
@@ -281,7 +281,7 @@ namespace Camber.AutoCAD.Objects
         [NodeCategory("Query")]
         public static double GlobalWidth(this acDynNodes.Polyline polyline)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Polyline.GlobalWidth"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Polyline.GlobalWidth"));
             return GetDouble(polyline, "ConstantWidth");
         }
 
@@ -296,7 +296,7 @@ namespace Camber.AutoCAD.Objects
         [NodeCategory("Query")]
         public static bool IsClosed(this acDynNodes.Polyline polyline)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Curve.IsClosed"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Curve.IsClosed"));
             return GetBool(polyline, "Closed");
         }
 
@@ -311,7 +311,7 @@ namespace Camber.AutoCAD.Objects
             "Autodesk.AutoCAD.DynamoNodes.Polyline.SetElevation")]
         public static acDynNodes.Polyline SetElevation(this acDynNodes.Polyline polyline, double elevation)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Polyline.SetElevation"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Polyline.SetElevation"));
             return SetValue(polyline, elevation);
         }
 
@@ -326,7 +326,7 @@ namespace Camber.AutoCAD.Objects
             "Autodesk.AutoCAD.DynamoNodes.Polyline.SetGlobalWidth")]
         public static acDynNodes.Polyline SetGlobalWidth(this acDynNodes.Polyline polyline, double width)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Polyline.SetGlobalWidth"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Polyline.SetGlobalWidth"));
 
             if (width < 0)
             {
@@ -347,7 +347,7 @@ namespace Camber.AutoCAD.Objects
             "Autodesk.AutoCAD.DynamoNodes.Curve.SetClosed")]
         public static acDynNodes.Polyline SetIsClosed(this acDynNodes.Polyline polyline, bool value)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Curve.SetClosed"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Curve.SetClosed"));
             return SetValue(polyline, value, "Closed");
         }
         #endregion

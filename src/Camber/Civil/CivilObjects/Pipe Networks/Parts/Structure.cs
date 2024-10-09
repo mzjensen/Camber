@@ -139,7 +139,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Structure.AutomaticSurfaceAdjustment"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Structure.AutomaticSurfaceAdjustment"));
                 return GetBool();
             }
         }
@@ -156,7 +156,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Structure.BarrelPipeClearance"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Structure.BarrelPipeClearance"));
                 return GetDouble();
             }
         }
@@ -171,7 +171,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Structure.SumpControlMethod"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Structure.SumpControlMethod"));
                 return GetString();
             }
         }
@@ -186,7 +186,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Structure.Cover"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Structure.Cover"));
                 return GetString();
             }
         }
@@ -201,7 +201,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Structure.OuterDiameterOrWidth"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Structure.OuterDiameterOrWidth"));
                 return GetDouble("DiameterOrWidth");
             }
         }
@@ -216,7 +216,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Structure.FloorThickness"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Structure.FloorThickness"));
                 return GetDouble();
             }
         }
@@ -231,7 +231,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Structure.Frame"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Structure.Frame"));
                 return GetString();
             }
         }
@@ -246,7 +246,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Structure.FrameDiameter"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Structure.FrameDiameter"));
                 return GetDouble();
             }
         }
@@ -261,7 +261,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Structure.FrameHeight"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Structure.FrameHeight"));
                 return GetDouble();
             }
         }
@@ -276,7 +276,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Structure.Grate"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Structure.Grate"));
                 return GetString();
             }
         }
@@ -292,7 +292,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Structure.HeadwallBaseThickness"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Structure.HeadwallBaseThickness"));
                 return GetDouble();
             }
         }
@@ -308,7 +308,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Structure.HeadwallBaseWidth"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Structure.HeadwallBaseWidth"));
                 return GetDouble();
             }
         }
@@ -323,7 +323,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Structure.Height"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Structure.Height"));
                 return GetDouble();
             }
         }
@@ -338,7 +338,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Structure.InnerDiameterOrWidth"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Structure.InnerDiameterOrWidth"));
                 return GetDouble();
             }
         }
@@ -353,7 +353,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Structure.InnerLength"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Structure.InnerLength"));
                 return GetDouble();
             }
         }
@@ -368,7 +368,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Structure.Length"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Structure.Length"));
                 return GetDouble();
             }
         }
@@ -383,7 +383,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Object.Location"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Object.Location"));
                 return GeometryConversions.AcPointToDynPoint(AeccStructure.Location);
             }
         }
@@ -398,7 +398,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Structure.Offset"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Structure.Offset"));
                 return GetDouble();
             }
         }
@@ -413,7 +413,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Structure.DepthToLowestPipeBottom"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Structure.DepthToLowestPipeBottom"));
                 return GetDouble();
             }
         }
@@ -428,7 +428,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Structure.DepthToUpperPipeTop"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Structure.DepthToUpperPipeTop"));
                 return GetDouble();
             }
         }
@@ -443,7 +443,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Structure.RimElevation"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Structure.RimElevation"));
                 return GetDouble();
             }
         }
@@ -458,7 +458,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Structure.RimToSumpHeight"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Structure.RimToSumpHeight"));
                 return GetDouble();
             }
         }
@@ -473,7 +473,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Object.Rotation"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Object.Rotation"));
                 return GetDouble();
             }
         }
@@ -488,7 +488,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Structure.Station"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Structure.Station"));
                 return GetDouble();
             }
         }
@@ -503,7 +503,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Structure.SumpDepth"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Structure.SumpDepth"));
                 return GetDouble();
             }
         }
@@ -518,7 +518,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Structure.SumpElevation"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Structure.SumpElevation"));
                 return GetDouble();
             }
         }
@@ -533,7 +533,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Structure.SurfaceAdjustmentValue"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Structure.SurfaceAdjustmentValue"));
                 return GetDouble();
             }
         }
@@ -550,7 +550,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Structure.VerticalPipeClearance"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Structure.VerticalPipeClearance"));
                 return GetDouble();
             }
         }
@@ -564,7 +564,7 @@ namespace Camber.Civil.PipeNetworks.Parts
             "Autodesk.Civil.DynamoNodes.Structure.ResizeByPipeDepths")]
         public Structure ResizeByPipeDepths()
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Structure.ResizeByPipeDepths"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Structure.ResizeByPipeDepths"));
 
             bool openedForWrite = AeccStructure.IsWriteEnabled;
             if (!openedForWrite) AeccStructure.UpgradeOpen();
@@ -589,7 +589,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// <returns></returns>
         public static Structure ByPoint(PipeNetwork pipeNetwork, Point point, PartFamily partFamily, PartSize partSize, double rotation = 0.0, bool applyRules = false)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "Structure.ByPoint"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MESSAGE, "Structure.ByPoint"));
 
             if (pipeNetwork is null)
             {
@@ -651,7 +651,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         [MultiReturn(new[] { "All", "Incoming", "Outgoing", "Bidirectional" })]
         public Dictionary<string, object> GetConnectedPipes()
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "Structure.Connections"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MESSAGE, "Structure.Connections"));
 
             var allPipes = new List<Pipe>();
             var incomingPipes = new List<Pipe>();

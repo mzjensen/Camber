@@ -404,7 +404,7 @@ namespace Camber.Civil.CivilObjects
         [MultiReturn(new[] { "Name", "Type", "Is Broken", "Source Drawing" })]
         public static Dictionary<string, object> GetReferenceInfo(civDynNodes.CivilObject civilObject)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "CivilObject.ReferenceInfo"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "CivilObject.ReferenceInfo"));
 
             if (!IsReference(civilObject)) { throw new ArgumentException(NotReferenceEntityMsg); }
 
@@ -437,7 +437,7 @@ namespace Camber.Civil.CivilObjects
         [NodeCategory("Query")]
         public static bool IsReference(civDynNodes.CivilObject civilObject)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "CivilObject.IsReferenceObject"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "CivilObject.IsReferenceObject"));
 
             acDynNodes.Document document = acDynNodes.Document.Current;
             using (var ctx = new acDynApp.DocumentContext(document?.AcDocument))

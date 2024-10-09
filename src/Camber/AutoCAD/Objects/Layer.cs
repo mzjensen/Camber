@@ -83,7 +83,7 @@ namespace Camber.AutoCAD.Objects
             "Book name" })]
         public static Dictionary<string, object> GetColorInfo(acDynNodes.Layer layer)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "Layer.Color"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MESSAGE, "Layer.Color"));
 
             acDynNodes.Document document = acDynNodes.Document.Current;
             using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
@@ -118,7 +118,7 @@ namespace Camber.AutoCAD.Objects
             "Autodesk.AutoCAD.DynamoNodes.Layer.Lineweight")]
         public static object Lineweight(acDynNodes.Layer layer)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Layer.Lineweight"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Layer.Lineweight"));
 
             using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
             {
@@ -154,7 +154,7 @@ namespace Camber.AutoCAD.Objects
             "Autodesk.AutoCAD.DynamoNodes.Layer.SetColor")]
         public static acDynNodes.Layer SetColor(acDynNodes.Layer layer, int colorIndex)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Layer.SetColor"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Layer.SetColor"));
 
             var color = Color.FromColorIndex(ColorMethod.ByAci, (short)colorIndex);
             SetValue(layer, color);
@@ -172,7 +172,7 @@ namespace Camber.AutoCAD.Objects
             "Autodesk.AutoCAD.DynamoNodes.Layer.SetLineweight")]
         public static acDynNodes.Layer SetLineweight(acDynNodes.Layer layer, string lineweight)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Layer.SetLineweight"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Layer.SetLineweight"));
 
             if (string.IsNullOrWhiteSpace(lineweight))
             {

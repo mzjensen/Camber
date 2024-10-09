@@ -241,7 +241,7 @@ namespace Camber.AutoCAD.Objects
         [NodeCategory("Query")]
         public static string Contents(this acDynNodes.Text text)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Text.Contents"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Text.Contents"));
             return GetString(text, "TextString");
         }
 
@@ -256,7 +256,7 @@ namespace Camber.AutoCAD.Objects
         [NodeCategory("Query")]
         public static double Height(this acDynNodes.Text text)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Text.TextHeight"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Text.TextHeight"));
             return GetDouble(text);
         }
 
@@ -268,7 +268,7 @@ namespace Camber.AutoCAD.Objects
         [NodeCategory("Query")]
         public static string HorizontalMode(this acDynNodes.Text text)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "Text.Justification"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MESSAGE, "Text.Justification"));
             return GetString(text);
         }
 
@@ -283,7 +283,7 @@ namespace Camber.AutoCAD.Objects
         [NodeCategory("Query")]
         public static bool IsBackward(this acDynNodes.Text text)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Text.IsBackward"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Text.IsBackward"));
             return GetBool(text, "IsMirroredInX");
         }
 
@@ -298,7 +298,7 @@ namespace Camber.AutoCAD.Objects
         [NodeCategory("Query")]
         public static bool IsUpsideDown(this acDynNodes.Text text)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Text.IsUpsideDown"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Text.IsUpsideDown"));
             return GetBool(text, "IsMirroredInY");
         }
 
@@ -313,7 +313,7 @@ namespace Camber.AutoCAD.Objects
         [NodeCategory("Query")]
         public static double Obliquing(this acDynNodes.Text text)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Text.ObliqueAngle"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Text.ObliqueAngle"));
             return Utilities.MathUtilities.RadiansToDegrees(GetDouble(text, "Oblique"));
         }
 
@@ -328,7 +328,7 @@ namespace Camber.AutoCAD.Objects
         [NodeCategory("Query")]
         public static Point Position(this acDynNodes.Text text)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Object.Location"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Object.Location"));
 
             acDynNodes.Document document = acDynNodes.Document.Current;
             using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
@@ -351,7 +351,7 @@ namespace Camber.AutoCAD.Objects
         [NodeCategory("Query")]
         public static double Rotation(this acDynNodes.Text text)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Object.Rotation"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Object.Rotation"));
             return Utilities.MathUtilities.RadiansToDegrees(GetDouble(text));
         }
 
@@ -366,7 +366,7 @@ namespace Camber.AutoCAD.Objects
             "Autodesk.AutoCAD.DynamoNodes.Text.SetContents")]
         public static acDynNodes.Text SetContents(this acDynNodes.Text text, string contents)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Text.SetContents"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Text.SetContents"));
             return SetValue(text, (object)contents, "TextString");
         }
 
@@ -381,7 +381,7 @@ namespace Camber.AutoCAD.Objects
             "Autodesk.AutoCAD.DynamoNodes.Text.SetTextHeight")]
         public static acDynNodes.Text SetHeight(this acDynNodes.Text text, double height)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Text.SetTextHeight"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Text.SetTextHeight"));
             return SetValue(text, height);
         }
 
@@ -396,7 +396,7 @@ namespace Camber.AutoCAD.Objects
             "Autodesk.AutoCAD.DynamoNodes.Text.SetBackward")]
         public static acDynNodes.Text SetIsBackward(this acDynNodes.Text text, bool @bool)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Text.SetBackward"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Text.SetBackward"));
             return SetValue(text, @bool, "IsMirroredInX");
         }
 
@@ -411,7 +411,7 @@ namespace Camber.AutoCAD.Objects
             "Autodesk.AutoCAD.DynamoNodes.Text.SetUpsideDown")]
         public static acDynNodes.Text SetIsUpsideDown(this acDynNodes.Text text, bool @bool)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Text.SetUpsideDown"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Text.SetUpsideDown"));
             return SetValue(text, @bool, "IsMirroredInY");
         }
 
@@ -426,7 +426,7 @@ namespace Camber.AutoCAD.Objects
             "Autodesk.AutoCAD.DynamoNodes.Text.SetObliqueAngle")]
         public static acDynNodes.Text SetObliquing(this acDynNodes.Text text, double angle)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Text.SetObliqueAngle"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Text.SetObliqueAngle"));
             return SetValue(text, Utilities.MathUtilities.DegreesToRadians(angle), "Oblique");
         }
 
@@ -441,7 +441,7 @@ namespace Camber.AutoCAD.Objects
             "Autodesk.AutoCAD.DynamoNodes.Object.SetLocation")]
         public static acDynNodes.Text SetPosition(this acDynNodes.Text text, Point point)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Object.SetLocation"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Object.SetLocation"));
             return SetValue(text, (acGeom.Point3d)GeometryConversions.DynPointToAcPoint(point, true));
         }
 
@@ -456,7 +456,7 @@ namespace Camber.AutoCAD.Objects
             "Autodesk.AutoCAD.DynamoNodes.Object.SetRotation")]
         public static acDynNodes.Text SetRotation(this acDynNodes.Text text, double angle)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Object.SetRotation"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Object.SetRotation"));
             return SetValue(text, Utilities.MathUtilities.DegreesToRadians(angle));
         }
 
@@ -471,7 +471,7 @@ namespace Camber.AutoCAD.Objects
             "Autodesk.AutoCAD.DynamoNodes.Text.SetTextStyle")]
         public static acDynNodes.Text SetTextStyle(this acDynNodes.Text text, string textStyleName)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Text.SetTextStyle"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Text.SetTextStyle"));
 
             if (string.IsNullOrEmpty(textStyleName))
             {
@@ -513,7 +513,7 @@ namespace Camber.AutoCAD.Objects
             "Autodesk.AutoCAD.DynamoNodes.Text.SetWidthFactor")]
         public static acDynNodes.Text SetWidthFactor(this acDynNodes.Text text, double widthFactor)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Text.SetWidthFactor"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Text.SetWidthFactor"));
 
             if (widthFactor <= 0)
             {
@@ -534,7 +534,7 @@ namespace Camber.AutoCAD.Objects
         [NodeCategory("Query")]
         public static string TextStyle(this acDynNodes.Text text)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Text.TextStyle"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Text.TextStyle"));
             return GetString(text, "TextStyleName");
         }
 
@@ -546,7 +546,7 @@ namespace Camber.AutoCAD.Objects
         [NodeCategory("Query")]
         public static double VerticalMode(this acDynNodes.Text text)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "Text.Justification"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MESSAGE, "Text.Justification"));
             return GetDouble(text);
         }
 
@@ -561,7 +561,7 @@ namespace Camber.AutoCAD.Objects
         [NodeCategory("Query")]
         public static double WidthFactor(this acDynNodes.Text text)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Text.WidthFactor"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Text.WidthFactor"));
             return GetDouble(text);
         }
         #endregion

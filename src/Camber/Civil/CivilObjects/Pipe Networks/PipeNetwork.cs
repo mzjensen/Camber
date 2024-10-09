@@ -123,7 +123,7 @@ namespace Camber.Civil.PipeNetworks
             "Autodesk.Civil.DynamoNodes.PipeNetwork.ByName")]
         public static PipeNetwork ByName(string name)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PipeNetwork.ByName"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "PipeNetwork.ByName"));
 
             if (string.IsNullOrEmpty(name))
             {
@@ -184,7 +184,7 @@ namespace Camber.Civil.PipeNetworks
         [MultiReturn(new[] { "Parts", "Path Length" })]
         public static Dictionary<string, object> FindShortestNetworkPath(Part startPart, Part endPart)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PipeNetwork.ShortestPathBetweenParts"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "PipeNetwork.ShortestPathBetweenParts"));
 
             if (startPart.PipeNetwork.Name != endPart.PipeNetwork.Name)
             {
@@ -240,7 +240,7 @@ namespace Camber.Civil.PipeNetworks
         [NodeCategory("Actions")]
         public static PipeNetwork GetPipeNetworkByName(acDynNodes.Document document, string name, bool allowReference = false)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "PipeNetwork.GetPipeNetworkByName"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MESSAGE, "PipeNetwork.GetPipeNetworkByName"));
 
             if (document is null)
             {
@@ -268,7 +268,7 @@ namespace Camber.Civil.PipeNetworks
             "Autodesk.Civil.DynamoNodes.PipeNetwork.GetPipeNetworks")]
         public static IList<PipeNetwork> GetPipeNetworks(acDynNodes.Document document, bool allowReference = false)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PipeNetwork.GetPipeNetworks"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "PipeNetwork.GetPipeNetworks"));
 
             if (document is null)
             {
@@ -322,7 +322,7 @@ namespace Camber.Civil.PipeNetworks
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PipeNetwork.Pipes"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "PipeNetwork.Pipes"));
 
                 var pipes = new List<Pipe>();
                 acDb.ObjectIdCollection pipeIds = AeccPipeNetwork.GetPipeIds();
@@ -344,7 +344,7 @@ namespace Camber.Civil.PipeNetworks
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PipeNetwork.Structures"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "PipeNetwork.Structures"));
 
                 var structures = new List<Structure>();
                 acDb.ObjectIdCollection structureIds = AeccPipeNetwork.GetStructureIds();
@@ -366,7 +366,7 @@ namespace Camber.Civil.PipeNetworks
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PipeNetwork.ReferenceAlignment"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "PipeNetwork.ReferenceAlignment"));
 
                 try
                 {
@@ -389,7 +389,7 @@ namespace Camber.Civil.PipeNetworks
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PipeNetwork.ReferenceSurface"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "PipeNetwork.ReferenceSurface"));
 
                 try
                 {

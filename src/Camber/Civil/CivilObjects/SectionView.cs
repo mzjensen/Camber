@@ -40,7 +40,7 @@ namespace Camber.Civil.CivilObjects
         #region deprecated
         public static SectionView ByPoint(string name, SampleLine sampleLine, Point location)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "SectionView.BySampleLine"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MESSAGE, "SectionView.BySampleLine"));
 
             if (string.IsNullOrEmpty(name))
             {
@@ -101,7 +101,7 @@ namespace Camber.Civil.CivilObjects
         [MultiReturn(new[] { "Offset", "Elevation" })]
         public static Dictionary<string, object> GetOffsetElevationAtPoint(SectionView sectionView, Point point)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "SectionView.OffsetElevationAtPoint"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "SectionView.OffsetElevationAtPoint"));
 
             // Error checking
             if (sectionView is null)
@@ -133,7 +133,7 @@ namespace Camber.Civil.CivilObjects
             "Autodesk.Civil.DynamoNodes.SectionView.PointAtOffsetElevation")]
         public static Point GetPointAtOffsetElevation(SectionView sectionView, double offset, double elevation)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "SectionView.PointAtOffsetElevation"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "SectionView.PointAtOffsetElevation"));
 
             // Error checking
             if (sectionView is null)
@@ -157,7 +157,7 @@ namespace Camber.Civil.CivilObjects
         /// <returns></returns>
         public static IList<SectionView> GetSectionViews(acDynNodes.Document document)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "All Objects of Type"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MESSAGE, "All Objects of Type"));
 
             List<SectionView> sectViews = new List<SectionView>();
             using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
@@ -189,7 +189,7 @@ namespace Camber.Civil.CivilObjects
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "SectionView.IsElevationRangeAutomatic"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "SectionView.IsElevationRangeAutomatic"));
                 return GetBool();
             }
         }
@@ -204,7 +204,7 @@ namespace Camber.Civil.CivilObjects
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "SectionView.IsOffsetRangeAutomatic"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "SectionView.IsOffsetRangeAutomatic"));
                 return GetBool();
             }
         }
@@ -219,7 +219,7 @@ namespace Camber.Civil.CivilObjects
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Object.Location"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Object.Location"));
                 return GeometryConversions.AcPointToDynPoint(AeccSectionView.Location);
             }
         }
@@ -234,7 +234,7 @@ namespace Camber.Civil.CivilObjects
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "SectionView.MaxElevation"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "SectionView.MaxElevation"));
                 return GetDouble("ElevationMax");
             }
         }
@@ -249,7 +249,7 @@ namespace Camber.Civil.CivilObjects
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "SectionView.MinElevation"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "SectionView.MinElevation"));
                 return GetDouble("ElevationMin");
             }
         }
@@ -264,7 +264,7 @@ namespace Camber.Civil.CivilObjects
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "SectionView.LeftOffset"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "SectionView.LeftOffset"));
                 return GetDouble();
             }
         }
@@ -279,7 +279,7 @@ namespace Camber.Civil.CivilObjects
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "SectionView.RightOffset"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "SectionView.RightOffset"));
                 return GetDouble();
             }
         }
@@ -294,7 +294,7 @@ namespace Camber.Civil.CivilObjects
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "SectionView.SampleLine"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "SectionView.SampleLine"));
                 return SampleLine.GetByObjectId(AeccSectionView.SampleLineId);
             }
         }
@@ -306,7 +306,7 @@ namespace Camber.Civil.CivilObjects
         /// <returns></returns>
         public SectionView SetElevationRangeMode(bool @bool)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "SectionView.SetElevationRangeAutomatic"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MESSAGE, "SectionView.SetElevationRangeAutomatic"));
             
             SetValue(@bool, "IsElevationRangeAutomatic");
             return this;
@@ -320,7 +320,7 @@ namespace Camber.Civil.CivilObjects
         /// <returns></returns>
         public SectionView SetElevations(double minElevation, double maxElevation)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "SectionView.SetMinElevation and SectionView.SetMaxElevation"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MESSAGE, "SectionView.SetMinElevation and SectionView.SetMaxElevation"));
 
             SetElevationRangeMode(false);
             SetValue(minElevation, "ElevationMin");
@@ -338,7 +338,7 @@ namespace Camber.Civil.CivilObjects
             "Autodesk.AutoCAD.DynamoNodes.Object.SetLocation")]
         public SectionView SetLocation(Point point)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Object.SetLocation"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Object.SetLocation"));
 
             acGeom.Point3d acPoint = (acGeom.Point3d)GeometryConversions.DynPointToAcPoint(point, true);
             SetValue(acPoint);
@@ -352,7 +352,7 @@ namespace Camber.Civil.CivilObjects
         /// <returns></returns>
         public SectionView SetOffsetRangeMode(bool @bool)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "SectionView.SetOffsetRangeAutomatic"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "SectionView.SetOffsetRangeAutomatic"));
 
             SetValue(@bool, "IsOffsetRangeAutomatic");
             return this;
@@ -366,7 +366,7 @@ namespace Camber.Civil.CivilObjects
         /// <returns></returns>
         public SectionView SetOffsets(double offsetLeft, double offsetRight)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "SectionView.SetLeftOffset and SectionView.SetRightOffset"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "SectionView.SetLeftOffset and SectionView.SetRightOffset"));
 
             SetOffsetRangeMode(false);
             SetValue(-offsetLeft, "OffsetLeft");

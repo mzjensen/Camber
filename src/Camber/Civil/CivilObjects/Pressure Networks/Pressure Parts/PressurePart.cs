@@ -88,7 +88,7 @@ namespace Camber.Civil.PressureNetworks.Parts
             "Autodesk.Civil.DynamoNodes.PressurePart.AddToProfileView")]
         public PressurePart AddToProfileView(ProfileView profileView)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PressurePart.AddToProfileView"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "PressurePart.AddToProfileView"));
 
             bool openedForWrite = AeccPressurePart.IsWriteEnabled;
             if (!openedForWrite) AeccPressurePart.UpgradeOpen();
@@ -107,7 +107,7 @@ namespace Camber.Civil.PressureNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PressurePart.Domain"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "PressurePart.Domain"));
                 return GetString("PartDomain");
             }
         }
@@ -122,7 +122,7 @@ namespace Camber.Civil.PressureNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PressurePart.PartData"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "PressurePart.PartData"));
 
                 Dictionary<string, object> propDict = new Dictionary<string, object>();
                 civDb.PressureNetworkPartData partData = AeccPressurePart.PartData;
@@ -146,7 +146,7 @@ namespace Camber.Civil.PressureNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PressurePart.PartDescription"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "PressurePart.PartDescription"));
                 return GetString();
             }
         }
@@ -161,7 +161,7 @@ namespace Camber.Civil.PressureNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PressurePart.PartType"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "PressurePart.PartType"));
                 return GetString();
             }
         }
@@ -176,7 +176,7 @@ namespace Camber.Civil.PressureNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PressurePart.PressureNetwork"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "PressurePart.PressureNetwork"));
                 return PressureNetwork.GetByObjectId(AeccPressurePart.NetworkId);
             }
         }
@@ -191,7 +191,7 @@ namespace Camber.Civil.PressureNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PressurePart.ProfileViewsDisplayedIn"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "PressurePart.ProfileViewsDisplayedIn"));
 
                 var views = new List<ProfileView>();
                 acDb.ObjectIdCollection viewIds = AeccPressurePart.GetProfileViewsDisplayingMe();
@@ -213,7 +213,7 @@ namespace Camber.Civil.PressureNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PressurePart.ReferenceAlignment"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "PressurePart.ReferenceAlignment"));
 
                 try
                 {
@@ -236,7 +236,7 @@ namespace Camber.Civil.PressureNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PressurePart.ReferenceSurface"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "PressurePart.ReferenceSurface"));
 
                 try
                 {
@@ -259,7 +259,7 @@ namespace Camber.Civil.PressureNetworks.Parts
             "Autodesk.Civil.DynamoNodes.PressurePart.RemoveFromProfileView")]
         public PressurePart RemoveFromProfileView(ProfileView profileView)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PressurePart.RemoveFromProfileView"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "PressurePart.RemoveFromProfileView"));
 
             bool openedForWrite = AeccPressurePart.IsWriteEnabled;
             if (!openedForWrite) AeccPressurePart.UpgradeOpen();
@@ -278,7 +278,7 @@ namespace Camber.Civil.PressureNetworks.Parts
             "Autodesk.AutoCAD.DynamoNodes.Object.SetLocation")]
         public PressurePart SetPosition(Point point)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Object.SetLocation"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Object.SetLocation"));
 
             bool openedForWrite = AeccPressurePart.IsWriteEnabled;
             if (!openedForWrite) AeccPressurePart.UpgradeOpen();
@@ -297,7 +297,7 @@ namespace Camber.Civil.PressureNetworks.Parts
             "Autodesk.Civil.DynamoNodes.PressurePart.SetReferenceAlignment")]
         public PressurePart SetReferenceAlignment(civDynNodes.Alignment alignment)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PressurePart.SetReferenceAlignment"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "PressurePart.SetReferenceAlignment"));
 
             bool openedForWrite = AeccPressurePart.IsWriteEnabled;
             if (!openedForWrite) AeccPressurePart.UpgradeOpen();
@@ -316,7 +316,7 @@ namespace Camber.Civil.PressureNetworks.Parts
             "Autodesk.Civil.DynamoNodes.PressurePart.SetReferenceSurface")]
         public PressurePart SetReferenceSurface(civDynNodes.Surface surface)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PressurePart.SetReferenceSurface"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "PressurePart.SetReferenceSurface"));
 
             bool openedForWrite = AeccPressurePart.IsWriteEnabled;
             if (!openedForWrite) AeccPressurePart.UpgradeOpen();
@@ -335,7 +335,7 @@ namespace Camber.Civil.PressureNetworks.Parts
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Object.Geometry"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Object.Geometry"));
                 return GeometryConversions.AcSolidToDynSolid(AeccPressurePart.Get3dBody());
             }
         }

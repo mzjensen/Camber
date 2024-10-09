@@ -373,7 +373,7 @@ namespace Camber.Civil.CivilObjects.Surfaces
             string name,
             SurfaceStyle surfaceStyle)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "TinSurface.ByName"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MESSAGE, "TinSurface.ByName"));
 
             if (civDynNodes.Selection.SurfaceByName(name, document) != null)
             {

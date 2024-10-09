@@ -320,7 +320,7 @@ namespace Camber.AutoCAD
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Layout.Block"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Layout.Block"));
 
                 acDynNodes.Document document = acDynNodes.Document.Current;
                 ;
@@ -355,7 +355,7 @@ namespace Camber.AutoCAD
             "Autodesk.AutoCAD.DynamoNodes.Layout.GetLayouts")]
         public static IList<Layout> GetLayouts(acDynNodes.Document document, bool includeModel = false)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Layout.GetLayouts"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Layout.GetLayouts"));
 
             List<Layout> layouts = new List<Layout>();
 
@@ -398,7 +398,7 @@ namespace Camber.AutoCAD
         [NodeCategory("Actions")]
         public static Layout GetLayoutByName(acDynNodes.Document document, string name)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "Layout.GetLayoutByName"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MESSAGE, "Layout.GetLayoutByName"));
 
             if (string.IsNullOrEmpty(name))
             {
@@ -421,7 +421,7 @@ namespace Camber.AutoCAD
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Layout.Name"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Layout.Name"));
                 return AcLayout.LayoutName;
             }
         }
@@ -436,7 +436,7 @@ namespace Camber.AutoCAD
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Layout.TabOrder"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Layout.TabOrder"));
                 return AcLayout.TabOrder;
             }
         }
@@ -451,7 +451,7 @@ namespace Camber.AutoCAD
             "Autodesk.AutoCAD.DynamoNodes.Layout.Reorder")]
         public static IList<Layout> Reorder(IList<Layout> layouts)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Layout.Reorder"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Layout.Reorder"));
 
             if (layouts.Any(layout => layout.Name.ToUpper() == "MODEL"))
             {
@@ -490,7 +490,7 @@ namespace Camber.AutoCAD
             "Autodesk.AutoCAD.DynamoNodes.Layout.SetName")]
         public Layout SetName(string newName)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Layout.SetName"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Layout.SetName"));
 
             if (string.IsNullOrEmpty(newName))
             {

@@ -267,7 +267,7 @@ namespace Camber.AutoCAD.Objects
             "Autodesk.AutoCAD.DynamoNodes.Block.SetName")]
         public static acDynNodes.Block SetName(this acDynNodes.Block block, string name)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Block.SetName"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Block.SetName"));
             try
             {
                 return SetValue(block, name);
@@ -289,7 +289,7 @@ namespace Camber.AutoCAD.Objects
             "Autodesk.AutoCAD.DynamoNodes.Block.SetDescription")]
         public static acDynNodes.Block SetDescription(this acDynNodes.Block block, string description)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Block.SetDescription"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Block.SetDescription"));
             return SetValue(block, (object)description, "Comments");
         }
 
@@ -304,7 +304,7 @@ namespace Camber.AutoCAD.Objects
             "Autodesk.AutoCAD.DynamoNodes.Block.SetExplodable")]
         public static acDynNodes.Block SetExplodable(this acDynNodes.Block block, bool @bool)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Block.SetExplodable"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Block.SetExplodable"));
             return SetValue(block, @bool);
         }
 
@@ -319,7 +319,7 @@ namespace Camber.AutoCAD.Objects
         [NodeCategory("Query")]
         public static bool IsAnonymous(this acDynNodes.Block block)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Block.IsAnonymous"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Block.IsAnonymous"));
             return GetBool(block);
         }
 
@@ -334,7 +334,7 @@ namespace Camber.AutoCAD.Objects
         [NodeCategory("Query")]
         public static bool IsDynamic(this acDynNodes.Block block)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Block.IsDynamic"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Block.IsDynamic"));
             return GetBool(block, "IsDynamicBlock");
         }
 
@@ -349,7 +349,7 @@ namespace Camber.AutoCAD.Objects
         [NodeCategory("Query")]
         public static bool Explodable(this acDynNodes.Block block)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Block.IsExplodable"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Block.IsExplodable"));
             return GetBool(block);
         }
 
@@ -361,7 +361,7 @@ namespace Camber.AutoCAD.Objects
         /// <returns></returns>
         public static acDynNodes.Block SetUnits(this acDynNodes.Block block, string units)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "Block.SetUnits"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MESSAGE, "Block.SetUnits"));
 
             if (!Enum.IsDefined(typeof(acDb.UnitsValue), units))
             {
@@ -378,7 +378,7 @@ namespace Camber.AutoCAD.Objects
         [NodeCategory("Query")]
         public static string Units(this acDynNodes.Block block)
         {
-            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "Block.Units"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MESSAGE, "Block.Units"));
             return GetString(block);
         }
         #endregion
