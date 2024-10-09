@@ -84,7 +84,7 @@ namespace Camber.Civil.CivilObjects
         {
             get
             {
-                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "SampleLineGroup.Alignment"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "SampleLineGroup.Alignment"));
 
                 acDb.ObjectId alignmentId = AeccSampleLineGroup.ParentAlignmentId;
                 AeccAlignment aeccAlignment = (AeccAlignment)alignmentId.GetObject(acDb.OpenMode.ForRead);
@@ -101,7 +101,7 @@ namespace Camber.Civil.CivilObjects
         /// <returns></returns>
         public static SampleLineGroup ByAlignment(civDynNodes.Alignment alignment, string groupName)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "SampleLineGroup.ByName"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "SampleLineGroup.ByName"));
 
             if (string.IsNullOrEmpty(groupName))
             {
@@ -158,7 +158,7 @@ namespace Camber.Civil.CivilObjects
         {
             get
             {
-                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "SampleLineGroup.SampleLines"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "SampleLineGroup.SampleLines"));
 
                 List<SampleLine> sampleLines = new List<SampleLine>();
                 foreach (acDb.ObjectId sampleLineId in AeccSampleLineGroup.GetSampleLineIds())

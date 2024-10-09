@@ -261,7 +261,7 @@ namespace Camber.AutoCAD.Objects
         [NodeCategory("Query")]
         public static bool IsClosed(this acDynNodes.Polyline3D polyline3d)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Curve.IsClosed"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Curve.IsClosed"));
             return GetBool(polyline3d, "Closed");
         }
 
@@ -276,7 +276,7 @@ namespace Camber.AutoCAD.Objects
             "Autodesk.AutoCAD.DynamoNodes.Curve.SetClosed")]
         public static acDynNodes.Polyline3D SetIsClosed(this acDynNodes.Polyline3D polyline3d, bool value)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Curve.SetClosed"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Curve.SetClosed"));
             return SetValue(polyline3d, value, "Closed");
         }
 

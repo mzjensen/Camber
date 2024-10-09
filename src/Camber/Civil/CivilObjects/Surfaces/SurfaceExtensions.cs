@@ -507,7 +507,7 @@ namespace Camber.Civil.CivilObjects.Surfaces
         [NodeCategory("Query")]
         public static bool AutoRebuild(this civDynNodes.Surface surface)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Surface.AutomaticRebuild"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Surface.AutomaticRebuild"));
             return surface.GetBoolProperty();
         }
 
@@ -522,7 +522,7 @@ namespace Camber.Civil.CivilObjects.Surfaces
         [NodeCategory("Query")]
         public static bool HasSnapshot(this civDynNodes.Surface surface)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Surface.HasSnapshot"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Surface.HasSnapshot"));
             return surface.GetBoolProperty();
         }
 
@@ -537,7 +537,7 @@ namespace Camber.Civil.CivilObjects.Surfaces
         [NodeCategory("Query")]
         public static bool IsOutOfDate(this civDynNodes.Surface surface)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Surface.IsOutOfDate"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Surface.IsOutOfDate"));
             return surface.GetBoolProperty();
         }
 
@@ -557,7 +557,7 @@ namespace Camber.Civil.CivilObjects.Surfaces
             Point startPoint,
             bool create3DCurves)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Surface.WaterDropPaths"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Surface.WaterDropPaths"));
 
             List<PolyCurve> pcurves = new List<PolyCurve>();
 
@@ -623,7 +623,7 @@ namespace Camber.Civil.CivilObjects.Surfaces
         [NodeCategory("Query")]
         public static bool IsLocked(this civDynNodes.Surface surface)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Surface.IsLocked"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Surface.IsLocked"));
             return surface.GetBoolProperty("Lock");
         }
 
@@ -637,7 +637,7 @@ namespace Camber.Civil.CivilObjects.Surfaces
             "Autodesk.Civil.DynamoNodes.Surface.SetAutomaticRebuild")]
         public static civDynNodes.Surface SetAutoRebuild(this civDynNodes.Surface surface, bool @bool)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Surface.SetAutomaticRebuild"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Surface.SetAutomaticRebuild"));
             return surface.SetProperty(@bool);
         }
 
@@ -652,7 +652,7 @@ namespace Camber.Civil.CivilObjects.Surfaces
             "Autodesk.Civil.DynamoNodes.Surface.SetLocked")]
         public static civDynNodes.Surface SetIsLocked(this civDynNodes.Surface surface, bool @bool)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Surface.SetLocked"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Surface.SetLocked"));
             return surface.SetProperty(@bool, "Lock");
         }
 

@@ -92,7 +92,7 @@ namespace Camber.AutoCAD.Objects
         {
             get
             {
-                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Multileader.SourceBlock"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Multileader.SourceBlock"));
 
                 acDynNodes.Document document = acDynNodes.Document.Current;
                 using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
@@ -114,7 +114,7 @@ namespace Camber.AutoCAD.Objects
         {
             get
             {
-                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Multileader.BlockLocation"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Multileader.BlockLocation"));
                 return GeometryConversions.AcPointToDynPoint(AcMLeader.BlockPosition);
             }
         }
@@ -128,7 +128,7 @@ namespace Camber.AutoCAD.Objects
         /// <returns></returns>
         public static MLeader ByPointBlock(Point point, acDynNodes.Block block, Vector draggedOffset)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "Multileader.ByPointsBlock"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "Multileader.ByPointsBlock"));
 
             acDynNodes.Document document = acDynNodes.Document.Current;
 
@@ -192,7 +192,7 @@ namespace Camber.AutoCAD.Objects
         /// <returns></returns>
         public static MLeader ByPointText(Point point, string text, Vector draggedOffset)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "Multileader.ByPointsText"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "Multileader.ByPointsText"));
 
             acDynNodes.Document document = acDynNodes.Document.Current;
 
@@ -261,7 +261,7 @@ namespace Camber.AutoCAD.Objects
         {
             get
             {
-                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Multileader.ContentType"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Multileader.ContentType"));
                 return GetString();
             }
         }
@@ -276,7 +276,7 @@ namespace Camber.AutoCAD.Objects
             "Autodesk.AutoCAD.DynamoNodes.Multileader.BlockAttributeValueByTag")]
         public string GetAttributeValueByTag(string tagName)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Multileader.BlockAttributeValueByTag"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Multileader.BlockAttributeValueByTag"));
 
             if (string.IsNullOrEmpty(tagName)) { throw new ArgumentNullException("tagName"); }
 
@@ -308,7 +308,7 @@ namespace Camber.AutoCAD.Objects
             "Autodesk.AutoCAD.DynamoNodes.Multileader.SetBlockAttributeValueByTag")]
         public MLeader SetAttributeValueByTag(string tagName, string value)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Multileader.SetBlockAttributeValueByTag"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Multileader.SetBlockAttributeValueByTag"));
 
             if (string.IsNullOrEmpty(tagName)) { throw new ArgumentNullException("tagName"); }
 
@@ -357,7 +357,7 @@ namespace Camber.AutoCAD.Objects
         {
             get
             {
-                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Multileader.ArrowheadLocations"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Multileader.ArrowheadLocations"));
 
                 var pnts = new List<Point>();
                 for (int i = 0; i < AcMLeader.LeaderLineCount; i++)
@@ -381,7 +381,7 @@ namespace Camber.AutoCAD.Objects
         {
             get
             {
-                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Multileader.OverallScale"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Multileader.OverallScale"));
                 return GetDouble();
             }
         }
@@ -396,7 +396,7 @@ namespace Camber.AutoCAD.Objects
         {
             get
             {
-                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Multileader.TextLocation"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Multileader.TextLocation"));
                 return GeometryConversions.AcPointToDynPoint(AcMLeader.TextLocation);
             }
         }
@@ -411,7 +411,7 @@ namespace Camber.AutoCAD.Objects
         {
             get
             {
-                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Multileader.LeaderCount"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Multileader.LeaderCount"));
                 return GetInt();
             }
         }

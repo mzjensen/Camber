@@ -157,7 +157,7 @@ namespace Camber.Civil.CivilObjects
         [NodeCategory("Query")]
         public static PolyCurve Geometry(this civDynNodes.Alignment alignment)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Alignment.PolyCurve"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Alignment.PolyCurve"));
             
             try
             {
@@ -188,7 +188,7 @@ namespace Camber.Civil.CivilObjects
             this civDynNodes.Alignment alignment,
             string labelSetStyleName)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "Alignment.ImportLabelSet"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "Alignment.ImportLabelSet"));
 
             if (string.IsNullOrEmpty(labelSetStyleName))
             {
@@ -223,7 +223,7 @@ namespace Camber.Civil.CivilObjects
         [NodeCategory("Query")]
         public static IList<ProfileView> ProfileViews(this civDynNodes.Alignment alignment)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Alignment.ProfileViews"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Alignment.ProfileViews"));
 
             List<ProfileView> profileViews = new List<ProfileView>();
             acDynNodes.Document document = acDynNodes.Document.Current;
@@ -258,7 +258,7 @@ namespace Camber.Civil.CivilObjects
         [NodeCategory("Query")]
         public static IList<SampleLineGroup> SampleLineGroups(this civDynNodes.Alignment alignment)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Alignment.SampleLineGroups"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Alignment.SampleLineGroups"));
 
             List<SampleLineGroup> slGroups = new List<SampleLineGroup>();
             acDynNodes.Document document = acDynNodes.Document.Current;
@@ -293,7 +293,7 @@ namespace Camber.Civil.CivilObjects
             "Autodesk.Civil.DynamoNodes.Alignment.SetReferencePointStation")]
         public static civDynNodes.Alignment SetStartStation(this civDynNodes.Alignment alignment, double startStation)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Alignment.SetReferencePointStation"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Alignment.SetReferencePointStation"));
 
             if (alignment == null)
             {

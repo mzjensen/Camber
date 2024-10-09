@@ -162,7 +162,7 @@ namespace Camber.Civil.CivilObjects
         /// <returns></returns>
         public static SampleLine ByStation(string name, SampleLineGroup sampleLineGroup, double station)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "SampleLine.ByStationSwathWidths"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "SampleLine.ByStationSwathWidths"));
 
             if (string.IsNullOrEmpty(name))
             {
@@ -220,7 +220,7 @@ namespace Camber.Civil.CivilObjects
         {
             get
             {
-                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Object.Geometry"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Object.Geometry"));
                 var dict = GetVertices();
                 return PolyCurve.ByPoints((List<Point>)dict["Points"]);
             }
@@ -236,7 +236,7 @@ namespace Camber.Civil.CivilObjects
         {
             get
             {
-                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "SampleLine.IsLockedToStation"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "SampleLine.IsLockedToStation"));
                 return GetBool();
             }
         }
@@ -251,7 +251,7 @@ namespace Camber.Civil.CivilObjects
         {
             get
             {
-                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "SampleLine.Number"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "SampleLine.Number"));
                 return GetInt();
             }
         }
@@ -266,7 +266,7 @@ namespace Camber.Civil.CivilObjects
         {
             get
             {
-                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "SampleLine.SampleLineGroup"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "SampleLine.SampleLineGroup"));
                 return SampleLineGroup.GetByObjectId(AeccSampleLine.GroupId);
             }
         }
@@ -281,7 +281,7 @@ namespace Camber.Civil.CivilObjects
         {
             get
             {
-                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "SampleLine.SectionViews"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "SampleLine.SectionViews"));
                 List<SectionView> sectViews = new List<SectionView>();
                 foreach (acDb.ObjectId oid in AeccSampleLine.GetSectionViewIds())
                 {
@@ -302,7 +302,7 @@ namespace Camber.Civil.CivilObjects
             "Autodesk.Civil.DynamoNodes.SampleLine.SetLockedToStation")]
         public SampleLine SetLockToStation(bool @bool)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "SampleLine.SetLockedToStation"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "SampleLine.SetLockedToStation"));
             SetValue(@bool);
             return this;
         }
@@ -317,7 +317,7 @@ namespace Camber.Civil.CivilObjects
             "Autodesk.Civil.DynamoNodes.SampleLine.SetStation")]
         public SampleLine SetStation(double station)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "SampleLine.SetStation"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "SampleLine.SetStation"));
             SetValue(station);
             return this;
         }
@@ -332,7 +332,7 @@ namespace Camber.Civil.CivilObjects
         {
             get
             {
-                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "SampleLine.Station"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "SampleLine.Station"));
                 return GetDouble();
             }
         }

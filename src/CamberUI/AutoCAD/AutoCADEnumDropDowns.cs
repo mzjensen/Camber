@@ -20,14 +20,14 @@ namespace Camber.UI
 
         public BlockUnitsDropDown() : base(OutputName, typeof(acDb.UnitsValue))
         {
-            this.Warning(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "Units"), true);
+            this.Info(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "Units"), true);
         }
 
         [JsonConstructor]
         public BlockUnitsDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts)
             : base(OutputName, typeof(acDb.UnitsValue), inPorts, outPorts)
         {
-            this.Warning(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "Units"), true);
+            this.Info(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "Units"), true);
         }
     }
 

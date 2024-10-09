@@ -146,7 +146,7 @@ namespace Camber.AutoCAD.Objects
         [NodeCategory("Query")]
         public static string TextStyle(this acDynNodes.MText mText)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "MText.TextStyle"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "MText.TextStyle"));
             return GetString(mText, "TextStyleName");
         }
 
@@ -161,7 +161,7 @@ namespace Camber.AutoCAD.Objects
             "Autodesk.AutoCAD.DynamoNodes.MText.SetTextStyle")]
         public static acDynNodes.MText SetTextStyle(this acDynNodes.MText mText, string textStyleName)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "MText.SetTextStyle"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "MText.SetTextStyle"));
 
             if (string.IsNullOrEmpty(textStyleName))
             {

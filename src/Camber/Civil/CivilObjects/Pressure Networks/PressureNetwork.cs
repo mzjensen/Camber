@@ -68,7 +68,7 @@ namespace Camber.Civil.PressureNetworks
         {
             get
             {
-                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PressureNetwork.Appurtenances"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PressureNetwork.Appurtenances"));
 
                 var appurtenances = new List<PressureAppurtenance>();
                 foreach (acDb.ObjectId oid in AeccPressureNetwork.GetAppurtenanceIds())
@@ -89,7 +89,7 @@ namespace Camber.Civil.PressureNetworks
             "Autodesk.Civil.DynamoNodes.PressureNetwork.ByName")]
         public static PressureNetwork ByName(string name)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PressureNetwork.ByName"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PressureNetwork.ByName"));
 
             if (string.IsNullOrEmpty(name))
             {
@@ -147,7 +147,7 @@ namespace Camber.Civil.PressureNetworks
         {
             get
             {
-                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PressureNetwork.PressurePipes"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PressureNetwork.PressurePipes"));
 
                 var pipes = new List<PressurePipe>();
                 foreach (acDb.ObjectId oid in AeccPressureNetwork.GetPipeIds())
@@ -168,7 +168,7 @@ namespace Camber.Civil.PressureNetworks
         {
             get
             {
-                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PressureNetwork.Fittings"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PressureNetwork.Fittings"));
 
                 var fittings = new List<PressureFitting>();
                 foreach (acDb.ObjectId oid in AeccPressureNetwork.GetFittingIds())
@@ -190,7 +190,7 @@ namespace Camber.Civil.PressureNetworks
             "Autodesk.Civil.DynamoNodes.PressureNetwork.GetPressureNetworks")]
         public static IList<PressureNetwork> GetPressureNetworks(acDynNodes.Document document, bool allowReference = false)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PressureNetwork.GetPressureNetworks"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "PressureNetwork.GetPressureNetworks"));
 
             if (document is null)
             {
@@ -237,7 +237,7 @@ namespace Camber.Civil.PressureNetworks
         [NodeCategory("Actions")]
         public static PressureNetwork GetPressureNetworkByName(acDynNodes.Document document, string name, bool allowReference = false)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "PressureNetwork.GetPressureNetworkByName"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "PressureNetwork.GetPressureNetworkByName"));
 
             if (document is null)
             {

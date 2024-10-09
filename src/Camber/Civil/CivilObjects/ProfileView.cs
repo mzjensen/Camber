@@ -104,7 +104,7 @@ namespace Camber.Civil.CivilObjects
         {
             get
             {
-                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "ProfileView.Alignment"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "ProfileView.Alignment"));
 
                 acDb.ObjectId alignmentId = AeccProfileView.AlignmentId;
                 AeccAlignment aeccAlignment = (AeccAlignment)alignmentId.GetObject(acDb.OpenMode.ForRead);
@@ -124,7 +124,7 @@ namespace Camber.Civil.CivilObjects
             "Autodesk.Civil.DynamoNodes.ProfileView.ByAlignment")]
         public static ProfileView ByPoint(civDynNodes.Alignment alignment, Point location)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "ProfileView.ByAlignment"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "ProfileView.ByAlignment"));
 
             acDynNodes.Document document = acDynNodes.Document.Current;
 
@@ -177,7 +177,7 @@ namespace Camber.Civil.CivilObjects
         {
             get
             {
-                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "ProfileView.MaxElevation"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "ProfileView.MaxElevation"));
                 return GetDouble("ElevationMax");
             }
         }
@@ -192,7 +192,7 @@ namespace Camber.Civil.CivilObjects
         {
             get
             {
-                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "ProfileView.MinElevation"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "ProfileView.MinElevation"));
                 return GetDouble("ElevationMin");
             }
         }
@@ -204,7 +204,7 @@ namespace Camber.Civil.CivilObjects
         {
             get
             {
-                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "ProfileView.IsElevationRangeAutomatic"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "ProfileView.IsElevationRangeAutomatic"));
                 return AeccProfileView.ElevationRangeMode.ToString();
             }
         }
@@ -219,7 +219,7 @@ namespace Camber.Civil.CivilObjects
         {
             get
             {
-                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Object.Location"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Object.Location"));
                 return GeometryConversions.AcPointToDynPoint(AeccProfileView.Location);
             }
         }
@@ -234,7 +234,7 @@ namespace Camber.Civil.CivilObjects
         {
             get
             {
-                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "ProfileView.EndStation"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "ProfileView.EndStation"));
                 return GetDouble("StationEnd");
             }
         }
@@ -249,7 +249,7 @@ namespace Camber.Civil.CivilObjects
         {
             get
             {
-                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "ProfileView.StartStation"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "ProfileView.StartStation"));
                 return GetDouble("StationStart");
             }
         }
@@ -261,7 +261,7 @@ namespace Camber.Civil.CivilObjects
         {
             get
             {
-                LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "ProfileView.IsStationRangeAutomatic"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "ProfileView.IsStationRangeAutomatic"));
                 return AeccProfileView.StationRangeMode.ToString();
             }
         }
@@ -273,7 +273,7 @@ namespace Camber.Civil.CivilObjects
         /// <returns></returns>
         public static IList<ProfileView> GetAllProfileViews(acDynNodes.Document document)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "All Objects of Type"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "All Objects of Type"));
 
             List<ProfileView> pViews = new List<ProfileView>();
 
@@ -314,7 +314,7 @@ namespace Camber.Civil.CivilObjects
             "Autodesk.Civil.DynamoNodes.ProfileView.PointAtStationElevation")]
         public static Point GetPointAtStationElevation(ProfileView profileView, double station, double elevation)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "ProfileView.PointAtStationElevation"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "ProfileView.PointAtStationElevation"));
 
             // Error checking
             if (profileView is null)
@@ -343,7 +343,7 @@ namespace Camber.Civil.CivilObjects
         [MultiReturn(new[] { "Station", "Elevation" })]
         public static Dictionary<string, object> GetStationElevationAtPoint(ProfileView profileView, Point point)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "ProfileView.StationElevationAtPoint"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "ProfileView.StationElevationAtPoint"));
 
             // Error checking
             if (profileView is null)
@@ -371,7 +371,7 @@ namespace Camber.Civil.CivilObjects
         /// <returns></returns>
         public ProfileView SetElevations(double minElevation, double maxElevation)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "ProfileView.SetMaxElevation or ProfileView.SetMinElevation"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "ProfileView.SetMaxElevation or ProfileView.SetMinElevation"));
 
             SetElevationRangeMode(false);
             SetValue(minElevation, "ElevationMin");
@@ -386,7 +386,7 @@ namespace Camber.Civil.CivilObjects
         /// <returns></returns>
         public ProfileView SetElevationRangeMode(bool modeToggle)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "ProfileView.SetElevationRangeAutomatic"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "ProfileView.SetElevationRangeAutomatic"));
 
             var mode = civDb.ElevationRangeType.Automatic;
             if (!modeToggle)
@@ -408,7 +408,7 @@ namespace Camber.Civil.CivilObjects
             "Autodesk.AutoCAD.DynamoNodes.Object.SetLocation")]
         public ProfileView SetLocation(Point point)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Object.SetLocation"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Object.SetLocation"));
 
             var acPoint = new acGeom.Point3d(point.X, point.Y, point.Z);
             SetValue(acPoint);
@@ -423,7 +423,7 @@ namespace Camber.Civil.CivilObjects
         /// <returns></returns>
         public ProfileView SetStations(double startStation, double endStation)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "ProfileView.SetStartStation or ProfileView.SetEndStation"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "ProfileView.SetStartStation or ProfileView.SetEndStation"));
 
             SetStationRangeMode(false);
             SetValue(startStation, "StationStart");
@@ -439,7 +439,7 @@ namespace Camber.Civil.CivilObjects
         /// <returns></returns>
         public ProfileView SetStationRangeMode(bool modeToggle)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "ProfileView.SetStationRangeAutomatic"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "ProfileView.SetStationRangeAutomatic"));
 
             var mode = civDb.StationRangeType.Automatic;
 

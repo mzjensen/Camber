@@ -365,7 +365,7 @@ namespace Camber.AutoCAD
         /// <returns></returns>
         public static object GetSystemVariable(this acDynNodes.Document document, string variableName)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "Document.SystemVariable"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "Document.SystemVariable"));
             return acApp.Application.GetSystemVariable(variableName);
         }
 
@@ -377,7 +377,7 @@ namespace Camber.AutoCAD
         [NodeCategory("Query")]
         public static bool IsNamedDrawing(this acDynNodes.Document document)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "Document.IsNew"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "Document.IsNew"));
             return document.AcDocument.IsNamedDrawing;
         }
 
@@ -392,7 +392,7 @@ namespace Camber.AutoCAD
         [NodeCategory("Query")]
         public static bool IsReadOnly(this acDynNodes.Document document)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Document.IsReadOnly"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Document.IsReadOnly"));
             return document.AcDocument.IsReadOnly;
         }
 
@@ -407,7 +407,7 @@ namespace Camber.AutoCAD
             "Autodesk.AutoCAD.DynamoNodes.Document.SetCoordinateReferenceSystem")]
         public static acDynNodes.Document SetCoordinateSystemCode(this acDynNodes.Document document, string code)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Document.SetCoordinateReferenceSystem"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Document.SetCoordinateReferenceSystem"));
 
             try
             {
@@ -436,7 +436,7 @@ namespace Camber.AutoCAD
             "Autodesk.Civil.DynamoNodes.CivilDocument.SetScale")]
         public static acDynNodes.Document SetDrawingScale(this acDynNodes.Document document, double scale)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "CivilDocument.SetScale"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "CivilDocument.SetScale"));
 
             try
             {
@@ -466,7 +466,7 @@ namespace Camber.AutoCAD
             "Autodesk.AutoCAD.DynamoNodes.Document.SetSystemVariable")]
         public static acDynNodes.Document SetSystemVariable(this acDynNodes.Document document, string variableName, object newValue)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Document.SetSystemVariable"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Document.SetSystemVariable"));
 
             // AutoCAD needs 16-bit integers, but from Dynamo they come as 64-bit.
             // Without this check, an eInvalidInput exception will be thrown when trying to set integer values.

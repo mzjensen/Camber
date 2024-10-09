@@ -269,7 +269,7 @@ namespace Camber.AutoCAD.Objects
         [NodeCategory("Query")]
         public static int ColorIndex(acDynNodes.Object @object)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "Object.Color"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MESSAGE, "Object.Color"));
 
             acDynNodes.Document document = acDynNodes.Document.Current;
             using (var ctx = new acDynApp.DocumentContext(document.AcDocument.Database))
@@ -291,7 +291,7 @@ namespace Camber.AutoCAD.Objects
             "Autodesk.AutoCAD.DynamoNodes.Object.SetColor")]
         public static acDynNodes.Object SetColor(acDynNodes.Object @object, int colorIndex)
         {
-            LogWarningMessageEvents.OnLogWarningMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Object.SetColor"));
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_DEPRECATED_MIGRATION_MESSAGE, "Object.SetColor"));
 
             acDynNodes.Document document = acDynNodes.Document.Current;
             try
