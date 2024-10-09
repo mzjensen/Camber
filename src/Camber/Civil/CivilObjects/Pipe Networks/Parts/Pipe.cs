@@ -173,7 +173,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         }
         #endregion
 
-        #region deprecated
+        #region obsolete
         /// <summary>
         /// Gets the bearing of a Pipe. For straight Pipes, the returned value is the horizontal bearing.
         /// For curved Pipes, the returned bearing is the chord bearing.

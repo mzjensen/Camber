@@ -254,7 +254,7 @@ namespace Camber.AutoCAD.Objects
         }
         #endregion
 
-        #region deprecated
+        #region obsolete
         /// <summary>
         /// Gets the elevation of a Polyline measured from the world XY plane.
         /// </summary>

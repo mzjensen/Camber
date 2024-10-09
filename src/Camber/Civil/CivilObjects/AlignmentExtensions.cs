@@ -145,7 +145,7 @@ namespace Camber.Civil.CivilObjects
         }
         #endregion
 
-        #region deprecated
+        #region obsolete
         /// <summary>
         /// Gets the Polycurve geometry of an Alignment. Note that spiral entities will be tessellated.
         /// </summary>

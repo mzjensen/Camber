@@ -152,7 +152,7 @@ namespace Camber.Civil.CivilObjects
         }
         #endregion
 
-        #region deprecated
+        #region obsolete
         /// <summary>
         /// Returns a Sample Line at the specified station. A new Sample Line will be created if it does not already exist.
         /// </summary>

@@ -359,7 +359,7 @@ namespace Camber.Civil.CivilObjects.Surfaces
         }
         #endregion
 
-        #region deprecated
+        #region obsolete
         /// <summary>
         /// Creates a new empty TIN Surface by name and style.
         /// </summary>

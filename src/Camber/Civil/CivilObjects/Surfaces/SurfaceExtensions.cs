@@ -495,7 +495,7 @@ namespace Camber.Civil.CivilObjects.Surfaces
             SlopeArrows
         }
 
-        #region deprecated
+        #region obsolete
         /// <summary>
         /// Gets whether a Surface is automatically rebuilt when its definition is changed.
         /// </summary>

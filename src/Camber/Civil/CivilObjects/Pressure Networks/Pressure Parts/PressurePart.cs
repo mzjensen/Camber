@@ -77,7 +77,7 @@ namespace Camber.Civil.PressureNetworks.Parts
         }
         #endregion
 
-        #region deprecated
+        #region obsolete
         /// <summary>
         /// Adds the Pressure Part to the specified Profile View.
         /// </summary>

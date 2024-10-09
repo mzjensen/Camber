@@ -126,7 +126,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         }
         #endregion
 
-        #region deprecated
+        #region obsolete
         /// <summary>
         /// Adds the Part to the specified Profile View.
         /// </summary>

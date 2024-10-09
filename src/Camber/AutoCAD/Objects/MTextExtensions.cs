@@ -134,7 +134,7 @@ namespace Camber.AutoCAD.Objects
         }
         #endregion
 
-        #region deprecated
+        #region obsolete
         /// <summary>
         /// Gets the name of the text style assigned to an MText.
         /// </summary>

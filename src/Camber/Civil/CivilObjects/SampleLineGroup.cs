@@ -73,7 +73,7 @@ namespace Camber.Civil.CivilObjects
         }
         #endregion
 
-        #region deprecated
+        #region obsolete
         /// <summary>
         /// Gets the parent Alignment of a Sample Line Group.
         /// </summary>

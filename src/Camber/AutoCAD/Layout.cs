@@ -309,7 +309,7 @@ namespace Camber.AutoCAD
         }
         #endregion
 
-        #region deprecated
+        #region obsolete
         /// <summary>
         /// Gets the Block associated with a Layout.
         /// </summary>

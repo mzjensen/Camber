@@ -255,7 +255,7 @@ namespace Camber.AutoCAD.Objects
         }
         #endregion
 
-        #region deprecated
+        #region obsolete
         /// <summary>
         /// Sets the name of a Block.
         /// </summary>

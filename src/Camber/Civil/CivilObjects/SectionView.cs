@@ -37,7 +37,7 @@ namespace Camber.Civil.CivilObjects
         public override string ToString() => $"SectionView(Name = {Name})";
         #endregion
 
-        #region deprecated
+        #region obsolete
         public static SectionView ByPoint(string name, SampleLine sampleLine, Point location)
         {
             LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MESSAGE, "SectionView.BySampleLine"));

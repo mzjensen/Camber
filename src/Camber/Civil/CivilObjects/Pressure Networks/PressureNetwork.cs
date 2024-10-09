@@ -57,7 +57,7 @@ namespace Camber.Civil.PressureNetworks
         public override string ToString() => $"PressureNetwork(Name = {Name})";
         #endregion
 
-        #region deprecated
+        #region obsolete
         /// <summary>
         /// Gets the collection of Pressure Appurtenances that belong to the Pressure Network.
         /// </summary>

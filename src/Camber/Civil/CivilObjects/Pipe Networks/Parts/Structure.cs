@@ -128,7 +128,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         }
         #endregion
 
-        #region deprecated
+        #region obsolete
         /// <summary>
         /// Gets whether a Structure's rim elevation should be automatically adjusted when the reference Surface changes.
         /// </summary>

@@ -71,7 +71,7 @@ namespace Camber.AutoCAD.Objects
         }
         #endregion
 
-        #region deprecated
+        #region obsolete
         /// <summary>
         /// Gets info about the color assigned to a Layer.
         /// </summary>

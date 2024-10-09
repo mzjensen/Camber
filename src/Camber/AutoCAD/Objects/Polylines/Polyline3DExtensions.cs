@@ -249,7 +249,7 @@ namespace Camber.AutoCAD.Objects
         }
         #endregion
 
-        #region deprecated
+        #region obsolete
         /// <summary>
         /// Gets whether a 3D Polyline is closed or not.
         /// </summary>

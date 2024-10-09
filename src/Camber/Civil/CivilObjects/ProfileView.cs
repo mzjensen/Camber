@@ -93,7 +93,7 @@ namespace Camber.Civil.CivilObjects
         }
         #endregion
 
-        #region deprecated
+        #region obsolete
         /// <summary>
         /// Gets the parent Alignment for the Profile View.
         /// </summary>

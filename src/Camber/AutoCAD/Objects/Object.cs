@@ -260,7 +260,7 @@ namespace Camber.AutoCAD.Objects
         #endregion
         #endregion
 
-        #region deprecated
+        #region obsolete
         /// <summary>
         /// Gets the color index assigned to an Object.
         /// </summary>

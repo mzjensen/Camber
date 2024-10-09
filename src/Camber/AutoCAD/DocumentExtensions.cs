@@ -356,7 +356,7 @@ namespace Camber.AutoCAD
         }
         #endregion
 
-        #region deprecated
+        #region obsolete
         /// <summary>
         /// Gets the value of a system variable.
         /// </summary>

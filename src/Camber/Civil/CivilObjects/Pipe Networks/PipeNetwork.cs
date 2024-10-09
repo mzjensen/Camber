@@ -112,7 +112,7 @@ namespace Camber.Civil.PipeNetworks
         public override string ToString() => $"PipeNetwork(Name = {Name})";
         #endregion
 
-        #region deprecated
+        #region obsolete
         /// <summary>
         /// Creates a Pipe Network by name.
         /// </summary>

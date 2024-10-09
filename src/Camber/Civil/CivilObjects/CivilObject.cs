@@ -392,7 +392,7 @@ namespace Camber.Civil.CivilObjects
         }
         #endregion
 
-        #region deprecated
+        #region obsolete
         /// <summary>
         /// Gets reference information for a Civil Object whose source is a Data Shortcut.
         /// </summary>

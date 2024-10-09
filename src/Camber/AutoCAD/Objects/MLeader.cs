@@ -81,7 +81,7 @@ namespace Camber.AutoCAD.Objects
         public override string ToString() => $"MLeader(ContentType = {ContentType})";
         #endregion
 
-        #region deprecated
+        #region obsolete
         /// <summary>
         /// Gets the Block object of MLeader Block content.
         /// </summary>
