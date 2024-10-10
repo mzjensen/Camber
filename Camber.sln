@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Runner", "src\Runner\Runner
 		{23BBAB73-5A3B-4EE8-A757-A1F37C67AB1F} = {23BBAB73-5A3B-4EE8-A757-A1F37C67AB1F}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CamberMigrationAssistant", "src\CamberMigrationAssistant\CamberMigrationAssistant.csproj", "{F7AD729D-99B2-4E47-9504-6B8E719F18C4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{40538D09-C695-48EE-890C-0DDFCCB362D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40538D09-C695-48EE-890C-0DDFCCB362D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40538D09-C695-48EE-890C-0DDFCCB362D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7AD729D-99B2-4E47-9504-6B8E719F18C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7AD729D-99B2-4E47-9504-6B8E719F18C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7AD729D-99B2-4E47-9504-6B8E719F18C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7AD729D-99B2-4E47-9504-6B8E719F18C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
