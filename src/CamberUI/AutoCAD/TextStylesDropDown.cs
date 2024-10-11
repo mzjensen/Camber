@@ -16,9 +16,6 @@ namespace Camber.UI
     [NodeCategory("Camber.AutoCAD.Objects")]
     [NodeDescription("Select text style.")]
     [IsDesignScriptCompatible]
-    [NodeMigrationMapping(
-        "Camber.UI.TextStylesDropDown",
-        "Autodesk.AutoCAD.DynamoNodes.ListTextStyle ")]
     public class TextStylesDropDown : DSDropDownBase
     {
         #region fields

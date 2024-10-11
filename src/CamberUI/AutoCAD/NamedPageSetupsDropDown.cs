@@ -17,9 +17,6 @@ namespace Camber.UI
     [NodeCategory("Camber.AutoCAD.Layout")]
     [NodeDescription("Select named page setup.")]
     [IsDesignScriptCompatible]
-    [NodeMigrationMapping(
-        "Camber.UI.NamedPageSetupsDropDown",
-        "Autodesk.AutoCAD.DynamoNodes.ListNamedPageSetup")]
     public class NamedPageSetupsDropDown : DSDropDownBase
     {
         #region fields
