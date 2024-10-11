@@ -151,7 +151,7 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// </summary>
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Part.ApplyRules",
-            "Autodesk.Civil.DynamoNodes.Part.AddToProfileView")]
+            "Autodesk.Civil.DynamoNodes.Part.ApplyRules")]
         public Part ApplyRules()
         {
             LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Part.ApplyRules"));
@@ -330,12 +330,12 @@ namespace Camber.Civil.PipeNetworks.Parts
         /// </summary>
         [NodeMigrationMapping(
             "Camber.Civil.PipeNetworks.Parts.Part.SectionsViewsDisplayedIn",
-            "Autodesk.Civil.DynamoNodes.Part.SectionsViewsDisplayedIn")]
+            "Autodesk.Civil.DynamoNodes.Part.SectionViewsDisplayedIn")]
         public IList<SectionView> SectionsViewsDisplayedIn
         {
             get
             {
-                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Part.SectionsViewsDisplayedIn"));
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Part.SectionViewsDisplayedIn"));
 
                 var views = new List<SectionView>();
                 acDb.ObjectIdCollection viewIds = AeccPart.GetSectionViewsDisplayingMe();
