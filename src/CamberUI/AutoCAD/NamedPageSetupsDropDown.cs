@@ -29,7 +29,7 @@ namespace Camber.UI
         /// </summary>
         public NamedPageSetupsDropDown() : base(_outputName)
         {
-            this.Info(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Choose Named Page Setup"), true);
+            this.Info(string.Format(Resources.NODE_OBSOLETE_MESSAGE, "Choose Named Page Setup"), true);
             PopulateDropDownItems();
         }
 
@@ -42,7 +42,7 @@ namespace Camber.UI
         public NamedPageSetupsDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts) 
             : base(_outputName, inPorts, outPorts)
         {
-            this.Info(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Choose Named Page Setup"), true);
+            this.Info(string.Format(Resources.NODE_OBSOLETE_MESSAGE, "Choose Named Page Setup"), true);
             PopulateDropDownItems();
         }
         #endregion

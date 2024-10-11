@@ -28,7 +28,7 @@ namespace Camber.UI
         /// </summary>
         public TextStylesDropDown() : base(_outputName)
         {
-            this.Info(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Choose Text Style"), true);
+            this.Info(string.Format(Resources.NODE_OBSOLETE_MESSAGE, "Choose Text Style"), true);
             PopulateDropDownItems();
         }
 
@@ -41,7 +41,7 @@ namespace Camber.UI
         public TextStylesDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts) 
             : base(_outputName, inPorts, outPorts)
         {
-            this.Info(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Choose Text Style"), true);
+            this.Info(string.Format(Resources.NODE_OBSOLETE_MESSAGE, "Choose Text Style"), true);
             PopulateDropDownItems();
         }
         #endregion
