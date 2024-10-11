@@ -7,13 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Camber", "src\Camber\Camber
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CamberUI", "src\CamberUI\CamberUI.csproj", "{1BC882EB-92D5-43DE-BB73-C910DCC78729}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Runner", "src\Runner\Runner.csproj", "{40538D09-C695-48EE-890C-0DDFCCB362D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Builder", "src\Builder\Builder.csproj", "{40538D09-C695-48EE-890C-0DDFCCB362D9}"
 	ProjectSection(ProjectDependencies) = postProject
 		{1BC882EB-92D5-43DE-BB73-C910DCC78729} = {1BC882EB-92D5-43DE-BB73-C910DCC78729}
 		{23BBAB73-5A3B-4EE8-A757-A1F37C67AB1F} = {23BBAB73-5A3B-4EE8-A757-A1F37C67AB1F}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CamberMigrationAssistant", "src\CamberMigrationAssistant\CamberMigrationAssistant.csproj", "{F7AD729D-99B2-4E47-9504-6B8E719F18C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CamberMigrationAssistant", "src\CamberMigrationAssistant\CamberMigrationAssistant.csproj", "{F7AD729D-99B2-4E47-9504-6B8E719F18C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
