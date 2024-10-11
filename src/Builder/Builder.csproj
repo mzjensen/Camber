@@ -5,7 +5,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-		<BaseOutputPath>..\..\build</BaseOutputPath>
+		<BaseOutputPath>bin\</BaseOutputPath>
 		<OutputType>Library</OutputType>
 		<!-- Don't build DLL -->
 		<SkipCopyBuildProduct>true</SkipCopyBuildProduct>
