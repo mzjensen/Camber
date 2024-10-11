@@ -11,6 +11,9 @@
 	<AssemblyName>$(MSBuildProjectName)</AssemblyName>
 	<RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
 	<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+	<Copyright>Copyright © 2024</Copyright>
+	<Product>Camber</Product>
+	<Description>Migration assistant for Camber nodes.</Description>
   </PropertyGroup>
 
   <ItemGroup>
