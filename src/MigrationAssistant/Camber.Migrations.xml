@@ -410,7 +410,7 @@
   </priorNameHint>
   <priorNameHint>
     <oldName>Camber.Civil.PipeNetworks.Parts.Part.ApplyRules</oldName>
-    <newName>Autodesk.Civil.DynamoNodes.Part.AddToProfileView</newName>
+    <newName>Autodesk.Civil.DynamoNodes.Part.ApplyRules</newName>
   </priorNameHint>
   <priorNameHint>
     <oldName>Camber.Civil.PipeNetworks.Parts.Part.Domain</oldName>
@@ -450,7 +450,7 @@
   </priorNameHint>
   <priorNameHint>
     <oldName>Camber.Civil.PipeNetworks.Parts.Part.SectionsViewsDisplayedIn</oldName>
-    <newName>Autodesk.Civil.DynamoNodes.Part.SectionsViewsDisplayedIn</newName>
+    <newName>Autodesk.Civil.DynamoNodes.Part.SectionViewsDisplayedIn</newName>
   </priorNameHint>
   <priorNameHint>
     <oldName>Camber.Civil.PipeNetworks.Parts.Part.SetReferenceAlignment</oldName>
