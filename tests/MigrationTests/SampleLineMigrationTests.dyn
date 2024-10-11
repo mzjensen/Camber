@@ -1,0 +1,845 @@
+{
+  "Uuid": "c10413f3-2807-411a-80f2-483455ac80bb",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "SampleLineMigrationTests",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "4a2ad8d7db4f484fbc86fd263d10eafa",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "d1907afeb53f4566a09f252506b025f3",
+          "Name": "name",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "b426d9b2e0644f44abb0dc3f38215a35",
+          "Name": "sampleLineGroup",
+          "Description": "SampleLineGroup",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "49071c8b4a2b47dabaec0aae7eae1666",
+          "Name": "station",
+          "Description": "double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "a47fc7ab81b843c29ba76c8cf05c886c",
+          "Name": "SampleLine",
+          "Description": "SampleLine",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.SampleLine.ByStation@string,Camber.Civil.CivilObjects.SampleLineGroup,double",
+      "Replication": "Auto",
+      "Description": "Returns a Sample Line at the specified station. A new Sample Line will be created if it does not already exist.\n\nSampleLine.ByStation (name: string, sampleLineGroup: SampleLineGroup, station: double): SampleLine"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "23d0709817c944b9be8df8bb1aa4ea78",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "b23238402be6433e85e4c561c0103384",
+          "Name": "alignment",
+          "Description": "Alignment",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "47063183018a4fe7ae0bf746904ee162",
+          "Name": "groupName",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "05f47d7cb0a24a17b25a010f70f501e0",
+          "Name": "SampleLineGroup",
+          "Description": "SampleLineGroup",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.SampleLineGroup.ByAlignment@Autodesk.Civil.DynamoNodes.Alignment,string",
+      "Replication": "Auto",
+      "Description": "Returns a Sample Line Group by name. A new Sample Line Group will be created if it does not already exist.\n\nSampleLineGroup.ByAlignment (alignment: Alignment, groupName: string): SampleLineGroup"
+    },
+    {
+      "ConcreteType": "Autodesk.AutoCAD.DynamoNodes.AcObjectsOfType, AutoCADNodesUI",
+      "Id": "d458a628cc204506be3d3e160ae6d0f1",
+      "NodeType": "ExtensionNode",
+      "Inputs": [
+        {
+          "Id": "2aa9479225d64b06874e0e5cd4147091",
+          "Name": "type",
+          "Description": "",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "ed945b0565f1441f97f26de5c863745a",
+          "Name": "block",
+          "Description": "",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "e5291d767f234fa185618314f796a972",
+          "Name": "Object[]",
+          "Description": "Object[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Select all objects of the type."
+    },
+    {
+      "ConcreteType": "Autodesk.AutoCAD.DynamoNodes.AcObjectTypes, AutoCADNodesUI",
+      "SelectedIndex": 0,
+      "SelectedString": "Alignment",
+      "Id": "03bba0d5e52d4dd78be87377ee82d7f5",
+      "NodeType": "ExtensionNode",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "3ac12973460540868d2a1a3f1ee42e63",
+          "Name": "Object Type",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Select object type."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "5f62ef42bceb4af88a072f162510577d",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "6f7fd1a01a294f6bb0ac303c701eea11",
+          "Name": "document",
+          "Description": "Autodesk.AutoCAD.DynamoNodes.Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "4569d970b2d64c1c9352048c89be710b",
+          "Name": "Block",
+          "Description": "Block",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Document.ModelSpace",
+      "Replication": "Auto",
+      "Description": "Get the model space block table record.\n\nDocument.ModelSpace: Block"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "d0e14540c40f463da2c0a1c05d558840",
+      "NodeType": "FunctionNode",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "fe1f43e85d1b498289b0f97065abf30b",
+          "Name": "Document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Document.Current",
+      "Replication": "Auto",
+      "Description": "Get the current AutoCAD document.\n\nDocument.Current: Document"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "Id": "ca9981d9e05e45759c51389db95d31ae",
+      "NodeType": "StringInputNode",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "4670dc6982424936a5ce588ad3b2adbc",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string",
+      "InputValue": "Test"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.DoubleInput, CoreNodeModels",
+      "NumberType": "Double",
+      "Id": "661d9d18c54a4ba19c0e2da942605d5e",
+      "NodeType": "NumberInputNode",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "4a3032bb933347dea87c732b4cb3ab08",
+          "Name": "",
+          "Description": "Double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a number",
+      "InputValue": 0.0
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "a7b943961c5a48d99107dbb0bfb87fe2",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "f79bdf3c4e5748f7af2cbdeb5e738308",
+          "Name": "sampleLine",
+          "Description": "Camber.Civil.CivilObjects.SampleLine",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "c31c4ac8cc8e4caaa98c3185d0637994",
+          "Name": "bool",
+          "Description": "bool",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "655eabd8fbaf481cbcec00542c8e9b0a",
+          "Name": "SampleLine",
+          "Description": "SampleLine",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.SampleLine.SetLockToStation@bool",
+      "Replication": "Auto",
+      "Description": "Sets the boolean value which specifies whether the Sample Line is locked to a station.\n\nSampleLine.SetLockToStation (bool: bool): SampleLine"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "028411587aae40028b4392e0c4003e22",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "3688431050fe4b39a29bc150081e9f02",
+          "Name": "sampleLine",
+          "Description": "Camber.Civil.CivilObjects.SampleLine",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "a26279f3df1f457f9a1658299b741240",
+          "Name": "station",
+          "Description": "double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "8c8e0b545f984fb184ce197978d0b9af",
+          "Name": "SampleLine",
+          "Description": "SampleLine",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.SampleLine.SetStation@double",
+      "Replication": "Auto",
+      "Description": "Sets the station of the Sample Line.\n\nSampleLine.SetStation (station: double): SampleLine"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "3ccb9e572fa547ae80ea51114d3e9658",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "d03b42a996c646c99fabd447d297b2cb",
+          "Name": "sampleLine",
+          "Description": "Camber.Civil.CivilObjects.SampleLine",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "7e0147b2b5544d219df9f328766cfc49",
+          "Name": "PolyCurve",
+          "Description": "PolyCurve",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.SampleLine.Geometry",
+      "Replication": "Auto",
+      "Description": "Gets the PolyCurve representation of the Sample Line.\n\nSampleLine.Geometry: PolyCurve"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "00c1a68774f64a72b0f488cda6b5f303",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "37631a5ebae345cab4ab4d7eaedb37d4",
+          "Name": "sampleLine",
+          "Description": "Camber.Civil.CivilObjects.SampleLine",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "2548be442bed4b6dbdfaf0daa31f717e",
+          "Name": "bool",
+          "Description": "bool",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.SampleLine.LockToStation",
+      "Replication": "Auto",
+      "Description": "Gets the boolean value which specifies whether the Sample Line is locked to a station.\n\nSampleLine.LockToStation: bool"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "0b370f8f489a4e648e8d18dbc6a43755",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "aef1d33b4514433193fe704cc86e9d00",
+          "Name": "sampleLine",
+          "Description": "Camber.Civil.CivilObjects.SampleLine",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "40538bfbce8b4bd4a1de6d48fc453f8a",
+          "Name": "int",
+          "Description": "int",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.SampleLine.Number",
+      "Replication": "Auto",
+      "Description": "Gets the number assigned to the Sample Line.\n\nSampleLine.Number: int"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "6ba947d7e06447c9bc8db47ab944c72b",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "8a2cb22d745844919a1e85a422248ccb",
+          "Name": "sampleLine",
+          "Description": "Camber.Civil.CivilObjects.SampleLine",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "3f12ff00af1745c2904061b5f6863cc4",
+          "Name": "SampleLineGroup",
+          "Description": "SampleLineGroup",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.SampleLine.SampleLineGroup",
+      "Replication": "Auto",
+      "Description": "Gets the Sample Line Group to which the Sample Line belongs.\n\nSampleLine.SampleLineGroup: SampleLineGroup"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "9aaa03b934d84ff7aadc76c1d55c4801",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "f8bb1325a050465fb8c335906e5aa6bd",
+          "Name": "sampleLine",
+          "Description": "Camber.Civil.CivilObjects.SampleLine",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "44d4f891c0e74d759ae287eb6c334055",
+          "Name": "SectionView[]",
+          "Description": "SectionView[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.SampleLine.SectionViews",
+      "Replication": "Auto",
+      "Description": "Gets the Section Views associated with a Sample Line.\n\nSampleLine.SectionViews: SectionView[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "ff4f91fc75ad40809b49ae14744dc387",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "04d42f2453e24c2c912756508b7328a9",
+          "Name": "sampleLine",
+          "Description": "Camber.Civil.CivilObjects.SampleLine",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "dc9aee0df5c6498c9d5e8c2be0ae0be3",
+          "Name": "double",
+          "Description": "double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.SampleLine.Station",
+      "Replication": "Auto",
+      "Description": "Gets the station of the Sample Line.\n\nSampleLine.Station: double"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "a47fc7ab81b843c29ba76c8cf05c886c",
+      "End": "d03b42a996c646c99fabd447d297b2cb",
+      "Id": "5c60699e3f0f43b28a736d26d9031a00",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "a47fc7ab81b843c29ba76c8cf05c886c",
+      "End": "04d42f2453e24c2c912756508b7328a9",
+      "Id": "9ebb0d6245c54005a588118dceb6920b",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "a47fc7ab81b843c29ba76c8cf05c886c",
+      "End": "37631a5ebae345cab4ab4d7eaedb37d4",
+      "Id": "279aaccf8fc64bdd9c71c0d8abb950ff",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "a47fc7ab81b843c29ba76c8cf05c886c",
+      "End": "aef1d33b4514433193fe704cc86e9d00",
+      "Id": "7abb17b5430c43179e91d963ca49cc04",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "a47fc7ab81b843c29ba76c8cf05c886c",
+      "End": "f8bb1325a050465fb8c335906e5aa6bd",
+      "Id": "93acc3d5ee0c4e46a8e12bd8a9a62e69",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "a47fc7ab81b843c29ba76c8cf05c886c",
+      "End": "f79bdf3c4e5748f7af2cbdeb5e738308",
+      "Id": "9e2c2178e59a4da1ae37c48566ed5bba",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "a47fc7ab81b843c29ba76c8cf05c886c",
+      "End": "8a2cb22d745844919a1e85a422248ccb",
+      "Id": "4c0b700287814b03a2bac19f9141b7b5",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "a47fc7ab81b843c29ba76c8cf05c886c",
+      "End": "3688431050fe4b39a29bc150081e9f02",
+      "Id": "36c60a02a3ee48d29d82b688ef0b7bd4",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "05f47d7cb0a24a17b25a010f70f501e0",
+      "End": "b426d9b2e0644f44abb0dc3f38215a35",
+      "Id": "6423bdf9f03a4af69196c0b1c7669fb9",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "e5291d767f234fa185618314f796a972",
+      "End": "b23238402be6433e85e4c561c0103384",
+      "Id": "3d38c19df13548c6a3054a39c92f22f6",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "3ac12973460540868d2a1a3f1ee42e63",
+      "End": "2aa9479225d64b06874e0e5cd4147091",
+      "Id": "1a957ccd8130467dac688a0a092f59c8",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "4569d970b2d64c1c9352048c89be710b",
+      "End": "ed945b0565f1441f97f26de5c863745a",
+      "Id": "901fae5edcdd4979b08d9886a3a61b3b",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "fe1f43e85d1b498289b0f97065abf30b",
+      "End": "6f7fd1a01a294f6bb0ac303c701eea11",
+      "Id": "ce6b9c3bc9204ed3b1ae6e4804a8e02d",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "4670dc6982424936a5ce588ad3b2adbc",
+      "End": "47063183018a4fe7ae0bf746904ee162",
+      "Id": "1d7a98ea125d4071b5f82aa5ca635d07",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "4670dc6982424936a5ce588ad3b2adbc",
+      "End": "d1907afeb53f4566a09f252506b025f3",
+      "Id": "2eca3c8192d7485fa24fc2c2602bf6b2",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "4a3032bb933347dea87c732b4cb3ab08",
+      "End": "49071c8b4a2b47dabaec0aae7eae1666",
+      "Id": "4ead6b4df95647598f811eb906892e55",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "2548be442bed4b6dbdfaf0daa31f717e",
+      "End": "c31c4ac8cc8e4caaa98c3185d0637994",
+      "Id": "b376ffb7d14e4bc8955f043bd5fc8c4b",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "dc9aee0df5c6498c9d5e8c2be0ae0be3",
+      "End": "a26279f3df1f457f9a1658299b741240",
+      "Id": "61721d7cc41f4eba80b7b97b43752fd5",
+      "IsHidden": "False"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Camber",
+      "Version": "4.2.6",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "4a2ad8d7db4f484fbc86fd263d10eafa",
+        "23d0709817c944b9be8df8bb1aa4ea78",
+        "a7b943961c5a48d99107dbb0bfb87fe2",
+        "028411587aae40028b4392e0c4003e22",
+        "3ccb9e572fa547ae80ea51114d3e9658",
+        "00c1a68774f64a72b0f488cda6b5f303",
+        "0b370f8f489a4e648e8d18dbc6a43755",
+        "6ba947d7e06447c9bc8db47ab944c72b",
+        "9aaa03b934d84ff7aadc76c1d55c4801",
+        "ff4f91fc75ad40809b49ae14744dc387"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.19",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.19.4.6671",
+      "RunType": "Automatic",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "_Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "ConnectorPins": [],
+    "NodeViews": [
+      {
+        "Id": "4a2ad8d7db4f484fbc86fd263d10eafa",
+        "Name": "SampleLine.ByStation",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 576.22351080684712,
+        "Y": 909.27592717302923
+      },
+      {
+        "Id": "23d0709817c944b9be8df8bb1aa4ea78",
+        "Name": "SampleLineGroup.ByAlignment",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 171.22351080684712,
+        "Y": 871.27592717302923
+      },
+      {
+        "Id": "d458a628cc204506be3d3e160ae6d0f1",
+        "Name": "All Objects of Type",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": -140.77648919315288,
+        "Y": 800.27592717302923
+      },
+      {
+        "Id": "03bba0d5e52d4dd78be87377ee82d7f5",
+        "Name": "Objects Types",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": -491.77648919315288,
+        "Y": 743.27592717302923
+      },
+      {
+        "Id": "5f62ef42bceb4af88a072f162510577d",
+        "Name": "Document.ModelSpace",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": -491.77648919315288,
+        "Y": 891.27592717302923
+      },
+      {
+        "Id": "d0e14540c40f463da2c0a1c05d558840",
+        "Name": "Document.Current",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": -800.77648919315288,
+        "Y": 891.27592717302923
+      },
+      {
+        "Id": "ca9981d9e05e45759c51389db95d31ae",
+        "Name": "String",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": -140.77648919315288,
+        "Y": 978.27592717302923
+      },
+      {
+        "Id": "661d9d18c54a4ba19c0e2da942605d5e",
+        "Name": "Number",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 171.22351080684712,
+        "Y": 1049.2759271730292
+      },
+      {
+        "Id": "a7b943961c5a48d99107dbb0bfb87fe2",
+        "Name": "SampleLine.SetLockToStation",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1341.2235108068471,
+        "Y": 892.275927173029
+      },
+      {
+        "Id": "028411587aae40028b4392e0c4003e22",
+        "Name": "SampleLine.SetStation",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1341.2235108068471,
+        "Y": 1216.275927173029
+      },
+      {
+        "Id": "3ccb9e572fa547ae80ea51114d3e9658",
+        "Name": "SampleLine.Geometry",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1341.2235108068471,
+        "Y": 450.27592717302906
+      },
+      {
+        "Id": "00c1a68774f64a72b0f488cda6b5f303",
+        "Name": "SampleLine.LockToStation",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 972.22351080684712,
+        "Y": 926.27592717302923
+      },
+      {
+        "Id": "0b370f8f489a4e648e8d18dbc6a43755",
+        "Name": "SampleLine.Number",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1341.2235108068471,
+        "Y": 597.275927173029
+      },
+      {
+        "Id": "6ba947d7e06447c9bc8db47ab944c72b",
+        "Name": "SampleLine.SampleLineGroup",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1341.2235108068471,
+        "Y": 1069.275927173029
+      },
+      {
+        "Id": "9aaa03b934d84ff7aadc76c1d55c4801",
+        "Name": "SampleLine.SectionViews",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1341.2235108068471,
+        "Y": 744.275927173029
+      },
+      {
+        "Id": "ff4f91fc75ad40809b49ae14744dc387",
+        "Name": "SampleLine.Station",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 972.22351080684712,
+        "Y": 1250.2759271730292
+      }
+    ],
+    "Annotations": [],
+    "X": 403.95835227183318,
+    "Y": -59.39351416567456,
+    "Zoom": 0.46699466994669947
+  }
+}

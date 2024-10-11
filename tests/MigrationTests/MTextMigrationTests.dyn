@@ -1,0 +1,634 @@
+{
+  "Uuid": "a0ebb5c7-0863-4635-b5fd-938303c121ac",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "MTextMigrationTests",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "849509ab3aed4acfb47ee527196a4939",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "3ddfd570759b41c9bbde17d70d699dfa",
+          "Name": "text",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "af6baa50e92842aa9e65d26e8f011999",
+          "Name": "insertionPoint",
+          "Description": "Point",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "40406e6b29a34132b9052d1b59861bbf",
+          "Name": "columns",
+          "Description": "int\nDefault value : 1",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "ad4a5d9e3e8849e59134d62df76f58cf",
+          "Name": "width",
+          "Description": "double\nDefault value : 0.2",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "acace251d8394b6f8b34ace79d0b823e",
+          "Name": "height",
+          "Description": "double\nDefault value : 0",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "1eaff7ec80ac42878c9224f9add7096f",
+          "Name": "columnGutterWidth",
+          "Description": "double\nDefault value : 0",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "f7459ddb949746ec9699f3f946e2b849",
+          "Name": "horizontalAttachment",
+          "Description": "string\nDefault value : \"Left\"",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "a1c4047964d54eda9ae2dece7de6e31f",
+          "Name": "verticalAttachment",
+          "Description": "string\nDefault value : \"Top\"",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "fa482c15c402436e935e6459656f9cca",
+          "Name": "layer",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "8d2aa23f2407400f8481b3cfb0ca2b35",
+          "Name": "block",
+          "Description": "Block",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "ff9d81e023504be599826e2f96b66bd1",
+          "Name": "MText",
+          "Description": "MText",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.MText.Create@string,Autodesk.DesignScript.Geometry.Point,int,double,double,double,string,string,string,Autodesk.AutoCAD.DynamoNodes.Block",
+      "Replication": "Auto",
+      "Description": "Create AutoCAD MText from a string of text.\n\nMText.Create (text: string, insertionPoint: Point, columns: int = 1, width: double = 0.2, height: double = 0, columnGutterWidth: double = 0, horizontalAttachment: string = \"Left\", verticalAttachment: string = \"Top\", layer: string, block: Block): MText"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "Id": "c9c2dab23d0b43ec9aca0e99e839a720",
+      "NodeType": "StringInputNode",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "7a6ab4e3785b418e88b8ff32c02db6e2",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string",
+      "InputValue": "Test"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "b482761c5edf4b33b6cdc2a838e64754",
+      "NodeType": "FunctionNode",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "7127ce61b5834fb4a744a6fa3743d27a",
+          "Name": "Point",
+          "Description": "Origin point",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Autodesk.DesignScript.Geometry.Point.Origin",
+      "Replication": "Auto",
+      "Description": "Get the Origin point (0,0,0)\n\nPoint.Origin ( ): Point"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "a80f31def85540a3a0214880f41b559d",
+      "NodeType": "FunctionNode",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "093b06a417f44495a07877cd86bf9aa3",
+          "Name": "Document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Document.Current",
+      "Replication": "Auto",
+      "Description": "Get the current AutoCAD document.\n\nDocument.Current: Document"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "f104496f15344f6c8b31aa0e6f9f48a0",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "e59cef13879a4ff192c65fa4470ebb1d",
+          "Name": "document",
+          "Description": "Autodesk.AutoCAD.DynamoNodes.Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "2f09e6032b1b44478fbcf447cc8b9bdd",
+          "Name": "string",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Document.CurrentLayer",
+      "Replication": "Auto",
+      "Description": "Get the current layer of the current document.\n\nDocument.CurrentLayer: string"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "6acc7e9edbca450c9373d9bbcce48c41",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "7c92cbf227cc4fcb98be7901a7e52c37",
+          "Name": "document",
+          "Description": "Autodesk.AutoCAD.DynamoNodes.Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "dd44617fdc44438ca45b9c58f403b3d0",
+          "Name": "Block",
+          "Description": "Block",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Document.ModelSpace",
+      "Replication": "Auto",
+      "Description": "Get the model space block table record.\n\nDocument.ModelSpace: Block"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "cadbd3a4dfed4d608d3586d192500d5d",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "6be614c2a12645959667a23ce1d25f1c",
+          "Name": "mText",
+          "Description": "MText",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "7843488bec9a4d2a8d7973e59b172054",
+          "Name": "string",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.AutoCAD.Objects.MText.TextStyle@Autodesk.AutoCAD.DynamoNodes.MText",
+      "Replication": "Auto",
+      "Description": "Gets the name of the text style assigned to an MText.\n\nMText.TextStyle (mText: MText): string"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "75328bd3085c45b888385d4951d02f99",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "4dc7ba8a81d64f478ca4e24df1d1cd16",
+          "Name": "mText",
+          "Description": "MText",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "a66d50e64d8342caa05090660b3bf8d9",
+          "Name": "textStyleName",
+          "Description": "The name of the text style to assign.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "55b606adde84458d85199edc6404ce6f",
+          "Name": "MText",
+          "Description": "MText",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.AutoCAD.Objects.MText.SetTextStyle@Autodesk.AutoCAD.DynamoNodes.MText,string",
+      "Replication": "Auto",
+      "Description": "Sets the text style for an MText.\n\nMText.SetTextStyle (mText: MText, textStyleName: string): MText"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "WatchWidth": 58.0,
+      "WatchHeight": 38.0,
+      "Id": "844259befe074547a02834391b4eb84c",
+      "NodeType": "ExtensionNode",
+      "Inputs": [
+        {
+          "Id": "227b27736692459894c2fc2ba761afa9",
+          "Name": "",
+          "Description": "Node to show output from",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "3c52e1c120464f71bb0964b62c4c050d",
+          "Name": "",
+          "Description": "Node output",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualizes a node's output"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "WatchWidth": 80.0,
+      "WatchHeight": 38.0,
+      "Id": "5b70d2498c5b4d4989420da433635a00",
+      "NodeType": "ExtensionNode",
+      "Inputs": [
+        {
+          "Id": "592f77e72d8a4279bbac457e9c60bd55",
+          "Name": "",
+          "Description": "Node to show output from",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "3ec8f59b74f14027960a04146190c3d1",
+          "Name": "",
+          "Description": "Node output",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualizes a node's output"
+    },
+    {
+      "ConcreteType": "Camber.UI.TextStylesDropDown, CamberUI",
+      "SelectedIndex": 4,
+      "SelectedString": "Standard",
+      "Id": "18de23fc163944d88ae219dcdcb08e30",
+      "NodeType": "ExtensionNode",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "43c9f3129830402aacf62b5624f4bbf2",
+          "Name": "textStyle",
+          "Description": "The selected textStyle",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Select text style."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "ff9d81e023504be599826e2f96b66bd1",
+      "End": "6be614c2a12645959667a23ce1d25f1c",
+      "Id": "daed88703dbf4948bfceb712165ff237",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "ff9d81e023504be599826e2f96b66bd1",
+      "End": "4dc7ba8a81d64f478ca4e24df1d1cd16",
+      "Id": "4b8f681d9c9e419ea04b9fbce88caac9",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "7a6ab4e3785b418e88b8ff32c02db6e2",
+      "End": "3ddfd570759b41c9bbde17d70d699dfa",
+      "Id": "711c7471487e4e5da55de659b30c5222",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "7127ce61b5834fb4a744a6fa3743d27a",
+      "End": "af6baa50e92842aa9e65d26e8f011999",
+      "Id": "084a4a7d636949cfbc8ab68967d72556",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "093b06a417f44495a07877cd86bf9aa3",
+      "End": "7c92cbf227cc4fcb98be7901a7e52c37",
+      "Id": "04de0941fc974a24bf0899db2410dc78",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "093b06a417f44495a07877cd86bf9aa3",
+      "End": "e59cef13879a4ff192c65fa4470ebb1d",
+      "Id": "75cef409a7244edf9a6ce66832a66541",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "2f09e6032b1b44478fbcf447cc8b9bdd",
+      "End": "fa482c15c402436e935e6459656f9cca",
+      "Id": "2078719691294e769bfe25a59f42e4a6",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "dd44617fdc44438ca45b9c58f403b3d0",
+      "End": "8d2aa23f2407400f8481b3cfb0ca2b35",
+      "Id": "2a7444daabdc47f788ef7b1d7f001197",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "7843488bec9a4d2a8d7973e59b172054",
+      "End": "592f77e72d8a4279bbac457e9c60bd55",
+      "Id": "de012fc0492a400da95b5a6c07f6fc53",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "55b606adde84458d85199edc6404ce6f",
+      "End": "227b27736692459894c2fc2ba761afa9",
+      "Id": "39fd567fb3b9469bbeb07464f9ce533c",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "43c9f3129830402aacf62b5624f4bbf2",
+      "End": "a66d50e64d8342caa05090660b3bf8d9",
+      "Id": "2584554586604ea4bfdd00b9ad2adee2",
+      "IsHidden": "False"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Camber",
+      "Version": "4.2.6",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "cadbd3a4dfed4d608d3586d192500d5d",
+        "75328bd3085c45b888385d4951d02f99",
+        "18de23fc163944d88ae219dcdcb08e30"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.19",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.19.4.6671",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "_Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "ConnectorPins": [],
+    "NodeViews": [
+      {
+        "Id": "849509ab3aed4acfb47ee527196a4939",
+        "Name": "MText.Create",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 605.74850440361752,
+        "Y": 234.31852937088817
+      },
+      {
+        "Id": "c9c2dab23d0b43ec9aca0e99e839a720",
+        "Name": "String",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 255.74850440361752,
+        "Y": 166.31852937088814
+      },
+      {
+        "Id": "b482761c5edf4b33b6cdc2a838e64754",
+        "Name": "Point.Origin",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 255.74850440361752,
+        "Y": 313.3185293708882
+      },
+      {
+        "Id": "a80f31def85540a3a0214880f41b559d",
+        "Name": "Document.Current",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": -53.251495596382483,
+        "Y": 534.8185293708882
+      },
+      {
+        "Id": "f104496f15344f6c8b31aa0e6f9f48a0",
+        "Name": "Document.CurrentLayer",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 255.74850440361752,
+        "Y": 461.31852937088814
+      },
+      {
+        "Id": "6acc7e9edbca450c9373d9bbcce48c41",
+        "Name": "Document.ModelSpace",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 255.74850440361752,
+        "Y": 608.3185293708882
+      },
+      {
+        "Id": "cadbd3a4dfed4d608d3586d192500d5d",
+        "Name": "MText.TextStyle",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 995.74850440361752,
+        "Y": 332.3185293708882
+      },
+      {
+        "Id": "75328bd3085c45b888385d4951d02f99",
+        "Name": "MText.SetTextStyle",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 995.74850440361752,
+        "Y": 484.31852937088814
+      },
+      {
+        "Id": "844259befe074547a02834391b4eb84c",
+        "Name": "Watch",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1346.7485044036175,
+        "Y": 484.31852937088814
+      },
+      {
+        "Id": "5b70d2498c5b4d4989420da433635a00",
+        "Name": "Watch",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1346.7485044036175,
+        "Y": 332.3185293708882
+      },
+      {
+        "Id": "18de23fc163944d88ae219dcdcb08e30",
+        "Name": "Text Styles",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 605.74850440361752,
+        "Y": 692.3185293708882
+      }
+    ],
+    "Annotations": [],
+    "X": 68.9553330021063,
+    "Y": 34.344216471778026,
+    "Zoom": 0.73153500321130382
+  }
+}
