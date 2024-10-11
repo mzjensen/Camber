@@ -6,22 +6,24 @@
         xmlns:local="clr-namespace:Camber.MigrationAssistant"
         mc:Ignorable="d"
         Title="Camber Graph Migration Assistant" 
-        Height="290" Width="600"
+        Height="340" Width="600"
         MinWidth="600"
-        MinHeight="290"
-        MaxHeight="290"
+        MinHeight="340"
+        MaxHeight="340"
         ResizeMode="CanResize"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <StackPanel Margin="10">
-            <Button Name="btnSelectSource" Content="Select Source Folder" Click="btnSelectSource_Click" Margin="0,5"/>
+            <Button Name="btnSelectSource" Content="Select Source Folder" Command="{Binding SelectSourceFolderCommand}" Margin="0,5"/>
             <TextBlock Text="{Binding SourceFolder}" Margin="0,5" TextTrimming="CharacterEllipsis" FontStyle="Italic" />
-            <Button Name="btnSelectOutput" Content="Select Output Folder" Click="btnSelectOutput_Click" Margin="0,5"/>
+            <Button Name="btnSelectOutput" Content="Select Output Folder" Command="{Binding SelectOutputFolderCommand}" Margin="0,5"/>
             <TextBlock Text="{Binding OutputFolder}" Margin="0,5" TextTrimming="CharacterEllipsis" FontStyle="Italic" />
             <Button Content="Migrate Graphs" Command="{Binding MigrateCommand}" IsEnabled="{Binding CanMigrate}" Margin="0,5"/>
             <ProgressBar Value="{Binding Progress}" Height="20" Margin="0,5" />
             <TextBlock Text="{Binding Status}" Margin="0,5" FontWeight="Bold" />
             <Button Content="View Log" Command="{Binding ViewLogCommand}" IsEnabled="{Binding IsProcessingComplete}" Margin="0,5"/>
+            <Rectangle Height="1" Fill="Gray" HorizontalAlignment="Stretch" Margin="0,10" />
+            <Button Name="btnHelp" Content="Help" Command="{Binding HelpCommand}" Margin="0,5"/>
         </StackPanel>
     </Grid>
 </Window>

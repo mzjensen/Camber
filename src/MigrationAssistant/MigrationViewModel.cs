@@ -1,7 +1,11 @@
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Input;
+using MessageBox = System.Windows.MessageBox;
 
 namespace Camber.MigrationAssistant
 {
@@ -131,15 +135,21 @@ namespace Camber.MigrationAssistant
             }
         }
 
+        public ICommand SelectSourceFolderCommand { get; }
+        public ICommand SelectOutputFolderCommand { get; }
         public ICommand MigrateCommand { get; }
         public ICommand ViewLogCommand { get; }
+        public ICommand HelpCommand { get; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public MigrationViewModel()
         {
+            SelectSourceFolderCommand = new RelayCommand(SelectSourceFolder);
+            SelectOutputFolderCommand = new RelayCommand(SelectOutputFolder);
             MigrateCommand = new RelayCommand(Migrate, () => CanMigrate);
             ViewLogCommand = new RelayCommand(ViewLog, () => IsProcessingComplete);
+            HelpCommand = new RelayCommand(ViewHelp);
             LogFile = "Migration.log";
             XmlMigrationFile = "Camber.Migrations.xml";
         }
@@ -147,6 +157,24 @@ namespace Camber.MigrationAssistant
         private void CheckReadyToMigrate()
         {
             CanMigrate = !string.IsNullOrEmpty(SourceFolder) && !string.IsNullOrEmpty(OutputFolder);
+        }
+
+        private void SelectSourceFolder()
+        {
+            using var dialog = new FolderBrowserDialog();
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                SourceFolder = dialog.SelectedPath;
+            }
+        }
+
+        private void SelectOutputFolder()
+        {
+            using var dialog = new FolderBrowserDialog();
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                OutputFolder = dialog.SelectedPath;
+            }
         }
 
         private void Migrate()
@@ -172,11 +200,11 @@ namespace Camber.MigrationAssistant
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show(
+                MessageBox.Show(
                     $"{ex.Message}", 
                     "Error", 
-                    System.Windows.MessageBoxButton.OK, 
-                    System.Windows.MessageBoxImage.Error);
+                    MessageBoxButton.OK, 
+                    MessageBoxImage.Error);
                 return;
             }
 
@@ -213,19 +241,19 @@ namespace Camber.MigrationAssistant
 
             if (FilesErrored > 0)
             {
-                System.Windows.MessageBox.Show(
+                MessageBox.Show(
                     "Errors were encountered during migration. Please check the log file.",
                     "Migration Complete",
-                    System.Windows.MessageBoxButton.OK,
-                    System.Windows.MessageBoxImage.Warning);
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Warning);
             }
             else
             {
-                System.Windows.MessageBox.Show(
+                MessageBox.Show(
                     $"{FilesProcessed} graphs migrated successfully. Please open them in Dynamo to verify the results.",
                     "Migration Complete",
-                    System.Windows.MessageBoxButton.OK,
-                    System.Windows.MessageBoxImage.Information);
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
             }
         }
 
@@ -235,7 +263,7 @@ namespace Camber.MigrationAssistant
 
             if (File.Exists(file))
             {
-                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                Process.Start(new ProcessStartInfo
                 {
                     FileName = file,
                     UseShellExecute = true
@@ -243,11 +271,35 @@ namespace Camber.MigrationAssistant
             }
             else
             {
-                System.Windows.MessageBox.Show(
+                MessageBox.Show(
                     "Log file not found",
                     "Error",
-                    System.Windows.MessageBoxButton.OK,
-                    System.Windows.MessageBoxImage.Error);
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
+        }
+
+        private void ViewHelp()
+        {
+            string exePath = Assembly.GetExecutingAssembly().Location;
+            string exeDirectory = Path.GetDirectoryName(exePath);
+            string readmePath = Path.Combine(exeDirectory, "README.md");
+
+            if (File.Exists(readmePath))
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = readmePath,
+                    UseShellExecute = true
+                });
+            }
+            else
+            {
+                MessageBox.Show(
+                    "README file not found",
+                    "Error",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
             }
         }
 
