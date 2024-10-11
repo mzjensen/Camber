@@ -23,7 +23,7 @@
 	</ItemGroup>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-		<Exec Command="call &quot;$(ProjectDir)GenerateMigrationsXML.bat&quot;&#xD;&#xA;call &quot;$(ProjectDir)CreatePackage.bat&quot;" />
+		<Exec Command="call &quot;$(ProjectDir)CreatePackage.bat&quot;" />
 	</Target>
 
 </Project>

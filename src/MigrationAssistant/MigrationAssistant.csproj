@@ -9,10 +9,22 @@
 	<UseWindowsForms>true</UseWindowsForms>
 	<RootNamespace>Camber.MigrationAssistant</RootNamespace>
 	<AssemblyName>$(MSBuildProjectName)</AssemblyName>
+	<RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+	<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Camber.Migrations.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="call &quot;$(ProjectDir)GenerateMigrationsXML.bat&quot;" />
+  </Target>
 
 </Project>
