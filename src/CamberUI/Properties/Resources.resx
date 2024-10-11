@@ -121,6 +121,6 @@
     <value>This node from Camber is obsolete. It is recommended to replace it with the '{0}' node from the main library.</value>
   </data>
   <data name="NODE_OBSOLETE_MIGRATION_MESSAGE" xml:space="preserve">
-    <value>This node from Camber is obsolete. It is recommended to replace it with the '{0}' node from the main library, or use the Camber Migration Assistant to automatically upgrade graphs that contain obsolete nodes.</value>
+    <value>This node from Camber is obsolete. It is recommended to replace it with the '{0}' node from the main library. Alternatively, you can use the Camber Migration Assistant to automatically upgrade graphs that contain certain obsolete nodes like this one.</value>
   </data>
 </root>

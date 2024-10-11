@@ -70,7 +70,7 @@ namespace Camber.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This node from Camber is obsolete. It is recommended to replace it with the &apos;{0}&apos; node from the main library, or use the Camber Migration Assistant to automatically upgrade graphs that contain obsolete nodes..
+        ///   Looks up a localized string similar to This node from Camber is obsolete. It is recommended to replace it with the &apos;{0}&apos; node from the main library. Alternatively, you can use the Camber Migration Assistant to automatically upgrade graphs that contain certain obsolete nodes like this one..
         /// </summary>
         internal static string NODE_OBSOLETE_MIGRATION_MESSAGE {
             get {
