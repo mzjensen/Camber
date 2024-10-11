@@ -19,7 +19,7 @@ namespace Camber.AutoCAD.Objects.MultiViewBlocks
         /// <summary>
         /// Gets the Block that a Multi-View Block Reference resides in.
         /// </summary>
-        public acDynNodes.Block Block => acDynNodes.Document.Current.BlockByName(AecMultiViewBlockReference.BlockName);
+        public acDynNodes.Block Block => acDynNodes.Block.GetBlockByName(acDynNodes.Document.Current, AecMultiViewBlockReference.BlockName);
 
         /// <summary>
         /// Gets the Multi-View Block that defines a Multi-View Block Reference.
@@ -41,7 +41,7 @@ namespace Camber.AutoCAD.Objects.MultiViewBlocks
         /// <summary>
         /// Gets the coordinate system of a Multi-View Block Reference.
         /// </summary>
-        public CoordinateSystem CoordinateSystem => AutoCADUtility.MatrixToCoordinateSystem(AecMultiViewBlockReference.Ecs);
+        public CoordinateSystem CoordinateSystem => AecMultiViewBlockReference.Ecs.ToDyn();
         #endregion
 
         #region constructors
@@ -79,7 +79,7 @@ namespace Camber.AutoCAD.Objects.MultiViewBlocks
                     mvBlkRef.SetToStandard(document.AcDocument.Database);
                     mvBlkRef.BlockDefId = multiViewBlock.InternalObjectId;
                     mvBlkRef.Layer = layer;
-                    mvBlkRef.GeoEcs = AutoCADUtility.CooridnateSystemToMatrix(coordinateSystem);
+                    mvBlkRef.GeoEcs = coordinateSystem.ToAc();
                     btr.AppendEntity(mvBlkRef);
                     ctx.Transaction.AddNewlyCreatedDBObject(mvBlkRef, true);
                     btr.DowngradeOpen();
@@ -116,9 +116,9 @@ namespace Camber.AutoCAD.Objects.MultiViewBlocks
                             mvBlkRef.Layer = layer;
                         }
 
-                        if (mvBlkRef.GeoEcs != AutoCADUtility.CooridnateSystemToMatrix(coordinateSystem))
+                        if (mvBlkRef.GeoEcs != coordinateSystem.ToAc())
                         {
-                            mvBlkRef.GeoEcs = AutoCADUtility.CooridnateSystemToMatrix(coordinateSystem);
+                            mvBlkRef.GeoEcs = coordinateSystem.ToAc();
                         }
                     }
                     return true;
@@ -140,7 +140,7 @@ namespace Camber.AutoCAD.Objects.MultiViewBlocks
             using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
             {
                 AecMultiViewBlockReference.UpgradeOpen();
-                AecMultiViewBlockReference.GeoEcs = AutoCADUtility.CooridnateSystemToMatrix(coordinateSystem);
+                AecMultiViewBlockReference.GeoEcs = coordinateSystem.ToAc();
                 AecMultiViewBlockReference.DowngradeOpen();
             }
             return this;

@@ -1,0 +1,688 @@
+{
+  "Uuid": "8dbc9701-e004-472e-8866-3e8a1c3d609c",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "SurfaceMigrationTests",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "e42c91afae5a408ca130f08936309ad6",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "3c9f00108c8f45188ae60cda4e1cf468",
+          "Name": "surface",
+          "Description": "Surface",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "8bfc71bb30bf467cb526781bab191365",
+          "Name": "startPoint",
+          "Description": "Point",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "251562961e9142b79fc9b45581d606e4",
+          "Name": "create3DCurves",
+          "Description": "True = create 3D PolyCurves, False = create 2D PolyCurves\n\nbool",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "161926797f6146f2a504cea44e63b2c4",
+          "Name": "PolyCurve[]",
+          "Description": "PolyCurve[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.Surfaces.Surface.CreateWaterDrop@Autodesk.Civil.DynamoNodes.Surface,Autodesk.DesignScript.Geometry.Point,bool",
+      "Replication": "Auto",
+      "Description": "Creates one or more PolyCurves that represent the flow of water along a Surface from a given start point. If the point is on a peak, multiple curves are created. If the location is on a flat area, no curves are created. Otherwise, only one curve is created.\n\nSurface.CreateWaterDrop (surface: Surface, startPoint: Point, create3DCurves: bool): PolyCurve[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "93ed0f8382b04dbfb05743cd18b5ba10",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "6aeed8d68dfa4d2dbd1213dd50ecb735",
+          "Name": "surface",
+          "Description": "Surface",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "31a47decfce84df2b3fd429b79fe0956",
+          "Name": "bool",
+          "Description": "bool",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "37115dd7cc664ebc9c466ac0e0a5f914",
+          "Name": "Surface",
+          "Description": "Surface",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.Surfaces.Surface.SetAutoRebuild@Autodesk.Civil.DynamoNodes.Surface,bool",
+      "Replication": "Auto",
+      "Description": "Sets whether to automatically rebuild a Surface when its definition is changed.\n\nSurface.SetAutoRebuild (surface: Surface, bool: bool): Surface"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "01705c5bf4524f68bbba325e39a5c97e",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "1a455ac9ebe8420fa3421955cba675fe",
+          "Name": "surface",
+          "Description": "Surface",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "38ba5bf0731c4a1480fa791dfa36dcb0",
+          "Name": "bool",
+          "Description": "bool",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "858a40a3575d4e0aa71f5a9cc954e33d",
+          "Name": "Surface",
+          "Description": "Surface",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.Surfaces.Surface.SetIsLocked@Autodesk.Civil.DynamoNodes.Surface,bool",
+      "Replication": "Auto",
+      "Description": "Sets whether the Civil 3D GUI shows a Surface as locked.\n\nSurface.SetIsLocked (surface: Surface, bool: bool): Surface"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "146ac2902ba3402ea6175607fb9bdd41",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "90d9845208974adb9891cb4adae74911",
+          "Name": "surface",
+          "Description": "Surface",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "be021b2404e545a89c64983f9c247c5c",
+          "Name": "bool",
+          "Description": "bool",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.Surfaces.Surface.AutoRebuild@Autodesk.Civil.DynamoNodes.Surface",
+      "Replication": "Auto",
+      "Description": "Gets whether a Surface is automatically rebuilt when its definition is changed.\n\nSurface.AutoRebuild (surface: Surface): bool"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "19db6f50bf5c40178f623f39326c6667",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "f19128f7d99c46d1ac30469236bc39f2",
+          "Name": "surface",
+          "Description": "Surface",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "c5a435d228a14910bb2df660c70566f1",
+          "Name": "bool",
+          "Description": "bool",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.Surfaces.Surface.HasSnapshot@Autodesk.Civil.DynamoNodes.Surface",
+      "Replication": "Auto",
+      "Description": "Gets a boolean value that specifies whether a Surface has a snapshot.\n\nSurface.HasSnapshot (surface: Surface): bool"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "a46c949a5c124eb79ea53d63fdb74ed8",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "6f050e64e0cd49ac9a7fa24425182049",
+          "Name": "surface",
+          "Description": "Surface",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "8dd4c1d232f84e458e9034e0942847bb",
+          "Name": "bool",
+          "Description": "bool",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.Surfaces.Surface.IsLocked@Autodesk.Civil.DynamoNodes.Surface",
+      "Replication": "Auto",
+      "Description": "Gets whether the Civil 3D GUI shows a Surface as locked.\n\nSurface.IsLocked (surface: Surface): bool"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "72343d36695a4074ba2703f5ae1a9cd0",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "dbf1c0736e9a4a2a80564b80ad68df01",
+          "Name": "surface",
+          "Description": "Surface",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "503f3cbf0aa74e9c9f82d85dae8586b0",
+          "Name": "bool",
+          "Description": "bool",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.Surfaces.Surface.IsOutOfDate@Autodesk.Civil.DynamoNodes.Surface",
+      "Replication": "Auto",
+      "Description": "Gets whether a Surface is out-of-date.\n\nSurface.IsOutOfDate (surface: Surface): bool"
+    },
+    {
+      "ConcreteType": "Autodesk.AutoCAD.DynamoNodes.AcObjectsOfType, AutoCADNodesUI",
+      "Id": "0f4a3f6b5ce449638e14575d50a316d8",
+      "NodeType": "ExtensionNode",
+      "Inputs": [
+        {
+          "Id": "80dd6ffbc8d44636b2ffa4c0ab872996",
+          "Name": "type",
+          "Description": "",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "593d39983929424eb02ca3a61a79116d",
+          "Name": "block",
+          "Description": "",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "71574b11a1a44e4c80f681abcbc1e7e5",
+          "Name": "Object[]",
+          "Description": "Object[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Select all objects of the type."
+    },
+    {
+      "ConcreteType": "Autodesk.AutoCAD.DynamoNodes.AcObjectTypes, AutoCADNodesUI",
+      "SelectedIndex": 12,
+      "SelectedString": "Surface",
+      "Id": "2face78ce9734cad803bf1af21ab765d",
+      "NodeType": "ExtensionNode",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "1ba72160e8f947a8af4900f44d196345",
+          "Name": "Object Type",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Select object type."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "8d510ac2803743f9b6536aa7c970d0a9",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "2884996441ea4ecc8d5134fa513a6fe6",
+          "Name": "document",
+          "Description": "Autodesk.AutoCAD.DynamoNodes.Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "636131569f7b427091e68b0ea8338352",
+          "Name": "Block",
+          "Description": "Block",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Document.ModelSpace",
+      "Replication": "Auto",
+      "Description": "Get the model space block table record.\n\nDocument.ModelSpace: Block"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "9fd034709f864c16bdee2415ceaec31f",
+      "NodeType": "FunctionNode",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "3029088b5c6846769ac434ed60ef49b3",
+          "Name": "Document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Document.Current",
+      "Replication": "Auto",
+      "Description": "Get the current AutoCAD document.\n\nDocument.Current: Document"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "Id": "a6a31b99639844f3a81b029bacd88151",
+      "NodeType": "BooleanInputNode",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "27365eb6418646e3b983d2e0c6b031b5",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Enables selection between True and False",
+      "InputValue": false
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "a556a2b9c8204010ba8ccacad8089fce",
+      "NodeType": "FunctionNode",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "2db3aec6df2440f7856a468475cc8231",
+          "Name": "Point",
+          "Description": "Origin point",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Autodesk.DesignScript.Geometry.Point.Origin",
+      "Replication": "Auto",
+      "Description": "Get the Origin point (0,0,0)\n\nPoint.Origin ( ): Point"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "71574b11a1a44e4c80f681abcbc1e7e5",
+      "End": "dbf1c0736e9a4a2a80564b80ad68df01",
+      "Id": "f5ea110e774b454b84e7f390525d9ff2",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "71574b11a1a44e4c80f681abcbc1e7e5",
+      "End": "90d9845208974adb9891cb4adae74911",
+      "Id": "626bed68afc746ae85bf809221102f43",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "71574b11a1a44e4c80f681abcbc1e7e5",
+      "End": "f19128f7d99c46d1ac30469236bc39f2",
+      "Id": "845318022e874cde8c6872a981b0916b",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "71574b11a1a44e4c80f681abcbc1e7e5",
+      "End": "6f050e64e0cd49ac9a7fa24425182049",
+      "Id": "2e4398fe42b2435ea32718a9afbd9473",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "71574b11a1a44e4c80f681abcbc1e7e5",
+      "End": "1a455ac9ebe8420fa3421955cba675fe",
+      "Id": "282c0b7e19e24b0faf8d52ebf2802372",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "71574b11a1a44e4c80f681abcbc1e7e5",
+      "End": "6aeed8d68dfa4d2dbd1213dd50ecb735",
+      "Id": "388767d2686a493d9e5c966ad6fb110c",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "71574b11a1a44e4c80f681abcbc1e7e5",
+      "End": "3c9f00108c8f45188ae60cda4e1cf468",
+      "Id": "0fb4010624494ba48e4baf226209737a",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "1ba72160e8f947a8af4900f44d196345",
+      "End": "80dd6ffbc8d44636b2ffa4c0ab872996",
+      "Id": "ce9c90c68b6d4cba912ee07b933a7843",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "636131569f7b427091e68b0ea8338352",
+      "End": "593d39983929424eb02ca3a61a79116d",
+      "Id": "a660a6b81f3d49f1956d143d5781411c",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "3029088b5c6846769ac434ed60ef49b3",
+      "End": "2884996441ea4ecc8d5134fa513a6fe6",
+      "Id": "f34debe9aa4a424ea419c621985da165",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "27365eb6418646e3b983d2e0c6b031b5",
+      "End": "38ba5bf0731c4a1480fa791dfa36dcb0",
+      "Id": "6f375d6369e84a9091094392554bc607",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "27365eb6418646e3b983d2e0c6b031b5",
+      "End": "31a47decfce84df2b3fd429b79fe0956",
+      "Id": "39d128e34d4743ebacc888acd3277514",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "27365eb6418646e3b983d2e0c6b031b5",
+      "End": "251562961e9142b79fc9b45581d606e4",
+      "Id": "5c31f8308819425089c274f528e8b248",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "2db3aec6df2440f7856a468475cc8231",
+      "End": "8bfc71bb30bf467cb526781bab191365",
+      "Id": "06940bb03e1e4282835fb080b0a8c3a6",
+      "IsHidden": "False"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Camber",
+      "Version": "4.2.6",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "e42c91afae5a408ca130f08936309ad6",
+        "93ed0f8382b04dbfb05743cd18b5ba10",
+        "01705c5bf4524f68bbba325e39a5c97e",
+        "146ac2902ba3402ea6175607fb9bdd41",
+        "19db6f50bf5c40178f623f39326c6667",
+        "a46c949a5c124eb79ea53d63fdb74ed8",
+        "72343d36695a4074ba2703f5ae1a9cd0"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.19",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.19.4.6671",
+      "RunType": "Automatic",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "_Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "ConnectorPins": [],
+    "NodeViews": [
+      {
+        "Id": "e42c91afae5a408ca130f08936309ad6",
+        "Name": "Surface.CreateWaterDrop",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 633.75,
+        "Y": -250.5
+      },
+      {
+        "Id": "93ed0f8382b04dbfb05743cd18b5ba10",
+        "Name": "Surface.SetAutoRebuild",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 633.75,
+        "Y": -38.5
+      },
+      {
+        "Id": "01705c5bf4524f68bbba325e39a5c97e",
+        "Name": "Surface.SetIsLocked",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 633.75,
+        "Y": 139.5
+      },
+      {
+        "Id": "146ac2902ba3402ea6175607fb9bdd41",
+        "Name": "Surface.AutoRebuild",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 633.75,
+        "Y": 757.5
+      },
+      {
+        "Id": "19db6f50bf5c40178f623f39326c6667",
+        "Name": "Surface.HasSnapshot",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 633.75,
+        "Y": 316.5
+      },
+      {
+        "Id": "a46c949a5c124eb79ea53d63fdb74ed8",
+        "Name": "Surface.IsLocked",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 633.75,
+        "Y": 463.5
+      },
+      {
+        "Id": "72343d36695a4074ba2703f5ae1a9cd0",
+        "Name": "Surface.IsOutOfDate",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 633.75,
+        "Y": 610.5
+      },
+      {
+        "Id": "0f4a3f6b5ce449638e14575d50a316d8",
+        "Name": "All Objects of Type",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 321.75,
+        "Y": 316.5
+      },
+      {
+        "Id": "2face78ce9734cad803bf1af21ab765d",
+        "Name": "Objects Types",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": -29.25,
+        "Y": 259.5
+      },
+      {
+        "Id": "8d510ac2803743f9b6536aa7c970d0a9",
+        "Name": "Document.ModelSpace",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": -29.25,
+        "Y": 407.5
+      },
+      {
+        "Id": "9fd034709f864c16bdee2415ceaec31f",
+        "Name": "Document.Current",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": -338.25,
+        "Y": 407.5
+      },
+      {
+        "Id": "a6a31b99639844f3a81b029bacd88151",
+        "Name": "Boolean",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 321.75,
+        "Y": -4.5
+      },
+      {
+        "Id": "a556a2b9c8204010ba8ccacad8089fce",
+        "Name": "Point.Origin",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 321.75,
+        "Y": -216.5
+      }
+    ],
+    "Annotations": [],
+    "X": 426.04444444444448,
+    "Y": 179.18666666666672,
+    "Zoom": 0.5955555555555555
+  }
+}

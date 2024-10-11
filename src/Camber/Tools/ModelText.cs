@@ -131,7 +131,7 @@ namespace Camber.Tools
                         }
                     }  
                 }
-                polyCurves.Add(PolyCurve.ByJoinedCurves(lineSegments));
+                polyCurves.Add(PolyCurve.ByJoinedCurves(lineSegments, 0.001D, false));
             }
 
             return SolidsFromTextOutlines(polyCurves, coordinateSystem.YAxis, thickness);

@@ -1,11 +1,14 @@
 ﻿using Autodesk.DesignScript.Geometry;
+using Autodesk.DesignScript.Runtime;
 using Camber.Utilities.GeometryConversions;
 using Dynamo.Graph.Nodes;
+using DynamoServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using Camber.Properties;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
@@ -56,35 +59,11 @@ namespace Camber.AutoCAD.Objects
         public static int DuplicateVerticesCount(this acDynNodes.Polyline polyline) => polyline.GetDuplicateVertices().Count;
 
         /// <summary>
-        /// Gets whether a Polyline is closed or not.
-        /// </summary>
-        /// <param name="polyline"></param>
-        /// <returns></returns>
-        [NodeCategory("Query")]
-        public static bool IsClosed(this acDynNodes.Polyline polyline) => GetBool(polyline, "Closed");
-
-        [NodeCategory("Query")]
-        /// <summary>
-        /// Gets the global width of a Polyline.
-        /// </summary>
-        /// <param name="polyline"></param>
-        /// <returns></returns>
-        public static double GlobalWidth(this acDynNodes.Polyline polyline) => GetDouble(polyline, "ConstantWidth");
-
-        [NodeCategory("Query")]
-        /// <summary>
-        /// Gets the elevation of a Polyline measured from the world XY plane.
-        /// </summary>
-        /// <param name="polyline"></param>
-        /// <returns></returns>
-        public static double Elevation(this acDynNodes.Polyline polyline) => GetDouble(polyline);
-
-        [NodeCategory("Query")]
-        /// <summary>
         /// Gets the total length of a Polyline.
         /// </summary>
         /// <param name="polyline"></param>
         /// <returns></returns>
+        [NodeCategory("Query")]
         public static double Length(this acDynNodes.Polyline polyline) => GetDouble(polyline);
         #endregion
 
@@ -121,38 +100,6 @@ namespace Camber.AutoCAD.Objects
                 throw new InvalidOperationException(ex.Message);
             }
         }
-
-        /// <summary>
-        /// Sets whether a Polyline is closed or not.
-        /// </summary>
-        /// <param name="polyline"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public static acDynNodes.Polyline SetIsClosed(this acDynNodes.Polyline polyline, bool value) => SetValue(polyline, value, "Closed");
-
-        /// <summary>
-        /// Sets the global width of a Polyline.
-        /// </summary>
-        /// <param name="polyline"></param>
-        /// <param name="width">A positive width value.</param>
-        /// <returns></returns>
-        public static acDynNodes.Polyline SetGlobalWidth(this acDynNodes.Polyline polyline, double width)
-        {
-            if (width < 0)
-            {
-                throw new InvalidOperationException("Input width must be positive.");
-            }
-
-            return SetValue(polyline, width, "ConstantWidth");
-        }
-
-        /// <summary>
-        /// Sets the elevation of a Polyline measured from the world XY plane.
-        /// </summary>
-        /// <param name="polyline"></param>
-        /// <param name="elevation"></param>
-        /// <returns></returns>
-        public static acDynNodes.Polyline SetElevation(this acDynNodes.Polyline polyline, double elevation) => SetValue(polyline, elevation);
         #endregion
 
         #region private methods
@@ -304,6 +251,104 @@ namespace Camber.AutoCAD.Objects
                 }
                 catch { throw; }
             }
+        }
+        #endregion
+
+        #region obsolete
+        /// <summary>
+        /// Gets the elevation of a Polyline measured from the world XY plane.
+        /// </summary>
+        /// <param name="polyline"></param>
+        /// <returns></returns>
+        [NodeMigrationMapping(
+            "Camber.AutoCAD.Objects.Polyline.Elevation",
+            "Autodesk.AutoCAD.DynamoNodes.Polyline.Elevation")]
+        [NodeCategory("Query")]
+        public static double Elevation(this acDynNodes.Polyline polyline)
+        {
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Polyline.Elevation"));
+            return GetDouble(polyline);
+        }
+
+        /// <summary>
+        /// Gets the global width of a Polyline.
+        /// </summary>
+        /// <param name="polyline"></param>
+        /// <returns></returns>
+        [NodeMigrationMapping(
+            "Camber.AutoCAD.Objects.Polyline.GlobalWidth",
+            "Autodesk.AutoCAD.DynamoNodes.Polyline.GlobalWidth")]
+        [NodeCategory("Query")]
+        public static double GlobalWidth(this acDynNodes.Polyline polyline)
+        {
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Polyline.GlobalWidth"));
+            return GetDouble(polyline, "ConstantWidth");
+        }
+
+        /// <summary>
+        /// Gets whether a Polyline is closed or not.
+        /// </summary>
+        /// <param name="polyline"></param>
+        /// <returns></returns>
+        [NodeMigrationMapping(
+            "Camber.AutoCAD.Objects.Polyline.IsClosed",
+            "Autodesk.AutoCAD.DynamoNodes.Curve.IsClosed")]
+        [NodeCategory("Query")]
+        public static bool IsClosed(this acDynNodes.Polyline polyline)
+        {
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Curve.IsClosed"));
+            return GetBool(polyline, "Closed");
+        }
+
+        /// <summary>
+        /// Sets the elevation of a Polyline measured from the world XY plane.
+        /// </summary>
+        /// <param name="polyline"></param>
+        /// <param name="elevation"></param>
+        /// <returns></returns>
+        [NodeMigrationMapping(
+            "Camber.AutoCAD.Objects.Polyline.SetElevation",
+            "Autodesk.AutoCAD.DynamoNodes.Polyline.SetElevation")]
+        public static acDynNodes.Polyline SetElevation(this acDynNodes.Polyline polyline, double elevation)
+        {
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Polyline.SetElevation"));
+            return SetValue(polyline, elevation);
+        }
+
+        /// <summary>
+        /// Sets the global width of a Polyline.
+        /// </summary>
+        /// <param name="polyline"></param>
+        /// <param name="width">A positive width value.</param>
+        /// <returns></returns>
+        [NodeMigrationMapping(
+            "Camber.AutoCAD.Objects.Polyline.SetGlobalWidth",
+            "Autodesk.AutoCAD.DynamoNodes.Polyline.SetGlobalWidth")]
+        public static acDynNodes.Polyline SetGlobalWidth(this acDynNodes.Polyline polyline, double width)
+        {
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Polyline.SetGlobalWidth"));
+
+            if (width < 0)
+            {
+                throw new InvalidOperationException("Input width must be positive.");
+            }
+
+            return SetValue(polyline, width, "ConstantWidth");
+        }
+
+        /// <summary>
+        /// Sets whether a Polyline is closed or not.
+        /// </summary>
+        /// <param name="polyline"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        [NodeMigrationMapping(
+            "Camber.AutoCAD.Objects.Polyline.SetIsClosed",
+            "Autodesk.AutoCAD.DynamoNodes.Curve.SetClosed")]
+        public static acDynNodes.Polyline SetIsClosed(this acDynNodes.Polyline polyline, bool value)
+        {
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Curve.SetClosed"));
+            return SetValue(polyline, value, "Closed");
         }
         #endregion
     }

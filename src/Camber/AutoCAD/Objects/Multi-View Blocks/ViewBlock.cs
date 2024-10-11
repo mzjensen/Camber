@@ -31,7 +31,7 @@ namespace Camber.AutoCAD.Objects.MultiViewBlocks
                         var btr = (acDb.BlockTableRecord)ctx.Transaction.GetObject(
                             AecViewBlock.BlockId,
                             acDb.OpenMode.ForRead);
-                        return document.BlockByName(btr.Name);
+                        return acDynNodes.Block.GetBlockByName(document, btr.Name);
                     }
                 }
                 return null;

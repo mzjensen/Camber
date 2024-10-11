@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using ProtoCore.AST.AssociativeAST;
 using System.Collections.Generic;
 using System.Linq;
+using Camber.Properties;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
@@ -27,6 +28,7 @@ namespace Camber.UI
         /// </summary>
         public TextStylesDropDown() : base(_outputName)
         {
+            this.Info(string.Format(Resources.NODE_OBSOLETE_MESSAGE, "Choose Text Style"), true);
             PopulateDropDownItems();
         }
 
@@ -39,6 +41,7 @@ namespace Camber.UI
         public TextStylesDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts) 
             : base(_outputName, inPorts, outPorts)
         {
+            this.Info(string.Format(Resources.NODE_OBSOLETE_MESSAGE, "Choose Text Style"), true);
             PopulateDropDownItems();
         }
         #endregion

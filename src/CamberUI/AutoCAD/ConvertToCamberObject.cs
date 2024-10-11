@@ -12,10 +12,10 @@ namespace Camber.UI
     [NodeDescription("Converts a Dynamo Object to a Camber Object.")]
     [NodeCategory("Camber")]
     [InPortNames("object")]
-    [InPortTypes("Autodesk.AutoCAD.DynamoNodes.Object")]
-    [InPortDescriptions("Autodesk.AutoCAD.DynamoNodes.Object")]
+    [InPortTypes("Object")]
+    [InPortDescriptions("Object")]
     [OutPortNames("Object")]
-    [OutPortTypes("Autodesk.AutoCAD.DynamoNodes.Object")]
+    [OutPortTypes("Object")]
     [OutPortDescriptions("Object")]
 
     [IsDesignScriptCompatible]

@@ -1,0 +1,800 @@
+{
+  "Uuid": "a0ebb5c7-0863-4635-b5fd-938303c121ac",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "AlignmentMigrationTests",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Autodesk.AutoCAD.DynamoNodes.AcObjectsOfType, AutoCADNodesUI",
+      "Id": "d5752517d67a401798e341375513967d",
+      "NodeType": "ExtensionNode",
+      "Inputs": [
+        {
+          "Id": "c6889e594c3f454dad20f90aeaac97d9",
+          "Name": "type",
+          "Description": "",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "a6fabeb9d5a74516babd75d2c73b77b5",
+          "Name": "block",
+          "Description": "",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "cad11525b5ff4d648574cd119fa9aab8",
+          "Name": "Object[]",
+          "Description": "Object[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Select all objects of the type."
+    },
+    {
+      "ConcreteType": "Autodesk.AutoCAD.DynamoNodes.AcObjectTypes, AutoCADNodesUI",
+      "SelectedIndex": 0,
+      "SelectedString": "Alignment",
+      "Id": "d0dbe4a3e3fb4d25b8576fb73b9b5dd1",
+      "NodeType": "ExtensionNode",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "2113a0bb9d1541a58578705de8c2692c",
+          "Name": "Object Type",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Select object type."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "915f9acbd49144c6b60a4019542830a7",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "1bdbf18b05114ddbb164e0296f16adc9",
+          "Name": "document",
+          "Description": "Autodesk.AutoCAD.DynamoNodes.Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "3ab1f33bc9844ab397030ae6ee7c4f77",
+          "Name": "Block",
+          "Description": "Block",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Document.ModelSpace",
+      "Replication": "Auto",
+      "Description": "Get the model space block table record.\n\nDocument.ModelSpace: Block"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "d2c52461da5a4966ac9dededcb01cbfc",
+      "NodeType": "FunctionNode",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "648a5756b87b45129848edbc253a919e",
+          "Name": "Document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Document.Current",
+      "Replication": "Auto",
+      "Description": "Get the current AutoCAD document.\n\nDocument.Current: Document"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "3b9299e2f6ee42d286f5228c2067c320",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "07da1215ad9348ab9f91e73f61b07f11",
+          "Name": "alignment",
+          "Description": "Alignment",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "8129abfd4e7042ac83f17b53d0e7af06",
+          "Name": "PolyCurve",
+          "Description": "PolyCurve",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.Alignment.Geometry@Autodesk.Civil.DynamoNodes.Alignment",
+      "Replication": "Auto",
+      "Description": "Gets the Polycurve geometry of an Alignment. Note that spiral entities will be tessellated.\n\nAlignment.Geometry (alignment: Alignment): PolyCurve"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "66d28d1fe1bd40e6ac5b01841481d132",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "528283b6827f4237a199ea80ae234452",
+          "Name": "alignment",
+          "Description": "Alignment",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "10438a6b75d34c69b8a61371d6de32f0",
+          "Name": "labelSetStyleName",
+          "Description": "The name of the label set style to import.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "21f4c430f4f94589862a61a52b52fe9a",
+          "Name": "Alignment",
+          "Description": "Alignment",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.Alignment.ImportLabelSet@Autodesk.Civil.DynamoNodes.Alignment,string",
+      "Replication": "Auto",
+      "Description": "Imports an Alignment Label Set for an Alignment.\n\nAlignment.ImportLabelSet (alignment: Alignment, labelSetStyleName: string): Alignment"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "Id": "b5d7dd911bce4e50b0a9ad9c6965a5bf",
+      "NodeType": "StringInputNode",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "8f40fb2308424844a89698f09a95442e",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string",
+      "InputValue": "All Labels"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "f1d455bc68f440edaedf3e9adbf99894",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "dbca420a966c48ff86e146cbbfd9f155",
+          "Name": "alignment",
+          "Description": "Alignment",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "7d48d6c6fc454d5fa049e412cc99a2f3",
+          "Name": "ProfileView[]",
+          "Description": "ProfileView[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.Alignment.ProfileViews@Autodesk.Civil.DynamoNodes.Alignment",
+      "Replication": "Auto",
+      "Description": "Gets the Profile Views that are based on an Alignment.\n\nAlignment.ProfileViews (alignment: Alignment): ProfileView[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "debe9a5ae40d4e80ae05bff967b85334",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "fb0a8d8201554dbea1ad7a077aba3f0f",
+          "Name": "alignment",
+          "Description": "Alignment",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "c3ad1daf01384f6191b0a36bcf0f85fe",
+          "Name": "SampleLineGroup[]",
+          "Description": "SampleLineGroup[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.Alignment.SampleLineGroups@Autodesk.Civil.DynamoNodes.Alignment",
+      "Replication": "Auto",
+      "Description": "Gets the Sample Line Groups that are based on an Alignment.\n\nAlignment.SampleLineGroups (alignment: Alignment): SampleLineGroup[]"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "WatchWidth": 95.0,
+      "WatchHeight": 38.0,
+      "Id": "c0018884a1064809a5a8267879cd80eb",
+      "NodeType": "ExtensionNode",
+      "Inputs": [
+        {
+          "Id": "d1da3c422b8a48258a7076166ed24472",
+          "Name": "",
+          "Description": "Node to show output from",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "b857e0542e3e44e984c1ac3a646e592f",
+          "Name": "",
+          "Description": "Node output",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualizes a node's output"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "WatchWidth": 95.0,
+      "WatchHeight": 38.0,
+      "Id": "b524e99eaf1d45dabb4018e2428a3879",
+      "NodeType": "ExtensionNode",
+      "Inputs": [
+        {
+          "Id": "b557e6f144bd48ca901d913df68f3d61",
+          "Name": "",
+          "Description": "Node to show output from",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "60fed3d1eac746d38dee64355daf1ab3",
+          "Name": "",
+          "Description": "Node output",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualizes a node's output"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "WatchWidth": 95.0,
+      "WatchHeight": 38.0,
+      "Id": "18972e2d957145d5baf2f5948ffffba9",
+      "NodeType": "ExtensionNode",
+      "Inputs": [
+        {
+          "Id": "6d5396a20d1f481889382977ada7a7eb",
+          "Name": "",
+          "Description": "Node to show output from",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "fba4c464cae24332bf3ba3645deb3018",
+          "Name": "",
+          "Description": "Node output",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualizes a node's output"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "WatchWidth": 95.0,
+      "WatchHeight": 38.0,
+      "Id": "31dfbbe8adc84bf98a0d8d97e49d0227",
+      "NodeType": "ExtensionNode",
+      "Inputs": [
+        {
+          "Id": "662b413440834ac9af4ef36eb9fe3cd0",
+          "Name": "",
+          "Description": "Node to show output from",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "d3e51f6d74cb433baef27798bf893fb0",
+          "Name": "",
+          "Description": "Node output",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualizes a node's output"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "21679f9c22454d198bcbccd21a1dbf78",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "c84777dbd22143299ffd6bf5f191370d",
+          "Name": "alignment",
+          "Description": "Alignment",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "08a774cd6ea24aed8d55b1b45df75f73",
+          "Name": "startStation",
+          "Description": "double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "b71ce3d7856248729fc750770cbad2c2",
+          "Name": "Alignment",
+          "Description": "Alignment",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.Alignment.SetStartStation@Autodesk.Civil.DynamoNodes.Alignment,double",
+      "Replication": "Auto",
+      "Description": "Sets the start station for an Alignment.\n\nAlignment.SetStartStation (alignment: Alignment, startStation: double): Alignment"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.DoubleInput, CoreNodeModels",
+      "NumberType": "Double",
+      "Id": "5f8ceb80c1524fe983cc9c464d768cd0",
+      "NodeType": "NumberInputNode",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "2f2277c3d0c646749965c9877bc237e9",
+          "Name": "",
+          "Description": "Double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a number",
+      "InputValue": 0.0
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "WatchWidth": 95.0,
+      "WatchHeight": 38.0,
+      "Id": "972a1aab963e4bfd858c0f71d20231ae",
+      "NodeType": "ExtensionNode",
+      "Inputs": [
+        {
+          "Id": "36915cc438e5493cae1ad46c5da8f6a8",
+          "Name": "",
+          "Description": "Node to show output from",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "fa02e06afc2e40efafa8e9261e3635b9",
+          "Name": "",
+          "Description": "Node output",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualizes a node's output"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "cad11525b5ff4d648574cd119fa9aab8",
+      "End": "07da1215ad9348ab9f91e73f61b07f11",
+      "Id": "0e093faa13404b88af98b4e4079fdd4e",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "cad11525b5ff4d648574cd119fa9aab8",
+      "End": "528283b6827f4237a199ea80ae234452",
+      "Id": "ae39c53490b9411da6fcb88894a95dc7",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "cad11525b5ff4d648574cd119fa9aab8",
+      "End": "dbca420a966c48ff86e146cbbfd9f155",
+      "Id": "a6cc509cda4947bcb633a850a91526d1",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "cad11525b5ff4d648574cd119fa9aab8",
+      "End": "fb0a8d8201554dbea1ad7a077aba3f0f",
+      "Id": "38be4b6f7ec14352857aacde3d974761",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "cad11525b5ff4d648574cd119fa9aab8",
+      "End": "c84777dbd22143299ffd6bf5f191370d",
+      "Id": "df57713baadf4844a48a85c1edb419ea",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "2113a0bb9d1541a58578705de8c2692c",
+      "End": "c6889e594c3f454dad20f90aeaac97d9",
+      "Id": "9f4c9cc3cb07426399000bc3e2eb735d",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "3ab1f33bc9844ab397030ae6ee7c4f77",
+      "End": "a6fabeb9d5a74516babd75d2c73b77b5",
+      "Id": "c57e063f7d414120bc2f255f1cc3fb52",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "648a5756b87b45129848edbc253a919e",
+      "End": "1bdbf18b05114ddbb164e0296f16adc9",
+      "Id": "dd67dfe9b6c347efbffdf89ad6c714cf",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "8129abfd4e7042ac83f17b53d0e7af06",
+      "End": "d1da3c422b8a48258a7076166ed24472",
+      "Id": "a444f9d91b164885ba3fcf8fec9a731d",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "21f4c430f4f94589862a61a52b52fe9a",
+      "End": "b557e6f144bd48ca901d913df68f3d61",
+      "Id": "e75539d5d4fa466e925c29235ce9160f",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "8f40fb2308424844a89698f09a95442e",
+      "End": "10438a6b75d34c69b8a61371d6de32f0",
+      "Id": "07f239c4c1854fe4a56ae34467386062",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "7d48d6c6fc454d5fa049e412cc99a2f3",
+      "End": "6d5396a20d1f481889382977ada7a7eb",
+      "Id": "afc8f237deb84816bd0260b9353fd1d0",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "c3ad1daf01384f6191b0a36bcf0f85fe",
+      "End": "662b413440834ac9af4ef36eb9fe3cd0",
+      "Id": "12b2ef234bdf47df8c45a01b2fa4d1c9",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "b71ce3d7856248729fc750770cbad2c2",
+      "End": "36915cc438e5493cae1ad46c5da8f6a8",
+      "Id": "52ca56cdc4f94d81ae52769f2f4b9a24",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "2f2277c3d0c646749965c9877bc237e9",
+      "End": "08a774cd6ea24aed8d55b1b45df75f73",
+      "Id": "59c616a443d944a5b23a7a0b13c3ad03",
+      "IsHidden": "False"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Camber",
+      "Version": "4.2.6",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "3b9299e2f6ee42d286f5228c2067c320",
+        "66d28d1fe1bd40e6ac5b01841481d132",
+        "f1d455bc68f440edaedf3e9adbf99894",
+        "debe9a5ae40d4e80ae05bff967b85334",
+        "21679f9c22454d198bcbccd21a1dbf78"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.19",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.19.4.6671",
+      "RunType": "Automatic",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "_Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "ConnectorPins": [],
+    "NodeViews": [
+      {
+        "Id": "d5752517d67a401798e341375513967d",
+        "Name": "All Objects of Type",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 440.161619705676,
+        "Y": 839.46147178959552
+      },
+      {
+        "Id": "d0dbe4a3e3fb4d25b8576fb73b9b5dd1",
+        "Name": "Objects Types",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 89.161619705676,
+        "Y": 782.46147178959552
+      },
+      {
+        "Id": "915f9acbd49144c6b60a4019542830a7",
+        "Name": "Document.ModelSpace",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 89.161619705676,
+        "Y": 930.46147178959552
+      },
+      {
+        "Id": "d2c52461da5a4966ac9dededcb01cbfc",
+        "Name": "Document.Current",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": -219.838380294324,
+        "Y": 930.46147178959552
+      },
+      {
+        "Id": "3b9299e2f6ee42d286f5228c2067c320",
+        "Name": "Alignment.Geometry",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 752.161619705676,
+        "Y": 513.46147178959552
+      },
+      {
+        "Id": "66d28d1fe1bd40e6ac5b01841481d132",
+        "Name": "Alignment.ImportLabelSet",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 752.161619705676,
+        "Y": 660.46147178959552
+      },
+      {
+        "Id": "b5d7dd911bce4e50b0a9ad9c6965a5bf",
+        "Name": "String",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 440.161619705676,
+        "Y": 692.46147178959552
+      },
+      {
+        "Id": "f1d455bc68f440edaedf3e9adbf99894",
+        "Name": "Alignment.ProfileViews",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 752.161619705676,
+        "Y": 837.46147178959552
+      },
+      {
+        "Id": "debe9a5ae40d4e80ae05bff967b85334",
+        "Name": "Alignment.SampleLineGroups",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 752.161619705676,
+        "Y": 984.46147178959552
+      },
+      {
+        "Id": "c0018884a1064809a5a8267879cd80eb",
+        "Name": "Watch",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1151.161619705676,
+        "Y": 523.46147178959552
+      },
+      {
+        "Id": "b524e99eaf1d45dabb4018e2428a3879",
+        "Name": "Watch",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1151.161619705676,
+        "Y": 674.46147178959552
+      },
+      {
+        "Id": "18972e2d957145d5baf2f5948ffffba9",
+        "Name": "Watch",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1151.161619705676,
+        "Y": 825.46147178959552
+      },
+      {
+        "Id": "31dfbbe8adc84bf98a0d8d97e49d0227",
+        "Name": "Watch",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1151.161619705676,
+        "Y": 976.46147178959552
+      },
+      {
+        "Id": "21679f9c22454d198bcbccd21a1dbf78",
+        "Name": "Alignment.SetStartStation",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 752.161619705676,
+        "Y": 1131.4614717895956
+      },
+      {
+        "Id": "5f8ceb80c1524fe983cc9c464d768cd0",
+        "Name": "Number",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 440.161619705676,
+        "Y": 1165.4614717895956
+      },
+      {
+        "Id": "972a1aab963e4bfd858c0f71d20231ae",
+        "Name": "Watch",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1151.161619705676,
+        "Y": 1127.4614717895956
+      }
+    ],
+    "Annotations": [],
+    "X": 192.27862291330851,
+    "Y": -297.85036705661,
+    "Zoom": 0.7381723914452365
+  }
+}

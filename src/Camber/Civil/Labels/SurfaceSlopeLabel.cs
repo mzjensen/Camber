@@ -57,18 +57,12 @@ namespace Camber.Civil.Labels
             {
                 if (SlopeLabelType == "OnePoint")
                 {
-                    return civDynNodes.Surface.SamplePoint(
-                        Surface,
-                        GeometryConversions.AcPointToDynPoint(AeccSurfaceSlopeLabel.Location));
+                    return Surface.SamplePoint(GeometryConversions.AcPointToDynPoint(AeccSurfaceSlopeLabel.Location));
                 }
                 else if (SlopeLabelType == "TwoPoint")
                 {
-                    Point startPoint = civDynNodes.Surface.SamplePoint(
-                        Surface,
-                        GeometryConversions.AcPointToDynPoint(AeccSurfaceSlopeLabel.Location));
-                    Point endPoint = civDynNodes.Surface.SamplePoint(
-                        Surface,
-                        GeometryConversions.AcPointToDynPoint(AeccSurfaceSlopeLabel.Location2));
+                    Point startPoint = Surface.SamplePoint(GeometryConversions.AcPointToDynPoint(AeccSurfaceSlopeLabel.Location));
+                    Point endPoint = Surface.SamplePoint(GeometryConversions.AcPointToDynPoint(AeccSurfaceSlopeLabel.Location2));
                     return Line.ByStartPointEndPoint(startPoint, endPoint);
                 }
                 else

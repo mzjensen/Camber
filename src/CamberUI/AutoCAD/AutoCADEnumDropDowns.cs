@@ -1,5 +1,7 @@
 ﻿#region references
 using System.Collections.Generic;
+using Autodesk.DesignScript.Runtime;
+using Camber.Properties;
 using Newtonsoft.Json;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using aecDb = Autodesk.Aec.DatabaseServices;
@@ -16,11 +18,17 @@ namespace Camber.UI
     {
         private const string OutputName = "units";
 
-        public BlockUnitsDropDown() : base(OutputName, typeof(acDb.UnitsValue)) { }
+        public BlockUnitsDropDown() : base(OutputName, typeof(acDb.UnitsValue))
+        {
+            this.Info(string.Format(Resources.NODE_OBSOLETE_MESSAGE, "Units"), true);
+        }
 
         [JsonConstructor]
         public BlockUnitsDropDown(IEnumerable<PortModel> inPorts, IEnumerable<PortModel> outPorts)
-            : base(OutputName, typeof(acDb.UnitsValue), inPorts, outPorts) { }
+            : base(OutputName, typeof(acDb.UnitsValue), inPorts, outPorts)
+        {
+            this.Info(string.Format(Resources.NODE_OBSOLETE_MESSAGE, "Units"), true);
+        }
     }
 
     [NodeName("View Block View Directions")]

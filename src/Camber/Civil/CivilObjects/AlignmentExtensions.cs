@@ -1,9 +1,12 @@
 ﻿using Autodesk.Civil.Settings;
 using Autodesk.DesignScript.Geometry;
+using Autodesk.DesignScript.Runtime;
 using Camber.AutoCAD.Objects;
 using Dynamo.Graph.Nodes;
+using DynamoServices;
 using System;
 using System.Collections.Generic;
+using Camber.Properties;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
@@ -36,66 +39,6 @@ namespace Camber.Civil.CivilObjects
         }
 
         #region query methods
-        /// <summary>
-        /// Gets the Profile Views that are based on an Alignment.
-        /// </summary>
-        /// <param name="alignment"></param>
-        /// <returns></returns>
-        [NodeCategory("Query")]
-        public static IList<ProfileView> ProfileViews(this civDynNodes.Alignment alignment)
-        {
-            List<ProfileView> profileViews = new List<ProfileView>();
-            acDynNodes.Document document = acDynNodes.Document.Current;
-
-            try
-            {
-                using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
-                {
-                    AeccAlignment aeccAlign = (AeccAlignment)ctx.Transaction.GetObject(alignment.InternalObjectId, acDb.OpenMode.ForRead);
-
-                    foreach (acDb.ObjectId oid in aeccAlign.GetProfileViewIds())
-                    {
-                        profileViews.Add(ProfileView.GetByObjectId(oid));
-                    }
-                    return profileViews;
-                }
-            }
-            catch (Exception e)
-            {
-                throw new InvalidOperationException(e.Message);
-            } 
-        }
-
-        /// <summary>
-        /// Gets the Sample Line Groups that are based on an Alignment.
-        /// </summary>
-        /// <param name="alignment"></param>
-        /// <returns></returns>
-        [NodeCategory("Query")]
-        public static IList<SampleLineGroup> SampleLineGroups(this civDynNodes.Alignment alignment)
-        {
-            List<SampleLineGroup> slGroups = new List<SampleLineGroup>();
-            acDynNodes.Document document = acDynNodes.Document.Current;
-
-            try
-            {
-                using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
-                {
-                    AeccAlignment aeccAlign = (AeccAlignment)ctx.Transaction.GetObject(alignment.InternalObjectId, acDb.OpenMode.ForRead);
-
-                    foreach (acDb.ObjectId oid in aeccAlign.GetSampleLineGroupIds())
-                    {
-                        slGroups.Add(SampleLineGroup.GetByObjectId(oid));
-                    }
-                    return slGroups;
-                }
-            }
-            catch (Exception e)
-            {
-                throw new InvalidOperationException(e.Message);
-            }
-        }
-
         /// <summary>
         /// Gets if an Alignment is a Connected Alignment.
         /// </summary>
@@ -141,97 +84,6 @@ namespace Camber.Civil.CivilObjects
             catch (Exception e)
             {
                 throw new InvalidOperationException(e.Message);
-            }
-        }
-
-        /// <summary>
-        /// Gets the Polycurve geometry of an Alignment. Note that spiral entities will be tessellated.
-        /// </summary>
-        /// <param name="alignment"></param>
-        /// <returns></returns>
-        [NodeCategory("Query")]
-        public static PolyCurve Geometry(this civDynNodes.Alignment alignment)
-        {
-            try
-            {
-                using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
-                {
-                    var aeccAlign = (AeccAlignment) ctx.Transaction.GetObject(alignment.InternalObjectId, acDb.OpenMode.ForRead);
-                    var plineId = aeccAlign.GetPolyline();
-                    var acPline = (acDb.Polyline) ctx.Transaction.GetObject(plineId, acDb.OpenMode.ForWrite);
-                    var dynPline = (acDynNodes.Polyline) acDynNodes.SelectionByQuery.GetObjectByObjectHandle(plineId.Handle.ToString());
-                    dynPline.PruneDuplicateVertices(false);
-                    acPline.Erase();
-                    return (PolyCurve)dynPline.Geometry;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new InvalidOperationException(ex.Message);
-            }
-        }
-        #endregion
-
-        #region action methods
-        /// <summary>
-        /// Imports an Alignment Label Set for an Alignment.
-        /// </summary>
-        /// <param name="alignment"></param>
-        /// <param name="labelSetStyleName">The name of the label set style to import.</param>
-        /// <returns></returns>
-        public static civDynNodes.Alignment ImportLabelSet(
-            this civDynNodes.Alignment alignment,
-            string labelSetStyleName)
-        {
-            if (string.IsNullOrEmpty(labelSetStyleName))
-            {
-                throw new InvalidOperationException("Label set style name is null or empty.");
-            }
-
-            try
-            {
-                using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
-                {
-                    var aeccAlign =
-                        (AeccAlignment) ctx.Transaction.GetObject(alignment.InternalObjectId, acDb.OpenMode.ForWrite);
-                    aeccAlign.ImportLabelSet(labelSetStyleName);
-                }
-
-                return alignment;
-            }
-            catch (Exception ex)
-            {
-                throw new InvalidOperationException(ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// Sets the start station for an Alignment.
-        /// </summary>
-        /// <param name="alignment"></param>
-        /// <param name="startStation"></param>
-        /// <returns></returns>
-        public static civDynNodes.Alignment SetStartStation(this civDynNodes.Alignment alignment, double startStation)
-        {
-            if (alignment == null)
-            {
-                return null;
-            }
-
-            try
-            {
-                using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
-                {
-                    var aeccAlign = (AeccAlignment)ctx.Transaction.GetObject(
-                        alignment.InternalObjectId, 
-                        acDb.OpenMode.ForWrite);
-                    aeccAlign.ReferencePointStation = startStation;
-                    return alignment;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new InvalidOperationException(ex.Message);
             }
         }
         #endregion
@@ -289,6 +141,179 @@ namespace Camber.Civil.CivilObjects
                 {
                     throw new InvalidOperationException(ex.Message);
                 }
+            }
+        }
+        #endregion
+
+        #region obsolete
+        /// <summary>
+        /// Gets the Polycurve geometry of an Alignment. Note that spiral entities will be tessellated.
+        /// </summary>
+        /// <param name="alignment"></param>
+        /// <returns></returns>
+        [NodeMigrationMapping(
+            "Camber.Civil.CivilObjects.Alignment.Geometry",
+            "Autodesk.Civil.DynamoNodes.Alignment.PolyCurve")]
+        [NodeCategory("Query")]
+        public static PolyCurve Geometry(this civDynNodes.Alignment alignment)
+        {
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Alignment.PolyCurve"));
+            
+            try
+            {
+                using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
+                {
+                    var aeccAlign = (AeccAlignment)ctx.Transaction.GetObject(alignment.InternalObjectId, acDb.OpenMode.ForRead);
+                    var plineId = aeccAlign.GetPolyline();
+                    var acPline = (acDb.Polyline)ctx.Transaction.GetObject(plineId, acDb.OpenMode.ForWrite);
+                    var dynPline = (acDynNodes.Polyline)acDynNodes.SelectionByQuery.GetObjectByObjectHandle(plineId.Handle.ToString());
+                    dynPline.PruneDuplicateVertices(false);
+                    acPline.Erase();
+                    return (PolyCurve)dynPline.Geometry;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Imports an Alignment Label Set for an Alignment.
+        /// </summary>
+        /// <param name="alignment"></param>
+        /// <param name="labelSetStyleName">The name of the label set style to import.</param>
+        /// <returns></returns>
+        public static civDynNodes.Alignment ImportLabelSet(
+            this civDynNodes.Alignment alignment,
+            string labelSetStyleName)
+        {
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MESSAGE, "Alignment.ImportLabelSet"));
+
+            if (string.IsNullOrEmpty(labelSetStyleName))
+            {
+                throw new InvalidOperationException("Label set style name is null or empty.");
+            }
+
+            try
+            {
+                using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
+                {
+                    var aeccAlign =
+                        (AeccAlignment)ctx.Transaction.GetObject(alignment.InternalObjectId, acDb.OpenMode.ForWrite);
+                    aeccAlign.ImportLabelSet(labelSetStyleName);
+                }
+
+                return alignment;
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Gets the Profile Views that are based on an Alignment.
+        /// </summary>
+        /// <param name="alignment"></param>
+        /// <returns></returns>
+        [NodeMigrationMapping(
+            "Camber.Civil.CivilObjects.Alignment.ProfileViews",
+            "Autodesk.Civil.DynamoNodes.Alignment.ProfileViews")]
+        [NodeCategory("Query")]
+        public static IList<ProfileView> ProfileViews(this civDynNodes.Alignment alignment)
+        {
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Alignment.ProfileViews"));
+
+            List<ProfileView> profileViews = new List<ProfileView>();
+            acDynNodes.Document document = acDynNodes.Document.Current;
+
+            try
+            {
+                using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
+                {
+                    AeccAlignment aeccAlign = (AeccAlignment)ctx.Transaction.GetObject(alignment.InternalObjectId, acDb.OpenMode.ForRead);
+
+                    foreach (acDb.ObjectId oid in aeccAlign.GetProfileViewIds())
+                    {
+                        profileViews.Add(ProfileView.GetByObjectId(oid));
+                    }
+                    return profileViews;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new InvalidOperationException(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Gets the Sample Line Groups that are based on an Alignment.
+        /// </summary>
+        /// <param name="alignment"></param>
+        /// <returns></returns>
+        [NodeMigrationMapping(
+            "Camber.Civil.CivilObjects.Alignment.SampleLineGroups",
+            "Autodesk.Civil.DynamoNodes.Alignment.SampleLineGroups")]
+        [NodeCategory("Query")]
+        public static IList<SampleLineGroup> SampleLineGroups(this civDynNodes.Alignment alignment)
+        {
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Alignment.SampleLineGroups"));
+
+            List<SampleLineGroup> slGroups = new List<SampleLineGroup>();
+            acDynNodes.Document document = acDynNodes.Document.Current;
+
+            try
+            {
+                using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
+                {
+                    AeccAlignment aeccAlign = (AeccAlignment)ctx.Transaction.GetObject(alignment.InternalObjectId, acDb.OpenMode.ForRead);
+
+                    foreach (acDb.ObjectId oid in aeccAlign.GetSampleLineGroupIds())
+                    {
+                        slGroups.Add(SampleLineGroup.GetByObjectId(oid));
+                    }
+                    return slGroups;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new InvalidOperationException(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Sets the start station for an Alignment.
+        /// </summary>
+        /// <param name="alignment"></param>
+        /// <param name="startStation"></param>
+        /// <returns></returns>
+        [NodeMigrationMapping(
+            "Camber.Civil.CivilObjects.Alignment.SetStartStation",
+            "Autodesk.Civil.DynamoNodes.Alignment.SetReferencePointStation")]
+        public static civDynNodes.Alignment SetStartStation(this civDynNodes.Alignment alignment, double startStation)
+        {
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Alignment.SetReferencePointStation"));
+
+            if (alignment == null)
+            {
+                return null;
+            }
+
+            try
+            {
+                using (var ctx = new acDynApp.DocumentContext(acDynNodes.Document.Current.AcDocument))
+                {
+                    var aeccAlign = (AeccAlignment)ctx.Transaction.GetObject(
+                        alignment.InternalObjectId,
+                        acDb.OpenMode.ForWrite);
+                    aeccAlign.ReferencePointStation = startStation;
+                    return alignment;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
             }
         }
         #endregion

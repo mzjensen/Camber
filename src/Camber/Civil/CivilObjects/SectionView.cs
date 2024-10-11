@@ -10,6 +10,7 @@ using civDynNodes = Autodesk.Civil.DynamoNodes;
 using AeccSectionView = Autodesk.Civil.DatabaseServices.SectionView;
 using Autodesk.DesignScript.Runtime;
 using Autodesk.DesignScript.Geometry;
+using Camber.Properties;
 using DynamoServices;
 using Camber.Utilities.GeometryConversions;
 #endregion
@@ -21,46 +22,6 @@ namespace Camber.Civil.CivilObjects
     {
         #region properties
         internal AeccSectionView AeccSectionView => AcObject as AeccSectionView;
-
-        /// <summary>
-        /// Gets the Sample Line that the Section View is associated with.
-        /// </summary>
-        public SampleLine SampleLine => SampleLine.GetByObjectId(AeccSectionView.SampleLineId);
-
-        /// <summary>
-        /// Gets the maximum elevation of the Section View.
-        /// </summary>
-        public double MaxElevation => GetDouble("ElevationMax");
-
-        /// <summary>
-        /// Gets the minimum elevation of the Section View.
-        /// </summary>
-        public double MinElevation => GetDouble("ElevationMin");
-
-        /// <summary>
-        /// Gets whether the elevation range of the Section View is set to Automatic.
-        /// </summary>
-        public bool IsElevationRangeAutomatic => GetBool();
-
-        /// <summary>
-        /// Gets whether the offset range of the Section View is set to Automatic.
-        /// </summary>
-        public bool IsOffsetRangeAutomatic => GetBool();
-
-        /// <summary>
-        /// Gets the location of the Section View.
-        /// </summary>
-        public Point Location => GeometryConversions.AcPointToDynPoint(AeccSectionView.Location);
-
-        /// <summary>
-        /// Gets the left offset of the Section View.
-        /// </summary>
-        public double OffsetLeft => GetDouble();
-
-        /// <summary>
-        /// Gets the right offset of the Section View.
-        /// </summary>
-        public double OffsetRight => GetDouble();
         #endregion
 
         #region constructors
@@ -70,9 +31,17 @@ namespace Camber.Civil.CivilObjects
         internal static SectionView GetByObjectId(acDb.ObjectId sectionViewId)
             => CivilObjectSupport.Get<SectionView, AeccSectionView>
             (sectionViewId, (sectionView) => new SectionView(sectionView));
+        #endregion
 
+        #region methods
+        public override string ToString() => $"SectionView(Name = {Name})";
+        #endregion
+
+        #region obsolete
         public static SectionView ByPoint(string name, SampleLine sampleLine, Point location)
         {
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MESSAGE, "SectionView.BySampleLine"));
+
             if (string.IsNullOrEmpty(name))
             {
                 throw new ArgumentNullException("Section View name is null");
@@ -119,37 +88,6 @@ namespace Camber.Civil.CivilObjects
                 return null;
             }
         }
-        #endregion
-
-        #region methods
-        public override string ToString() => $"SectionView(Name = {Name})";
-
-        /// <summary>
-        /// Gets all Section Views in a Document.
-        /// </summary>
-        /// <param name="document"></param>
-        /// <returns></returns>
-        public static IList<SectionView> GetSectionViews(acDynNodes.Document document)
-        {
-            List<SectionView> sectViews = new List<SectionView>();
-            using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
-            {
-                var bt = (acDb.BlockTable)ctx.Transaction.GetObject(ctx.Database.BlockTableId, acDb.OpenMode.ForRead);
-                var btr = (acDb.BlockTableRecord)ctx.Transaction.GetObject(
-                    acDb.SymbolUtilityServices.GetBlockModelSpaceId(document.AcDocument.Database), 
-                    acDb.OpenMode.ForRead);
-                foreach (acDb.ObjectId oid in btr)
-                {
-                    var obj = ctx.Transaction.GetObject(oid, acDb.OpenMode.ForRead);
-                    if (obj is AeccSectionView)
-                    {
-                        sectViews.Add(SectionView.GetByObjectId(oid));
-                    }
-                }
-
-                return sectViews;
-            }
-        }
 
         /// <summary>
         /// Gets the offset and elevation values of a point in the Section View.
@@ -157,9 +95,14 @@ namespace Camber.Civil.CivilObjects
         /// <param name="sectionView"></param>
         /// <param name="point"></param>
         /// <returns></returns>
+        [NodeMigrationMapping(
+            "Camber.Civil.CivilObjects.SectionView.GetOffsetElevationAtPoint",
+            "Autodesk.Civil.DynamoNodes.SectionView.OffsetElevationAtPoint")]
         [MultiReturn(new[] { "Offset", "Elevation" })]
         public static Dictionary<string, object> GetOffsetElevationAtPoint(SectionView sectionView, Point point)
         {
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "SectionView.OffsetElevationAtPoint"));
+
             // Error checking
             if (sectionView is null)
             {
@@ -185,8 +128,13 @@ namespace Camber.Civil.CivilObjects
         /// <param name="offset"></param>
         /// <param name="elevation"></param>
         /// <returns></returns>
+        [NodeMigrationMapping(
+            "Camber.Civil.CivilObjects.SectionView.GetPointAtOffsetElevation",
+            "Autodesk.Civil.DynamoNodes.SectionView.PointAtOffsetElevation")]
         public static Point GetPointAtOffsetElevation(SectionView sectionView, double offset, double elevation)
         {
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "SectionView.PointAtOffsetElevation"));
+
             // Error checking
             if (sectionView is null)
             {
@@ -203,17 +151,152 @@ namespace Camber.Civil.CivilObjects
         }
 
         /// <summary>
-        /// Sets the elevations of the Section View. The elevation range mode will be set to "User specified".
+        /// Gets all Section Views in a Document.
         /// </summary>
-        /// <param name="minElevation"></param>
-        /// <param name="maxElevation"></param>
+        /// <param name="document"></param>
         /// <returns></returns>
-        public SectionView SetElevations(double minElevation, double maxElevation)
+        public static IList<SectionView> GetSectionViews(acDynNodes.Document document)
         {
-            SetElevationRangeMode(false);
-            SetValue(minElevation, "ElevationMin");
-            SetValue(maxElevation, "ElevationMax");
-            return this;
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MESSAGE, "All Objects of Type"));
+
+            List<SectionView> sectViews = new List<SectionView>();
+            using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
+            {
+                var bt = (acDb.BlockTable)ctx.Transaction.GetObject(ctx.Database.BlockTableId, acDb.OpenMode.ForRead);
+                var btr = (acDb.BlockTableRecord)ctx.Transaction.GetObject(
+                    acDb.SymbolUtilityServices.GetBlockModelSpaceId(document.AcDocument.Database),
+                    acDb.OpenMode.ForRead);
+                foreach (acDb.ObjectId oid in btr)
+                {
+                    var obj = ctx.Transaction.GetObject(oid, acDb.OpenMode.ForRead);
+                    if (obj is AeccSectionView)
+                    {
+                        sectViews.Add(SectionView.GetByObjectId(oid));
+                    }
+                }
+
+                return sectViews;
+            }
+        }
+
+        /// <summary>
+        /// Gets whether the elevation range of the Section View is set to Automatic.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.Civil.CivilObjects.SectionView.IsElevationRangeAutomatic",
+            "Autodesk.Civil.DynamoNodes.SectionView.IsElevationRangeAutomatic")]
+        public bool IsElevationRangeAutomatic
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "SectionView.IsElevationRangeAutomatic"));
+                return GetBool();
+            }
+        }
+
+        /// <summary>
+        /// Gets whether the offset range of the Section View is set to Automatic.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.Civil.CivilObjects.SectionView.IsOffsetRangeAutomatic",
+            "Autodesk.Civil.DynamoNodes.SectionView.IsOffsetRangeAutomatic")]
+        public bool IsOffsetRangeAutomatic
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "SectionView.IsOffsetRangeAutomatic"));
+                return GetBool();
+            }
+        }
+
+        /// <summary>
+        /// Gets the location of the Section View.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.Civil.CivilObjects.SectionView.Location",
+            "Autodesk.AutoCAD.DynamoNodes.Object.Location")]
+        public Point Location
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Object.Location"));
+                return GeometryConversions.AcPointToDynPoint(AeccSectionView.Location);
+            }
+        }
+
+        /// <summary>
+        /// Gets the maximum elevation of the Section View.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.Civil.CivilObjects.SectionView.MaxElevation",
+            "Autodesk.Civil.DynamoNodes.SectionView.MaxElevation")]
+        public double MaxElevation
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "SectionView.MaxElevation"));
+                return GetDouble("ElevationMax");
+            }
+        }
+
+        /// <summary>
+        /// Gets the minimum elevation of the Section View.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.Civil.CivilObjects.SectionView.MinElevation",
+            "Autodesk.Civil.DynamoNodes.SectionView.MinElevation")]
+        public double MinElevation
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "SectionView.MinElevation"));
+                return GetDouble("ElevationMin");
+            }
+        }
+
+        /// <summary>
+        /// Gets the left offset of the Section View.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.Civil.CivilObjects.SectionView.OffsetLeft",
+            "Autodesk.Civil.DynamoNodes.SectionView.LeftOffset")]
+        public double OffsetLeft
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "SectionView.LeftOffset"));
+                return GetDouble();
+            }
+        }
+
+        /// <summary>
+        /// Gets the right offset of the Section View.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.Civil.CivilObjects.SectionView.OffsetRight",
+            "Autodesk.Civil.DynamoNodes.SectionView.RightOffset")]
+        public double OffsetRight
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "SectionView.RightOffset"));
+                return GetDouble();
+            }
+        }
+
+        /// <summary>
+        /// Gets the Sample Line that the Section View is associated with.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.Civil.CivilObjects.SectionView.SampleLine",
+            "Autodesk.Civil.DynamoNodes.SectionView.SampleLine")]
+        public SampleLine SampleLine
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "SectionView.SampleLine"));
+                return SampleLine.GetByObjectId(AeccSectionView.SampleLineId);
+            }
         }
 
         /// <summary>
@@ -223,7 +306,42 @@ namespace Camber.Civil.CivilObjects
         /// <returns></returns>
         public SectionView SetElevationRangeMode(bool @bool)
         {
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MESSAGE, "SectionView.SetElevationRangeAutomatic"));
+            
             SetValue(@bool, "IsElevationRangeAutomatic");
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the elevations of the Section View. The elevation range mode will be set to "User specified".
+        /// </summary>
+        /// <param name="minElevation"></param>
+        /// <param name="maxElevation"></param>
+        /// <returns></returns>
+        public SectionView SetElevations(double minElevation, double maxElevation)
+        {
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MESSAGE, "SectionView.SetMinElevation and SectionView.SetMaxElevation"));
+
+            SetElevationRangeMode(false);
+            SetValue(minElevation, "ElevationMin");
+            SetValue(maxElevation, "ElevationMax");
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the location of the Section View.
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        [NodeMigrationMapping(
+            "Camber.Civil.CivilObjects.SectionView.SetLocation",
+            "Autodesk.AutoCAD.DynamoNodes.Object.SetLocation")]
+        public SectionView SetLocation(Point point)
+        {
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Object.SetLocation"));
+
+            acGeom.Point3d acPoint = (acGeom.Point3d)GeometryConversions.DynPointToAcPoint(point, true);
+            SetValue(acPoint);
             return this;
         }
 
@@ -234,6 +352,8 @@ namespace Camber.Civil.CivilObjects
         /// <returns></returns>
         public SectionView SetOffsetRangeMode(bool @bool)
         {
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "SectionView.SetOffsetRangeAutomatic"));
+
             SetValue(@bool, "IsOffsetRangeAutomatic");
             return this;
         }
@@ -246,22 +366,11 @@ namespace Camber.Civil.CivilObjects
         /// <returns></returns>
         public SectionView SetOffsets(double offsetLeft, double offsetRight)
         {
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "SectionView.SetLeftOffset and SectionView.SetRightOffset"));
+
             SetOffsetRangeMode(false);
             SetValue(-offsetLeft, "OffsetLeft");
             SetValue(offsetRight, "OffsetRight");
-            return this;
-        }
-
-
-        /// <summary>
-        /// Sets the location of the Section View.
-        /// </summary>
-        /// <param name="point"></param>
-        /// <returns></returns>
-        public SectionView SetLocation(Point point)
-        {
-            acGeom.Point3d acPoint = (acGeom.Point3d)GeometryConversions.DynPointToAcPoint(point, true);
-            SetValue(acPoint);
             return this;
         }
         #endregion

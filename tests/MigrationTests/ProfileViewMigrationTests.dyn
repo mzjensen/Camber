@@ -1,0 +1,1333 @@
+{
+  "Uuid": "b6e44180-248a-4fa1-9a7f-0b126a8623c4",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "ProfileViewMigrationTests",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Autodesk.AutoCAD.DynamoNodes.AcObjectsOfType, AutoCADNodesUI",
+      "Id": "b9edf4d0a6664aa3857faf33a7b30218",
+      "NodeType": "ExtensionNode",
+      "Inputs": [
+        {
+          "Id": "e22940a8f22e4035806b1b391f392a6e",
+          "Name": "type",
+          "Description": "",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "1f304ef9360944b490c40397e6614573",
+          "Name": "block",
+          "Description": "",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "3eae8e02bf2943b38467490d11e91d25",
+          "Name": "Object[]",
+          "Description": "Object[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Select all objects of the type."
+    },
+    {
+      "ConcreteType": "Autodesk.AutoCAD.DynamoNodes.AcObjectTypes, AutoCADNodesUI",
+      "SelectedIndex": 0,
+      "SelectedString": "Alignment",
+      "Id": "3a2639538dae41eb860f2c55342c115b",
+      "NodeType": "ExtensionNode",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "7dc1597aee9c47ec98b3aa2dedbb33e8",
+          "Name": "Object Type",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Select object type."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "e4ead37a886b43809bb243dcc8d27050",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "a3a8bb3f8d39419286fde80ff7f7519f",
+          "Name": "document",
+          "Description": "Autodesk.AutoCAD.DynamoNodes.Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "31ea2831566e4abd9dda52acc6bfb805",
+          "Name": "Block",
+          "Description": "Block",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Document.ModelSpace",
+      "Replication": "Auto",
+      "Description": "Get the model space block table record.\n\nDocument.ModelSpace: Block"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "33fdcdc51dfc43f3864a6eecf9d6aed7",
+      "NodeType": "FunctionNode",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "61d22af589e64dac8115f67a3e34d016",
+          "Name": "Document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Document.Current",
+      "Replication": "Auto",
+      "Description": "Get the current AutoCAD document.\n\nDocument.Current: Document"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "c7c454ff1bc74b739b6c9300fa5c940b",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "35abd0b3d18541999941ae192310c1da",
+          "Name": "alignment",
+          "Description": "Alignment",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "a8a8979cf3c149c9b4d937eff85c3f11",
+          "Name": "location",
+          "Description": "Point",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "c53a45b986e84852969eb5f823086854",
+          "Name": "ProfileView",
+          "Description": "ProfileView",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.ProfileView.ByPoint@Autodesk.Civil.DynamoNodes.Alignment,Autodesk.DesignScript.Geometry.Point",
+      "Replication": "Auto",
+      "Description": "Creates a Profile View by point.\n\nProfileView.ByPoint (alignment: Alignment, location: Point): ProfileView"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "b655ef9270664b77a74cb841da139f84",
+      "NodeType": "FunctionNode",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "3b1722c8bcdc4296a48d129ff3c07168",
+          "Name": "Point",
+          "Description": "Origin point",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Autodesk.DesignScript.Geometry.Point.Origin",
+      "Replication": "Auto",
+      "Description": "Get the Origin point (0,0,0)\n\nPoint.Origin ( ): Point"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "5f22b19a229c4bd28712dceb465a1063",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "898151244cd94747a1c971f5629ec044",
+          "Name": "document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "17239b6073864aed9fcd8eff8cc93a74",
+          "Name": "ProfileView[]",
+          "Description": "ProfileView[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.ProfileView.GetAllProfileViews@Autodesk.AutoCAD.DynamoNodes.Document",
+      "Replication": "Auto",
+      "Description": "Gets all of the Profile Views in a document.\n\nProfileView.GetAllProfileViews (document: Document): ProfileView[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "a900a5a539b349469d85044d784a2e24",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "58ac1f37195d48f2be5ab3c51252877e",
+          "Name": "profileView",
+          "Description": "ProfileView",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "337b38e573244da4b219638833de359a",
+          "Name": "station",
+          "Description": "double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "2e05b42c4b604aceac4c23ac7054fe22",
+          "Name": "elevation",
+          "Description": "double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "96dc1363f18a4f1c81bf71676cc3250d",
+          "Name": "Point",
+          "Description": "Point",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.ProfileView.GetPointAtStationElevation@Camber.Civil.CivilObjects.ProfileView,double,double",
+      "Replication": "Auto",
+      "Description": "Gets a point in the Profile View at the given station and elevation values.\n\nProfileView.GetPointAtStationElevation (profileView: ProfileView, station: double, elevation: double): Point"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.DoubleInput, CoreNodeModels",
+      "NumberType": "Double",
+      "Id": "1717a8db8a40420f9a5e5a7f45ebc285",
+      "NodeType": "NumberInputNode",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "7d80e56d061b45a48e6b084d89e18e16",
+          "Name": "",
+          "Description": "Double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a number",
+      "InputValue": 0.0
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "01b0794b9a2e48fbb6137f091789fdd0",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "c98e59ecacd74070ae237b29084bb0f2",
+          "Name": "profileView",
+          "Description": "ProfileView",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "fcc90c814f7f4aacbe95dab8d5da0ca5",
+          "Name": "point",
+          "Description": "Point",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "232358108f3649cdb70ecdcd5800a3e3",
+          "Name": "Station",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "ead85363e9c44455a00547e01d28200b",
+          "Name": "Elevation",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.ProfileView.GetStationElevationAtPoint@Camber.Civil.CivilObjects.ProfileView,Autodesk.DesignScript.Geometry.Point",
+      "Replication": "Auto",
+      "Description": "Gets the station and elevation values of a point in the Profile View.\n\nProfileView.GetStationElevationAtPoint (profileView: ProfileView, point: Point): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "75fdeca72faf430781e2f2966cace275",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "d37e110071694035a8f5907cd1c38a5a",
+          "Name": "profileView",
+          "Description": "Camber.Civil.CivilObjects.ProfileView",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "1fd65ada8dfb46958c05e1e78f7f5194",
+          "Name": "modeToggle",
+          "Description": "True = Automatic, False = User specified\n\nbool",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "3a7aace5f60b49c098f8620b077663ac",
+          "Name": "ProfileView",
+          "Description": "ProfileView",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.ProfileView.SetElevationRangeMode@bool",
+      "Replication": "Auto",
+      "Description": "Sets the vertical range mode of the Profile View.\n\nProfileView.SetElevationRangeMode (modeToggle: bool): ProfileView"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "Id": "60a6fcebb74d4c03af947db5faf7ef50",
+      "NodeType": "BooleanInputNode",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "39412036f2d1491b9c1f9911ab26276a",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Enables selection between True and False",
+      "InputValue": true
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "1b24ac0cc7b34952a64f4ce5e11244cc",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "d0aa087ea6674bf5a062642e8522bf9e",
+          "Name": "profileView",
+          "Description": "Camber.Civil.CivilObjects.ProfileView",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "c883ee89c1e7422099019b7dae9e295b",
+          "Name": "minElevation",
+          "Description": "double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "2335da5a601749e4bd0074d480070473",
+          "Name": "maxElevation",
+          "Description": "double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "4495ea4c2b52435b8be074e5761667f4",
+          "Name": "ProfileView",
+          "Description": "ProfileView",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.ProfileView.SetElevations@double,double",
+      "Replication": "Auto",
+      "Description": "Sets the elevations for the Profile View. The elevation range mode will be set to \"User specified\".\n\nProfileView.SetElevations (minElevation: double, maxElevation: double): ProfileView"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "Id": "969e825f3cf24f128afa7793908148d3",
+      "NodeType": "CodeBlockNode",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "3225868c81fd4e0bafe39854acfa3347",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly",
+      "Code": "50;"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "bfdb89fa941e40c2b8f96f4c7dda44db",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "7026ad62afd84946aa3072b8e132bfd4",
+          "Name": "profileView",
+          "Description": "Camber.Civil.CivilObjects.ProfileView",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "669b097569784a4299431d15df696074",
+          "Name": "point",
+          "Description": "Point",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "190bc22934214bd18d797ca00cf693a9",
+          "Name": "ProfileView",
+          "Description": "ProfileView",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.ProfileView.SetLocation@Autodesk.DesignScript.Geometry.Point",
+      "Replication": "Auto",
+      "Description": "Sets the location of the Profile View.\n\nProfileView.SetLocation (point: Point): ProfileView"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "df52ba22aa7945ea869bf0c54d8b0ae8",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "557e1d8b7def406faca2de81f79599e2",
+          "Name": "profileView",
+          "Description": "Camber.Civil.CivilObjects.ProfileView",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "e832c809ca554e90806da7c5f953af1b",
+          "Name": "modeToggle",
+          "Description": "True = Automatic, False = User specified\n\nbool",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "34294f57e29c46f0b32fcdf4f4d57d5c",
+          "Name": "ProfileView",
+          "Description": "ProfileView",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.ProfileView.SetStationRangeMode@bool",
+      "Replication": "Auto",
+      "Description": "Sets the horizontal range mode of the Profile View.\n\nProfileView.SetStationRangeMode (modeToggle: bool): ProfileView"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "370c50d58ccf4adeae3e30607aed0e68",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "108251985cd44eb8920b631b1adceb21",
+          "Name": "profileView",
+          "Description": "Camber.Civil.CivilObjects.ProfileView",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "4f623d3040ac4bf1905f430b855a1225",
+          "Name": "startStation",
+          "Description": "double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "fe64a789e6d84ff4bf209798f62d5c0f",
+          "Name": "endStation",
+          "Description": "double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "640e544577104f8a8911b65244d8fbe1",
+          "Name": "ProfileView",
+          "Description": "ProfileView",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.ProfileView.SetStations@double,double",
+      "Replication": "Auto",
+      "Description": "Sets the stations of the Profile View. The station range mode will be set to \"User specified\".\n\nProfileView.SetStations (startStation: double, endStation: double): ProfileView"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "cca3ded9def944d485e9b4bd5441955c",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "72a3ea3a254543489e85f55a3d069531",
+          "Name": "profileView",
+          "Description": "Camber.Civil.CivilObjects.ProfileView",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "df3dc988bd904b53aafe51fb2f213b56",
+          "Name": "Alignment",
+          "Description": "Alignment",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.ProfileView.Alignment",
+      "Replication": "Auto",
+      "Description": "Gets the parent Alignment for the Profile View.\n\nProfileView.Alignment: Alignment"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "fe6c6fdf0ccc466a835a9cb3dc7a9247",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "9f33c845ac6f48e894f60bd5565d90f8",
+          "Name": "profileView",
+          "Description": "Camber.Civil.CivilObjects.ProfileView",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "5528be520ac5475e8b780e69c025cf3e",
+          "Name": "string",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.ProfileView.ElevationRangeMode",
+      "Replication": "Auto",
+      "Description": "Gets how the vertical range of the Profile View is specified.\n\nProfileView.ElevationRangeMode: string"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "a686272b63144fb193c76c5c7d463bcb",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "33f34037a1fa4d828d142c7b4be87ca4",
+          "Name": "profileView",
+          "Description": "Camber.Civil.CivilObjects.ProfileView",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "fbca0d25fbdc4b58a99defd4c3105302",
+          "Name": "double",
+          "Description": "double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.ProfileView.EndStation",
+      "Replication": "Auto",
+      "Description": "Gets the end station of the Profile View.\n\nProfileView.EndStation: double"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "6482ad2bf6dc42a5a042cf4cfd4366ce",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "fb6e43443ce04c8f8b9238f2ea1471f5",
+          "Name": "profileView",
+          "Description": "Camber.Civil.CivilObjects.ProfileView",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "3e425cdd08d443f89da85ccb9bcae2ee",
+          "Name": "Point",
+          "Description": "Point",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.ProfileView.Location",
+      "Replication": "Auto",
+      "Description": "Gets the location of the Profile View.\n\nProfileView.Location: Point"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "c71d80291e214643b07c6b2184dff87e",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "91ca52effe7444d5a291380dff06caf2",
+          "Name": "profileView",
+          "Description": "Camber.Civil.CivilObjects.ProfileView",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "396a3ef887bc444da9d802bd30eac2c6",
+          "Name": "double",
+          "Description": "double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.ProfileView.MaxElevation",
+      "Replication": "Auto",
+      "Description": "Gets the maximum elevation of the Profile View.\n\nProfileView.MaxElevation: double"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "061663519f6b418fbcfc1327918de131",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "b11748a84ac745df8bd84cb681817f75",
+          "Name": "profileView",
+          "Description": "Camber.Civil.CivilObjects.ProfileView",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "2f202e3169864ff38f52b94120b4c1ed",
+          "Name": "double",
+          "Description": "double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.ProfileView.MinElevation",
+      "Replication": "Auto",
+      "Description": "Gets the minimum elevation of the ProfileView.\n\nProfileView.MinElevation: double"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "5accb6066ceb4fdea125af5ec387d4e7",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "b6beb9cc19b342a299639deecb519014",
+          "Name": "profileView",
+          "Description": "Camber.Civil.CivilObjects.ProfileView",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "dc23ef68e9394efbaa273dc8e55160a1",
+          "Name": "double",
+          "Description": "double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.ProfileView.StartStation",
+      "Replication": "Auto",
+      "Description": "Gets the start station of the Profile View.\n\nProfileView.StartStation: double"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "68e72b996ba74618a4da919d087df0e7",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "3e37eebafd184ae1a61e99367f96aa65",
+          "Name": "profileView",
+          "Description": "Camber.Civil.CivilObjects.ProfileView",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "c936d4939b9c43c9beeab0991c712185",
+          "Name": "string",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.ProfileView.StationRangeMode",
+      "Replication": "Auto",
+      "Description": "Gets how the horizontal range of the Profile View is specified.\n\nProfileView.StationRangeMode: string"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "3eae8e02bf2943b38467490d11e91d25",
+      "End": "35abd0b3d18541999941ae192310c1da",
+      "Id": "6eb267a361a94c7d9fa0b45e797929c2",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "7dc1597aee9c47ec98b3aa2dedbb33e8",
+      "End": "e22940a8f22e4035806b1b391f392a6e",
+      "Id": "bbe38445525d43adb145777af652ed21",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "31ea2831566e4abd9dda52acc6bfb805",
+      "End": "1f304ef9360944b490c40397e6614573",
+      "Id": "ddefb86e89504b3bbcfffcec73200387",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "61d22af589e64dac8115f67a3e34d016",
+      "End": "a3a8bb3f8d39419286fde80ff7f7519f",
+      "Id": "c5cd8d5e37804b2ca6d45bac08f7ff17",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "61d22af589e64dac8115f67a3e34d016",
+      "End": "898151244cd94747a1c971f5629ec044",
+      "Id": "5155b54663944b9bbe9818cf4de7e0df",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "c53a45b986e84852969eb5f823086854",
+      "End": "58ac1f37195d48f2be5ab3c51252877e",
+      "Id": "cc88730bec20470387d7f33a56f914ac",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "c53a45b986e84852969eb5f823086854",
+      "End": "c98e59ecacd74070ae237b29084bb0f2",
+      "Id": "7f13771da80049a082949d44b6f4a82b",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "c53a45b986e84852969eb5f823086854",
+      "End": "d37e110071694035a8f5907cd1c38a5a",
+      "Id": "49ecacc719994ec4a40e4744b120cf7b",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "c53a45b986e84852969eb5f823086854",
+      "End": "d0aa087ea6674bf5a062642e8522bf9e",
+      "Id": "dd78c6e1b61e4e94b8392db6ead24f92",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "c53a45b986e84852969eb5f823086854",
+      "End": "7026ad62afd84946aa3072b8e132bfd4",
+      "Id": "6a16278b05544ce58d616432c8ff95ba",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "c53a45b986e84852969eb5f823086854",
+      "End": "557e1d8b7def406faca2de81f79599e2",
+      "Id": "e40955677bea49f38949fba1a2f4adec",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "c53a45b986e84852969eb5f823086854",
+      "End": "108251985cd44eb8920b631b1adceb21",
+      "Id": "5fc5a76c298c459d9ef2ebad7b2471b3",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "c53a45b986e84852969eb5f823086854",
+      "End": "72a3ea3a254543489e85f55a3d069531",
+      "Id": "aa4f2dd7118f43339ca727eeac76cdf1",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "c53a45b986e84852969eb5f823086854",
+      "End": "9f33c845ac6f48e894f60bd5565d90f8",
+      "Id": "76269cb391144f03b28c274dcf955ded",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "c53a45b986e84852969eb5f823086854",
+      "End": "33f34037a1fa4d828d142c7b4be87ca4",
+      "Id": "fb66fab1bb8844988a378ade2c54d21e",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "c53a45b986e84852969eb5f823086854",
+      "End": "fb6e43443ce04c8f8b9238f2ea1471f5",
+      "Id": "2ad28410c86943599e941ac511a55a9c",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "c53a45b986e84852969eb5f823086854",
+      "End": "91ca52effe7444d5a291380dff06caf2",
+      "Id": "c12c302400244bf78d1d7023413bf0f4",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "c53a45b986e84852969eb5f823086854",
+      "End": "b11748a84ac745df8bd84cb681817f75",
+      "Id": "2eb8c3d72c374e98822ec03c39556a30",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "c53a45b986e84852969eb5f823086854",
+      "End": "b6beb9cc19b342a299639deecb519014",
+      "Id": "f8f99862e3ec4ee79cbf658b7eaa64a9",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "c53a45b986e84852969eb5f823086854",
+      "End": "3e37eebafd184ae1a61e99367f96aa65",
+      "Id": "27f31bc5692c46fb9429330175c374d5",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "3b1722c8bcdc4296a48d129ff3c07168",
+      "End": "a8a8979cf3c149c9b4d937eff85c3f11",
+      "Id": "b2ba4d9f15cd4fe7a4429f7659f86338",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "3b1722c8bcdc4296a48d129ff3c07168",
+      "End": "669b097569784a4299431d15df696074",
+      "Id": "988b2a3be9a248888b1cd38d39131c79",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "96dc1363f18a4f1c81bf71676cc3250d",
+      "End": "fcc90c814f7f4aacbe95dab8d5da0ca5",
+      "Id": "05c70b70e7874ff6be7184f2c86ca9c2",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "7d80e56d061b45a48e6b084d89e18e16",
+      "End": "337b38e573244da4b219638833de359a",
+      "Id": "3604963c099845c7acaa73327a0b7810",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "7d80e56d061b45a48e6b084d89e18e16",
+      "End": "2e05b42c4b604aceac4c23ac7054fe22",
+      "Id": "d3449c2870e94ab5a8315cf3743d166f",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "7d80e56d061b45a48e6b084d89e18e16",
+      "End": "c883ee89c1e7422099019b7dae9e295b",
+      "Id": "f5c52eb76bcb493db16a4b190bc5027b",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "7d80e56d061b45a48e6b084d89e18e16",
+      "End": "4f623d3040ac4bf1905f430b855a1225",
+      "Id": "4e7cbd8d50b64faa87e690cde47480f9",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "39412036f2d1491b9c1f9911ab26276a",
+      "End": "1fd65ada8dfb46958c05e1e78f7f5194",
+      "Id": "7119786612494ce2aad73739d907f6f1",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "3225868c81fd4e0bafe39854acfa3347",
+      "End": "2335da5a601749e4bd0074d480070473",
+      "Id": "2168b45a98de4cb1a836a2b6bb93cc98",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "3225868c81fd4e0bafe39854acfa3347",
+      "End": "e832c809ca554e90806da7c5f953af1b",
+      "Id": "ac22c93a906b44c89077dd6c2c601578",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "3225868c81fd4e0bafe39854acfa3347",
+      "End": "fe64a789e6d84ff4bf209798f62d5c0f",
+      "Id": "bfc20317de7243cc8c1a2bd469a16730",
+      "IsHidden": "False"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Camber",
+      "Version": "4.2.6",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "c7c454ff1bc74b739b6c9300fa5c940b",
+        "5f22b19a229c4bd28712dceb465a1063",
+        "a900a5a539b349469d85044d784a2e24",
+        "01b0794b9a2e48fbb6137f091789fdd0",
+        "75fdeca72faf430781e2f2966cace275",
+        "1b24ac0cc7b34952a64f4ce5e11244cc",
+        "bfdb89fa941e40c2b8f96f4c7dda44db",
+        "df52ba22aa7945ea869bf0c54d8b0ae8",
+        "370c50d58ccf4adeae3e30607aed0e68",
+        "cca3ded9def944d485e9b4bd5441955c",
+        "fe6c6fdf0ccc466a835a9cb3dc7a9247",
+        "a686272b63144fb193c76c5c7d463bcb",
+        "6482ad2bf6dc42a5a042cf4cfd4366ce",
+        "c71d80291e214643b07c6b2184dff87e",
+        "061663519f6b418fbcfc1327918de131",
+        "5accb6066ceb4fdea125af5ec387d4e7",
+        "68e72b996ba74618a4da919d087df0e7"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.19",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.19.4.6671",
+      "RunType": "Automatic",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "_Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "ConnectorPins": [],
+    "NodeViews": [
+      {
+        "Id": "b9edf4d0a6664aa3857faf33a7b30218",
+        "Name": "All Objects of Type",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 770.74456972434473,
+        "Y": 1197.1525004047362
+      },
+      {
+        "Id": "3a2639538dae41eb860f2c55342c115b",
+        "Name": "Objects Types",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 419.74456972434473,
+        "Y": 1140.1525004047362
+      },
+      {
+        "Id": "e4ead37a886b43809bb243dcc8d27050",
+        "Name": "Document.ModelSpace",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 419.74456972434473,
+        "Y": 1288.1525004047362
+      },
+      {
+        "Id": "33fdcdc51dfc43f3864a6eecf9d6aed7",
+        "Name": "Document.Current",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 110.74456972434473,
+        "Y": 628.15250040473632
+      },
+      {
+        "Id": "c7c454ff1bc74b739b6c9300fa5c940b",
+        "Name": "ProfileView.ByPoint",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1082.7445697243447,
+        "Y": 1187.1525004047362
+      },
+      {
+        "Id": "b655ef9270664b77a74cb841da139f84",
+        "Name": "Point.Origin",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 770.74456972434473,
+        "Y": 1049.1525004047362
+      },
+      {
+        "Id": "5f22b19a229c4bd28712dceb465a1063",
+        "Name": "ProfileView.GetAllProfileViews",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1904.7445697243447,
+        "Y": -31.8474995952638
+      },
+      {
+        "Id": "a900a5a539b349469d85044d784a2e24",
+        "Name": "ProfileView.GetPointAtStationElevation",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1436.7445697243447,
+        "Y": 134.1525004047362
+      },
+      {
+        "Id": "1717a8db8a40420f9a5e5a7f45ebc285",
+        "Name": "Number",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1082.7445697243447,
+        "Y": 443.6525004047362
+      },
+      {
+        "Id": "01b0794b9a2e48fbb6137f091789fdd0",
+        "Name": "ProfileView.GetStationElevationAtPoint",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1904.7445697243447,
+        "Y": 115.1525004047362
+      },
+      {
+        "Id": "75fdeca72faf430781e2f2966cace275",
+        "Name": "ProfileView.SetElevationRangeMode",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1904.7445697243447,
+        "Y": 297.1525004047362
+      },
+      {
+        "Id": "60a6fcebb74d4c03af947db5faf7ef50",
+        "Name": "Boolean",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1436.7445697243447,
+        "Y": 346.1525004047362
+      },
+      {
+        "Id": "1b24ac0cc7b34952a64f4ce5e11244cc",
+        "Name": "ProfileView.SetElevations",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1904.7445697243447,
+        "Y": 651.1525004047362
+      },
+      {
+        "Id": "969e825f3cf24f128afa7793908148d3",
+        "Name": "Code Block",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1436.7445697243447,
+        "Y": 718.9800004047363
+      },
+      {
+        "Id": "bfdb89fa941e40c2b8f96f4c7dda44db",
+        "Name": "ProfileView.SetLocation",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1904.7445697243447,
+        "Y": 863.1525004047362
+      },
+      {
+        "Id": "df52ba22aa7945ea869bf0c54d8b0ae8",
+        "Name": "ProfileView.SetStationRangeMode",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1904.7445697243447,
+        "Y": 474.1525004047362
+      },
+      {
+        "Id": "370c50d58ccf4adeae3e30607aed0e68",
+        "Name": "ProfileView.SetStations",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1904.7445697243447,
+        "Y": 1187.1525004047362
+      },
+      {
+        "Id": "cca3ded9def944d485e9b4bd5441955c",
+        "Name": "ProfileView.Alignment",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1904.7445697243447,
+        "Y": 2134.1525004047362
+      },
+      {
+        "Id": "fe6c6fdf0ccc466a835a9cb3dc7a9247",
+        "Name": "ProfileView.ElevationRangeMode",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1904.7445697243447,
+        "Y": 1546.1525004047362
+      },
+      {
+        "Id": "a686272b63144fb193c76c5c7d463bcb",
+        "Name": "ProfileView.EndStation",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1904.7445697243447,
+        "Y": 1040.1525004047362
+      },
+      {
+        "Id": "6482ad2bf6dc42a5a042cf4cfd4366ce",
+        "Name": "ProfileView.Location",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1904.7445697243447,
+        "Y": 1693.1525004047362
+      },
+      {
+        "Id": "c71d80291e214643b07c6b2184dff87e",
+        "Name": "ProfileView.MaxElevation",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1904.7445697243447,
+        "Y": 1987.1525004047362
+      },
+      {
+        "Id": "061663519f6b418fbcfc1327918de131",
+        "Name": "ProfileView.MinElevation",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1904.7445697243447,
+        "Y": 1399.1525004047362
+      },
+      {
+        "Id": "5accb6066ceb4fdea125af5ec387d4e7",
+        "Name": "ProfileView.StartStation",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1904.7445697243447,
+        "Y": 1840.1525004047362
+      },
+      {
+        "Id": "68e72b996ba74618a4da919d087df0e7",
+        "Name": "ProfileView.StationRangeMode",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1904.7445697243447,
+        "Y": 2281.1525004047362
+      }
+    ],
+    "Annotations": [],
+    "X": 270.91199106365804,
+    "Y": 38.7809978307929,
+    "Zoom": 0.27572016460905352
+  }
+}

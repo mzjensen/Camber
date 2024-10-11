@@ -1,0 +1,651 @@
+{
+  "Uuid": "6cfb4962-5154-4049-bb51-eeeaddb19fad",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "LayerMigrationTests",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "5c5f7bf8dcbc4958973234c430d33216",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "77dd1b7afeab4672bd67104d260899b1",
+          "Name": "layer",
+          "Description": "Layer",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "d26178e060be4f2eb4a7cab99b5f42d8",
+          "Name": "Index",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "b6b9db4c1de447479042203cf106e195",
+          "Name": "Color name",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "c548f28eee9c4df1954e14425aea186a",
+          "Name": "Book name",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.AutoCAD.Objects.Layer.GetColorInfo@Autodesk.AutoCAD.DynamoNodes.Layer",
+      "Replication": "Auto",
+      "Description": "Gets info about the color assigned to a Layer.\n\nLayer.GetColorInfo (layer: Layer): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "e3eb151ca4304df79667e14d9c733369",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "a41acdf03ce74035b39bb782a601af84",
+          "Name": "document",
+          "Description": "Autodesk.AutoCAD.DynamoNodes.Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "a970fa7ac3334e209e35b38d5e4c3b36",
+          "Name": "string[]",
+          "Description": "string[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Document.Layers",
+      "Replication": "Auto",
+      "Description": "Get all layer names from the current document.\n\nDocument.Layers: string[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "7b04eb6daa1a43199cbdecd6bd839043",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "6b58561ea43b489d9e0f0983eaeb526b",
+          "Name": "document",
+          "Description": "Autodesk.AutoCAD.DynamoNodes.Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "80db9384cbb54eeb87c517ca01b9c384",
+          "Name": "name",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "c51bb079acfe4c4bb69c98eba2946fca",
+          "Name": "Layer",
+          "Description": "Layer",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Document.LayerByName@string",
+      "Replication": "Auto",
+      "Description": "Get a layer by a specified name.\n\nDocument.LayerByName (name: string): Layer"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "d57c0dd306474b579930f5a808a8f903",
+      "NodeType": "FunctionNode",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "aa731ca6c36e41e19381bf4c8166cb56",
+          "Name": "Document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Document.Current",
+      "Replication": "Auto",
+      "Description": "Get the current AutoCAD document.\n\nDocument.Current: Document"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "531535240090494391f379b38887209a",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "4a6614f360654c99a5cfca957b8917c3",
+          "Name": "layer",
+          "Description": "Layer",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "2b7998250b374990b385786c03ce7113",
+          "Name": "var[]..[]",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.AutoCAD.Objects.Layer.Lineweight@Autodesk.AutoCAD.DynamoNodes.Layer",
+      "Replication": "Auto",
+      "Description": "Gets the lineweight of a Layer.\n\nLayer.Lineweight (layer: Layer): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "9c7c26f192e247e48d1abf129b70a2f3",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "7d26de87dc9f4992860de9cc0bedfb74",
+          "Name": "layer",
+          "Description": "Layer",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "56ff4f991c7f4b0ba4bf4898e4a60baa",
+          "Name": "colorIndex",
+          "Description": "int",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "e9faf132df1949e9925a0e1351c27d80",
+          "Name": "Layer",
+          "Description": "Layer",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.AutoCAD.Objects.Layer.SetColor@Autodesk.AutoCAD.DynamoNodes.Layer,int",
+      "Replication": "Auto",
+      "Description": "Sets the color of a Layer by ACI number.\n\nLayer.SetColor (layer: Layer, colorIndex: int): Layer"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "154ff7f7307946898b825307b38d3a09",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "c50c7027ba114a94a82d73c77414ad24",
+          "Name": "layer",
+          "Description": "Layer",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "ddf2c275a0a843beba6de355c760b8a6",
+          "Name": "lineweight",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "d1f294ae19aa4e5384c534bac3618001",
+          "Name": "Layer",
+          "Description": "Layer",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.AutoCAD.Objects.Layer.SetLineweight@Autodesk.AutoCAD.DynamoNodes.Layer,string",
+      "Replication": "Auto",
+      "Description": "Sets the lineweight of a Layer.\n\nLayer.SetLineweight (layer: Layer, lineweight: string): Layer"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.IntegerSlider, CoreNodeModels",
+      "NumberType": "Integer",
+      "MaximumValue": 255,
+      "MinimumValue": 0,
+      "StepValue": 1,
+      "Id": "3db74fbb81164d409c0f4df2f4cb8bb4",
+      "NodeType": "NumberInputNode",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "e9a793b9f8f34613bf495e2b6b06309a",
+          "Name": "",
+          "Description": "Int64",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Produces integer values",
+      "InputValue": 1
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "WatchWidth": 200.0,
+      "WatchHeight": 200.0,
+      "Id": "61686f8c73a9431ca47cf9beb9250dbb",
+      "NodeType": "ExtensionNode",
+      "Inputs": [
+        {
+          "Id": "8a62b2fcc4c4483b9274fece7e3c314a",
+          "Name": "",
+          "Description": "Node to show output from",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "950aeb30a3564f339af76899f2db3045",
+          "Name": "",
+          "Description": "Node output",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualizes a node's output"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "WatchWidth": 200.0,
+      "WatchHeight": 200.0,
+      "Id": "5b359bb44ee641bf87ec891b8e3a53dc",
+      "NodeType": "ExtensionNode",
+      "Inputs": [
+        {
+          "Id": "059e4230712f4a7c87c80fd600e407f6",
+          "Name": "",
+          "Description": "Node to show output from",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "95c0b76441a743169ba41581de8bcb37",
+          "Name": "",
+          "Description": "Node output",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualizes a node's output"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "WatchWidth": 200.0,
+      "WatchHeight": 200.0,
+      "Id": "e4167bdaebb54a4b8a95a4c31b47f02d",
+      "NodeType": "ExtensionNode",
+      "Inputs": [
+        {
+          "Id": "beca6a761c0d483ea2fd6a9fc1f0655d",
+          "Name": "",
+          "Description": "Node to show output from",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "2574b8ffead340a6bf264f8135196be4",
+          "Name": "",
+          "Description": "Node output",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualizes a node's output"
+    },
+    {
+      "ConcreteType": "Autodesk.AutoCAD.DynamoNodes.Lineweight, AutoCADNodesUI",
+      "SelectedIndex": 0,
+      "SelectedString": "Default",
+      "Id": "c91807611cab4ef893dd4f6e986bcf6f",
+      "NodeType": "ExtensionNode",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "bd8bf49b2b504ce2a8bea9abd8c17d8f",
+          "Name": "Lineweight",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Set the lineweight for a Layer node."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "a970fa7ac3334e209e35b38d5e4c3b36",
+      "End": "80db9384cbb54eeb87c517ca01b9c384",
+      "Id": "136c0d5e90fd41c5b50df8ef9667e2d4",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "c51bb079acfe4c4bb69c98eba2946fca",
+      "End": "77dd1b7afeab4672bd67104d260899b1",
+      "Id": "7ec4d05479224c22ac8aa3ed449f2f34",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "c51bb079acfe4c4bb69c98eba2946fca",
+      "End": "4a6614f360654c99a5cfca957b8917c3",
+      "Id": "77037e14d56f4dafadafec4cd134c5b5",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "c51bb079acfe4c4bb69c98eba2946fca",
+      "End": "7d26de87dc9f4992860de9cc0bedfb74",
+      "Id": "2166a9d6f62f493384a7a7e1ad268fe6",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "c51bb079acfe4c4bb69c98eba2946fca",
+      "End": "c50c7027ba114a94a82d73c77414ad24",
+      "Id": "2bb49a9b48ce49a0ae696e075a4daaa1",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "aa731ca6c36e41e19381bf4c8166cb56",
+      "End": "6b58561ea43b489d9e0f0983eaeb526b",
+      "Id": "f214ca0bca654cb2a2f28dc44a8eddc7",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "aa731ca6c36e41e19381bf4c8166cb56",
+      "End": "a41acdf03ce74035b39bb782a601af84",
+      "Id": "146b1a40ca3a43e58ad50a5ec8c1800d",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "2b7998250b374990b385786c03ce7113",
+      "End": "059e4230712f4a7c87c80fd600e407f6",
+      "Id": "0680002c854240fe8da90e3ef00baee0",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "e9faf132df1949e9925a0e1351c27d80",
+      "End": "8a62b2fcc4c4483b9274fece7e3c314a",
+      "Id": "dc8367b8874c4e3bbc5c3354e55d1a2f",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "d1f294ae19aa4e5384c534bac3618001",
+      "End": "beca6a761c0d483ea2fd6a9fc1f0655d",
+      "Id": "f0738a0a3d13471193b0c66af3f6e1b6",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "e9a793b9f8f34613bf495e2b6b06309a",
+      "End": "56ff4f991c7f4b0ba4bf4898e4a60baa",
+      "Id": "ba56a537f32b4a9b8462e944045e6636",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "bd8bf49b2b504ce2a8bea9abd8c17d8f",
+      "End": "ddf2c275a0a843beba6de355c760b8a6",
+      "Id": "9b979c834dfa485bbc3cba6cb6657fc3",
+      "IsHidden": "False"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Camber",
+      "Version": "4.2.6",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "5c5f7bf8dcbc4958973234c430d33216",
+        "531535240090494391f379b38887209a",
+        "9c7c26f192e247e48d1abf129b70a2f3",
+        "154ff7f7307946898b825307b38d3a09"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.19",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.19.4.6671",
+      "RunType": "Automatic",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "_Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "ConnectorPins": [],
+    "NodeViews": [
+      {
+        "Id": "5c5f7bf8dcbc4958973234c430d33216",
+        "Name": "Layer.GetColorInfo",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1250.4482910772435,
+        "Y": 289.538568793738
+      },
+      {
+        "Id": "e3eb151ca4304df79667e14d9c733369",
+        "Name": "Document.Layers",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 145.44829107724343,
+        "Y": 415.53856879373808
+      },
+      {
+        "Id": "7b04eb6daa1a43199cbdecd6bd839043",
+        "Name": "Document.LayerByName",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 478.44829107724343,
+        "Y": 381.538568793738
+      },
+      {
+        "Id": "d57c0dd306474b579930f5a808a8f903",
+        "Name": "Document.Current",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": -163.55170892275657,
+        "Y": 398.538568793738
+      },
+      {
+        "Id": "531535240090494391f379b38887209a",
+        "Name": "Layer.Lineweight",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 926.44829107724343,
+        "Y": -23.461431206261977
+      },
+      {
+        "Id": "9c7c26f192e247e48d1abf129b70a2f3",
+        "Name": "Layer.SetColor",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 926.44829107724343,
+        "Y": 507.538568793738
+      },
+      {
+        "Id": "154ff7f7307946898b825307b38d3a09",
+        "Name": "Layer.SetLineweight",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 926.44829107724343,
+        "Y": 820.538568793738
+      },
+      {
+        "Id": "3db74fbb81164d409c0f4df2f4cb8bb4",
+        "Name": "Integer Slider",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 478.44829107724343,
+        "Y": 558.538568793738
+      },
+      {
+        "Id": "61686f8c73a9431ca47cf9beb9250dbb",
+        "Name": "Watch",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1250.4482910772435,
+        "Y": 507.538568793738
+      },
+      {
+        "Id": "5b359bb44ee641bf87ec891b8e3a53dc",
+        "Name": "Watch",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1250.4482910772435,
+        "Y": -23.461431206261977
+      },
+      {
+        "Id": "e4167bdaebb54a4b8a95a4c31b47f02d",
+        "Name": "Watch",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1250.4482910772435,
+        "Y": 820.538568793738
+      },
+      {
+        "Id": "c91807611cab4ef893dd4f6e986bcf6f",
+        "Name": "Lineweight List",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 478.44829107724343,
+        "Y": 854.538568793738
+      }
+    ],
+    "Annotations": [],
+    "X": 194.08264860536548,
+    "Y": 43.947789625728063,
+    "Zoom": 0.59449866903283055
+  }
+}

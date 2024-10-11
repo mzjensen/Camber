@@ -224,7 +224,7 @@ namespace Camber.LandXML
         {
             bool hasCorridors = civDynNodes.Selection.Corridors(document).Count > 0;
             bool hasAlignments = civDynNodes.Selection.Alignments(document).Count > 0;
-            bool hasCogoPoints = civDynNodes.Selection.CogoPointGroups(document).Count > 0;
+            bool hasCogoPoints = civDynNodes.CogoPointGroup.GetCogoPointGroups(document).Count > 0;
             bool hasSurfaces = civDynNodes.Selection.Surfaces(document).Count > 0;
             bool hasPipeNetworks = Civil.PipeNetworks.PipeNetwork.GetPipeNetworks(document, true).Count > 0;
 

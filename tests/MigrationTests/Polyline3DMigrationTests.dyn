@@ -1,0 +1,665 @@
+{
+  "Uuid": "6ae52b4a-e2bf-4a1d-b353-663ee0ec2fd9",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "Polyline3DMigrationTests",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "049008eaf7dc4ef9a7ae9fcf2ba1f0ce",
+      "NodeType": "FunctionNode",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "6600cd7705c4424d9e2afc5cb2beb8c6",
+          "Name": "Point",
+          "Description": "Origin point",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Autodesk.DesignScript.Geometry.Point.Origin",
+      "Replication": "Auto",
+      "Description": "Get the Origin point (0,0,0)\n\nPoint.Origin ( ): Point"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "0a8487c36162481cb8dd67a678bffd54",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "05294314dc6447b3b09a3a0e0d9a4725",
+          "Name": "x",
+          "Description": "X coordinate\n\ndouble\nDefault value : 0",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "ada9a5e8fdce4df7bde6b0e5487ab3d7",
+          "Name": "y",
+          "Description": "Y coordinate\n\ndouble\nDefault value : 0",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "391f01d3f57e49fe95f38f2341931a0f",
+          "Name": "z",
+          "Description": "Z coordinate\n\ndouble\nDefault value : 0",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "11626e02629e48a09705b8942ae67c31",
+          "Name": "Point",
+          "Description": "Point created by coordinates",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Autodesk.DesignScript.Geometry.Point.ByCoordinates@double,double,double",
+      "Replication": "Auto",
+      "Description": "Form a Point given 3 cartesian coordinates\n\nPoint.ByCoordinates (x: double = 0, y: double = 0, z: double = 0): Point"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "Id": "0a086decae8847669b1ae0446f891eec",
+      "NodeType": "CodeBlockNode",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "0d3b5536e2df41dea7e532dda85e5996",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly",
+      "Code": "5;"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.CreateList, CoreNodeModels",
+      "VariableInputPorts": true,
+      "Id": "a4ba4bfa21a540089a3d6dcdf00af4a3",
+      "NodeType": "ExtensionNode",
+      "Inputs": [
+        {
+          "Id": "0b92ab360a904b6aa345646a14680dda",
+          "Name": "item0",
+          "Description": "Item Index #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "b866edf7ca394d0d8bb2166c1bc12af7",
+          "Name": "item1",
+          "Description": "Item Index #1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "dfecd13a9c65402385dbeeb937ff5f20",
+          "Name": "list",
+          "Description": "A list (type: var[]..[])",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Makes a new list from the given inputs"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "989cd298aa83406db7f1a0ad6ba7b6ff",
+      "NodeType": "FunctionNode",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "4ef7afc94f254fabbdf3f6a7945543e0",
+          "Name": "Document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Document.Current",
+      "Replication": "Auto",
+      "Description": "Get the current AutoCAD document.\n\nDocument.Current: Document"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "d71acf1e76134153b54b400caceeb871",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "d5ad7d3768494655a4ece0afb46ae7c5",
+          "Name": "document",
+          "Description": "Autodesk.AutoCAD.DynamoNodes.Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "da1af244c51e446a8ab6834ee7010202",
+          "Name": "string",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Document.CurrentLayer",
+      "Replication": "Auto",
+      "Description": "Get the current layer of the current document.\n\nDocument.CurrentLayer: string"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "73238fe9c23647c8a33c0baae53e1329",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "8a40ada31d9c4dce990cd209b86f667f",
+          "Name": "document",
+          "Description": "Autodesk.AutoCAD.DynamoNodes.Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "64be55b3f2c64a9491aa747968986f89",
+          "Name": "Block",
+          "Description": "Block",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Document.ModelSpace",
+      "Replication": "Auto",
+      "Description": "Get the model space block table record.\n\nDocument.ModelSpace: Block"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "WatchWidth": 58.0,
+      "WatchHeight": 38.0,
+      "Id": "7b62712857bb46b08ad48ec053bd5e3e",
+      "NodeType": "ExtensionNode",
+      "Inputs": [
+        {
+          "Id": "90a7ff295c8b4001889714af58099cfe",
+          "Name": "",
+          "Description": "Node to show output from",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "e956d0af04c44295ac628576cd202561",
+          "Name": "",
+          "Description": "Node output",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualizes a node's output"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "WatchWidth": 95.0,
+      "WatchHeight": 38.0,
+      "Id": "646deed928cf4ab5852d62ffb9ce3104",
+      "NodeType": "ExtensionNode",
+      "Inputs": [
+        {
+          "Id": "2f883849c6514648875e6965ea8dd35c",
+          "Name": "",
+          "Description": "Node to show output from",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "af9f0ea18dc8497394a2e66618e6b3d8",
+          "Name": "",
+          "Description": "Node output",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualizes a node's output"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "5fa4f9ff189f4aa4a0e0f5b36bdd4f04",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "7749d526c3b84f8da3d8eda7ca6cb0e2",
+          "Name": "polyline3d",
+          "Description": "Polyline3D",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "69fc168362ef47b081d060250694a992",
+          "Name": "bool",
+          "Description": "bool",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.AutoCAD.Objects.Polyline3D.IsClosed@Autodesk.AutoCAD.DynamoNodes.Polyline3D",
+      "Replication": "Auto",
+      "Description": "Gets whether a 3D Polyline is closed or not.\n\nPolyline3D.IsClosed (polyline3d: Polyline3D): bool"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "4cae4234ce364f0aa37656f9087cdae6",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "ea2e9075b3574c4fadb6ab683cdcdc77",
+          "Name": "polyline3d",
+          "Description": "Polyline3D",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "8bf9df36ec6c480f8f42487972609d6c",
+          "Name": "value",
+          "Description": "bool",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "33100e6e52834bd3952d36b2dab39d57",
+          "Name": "Polyline3D",
+          "Description": "Polyline3D",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.AutoCAD.Objects.Polyline3D.SetIsClosed@Autodesk.AutoCAD.DynamoNodes.Polyline3D,bool",
+      "Replication": "Auto",
+      "Description": "Sets if a 3D Polyline is closed or not.\n\nPolyline3D.SetIsClosed (polyline3d: Polyline3D, value: bool): Polyline3D"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "fec0cd841a0d4eda8617ae17d2a2882a",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "a1268fe498d1485c8ba679cd33af6406",
+          "Name": "points",
+          "Description": "Point[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "32f9bcfb2bdf44b98a8fae0be319f2ab",
+          "Name": "layer",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "0dd7426ff58d4501940422032cf715b6",
+          "Name": "block",
+          "Description": "Block",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "31d6a93cb4664f2fae8104654129d8df",
+          "Name": "Polyline3D",
+          "Description": "Polyline3D",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Polyline3D.ByPoints@Autodesk.DesignScript.Geometry.Point[],string,Autodesk.AutoCAD.DynamoNodes.Block",
+      "Replication": "Auto",
+      "Description": "Create an AutoCAD 3D polyline from a point list.\n\nPolyline3D.ByPoints (points: Point[], layer: string, block: Block): Polyline3D"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "6600cd7705c4424d9e2afc5cb2beb8c6",
+      "End": "0b92ab360a904b6aa345646a14680dda",
+      "Id": "303fe08b6c684ef594e6abe819a142fd",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "11626e02629e48a09705b8942ae67c31",
+      "End": "b866edf7ca394d0d8bb2166c1bc12af7",
+      "Id": "33a1fd6f51ea4159b830e5337cdf6e57",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "0d3b5536e2df41dea7e532dda85e5996",
+      "End": "05294314dc6447b3b09a3a0e0d9a4725",
+      "Id": "777287cb3b9c45e48beb95105cafc70d",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "dfecd13a9c65402385dbeeb937ff5f20",
+      "End": "a1268fe498d1485c8ba679cd33af6406",
+      "Id": "f41f0cc7cd1c40de8a87d74b4d99fe5b",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "4ef7afc94f254fabbdf3f6a7945543e0",
+      "End": "8a40ada31d9c4dce990cd209b86f667f",
+      "Id": "454c36528f554edd8f7d8c021f2d3b3f",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "4ef7afc94f254fabbdf3f6a7945543e0",
+      "End": "d5ad7d3768494655a4ece0afb46ae7c5",
+      "Id": "a1b6ba6fa57647c3bf11ee3feaef669e",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "da1af244c51e446a8ab6834ee7010202",
+      "End": "32f9bcfb2bdf44b98a8fae0be319f2ab",
+      "Id": "b19f7fb67803487eb1a431804106b109",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "64be55b3f2c64a9491aa747968986f89",
+      "End": "0dd7426ff58d4501940422032cf715b6",
+      "Id": "52fc4989d41e4daa981a1a7b0d046af5",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "69fc168362ef47b081d060250694a992",
+      "End": "90a7ff295c8b4001889714af58099cfe",
+      "Id": "05a5fa4bebe54b6a953843271cbdd671",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "69fc168362ef47b081d060250694a992",
+      "End": "8bf9df36ec6c480f8f42487972609d6c",
+      "Id": "2bbaf337554e47cf8b570bcfab894d01",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "33100e6e52834bd3952d36b2dab39d57",
+      "End": "2f883849c6514648875e6965ea8dd35c",
+      "Id": "279ada574411446b98f03258a616568b",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "31d6a93cb4664f2fae8104654129d8df",
+      "End": "7749d526c3b84f8da3d8eda7ca6cb0e2",
+      "Id": "78e2b113eb4842369d363f58222fae5e",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "31d6a93cb4664f2fae8104654129d8df",
+      "End": "ea2e9075b3574c4fadb6ab683cdcdc77",
+      "Id": "4d43c00cd37d4d41844dac17aaab0281",
+      "IsHidden": "False"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Camber",
+      "Version": "4.2.6",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "5fa4f9ff189f4aa4a0e0f5b36bdd4f04",
+        "4cae4234ce364f0aa37656f9087cdae6"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.19",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [
+    {
+      "NodeId": "878c6ebc-e417-4b55-bcff-d9248d234ce8",
+      "Binding": {
+        "ByPoints_InClassDecl-1_InFunctionScope-1_Instance0_878c6ebc-e417-4b55-bcff-d9248d234ce8": "PFNPQVAtRU5WOkVudmVsb3BlIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiIHhtbG5zOnhzZD0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEiIHhtbG5zOlNPQVAtRU5DPSJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy9zb2FwL2VuY29kaW5nLyIgeG1sbnM6U09BUC1FTlY9Imh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3NvYXAvZW52ZWxvcGUvIiB4bWxuczpjbHI9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vc29hcC9lbmNvZGluZy9jbHIvMS4wIiBTT0FQLUVOVjplbmNvZGluZ1N0eWxlPSJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy9zb2FwL2VuY29kaW5nLyI+DQo8U09BUC1FTlY6Qm9keT4NCjxhMTpDYWxsU2l0ZV94MDAyQl9UcmFjZVNlcmlhbGlzZXJIZWxwZXIgaWQ9InJlZi0xIiB4bWxuczphMT0iaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS9jbHIvbnNhc3NlbS9Qcm90b0NvcmUvUHJvdG9Db3JlJTJDJTIwVmVyc2lvbiUzRDIuMTkuNC42NjcxJTJDJTIwQ3VsdHVyZSUzRG5ldXRyYWwlMkMlMjBQdWJsaWNLZXlUb2tlbiUzRG51bGwiPg0KPE51bWJlck9mRWxlbWVudHM+MTwvTnVtYmVyT2ZFbGVtZW50cz4NCjxCYXNlLTBfSGFzRGF0YT50cnVlPC9CYXNlLTBfSGFzRGF0YT4NCjxCYXNlLTBfRGF0YSBpZD0icmVmLTMiPlBGTlBRVkF0UlU1V09rVnVkbVZzYjNCbElIaHRiRzV6T25oemFUMGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TVM5WVRVeFRZMmhsYldFdGFXNXpkR0Z1WTJVaUlIaHRiRzV6T25oelpEMGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TVM5WVRVeFRZMmhsYldFaUlIaHRiRzV6T2xOUFFWQXRSVTVEUFNKb2RIUndPaTh2YzJOb1pXMWhjeTU0Yld4emIyRndMbTl5Wnk5emIyRndMMlZ1WTI5a2FXNW5MeUlnZUcxc2JuTTZVMDlCVUMxRlRsWTlJbWgwZEhBNkx5OXpZMmhsYldGekxuaHRiSE52WVhBdWIzSm5MM052WVhBdlpXNTJaV3h2Y0dVdklpQjRiV3h1Y3pwamJISTlJbWgwZEhBNkx5OXpZMmhsYldGekxtMXBZM0p2YzI5bWRDNWpiMjB2YzI5aGNDOWxibU52WkdsdVp5OWpiSEl2TVM0d0lpQlRUMEZRTFVWT1ZqcGxibU52WkdsdVoxTjBlV3hsUFNKb2RIUndPaTh2YzJOb1pXMWhjeTU0Yld4emIyRndMbTl5Wnk5emIyRndMMlZ1WTI5a2FXNW5MeUkrRFFvOFUwOUJVQzFGVGxZNlFtOWtlVDROQ2p4aE1UcFRaWEpwWVd4cGVtRmliR1ZJWVc1a2JHVWdhV1E5SW5KbFppMHhJaUI0Yld4dWN6cGhNVDBpYUhSMGNEb3ZMM05qYUdWdFlYTXViV2xqY205emIyWjBMbU52YlM5amJISXZibk5oYzNObGJTOUJkWFJ2WkdWemF5NUJkWFJ2UTBGRUxrUjVibUZ0YjBGd2NDNVRaWEoyYVdObGN5OUJZMFI1Ym1GdGIxTmxjblpwWTJWekpUSkRKVEl3Vm1WeWMybHZiaVV6UkRFekxqWXVNVGt4Tmk0d0pUSkRKVEl3UTNWc2RIVnlaU1V6Ukc1bGRYUnlZV3dsTWtNbE1qQlFkV0pzYVdOTFpYbFViMnRsYmlVelJHNTFiR3dpUGcwS1BITjBjbWx1WjBsRUlHbGtQU0p5WldZdE15SStPRU0xTXp3dmMzUnlhVzVuU1VRK0RRbzhMMkV4T2xObGNtbGhiR2w2WVdKc1pVaGhibVJzWlQ0TkNqd3ZVMDlCVUMxRlRsWTZRbTlrZVQ0TkNqd3ZVMDlCVUMxRlRsWTZSVzUyWld4dmNHVStEUW89PC9CYXNlLTBfRGF0YT4NCjxCYXNlLTBfSGFzTmVzdGVkRGF0YT5mYWxzZTwvQmFzZS0wX0hhc05lc3RlZERhdGE+DQo8L2ExOkNhbGxTaXRlX3gwMDJCX1RyYWNlU2VyaWFsaXNlckhlbHBlcj4NCjwvU09BUC1FTlY6Qm9keT4NCjwvU09BUC1FTlY6RW52ZWxvcGU+DQo="
+      }
+    }
+  ],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.19.4.6671",
+      "RunType": "Automatic",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "_Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "ConnectorPins": [],
+    "NodeViews": [
+      {
+        "Id": "049008eaf7dc4ef9a7ae9fcf2ba1f0ce",
+        "Name": "Point.Origin",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 255.43094798943366,
+        "Y": 632.51161409585507
+      },
+      {
+        "Id": "0a8487c36162481cb8dd67a678bffd54",
+        "Name": "Point.ByCoordinates",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 255.43094798943366,
+        "Y": 779.51161409585507
+      },
+      {
+        "Id": "0a086decae8847669b1ae0446f891eec",
+        "Name": "Code Block",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1.4309479894336619,
+        "Y": 779.339114095855
+      },
+      {
+        "Id": "a4ba4bfa21a540089a3d6dcdf00af4a3",
+        "Name": "List Create",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 580.43094798943366,
+        "Y": 706.51161409585507
+      },
+      {
+        "Id": "989cd298aa83406db7f1a0ad6ba7b6ff",
+        "Name": "Document.Current",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 255.43094798943366,
+        "Y": 993.511614095855
+      },
+      {
+        "Id": "d71acf1e76134153b54b400caceeb871",
+        "Name": "Document.CurrentLayer",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 580.43094798943366,
+        "Y": 884.51161409585507
+      },
+      {
+        "Id": "73238fe9c23647c8a33c0baae53e1329",
+        "Name": "Document.ModelSpace",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 580.43094798943366,
+        "Y": 1032.5116140958548
+      },
+      {
+        "Id": "7b62712857bb46b08ad48ec053bd5e3e",
+        "Name": "Watch",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1932.4309479894337,
+        "Y": 718.01161409585507
+      },
+      {
+        "Id": "646deed928cf4ab5852d62ffb9ce3104",
+        "Name": "Watch",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1932.4309479894337,
+        "Y": 870.01161409585507
+      },
+      {
+        "Id": "5fa4f9ff189f4aa4a0e0f5b36bdd4f04",
+        "Name": "Polyline3D.IsClosed",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1259.4309479894337,
+        "Y": 811.01161409585507
+      },
+      {
+        "Id": "4cae4234ce364f0aa37656f9087cdae6",
+        "Name": "Polyline3D.SetIsClosed",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1580.4309479894337,
+        "Y": 870.011614095855
+      },
+      {
+        "Id": "fec0cd841a0d4eda8617ae17d2a2882a",
+        "Name": "Polyline3D.ByPoints",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 930.43094798943366,
+        "Y": 840.511614095855
+      }
+    ],
+    "Annotations": [],
+    "X": 29.22498822635999,
+    "Y": -117.57833022119772,
+    "Zoom": 0.54160722776985259
+  }
+}

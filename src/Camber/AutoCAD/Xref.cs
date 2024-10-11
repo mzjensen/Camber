@@ -6,6 +6,7 @@ using DynamoServices;
 using System;
 using System.IO;
 using System.Linq;
+using Autodesk.AutoCAD.DynamoNodes;
 using AcBlock = Autodesk.AutoCAD.DatabaseServices.BlockTableRecord;
 using AcBlockReference = Autodesk.AutoCAD.DatabaseServices.BlockReference;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
@@ -75,8 +76,7 @@ namespace Camber.AutoCAD
         /// <summary>
         /// Gets the insertion point, rotation, and scale factors of an Xref in the form of a coordinate system.
         /// </summary>
-        public CoordinateSystem CoordinateSystem =>
-            acDynNodes.AutoCADUtility.MatrixToCoordinateSystem(AcBlockReference.BlockTransform);
+        public CoordinateSystem CoordinateSystem => AcBlockReference.BlockTransform.ToDyn();
 
         /// <summary>
         /// Gets the full path of the source file that defines an Xref. 
@@ -162,7 +162,7 @@ namespace Camber.AutoCAD
                             : ctx.Database.AttachXref(filePath, name);
 
                         AcBlockReference blkRef = new AcBlockReference(insPnt, xrefId);
-                        blkRef.BlockTransform = acDynNodes.AutoCADUtility.CooridnateSystemToMatrix(coordinateSystem);
+                        blkRef.BlockTransform = coordinateSystem.ToAc();
 
                         AcBlock btr = (AcBlock) ctx.Transaction.GetObject(
                             block.GetObjectId(),
@@ -225,7 +225,7 @@ namespace Camber.AutoCAD
                         }
 
                         // Update block transform
-                        xref.BlockTransform = acDynNodes.AutoCADUtility.CooridnateSystemToMatrix(coordinateSystem);
+                        xref.BlockTransform = coordinateSystem.ToAc();
 
                         // Update overlay/attach
                         if (btr.IsFromOverlayReference != overlay)
@@ -511,7 +511,7 @@ namespace Camber.AutoCAD
             try
             {
                 AcBlockReference.UpgradeOpen();
-                AcBlockReference.BlockTransform = acDynNodes.AutoCADUtility.CooridnateSystemToMatrix(coordinateSystem);
+                AcBlockReference.BlockTransform = coordinateSystem.ToAc();
                 AcBlockReference.DowngradeOpen();
                 return this;
             }

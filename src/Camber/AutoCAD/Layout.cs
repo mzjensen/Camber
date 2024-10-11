@@ -6,6 +6,7 @@ using DynamoServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Camber.Properties;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
@@ -23,45 +24,6 @@ namespace Camber.AutoCAD
 
         #region properties
         internal AcLayout AcLayout => AcObject as AcLayout;
-
-        /// <summary>
-        /// Gets the name of a Layout.
-        /// </summary>
-        public string Name => AcLayout.LayoutName;
-
-        /// <summary>
-        /// Gets the tab order of a Layout.
-        /// </summary>
-        public int TabOrder => AcLayout.TabOrder;
-
-        /// <summary>
-        /// Gets the Block associated with a Layout.
-        /// </summary>
-        public acDynNodes.Block Block
-        {
-            get
-            {
-                acDynNodes.Document document = acDynNodes.Document.Current;
-                ;
-                using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
-                {
-                    try
-                    {
-                        var bt = (acDb.BlockTable)ctx.Transaction.GetObject(
-                            ctx.Database.BlockTableId,
-                            acDb.OpenMode.ForRead);
-                        var btr = (acDb.BlockTableRecord)ctx.Transaction.GetObject(
-                            AcLayout.BlockTableRecordId,
-                            acDb.OpenMode.ForRead);
-                        return acDynNodes.AutoCADUtility.GetBlockByName(btr.Name, document.AcDocument);
-                    }
-                    catch (Exception e)
-                    {
-                        throw new InvalidOperationException(e.Message);
-                    }
-                }
-            }
-        }
         #endregion
 
         #region constructors
@@ -297,30 +259,10 @@ namespace Camber.AutoCAD
         }
 
         /// <summary>
-        /// Gets a Layout in a Document by name.
-        /// </summary>
-        /// <param name="document"></param>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        [NodeCategory("Actions")]
-        public static Layout GetLayoutByName(acDynNodes.Document document, string name)
-        {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new InvalidOperationException("Layout name is null or empty.");
-            }
-
-            return GetLayouts(document, true).FirstOrDefault(
-                item => item.Name.Equals(
-                    name, 
-                    StringComparison.OrdinalIgnoreCase));
-        }
-
-        [NodeCategory("Actions")]
-        /// <summary>
         /// Gets the currently-selected Layout.
         /// </summary>
         /// <param name="document"></param>
+        [NodeCategory("Actions")]
         public static Layout GetActiveLayout(acDynNodes.Document document) =>
             GetLayoutByName(document, acDb.LayoutManager.Current.CurrentLayout);
         #endregion
@@ -365,6 +307,42 @@ namespace Camber.AutoCAD
             ObjectHandle = (string)null;
             acDynNodes.Document.Current.AcDocument.Editor.Regen();
         }
+        #endregion
+
+        #region obsolete
+        /// <summary>
+        /// Gets the Block associated with a Layout.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.AutoCAD.Layout.Block",
+            "Autodesk.AutoCAD.DynamoNodes.Layout.Block")]
+        public acDynNodes.Block Block
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Layout.Block"));
+
+                acDynNodes.Document document = acDynNodes.Document.Current;
+                ;
+                using (var ctx = new acDynApp.DocumentContext(document.AcDocument))
+                {
+                    try
+                    {
+                        var bt = (acDb.BlockTable)ctx.Transaction.GetObject(
+                            ctx.Database.BlockTableId,
+                            acDb.OpenMode.ForRead);
+                        var btr = (acDb.BlockTableRecord)ctx.Transaction.GetObject(
+                            AcLayout.BlockTableRecordId,
+                            acDb.OpenMode.ForRead);
+                        return acDynNodes.AutoCADUtility.GetBlockByName(btr.Name, document.AcDocument);
+                    }
+                    catch (Exception e)
+                    {
+                        throw new InvalidOperationException(e.Message);
+                    }
+                }
+            }
+        }
 
         /// <summary>
         /// Gets all of the Layouts in a Document.
@@ -372,8 +350,13 @@ namespace Camber.AutoCAD
         /// <param name="document"></param>
         /// <param name="includeModel">Include Model Space?</param>
         /// <returns></returns>
+        [NodeMigrationMapping(
+            "Camber.AutoCAD.Layout.GetLayouts",
+            "Autodesk.AutoCAD.DynamoNodes.Layout.GetLayouts")]
         public static IList<Layout> GetLayouts(acDynNodes.Document document, bool includeModel = false)
         {
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Layout.GetLayouts"));
+
             List<Layout> layouts = new List<Layout>();
 
             try
@@ -407,12 +390,108 @@ namespace Camber.AutoCAD
         }
 
         /// <summary>
+        /// Gets a Layout in a Document by name.
+        /// </summary>
+        /// <param name="document"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        [NodeCategory("Actions")]
+        public static Layout GetLayoutByName(acDynNodes.Document document, string name)
+        {
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MESSAGE, "Layout.GetLayoutByName"));
+
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new InvalidOperationException("Layout name is null or empty.");
+            }
+
+            return GetLayouts(document, true).FirstOrDefault(
+                item => item.Name.Equals(
+                    name,
+                    StringComparison.OrdinalIgnoreCase));
+        }
+
+        /// <summary>
+        /// Gets the name of a Layout.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.AutoCAD.Layout.Name",
+            "Autodesk.AutoCAD.DynamoNodes.Layout.Name")]
+        public string Name
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Layout.Name"));
+                return AcLayout.LayoutName;
+            }
+        }
+
+        /// <summary>
+        /// Gets the tab order of a Layout.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.AutoCAD.Layout.TabOrder",
+            "Autodesk.AutoCAD.DynamoNodes.Layout.TabOrder")]
+        public int TabOrder
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Layout.TabOrder"));
+                return AcLayout.TabOrder;
+            }
+        }
+
+        /// <summary>
+        /// Reorders Layout tabs based on the ordering of the input list.
+        /// </summary>
+        /// <param name="layouts"></param>
+        /// <returns></returns>
+        [NodeMigrationMapping(
+            "Camber.AutoCAD.Layout.Reorder",
+            "Autodesk.AutoCAD.DynamoNodes.Layout.Reorder")]
+        public static IList<Layout> Reorder(IList<Layout> layouts)
+        {
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Layout.Reorder"));
+
+            if (layouts.Any(layout => layout.Name.ToUpper() == "MODEL"))
+            {
+                throw new InvalidOperationException("The Model Space tab cannot be reordered.");
+            }
+
+            var docLayouts = GetLayouts(
+                acDynNodes.Document.Current,
+                false);
+
+            if (layouts.Count != docLayouts.Count)
+            {
+                throw new InvalidOperationException(
+                    "The number of input Layouts should match the total number of " +
+                    "Layouts in the Document (excluding Model Space).");
+            }
+
+            //int maxTabOrder = docLayouts.Max(layout => layout.TabOrder);
+            foreach (Layout layout in layouts)
+            {
+                layout.AcLayout.UpgradeOpen();
+                layout.AcLayout.TabOrder = layouts.IndexOf(layout) + 1;
+                layout.AcLayout.DowngradeOpen();
+            }
+            acDynNodes.Document.Current.AcDocument.Editor.Regen();
+            return layouts;
+        }
+
+        /// <summary>
         /// Sets the name of a Layout.
         /// </summary>
         /// <param name="newName"></param>
         /// <returns></returns>
+        [NodeMigrationMapping(
+            "Camber.AutoCAD.Layout.SetName",
+            "Autodesk.AutoCAD.DynamoNodes.Layout.SetName")]
         public Layout SetName(string newName)
         {
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Layout.SetName"));
+
             if (string.IsNullOrEmpty(newName))
             {
                 throw new InvalidOperationException("Name is null or empty.");
@@ -433,40 +512,6 @@ namespace Camber.AutoCAD
             AcLayout.DowngradeOpen();
             acDynNodes.Document.Current.AcDocument.Editor.Regen();
             return this;
-        }
-
-        /// <summary>
-        /// Reorders Layout tabs based on the ordering of the input list.
-        /// </summary>
-        /// <param name="layouts"></param>
-        /// <returns></returns>
-        public static IList<Layout> Reorder(IList<Layout> layouts)
-        {
-            if (layouts.Any(layout => layout.Name.ToUpper() == "MODEL"))
-            {
-                throw new InvalidOperationException("The Model Space tab cannot be reordered.");
-            }
-
-            var docLayouts = GetLayouts(
-                acDynNodes.Document.Current, 
-                false);
-
-            if (layouts.Count != docLayouts.Count)
-            {
-                throw new InvalidOperationException(
-                    "The number of input Layouts should match the total number of " +
-                    "Layouts in the Document (excluding Model Space).");
-            }
-
-            //int maxTabOrder = docLayouts.Max(layout => layout.TabOrder);
-            foreach (Layout layout in layouts)
-            {
-                layout.AcLayout.UpgradeOpen();
-                layout.AcLayout.TabOrder = layouts.IndexOf(layout) + 1;
-                layout.AcLayout.DowngradeOpen();
-            }
-            acDynNodes.Document.Current.AcDocument.Editor.Regen();
-            return layouts;
         }
         #endregion
     }

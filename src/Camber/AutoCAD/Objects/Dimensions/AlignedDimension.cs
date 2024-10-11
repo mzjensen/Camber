@@ -125,7 +125,7 @@ namespace Camber.AutoCAD.Objects.Dimensions
                 return (acGeom.Point3d)GeometryConversions.DynPointToAcPoint(line.PointAtParameter(0.5));
             }
 
-            Vector normal = line.NormalAtParameter();
+            Vector normal = line.NormalAtParameter(0);
             Line offsetLine = Line.ByStartPointDirectionLength(p1, normal, offset);
             return (acGeom.Point3d)GeometryConversions.DynPointToAcPoint(offsetLine.EndPoint);
         }

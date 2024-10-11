@@ -12,6 +12,7 @@ using Autodesk.DesignScript.Geometry;
 using DynamoServices;
 using Camber.Civil.Labels;
 using Camber.Civil.CivilObjects;
+using Camber.Properties;
 using Camber.Utilities.GeometryConversions;
 #endregion
 
@@ -24,175 +25,14 @@ namespace Camber.Civil.PipeNetworks.Parts
         internal AeccPipe AeccPipe => AcObject as AeccPipe;
 
         /// <summary>
-        /// Gets the bearing of a Pipe. For straight Pipes, the returned value is the horizontal bearing.
-        /// For curved Pipes, the returned bearing is the chord bearing.
-        /// </summary>
-        public double Bearing => GetDouble();
-
-        /// <summary>
-        /// Gets the depth of cover at a Pipe's start point, measured from the top outside edge of the Pipe to its reference Surface.
-        /// </summary>
-        public double CoverStart => GetDouble("CoverOfStartPoint");
-
-        /// <summary>
-        /// Gets the cover at a Pipe's end point, measured from the top outside edge of the Pipe to its reference Surface.
-        /// </summary>
-        public double CoverEnd => GetDouble("CoverOfEndpoint");
-
-        /// <summary>
-        /// Gets a Pipe's cross sectional shape.
-        /// </summary>
-        public string CrossSectionalShape => GetString();
-
-        /// <summary>
-        /// Gets the end point of a Pipe at the centerline.
-        /// </summary>
-        public Point EndPoint => GeometryConversions.AcPointToDynPoint(AeccPipe.EndPoint);
-
-        /// <summary>
-        /// Gets the offset of a Pipe's end point from its reference Alignment.
-        /// </summary>
-        public double EndOffset => GetDouble();
-
-        /// <summary>
-        /// Gets the station of a Pipe's end point along its reference Alignment.
-        /// </summary>
-        public double EndStation => GetDouble("EndStation");
-
-        /// <summary>
-        /// Gets a Pipe's end Structure if it exists.
-        /// </summary>
-        public Structure EndStructure => Structure.GetByObjectId(AeccPipe.EndStructureId) ?? null;
-
-        /// <summary>
-        /// Gets the downstream elevation of the energy grade line for a Pipe.
-        /// </summary>
-        public double EGLDown => GetDouble("EnergyGradeLineDown");
-
-        /// <summary>
-        /// Gets the upstream elevation of the energy grade line for a Pipe.
-        /// </summary>
-        public double EGLUp => GetDouble("EnergyGradeLineUp");
-
-        /// <summary>
         /// Gets the current flow direction of a Pipe relative to its start and end points.
         /// </summary>
         public string FlowDirection => GetString();
 
         /// <summary>
-        /// Gets the method that is used to determine the flow direction of a Pipe.
-        /// </summary>
-        public string FlowDirectionMethod => GetString();
-
-        /// <summary>
-        /// Gets the flow rate value assigned to a Pipe.
-        /// </summary>
-        public double FlowRate => GetDouble();
-
-        /// <summary>
         /// Gets the method that determines how a Pipe will behave when resized.
         /// </summary>
         public string ResizeBehavior => GetString("HoldOnResizeType");
-
-        /// <summary>
-        /// Gets the downstream elevation of the hydraulic grade line for a Pipe.
-        /// </summary>
-        public double HGLDown => GetDouble();
-
-        /// <summary>
-        /// Gets the upstream elevation of the hydraulic grade line for a Pipe.
-        /// </summary>
-        public double HGLUp => GetDouble();
-
-        /// <summary>
-        /// Gets the inner diameter or width of a Pipe.
-        /// </summary>
-        public double InnerDiameterOrWidth => GetDouble();
-
-        /// <summary>
-        /// Gets the inner height of a Pipe.
-        /// </summary>
-        public double InnerHeight => GetDouble();
-
-        /// <summary>
-        /// Gets the junction loss value assigned to a Pipe.
-        /// </summary>
-        public double JunctionLoss => GetDouble();
-
-        /// <summary>
-        /// Gets the 2D length of a Pipe measured from the centers of its start and end Structures. 
-        /// </summary>
-        public double Length2DCenterToCenter => GetDouble();
-
-        /// <summary>
-        /// Gets the 2D length of a Pipe measured from the inside edges of its start and end Structures. 
-        /// </summary>
-        public double Length2DToInsideEdge => GetDouble();
-
-        /// <summary>
-        /// Gets the 3D length of a Pipe measured from the centers of its start and end Structures. 
-        /// </summary>
-        public double Length3DCenterToCenter => GetDouble();
-
-        /// <summary>
-        /// Gets the 3D length of a Pipe measured from the inside edges of its start and end Structures. 
-        /// </summary>
-        public double Length3DToInsideEdge => GetDouble();
-
-        /// <summary>
-        /// Gets the maximum depth of cover along the entire length of a Pipe, measured from the top outside of the Pipe to its reference Surface.
-        /// </summary>
-        public double CoverMax => GetDouble("MaximumCover");
-
-        /// <summary>
-        /// Gets the minimum depth of cover along the entire length of a Pipe, measured from the top outside of the Pipe to its reference Surface.
-        /// </summary>
-        public double CoverMin => GetDouble("MinimumCover");
-
-        /// <summary>
-        /// Gets the outer diameter or width of a Pipe.
-        /// </summary>
-        public double OuterDiameterOrWidth => GetDouble();
-
-        /// <summary>
-        /// Gets the outer height of a Pipe.
-        /// </summary>
-        public double OuterHeight => GetDouble();
-
-        /// <summary>
-        /// Gets the radius of a Pipe.
-        /// </summary>
-        public double Radius => GetDouble();
-
-        /// <summary>
-        /// Gets the return period value assigned to a Pipe.
-        /// </summary>
-        public int ReturnPeriod => GetInt();
-
-        /// <summary>
-        /// Gets the slope of a Pipe in absolute value.
-        /// </summary>
-        public double Slope => GetDouble();
-
-        /// <summary>
-        /// Gets the start point of a Pipe at the centerline.
-        /// </summary>
-        public Point StartPoint => GeometryConversions.AcPointToDynPoint(AeccPipe.StartPoint);
-
-        /// <summary>
-        /// Gets the offset of a Pipe's start point from its reference Alignment.
-        /// </summary>
-        public double StartOffset => GetDouble();
-
-        /// <summary>
-        /// Gets the station of a Pipe's end point along its reference Alignment.
-        /// </summary>
-        public double StartStation => GetDouble();
-
-        /// <summary>
-        /// Gets a Pipe's start Structure if it exists.
-        /// </summary>
-        public Structure StartStructure => Structure.GetByObjectId(AeccPipe.StartStructureId) ?? null;
 
         /// <summary>
         /// Gets a Pipe's subentity type.
@@ -277,49 +117,6 @@ namespace Camber.Civil.PipeNetworks.Parts
         public override string ToString() => $"Pipe(Name = {Name})";
 
         /// <summary>
-        /// Resize a Pipe to a new inner diameter or width.
-        /// </summary>
-        /// <param name="newSize">Inner diameter or width</param>
-        /// <param name="useClosestSize"></param>
-        /// <returns></returns>
-        public Pipe ResizeByInnerDimension(double newSize, bool useClosestSize = true)
-        {
-            bool openedForWrite = AeccPipe.IsWriteEnabled;
-            if (!openedForWrite) AeccPipe.UpgradeOpen();
-            AeccPipe.ResizeByInnerDiameterOrWidth(newSize, useClosestSize);
-            if (!openedForWrite) AeccPipe.DowngradeOpen();
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the slope of a Pipe from its end point towards its start point.
-        /// </summary>
-        /// <param name="slope"></param>
-        /// <returns></returns>
-        public Pipe SetSlopeHoldEnd(double slope)
-        {
-            bool openedForWrite = AeccPipe.IsWriteEnabled;
-            if (!openedForWrite) AeccPipe.UpgradeOpen();
-            AeccPipe.SetSlopeHoldEnd(slope);
-            if (!openedForWrite) AeccPipe.DowngradeOpen();
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the slope of a Pipe from its start point towards its end point.
-        /// </summary>
-        /// <param name="slope"></param>
-        /// <returns></returns>
-        public Pipe SetSlopeHoldStart(double slope)
-        {
-            bool openedForWrite = AeccPipe.IsWriteEnabled;
-            if (!openedForWrite) AeccPipe.UpgradeOpen();
-            AeccPipe.SetSlopeHoldStart(slope);
-            if (!openedForWrite) AeccPipe.DowngradeOpen();
-            return this;
-        }
-
-        /// <summary>
         /// Performs a cover check on a Pipe relative to its reference Surface.
         /// </summary>
         /// <param name="minCover"></param>
@@ -373,6 +170,529 @@ namespace Camber.Civil.PipeNetworks.Parts
                 { "Min Cover Violation Depths", minDepths.ToList() },
                 { "Max Cover Violation Depths", maxDepths.ToList() }
             };
+        }
+        #endregion
+
+        #region obsolete
+        /// <summary>
+        /// Gets the bearing of a Pipe. For straight Pipes, the returned value is the horizontal bearing.
+        /// For curved Pipes, the returned bearing is the chord bearing.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.Civil.PipeNetworks.Parts.Pipe.Bearing",
+            "Autodesk.Civil.DynamoNodes.Pipe.Bearing")]
+        public double Bearing
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Pipe.Bearing"));
+                return GetDouble();
+            }
+        }
+
+        /// <summary>
+        /// Gets the depth of cover at a Pipe's start point, measured from the top outside edge of the Pipe to its reference Surface.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.Civil.PipeNetworks.Parts.Pipe.CoverStart",
+            "Autodesk.Civil.DynamoNodes.Pipe.StartCover")]
+        public double CoverStart
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Pipe.StartCover"));
+                return GetDouble("CoverOfStartPoint");
+            }
+        }
+
+        /// <summary>
+        /// Gets the cover at a Pipe's end point, measured from the top outside edge of the Pipe to its reference Surface.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.Civil.PipeNetworks.Parts.Pipe.CoverEnd",
+            "Autodesk.Civil.DynamoNodes.Pipe.EndCover")]
+        public double CoverEnd
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Pipe.EndCover"));
+                return GetDouble("CoverOfEndpoint");
+            }
+        }
+
+        /// <summary>
+        /// Gets a Pipe's cross sectional shape.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.Civil.PipeNetworks.Parts.Pipe.CrossSectionalShape",
+            "Autodesk.Civil.DynamoNodes.Pipe.CrossSectionalShape")]
+        public string CrossSectionalShape
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Pipe.CrossSectionalShape"));
+                return GetString();
+            }
+        }
+
+        /// <summary>
+        /// Gets the end point of a Pipe at the centerline.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.Civil.PipeNetworks.Parts.Pipe.EndPoint",
+            "Autodesk.Civil.DynamoNodes.Pipe.EndPoint")]
+        public Point EndPoint
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Pipe.EndPoint"));
+                return GeometryConversions.AcPointToDynPoint(AeccPipe.EndPoint);
+            }
+        }
+
+        /// <summary>
+        /// Gets the offset of a Pipe's end point from its reference Alignment.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.Civil.PipeNetworks.Parts.Pipe.EndOffset",
+            "Autodesk.Civil.DynamoNodes.Pipe.EndOffset")]
+        public double EndOffset
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Pipe.EndOffset"));
+                return GetDouble();
+            }
+        }
+
+        /// <summary>
+        /// Gets the station of a Pipe's end point along its reference Alignment.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.Civil.PipeNetworks.Parts.Pipe.EndStation",
+            "Autodesk.Civil.DynamoNodes.Pipe.EndStation")]
+        public double EndStation
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Pipe.EndStation"));
+                return GetDouble("EndStation");
+            }
+        }
+
+        /// <summary>
+        /// Gets a Pipe's end Structure if it exists.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.Civil.PipeNetworks.Parts.Pipe.EndStructure",
+            "Autodesk.Civil.DynamoNodes.Pipe.EndStructure")]
+        public Structure EndStructure
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Pipe.EndStructure"));
+                return Structure.GetByObjectId(AeccPipe.EndStructureId) ?? null;
+            }
+        }
+
+        /// <summary>
+        /// Gets the downstream elevation of the energy grade line for a Pipe.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.Civil.PipeNetworks.Parts.Pipe.EGLDown",
+            "Autodesk.Civil.DynamoNodes.Pipe.EnergyGradeLineDown")]
+        public double EGLDown
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Pipe.EnergyGradeLineDown"));
+                return GetDouble("EnergyGradeLineDown");
+            }
+        }
+
+        /// <summary>
+        /// Gets the upstream elevation of the energy grade line for a Pipe.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.Civil.PipeNetworks.Parts.Pipe.EGLUp",
+            "Autodesk.Civil.DynamoNodes.Pipe.EnergyGradeLineUp")]
+        public double EGLUp
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Pipe.EnergyGradeLineUp"));
+                return GetDouble("EnergyGradeLineUp");
+            }
+        }
+
+        /// <summary>
+        /// Gets the method that is used to determine the flow direction of a Pipe.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.Civil.PipeNetworks.Parts.Pipe.FlowDirectionMethod",
+            "Autodesk.Civil.DynamoNodes.Pipe.FlowDirectionMethod")]
+        public string FlowDirectionMethod
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Pipe.FlowDirectionMethod"));
+                return GetString();
+            }
+        }
+
+        /// <summary>
+        /// Gets the flow rate value assigned to a Pipe.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.Civil.PipeNetworks.Parts.Pipe.FlowRate",
+            "Autodesk.Civil.DynamoNodes.Pipe.FlowRate")]
+        public double FlowRate
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Pipe.FlowRate"));
+                return GetDouble();
+            }
+        }
+
+        /// <summary>
+        /// Gets the downstream elevation of the hydraulic grade line for a Pipe.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.Civil.PipeNetworks.Parts.Pipe.HGLDown",
+            "Autodesk.Civil.DynamoNodes.Pipe.HydraulicGradeLineDown")]
+        public double HGLDown
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Pipe.HydraulicGradeLineDown"));
+                return GetDouble();
+            }
+        }
+
+        /// <summary>
+        /// Gets the upstream elevation of the hydraulic grade line for a Pipe.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.Civil.PipeNetworks.Parts.Pipe.HGLUp",
+            "Autodesk.Civil.DynamoNodes.Pipe.HydraulicGradeLineUp")]
+        public double HGLUp
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Pipe.HydraulicGradeLineUp"));
+                return GetDouble();
+            }
+        }
+
+        /// <summary>
+        /// Gets the inner diameter or width of a Pipe.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.Civil.PipeNetworks.Parts.Pipe.InnerDiameterOrWidth",
+            "Autodesk.Civil.DynamoNodes.Pipe.InnerDiameterOrWidth")]
+        public double InnerDiameterOrWidth
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Pipe.InnerDiameterOrWidth"));
+                return GetDouble();
+            }
+        }
+
+        /// <summary>
+        /// Gets the inner height of a Pipe.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.Civil.PipeNetworks.Parts.Pipe.InnerHeight",
+            "Autodesk.Civil.DynamoNodes.Pipe.InnerHeight")]
+        public double InnerHeight
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Pipe.InnerHeight"));
+                return GetDouble();
+            }
+        }
+
+        /// <summary>
+        /// Gets the junction loss value assigned to a Pipe.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.Civil.PipeNetworks.Parts.Pipe.JunctionLoss",
+            "Autodesk.Civil.DynamoNodes.Pipe.JunctionLoss")]
+        public double JunctionLoss
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Pipe.JunctionLoss"));
+                return GetDouble();
+            }
+        }
+
+        /// <summary>
+        /// Gets the 2D length of a Pipe measured from the centers of its start and end Structures. 
+        /// </summary>
+        public double Length2DCenterToCenter
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MESSAGE, "Pipe.Length"));
+                return GetDouble();
+            }
+        }
+
+        /// <summary>
+        /// Gets the 2D length of a Pipe measured from the inside edges of its start and end Structures. 
+        /// </summary>
+        public double Length2DToInsideEdge
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MESSAGE, "Pipe.Length"));
+                return GetDouble();
+            }
+        }
+
+        /// <summary>
+        /// Gets the 3D length of a Pipe measured from the centers of its start and end Structures. 
+        /// </summary>
+        public double Length3DCenterToCenter
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MESSAGE, "Pipe.Length"));
+                return GetDouble();
+            }
+        }
+
+        /// <summary>
+        /// Gets the 3D length of a Pipe measured from the inside edges of its start and end Structures. 
+        /// </summary>
+        public double Length3DToInsideEdge
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MESSAGE, "Pipe.Length"));
+                return GetDouble();
+            }
+        }
+
+        /// <summary>
+        /// Gets the maximum depth of cover along the entire length of a Pipe, measured from the top outside of the Pipe to its reference Surface.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.Civil.PipeNetworks.Parts.Pipe.CoverMax",
+            "Autodesk.Civil.DynamoNodes.Pipe.MaxCover")]
+        public double CoverMax
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Pipe.MaxCover"));
+                return GetDouble("MaximumCover");
+            }
+        }
+
+        /// <summary>
+        /// Gets the minimum depth of cover along the entire length of a Pipe, measured from the top outside of the Pipe to its reference Surface.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.Civil.PipeNetworks.Parts.Pipe.CoverMin",
+            "Autodesk.Civil.DynamoNodes.Pipe.MinCover")]
+        public double CoverMin
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Pipe.MinCover"));
+                return GetDouble("MinimumCover");
+            }
+        }
+
+        /// <summary>
+        /// Gets the outer diameter or width of a Pipe.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.Civil.PipeNetworks.Parts.Pipe.OuterDiameterOrWidth",
+            "Autodesk.Civil.DynamoNodes.Pipe.OuterDiameterOrWidth")]
+        public double OuterDiameterOrWidth
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Pipe.OuterDiameterOrWidth"));
+                return GetDouble();
+            }
+        }
+
+        /// <summary>
+        /// Gets the outer height of a Pipe.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.Civil.PipeNetworks.Parts.Pipe.OuterHeight",
+            "Autodesk.Civil.DynamoNodes.Pipe.OuterHeight")]
+        public double OuterHeight
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Pipe.OuterHeight"));
+                return GetDouble();
+            }
+        }
+
+        /// <summary>
+        /// Gets the radius of a Pipe.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.Civil.PipeNetworks.Parts.Pipe.Radius",
+            "Autodesk.Civil.DynamoNodes.Pipe.Radius")]
+        public double Radius
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Pipe.Radius"));
+                return GetDouble();
+            }
+        }
+
+        /// <summary>
+        /// Gets the return period value assigned to a Pipe.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.Civil.PipeNetworks.Parts.Pipe.ReturnPeriod",
+            "Autodesk.Civil.DynamoNodes.Pipe.ReturnPeriod")]
+        public int ReturnPeriod
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Pipe.ReturnPeriod"));
+                return GetInt();
+            }
+        }
+
+        /// <summary>
+        /// Gets the slope of a Pipe in absolute value.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.Civil.PipeNetworks.Parts.Pipe.Slope",
+            "Autodesk.Civil.DynamoNodes.Pipe.Slope")]
+        public double Slope
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Pipe.Slope"));
+                return GetDouble();
+            }
+        }
+
+        /// <summary>
+        /// Gets the start point of a Pipe at the centerline.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.Civil.PipeNetworks.Parts.Pipe.StartPoint",
+            "Autodesk.Civil.DynamoNodes.Pipe.StartPoint")]
+        public Point StartPoint
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Pipe.StartPoint"));
+                return GeometryConversions.AcPointToDynPoint(AeccPipe.StartPoint);
+            }
+        }
+
+        /// <summary>
+        /// Gets the offset of a Pipe's start point from its reference Alignment.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.Civil.PipeNetworks.Parts.Pipe.StartOffset",
+            "Autodesk.Civil.DynamoNodes.Pipe.StartOffset")]
+        public double StartOffset
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Pipe.StartOffset"));
+                return GetDouble();
+            }
+        }
+
+        /// <summary>
+        /// Gets the station of a Pipe's end point along its reference Alignment.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.Civil.PipeNetworks.Parts.Pipe.StartStation",
+            "Autodesk.Civil.DynamoNodes.Pipe.StartStation")]
+        public double StartStation
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Pipe.StartStation"));
+                return GetDouble();
+            }
+        }
+
+        /// <summary>
+        /// Gets a Pipe's start Structure if it exists.
+        /// </summary>
+        [NodeMigrationMapping(
+            "Camber.Civil.PipeNetworks.Parts.Pipe.StartStructure",
+            "Autodesk.Civil.DynamoNodes.Pipe.StartStructure")]
+        public Structure StartStructure
+        {
+            get
+            {
+                LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Pipe.StartStructure"));
+                return Structure.GetByObjectId(AeccPipe.StartStructureId) ?? null;
+            }
+        }
+
+        /// <summary>
+        /// Resize a Pipe to a new inner diameter or width.
+        /// </summary>
+        /// <param name="newSize">Inner diameter or width</param>
+        /// <param name="useClosestSize"></param>
+        /// <returns></returns>
+        [NodeMigrationMapping(
+            "Camber.Civil.PipeNetworks.Parts.Pipe.ResizeByInnerDimension",
+            "Autodesk.Civil.DynamoNodes.Pipe.Resize")]
+        public Pipe ResizeByInnerDimension(double newSize, bool useClosestSize = true)
+        {
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Pipe.Resize"));
+
+            bool openedForWrite = AeccPipe.IsWriteEnabled;
+            if (!openedForWrite) AeccPipe.UpgradeOpen();
+            AeccPipe.ResizeByInnerDiameterOrWidth(newSize, useClosestSize);
+            if (!openedForWrite) AeccPipe.DowngradeOpen();
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the slope of a Pipe from its end point towards its start point.
+        /// </summary>
+        /// <param name="slope"></param>
+        /// <returns></returns>
+        public Pipe SetSlopeHoldEnd(double slope)
+        {
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MESSAGE, "Pipe.SetSlope"));
+
+            bool openedForWrite = AeccPipe.IsWriteEnabled;
+            if (!openedForWrite) AeccPipe.UpgradeOpen();
+            AeccPipe.SetSlopeHoldEnd(slope);
+            if (!openedForWrite) AeccPipe.DowngradeOpen();
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the slope of a Pipe from its start point towards its end point.
+        /// </summary>
+        /// <param name="slope"></param>
+        /// <returns></returns>
+        public Pipe SetSlopeHoldStart(double slope)
+        {
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MESSAGE, "Pipe.SetSlope"));
+
+            bool openedForWrite = AeccPipe.IsWriteEnabled;
+            if (!openedForWrite) AeccPipe.UpgradeOpen();
+            AeccPipe.SetSlopeHoldStart(slope);
+            if (!openedForWrite) AeccPipe.DowngradeOpen();
+            return this;
         }
         #endregion
     }

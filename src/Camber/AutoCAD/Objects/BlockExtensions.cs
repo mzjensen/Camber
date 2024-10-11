@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Reflection;
 using Autodesk.DesignScript.Runtime;
+using Camber.Properties;
 using acDb = Autodesk.AutoCAD.DatabaseServices;
 using acDynNodes = Autodesk.AutoCAD.DynamoNodes;
 using acDynApp = Autodesk.AutoCAD.DynamoApp.Services;
 using Dynamo.Graph.Nodes;
+using DynamoServices;
 using AcBlock = Autodesk.AutoCAD.DatabaseServices.BlockTableRecord;
 #endregion
 
@@ -87,36 +89,12 @@ namespace Camber.AutoCAD.Objects
         }
 
         /// <summary>
-        /// Gets whether Block References associated with a Block can be exploded. 
-        /// </summary>
-        /// <param name="block"></param>
-        /// <returns></returns>
-        [NodeCategory("Query")]
-        public static bool Explodable(this acDynNodes.Block block) => GetBool(block);
-
-        /// <summary>
         /// Gets if a Block has a preview icon.
         /// </summary>
         /// <param name="block"></param>
         /// <returns></returns>
         [NodeCategory("Query")]
         public static bool HasPreviewIcon(this acDynNodes.Block block) => GetBool(block);
-
-        /// <summary>
-        /// Gets if a Block is anonymous.
-        /// </summary>
-        /// <param name="block"></param>
-        /// <returns></returns>
-        [NodeCategory("Query")]
-        public static bool IsAnonymous(this acDynNodes.Block block) => GetBool(block);
-
-        /// <summary>
-        /// Gets if a Block is dynamic.
-        /// </summary>
-        /// <param name="block"></param>
-        /// <returns></returns>
-        [NodeCategory("Query")]
-        public static bool IsDynamic(this acDynNodes.Block block) => GetBool(block, "IsDynamicBlock");
 
         /// <summary>
         /// Gets if a Block represents an external reference.
@@ -152,15 +130,6 @@ namespace Camber.AutoCAD.Objects
         public static bool IsUnloaded(this acDynNodes.Block block) => GetBool(block);
 
         /// <summary>
-        /// Gets the units of a Block.
-        /// </summary>
-        /// <param name="block"></param>
-        /// <returns></returns>
-        [NodeCategory("Query")]
-        public static string Units(this acDynNodes.Block block) => GetString(block);
-
-
-        /// <summary>
         /// Gets the external reference status of a Block.
         /// </summary>
         /// <param name="block"></param>
@@ -187,47 +156,13 @@ namespace Camber.AutoCAD.Objects
                     foreach (acDb.ObjectId oid in btr.GetAnonymousBlockIds())
                     {
                         var acAnonBlock = (acDb.BlockTableRecord)ctx.Transaction.GetObject(oid, acDb.OpenMode.ForRead);
-                        anonBlocks.Add(document.BlockByName(acAnonBlock.Name));
+                        anonBlocks.Add(acDynNodes.Block.GetBlockByName(document, acAnonBlock.Name));
                     }
                     return anonBlocks;
                 }
                 catch { throw; }
             }
         }
-
-        /// <summary>
-        /// Sets the name of a Block.
-        /// </summary>
-        /// <param name="block"></param>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        public static acDynNodes.Block SetName(this acDynNodes.Block block, string name)
-        {
-            try
-            {
-                return SetValue(block, name);
-            }
-            catch
-            {
-                throw new InvalidOperationException("Block cannot be renamed.");
-            }
-        }
-
-        /// <summary>
-        /// Sets the description for a Block.
-        /// </summary>
-        /// <param name="block"></param>
-        /// <param name="description"></param>
-        /// <returns></returns>
-        public static acDynNodes.Block SetDescription(this acDynNodes.Block block, string description) => SetValue(block, (object)description, "Comments");
-
-        /// <summary>
-        /// Sets whether Block References associated with a Block can be exploded.
-        /// </summary>
-        /// <param name="block"></param>
-        /// <param name="bool"></param>
-        /// <returns></returns>
-        public static acDynNodes.Block SetExplodable(this acDynNodes.Block block, bool @bool) => SetValue(block, @bool);
 
         /// <summary>
         /// Sets if a Block represents an overlay reference.
@@ -244,21 +179,6 @@ namespace Camber.AutoCAD.Objects
         /// <param name="bool"></param>
         /// <returns></returns>
         public static acDynNodes.Block SetIsUnloaded(this acDynNodes.Block block, bool @bool) => SetValue(block, @bool);
-
-        /// <summary>
-        /// Sets the units of a Block.
-        /// </summary>
-        /// <param name="block"></param>
-        /// <param name="units"></param>
-        /// <returns></returns>
-        public static acDynNodes.Block SetUnits(this acDynNodes.Block block, string units)
-        {
-            if (!Enum.IsDefined(typeof(acDb.UnitsValue), units))
-            {
-                throw new ArgumentException("Invalid units.");
-            }
-            return SetValue(block, Enum.Parse(typeof(acDb.UnitsValue), units));
-        }
 
         private static string GetString(this acDynNodes.Block block, [CallerMemberName] string propertyName = null)
         {
@@ -332,6 +252,134 @@ namespace Camber.AutoCAD.Objects
                 }
                 catch { throw; }
             }
+        }
+        #endregion
+
+        #region obsolete
+        /// <summary>
+        /// Sets the name of a Block.
+        /// </summary>
+        /// <param name="block"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        [NodeMigrationMapping(
+            "Camber.AutoCAD.Objects.Block.SetName", 
+            "Autodesk.AutoCAD.DynamoNodes.Block.SetName")]
+        public static acDynNodes.Block SetName(this acDynNodes.Block block, string name)
+        {
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Block.SetName"));
+            try
+            {
+                return SetValue(block, name);
+            }
+            catch
+            {
+                throw new InvalidOperationException("Block cannot be renamed.");
+            }
+        }
+
+        /// <summary>
+        /// Sets the description for a Block.
+        /// </summary>
+        /// <param name="block"></param>
+        /// <param name="description"></param>
+        /// <returns></returns>
+        [NodeMigrationMapping(
+            "Camber.AutoCAD.Objects.Block.SetDescription", 
+            "Autodesk.AutoCAD.DynamoNodes.Block.SetDescription")]
+        public static acDynNodes.Block SetDescription(this acDynNodes.Block block, string description)
+        {
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Block.SetDescription"));
+            return SetValue(block, (object)description, "Comments");
+        }
+
+        /// <summary>
+        /// Sets whether Block References associated with a Block can be exploded.
+        /// </summary>
+        /// <param name="block"></param>
+        /// <param name="bool"></param>
+        /// <returns></returns>
+        [NodeMigrationMapping(
+            "Camber.AutoCAD.Objects.Block.SetExplodable", 
+            "Autodesk.AutoCAD.DynamoNodes.Block.SetExplodable")]
+        public static acDynNodes.Block SetExplodable(this acDynNodes.Block block, bool @bool)
+        {
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Block.SetExplodable"));
+            return SetValue(block, @bool);
+        }
+
+        /// <summary>
+        /// Gets if a Block is anonymous.
+        /// </summary>
+        /// <param name="block"></param>
+        /// <returns></returns>
+        [NodeMigrationMapping(
+            "Camber.AutoCAD.Objects.Block.IsAnonymous", 
+            "Autodesk.AutoCAD.DynamoNodes.Block.IsAnonymous")]
+        [NodeCategory("Query")]
+        public static bool IsAnonymous(this acDynNodes.Block block)
+        {
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Block.IsAnonymous"));
+            return GetBool(block);
+        }
+
+        /// <summary>
+        /// Gets if a Block is dynamic.
+        /// </summary>
+        /// <param name="block"></param>
+        /// <returns></returns>
+        [NodeMigrationMapping(
+            "Camber.AutoCAD.Objects.Block.IsDynamic", 
+            "Autodesk.AutoCAD.DynamoNodes.Block.IsDynamic")]
+        [NodeCategory("Query")]
+        public static bool IsDynamic(this acDynNodes.Block block)
+        {
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Block.IsDynamic"));
+            return GetBool(block, "IsDynamicBlock");
+        }
+
+        /// <summary>
+        /// Gets whether Block References associated with a Block can be exploded. 
+        /// </summary>
+        /// <param name="block"></param>
+        /// <returns></returns>
+        [NodeMigrationMapping(
+            "Camber.AutoCAD.Objects.Block.Explodable", 
+            "Autodesk.AutoCAD.DynamoNodes.Block.IsExplodable")]
+        [NodeCategory("Query")]
+        public static bool Explodable(this acDynNodes.Block block)
+        {
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MIGRATION_MESSAGE, "Block.IsExplodable"));
+            return GetBool(block);
+        }
+
+        /// <summary>
+        /// Sets the units of a Block.
+        /// </summary>
+        /// <param name="block"></param>
+        /// <param name="units"></param>
+        /// <returns></returns>
+        public static acDynNodes.Block SetUnits(this acDynNodes.Block block, string units)
+        {
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MESSAGE, "Block.SetUnits"));
+
+            if (!Enum.IsDefined(typeof(acDb.UnitsValue), units))
+            {
+                throw new ArgumentException("Invalid units.");
+            }
+            return SetValue(block, Enum.Parse(typeof(acDb.UnitsValue), units));
+        }
+
+        /// <summary>
+        /// Gets the units of a Block.
+        /// </summary>
+        /// <param name="block"></param>
+        /// <returns></returns>
+        [NodeCategory("Query")]
+        public static string Units(this acDynNodes.Block block)
+        {
+            LogWarningMessageEvents.OnLogInfoMessage(string.Format(Resources.NODE_OBSOLETE_MESSAGE, "Block.Units"));
+            return GetString(block);
         }
         #endregion
     }
