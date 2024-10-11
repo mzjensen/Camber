@@ -85,6 +85,8 @@ namespace Camber.MigrationAssistant
 
             foreach (var node in nodes)
             {
+                // We only search for function signatures here, which means that
+                // node migrations are only supported for Zero-Touch nodes
                 var functionSignature = node["FunctionSignature"]?.Value<string>();
                 var nodeId = node["Id"]?.Value<string>();
 
