@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Builder", "src\Builder\Buil
 		{23BBAB73-5A3B-4EE8-A757-A1F37C67AB1F} = {23BBAB73-5A3B-4EE8-A757-A1F37C67AB1F}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CamberMigrationAssistant", "src\CamberMigrationAssistant\CamberMigrationAssistant.csproj", "{F7AD729D-99B2-4E47-9504-6B8E719F18C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MigrationAssistant", "src\MigrationAssistant\MigrationAssistant.csproj", "{F7AD729D-99B2-4E47-9504-6B8E719F18C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
