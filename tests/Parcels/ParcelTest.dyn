@@ -1,0 +1,412 @@
+{
+  "Uuid": "29efc3c7-aca6-4648-a017-91433263c41a",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "ParcelTest",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "e40f8fef53984c2ba20ba865cc4c36bf",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "e7e00527bf664fde8f51c4253d14d41b",
+          "Name": "site",
+          "Description": "Autodesk.Civil.DynamoNodes.Site",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "1c1ed7b6477c467188e78e2d12b5d724",
+          "Name": "Parcel[]",
+          "Description": "Parcels in site",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Autodesk.Civil.DynamoNodes.Site.Parcels",
+      "Replication": "Auto",
+      "Description": "Returns all parcels in a site\n\nSite.Parcels: Parcel[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "f41508be72b848bb890db9d8a6060fff",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "3fdbca39b98b496da1044f1dbfce277b",
+          "Name": "name",
+          "Description": "Name of the site\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "627ffe4802544c9fa93bcf6db9b01242",
+          "Name": "description",
+          "Description": "Description of the site\n\nstring\nDefault value : \"\"",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "809c2062e0864dd4be64bcd2584995eb",
+          "Name": "Site",
+          "Description": "Site",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Autodesk.Civil.DynamoNodes.Site.ByName@string,string",
+      "Replication": "Auto",
+      "Description": "Creates a site with the given name\n\nSite.ByName (name: string, description: string = \"\"): Site"
+    },
+    {
+      "ConcreteType": "Autodesk.Civil.DynamoNodes.ListSiteName, Civil3DNodesUI",
+      "ItemList": [
+        "Test Site"
+      ],
+      "SelectedIndex": 0,
+      "SelectedString": "Test Site",
+      "Id": "45b1b9308dca4cb18184a5ef23219e95",
+      "NodeType": "ExtensionNode",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "da1329b7be1f46b3aff7d0f9df644212",
+          "Name": "Site Name",
+          "Description": "The selected Site Name",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Choose the name of a site in the current document"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "4be359ad892b4a45a6085941929c10f6",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "ef23ea6cc65d4277961f979f0654b3be",
+          "Name": "civilObject",
+          "Description": "Autodesk.Civil.DynamoNodes.CivilObject",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "09a8a7a5125c47cb9b0d9e011ec04bc9",
+          "Name": "string",
+          "Description": "Name of civil object",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Autodesk.Civil.DynamoNodes.CivilObject.Name",
+      "Replication": "Auto",
+      "Description": "Returns the name of a civil object\n\nCivilObject.Name: string"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "5d3b6d250f8546b4ad2393bef20f49fb",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "23414271486948c5a10cd720708ebae1",
+          "Name": "parcel",
+          "Description": "Parcel",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "41d4e286cd32470aa388e24781f984ca",
+          "Name": "PolyCurve[]",
+          "Description": "PolyCurve[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.Parcel.PolyCurves@Autodesk.Civil.DynamoNodes.Parcel",
+      "Replication": "Auto",
+      "Description": "Parcel.PolyCurves (parcel: Parcel): PolyCurve[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "bc140a7311e14928a2c24872c29e1f52",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "2b81f5edd6e947b99e19554f94ff5ac1",
+          "Name": "geometry",
+          "Description": "Dynamo geometry to create the object from\n\nGeometry",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "bb277fb4a93f468a8b7ed5c845ac7012",
+          "Name": "layerName",
+          "Description": "Name of the layer the object will be created on. By default, the current layer will be used.\n\nstring\nDefault value : \"\"",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "e4a2f1c4a12f44ff92d49dda1547d5d6",
+          "Name": "block",
+          "Description": "Block the object will be created in. By default, the object will be created in model space of the current document.\n\nBlock\nDefault value : null",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "983b37178ae54ffb9f15631f9606aa9e",
+          "Name": "Object",
+          "Description": "Object",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Object.ByGeometry@Autodesk.DesignScript.Geometry.Geometry,string,Autodesk.AutoCAD.DynamoNodes.Block",
+      "Replication": "Auto",
+      "Description": "Creates an object from Dynamo geometry\n\nObject.ByGeometry (geometry: Geometry, layerName: string = \"\", block: Block = null): Object"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "b9a234ee532d4ebebbd4e49f7050ea40",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "b520813b3ad647ba9d8405491ddceb8d",
+          "Name": "parcel",
+          "Description": "Parcel",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "af398e94714b43958197f351fedbcd99",
+          "Name": "double",
+          "Description": "double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.Parcel.Area@Autodesk.Civil.DynamoNodes.Parcel",
+      "Replication": "Auto",
+      "Description": "Gets the area of the parcel.\n\nParcel.Area (parcel: Parcel): double"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "1c1ed7b6477c467188e78e2d12b5d724",
+      "End": "ef23ea6cc65d4277961f979f0654b3be",
+      "Id": "3b498ebef8c24188bc4848bf5a11305a",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "1c1ed7b6477c467188e78e2d12b5d724",
+      "End": "23414271486948c5a10cd720708ebae1",
+      "Id": "ade7dce331834891a2b4968cc5018b40",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "1c1ed7b6477c467188e78e2d12b5d724",
+      "End": "b520813b3ad647ba9d8405491ddceb8d",
+      "Id": "592075cc48344301b0e6fa098cbd4c4f",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "809c2062e0864dd4be64bcd2584995eb",
+      "End": "e7e00527bf664fde8f51c4253d14d41b",
+      "Id": "d76bc4666d8d41a9827887f431d9c924",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "da1329b7be1f46b3aff7d0f9df644212",
+      "End": "3fdbca39b98b496da1044f1dbfce277b",
+      "Id": "9bf3f31ea6744052a66d248e97e5fbbf",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "41d4e286cd32470aa388e24781f984ca",
+      "End": "2b81f5edd6e947b99e19554f94ff5ac1",
+      "Id": "8167984caf4845bda98f8d631a19a9a4",
+      "IsHidden": "False"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Camber",
+      "Version": "5.0.0",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "5d3b6d250f8546b4ad2393bef20f49fb",
+        "b9a234ee532d4ebebbd4e49f7050ea40"
+      ]
+    }
+  ],
+  "EnableLegacyPolyCurveBehavior": true,
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "3.3",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "3.3.0.6316",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "_Background Preview",
+      "EyeX": 3259.127197265625,
+      "EyeY": 197.1929168701172,
+      "EyeZ": -8299.30078125,
+      "LookX": -0.869873046875,
+      "LookY": -205.7164306640625,
+      "LookZ": -27.5107421875,
+      "UpX": -0.03131697699427605,
+      "UpY": 0.1326105296611786,
+      "UpZ": -0.9906733632087708
+    },
+    "ConnectorPins": [],
+    "NodeViews": [
+      {
+        "Id": "e40f8fef53984c2ba20ba865cc4c36bf",
+        "Name": "Site.Parcels",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 417.5,
+        "Y": 196.5
+      },
+      {
+        "Id": "f41508be72b848bb890db9d8a6060fff",
+        "Name": "Site.ByName",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 119.5,
+        "Y": 168.5
+      },
+      {
+        "Id": "45b1b9308dca4cb18184a5ef23219e95",
+        "Name": "Choose Site Name",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": -251.5,
+        "Y": 165.5
+      },
+      {
+        "Id": "4be359ad892b4a45a6085941929c10f6",
+        "Name": "CivilObject.Name",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 735.6267625214393,
+        "Y": -37.0743577001449
+      },
+      {
+        "Id": "5d3b6d250f8546b4ad2393bef20f49fb",
+        "Name": "Parcel.PolyCurves",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 760.5064707547194,
+        "Y": 482.3767748995831
+      },
+      {
+        "Id": "bc140a7311e14928a2c24872c29e1f52",
+        "Name": "Object.ByGeometry",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1138.17260090669,
+        "Y": 488.36699170533893
+      },
+      {
+        "Id": "b9a234ee532d4ebebbd4e49f7050ea40",
+        "Name": "Parcel.Area",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 743.9184951151765,
+        "Y": 110.8651445492005
+      }
+    ],
+    "Annotations": [],
+    "X": -187.74091167579206,
+    "Y": 39.942887174229526,
+    "Zoom": 0.5585046958488618
+  }
+}
