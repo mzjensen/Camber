@@ -9,6 +9,10 @@ using Dynamo.Graph.Nodes;
 using System.Collections.Generic;
 using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.DesignScript.Runtime;
+using Autodesk.AutoCAD.Runtime;
+using System.Security.Cryptography.Pkcs;
+using System;
+using Autodesk.AutoCAD.Geometry;
 #endregion
 
 namespace Camber.Civil.CivilObjects
@@ -83,8 +87,8 @@ namespace Camber.Civil.CivilObjects
         /// </summary>
         /// <param name="parcel"></param>
         /// <returns></returns>
-        [NodeCategory("Query")]
-        public static IList<Autodesk.DesignScript.Geometry.PolyCurve> PolyCurves(this civDynNodes.Parcel parcel)
+        [IsVisibleInDynamoLibrary(false)]
+        internal static IList<Autodesk.DesignScript.Geometry.PolyCurve> PolyCurves(this civDynNodes.Parcel parcel)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
             IList<Autodesk.DesignScript.Geometry.PolyCurve> retVal = new List<Autodesk.DesignScript.Geometry.PolyCurve>();
@@ -92,34 +96,6 @@ namespace Camber.Civil.CivilObjects
             {
                 retVal.Add(ConvertPolylineToPolyCurve(poly));
             }
-            //// get the COM object
-            //dynamic oParcel = parcel.InternalDBObject.AcadObject;
-            //// get the parcel loops from the COM object
-            //dynamic loops = oParcel.ParcelLoops;
-            //// loop the COM loops
-            //foreach (dynamic loop in loops)
-            //{
-            //    // create a polyline for later conversion to polycurve
-            //    acDb.Polyline poly = new acDb.Polyline();
-            //    int count = loop.Count;
-            //    for (int i = 0; i < count; i++)
-            //    {
-            //        dynamic segElements = loop.Item(i);
-            //        double x = segElements.StartX;
-            //        double y = segElements.StartY;
-            //        double bulge = 0;
-            //        try
-            //        {
-            //            bulge = (double)segElements.Bulge;
-            //        }
-            //        catch { }
-            //        poly.AddVertexAt(i, new Autodesk.AutoCAD.Geometry.Point2d(x, y), bulge, 0, 0);
-            //    }
-            //    poly.Closed = true;
-            //    retVal.Add(ConvertPolylineToPolyCurve(poly));
-            //    poly.Erase();
-            //}
-
             return retVal;
         }
         /// <summary>
@@ -193,19 +169,15 @@ namespace Camber.Civil.CivilObjects
             {
                 // extract each segment
                 Autodesk.DesignScript.Geometry.Curve[] curves; // = new Autodesk.DesignScript.Geometry.Curve[polyline.NumberOfVertices];
-                if (polyline.Closed) { curves = new Autodesk.DesignScript.Geometry.Curve[polyline.NumberOfVertices]; }
-                else { curves = new Autodesk.DesignScript.Geometry.Curve[polyline.NumberOfVertices - 1]; }
+                if (polyline.Closed) { curves = new Autodesk.DesignScript.Geometry.Curve[polyline.NumberOfVertices - 1]; }
+                else { curves = new Autodesk.DesignScript.Geometry.Curve[polyline.NumberOfVertices - 2]; }
                 // convert segment into Dynamo curve or line
                 int curIndex = 0;
-                while (curIndex <= polyline.NumberOfVertices)
+                while (curIndex <= curves.Length)
                 {
                     if (polyline.GetSegmentType(curIndex) == SegmentType.Arc)
                     {
-                        Autodesk.DesignScript.Geometry.Arc curCurve;
-                        Autodesk.DesignScript.Geometry.Point centerPt = Autodesk.DesignScript.Geometry.Point.ByCoordinates(
-                            polyline.GetArcSegment2dAt(curIndex).Center.X,
-                            polyline.GetArcSegment2dAt(curIndex).Center.Y,
-                            0.0);
+                        // get the start and end points   
                         Autodesk.DesignScript.Geometry.Point startPt = Autodesk.DesignScript.Geometry.Point.ByCoordinates(
                             polyline.GetArcSegment2dAt(curIndex).StartPoint.X,
                             polyline.GetArcSegment2dAt(curIndex).StartPoint.Y,
@@ -214,8 +186,60 @@ namespace Camber.Civil.CivilObjects
                             polyline.GetArcSegment2dAt(curIndex).EndPoint.X,
                             polyline.GetArcSegment2dAt(curIndex).EndPoint.Y,
                             0.0);
-                        curCurve = Autodesk.DesignScript.Geometry.Arc.ByCenterPointStartPointEndPoint(centerPt, endPt, startPt);
-                        curves.SetValue(curCurve, curIndex);
+                        if (curIndex == curves.Length)
+                            endPt = Autodesk.DesignScript.Geometry.Point.ByCoordinates(
+                            polyline.GetArcSegment2dAt(curIndex).EndPoint.X,
+                            polyline.GetArcSegment2dAt(curIndex).EndPoint.Y,
+                            0.0);
+
+                        // get the center point
+                        Autodesk.DesignScript.Geometry.Point centerPt = Autodesk.DesignScript.Geometry.Point.ByCoordinates(
+                            polyline.GetArcSegment2dAt(curIndex).Center.X,
+                            polyline.GetArcSegment2dAt(curIndex).Center.Y,
+                            0.0);
+
+                        // get the mid point
+                        Autodesk.AutoCAD.Geometry.CircularArc2d curArc = polyline.GetArcSegment2dAt(curIndex);
+
+                        double curLen = curArc.GetLength(curArc.GetParameterOf(curArc.StartPoint), curArc.GetParameterOf(curArc.EndPoint));
+                        double distToIndex = polyline.GetDistAtPoint(polyline.GetPoint3dAt(curIndex));
+                        double distToMidPt = distToIndex + curLen / 2;
+                        Point3d midPoint;
+                        try
+                        {
+                            midPoint = polyline.GetPointAtDist(distToMidPt);
+                        }
+                        catch
+                        {
+                            distToMidPt = distToIndex - curLen / 2;
+                            midPoint = polyline.GetPointAtDist(distToMidPt);
+                        }
+                        Autodesk.DesignScript.Geometry.Point midPt = Autodesk.DesignScript.Geometry.Point.ByCoordinates(midPoint.X, midPoint.Y, 0.0);
+
+                        // creates the curve using start/end/center points
+                        Autodesk.DesignScript.Geometry.Arc curCurveFromCen = Autodesk.DesignScript.Geometry.Arc.ByCenterPointStartPointEndPoint(centerPt, startPt, endPt);
+
+                        // creates the curve using the start/mid/end points
+                        Autodesk.DesignScript.Geometry.Arc curCurveFromMid = Autodesk.DesignScript.Geometry.Arc.ByThreePoints(startPt, midPt, endPt);
+
+                        // decide which curve is the best match
+                        if (curCurveFromMid.Length == curLen)
+                            curves.SetValue(curCurveFromMid, curIndex);
+                        else if (curCurveFromCen.Length == curLen)
+                            curves.SetValue(curCurveFromCen, curIndex);
+                        else
+                        {
+                            // if the neither curve matches, then lets try to best fit the curve to the points
+                            IList<Autodesk.DesignScript.Geometry.Point> points = new List<Autodesk.DesignScript.Geometry.Point>()
+                                {
+                                    startPt,
+                                    midPt,
+                                    endPt
+                                };
+
+                            Autodesk.DesignScript.Geometry.Arc curCurveAlt = Autodesk.DesignScript.Geometry.Arc.ByBestFitThroughPoints(points);
+                            curves.SetValue(curCurveAlt, curIndex);
+                        }
                     }
                     else if (polyline.GetSegmentType(curIndex) == SegmentType.Line)
                     {
@@ -233,7 +257,9 @@ namespace Camber.Civil.CivilObjects
                     }
                     curIndex = curIndex + 1;
                 }
-                retVal = Autodesk.DesignScript.Geometry.PolyCurve.ByJoinedCurves(curves, 0, false, 0);
+                try
+                { retVal = Autodesk.DesignScript.Geometry.PolyCurve.ByJoinedCurves(curves, 0, false, 0); }
+                catch { }
             }
             return retVal;
         }
@@ -258,16 +284,32 @@ namespace Camber.Civil.CivilObjects
                 int count = loop.Count;
                 for (int i = 0; i < count; i++)
                 {
-                    dynamic segElements = loop.Item(i);
-                    double x = segElements.StartX;
-                    double y = segElements.StartY;
+                    dynamic segElement = loop.Item(i);
+
+
+
+
+                    double x = segElement.StartX;
+                    double y = segElement.StartY;
                     double bulge = 0;
+                    double radius = 0;
                     try
                     {
-                        bulge = (double)segElements.Bulge;
+                        radius = (double)segElement.Radius;
+                        bulge = (double)segElement.Bulge;
                     }
                     catch { }
                     poly.AddVertexAt(i, new Autodesk.AutoCAD.Geometry.Point2d(x, y), bulge, 0, 0);
+                    if (i == count - 1)
+                    {
+                        bulge = 0;
+                        try
+                        {
+                            bulge = (double)segElement.Bulge;
+                        }
+                        catch { }
+                        poly.AddVertexAt(i + 1, new Autodesk.AutoCAD.Geometry.Point2d(segElement.EndX, segElement.EndY), bulge, 0, 0);
+                    }
                 }
                 poly.Closed = true;
                 retVal.Add(poly);
@@ -275,6 +317,79 @@ namespace Camber.Civil.CivilObjects
 
             return retVal;
         }
+
+        ///// <summary>
+        ///// Convert directly from parcel geometry to Curves, using mathematical recreation of arcs
+        ///// </summary>
+        ///// <param name="parcel"></param>
+        ///// <returns></returns>
+        //[IsVisibleInDynamoLibrary(false)]
+        //internal static IList<Autodesk.DesignScript.Geometry.Curve> GetPolyCurves(this civDynNodes.Parcel parcel)
+        //{
+        //    IList<Autodesk.DesignScript.Geometry.Curve> retVal = new List<Autodesk.DesignScript.Geometry.Curve>();
+        //    // get the COM object
+        //    dynamic oParcel = parcel.InternalDBObject.AcadObject;
+        //    // get the parcel loops from the COM object
+        //    dynamic loops = oParcel.ParcelLoops;
+        //    // loop the COM loops
+        //    foreach (dynamic loop in loops)
+        //    {
+        //        int count = loop.Count;
+        //        for (int i = 0; i < count; i++)
+        //        {
+        //            dynamic segElement = loop.Item(i);
+        //            double radius = 0;
+        //            double bulge = 0;
+        //            try
+        //            {
+        //                bulge = segElement.Bulge;
+        //                radius = segElement.Radius;
+        //            }
+        //            catch { }
+        //            Autodesk.DesignScript.Geometry.Point startPt = Autodesk.DesignScript.Geometry.Point.ByCoordinates(segElement.StartX, segElement.StartY);
+        //            Autodesk.DesignScript.Geometry.Point endPt = Autodesk.DesignScript.Geometry.Point.ByCoordinates(segElement.EndX, segElement.EndY);
+        //            if (radius == 0)
+        //            { // Line
+        //                Autodesk.DesignScript.Geometry.Line curLine = Autodesk.DesignScript.Geometry.Line.ByStartPointEndPoint(startPt, endPt);
+        //                retVal.Add(curLine);
+        //            }
+        //            else
+        //            { // Arc
+        //              // calculate the center point
+        //              //startPt = Autodesk.DesignScript.Geometry.Point.ByCoordinates(segElement.EndX, segElement.EndY);
+        //              //endPt = Autodesk.DesignScript.Geometry.Point.ByCoordinates(segElement.StartX, segElement.StartY);
+        //                double d = Math.Sqrt(((endPt.X - startPt.X) * (endPt.X - startPt.X)) + ((endPt.Y - startPt.Y) * (endPt.Y - startPt.Y)));
+        //                double Mx = (startPt.X + endPt.X) / 2;
+        //                double My = (startPt.Y + endPt.Y) / 2;
+        //                double sagitta = d / 2 * bulge;
+        //                double dx = endPt.X - startPt.X;
+        //                double dy = endPt.Y - startPt.Y;
+        //                Autodesk.DesignScript.Geometry.Vector unitVector = Autodesk.DesignScript.Geometry.Vector.ByCoordinates(-dy / d, dx / d, 0);
+        //                double R = d / 2 * ((1 + bulge * bulge) / (2 * bulge));
+        //                double Cx = Mx + Math.Sign(bulge) * (-dy / d) * radius;
+        //                double Cy = My + Math.Sign(bulge) * (dx / d) * radius;
+        //                Autodesk.DesignScript.Geometry.Point centerPt = Autodesk.DesignScript.Geometry.Point.ByCoordinates(Cx, Cy);
+
+        //                // calculate the mid point
+        //                double theta = Math.Atan2(endPt.Y - startPt.Y, endPt.X - startPt.X);
+        //                double delta = 4 * Math.Atan(bulge);
+        //                double theta_m = theta + (delta / 2) + Math.CopySign(Math.PI / 2, bulge);
+        //                double Mx_arc = Cx + radius * Math.Cos(theta_m);
+        //                double My_arc = Cy + radius * Math.Sin(theta_m);
+
+
+        //                Autodesk.DesignScript.Geometry.Point midPt = Autodesk.DesignScript.Geometry.Point.ByCoordinates(Mx_arc, My_arc);
+
+        //                Autodesk.DesignScript.Geometry.Arc curCurve = Autodesk.DesignScript.Geometry.Arc.ByThreePoints(startPt, midPt, endPt);
+        //                retVal.Add(curCurve);
+        //            }
+        //        }
+        //    }
+
+        //    return retVal;
+        //}
+
+
 
         #endregion methods
 

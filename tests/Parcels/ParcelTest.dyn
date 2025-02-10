@@ -104,114 +104,6 @@
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
-      "Id": "4be359ad892b4a45a6085941929c10f6",
-      "NodeType": "FunctionNode",
-      "Inputs": [
-        {
-          "Id": "ef23ea6cc65d4277961f979f0654b3be",
-          "Name": "civilObject",
-          "Description": "Autodesk.Civil.DynamoNodes.CivilObject",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Outputs": [
-        {
-          "Id": "09a8a7a5125c47cb9b0d9e011ec04bc9",
-          "Name": "string",
-          "Description": "Name of civil object",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "FunctionSignature": "Autodesk.Civil.DynamoNodes.CivilObject.Name",
-      "Replication": "Auto",
-      "Description": "Returns the name of a civil object\n\nCivilObject.Name: string"
-    },
-    {
-      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
-      "Id": "5d3b6d250f8546b4ad2393bef20f49fb",
-      "NodeType": "FunctionNode",
-      "Inputs": [
-        {
-          "Id": "23414271486948c5a10cd720708ebae1",
-          "Name": "parcel",
-          "Description": "Parcel",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Outputs": [
-        {
-          "Id": "41d4e286cd32470aa388e24781f984ca",
-          "Name": "PolyCurve[]",
-          "Description": "PolyCurve[]",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "FunctionSignature": "Camber.Civil.CivilObjects.Parcel.PolyCurves@Autodesk.Civil.DynamoNodes.Parcel",
-      "Replication": "Auto",
-      "Description": "Parcel.PolyCurves (parcel: Parcel): PolyCurve[]"
-    },
-    {
-      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
-      "Id": "bc140a7311e14928a2c24872c29e1f52",
-      "NodeType": "FunctionNode",
-      "Inputs": [
-        {
-          "Id": "2b81f5edd6e947b99e19554f94ff5ac1",
-          "Name": "geometry",
-          "Description": "Dynamo geometry to create the object from\n\nGeometry",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        },
-        {
-          "Id": "bb277fb4a93f468a8b7ed5c845ac7012",
-          "Name": "layerName",
-          "Description": "Name of the layer the object will be created on. By default, the current layer will be used.\n\nstring\nDefault value : \"\"",
-          "UsingDefaultValue": true,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        },
-        {
-          "Id": "e4a2f1c4a12f44ff92d49dda1547d5d6",
-          "Name": "block",
-          "Description": "Block the object will be created in. By default, the object will be created in model space of the current document.\n\nBlock\nDefault value : null",
-          "UsingDefaultValue": true,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Outputs": [
-        {
-          "Id": "983b37178ae54ffb9f15631f9606aa9e",
-          "Name": "Object",
-          "Description": "Object",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Object.ByGeometry@Autodesk.DesignScript.Geometry.Geometry,string,Autodesk.AutoCAD.DynamoNodes.Block",
-      "Replication": "Auto",
-      "Description": "Creates an object from Dynamo geometry\n\nObject.ByGeometry (geometry: Geometry, layerName: string = \"\", block: Block = null): Object"
-    },
-    {
-      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
       "Id": "b9a234ee532d4ebebbd4e49f7050ea40",
       "NodeType": "FunctionNode",
       "Inputs": [
@@ -238,26 +130,206 @@
       ],
       "FunctionSignature": "Camber.Civil.CivilObjects.Parcel.Area@Autodesk.Civil.DynamoNodes.Parcel",
       "Replication": "Auto",
-      "Description": "Gets the area of the parcel.\n\nParcel.Area (parcel: Parcel): double"
+      "Description": "Returns the area of a parcel.\n\nParcel.Area (parcel: Parcel): double"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "ed9480e8f77a4670a10ae67fcdd7d7c2",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "42390471fa214c6b9b1a5bf88c4401c0",
+          "Name": "parcel",
+          "Description": "Parcel",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "dfc5f325437a47aca5c76c03577d140e",
+          "Name": "double",
+          "Description": "double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.Parcel.Perimeter@Autodesk.Civil.DynamoNodes.Parcel",
+      "Replication": "Auto",
+      "Description": "Returns the perimeter of the parcel\n\nParcel.Perimeter (parcel: Parcel): double"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "954ec384a67240c590d376a4fc472f7d",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "009d2e87147742298572b9ad94fb70bc",
+          "Name": "parcel",
+          "Description": "Parcel",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "66fc9b2918504ae8bae27d818c3e93c7",
+          "Name": "PolyCurve[]",
+          "Description": "PolyCurve[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.Parcel.InteriorCurves@Autodesk.Civil.DynamoNodes.Parcel",
+      "Replication": "Auto",
+      "Description": "Returns a list of polycurves representing the interior boundaries of a parcel\n\nParcel.InteriorCurves (parcel: Parcel): PolyCurve[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "ec4473a8b77a4e44870e07f33ca4a0dd",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "9a8d4bc2d45244e3b7f7f855597f18f0",
+          "Name": "curve",
+          "Description": "Dynamo curve\n\nCurve",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "ff52f882e573466ab5ad8d1a88aafa73",
+          "Name": "layerName",
+          "Description": "Name of the layer the polyline will be created on. By default, the current layer will be used.\n\nstring\nDefault value : \"\"",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "da772c9805ed4e81b29644a753f77786",
+          "Name": "block",
+          "Description": "Block the polyline will be created in. By default, the polyline will be created in model space of the current document.\n\nBlock\nDefault value : null",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "839d9efb43844770a93856dbe36d6df1",
+          "Name": "Polyline",
+          "Description": "Polyline",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Polyline.ByGeometry@Autodesk.DesignScript.Geometry.Curve,string,Autodesk.AutoCAD.DynamoNodes.Block",
+      "Replication": "Auto",
+      "Description": "Creates a polyline from a Dynamo curve\n\nPolyline.ByGeometry (curve: Curve, layerName: string = \"\", block: Block = null): Polyline"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "ecd15826160a407fa0091b662362bcb4",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "7ca992a2312c48c5aaa4709f8e280940",
+          "Name": "parcel",
+          "Description": "Parcel",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "cd1e18def94840e6aadfcace35753820",
+          "Name": "PolyCurve",
+          "Description": "PolyCurve",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.Civil.CivilObjects.Parcel.ExteriorCurve@Autodesk.Civil.DynamoNodes.Parcel",
+      "Replication": "Auto",
+      "Description": "Returns a polycurve representation of the exterior boundary of a parcel\n\nParcel.ExteriorCurve (parcel: Parcel): PolyCurve"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "1dcc3974fec64f9db4738d69fb63e3a0",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "8c412c9b4bde4e09890487f7f3bbf847",
+          "Name": "curve",
+          "Description": "Dynamo curve\n\nCurve",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "66016c1f4d1042a1b5e7ffbb2d169f55",
+          "Name": "layerName",
+          "Description": "Name of the layer the polyline will be created on. By default, the current layer will be used.\n\nstring\nDefault value : \"\"",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "029c52014d964ebc83f2e8cd3475ff14",
+          "Name": "block",
+          "Description": "Block the polyline will be created in. By default, the polyline will be created in model space of the current document.\n\nBlock\nDefault value : null",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "9a917264659c40f2b8e0ddfc271fcf02",
+          "Name": "Polyline",
+          "Description": "Polyline",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Polyline.ByGeometry@Autodesk.DesignScript.Geometry.Curve,string,Autodesk.AutoCAD.DynamoNodes.Block",
+      "Replication": "Auto",
+      "Description": "Creates a polyline from a Dynamo curve\n\nPolyline.ByGeometry (curve: Curve, layerName: string = \"\", block: Block = null): Polyline"
     }
   ],
   "Connectors": [
     {
       "Start": "1c1ed7b6477c467188e78e2d12b5d724",
-      "End": "ef23ea6cc65d4277961f979f0654b3be",
-      "Id": "3b498ebef8c24188bc4848bf5a11305a",
-      "IsHidden": "False"
-    },
-    {
-      "Start": "1c1ed7b6477c467188e78e2d12b5d724",
-      "End": "23414271486948c5a10cd720708ebae1",
-      "Id": "ade7dce331834891a2b4968cc5018b40",
-      "IsHidden": "False"
-    },
-    {
-      "Start": "1c1ed7b6477c467188e78e2d12b5d724",
       "End": "b520813b3ad647ba9d8405491ddceb8d",
       "Id": "592075cc48344301b0e6fa098cbd4c4f",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "1c1ed7b6477c467188e78e2d12b5d724",
+      "End": "42390471fa214c6b9b1a5bf88c4401c0",
+      "Id": "e8da3f9a1956468abce760c75fc6bdb0",
       "IsHidden": "False"
     },
     {
@@ -273,9 +345,15 @@
       "IsHidden": "False"
     },
     {
-      "Start": "41d4e286cd32470aa388e24781f984ca",
-      "End": "2b81f5edd6e947b99e19554f94ff5ac1",
-      "Id": "8167984caf4845bda98f8d631a19a9a4",
+      "Start": "66fc9b2918504ae8bae27d818c3e93c7",
+      "End": "8c412c9b4bde4e09890487f7f3bbf847",
+      "Id": "5923cb2bd33f4fd4a8279f06fea5f44a",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "cd1e18def94840e6aadfcace35753820",
+      "End": "9a8d4bc2d45244e3b7f7f855597f18f0",
+      "Id": "e7ea3d68b6164e4c98db10c96ce17fa8",
       "IsHidden": "False"
     }
   ],
@@ -286,8 +364,10 @@
       "Version": "5.0.0",
       "ReferenceType": "Package",
       "Nodes": [
-        "5d3b6d250f8546b4ad2393bef20f49fb",
-        "b9a234ee532d4ebebbd4e49f7050ea40"
+        "b9a234ee532d4ebebbd4e49f7050ea40",
+        "ed9480e8f77a4670a10ae67fcdd7d7c2",
+        "954ec384a67240c590d376a4fc472f7d",
+        "ecd15826160a407fa0091b662362bcb4"
       ]
     }
   ],
@@ -309,10 +389,29 @@
     "warningCount": 0,
     "errorCount": 0
   },
-  "Bindings": [],
+  "Bindings": [
+    {
+      "NodeId": "e40f8fef-5398-4c2b-a20b-a865cc4c36bf",
+      "Binding": {
+        "get_Parcels_InClassDecl-1_InFunctionScope-1_Instance0_e40f8fef-5398-4c2b-a20b-a865cc4c36bf": "H4sIAAAAAAAACouuVkpJLElUslJysTR0UqqNBQBmvIWiEQAAAA=="
+      }
+    },
+    {
+      "NodeId": "f41508be-72b8-48bb-890d-b9d8a6060fff",
+      "Binding": {
+        "ByName_InClassDecl-1_InFunctionScope-1_Instance0_f41508be-72b8-48bb-890d-b9d8a6060fff": "H4sIAAAAAAAACouuVkpJLElUslJydnSxVKqNBQBmRV8NEQAAAA=="
+      }
+    },
+    {
+      "NodeId": "ec4473a8-b77a-4e44-870e-07f33ca4a0dd",
+      "Binding": {
+        "ByGeometry_InClassDecl-1_InFunctionScope-1_Instance0_ec4473a8-b77a-4e44-870e-07f33ca4a0dd": "H4sIAAAAAAAACl3PKw6AMBAA0busRlC6fB3QcgmCaNJaDDjSu0NQMG6enPWSPR1nii6cQYb1kviGeGOt5OJrhWu4gVu4g3t4hCd4hh3s4eVvLWEDVzD+Ff+Kf8W/Pv9b3m5epiVkYgEAAA=="
+      }
+    }
+  ],
   "View": {
     "Dynamo": {
-      "ScaleFactor": 1.0,
+      "ScaleFactor": 10000.0,
       "HasRunWithoutCrash": true,
       "IsVisibleInDynamoLibrary": true,
       "Version": "3.3.0.6316",
@@ -321,15 +420,15 @@
     },
     "Camera": {
       "Name": "_Background Preview",
-      "EyeX": 3259.127197265625,
-      "EyeY": 197.1929168701172,
-      "EyeZ": -8299.30078125,
-      "LookX": -0.869873046875,
-      "LookY": -205.7164306640625,
-      "LookZ": -27.5107421875,
-      "UpX": -0.03131697699427605,
-      "UpY": 0.1326105296611786,
-      "UpZ": -0.9906733632087708
+      "EyeX": 3136122.5,
+      "EyeY": 319.8192443847656,
+      "EyeZ": -10083558.0,
+      "LookX": -13.75,
+      "LookY": -323.5128173828125,
+      "LookZ": -24.0,
+      "UpX": -0.170175239443779,
+      "UpY": 0.11428360641002655,
+      "UpZ": -0.9787643551826477
     },
     "ConnectorPins": [],
     "NodeViews": [
@@ -364,49 +463,69 @@
         "Y": 165.5
       },
       {
-        "Id": "4be359ad892b4a45a6085941929c10f6",
-        "Name": "CivilObject.Name",
-        "IsSetAsInput": false,
-        "IsSetAsOutput": false,
-        "Excluded": false,
-        "ShowGeometry": true,
-        "X": 735.6267625214393,
-        "Y": -37.0743577001449
-      },
-      {
-        "Id": "5d3b6d250f8546b4ad2393bef20f49fb",
-        "Name": "Parcel.PolyCurves",
-        "IsSetAsInput": false,
-        "IsSetAsOutput": false,
-        "Excluded": false,
-        "ShowGeometry": true,
-        "X": 760.5064707547194,
-        "Y": 482.3767748995831
-      },
-      {
-        "Id": "bc140a7311e14928a2c24872c29e1f52",
-        "Name": "Object.ByGeometry",
-        "IsSetAsInput": false,
-        "IsSetAsOutput": false,
-        "Excluded": false,
-        "ShowGeometry": true,
-        "X": 1138.17260090669,
-        "Y": 488.36699170533893
-      },
-      {
         "Id": "b9a234ee532d4ebebbd4e49f7050ea40",
         "Name": "Parcel.Area",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
         "ShowGeometry": true,
-        "X": 743.9184951151765,
-        "Y": 110.8651445492005
+        "X": 792.2618666224887,
+        "Y": -69.97487479296788
+      },
+      {
+        "Id": "ed9480e8f77a4670a10ae67fcdd7d7c2",
+        "Name": "Parcel.Perimeter",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 788.3831240024235,
+        "Y": 76.33217473405819
+      },
+      {
+        "Id": "954ec384a67240c590d376a4fc472f7d",
+        "Name": "Parcel.InteriorCurves",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 783.4937788517184,
+        "Y": 219.91036506882384
+      },
+      {
+        "Id": "ec4473a8b77a4e44870e07f33ca4a0dd",
+        "Name": "Polyline.ByGeometry",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1126.3437160761978,
+        "Y": 426.28465042304026
+      },
+      {
+        "Id": "ecd15826160a407fa0091b662362bcb4",
+        "Name": "Parcel.ExteriorCurve",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 794.6917757199963,
+        "Y": 425.5707669331122
+      },
+      {
+        "Id": "1dcc3974fec64f9db4738d69fb63e3a0",
+        "Name": "Polyline.ByGeometry",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1124.375907802256,
+        "Y": 218.77425346627058
       }
     ],
     "Annotations": [],
-    "X": -187.74091167579206,
-    "Y": 39.942887174229526,
-    "Zoom": 0.5585046958488618
+    "X": 17.47624709540412,
+    "Y": 138.02449847575764,
+    "Zoom": 0.5977748789469259
   }
 }
