@@ -34,18 +34,14 @@ namespace Camber.Civil.CivilObjects
         public static civDynNodes.Site Site(this civDynNodes.Parcel parcel)
         {
             acDynNodes.Document document = acDynNodes.Document.Current;
-            try
+            using (acDynApp.DocumentContext ctx = new acDynApp.DocumentContext(document.AcDocument))
             {
-                using (acDynApp.DocumentContext ctx = new acDynApp.DocumentContext(document.AcDocument))
+                foreach (civDynNodes.Site site in civDynNodes.Site.GetSites(document))
                 {
-                    foreach (civDynNodes.Site site in civDynNodes.Site.GetSites(document))
-                    {
-                        foreach (civDynNodes.Parcel childParcel in site.Parcels)
-                            if (parcel.InternalObjectId.Equals(childParcel.InternalObjectId)) return site;
-                    }
+                    foreach (civDynNodes.Parcel childParcel in site.Parcels)
+                        if (parcel.InternalObjectId.Equals(childParcel.InternalObjectId)) return site;
                 }
             }
-            catch { throw; }
             return null;
         }
         /// <summary>
@@ -99,6 +95,8 @@ namespace Camber.Civil.CivilObjects
             IList<Autodesk.DesignScript.Geometry.PolyCurve> retVal = new List<Autodesk.DesignScript.Geometry.PolyCurve>();
             foreach (Polyline poly in ExtractPolylines(parcel))
             {
+                //acDynNodes.Polyline dynPoly = acDynNodes.Polyline.InternalMakeObject(poly, false) as acDynNodes.Polyline;
+                //retVal.Add(dynPoly.DoExportGeometry());
                 retVal.Add(ConvertPolylineToPolyCurve(poly));
             }
             return retVal;
@@ -190,7 +188,7 @@ namespace Camber.Civil.CivilObjects
                     {
                         Autodesk.DesignScript.Geometry.Curve curLine = Autodesk.DesignScript.Geometry.Line.ByStartPointEndPoint(startPt, endPt);
                         curves.Add(curLine);
-                    }                    
+                    }
                 }
             }
 
