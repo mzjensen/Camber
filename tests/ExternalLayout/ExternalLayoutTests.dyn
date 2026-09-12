@@ -11,9 +11,8 @@
   "Nodes": [
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
-      "NodeType": "FunctionNode",
-      "FunctionSignature": "Camber.External.ExternalDocument.LoadFromFile@string",
       "Id": "2d4d85fd501b450fbcee4144d2d9b772",
+      "NodeType": "FunctionNode",
       "Inputs": [
         {
           "Id": "a378822a6a9c4907a75495fda3a40bce",
@@ -36,15 +35,14 @@
           "KeepListStructure": false
         }
       ],
+      "FunctionSignature": "Camber.External.ExternalDocument.LoadFromFile@string",
       "Replication": "Auto",
       "Description": "Loads an External Document from an existing file. Please note that this node does not prevent other applications from opening and/or modifying the file at the same time.\n\nExternalDocument.LoadFromFile (filePath: string): ExternalDocument"
     },
     {
       "ConcreteType": "CoreNodeModels.Input.Filename, CoreNodeModels",
-      "HintPath": "C:\\Software Projects\\Camber\\tests\\ExternalLayout\\ExternalLayoutTests.dwg",
-      "InputValue": "C:\\Software Projects\\Camber\\tests\\ExternalLayout\\ExternalLayoutTests.dwg",
-      "NodeType": "ExtensionNode",
       "Id": "a7fc1be89be3436a8e401f0dec104d2f",
+      "NodeType": "ExtensionNode",
       "Inputs": [],
       "Outputs": [
         {
@@ -58,19 +56,20 @@
         }
       ],
       "Replication": "Disabled",
-      "Description": "Allows you to select a file on the system to get its file path."
+      "Description": "Allows you to select a file on the system and returns its file path",
+      "HintPath": "C:\\Software Projects\\Camber\\tests\\ExternalLayout\\ExternalLayoutTests.dwg",
+      "InputValue": "C:\\Software Projects\\Camber\\tests\\ExternalLayout\\ExternalLayoutTests.dwg"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
-      "NodeType": "CodeBlockNode",
-      "Code": "\"Layout1\";",
       "Id": "4cc95478133542d683e321e491784097",
+      "NodeType": "CodeBlockNode",
       "Inputs": [],
       "Outputs": [
         {
           "Id": "fd83bbee9d734e9ea4787a7e269c673c",
-          "Name": "",
-          "Description": "Value of expression at line 1",
+          "Name": "string",
+          "Description": "\"Layout1\"",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -78,13 +77,13 @@
         }
       ],
       "Replication": "Disabled",
-      "Description": "Allows for DesignScript code to be authored directly"
+      "Description": "Allows for DesignScript code to be authored directly",
+      "Code": "\"Layout1\";"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
-      "NodeType": "FunctionNode",
-      "FunctionSignature": "Camber.External.ExternalLayout.Block",
       "Id": "acaa8ef734794f7a8e1d17df5d05a10f",
+      "NodeType": "FunctionNode",
       "Inputs": [
         {
           "Id": "3a2c1fa31cf9494f8ad9ad228622dd38",
@@ -107,14 +106,14 @@
           "KeepListStructure": false
         }
       ],
+      "FunctionSignature": "Camber.External.ExternalLayout.Block",
       "Replication": "Auto",
       "Description": "P Gets the External Block associated with an External Layout.\n\nExternalLayout.Block: ExternalBlock"
     },
     {
       "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
-      "NodeType": "BooleanInputNode",
-      "InputValue": true,
       "Id": "2077520bbdd94d2b8a609bba4060e5e0",
+      "NodeType": "BooleanInputNode",
       "Inputs": [],
       "Outputs": [
         {
@@ -128,13 +127,13 @@
         }
       ],
       "Replication": "Disabled",
-      "Description": "Selection between a true and false."
+      "Description": "Enables selection between True and False",
+      "InputValue": true
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
-      "NodeType": "FunctionNode",
-      "FunctionSignature": "Camber.External.ExternalLayout.TabOrder",
       "Id": "8e02ad88c50f4ec386bf509dd9ec1019",
+      "NodeType": "FunctionNode",
       "Inputs": [
         {
           "Id": "3d2813abf68b41c09ac91263d9295216",
@@ -157,14 +156,14 @@
           "KeepListStructure": false
         }
       ],
+      "FunctionSignature": "Camber.External.ExternalLayout.TabOrder",
       "Replication": "Auto",
       "Description": "Gets the tab order of an External Layout.\n\nExternalLayout.TabOrder: int"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
-      "NodeType": "FunctionNode",
-      "FunctionSignature": "Camber.External.ExternalLayout.ByName@Camber.External.ExternalDocument,string,string",
       "Id": "b781f292016a4983bb3323780c79c54a",
+      "NodeType": "FunctionNode",
       "Inputs": [
         {
           "Id": "30900b1010ae482cb1680a2096883fea",
@@ -205,14 +204,14 @@
           "KeepListStructure": false
         }
       ],
+      "FunctionSignature": "Camber.External.ExternalLayout.ByName@Camber.External.ExternalDocument,string,string",
       "Replication": "Auto",
       "Description": "Creates a new External Layout by name.\n\nExternalLayout.ByName (externalDocument: ExternalDocument, name: string, pageSetupName: string): ExternalLayout"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
-      "NodeType": "FunctionNode",
-      "FunctionSignature": "Camber.External.ExternalDocument.Layouts@bool",
       "Id": "f86b47ab04a74afb9e53fca569616752",
+      "NodeType": "FunctionNode",
       "Inputs": [
         {
           "Id": "cac89ffbdf2243ab9826bf7ac734eb65",
@@ -244,14 +243,14 @@
           "KeepListStructure": false
         }
       ],
+      "FunctionSignature": "Camber.External.ExternalDocument.Layouts@bool",
       "Replication": "Auto",
       "Description": "Gets all of the External Layouts in an External Document.\n\nExternalDocument.Layouts (includeModel: bool = false): ExternalLayout[]"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
-      "NodeType": "FunctionNode",
-      "FunctionSignature": "Camber.External.ExternalDocument.LayoutByName@string",
       "Id": "12fb7f5cb29544d2845283126fa77103",
+      "NodeType": "FunctionNode",
       "Inputs": [
         {
           "Id": "2c7f0dd45caf432bb4be12edb8a763e7",
@@ -283,14 +282,14 @@
           "KeepListStructure": false
         }
       ],
+      "FunctionSignature": "Camber.External.ExternalDocument.LayoutByName@string",
       "Replication": "Auto",
       "Description": "Gets an External Layout in an External Document by name.\n\nExternalDocument.LayoutByName (name: string): ExternalLayout"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
-      "NodeType": "FunctionNode",
-      "FunctionSignature": "Camber.External.ExternalDocument.NamedPageSetups",
       "Id": "38086481749a4a90bde25da53af92ac8",
+      "NodeType": "FunctionNode",
       "Inputs": [
         {
           "Id": "e974ff018e394f19b1f338233f10d938",
@@ -313,14 +312,14 @@
           "KeepListStructure": false
         }
       ],
+      "FunctionSignature": "Camber.External.ExternalDocument.NamedPageSetups",
       "Replication": "Auto",
       "Description": "Gets all of the named page setups in an External Document.\n\nExternalDocument.NamedPageSetups: string[]"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
-      "NodeType": "FunctionNode",
-      "FunctionSignature": "Camber.External.ExternalLayout.SetName@string",
       "Id": "e48f306ed92242dab230e8fc2be14c79",
+      "NodeType": "FunctionNode",
       "Inputs": [
         {
           "Id": "d6608d2e56a84aa19803ebdab278bb87",
@@ -352,14 +351,14 @@
           "KeepListStructure": false
         }
       ],
+      "FunctionSignature": "Camber.External.ExternalLayout.SetName@string",
       "Replication": "Auto",
       "Description": "Sets the name of an External Layout.\n\nExternalLayout.SetName (newName: string): ExternalLayout"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
-      "NodeType": "CodeBlockNode",
-      "Code": "a[1];",
       "Id": "068a569e9fa247b49423d158504fda7e",
+      "NodeType": "CodeBlockNode",
       "Inputs": [
         {
           "Id": "44db44373ae94c5899473e8d97b8d3d3",
@@ -374,8 +373,8 @@
       "Outputs": [
         {
           "Id": "b04171057629414f9ce3ce9d274b3bc2",
-          "Name": "",
-          "Description": "Value of expression at line 1",
+          "Name": "function",
+          "Description": "DesignScript.Builtin.Get.ValueAtIndex(a, 1)",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -383,19 +382,19 @@
         }
       ],
       "Replication": "Disabled",
-      "Description": "Allows for DesignScript code to be authored directly"
+      "Description": "Allows for DesignScript code to be authored directly",
+      "Code": "a[1];"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
-      "NodeType": "CodeBlockNode",
-      "Code": "\"Layout3\";",
       "Id": "1f57bf3de3234c41a54d35993ac1493d",
+      "NodeType": "CodeBlockNode",
       "Inputs": [],
       "Outputs": [
         {
           "Id": "fb6431c24ff845589eda40502055fbae",
-          "Name": "",
-          "Description": "Value of expression at line 1",
+          "Name": "string",
+          "Description": "\"Layout3\"",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -403,13 +402,13 @@
         }
       ],
       "Replication": "Disabled",
-      "Description": "Allows for DesignScript code to be authored directly"
+      "Description": "Allows for DesignScript code to be authored directly",
+      "Code": "\"Layout3\";"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
-      "NodeType": "FunctionNode",
-      "FunctionSignature": "Camber.External.ExternalLayout.ByName@Camber.External.ExternalDocument,string,string",
       "Id": "f6c72fc6324c44caa70b0b792cccd93e",
+      "NodeType": "FunctionNode",
       "Inputs": [
         {
           "Id": "d2a21bbdbb4445588936a87676d760c1",
@@ -450,14 +449,14 @@
           "KeepListStructure": false
         }
       ],
+      "FunctionSignature": "Camber.External.ExternalLayout.ByName@Camber.External.ExternalDocument,string,string",
       "Replication": "Auto",
       "Description": "Creates a new External Layout by name.\n\nExternalLayout.ByName (externalDocument: ExternalDocument, name: string, pageSetupName: string): ExternalLayout"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
-      "NodeType": "CodeBlockNode",
-      "Code": "a[0];",
       "Id": "9e5917eb35aa456fa1e76c013a7f9d52",
+      "NodeType": "CodeBlockNode",
       "Inputs": [
         {
           "Id": "1a8c4bcda839434286ad04c42ca907df",
@@ -472,8 +471,8 @@
       "Outputs": [
         {
           "Id": "4835bc1ea9cf4fd0b01fb98931765bab",
-          "Name": "",
-          "Description": "Value of expression at line 1",
+          "Name": "function",
+          "Description": "DesignScript.Builtin.Get.ValueAtIndex(a, 0)",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -481,19 +480,19 @@
         }
       ],
       "Replication": "Disabled",
-      "Description": "Allows for DesignScript code to be authored directly"
+      "Description": "Allows for DesignScript code to be authored directly",
+      "Code": "a[0];"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
-      "NodeType": "CodeBlockNode",
-      "Code": "\"Layout4\";",
       "Id": "5ff02d603aa94fadaa413f2d22d3a0df",
+      "NodeType": "CodeBlockNode",
       "Inputs": [],
       "Outputs": [
         {
           "Id": "7031395dd8b1400c8a2eae295154ac6c",
-          "Name": "",
-          "Description": "Value of expression at line 1",
+          "Name": "string",
+          "Description": "\"Layout4\"",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -501,7 +500,38 @@
         }
       ],
       "Replication": "Disabled",
-      "Description": "Allows for DesignScript code to be authored directly"
+      "Description": "Allows for DesignScript code to be authored directly",
+      "Code": "\"Layout4\";"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "610ca64b044b4695b4a60c1a707165ec",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "7b0be9c5f11e43968adc992fe13f5548",
+          "Name": "externalLayout",
+          "Description": "Camber.External.ExternalLayout",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "d19ed1e4d5b441818f8ece7598a8ea88",
+          "Name": "bool",
+          "Description": "True if the layout was successfully deleted.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.External.ExternalLayout.Delete",
+      "Replication": "Auto",
+      "Description": "Deletes the External Layout from its document.\n\nExternalLayout.Delete ( ): bool"
     }
   ],
   "Connectors": [
@@ -566,6 +596,12 @@
       "IsHidden": "False"
     },
     {
+      "Start": "70281e8d224f420cb9dc2f94f79cf3e6",
+      "End": "7b0be9c5f11e43968adc992fe13f5548",
+      "Id": "cc88767a57354ea891e4ba9a168192c8",
+      "IsHidden": "False"
+    },
+    {
       "Start": "39e3c3df37d14c61ac57203abe3f0978",
       "End": "1a8c4bcda839434286ad04c42ca907df",
       "Id": "a805957ab0b647e5883fe1c841c534ed",
@@ -609,6 +645,13 @@
       ]
     },
     {
+      "Name": "Camber.dll",
+      "ReferenceType": "ZeroTouch",
+      "Nodes": [
+        "610ca64b044b4695b4a60c1a707165ec"
+      ]
+    },
+    {
       "Name": "ExternalLayoutTests.dwg",
       "ReferenceType": "External",
       "Nodes": [
@@ -616,6 +659,7 @@
       ]
     }
   ],
+  "EnableLegacyPolyCurveBehavior": true,
   "Thumbnail": "",
   "GraphDocumentationURL": null,
   "ExtensionWorkspaceData": [
@@ -637,14 +681,14 @@
   "View": {
     "Dynamo": {
       "ScaleFactor": 1.0,
-      "HasRunWithoutCrash": true,
+      "HasRunWithoutCrash": false,
       "IsVisibleInDynamoLibrary": true,
-      "Version": "2.13.1.3887",
-      "RunType": "Automatic",
+      "Version": "3.6.1.9956",
+      "RunType": "Manual",
       "RunPeriod": "1000"
     },
     "Camera": {
-      "Name": "Background Preview",
+      "Name": "_Background Preview",
       "EyeX": -17.0,
       "EyeY": 24.0,
       "EyeZ": 50.0,
@@ -658,169 +702,179 @@
     "ConnectorPins": [],
     "NodeViews": [
       {
-        "Name": "ExternalDocument.LoadFromFile",
-        "ShowGeometry": true,
         "Id": "2d4d85fd501b450fbcee4144d2d9b772",
+        "Name": "ExternalDocument.LoadFromFile",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
+        "ShowGeometry": true,
         "X": 435.0,
         "Y": 142.0
       },
       {
-        "Name": "File Path",
-        "ShowGeometry": true,
         "Id": "a7fc1be89be3436a8e401f0dec104d2f",
+        "Name": "File Path",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
+        "ShowGeometry": true,
         "X": -75.0,
         "Y": 141.0
       },
       {
-        "Name": "Code Block",
-        "ShowGeometry": true,
         "Id": "4cc95478133542d683e321e491784097",
+        "Name": "Code Block",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 801.84866468842722,
+        "ShowGeometry": true,
+        "X": 801.8486646884272,
         "Y": 239.96142433234422
       },
       {
-        "Name": "ExternalLayout.Block",
-        "ShowGeometry": true,
         "Id": "acaa8ef734794f7a8e1d17df5d05a10f",
+        "Name": "ExternalLayout.Block",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 1412.6617210682491,
-        "Y": -26.252225519287833
+        "ShowGeometry": true,
+        "X": 1456.1647028196785,
+        "Y": -354.6295716429805
       },
       {
-        "Name": "Boolean",
-        "ShowGeometry": true,
         "Id": "2077520bbdd94d2b8a609bba4060e5e0",
+        "Name": "Boolean",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 718.44807121661711,
-        "Y": -54.590504451038612
+        "ShowGeometry": true,
+        "X": 718.4480712166171,
+        "Y": -54.59050445103861
       },
       {
-        "Name": "ExternalLayout.TabOrder",
-        "ShowGeometry": true,
         "Id": "8e02ad88c50f4ec386bf509dd9ec1019",
+        "Name": "ExternalLayout.TabOrder",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 1419.7833827893171,
-        "Y": -179.36795252225525
+        "ShowGeometry": true,
+        "X": 1463.2863645407465,
+        "Y": -507.74529864594797
       },
       {
-        "Name": "ExternalLayout.ByName",
-        "ShowGeometry": true,
         "Id": "b781f292016a4983bb3323780c79c54a",
+        "Name": "ExternalLayout.ByName",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
+        "ShowGeometry": true,
         "X": 1001.9792284866469,
         "Y": 494.8160237388725
       },
       {
-        "Name": "ExternalDocument.Layouts",
-        "ShowGeometry": true,
         "Id": "f86b47ab04a74afb9e53fca569616752",
+        "Name": "ExternalDocument.Layouts",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 998.41839762611266,
-        "Y": -33.373887240356112
+        "ShowGeometry": true,
+        "X": 998.4183976261127,
+        "Y": -33.37388724035611
       },
       {
-        "Name": "ExternalDocument.LayoutByName",
-        "ShowGeometry": true,
         "Id": "12fb7f5cb29544d2845283126fa77103",
+        "Name": "ExternalDocument.LayoutByName",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 999.60534124629089,
+        "ShowGeometry": true,
+        "X": 999.6053412462909,
         "Y": 136.35905044510378
       },
       {
-        "Name": "ExternalDocument.NamedPageSetups",
-        "ShowGeometry": true,
         "Id": "38086481749a4a90bde25da53af92ac8",
+        "Name": "ExternalDocument.NamedPageSetups",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
+        "ShowGeometry": true,
         "X": 1009.1008902077153,
-        "Y": 344.07418397626111
+        "Y": 344.0741839762611
       },
       {
-        "Name": "ExternalLayout.SetName",
-        "ShowGeometry": true,
         "Id": "e48f306ed92242dab230e8fc2be14c79",
+        "Name": "ExternalLayout.SetName",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 1632.2462908011869,
-        "Y": 196.89317507418386
+        "ShowGeometry": true,
+        "X": 1675.7492725526163,
+        "Y": -131.4841710495088
       },
       {
-        "Name": "Code Block",
-        "ShowGeometry": true,
         "Id": "068a569e9fa247b49423d158504fda7e",
+        "Name": "Code Block",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 1405.0,
-        "Y": 138.0
+        "ShowGeometry": true,
+        "X": 1448.5029817514294,
+        "Y": -190.3773461236927
       },
       {
-        "Name": "Code Block",
-        "ShowGeometry": true,
         "Id": "1f57bf3de3234c41a54d35993ac1493d",
-        "IsSetAsInput": false,
-        "IsSetAsOutput": false,
-        "Excluded": false,
-        "X": 1415.0178041543027,
-        "Y": 273.43916913946589
-      },
-      {
-        "Name": "ExternalLayout.ByName",
-        "ShowGeometry": true,
-        "Id": "f6c72fc6324c44caa70b0b792cccd93e",
-        "IsSetAsInput": false,
-        "IsSetAsOutput": false,
-        "Excluded": false,
-        "X": 1618.5560419867538,
-        "Y": 649.38396786200121
-      },
-      {
         "Name": "Code Block",
-        "ShowGeometry": true,
-        "Id": "9e5917eb35aa456fa1e76c013a7f9d52",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1458.520785905732,
+        "Y": -54.9381769842268
+      },
+      {
+        "Id": "f6c72fc6324c44caa70b0b792cccd93e",
+        "Name": "ExternalLayout.ByName",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1618.5560419867538,
+        "Y": 649.3839678620012
+      },
+      {
+        "Id": "9e5917eb35aa456fa1e76c013a7f9d52",
+        "Name": "Code Block",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
         "X": 1366.7823220894852,
         "Y": 502.0
       },
       {
-        "Name": "Code Block",
-        "ShowGeometry": true,
         "Id": "5ff02d603aa94fadaa413f2d22d3a0df",
+        "Name": "Code Block",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
+        "ShowGeometry": true,
         "X": 1367.8476965303555,
-        "Y": 742.28807586741118
+        "Y": 742.2880758674112
+      },
+      {
+        "Id": "610ca64b044b4695b4a60c1a707165ec",
+        "Name": "ExternalLayout.Delete",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1421.0875341353044,
+        "Y": 137.4518046318845
       }
     ],
     "Annotations": [],
-    "X": -356.53084319538914,
-    "Y": 131.95292351276413,
-    "Zoom": 0.74769281712332536
+    "X": 148.70151378702144,
+    "Y": 310.5903205681063,
+    "Zoom": 0.49935774833045793
   }
 }

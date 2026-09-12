@@ -307,6 +307,30 @@ namespace Camber.AutoCAD
             ObjectHandle = (string)null;
             acDynNodes.Document.Current.AcDocument.Editor.Regen();
         }
+        
+        /// <summary>
+        /// Deletes the Layout.
+        /// </summary>
+        /// <returns></returns>
+        [NodeCategory("Actions")]
+        public void Delete()
+        {
+            if (string.IsNullOrEmpty(this.Name) || this.Name.ToUpper() == "MODEL")
+            {
+                throw new InvalidOperationException("The Model Space layout cannot be deleted.");
+            }
+
+            try
+            {
+                acDb.LayoutManager.Current.DeleteLayout(this.Name);
+            }
+            catch (System.Exception ex)
+            {
+                throw new InvalidOperationException("Failed to delete layout: " + ex.Message);
+            }
+
+            return;
+        }
         #endregion
 
         #region obsolete

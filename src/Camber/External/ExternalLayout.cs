@@ -154,6 +154,40 @@ namespace Camber.External
             }
             return this;
         }
+
+        /// <summary>
+        /// Deletes the External Layout from its document.
+        /// </summary>
+        /// <returns>True if the layout was successfully deleted.</returns>
+        public bool Delete()
+        {
+            if (string.IsNullOrEmpty(Name) || Name.Equals("Model", StringComparison.OrdinalIgnoreCase))
+            {
+                throw new InvalidOperationException("The Model Space layout cannot be deleted.");
+            }
+
+            try
+            {
+                acDb.HostApplicationServices.WorkingDatabase = AcDatabase;
+                var layoutMgr = acDb.LayoutManager.Current;
+
+                if (!layoutMgr.LayoutExists(Name))
+                {
+                    throw new InvalidOperationException($"The layout '{Name}' does not exist in the external document.");
+                }
+
+                layoutMgr.DeleteLayout(Name);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException($"Failed to delete layout '{Name}': {ex.Message}", ex);
+            }
+            finally
+            {
+                acDb.HostApplicationServices.WorkingDatabase = acDynNodes.Document.Current.AcDocument.Database;
+            }
+        }
         #endregion
     }
 }
