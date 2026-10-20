@@ -197,7 +197,7 @@ namespace Camber.Tools
                     Solid checkerSolid = solids[j];
 
                     // Check for full containment and subtract if so
-                    if (BoundingBoxExtensions.IsFullyContained(BoundingBox.ByGeometry(checkerSolid), BoundingBox.ByGeometry(currentSolid)))
+                    if (BoundingBoxExtensions.IsFullyContained(BoundingBox.ByGeometry(new Autodesk.DesignScript.Geometry.Geometry[] { checkerSolid }), BoundingBox.ByGeometry(new Autodesk.DesignScript.Geometry.Geometry[] { currentSolid })))
                     {
                         try
                         {
